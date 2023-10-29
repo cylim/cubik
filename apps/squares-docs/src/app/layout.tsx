@@ -1,3 +1,5 @@
+
+
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
@@ -28,7 +30,7 @@ export default function RootLayout({
       <body className={`${inter.className} bg-[var(--color-bg-secondary)]`}>
         <Background />
         <Header />
-        <div className="Z-1 flex flex-row w-full">
+        <div className="Z-1 flex w-full flex-row">
           <Sidebar />
           {children}
         </div>

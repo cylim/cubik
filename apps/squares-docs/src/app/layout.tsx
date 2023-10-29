@@ -9,9 +9,9 @@ import '@cubik/presets/styles/lightColor.style.css';
 import '@cubik/presets/styles/darkColors.styles.css';
 import '@cubik/presets/styles/component.style.css';
 
-import Background from './components/background';
-import Header from './components/header';
-import Sidebar from './components/sidebar';
+import Background from './home-page-components/components';
+import Header from './home-page-components/header';
+import Sidebar from './home-page-components/sidebar';
 
 const inter = Inter({ subsets: ['latin'] });
 

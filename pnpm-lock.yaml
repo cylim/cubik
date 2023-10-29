@@ -22,6 +22,9 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: ^0.5.6
         version: 0.5.6(@ianvs/prettier-plugin-sort-imports@4.1.1)(@trivago/prettier-plugin-sort-imports@4.2.1)(prettier@3.0.3)
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
     devDependencies:
       '@turbo/gen':
         specifier: ^1.10.16
@@ -771,6 +774,9 @@ importers:
 
   packages/presets:
     dependencies:
+      '@cubik/config':
+        specifier: workspace:*
+        version: link:../config
       '@next/eslint-plugin-next':
         specifier: ^13.5.6
         version: 13.5.6
@@ -868,6 +874,9 @@ importers:
 
   packages/ui:
     dependencies:
+      '@cubik/config':
+        specifier: workspace:*
+        version: link:../config
       '@headlessui/react':
         specifier: ^1.7.17
         version: 1.7.17(react-dom@18.2.0)(react@17.0.2)
@@ -905,9 +914,6 @@ importers:
         specifier: ^1.0.6
         version: 1.0.6(tailwindcss@3.3.2)
     devDependencies:
-      '@cubik/config':
-        specifier: workspace:*
-        version: link:../config
       '@types/node':
         specifier: ^17.0.12
         version: 17.0.12

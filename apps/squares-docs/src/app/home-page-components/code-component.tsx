@@ -5,9 +5,16 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 import { githubGist } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
-const CodeComponent = () => {
-  const codeString = `import { React } from 'react';`;
 
+
+
+
+interface Props {
+  codeString?:string
+}
+const CodeComponent = ({
+  codeString = `import { React } from 'react';`,
+}: Props) => {
   const customStyle = {
     fontFamily:
       'Fira Code, Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace',

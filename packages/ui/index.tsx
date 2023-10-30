@@ -27,6 +27,6 @@ export * from './components/ui/Switch';
 export * from './components/ui/Toast';
 export * from './components/ui/ToggleSwitch';
 export * from './components/ui/heading';
-export * from './components/ui/modal';
 export * from './components/ui/project-card';
 export * from './components/ui/image-upload';
+export * from './components/ui/Modal';

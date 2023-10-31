@@ -241,6 +241,18 @@ const navigationData: INavigationData[] = [
           },
         ],
       },
+      {
+        id: 26,
+        name: 'Form',
+        children: [
+          {
+            id: 261,
+            name: 'Input',
+            link: '/components/forms/input',
+            description: '',
+          },
+        ],
+      },
     ],
   },
 ];

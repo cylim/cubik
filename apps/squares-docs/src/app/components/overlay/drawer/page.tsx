@@ -1,9 +1,34 @@
-import React from 'react'
+'use client';
 
-const page = () => {
+import React, { useState } from 'react';
+import CodeComponent from '@/app/home-page-components/code-component';
+import PageHOC from '@/app/home-page-components/components/pageHOC';
+
+import { Drawer } from '@cubik/ui';
+
+const Page = () => {
+  const [open, setOpen] = useState<boolean>(false);
   return (
-    <div>page</div>
-  )
-}
+    <>
+      <PageHOC
+        pages={[
+          { name: 'Component', href: '/component', current: false },
+          { name: 'Drawer', href: '/component/drawer', current: true },
+        ]}
+        heading={'Drawer'}
+        description=""
+      >
+        <div>
+          <div className="border-[var(--color-border-primary) overflow-hidden rounded-[8px] border bg-[var(--white)] px-6 py-4">
+            <CodeComponent codeString='import { Drawer } from "@cubik/ui"' />
+          </div>
+          <Drawer onClose={() => setOpen(false)} open={open}>
+            <div>Page</div>
+          </Drawer>
+        </div>
+      </PageHOC>
+    </>
+  );
+};
 
-export default page
+export default Page;

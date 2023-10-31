@@ -22,8 +22,8 @@ const Page = () => {
             <CodeComponent codeString='import { Modal } from "@cubik/ui"' />
           </div>
           <button onClick={()=> setOpen(true)}>Test Button</button>
-            <Modal dialogSize='sm' headingSize='lg' onClose={()=> setOpen(false)} open={open}>
-              <div className='h-20 w-full bg-red-400'></div>
+            <Modal dialogSize='md' headingSize='md' onClose={()=> setOpen(false)} open={open}>
+              <div className='h-80 w-full bg-red-400'></div>
             </Modal>
         </div>
       </PageHOC>

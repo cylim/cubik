@@ -7,22 +7,49 @@ interface Props {
   open: boolean;
   onClose: () => void;
   children: ReactNode | React.JSX.Element;
+  drawerSize: keyof typeof DrawerSize;
+  drawerPosition: keyof typeof DrawerPosition;
+  className?: string;
 }
-export const Drawer = ({ onClose, open, children }: Props) => {
+
+const DrawerSize = {
+  sm: 'max-w-[320px]',
+  md: 'max-w-[480px]',
+  lg: 'max-w-[600px]',
+  max: '',
+};
+const DrawerPosition = {
+  bottom: 'bottom-0 max-h-[85vh]',
+  right: 'right-0 top-0 min-h-screen',
+  left: 'left-0 top-0 min-h-screen',
+};
+export const Drawer = ({
+  onClose,
+  open,
+  children,
+  // handles the width for drawer
+  drawerSize = 'md',
+
+  // handles the position for drawer
+  drawerPosition = 'right',
+  className,
+}: Props) => {
   return (
     <>
       <Dialog.Root open={open}>
         <Dialog.Portal>
           <Dialog.Overlay
             onClick={onClose}
-            className="bg-black/50 data-[state=open]:animate-overlayShow fixed inset-0"
+            className="bg-black/50  fixed inset-0"
           />
           <Dialog.Content
             className={cn(
-              'text-white data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-full  translate-x-[-50%] translate-y-[-50%] rounded-[12px] bg-[var(--color-surface-primary)] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none',
+              'text-white  fixed  w-full  bg-[var(--color-surface-primary)] dark:bg-[var(--color-bg-tertiary)]  focus:outline-none',
+              DrawerPosition[drawerPosition],
+              DrawerSize[drawerSize],
             )}
           >
-            <Dialog.Content className="mb-5 p-5">{children}</Dialog.Content>
+            <Dialog.Content className={className}>{children}</Dialog.Content>
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>

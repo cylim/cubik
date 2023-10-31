@@ -14,14 +14,17 @@ import {useTheme} from './hooks/useTheme';
 
 
 
+
 interface Props {
   codeString?:string
 }
+
 
 const firacode = Fira_Code({
   subsets: ['latin', 'cyrillic-ext'],
   weight: '300',
 });
+
 
 const CodeComponent = ({ codeString }: { codeString: string }) => {
   const {theme, toggleTheme} =  useTheme()

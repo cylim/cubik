@@ -31,3 +31,4 @@ export * from './components/ui/project-card';
 export * from './components/ui/image-upload';
 export * from './components/ui/Modal';
 export * from './components/ui/Drawer';
+export * from './components/ui/SegmentControl';

@@ -167,6 +167,12 @@ const navigationData: INavigationData[] = [
             link: '/components/disclosure/accordion',
             description: '',
           },
+          {
+            id: 223,
+            name: 'Segment Control',
+            link: '/components/disclosure/segment',
+            description: '',
+          },
         ],
       },
       {

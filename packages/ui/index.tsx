@@ -31,3 +31,4 @@ export * from './components/ui/Drawer';
 export * from './components/ui/SegmentControl';
 export * from './components/ui/Input';
 export * from './components/ui/Progress';
+export * from './components/ui/Popover';

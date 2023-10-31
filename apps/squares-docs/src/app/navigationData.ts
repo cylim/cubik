@@ -245,6 +245,12 @@ const navigationData: INavigationData[] = [
             link: '/components/overlay/drawer',
             description: '',
           },
+          {
+            id: 253,
+            name: 'Popover',
+            link: '/components/overlay/popover',
+            description: '',
+          },
         ],
       },
       {

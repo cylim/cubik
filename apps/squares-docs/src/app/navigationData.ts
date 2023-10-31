@@ -192,9 +192,15 @@ const navigationData: INavigationData[] = [
             description: '',
           },
           {
-            id: 132, // Should this be 232?
+            id: 232, // Should this be 232?
             name: 'Toast',
             link: '/components/feedback/toast',
+            description: '',
+          },
+          {
+            id: 233, // Should this be 232?
+            name: 'Progress',
+            link: '/components/feedback/progress',
             description: '',
           },
         ],

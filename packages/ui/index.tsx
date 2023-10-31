@@ -30,3 +30,4 @@ export * from './components/ui/Modal';
 export * from './components/ui/Drawer';
 export * from './components/ui/SegmentControl';
 export * from './components/ui/Input';
+export * from './components/ui/Progress';

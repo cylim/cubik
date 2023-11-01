@@ -153,6 +153,12 @@ const navigationData: INavigationData[] = [
             link: '/components/data-display/table',
             description: '',
           },
+          {
+            id: 213,
+            name: 'Divider',
+            link: '/components/data-display/divider',
+            description: '',
+          },
         ],
       },
       {

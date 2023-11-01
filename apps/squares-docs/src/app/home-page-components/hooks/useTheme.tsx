@@ -23,7 +23,7 @@ interface ThemeProviderProps {
 function ThemeProvider({ children }: ThemeProviderProps) {
     const [theme, setTheme] = useState<Theme>(() => {
         const storedTheme = Cookies.get('theme');
-        return (storedTheme ?? 'light') as Theme;
+        return (storedTheme ?? 'dark') as Theme;
     });
 
     // Function to toggle the theme

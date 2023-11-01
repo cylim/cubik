@@ -32,3 +32,4 @@ export * from './components/ui/SegmentControl';
 export * from './components/ui/Input';
 export * from './components/ui/Progress';
 export * from './components/ui/Popover';
+export * from './components/ui/Tooltip';

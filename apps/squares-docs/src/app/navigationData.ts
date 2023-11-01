@@ -251,6 +251,12 @@ const navigationData: INavigationData[] = [
             link: '/components/overlay/popover',
             description: '',
           },
+          {
+            id: 254,
+            name: 'Tooltip',
+            link: '/components/overlay/tooltip',
+            description: '',
+          },
         ],
       },
       {

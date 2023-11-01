@@ -231,9 +231,6 @@ importers:
       clsx:
         specifier: ^1.2.1
         version: 1.2.1
-      cubik-web:
-        specifier: workspace:^
-        version: link:../cubik-web
       eslint-config-next:
         specifier: 13.5.6
         version: 13.5.6(eslint@8.48.0)(typescript@5.2.2)

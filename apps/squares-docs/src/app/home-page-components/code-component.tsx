@@ -42,8 +42,8 @@ const CodeComponent = ({ codeString }: { codeString: string }) => {
           navigator.clipboard.writeText(codeString);
           toast.success('Copied to clipboard!');
         }}
-        className="bg-violet-500"
-        variant="secondary"
+
+        variant="outline"
       >
         Copy
       </Button>

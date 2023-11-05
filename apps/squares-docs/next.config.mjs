@@ -1,11 +1,14 @@
-;
-/** @type {import('next').NextConfig} */
+
 import { withAxiom } from "next-axiom";
 
 
 
 
 
+
+
+
+/** @type {import("next").NextConfig} */
 const nextConfig = {
   transpilePackages: ["@cubik/ui"],
   reactStrictMode: true,
@@ -14,4 +17,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withAxiom(nextConfig);
+export default withAxiom(nextConfig);

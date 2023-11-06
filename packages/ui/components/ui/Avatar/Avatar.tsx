@@ -2,10 +2,9 @@ import React from 'react';
 import Image from 'next/image';
 import { cva, VariantProps } from 'class-variance-authority';
 
-import { useMediaQuery } from '../../../hooks/index';
 import { Icon } from '../../../icons/icon';
 import { iconLibrary } from '../../../icons/iconLibrary';
-import { cn } from '../../../lib/utils';
+import { cn, handleMediaQuery } from '../../../lib/utils';
 
 const avatarVariants = cva('', {
   variants: {
@@ -65,16 +64,28 @@ const Avatar = ({
   className,
   iconName,
 }: AvatarProps) => {
-  const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
   return (
     <span
       className={cn(
         'relative inline-block',
-        avatarVariants({
-          size: isSmallDevice ? 'sm' : size,
-          variant,
-          className,
-        }),
+        handleMediaQuery([
+          {
+            className: avatarVariants({
+              size: size,
+              variant,
+              className,
+            }),
+            type: 'default',
+          },
+          {
+            className: avatarVariants({
+              size: 'sm',
+              variant,
+              className,
+            }),
+            type: 'sm',
+          },
+        ]),
       )}
     >
       <Image

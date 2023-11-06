@@ -1,7 +1,7 @@
 import React from 'react';
 import { cva } from 'class-variance-authority';
 
-import { cn } from '../../../lib/utils';
+import { cn, handleMediaQuery } from '../../../lib/utils';
 
 const Variant = {
   primary: cn(
@@ -75,10 +75,23 @@ export const Button = (props: Props) => {
   return (
     <button
       className={cn(
-        buttonVariant({
-          variant: props.variant,
-          sizeVariant: props.sizeVariant,
-        }),
+        handleMediaQuery([
+          {
+            className: buttonVariant({
+              variant: props.variant,
+              sizeVariant: props.sizeVariant,
+            }),
+            type: 'default',
+          },
+          {
+            className: buttonVariant({
+              variant: props.variant,
+              sizeVariant: 'sm',
+            }),
+            type: 'md',
+          },
+        ]),
+
         props.className,
       )}
       type={(props.type as any) ?? 'button'}

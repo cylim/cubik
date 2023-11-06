@@ -35,7 +35,7 @@ export default async function Home() {
     <>
       <div className="mt-20 flex min-h-screen w-full flex-col items-center  lg:flex-row 2xl:mx-auto 2xl:max-w-7xl">
         <div className="h-full w-full lg:w-2/3">
-          <div className="pt-10 lg:px-20">
+          <div className="px-6 pt-10 lg:px-20">
             <SubHead
               heading="Projects"
               size="lg"

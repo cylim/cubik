@@ -62,7 +62,11 @@ const buttonVariant = cva('font-semibold rounded-[8px]', {
     sizeVariant: 'sm',
   },
 });
-interface Props extends React.HTMLProps<HTMLButtonElement> {
+interface Props
+  extends React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
   variant: keyof typeof Variant;
   sizeVariant?: keyof typeof SizeVariant;
 }

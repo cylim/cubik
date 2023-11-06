@@ -14,7 +14,7 @@ const Links = () => {
 
   return (
     <>
-      <div className="flex items-center justify-start gap-6">
+      <div className="hidden items-center justify-start gap-6 lg:flex">
         <Link
           className={cn(isActiveRoute('/projects') ? 'text-[var(--white)] font-bold text-[16px] leading-6' : 'text-[var(--color-neutral-300)] font-medium text-[16px] leading-6')}
           href="/projects"

@@ -1,11 +1,13 @@
 import React from 'react';
+import Image from 'next/image';
 import { cva, VariantProps } from 'class-variance-authority';
 
+import { useMediaQuery } from '../../../hooks/index';
 import { Icon } from '../../../icons/icon';
 import { iconLibrary } from '../../../icons/iconLibrary';
 import { cn } from '../../../lib/utils';
 
-const avatarVariants = cva('object-cover', {
+const avatarVariants = cva('', {
   variants: {
     variant: {
       square: 'rounded-lg',
@@ -63,12 +65,28 @@ const Avatar = ({
   className,
   iconName,
 }: AvatarProps) => {
+  const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
   return (
-    <span className="relative inline-block overflow-hidden w-12rem">
-      <img
+    <span
+      className={cn(
+        'relative inline-block',
+        avatarVariants({
+          size: isSmallDevice ? 'sm' : size,
+          variant,
+          className,
+        }),
+      )}
+    >
+      <Image
         src={src}
         alt={alt}
-        className={cn(avatarVariants({ variant, size, className }))}
+        fill={true}
+        style={{
+          objectFit: 'cover',
+          background: 'transparent',
+          borderRadius: variant === 'circle' ? '100%' : '8px',
+        }}
+        priority
       />
       {iconName && (
         <Icon name={iconName} className={cn(iconVariants({ variant, size }))} />

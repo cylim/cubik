@@ -1,6 +1,7 @@
 import React from 'react';
 import { cva } from 'class-variance-authority';
 
+import { useMediaQuery } from '../../../hooks/index';
 import { cn } from '../../../lib/utils';
 import { Avatar, AvatarProps } from './Avatar';
 import { AvatarGroup } from './AvatarGroup';
@@ -80,13 +81,19 @@ const AvatarLabelGroup: React.FC<AvatarLabelProps> = ({
   longDescription,
   size,
 }) => {
+  const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
   return (
     <div className={cn('flex items-center gap-2 max-w-md')}>
       <div className="flex-shrink-0">
         {typeof avatarSrc === 'string' ? (
-          <Avatar src={avatarSrc} alt="sample" size={size} variant={shape} />
+          <Avatar
+            src={avatarSrc}
+            alt="sample"
+            size={isSmallDevice ? 'sm' : size}
+            variant={shape}
+          />
         ) : (
-          <AvatarGroup avatars={avatarSrc} size={size} />
+          <AvatarGroup avatars={avatarSrc} size={isSmallDevice ? 'sm' : size} />
         )}
       </div>
 

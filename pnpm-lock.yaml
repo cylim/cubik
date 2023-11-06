@@ -334,6 +334,9 @@ importers:
       '@cubik/presets':
         specifier: workspace:*
         version: link:../../packages/presets
+      '@cubik/ui':
+        specifier: workspace:^
+        version: link:../../packages/ui
       '@fontsource/plus-jakarta-sans':
         specifier: ^5.0.17
         version: 5.0.17

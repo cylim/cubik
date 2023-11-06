@@ -21,6 +21,7 @@
     "@cubik/config": "workspace:*",
     "@cubik/database": "workspace:*",
     "@cubik/presets": "workspace:*",
+    "@cubik/ui": "workspace:^",
     "@fontsource/plus-jakarta-sans": "^5.0.17",
     "@hookform/resolvers": "^2.9.11",
     "@lottiefiles/react-lottie-player": "^3.5.3",

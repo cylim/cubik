@@ -9,7 +9,7 @@ export async function sendEmail(
   notificationType?: string,
 ) {
   try {
-    const resend = new Resend('re_YtBx6r2K_KT4qsZECaAULZyLg5oJL564F');
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     const emailReceipt = await resend.emails.send({
       from: 'onboarding@resend.dev',

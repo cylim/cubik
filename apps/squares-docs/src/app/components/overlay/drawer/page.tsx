@@ -24,8 +24,8 @@ const Page = () => {
           </div>
           <button onClick={() => setOpen(true)}>Test Button</button>
           <Drawer
-            drawerPosition="right"
-            drawerSize="md"
+            drawerPosition="bottom"
+            drawerSize="max"
             onClose={() => setOpen(false)}
             open={open}
           >

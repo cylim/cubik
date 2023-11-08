@@ -1,6 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextIndex", "fullTextSearch","driverAdapters"]
+  previewFeatures = ["fullTextIndex", "fullTextSearch", "driverAdapters"]
 }
 
 datasource db {
@@ -83,8 +83,8 @@ model Project {
   status               ProjectVerifyStatus    @default(REVIEW)
   failedReason         String?                @default("")
   mutliSigAddress      String?                @default("")
-  multiSigAddress_v3   String? @default("")
-  multiSigAddress_v4   String? @default("")
+  multiSigAddress_v3   String?                @default("")
+  multiSigAddress_v4   String?                @default("")
   email                String                 @default("")
   createKey            String?                @default("")
   createdAt            DateTime               @default(now())

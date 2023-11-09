@@ -20,23 +20,25 @@ import { Welcome } from '../templates/welcome';
  * Represents the properties required to send an email.
  */
 interface EmailProps {
+  from?: string;
   data: any;
   subject: string;
   text: string;
+  reply_to?: string | string[];
 }
 
 const sender = 'Cubik <no-reply@mail.cubik.so>'; // sender email address can be updated at runtime
 
 /**
  * Sends an email to the specified recipient with the given email properties.
- * @param to - The email address of the recipient.
+ * @param to - The email addresses of the recipient.
  * @param notificationType - The type of notification to send.
  * @param props - The email properties.
  * @returns A Promise that resolves to the result of sending the email.
  * @throws An error if the notification type is invalid.
  */
 export async function sendEmail(
-  to: string,
+  to: string | string[],
   notificationType: ActivityType,
   props: EmailProps,
 ) {
@@ -44,10 +46,11 @@ export async function sendEmail(
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     const emailPayload = {
-      from: sender,
-      to: [to],
+      from: props.from || sender,
+      to: to,
       subject: props.subject,
       text: props.text,
+      reply_to: props.reply_to || process.env.RESEND_REPLY_TO,
     };
 
     switch (notificationType) {

@@ -4,7 +4,7 @@ import { sendEmail } from './sdk';
 
 (async () => {
   const emailReceipt = await sendEmail(
-    'dev.sahilpabale@gmail.com', // any email address
+    ['dankguy6146@gmail.com', 'sahil@cubik.so'], // any email address
     ActivityType.WELCOME,
     {
       subject: 'Welcome to Cubik',

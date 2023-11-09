@@ -762,6 +762,9 @@ importers:
       '@cubik/config':
         specifier: workspace:*
         version: link:../config
+      '@cubik/database':
+        specifier: workspace:*
+        version: link:../database
       '@types/react':
         specifier: ^18.2.21
         version: 18.2.21
@@ -777,6 +780,10 @@ importers:
       resend:
         specifier: ^2.0.0
         version: 2.0.0
+    devDependencies:
+      tsx:
+        specifier: ^3.12.7
+        version: 3.12.7
 
   packages/helper-scripts:
     dependencies:

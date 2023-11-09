@@ -4,13 +4,13 @@ import { sendEmail } from './sdk';
 
 (async () => {
   const emailReceipt = await sendEmail(
-    'me@sayanbiswas.in',
+    'dev.sahilpabale@gmail.com', // any email address
     ActivityType.WELCOME,
     {
       subject: 'Welcome to Cubik',
       text: 'Welcome to Cubik',
       data: {
-        firstName: 'Sayan',
+        firstName: 'Sahil',
       },
     },
   );

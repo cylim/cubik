@@ -25,7 +25,7 @@ interface EmailProps {
   text: string;
 }
 
-const sender = 'onboarding@resend.dev';
+const sender = 'Cubik <no-reply@mail.cubik.so>'; // sender email address can be updated at runtime
 
 /**
  * Sends an email to the specified recipient with the given email properties.

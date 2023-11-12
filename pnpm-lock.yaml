@@ -56,6 +56,9 @@ importers:
       '@cubik/database':
         specifier: workspace:*
         version: link:../../packages/database
+      '@cubik/presets':
+        specifier: workspace:*
+        version: link:../../packages/presets
       '@types/body-parser':
         specifier: ^1.19.2
         version: 1.19.2

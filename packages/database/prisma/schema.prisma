@@ -31,7 +31,8 @@ model User {
   proof          Proof[]
   project        Project[]
   AdminAccess    AdminAccess[]
-  Activity       Activity[]
+  activity       Activity[]
+  notification   Notification[]
 
   @@fulltext([username])
 }
@@ -51,6 +52,15 @@ enum ActivityType {
   GENERIC
 }
 
+enum NotificationType {
+  PROJECT_STATUS_APPROVED
+  PROJECT_STATUS_REJECTED
+  CONTRIBUTION_TO_PROJECT
+  CONTRIBUTION_TO_USER
+  PROJECT_JOIN_ROUND_APPROVED
+  PROJECT_JOIN_ROUND_REJECTED
+}
+
 model Activity {
   id        String       @id @default(uuid()) @map("_id")
   userId    String
@@ -61,6 +71,22 @@ model Activity {
   isArchive Boolean      @default(false)
   user      User         @relation(fields: [userId], references: [id])
   data      Json
+
+  @@index([userId])
+}
+
+model Notification {
+  id     String           @id @default(uuid()) @map("_id")
+  userId String
+  type   NotificationType
+  isRead Boolean          @default(false)
+  user   User             @relation(fields: [userId], references: [id])
+  data   Json
+
+  isActive  Boolean  @default(true)
+  isArchive Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([userId])
 }

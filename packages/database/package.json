@@ -4,7 +4,7 @@
   "types": "./index.ts",
   "scripts": {
     "db:generate": "prisma generate",
-    "db:push": "prisma db push --skip-generate",
+    "db:push": "dotenv -e ../../.env -- npx prisma db push --skip-generate",
     "dev": "pnpm prisma studio --port 5556"
   },
   "dependencies": {

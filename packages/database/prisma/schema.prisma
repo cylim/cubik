@@ -33,6 +33,7 @@ model User {
   AdminAccess    AdminAccess[]
   activity       Activity[]
   notification   Notification[]
+  pda            String?         @unique
 
   @@fulltext([username])
 }
@@ -101,6 +102,7 @@ model Proof {
   isActive  Boolean   @default(true)
   isArchive Boolean   @default(false)
   user      User      @relation(fields: [userId], references: [id])
+  pda       String?   @unique
 
   @@index([userId])
 }
@@ -153,6 +155,7 @@ model Project {
   contribution         Contribution[]
   team                 Team[]
   projectJoinHackathon ProjectJoinHackathon[]
+  pda                  String?                @unique
 
   @@index([ownerPublickey])
 }
@@ -183,6 +186,7 @@ model Round {
   projectJoinRound      ProjectJoinRound[]
   contribution          Contribution[]
   AdminAccess           AdminAccess[]
+  pda                   String?            @unique
 
   @@index([userId])
 }
@@ -216,6 +220,7 @@ model ProjectJoinRound {
   project       Project                @relation(fields: [projectId], references: [id])
   round         Round                  @relation(fields: [roundId], references: [id])
   contribution  Contribution[]
+  pda           String?                @unique
 
   @@index([projectId])
   @@index([roundId])
@@ -327,6 +332,7 @@ model ProjectJoinHackathon {
   hackathon    Hackathon      @relation(fields: [hackathonId], references: [id])
   project      Project        @relation(fields: [projectId], references: [id])
   contribution Contribution[]
+  pda          String?        @unique
 
   @@index([hackathonId])
   @@index([projectId])
@@ -355,6 +361,7 @@ model Contribution {
   hackathon              Hackathon?            @relation(fields: [hackathonId], references: [id])
   projectJoinRound       ProjectJoinRound?     @relation(fields: [projectJoinRoundId], references: [id])
   projectJoinHackathon   ProjectJoinHackathon? @relation(fields: [projectJoinHackathonId], references: [id])
+  pda                    String?               @unique
 
   @@index([projectId])
   @@index([roundId])

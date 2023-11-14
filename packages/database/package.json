@@ -5,7 +5,7 @@
   "scripts": {
     "db:generate": "prisma generate",
     "db:push": "dotenv -e ../../.env -- npx prisma db push --skip-generate",
-    "dev": "pnpm prisma studio --port 5556"
+    "dev": "dotenv -e ../../.env -- npx prisma studio --port 5556"
   },
   "dependencies": {
     "@cubik/config": "workspace:*",

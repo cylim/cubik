@@ -92,8 +92,8 @@ export const MultisigCard = () => {
                   />
                 </Button>
               </TabPanel>
-              <TabPanel value={2}></TabPanel>
-              <TabPanel value={3}></TabPanel>
+              <TabPanel value={2}>a</TabPanel>
+              <TabPanel value={3}>a</TabPanel>
             </TabPanels>
           </div>
         </Tabs>

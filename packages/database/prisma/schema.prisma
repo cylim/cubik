@@ -1,6 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextIndex", "fullTextSearch","driverAdapters"]
+  previewFeatures = ["fullTextIndex", "fullTextSearch", "driverAdapters"]
 }
 
 datasource db {
@@ -10,29 +10,94 @@ datasource db {
 }
 
 model User {
-  id             String          @id @default(uuid()) @map("_id")
-  username       String?         @unique
-  mainWallet     String          @unique
-  email          String?
-  profileNft     Json?
-  userSybil      UserSybilStatus @default(NONE)
-  profilePicture String?         @db.VarChar(500)
-  tx             String?         @db.VarChar(500)
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
-  isActive       Boolean         @default(true)
-  isArchive      Boolean         @default(false)
-  session        Session[]
-  comments       Comments[]
-  reply          Reply[]
-  round          Round[]
-  contribution   Contribution[]
-  team           Team[]
-  proof          Proof[]
-  project        Project[]
-  AdminAccess    AdminAccess[]
+  id               String             @id @default(uuid()) @map("_id")
+  username         String?            @unique
+  mainWallet       String             @unique
+  email            String?
+  profileNft       Json?
+  userSybil        UserSybilStatus    @default(NONE)
+  profilePicture   String?            @db.VarChar(500)
+  tx               String?            @db.VarChar(500)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  isActive         Boolean            @default(true)
+  isArchive        Boolean            @default(false)
+  session          Session[]
+  comments         Comments[]
+  reply            Reply[]
+  round            Round[]
+  contribution     Contribution[]
+  team             Team[]
+  proof            Proof[]
+  project          Project[]
+  AdminAccess      AdminAccess[]
+  Activity         Activity[]
+  CommunityMembers CommunityMembers[]
 
   @@fulltext([username])
+}
+
+model Communities {
+  id               String             @id @default(uuid()) @map("_id")
+  name             String
+  logo             String             @db.VarChar(500)
+  background       String             @db.VarChar(500)
+  shortDescription String             @db.VarChar(2000)
+  method           COMM
+  collection       Json? // {collection:string}[]
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  isArchive        Boolean            @default(true)
+  CommunityMembers CommunityMembers[]
+}
+
+model CommunityMembers {
+  id          String      @id @default(uuid()) @map("_id")
+  userId      String
+  communityId String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  user        User        @relation(fields: [userId], references: [id])
+  community   Communities @relation(fields: [communityId], references: [id])
+  isActive    Boolean     @default(true)
+
+  @@index([userId])
+  @@index([communityId])
+}
+
+enum COMM {
+  DISCORD
+  MINT_ADD
+  LIST_ADD
+}
+
+enum ActivityType {
+  WELCOME
+  CREATE_NEW_PROJECT
+  PROJECT_STATUS_APPROVED
+  PROJECT_STATUS_REJECTED
+  PROJECT_JOIN_ROUND
+  PROJECT_JOIN_ROUND_APPROVED
+  PROJECT_JOIN_ROUND_REJECTED
+  PROOF_COLLECTED
+  PROJECT_BAN_IN_ROUND
+  CONTRIBUTION_TO_PROJECT
+  CONTRIBUTION_TO_USER
+  GENERIC
+}
+
+model Activity {
+  id        String       @id @default(uuid()) @map("_id")
+  userId    String
+  type      ActivityType
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  isActive  Boolean      @default(true)
+  isArchive Boolean      @default(false)
+  user      User         @relation(fields: [userId], references: [id])
+  data      Json
+
+  @@index([userId])
 }
 
 model Proof {
@@ -83,8 +148,8 @@ model Project {
   status               ProjectVerifyStatus    @default(REVIEW)
   failedReason         String?                @default("")
   mutliSigAddress      String?                @default("")
-  multiSigAddress_v3   String? @default("")
-  multiSigAddress_v4   String? @default("")
+  multiSigAddress_v3   String?                @default("")
+  multiSigAddress_v4   String?                @default("")
   email                String                 @default("")
   createKey            String?                @default("")
   createdAt            DateTime               @default(now())

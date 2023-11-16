@@ -2,13 +2,20 @@ import { ReactNode } from 'react';
 import { MultisigCardHeader } from '@/app/grants/components/cards/MultisigCard';
 
 import { Button, Icon, SubHead } from '@cubik/ui';
+import { cn } from '@cubik/ui/lib/utils';
 
 interface Props {
   subhead: ReactNode;
+  borderbottom?: boolean;
 }
 export const MultisigInfo = (props: Props) => {
   return (
-    <div className="border-b border-[#333] bg-[#262626]">
+    <div
+      className={cn(
+        'bg-[#262626]',
+        props.borderbottom && 'border-b border-[#333]',
+      )}
+    >
       <MultisigCardHeader
         borderbottom={true}
         className="flex items-center justify-between"

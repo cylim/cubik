@@ -8,7 +8,7 @@ import { SubHead, Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
 
 export const OverviewCard = () => {
   return (
-    <MultisigCard>
+    <MultisigCard borderbottom={true}>
       <div className="bg-[#262626]">
         <MultisigCardHeader>
           <SubHead heading="Overview" size="md" />

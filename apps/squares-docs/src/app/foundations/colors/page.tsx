@@ -2,6 +2,7 @@
 
 import React from 'react';
 
+import { serializeSemantic } from '@cubik/helper-scripts/src/color/serializeSemantic';
 import {
   Tab,
   Table,
@@ -17,7 +18,6 @@ import {
   Tabs,
 } from '@cubik/ui';
 
-import { serializeSemantic } from '../../../lib/colors';
 import PageHOC from '../../home-page-components/components/pageHOC';
 
 type objectType = {
@@ -43,7 +43,7 @@ export default function ComponentPage() {
         {' '}
         {serialized.map((token, key) => (
           <div key={key}>
-            <Tabs defaultValue="three" size="sm" className="">
+            <Tabs defaultValue={0} size="sm" className="">
               <TabList>
                 {(token.value as objectType[]).map(
                   (tokenVariant: any, key: any) => (

@@ -33,9 +33,44 @@ model User {
   AdminAccess    AdminAccess[]
   activity       Activity[]
   notification   Notification[]
+  CommunityMembers CommunityMembers[]
   pda            String?         @unique
 
   @@fulltext([username])
+}
+
+model Communities {
+  id               String             @id @default(uuid()) @map("_id")
+  name             String
+  logo             String             @db.VarChar(500)
+  background       String             @db.VarChar(500)
+  shortDescription String             @db.VarChar(2000)
+  method           COMM
+  collection       Json? // {collection:string}[]
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  isArchive        Boolean            @default(true)
+  CommunityMembers CommunityMembers[]
+}
+
+model CommunityMembers {
+  id          String      @id @default(uuid()) @map("_id")
+  userId      String
+  communityId String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  user        User        @relation(fields: [userId], references: [id])
+  community   Communities @relation(fields: [communityId], references: [id])
+  isActive    Boolean     @default(true)
+
+  @@index([userId])
+  @@index([communityId])
+}
+
+enum COMM {
+  DISCORD
+  MINT_ADD
+  LIST_ADD
 }
 
 enum ActivityType {

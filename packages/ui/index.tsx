@@ -1,5 +1,5 @@
 'use client';
-export * from './components/ui/text';
+export * from './components/ui/text/text';
 export * from './components/ui/Tabs/tabs';
 export * from './components/ui/table';
 export * from './components/ui/accordion';
@@ -34,3 +34,4 @@ export * from './components/ui/Tag';
 export * from './components/ui/Button';
 export * from './components/ui/Subhead';
 export * from './hooks/useTheme';
+export * from './hooks/useTokenPrice';

@@ -10,29 +10,31 @@ datasource db {
 }
 
 model User {
-  id               String             @id @default(uuid()) @map("_id")
-  username         String?            @unique
-  mainWallet       String             @unique
-  email            String?
-  profileNft       Json?
-  userSybil        UserSybilStatus    @default(NONE)
-  profilePicture   String?            @db.VarChar(500)
-  tx               String?            @db.VarChar(500)
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-  isActive         Boolean            @default(true)
-  isArchive        Boolean            @default(false)
-  session          Session[]
-  comments         Comments[]
-  reply            Reply[]
-  round            Round[]
-  contribution     Contribution[]
-  team             Team[]
-  proof            Proof[]
-  project          Project[]
-  AdminAccess      AdminAccess[]
-  Activity         Activity[]
+  id             String          @id @default(uuid()) @map("_id")
+  username       String?         @unique
+  mainWallet     String          @unique
+  email          String?
+  profileNft     Json?
+  userSybil      UserSybilStatus @default(NONE)
+  profilePicture String?         @db.VarChar(500)
+  tx             String?         @db.VarChar(500)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  isActive       Boolean         @default(true)
+  isArchive      Boolean         @default(false)
+  session        Session[]
+  comments       Comments[]
+  reply          Reply[]
+  round          Round[]
+  contribution   Contribution[]
+  team           Team[]
+  proof          Proof[]
+  project        Project[]
+  AdminAccess    AdminAccess[]
+  activity       Activity[]
+  notification   Notification[]
   CommunityMembers CommunityMembers[]
+  pda            String?         @unique
 
   @@fulltext([username])
 }
@@ -86,6 +88,15 @@ enum ActivityType {
   GENERIC
 }
 
+enum NotificationType {
+  PROJECT_STATUS_APPROVED
+  PROJECT_STATUS_REJECTED
+  CONTRIBUTION_TO_PROJECT
+  CONTRIBUTION_TO_USER
+  PROJECT_JOIN_ROUND_APPROVED
+  PROJECT_JOIN_ROUND_REJECTED
+}
+
 model Activity {
   id        String       @id @default(uuid()) @map("_id")
   userId    String
@@ -100,6 +111,22 @@ model Activity {
   @@index([userId])
 }
 
+model Notification {
+  id     String           @id @default(uuid()) @map("_id")
+  userId String
+  type   NotificationType
+  isRead Boolean          @default(false)
+  user   User             @relation(fields: [userId], references: [id])
+  data   Json
+
+  isActive  Boolean  @default(true)
+  isArchive Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
 model Proof {
   id        String    @id @default(uuid()) @map("_id")
   userId    String
@@ -110,6 +137,7 @@ model Proof {
   isActive  Boolean   @default(true)
   isArchive Boolean   @default(false)
   user      User      @relation(fields: [userId], references: [id])
+  pda       String?   @unique
 
   @@index([userId])
 }
@@ -162,6 +190,7 @@ model Project {
   contribution         Contribution[]
   team                 Team[]
   projectJoinHackathon ProjectJoinHackathon[]
+  pda                  String?                @unique
 
   @@index([ownerPublickey])
 }
@@ -192,6 +221,7 @@ model Round {
   projectJoinRound      ProjectJoinRound[]
   contribution          Contribution[]
   AdminAccess           AdminAccess[]
+  pda                   String?            @unique
 
   @@index([userId])
 }
@@ -225,6 +255,7 @@ model ProjectJoinRound {
   project       Project                @relation(fields: [projectId], references: [id])
   round         Round                  @relation(fields: [roundId], references: [id])
   contribution  Contribution[]
+  pda           String?                @unique
 
   @@index([projectId])
   @@index([roundId])
@@ -336,6 +367,7 @@ model ProjectJoinHackathon {
   hackathon    Hackathon      @relation(fields: [hackathonId], references: [id])
   project      Project        @relation(fields: [projectId], references: [id])
   contribution Contribution[]
+  pda          String?        @unique
 
   @@index([hackathonId])
   @@index([projectId])
@@ -364,6 +396,7 @@ model Contribution {
   hackathon              Hackathon?            @relation(fields: [hackathonId], references: [id])
   projectJoinRound       ProjectJoinRound?     @relation(fields: [projectJoinRoundId], references: [id])
   projectJoinHackathon   ProjectJoinHackathon? @relation(fields: [projectJoinHackathonId], references: [id])
+  pda                    String?               @unique
 
   @@index([projectId])
   @@index([roundId])

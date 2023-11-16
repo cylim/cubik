@@ -1,5 +1,5 @@
 {
-  "name": "@cubik/email",
+  "name": "@cubik/notifications",
   "private": true,
   "version": "0.1.0",
   "main": "index.tsx",

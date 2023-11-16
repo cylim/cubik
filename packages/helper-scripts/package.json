@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@coral-xyz/anchor": "^0.27.0",
     "@cubik/config": "workspace:*",
     "@cubik/database": "workspace:*",
     "axios": "^1.3.4",

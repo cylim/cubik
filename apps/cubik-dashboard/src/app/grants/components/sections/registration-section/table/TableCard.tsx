@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
+
 // import { Tabs, TabsContent, TabsList, TabsTrigger } from '@cubik/ui';
 
 // import { PendingTable } from './tables/PendingTable';
@@ -7,13 +9,13 @@ import React from 'react';
 export const TableCard = () => {
   return (
     <>
-      <div className="px-3">
+      <div className="px-3 md:px-0">
         <div className="w-full rounded-md bg-neutral-800">
-          <div className="border-b-surface-neutral-800 border-b p-5">
+          <div className=" border-b border-[var(--color-neutral-800)] p-5">
             <p className="text-2xl font-semibold text-white">Projects</p>
           </div>
           <div className="flex h-20 justify-start gap-4 px-10 py-5 md:gap-20">
-            <div className="text-surface-neutral-600 flex flex-col items-start justify-start gap-3 font-normal">
+            <div className="flex flex-col items-start justify-start gap-3 font-normal text-[var(--color-neutral-600)]">
               <p className="text-xl font-semibold ">
                 <span className="text-3xl font-extrabold text-white">29</span>
                 /50
@@ -56,6 +58,27 @@ export const TableCard = () => {
                 </TabsContent>
               </div>
             </Tabs> */}
+
+            <Tabs size="sm" className="my-6" defaultValue={0}>
+              <TabList className="w-full overflow-x-auto whitespace-nowrap border-b border-[var(--color-neutral-800)]">
+                <div className=" mx-auto flex w-full max-w-7xl justify-start gap-4 pl-2">
+                  <Tab value={0}>Pending</Tab>
+                  <Tab value={1}>Rejected</Tab>
+                  <Tab value={2}>Accepted</Tab>
+                </div>
+              </TabList>
+              <TabPanels className="mx-auto w-full max-w-7xl">
+                <TabPanel value={0}>
+                  Make changes to your account here.
+                </TabPanel>
+                <TabPanel value={1}>
+                  Make changes to your account here.
+                </TabPanel>
+                <TabPanel value={2}>
+                  Make changes to your account here.
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
           </div>
         </div>
       </div>

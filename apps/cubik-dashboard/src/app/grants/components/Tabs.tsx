@@ -11,11 +11,11 @@ export const TabsSection = () => {
   return (
     <div className="mx-auto w-full  text-white">
       <Tabs size="sm" defaultValue={0}>
-        <TabList className="w-full  overflow-x-auto whitespace-nowrap bg-neutral-800">
-          <div className="mx-auto flex w-full  max-w-7xl justify-start gap-4">
+        <TabList className="w-full overflow-x-auto whitespace-nowrap bg-neutral-800">
+          <div className="mx-auto flex w-full max-w-7xl justify-start gap-4">
             <Tab value={0}>Details</Tab>
             <Tab value={1}>Registrations</Tab>
-            <Tab value={2}>Multi</Tab>
+            <Tab value={2}>Multisigs</Tab>
             <Tab value={3}>Analytics</Tab>
             <Tab value={4}>Settings</Tab>
           </div>

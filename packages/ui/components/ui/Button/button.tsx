@@ -8,13 +8,15 @@ const buttonVariants = cva('font-semibold rounded-[8px]', {
     variant: {
       primary: cn(
         'focus:bg-[var(--button-primary-surface-focused)] focus:border-2  focus:text-[var(--button-primary-text-focused)] focus:border-[var(--button-primary-border-focused)]',
-        'bg-[var(--button-primary-surface-default)] text-[var(--button-primary-text-default)] focus:border ',
+        'bg-[var(--button-primary-surface-default)] text-[var(--button-primary-text-default)] focus:border',
         'hover:bg-[var(--button-primary-surface-hovered)] hover:text-[var(--button-primary-text-hovered)]',
+        'hover:stroke-[var(--button-primary-text-hovered)] stroke-[var(--button-primary-text-default)]',
         'disabled:bg-[var(--button-primary-surface-disabled)]',
       ),
       secondary: cn(
         'focus:bg-[var(--button-secondary-surface-focused)] focus:border-2 focus:border-[var(--button-secondary-border-focused)]',
         'bg-[var(--button-secondary-surface-default)] text-[var(--button-secondary-text-default)] focus:border',
+        'stroke-[var(--button-secondary-surface-default)] stroke-[var(--button-secondary-text-default)] focus:border',
         'hover:bg-[var(--button-secondary-surface-hovered)] hover:text-[var(--button-secondary-text-hovered)]',
         'disabled:bg-[var(--button-secondary-surface-disabled)]',
       ),
@@ -69,6 +71,7 @@ export const Button = ({ variant, size, className, ...props }: Props) => {
     <button
       // className={cn(className, buttonVariants({ variant, size }))}
       className={cn(
+        '',
         handleMediaQuery([
           {
             className: buttonVariants({

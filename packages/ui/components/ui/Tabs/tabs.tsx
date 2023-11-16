@@ -24,7 +24,7 @@ export const TabContext = createContext<TabContextType>({
 });
 //border-b-[2px] data-[state=active]:border-b-[2px] data-[state=active]:border-[var(--tab-border-active)] font-normal border-b-transparent
 const tabVariants = cva(
-  ' leading-loose text-lg text-[var(--tab-fg-inactive)]   data-[state=active]:text-[var(--tab-fg-active)] font-medium ',
+  ' leading-loose text-lg text-[var(--tab-fg-inactive)]  data-[state=active]:text-[var(--tab-fg-active)] font-medium ',
   {
     variants: {
       size: {
@@ -135,6 +135,7 @@ const TabList: React.FC<TabListProps> = ({ children, className }) => {
   );
 
   // Use the selectedTab index and measurements to set the indicator style
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const indicatorStyle: React.CSSProperties = {
     left: `${measurements[selectedTab]?.left}px`,
     width: `${measurements[selectedTab]?.width}px`,
@@ -160,7 +161,7 @@ const TabList: React.FC<TabListProps> = ({ children, className }) => {
           });
         })}
       </>
-      <div className={`bg-[var(--tab-fg-active)]`} style={indicatorStyle} />
+      {/* <div className={`bg-[var(--tab-fg-active)]`} style={indicatorStyle} /> */}
     </RadixTabs.List>
   );
 };
@@ -174,7 +175,10 @@ const Tab: React.FC<TabProps> = React.forwardRef<HTMLDivElement, TabProps>(
     return (
       <RadixTabs.Trigger
         value={value.toString()}
-        className={`${tabStyles} ${className}`}
+        className={cn(
+          `${tabStyles} ${className}`,
+          'data-[state=active]:text-[var(--tab-fg-active)] data-[state=active]:border-b-2 ',
+        )}
         ref={ref}
       >
         {children}

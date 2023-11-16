@@ -1,14 +1,25 @@
 import React from 'react';
 
+import {
+  Segment,
+  SegmentContainer,
+  SegmentContent,
+  SegmentList,
+  SegmentTrigger,
+  SubHead,
+} from '@cubik/ui';
+
 import MultisigCard from '../registration-section/cards/MultisigCard';
 import OverviewCard from '../registration-section/cards/OverviewCard';
 import TreasuryCard from '../registration-section/cards/TreasuryCard';
+import { CubikMultisig } from './cubik-multisig';
+import { SponsorMultisig } from './sponsor-multisig';
 
 export const MultisigSection = () => {
   return (
     <div className="my-5 flex items-center justify-between px-3 md:px-0 ">
       <div className="w-full">
-        {/* <Subhead text=Overview" /> */}
+        <SubHead heading="Overview" size="md" />
         <div className="my-6 grid w-full grid-cols-3 space-x-6">
           <TreasuryCard
             iconName="USDC"
@@ -26,21 +37,31 @@ export const MultisigSection = () => {
           />
           <TreasuryCard
             iconName="piggyBank"
-            title="Matching Amount"
-            amount="50,000"
-            symbol="$"
+            title="Total Treasuries"
+            amount="3"
+            symbol=""
             classname="bg-purple-500"
           />
         </div>
-        {/* <Subhead text="Multisigs" /> */}
-        <div className="flex space-x-4">
-          <div className="flex w-full flex-[0.7]">
-            <MultisigCard />
-          </div>
-          <div className="flex flex-[0.3]">
-            <OverviewCard />
-          </div>
-        </div>
+        <SegmentContainer size="sm">
+          <Segment defaultValue="cubik">
+            <div className="flex justify-between">
+              <SubHead heading="Multisig" size="md" />
+              <SegmentList className="max-w-[20rem]" position="end">
+                <SegmentTrigger value="cubik">Cubik Multisig</SegmentTrigger>
+                <SegmentTrigger value="sponsor">
+                  Sponsor Multisig
+                </SegmentTrigger>
+              </SegmentList>
+            </div>
+            <SegmentContent value={'cubik'}>
+              <CubikMultisig />
+            </SegmentContent>
+            <SegmentContent value="sponsor">
+              <SponsorMultisig />
+            </SegmentContent>
+          </Segment>
+        </SegmentContainer>
       </div>
     </div>
   );

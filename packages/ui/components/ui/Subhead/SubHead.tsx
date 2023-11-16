@@ -7,8 +7,8 @@ const Size = {
   xxs: 'text-[14px]',
   xs: 'text-[16px]',
   sm: 'text-[18px]',
-  md: 'text-[18px]',
-  lg: 'text-[20px]',
+  md: 'text-[20px]',
+  lg: 'text-[24px]',
 };
 
 const subheadingVariant = cva('text-[var(--subhead-fg-primary)]', {

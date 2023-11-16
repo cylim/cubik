@@ -8,11 +8,15 @@ import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import morganBody from 'morgan-body';
+
 import { scheduleJob } from 'node-schedule';
 import { tokenRouter } from 'routes';
 import { authRouter } from 'routes/auth.router';
 import { uploadRouter } from 'routes/upload.router';
 import { syncCommunity } from 'service/community-sync/syncCommunity';
+
+import priceController from 'routes/price';
+
 
 import logger from './middleware/logger';
 
@@ -44,9 +48,7 @@ const main = async () => {
     res.send('Server is running');
   });
 
-  app.use(basePath + '/token', tokenRouter);
-  app.use(basePath + '/auth', authRouter);
-  app.use(basePath + '/upload', uploadRouter);
+  app.use(basePath + '/price/', priceController);
 
   app.listen(PORT, async () => {
     logger.log('info', 'Adding Sync Community Cron Job');

@@ -1,16 +1,7 @@
-
-
-
-import "./src/env.mjs";
-
-
+import './src/env.mjs';
 
 import { PrismaPlugin } from '@prisma/nextjs-monorepo-workaround-plugin';
 import { withAxiom } from 'next-axiom';
-
-
-
-
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -25,11 +16,19 @@ const nextConfig = {
     }
     config.module.rules.push({
       test: /\.svg$/,
-      use: ["@svgr/webpack"],
+      use: ['@svgr/webpack'],
     });
     return config;
   },
-  transpilePackages: ["@cubik/database"],
-}
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'pbs.twimg.com',
+      },
+    ],
+  },
+  transpilePackages: ['@cubik/database'],
+};
 
-export default withAxiom(nextConfig)
+export default withAxiom(nextConfig);

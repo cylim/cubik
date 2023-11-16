@@ -9,9 +9,11 @@ import { SubHead } from '@cubik/ui';
 export const TimelineCard = () => {
   return (
     <MultisigCard>
-      <MultisigCardHeader>
-        <SubHead heading="Timeline" size="md" />
-      </MultisigCardHeader>
+      <div className="bg-[#262626]">
+        <MultisigCardHeader>
+          <SubHead heading="Timeline" size="md" />
+        </MultisigCardHeader>
+      </div>
       <div className="h-[10rem] w-full"></div>
     </MultisigCard>
   );

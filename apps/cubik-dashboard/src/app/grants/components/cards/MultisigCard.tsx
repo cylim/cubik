@@ -6,6 +6,7 @@ import { cn } from '@cubik/ui/lib/utils';
 interface Props {
   children: ReactNode;
   className?: ClassValue;
+  borderbottom?: boolean;
 }
 export const MultisigCard = ({ children }: Props) => {
   return (
@@ -15,9 +16,19 @@ export const MultisigCard = ({ children }: Props) => {
   );
 };
 
-export const MultisigCardHeader = ({ children, className }: Props) => {
+export const MultisigCardHeader = ({
+  children,
+  className,
+  borderbottom,
+}: Props) => {
   return (
-    <div className={cn('border-b border-[#333] p-5', className)}>
+    <div
+      className={cn(
+        borderbottom ? 'border-b border-[#333]' : '',
+        'p-5',
+        className,
+      )}
+    >
       {children}
     </div>
   );

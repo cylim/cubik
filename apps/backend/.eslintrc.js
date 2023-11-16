@@ -2,7 +2,7 @@ module.exports = {
   ...require('@cubik/presets/eslint-server'),
   root: true,
   parserOptions: {
-    project: './tsconfig.json',
+    project: './apps/backend/tsconfig.json',
     sourceType: 'module',
     ecmaVersion: 2020,
   },

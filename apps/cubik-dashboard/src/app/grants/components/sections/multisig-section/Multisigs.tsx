@@ -9,11 +9,9 @@ import {
   SubHead,
 } from '@cubik/ui';
 
-import MultisigCard from '../registration-section/cards/MultisigCard';
-import OverviewCard from '../registration-section/cards/OverviewCard';
-import TreasuryCard from '../registration-section/cards/TreasuryCard';
 import { CubikMultisig } from './cubik-multisig';
 import { SponsorMultisig } from './sponsor-multisig';
+import TreasuryCard from './TreasuryCard';
 
 export const MultisigSection = () => {
   return (

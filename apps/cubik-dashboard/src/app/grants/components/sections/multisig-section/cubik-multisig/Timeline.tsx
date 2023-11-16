@@ -6,12 +6,13 @@ import {
 
 import { SubHead } from '@cubik/ui';
 
-export const OverviewCard = () => {
+export const TimelineCard = () => {
   return (
     <MultisigCard>
       <MultisigCardHeader>
-        <SubHead heading="Overview" size="md" />
+        <SubHead heading="Timeline" size="md" />
       </MultisigCardHeader>
+      <div className="h-[10rem] w-full"></div>
     </MultisigCard>
   );
 };

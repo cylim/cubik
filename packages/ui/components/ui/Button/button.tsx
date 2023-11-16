@@ -3,7 +3,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 
 import { cn, handleMediaQuery } from '../../../lib/utils';
 
-const buttonVariants = cva('font-semibold rounded-[8px]', {
+const buttonVariants = cva('font-semibold ', {
   variants: {
     variant: {
       primary: cn(
@@ -11,41 +11,42 @@ const buttonVariants = cva('font-semibold rounded-[8px]', {
         'bg-[var(--button-primary-surface-default)] text-[var(--button-primary-text-default)] focus:border',
         'hover:bg-[var(--button-primary-surface-hovered)] hover:text-[var(--button-primary-text-hovered)]',
         'hover:stroke-[var(--button-primary-text-hovered)] stroke-[var(--button-primary-text-default)]',
-        'disabled:bg-[var(--button-primary-surface-disabled)]',
+        'disabled:bg-[var(--button-primary-surface-disabled)] rounded-[8px]',
       ),
       secondary: cn(
         'focus:bg-[var(--button-secondary-surface-focused)] focus:border-2 focus:border-[var(--button-secondary-border-focused)]',
         'bg-[var(--button-secondary-surface-default)] text-[var(--button-secondary-text-default)] focus:border',
         'stroke-[var(--button-secondary-surface-default)] stroke-[var(--button-secondary-text-default)] focus:border',
         'hover:bg-[var(--button-secondary-surface-hovered)] hover:text-[var(--button-secondary-text-hovered)]',
-        'disabled:bg-[var(--button-secondary-surface-disabled)]',
+        'disabled:bg-[var(--button-secondary-surface-disabled)] rounded-[8px]',
       ),
       outline: cn(
-        'bg-[var(--button-outline-surface-default)] border border-[var(--button-outline-border-default)] focus:bg-[var(--button-outline-surface-focused)] focus:border-2 focus:border-[var(--button-outline-border-focused)] focus:border text-[var(--button-outline-text-default)] hover:bg-[var(--button-outline-surface-hovered)] hover:text-[var(--button-outline-text-hovered)] disabled:bg-[var(--button-outline-surface-disabled)]',
+        'bg-[var(--button-outline-surface-default)] border rounded-[8px] border-[var(--button-outline-border-default)] focus:bg-[var(--button-outline-surface-focused)] focus:border-2 focus:border-[var(--button-outline-border-focused)] focus:border text-[var(--button-outline-text-default)] hover:bg-[var(--button-outline-surface-hovered)] hover:text-[var(--button-outline-text-hovered)] disabled:bg-[var(--button-outline-surface-disabled)]',
       ),
       tertiary: cn(
         'focus:bg-[var(--button-tertiary-surface-focused)] focus:border-2 focus:border-[var(--button-tertiary-border-focused)]',
         'bg-[var(--button-tertiary-surface-default)] focus:border text-[var(--button-tertiary-text-default)]',
         'hover:bg-[var(--button-tertiary-surface-hovered)] hover:text-[var(--button-tertiary-text-hovered)]',
-        'disabled:bg-[var(--button-tertiary-surface-disabled)]',
+        'disabled:bg-[var(--button-tertiary-surface-disabled)] rounded-[8px]',
       ),
       link: cn(
         'focus:bg-[var(--button-link-surface-focused)] focus:border-2 focus:border-[var(--button-link-border-focused)]',
         'bg-[var(--button-link-surface-default)]  text-[var(--button-link-text-default)]',
         'hover:bg-[var(--button-link-surface-hovered)] hover:text-[var(--button-link-text-hovered)]',
         'disabled:bg-[var(--button-link-surface-disabled)]',
+        'underline underline-offset-4 ',
       ),
       danger: cn(
         'focus:bg-[var(--button-danger-surface-focused)] focus:border-2 focus:border-[var(--button-danger-border-focused)]',
         'bg-[var(--button-danger-surface-default)] focus:border text-[var(--button-danger-text-default)]',
         'hover:bg-[var(--button-danger-surface-hovered)] hover:text-[var(--button-danger-text-hovered)]',
-        'disabled:bg-[var(--button-danger-surface-disabled)]',
+        'disabled:bg-[var(--button-danger-surface-disabled)] rounded-[8px]',
       ),
       success: cn(
         'focus:bg-[var(--button-success-surface-focused)] focus:border-2 focus:border-[var(--button-success-border-focused)]',
         'bg-[var(--button-success-surface-default)] focus:border text-[var(--button-success-text-default)]',
         'hover:bg-[var(--button-success-surface-hovered)] hover:text-[var(--button-success-text-hovered)]',
-        'disabled:bg-[var(--button-success-surface-disabled)]',
+        'disabled:bg-[var(--button-success-surface-disabled)] rounded-[8px]',
       ),
     },
     size: {

@@ -1,6 +1,15 @@
-const SettingsSVG: React.FC<React.SVGAttributes<SVGElement>> = ({ width = '12', height = '12' }) => {
+const SettingsSVG: React.FC<React.SVGAttributes<SVGElement>> = ({
+  width = '12',
+  height = '12',
+}) => {
   return (
-    <svg width={width} height={height} viewBox="0 0 12 10" fill="inherit" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 12 10"
+      fill="inherit"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         fillRule="evenodd"
         clipRule="evenodd"

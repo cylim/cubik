@@ -13,7 +13,8 @@ import { Toaster } from 'sonner';
 import { AuthProvider } from './context/user';
 
 import './globals.css';
-import { Metadata, Viewport } from "next";
+
+import { Metadata, Viewport } from 'next';
 import { Providers } from '@/app/provider';
 import { cn } from '@ui/lib/utils';
 
@@ -21,7 +22,6 @@ const PlusJakartaSans = Inter({
   subsets: ['latin'],
   weight: ['200', '300', '400', '500', '600', '700', '800'],
 });
-
 
 const APP_NAME = 'CUBIK';
 const APP_DEFAULT_TITLE = 'CUBIK';
@@ -65,8 +65,8 @@ export const metadata: Metadata = {
       template: APP_TITLE_TEMPLATE,
     },
     description: APP_DESCRIPTION,
-  }
-}
+  },
+};
 
 export default function RootLayout({
   children,

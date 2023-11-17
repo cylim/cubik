@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": "./src",
-    "paths": {
-    },
+    "paths": {},
     "target": "es2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -17,5 +16,5 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["./src"]
+  "include": ["./src/**/*", "./src/index.ts", "./.eslintrc.js"]
 }

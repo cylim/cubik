@@ -10,31 +10,30 @@ datasource db {
 }
 
 model User {
-  id             String          @id @default(uuid()) @map("_id")
-  username       String?         @unique
-  mainWallet     String          @unique
-  email          String?
-  profileNft     Json?
-  userSybil      UserSybilStatus @default(NONE)
-  profilePicture String?         @db.VarChar(500)
-  tx             String?         @db.VarChar(500)
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
-  isActive       Boolean         @default(true)
-  isArchive      Boolean         @default(false)
-  session        Session[]
-  comments       Comments[]
-  reply          Reply[]
-  round          Round[]
-  contribution   Contribution[]
-  team           Team[]
-  proof          Proof[]
-  project        Project[]
-  AdminAccess    AdminAccess[]
-  activity       Activity[]
-  notification   Notification[]
+  id               String             @id @default(uuid()) @map("_id")
+  username         String?            @unique
+  mainWallet       String             @unique
+  email            String?
+  profileNft       Json?
+  userSybil        UserSybilStatus    @default(NONE)
+  profilePicture   String?            @db.VarChar(500)
+  tx               String?            @db.VarChar(500)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  isActive         Boolean            @default(true)
+  isArchive        Boolean            @default(false)
+  session          Session[]
+  comments         Comments[]
+  reply            Reply[]
+  round            Round[]
+  contribution     Contribution[]
+  team             Team[]
+  proof            Proof[]
+  project          Project[]
+  AdminAccess      AdminAccess[]
+  Activity         Activity[]
   CommunityMembers CommunityMembers[]
-  pda            String?         @unique
+  Notification     Notification[]
 
   @@fulltext([username])
 }

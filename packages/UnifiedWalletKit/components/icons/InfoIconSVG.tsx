@@ -1,6 +1,15 @@
-const InfoIconSVG: React.FC<{ width?: number; height?: number }> = ({ width = 12, height = 12 }) => {
+const InfoIconSVG: React.FC<{ width?: number; height?: number }> = ({
+  width = 12,
+  height = 12,
+}) => {
   return (
-    <svg width={width} height={height} viewBox="0 0 12 12" fill="inherit" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 12 12"
+      fill="inherit"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M6.83337 3.56012C6.83337 4.02043 6.46024 4.39309 5.99994 4.39309C5.53963 4.39309 5.1665 4.02043 5.1665 3.56012C5.1665 3.09981 5.53963 2.72668 5.99994 2.72668C6.46024 2.72668 6.83337 3.09981 6.83337 3.56012Z"
         fill="inherit"

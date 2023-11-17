@@ -1,47 +1,24 @@
 module.exports = {
   env: {
+    browser: false,
+    es6: true,
     node: true,
   },
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint', 'jest'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    'airbnb-base',
-    'airbnb-typescript/base',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:import/typescript',
+    'plugin:jest/recommended',
     'prettier',
   ],
-  plugins: ['import', '@typescript-eslint'],
-  settings: {
-    'import/parsers': {
-      '@typescript-eslint/parser': ['.ts'],
-    },
-    'import/resolver': {
-      node: {
-        extensions: ['.js', '.ts'],
-        moduleDirectory: ['node_modules', 'src/'],
-      },
-      typescript: {
-        alwaysTryTypes: true,
-        project: '.',
-      },
-    },
+  rules: {
+    // The following rule is enabled only to supplement the inline suppression
+    // examples, and because it is not a recommended rule, you should either
+    // disable it, or understand what it enforces.
+    // https://typescript-eslint.io/rules/explicit-function-return-type/
+    '@typescript-eslint/explicit-function-return-type': 'warn',
   },
-  overrides: [
-    {
-      env: {
-        jest: true,
-      },
-      files: ['**/__tests__/**/*.[jt]s', '**/?(*.)+(spec|test).[jt]s'],
-      extends: ['plugin:jest/recommended'],
-      rules: {
-        'import/no-extraneous-dependencies': [
-          'off',
-          { devDependencies: ['**/?(*.)+(spec|test).[jt]s'] },
-        ],
-      },
-    },
-  ],
+
   ignorePatterns: ['**/*.js', 'node_modules', '.turbo', 'dist', 'coverage'],
 };

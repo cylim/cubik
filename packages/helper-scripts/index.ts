@@ -1,8 +1,3 @@
-export * from './src/color/serializeSemantic';
-export * from './src/color/generateCSS';
-export * from './src/color/primitive';
-export * from './src/color/data';
-
 import { config } from 'dotenv';
 
 import {
@@ -12,6 +7,11 @@ import {
   // seedPDAInRound,
   // seedPDAInUser,
 } from './utils/pdaSeeder';
+
+export * from './src/color/serializeSemantic';
+export * from './src/color/generateCSS';
+export * from './src/color/primitive';
+export * from './src/color/data';
 
 // import { generateSlug } from './src/data-move/generate_slug';
 // import { getDataFromInfura, uploadToInfura } from './utils/uploadToInfura';

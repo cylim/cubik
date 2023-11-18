@@ -1,4 +1,4 @@
-import { fetchPossibleSwapRoute } from '.';
+import { fetchPossibleSwapRoute } from './jupiter';
 
 (async () => {
   const route = await fetchPossibleSwapRoute(

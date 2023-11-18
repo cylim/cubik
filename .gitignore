@@ -5,6 +5,7 @@ logs
 sw.js
 sw.js.*
 workbox-*.js
+workbox-*.js.map
 
 # dependencies
 node_modules

@@ -1,6 +1,12 @@
 import "./src/env.mjs";
 // @ts-ignore
 import { PrismaPlugin } from "@prisma/nextjs-monorepo-workaround-plugin";
+import { withAxiom } from "next-axiom"
+import {
+  PHASE_DEVELOPMENT_SERVER,
+  PHASE_PRODUCTION_BUILD,
+} from "next/constants.js";
+
 
 /** @type {import("next").NextConfig} */
 const config = {
@@ -19,9 +25,7 @@ const config = {
     });
     return config;
   },
-  transpilePackages: ["@cubik/database"],
-  experimental: { serverActions: true, appDir: true },
-
+  transpilePackages: ["@cubik/database", "@cubik/ui"],
   images: {
     domains: [
       "d1yweukyu067aq.cloudfront.net",
@@ -36,14 +40,17 @@ const config = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  async redirects() {
-    return [
-      {
-        source: "/hackathon/opos",
-        destination: "/hackathons/opos",
-        permanent: true,
-      },
-    ];
-  },
+
 };
-export default config;
+
+const nextConfigFunction = async (phase) => {
+  if (phase === PHASE_DEVELOPMENT_SERVER || phase === PHASE_PRODUCTION_BUILD) {
+    const withPWA = (await import("@ducanh2912/next-pwa")).default({
+      dest: "public",
+    });
+    return withPWA(withAxiom(config));
+  }
+  return withAxiom(config);
+};
+
+export default nextConfigFunction;

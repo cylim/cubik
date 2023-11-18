@@ -1,0 +1,10 @@
+{
+  "extends": "@cubik/config/tsconfig/base.json",
+  "include": ["index.ts", "./src/**/*", "./utils/*", "./types/*"],
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "module": "esnext"
+  }
+}

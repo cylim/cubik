@@ -1,9 +1,8 @@
-export type ExplorerType = "round" | "hackathon";
-
+export type ExplorerType = 'round' | 'hackathon';
 
 export interface HackathonEvent {
   id: string;
-  eventName: "hackathon";
+  eventName: 'hackathon';
   amount: number;
   name: string;
   hackathonStart: Date;
@@ -17,7 +16,7 @@ export interface HackathonEvent {
 
 export interface RoundEvent {
   id: string;
-  eventName: "round";
+  eventName: 'round';
   amount: number;
   name: string;
   registrationStart?: Date;
@@ -30,7 +29,7 @@ export interface RoundEvent {
 
 export interface UnknownEvent {
   id: string;
-  eventName: "unknown";
+  eventName: 'unknown';
   bg?: string;
   color?: string;
   start: Date;
@@ -45,6 +44,7 @@ export interface ProjectExplorerType {
   id: string;
   logo: string;
   title: string;
+  slug: string;
   projectShortDescription: string;
   ownerName: string;
   industry: string;

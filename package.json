@@ -1,37 +1,39 @@
 {
   "private": false,
   "scripts": {
-    "build": "dotenv -- turbo run build",
-    "dev": "dotenv -- turbo run dev",
-    "lint": "dotenv -- turbo run lint --filter cubik-ui",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "build": "NODE_ENV=production dotenv -- turbo run build",
+    "dev": "NODE_ENV=development dotenv --  turbo run dev",
+    "lint": "dotenv --  eslint .",
+    "format": "prettier  --write \"**/*.{ts,tsx,md}\" --ignore-path .prettierignore",
     "generate": "dotenv -- turbo run db:generate",
     "db:push": "dotenv -- turbo run db:push",
-    "admin:dev": "pnpm run dev --filter cubik-admin",
-    "web:dev": "pnpm run dev --filter cubik-web",
-    "web:build": "dotenv -- turbo run build --filter cubik-web",
-    "grants:dev": "pnpm run dev --filter cubik-grants",
-    "backend": "pnpm run dev --filter backend",
-    "backend:build": "turbo run build --filter backend",
-    "backend:dev": "turbo run dev --filter backend",
-    "backend:start": "pnpm --filter backend run start",
+    "build:wallet": "turbo run build-lib",
     "db:studio": "dotenv -- pnpm -F @cubik/database dev",
-    "postinstall": "dotenv -- turbo run db:generate"
+    "postinstall": "dotenv -- turbo run db:generate",
+    "check-types": "npx tsc --noEmit --pretty",
+    "prepare": "husky install"
   },
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "dependencies": {
-    "dotenv-cli": "latest"
+    "@commitlint/cli": "^18.2.0",
+    "@commitlint/config-conventional": "^18.1.0",
+    "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
+    "dotenv-cli": "latest",
+    "lint-staged": "^15.0.2",
+    "prettier-plugin-tailwindcss": "^0.5.6",
+    "typescript": "^5.2.2"
   },
   "devDependencies": {
-    "@turbo/gen": "^1.9.7",
+    "@turbo/gen": "^1.10.16",
     "eslint": "^7.32.0",
-    "eslint-config-custom": "workspace:*",
-    "prettier": "^2.5.1",
-    "turbo": "^1.10.13"
+    "husky": "^8.0.0",
+    "jest": "^29.7.0",
+    "prettier": "^2.8.8",
+    "turbo": "^1.10.16"
   },
-  "packageManager": "pnpm@7.15.0",
+  "packageManager": "pnpm@8.6.10",
   "name": "cubik"
 }

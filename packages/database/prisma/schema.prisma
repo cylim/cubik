@@ -1,38 +1,129 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextIndex", "fullTextSearch"]
+  previewFeatures = ["fullTextIndex", "fullTextSearch", "driverAdapters"]
 }
 
 datasource db {
-  provider          = "mysql"
-  url               = env("PROD_DATABASE_URL")
-  relationMode      = "prisma"
+  provider     = "mysql"
+  url          = env("PROD_DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model User {
-  id             String          @id @default(uuid()) @map("_id")
-  username       String?         @unique
-  mainWallet     String          @unique
-  email          String?
-  profileNft     Json?
-  userSybil      UserSybilStatus @default(NONE)
-  profilePicture String?         @db.VarChar(500)
-  tx             String?         @db.VarChar(500)
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
-  isActive       Boolean         @default(true)
-  isArchive      Boolean         @default(false)
-  session        Session[]
-  comments       Comments[]
-  reply          Reply[]
-  round          Round[]
-  contribution   Contribution[]
-  team           Team[]
-  proof          Proof[]
-  project        Project[]
-  AdminAccess    AdminAccess[]
+  id               String             @id @default(uuid()) @map("_id")
+  username         String?            @unique
+  mainWallet       String             @unique
+  email            String?
+  profileNft       Json?
+  userSybil        UserSybilStatus    @default(NONE)
+  profilePicture   String?            @db.VarChar(500)
+  tx               String?            @db.VarChar(500)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  isActive         Boolean            @default(true)
+  isArchive        Boolean            @default(false)
+  session          Session[]
+  comments         Comments[]
+  reply            Reply[]
+  round            Round[]
+  contribution     Contribution[]
+  team             Team[]
+  proof            Proof[]
+  project          Project[]
+  AdminAccess      AdminAccess[]
+  Activity         Activity[]
+  CommunityMembers CommunityMembers[]
+  Notification     Notification[]
 
   @@fulltext([username])
+}
+
+model Communities {
+  id               String             @id @default(uuid()) @map("_id")
+  name             String
+  logo             String             @db.VarChar(500)
+  background       String             @db.VarChar(500)
+  shortDescription String             @db.VarChar(2000)
+  method           COMM
+  collection       Json? // {collection:string}[]
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  isArchive        Boolean            @default(true)
+  CommunityMembers CommunityMembers[]
+}
+
+model CommunityMembers {
+  id          String      @id @default(uuid()) @map("_id")
+  userId      String
+  communityId String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  user        User        @relation(fields: [userId], references: [id])
+  community   Communities @relation(fields: [communityId], references: [id])
+  isActive    Boolean     @default(true)
+
+  @@index([userId])
+  @@index([communityId])
+}
+
+enum COMM {
+  DISCORD
+  MINT_ADD
+  LIST_ADD
+}
+
+enum ActivityType {
+  WELCOME
+  CREATE_NEW_PROJECT
+  PROJECT_STATUS_APPROVED
+  PROJECT_STATUS_REJECTED
+  PROJECT_JOIN_ROUND
+  PROJECT_JOIN_ROUND_APPROVED
+  PROJECT_JOIN_ROUND_REJECTED
+  PROOF_COLLECTED
+  PROJECT_BAN_IN_ROUND
+  CONTRIBUTION_TO_PROJECT
+  CONTRIBUTION_TO_USER
+  GENERIC
+}
+
+enum NotificationType {
+  PROJECT_STATUS_APPROVED
+  PROJECT_STATUS_REJECTED
+  CONTRIBUTION_TO_PROJECT
+  CONTRIBUTION_TO_USER
+  PROJECT_JOIN_ROUND_APPROVED
+  PROJECT_JOIN_ROUND_REJECTED
+}
+
+model Activity {
+  id        String       @id @default(uuid()) @map("_id")
+  userId    String
+  type      ActivityType
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  isActive  Boolean      @default(true)
+  isArchive Boolean      @default(false)
+  user      User         @relation(fields: [userId], references: [id])
+  data      Json
+
+  @@index([userId])
+}
+
+model Notification {
+  id     String           @id @default(uuid()) @map("_id")
+  userId String
+  type   NotificationType
+  isRead Boolean          @default(false)
+  user   User             @relation(fields: [userId], references: [id])
+  data   Json
+
+  isActive  Boolean  @default(true)
+  isArchive Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
 }
 
 model Proof {
@@ -45,7 +136,7 @@ model Proof {
   isActive  Boolean   @default(true)
   isArchive Boolean   @default(false)
   user      User      @relation(fields: [userId], references: [id])
-
+  pda       String?   @unique
 
   @@index([userId])
 }
@@ -54,9 +145,9 @@ model Session {
   id        String   @id @default(uuid())
   ipAddress String
   userAgent String
-  latitude  String  @default("0")
-  longitude String  @default("0")
-  country   String  @default("default")
+  latitude  String   @default("0")
+  longitude String   @default("0")
+  country   String   @default("default")
   createdAt DateTime @default(now())
   userId    String
   User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -67,6 +158,8 @@ model Session {
 model Project {
   id                   String                 @id @default(uuid()) @map("_id")
   name                 String
+  slug                 String?                @default("")
+  slides               Json?
   shortDescription     String                 @db.VarChar(2000)
   logo                 String                 @db.VarChar(1000)
   ownerPublickey       String
@@ -82,8 +175,9 @@ model Project {
   status               ProjectVerifyStatus    @default(REVIEW)
   failedReason         String?                @default("")
   mutliSigAddress      String?                @default("")
+  multiSigAddress_v3   String?                @default("")
+  multiSigAddress_v4   String?                @default("")
   email                String                 @default("")
-  ogImage              String                 @default("")
   createKey            String?                @default("")
   createdAt            DateTime               @default(now())
   updatedAt            DateTime               @updatedAt
@@ -95,6 +189,7 @@ model Project {
   contribution         Contribution[]
   team                 Team[]
   projectJoinHackathon ProjectJoinHackathon[]
+  pda                  String?                @unique
 
   @@index([ownerPublickey])
 }
@@ -125,6 +220,7 @@ model Round {
   projectJoinRound      ProjectJoinRound[]
   contribution          Contribution[]
   AdminAccess           AdminAccess[]
+  pda                   String?            @unique
 
   @@index([userId])
 }
@@ -158,6 +254,7 @@ model ProjectJoinRound {
   project       Project                @relation(fields: [projectId], references: [id])
   round         Round                  @relation(fields: [roundId], references: [id])
   contribution  Contribution[]
+  pda           String?                @unique
 
   @@index([projectId])
   @@index([roundId])
@@ -269,6 +366,7 @@ model ProjectJoinHackathon {
   hackathon    Hackathon      @relation(fields: [hackathonId], references: [id])
   project      Project        @relation(fields: [projectId], references: [id])
   contribution Contribution[]
+  pda          String?        @unique
 
   @@index([hackathonId])
   @@index([projectId])
@@ -297,6 +395,7 @@ model Contribution {
   hackathon              Hackathon?            @relation(fields: [hackathonId], references: [id])
   projectJoinRound       ProjectJoinRound?     @relation(fields: [projectJoinRoundId], references: [id])
   projectJoinHackathon   ProjectJoinHackathon? @relation(fields: [projectJoinHackathonId], references: [id])
+  pda                    String?               @unique
 
   @@index([projectId])
   @@index([roundId])

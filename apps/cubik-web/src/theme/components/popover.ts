@@ -6,20 +6,20 @@ const { definePartsStyle, defineMultiStyleConfig } =
 
 const baseStyle = definePartsStyle(() => ({
   content: {
-    backgroundColor: "neutral.2",
-    border: "1px solid",
-    borderColor: "neutral.4",
+    backgroundColor: 'neutral.2',
+    border: '1px solid',
+    borderColor: 'neutral.4',
     _dark: {
-      backgroundColor: "neutral.2",
+      backgroundColor: 'neutral.2',
     },
   },
   body: {
-    border: "none",
-    outline: "none",
-    p: "0px",
+    border: 'none',
+    outline: 'none',
+    p: '0px',
   },
   header: {
-    padding: "0px",
+    padding: '0px',
   },
 }));
 

@@ -68,7 +68,8 @@ const cubik = definePartsStyle({
   root: {
     border: '1px solid',
     borderColor: '#272929',
-    rounded: '8px', background: '#0F0F0F',
+    rounded: '8px',
+    background: '#0F0F0F',
   },
   field: {
     border: 'none',

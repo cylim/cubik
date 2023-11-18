@@ -1,4 +1,338 @@
 export const textStyles = {
+  display: {
+    xxl: {
+      400: {
+        fontSize: '72px',
+        fontStyle: 'normal',
+        fontWeight: 400,
+        lineHeight: '90px',
+        letterSpacing: '-1.44px',
+      },
+      500: {
+        fontSize: '72px',
+        fontStyle: 'normal',
+        fontWeight: 500,
+        lineHeight: '90px',
+        letterSpacing: '-1.44px',
+      },
+      600: {
+        fontSize: '72px',
+        fontStyle: 'normal',
+        fontWeight: 600,
+        lineHeight: '90px',
+        letterSpacing: '-1.44px',
+      },
+      700: {
+        fontSize: '72px',
+        fontStyle: 'normal',
+        fontWeight: 700,
+        lineHeight: '90px',
+        letterSpacing: '-1.44px',
+      },
+    },
+    xl: {
+      400: {
+        fontSize: '60px',
+        fontStyle: 'normal',
+        fontWeight: 400,
+        lineHeight: '72px',
+        letterSpacing: '-1.2px',
+      },
+      500: {
+        fontSize: '60px',
+        fontStyle: 'normal',
+        fontWeight: 500,
+        lineHeight: '72px',
+        letterSpacing: '-1.2px',
+      },
+      600: {
+        fontSize: '60px',
+        fontStyle: 'normal',
+        fontWeight: 600,
+        lineHeight: '72px',
+        letterSpacing: '-1.2px',
+      },
+      700: {
+        fontSize: '60px',
+        fontStyle: 'normal',
+        fontWeight: 700,
+        lineHeight: '72px',
+        letterSpacing: '-1.2px',
+      },
+    },
+    lg: {
+      400: {
+        fontSize: '48px',
+        fontStyle: 'normal',
+        fontWeight: 400,
+        lineHeight: '60px',
+        letterSpacing: '-0.96px',
+      },
+      500: {
+        fontSize: '48px',
+        fontStyle: 'normal',
+        fontWeight: 500,
+        lineHeight: '60px',
+        letterSpacing: '-0.96px',
+      },
+      600: {
+        fontSize: '48px',
+        fontStyle: 'normal',
+        fontWeight: 600,
+        lineHeight: '60px',
+        letterSpacing: '-0.96px',
+      },
+      700: {
+        fontSize: '48px',
+        fontStyle: 'normal',
+        fontWeight: 700,
+        lineHeight: '60px',
+        letterSpacing: '-0.96px',
+      },
+    },
+    md: {
+      400: {
+        fontSize: '36px',
+        fontStyle: 'normal',
+        fontWeight: 400,
+        lineHeight: '44px',
+        letterSpacing: '-0.72px',
+      },
+      500: {
+        fontSize: '36px',
+        fontStyle: 'normal',
+        fontWeight: 500,
+        lineHeight: '44px',
+        letterSpacing: '-0.72px',
+      },
+      600: {
+        fontSize: '36px',
+        fontStyle: 'normal',
+        fontWeight: 600,
+        lineHeight: '44px',
+        letterSpacing: '-0.72px',
+      },
+      700: {
+        fontSize: '36px',
+        fontStyle: 'normal',
+        fontWeight: 700,
+        lineHeight: '44px',
+        letterSpacing: '-0.72px',
+      },
+    },
+    sm: {
+      400: {
+        fontSize: '30px',
+        fontStyle: 'normal',
+        fontWeight: 400,
+        lineHeight: '38px',
+      },
+      500: {
+        fontSize: '30px',
+        fontStyle: 'normal',
+        fontWeight: 500,
+        lineHeight: '38px',
+      },
+      600: {
+        fontSize: '30px',
+        fontStyle: 'normal',
+        fontWeight: 600,
+        lineHeight: '38px',
+      },
+      700: {
+        fontSize: '30px',
+        fontStyle: 'normal',
+        fontWeight: 700,
+        lineHeight: '38px',
+      },
+    },
+    xs: {
+      400: {
+        fontSize: '24px',
+        fontStyle: 'normal',
+        fontWeight: 400,
+        lineHeight: '32px',
+      },
+      500: {
+        fontSize: '24px',
+        fontStyle: 'normal',
+        fontWeight: 500,
+        lineHeight: '32px',
+      },
+      600: {
+        fontSize: '24px',
+        fontStyle: 'normal',
+        fontWeight: 600,
+        lineHeight: '32px',
+      },
+      700: {
+        fontSize: '24px',
+        fontStyle: 'normal',
+        fontWeight: 700,
+        lineHeight: '32px',
+      },
+    },
+  },
+  text: {
+    xxl: {
+      400: {
+        fontSize: '22px',
+        fontStyle: 'normal',
+        fontWeight: 400,
+        lineHeight: '30px',
+      },
+      500: {
+        fontSize: '22px',
+        fontStyle: 'normal',
+        fontWeight: 500,
+        lineHeight: '30px',
+      },
+      600: {
+        fontSize: '22px',
+        fontStyle: 'normal',
+        fontWeight: 600,
+        lineHeight: '30px',
+      },
+      700: {
+        fontSize: '22px',
+        fontStyle: 'normal',
+        fontWeight: 700,
+        lineHeight: '30px',
+      },
+    },
+    xl: {
+      400: {
+        fontSize: '20px',
+        fontStyle: 'normal',
+        fontWeight: 400,
+        lineHeight: '28px',
+      },
+      500: {
+        fontSize: '20px',
+        fontStyle: 'normal',
+        fontWeight: 500,
+        lineHeight: '28px',
+      },
+      600: {
+        fontSize: '20px',
+        fontStyle: 'normal',
+        fontWeight: 600,
+        lineHeight: '28px',
+      },
+      700: {
+        fontSize: '20px',
+        fontStyle: 'normal',
+        fontWeight: 700,
+        lineHeight: '28px',
+      },
+    },
+    lg: {
+      400: {
+        fontSize: '18px',
+        fontStyle: 'normal',
+        fontWeight: 400,
+        lineHeight: '26px',
+      },
+      500: {
+        fontSize: '18px',
+        fontStyle: 'normal',
+        fontWeight: 500,
+        lineHeight: '26px',
+      },
+      600: {
+        fontSize: '18px',
+        fontStyle: 'normal',
+        fontWeight: 600,
+        lineHeight: '26px',
+      },
+      700: {
+        fontSize: '18px',
+        fontStyle: 'normal',
+        fontWeight: 700,
+        lineHeight: '26px',
+      },
+    },
+    md: {
+      400: {
+        fontSize: '16px',
+        fontStyle: 'normal',
+        fontWeight: 400,
+        lineHeight: '24px',
+      },
+      500: {
+        fontSize: '16px',
+        fontStyle: 'normal',
+        fontWeight: 500,
+        lineHeight: '24px',
+      },
+      600: {
+        fontSize: '16px',
+        fontStyle: 'normal',
+        fontWeight: 600,
+        lineHeight: '24px',
+      },
+      700: {
+        fontSize: '16px',
+        fontStyle: 'normal',
+        fontWeight: 700,
+        lineHeight: '24px',
+      },
+    },
+    sm: {
+      400: {
+        fontSize: '14px',
+        fontStyle: 'normal',
+        fontWeight: 400,
+        lineHeight: '20px',
+      },
+      500: {
+        fontSize: '14px',
+        fontStyle: 'normal',
+        fontWeight: 500,
+        lineHeight: '20px',
+      },
+      600: {
+        fontSize: '14px',
+        fontStyle: 'normal',
+        fontWeight: 600,
+        lineHeight: '20px',
+      },
+      700: {
+        fontSize: '14px',
+        fontStyle: 'normal',
+        fontWeight: 700,
+        lineHeight: '20px',
+      },
+    },
+    xs: {
+      400: {
+        fontSize: '12px',
+        fontStyle: 'normal',
+        fontWeight: 400,
+        lineHeight: '18px',
+      },
+      500: {
+        fontSize: '12px',
+        fontStyle: 'normal',
+        fontWeight: 500,
+        lineHeight: '18px',
+      },
+      600: {
+        fontSize: '12px',
+        fontStyle: 'normal',
+        fontWeight: 600,
+        lineHeight: '18px',
+      },
+      700: {
+        fontSize: '12px',
+        fontStyle: 'normal',
+        fontWeight: 700,
+        lineHeight: '18px',
+      },
+    },
+  },
+
+  // ------- old styles -------
   display1: {
     fontSize: '56px',
     fontWeight: '700',

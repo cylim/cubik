@@ -4,16 +4,19 @@
   "types": "./index.ts",
   "scripts": {
     "db:generate": "prisma generate",
-    "db:push": "prisma db push --skip-generate",
-    "dev": "pnpm prisma studio --port 5556"
+    "db:push": "dotenv -e ../../.env -- npx prisma db push --skip-generate",
+    "dev": "dotenv -e ../../.env -- npx prisma studio --port 5556"
   },
   "dependencies": {
-    "@prisma/client": "^5.1.1",
+    "@cubik/config": "workspace:*",
+    "@planetscale/database": "^1.11.0",
+    "@prisma/adapter-planetscale": "^5.5.2",
+    "@prisma/client": "^5.5.2",
     "dotenv": "^16.3.1",
     "dotenv-cli": "latest"
   },
   "devDependencies": {
-    "prisma": "^5.1.1",
+    "prisma": "^5.5.2",
     "typescript": "^5.1.3"
   }
 }

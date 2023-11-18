@@ -18,7 +18,10 @@
     "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@ui/*": ["../../packages/ui/*"],
+      "@ui/components/*": ["../../packages/ui/components/ui/*"],
+      "@ui/components/ui/*": ["../../packages/ui/components/ui/*"]
     },
     "plugins": [{ "name": "next" }],
     "typeRoots": ["./types", "./src/types"]
@@ -30,7 +33,8 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "postcss.config.js"
   ],
   "exclude": ["node_modules"]
 }

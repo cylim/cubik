@@ -1,5 +1,13 @@
 {
-    "cSpell.words": [
-        "blockhash"
-    ]
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "javascript.validate.enable": false,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+  "cSpell.words": ["Leaderboard"]
 }

@@ -1,5 +1,12 @@
+import type { FC, ReactNode } from 'react';
+import { useMemo } from 'react';
+import { env } from '@/env.mjs';
+import { web3 } from '@coral-xyz/anchor';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
-import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
+import {
+  ConnectionProvider,
+  WalletProvider,
+} from '@solana/wallet-adapter-react';
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import {
   BackpackWalletAdapter,
@@ -10,11 +17,7 @@ import {
   SolletExtensionWalletAdapter,
   TokenaryWalletAdapter,
   TorusWalletAdapter,
-} from "@solana/wallet-adapter-wallets";
-import { web3 } from '@coral-xyz/anchor';
-import type { FC, ReactNode } from 'react';
-import { useMemo } from 'react';
-import { env } from "@/env.mjs";
+} from '@solana/wallet-adapter-wallets';
 
 require('@solana/wallet-adapter-react-ui/styles.css');
 

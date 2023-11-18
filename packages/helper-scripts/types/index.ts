@@ -1,3 +1,5 @@
+import { web3 } from '@coral-xyz/anchor';
+
 export interface CloudflareResponseType {
   result: {
     id: string;
@@ -13,3 +15,5 @@ export interface CloudflareResponseType {
   errors: any[];
   messages: any[];
 }
+
+export type PdaReturnType = [pda: web3.PublicKey, bump: number];

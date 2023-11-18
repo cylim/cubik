@@ -3,15 +3,9 @@
  * All credit goes to Jupiter Team
  */
 
-import fs from 'fs';
-
 import { Token } from '@cubik/common-types/src/token';
 
-export const newTokenList = JSON.parse(
-  fs.readFileSync('../../../packages/helper-scripts/tokenList.json', 'utf-8'),
-) as Token[];
-
-export const tokenList: Token[] = [
+export const TokenList: Token[] = [
   {
     address: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
     chainId: 101,
@@ -19,7 +13,7 @@ export const tokenList: Token[] = [
     name: 'USD Coin',
     symbol: 'USDC',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9145372c-6d2f-4a66-741b-c1d3cd1c8500/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'usd-coin',
@@ -32,7 +26,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped SOL',
     symbol: 'SOL',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/So11111111111111111111111111111111111111112/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/8f98c577-f117-4b8e-99ef-dd9283dc1c00/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'wrapped-solana',
@@ -45,7 +39,7 @@ export const tokenList: Token[] = [
     name: 'USDT',
     symbol: 'USDT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c3f7ef5a-c996-416e-590f-8bb2a70dfc00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'tether',
@@ -58,7 +52,7 @@ export const tokenList: Token[] = [
     name: 'BonkCoin',
     symbol: 'Bonk',
     logoURI:
-      'https://arweave.net/hQiPZOsRZXGXBJd_82PhVdlM_hACsT_q6wqwf5cSY7I?ext=png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/42f70ef3-5d36-4ca6-42fc-219783c89d00/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'bonk',
@@ -71,7 +65,7 @@ export const tokenList: Token[] = [
     name: 'Marinade staked SOL (mSOL)',
     symbol: 'mSOL',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/mSoLzYCxHdYgdzU16g5QSh3i5K3z3KZK7ytfqcJm7So/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0e8c1477-3495-4fb7-8d38-2f8ad3aa7500/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'msol',
@@ -83,7 +77,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Jito Staked SOL',
     symbol: 'JitoSOL',
-    logoURI: 'https://storage.googleapis.com/token-metadata/JitoSOL-256.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/78e38e9e-234b-45ac-a4ee-59116ef34500/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'jito-staked-sol',
@@ -96,7 +91,7 @@ export const tokenList: Token[] = [
     name: 'UXD Stablecoin',
     symbol: 'UXD',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/7kbnvuGBxxj8AG9qp8Scn56muWGaRaFqxg1FsRp3PaFT/uxd-icon-black.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/3f96e2db-b918-4759-67c3-b3417f403c00/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'uxd-stablecoin',
@@ -109,7 +104,7 @@ export const tokenList: Token[] = [
     name: 'Ether (Portal)',
     symbol: 'ETH',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/ETH_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/67a1b32b-e381-457e-6c85-b0d888addd00/public',
     tags: ['wormhole', 'old-registry'],
     extensions: {
       coingeckoId: 'ethereum-wormhole',
@@ -122,7 +117,7 @@ export const tokenList: Token[] = [
     name: 'Lido Staked SOL',
     symbol: 'stSOL',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/7dHbWXmci3dT8UFYWYZweBLXgycu7Y3iL6trKn1Y7ARj/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/25437d5b-e9cf-4b09-c6df-d2067c8cc700/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'lido-staked-sol',
@@ -135,7 +130,7 @@ export const tokenList: Token[] = [
     name: 'USD Coin (Portal from Ethereum)',
     symbol: 'USDCet',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/USDCet_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c04ee90d-fa69-4cb2-770f-08e106c24400/public',
     tags: ['wormhole', 'old-registry'],
     extensions: {
       coingeckoId: 'usd-coin-wormhole-from-ethereum',
@@ -148,7 +143,7 @@ export const tokenList: Token[] = [
     name: 'BlazeStake Staked SOL (bSOL)',
     symbol: 'bSOL',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/bSo13r4TkiE4KumL71LsHTPpL2euBYLFx6h9HP3piy1/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f12f008b-1be7-43e1-53f8-5910a6a55400/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'blazestake-staked-sol',
@@ -161,7 +156,7 @@ export const tokenList: Token[] = [
     name: 'Orca',
     symbol: 'ORCA',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/8dc2a200-609e-4fc1-4c61-2f5ab8cf2e00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'orca',
@@ -174,7 +169,7 @@ export const tokenList: Token[] = [
     name: 'Nosana',
     symbol: 'NOS',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/nosXBVoaCTtYdLvKY6Csb4AC8JCdQKKAaWYtx2ZMoo7/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e4a8ea02-837f-44cb-13ac-a8eae89dce00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'nosana',
@@ -187,7 +182,7 @@ export const tokenList: Token[] = [
     name: 'FluxBot',
     symbol: 'FLUXB',
     logoURI:
-      'https://bafybeiakyhwwesdvxpikjn4kyqddira3hjpjfcn26ycrrezt65bfa7r3gm.ipfs.nftstorage.link',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9aeb7a66-d186-4b6b-c75e-17d13a48d500/public',
     tags: ['community', 'token-2022'],
     extensions: {
       coingeckoId: 'fluxbot',
@@ -200,7 +195,7 @@ export const tokenList: Token[] = [
     name: 'Raydium',
     symbol: 'RAY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9427d849-4103-4988-68c3-92f3c279f900/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'raydium',
@@ -213,7 +208,7 @@ export const tokenList: Token[] = [
     name: 'Rollbit Coin',
     symbol: 'RLB',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/RLBxxFkseAZ4RgJH3Sqn8jXxhmGoz9jWxDNJMh8pL7a/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e1dc99bd-be49-416e-902c-7ffa7addae00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'rollbit-coin',
@@ -226,7 +221,7 @@ export const tokenList: Token[] = [
     name: 'Shadow Token',
     symbol: 'SHDW',
     logoURI:
-      'https://shdw-drive.genesysgo.net/FDcC9gn12fFkSU2KuQYH4TUjihrZxiTodFRWNF4ns9Kt/250x250_with_padding.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e7488cc2-7f79-4658-a70f-b011daf65a00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'genesysgo-shadow',
@@ -239,7 +234,7 @@ export const tokenList: Token[] = [
     name: 'Render Token',
     symbol: 'RENDER',
     logoURI:
-      'https://shdw-drive.genesysgo.net/5zseP54TGrcz9C8HdjZwJJsZ6f3VbP11p1abwKWGykZH/rndr.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e13184e6-a9f5-45fc-c881-9aa5facaf400/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'render-token',
@@ -252,7 +247,7 @@ export const tokenList: Token[] = [
     name: 'Helium Network Token',
     symbol: 'HNT',
     logoURI:
-      'https://shdw-drive.genesysgo.net/CsDkETHRRR1EcueeN346MJoqzymkkr7RFjMqGpZMzAib/hnt.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/8a03a288-b761-411b-ab8e-2db51b50ee00/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'helium',
@@ -277,7 +272,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped BTC (Portal)',
     symbol: 'WBTC',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/WBTC_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/727add0a-0577-4119-39b4-adc7554f4400/public',
     tags: ['wormhole', 'community', 'solana-fm'],
     extensions: {
       coingeckoId: 'wrapped-btc-wormhole',
@@ -290,7 +285,7 @@ export const tokenList: Token[] = [
     name: 'Samoyed Coin',
     symbol: 'SAMO',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/bfc7ddae-5670-4ef0-c9a0-962845195900/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'samoyedcoin',
@@ -303,7 +298,7 @@ export const tokenList: Token[] = [
     name: 'Helium Mobile',
     symbol: 'MOBILE',
     logoURI:
-      'https://shdw-drive.genesysgo.net/CsDkETHRRR1EcueeN346MJoqzymkkr7RFjMqGpZMzAib/mobile.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e59b4f4c-aa28-485e-2265-f3fb99ba9f00/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'helium-mobile',
@@ -316,7 +311,7 @@ export const tokenList: Token[] = [
     name: 'Media Network',
     symbol: 'MEDIA',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/ETAtLmCmsoiEEKfNrHKJ2kYy3MoABhU6NQvpSfij5tDs/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/98d0bf68-2000-4f92-e5ed-bc65d51e7500/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'media-network',
@@ -329,7 +324,7 @@ export const tokenList: Token[] = [
     name: 'CROWN Token',
     symbol: 'CROWN',
     logoURI:
-      'https://shdw-drive.genesysgo.net/AwJ6W2rRaYCGXimceFuLm5td14fhN1VFEfSYg566RxMD/image.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/4056c5ec-f6d3-499d-3846-21e40744f800/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'crown-by-third-time-games',
@@ -341,7 +336,8 @@ export const tokenList: Token[] = [
     decimals: 6,
     name: 'Mellivora',
     symbol: 'MELL',
-    logoURI: 'https://arweave.net/YIrpNAQuLbOMvI8hSRCzJakzm5qiT_wv1Av5mpcYxrY',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ff7f78f6-54a8-4580-4ccd-40dfef5ec200/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'mellivora',
@@ -354,7 +350,7 @@ export const tokenList: Token[] = [
     name: 'Aurory',
     symbol: 'AURY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/AURYydfxJib1ZkTir1Jn1J9ECYUtjb6rKQVmtYaixWPP/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/b9cc7546-5e7e-477c-6f68-891161c75300/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'aurory',
@@ -366,7 +362,8 @@ export const tokenList: Token[] = [
     decimals: 5,
     name: 'Solcasino Token',
     symbol: 'SCS',
-    logoURI: 'https://files.solcasino.io/logo.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/647ed19d-6022-43fd-8a7d-e7f80b922700/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'solcasino-token',
@@ -379,7 +376,7 @@ export const tokenList: Token[] = [
     name: 'GooseFX',
     symbol: 'GOFX',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/GFX1ZjR2P15tmrSwow6FjyDYcEkoFb4p4gJCpLBjaxHD/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/96426c0a-4129-4eb3-5efa-91ef6d569b00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'goosefx',
@@ -392,7 +389,7 @@ export const tokenList: Token[] = [
     name: 'Marinade',
     symbol: 'MNDE',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/MNDEFzGvMt87ueuHvVU9VcTqsAP5b3fTGPsHuuPA5ey/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/3dc4f699-746c-47fb-3fca-175cd8942400/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'marinade',
@@ -405,7 +402,7 @@ export const tokenList: Token[] = [
     name: 'Solanium',
     symbol: 'SLIM',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/xxxxa1sKNGwFtw2kFn8XauW9xq8hBZ5kVtcSesTT9fW/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/2e79008f-aa69-427c-663f-5666a3d60f00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'solanium',
@@ -418,7 +415,7 @@ export const tokenList: Token[] = [
     name: 'Star Atlas',
     symbol: 'ATLAS',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/ATLASXmbPQxBUYbxPsV97usA3fPQYEqzQBUHgiFCUsXx/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/072477ee-64c8-4aad-6cf8-1403a25caf00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'star-atlas',
@@ -431,7 +428,7 @@ export const tokenList: Token[] = [
     name: 'Star Atlas DAO',
     symbol: 'POLIS',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/poLisWXnNRwC6oBu1vHiuKQzFjGL4XDSu4g9qjz9qVk/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1dc715f6-1cf5-4e2d-9855-3b90e3619600/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'star-atlas-dao',
@@ -444,7 +441,7 @@ export const tokenList: Token[] = [
     name: 'Tether USD (Portal from Ethereum)',
     symbol: 'USDTet',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/USDTet_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ca2f2a05-00b7-4475-7f80-1c98e8755400/public',
     tags: ['wormhole', 'old-registry'],
     extensions: {
       coingeckoId: 'tether-usd-wormhole-from-ethereum',
@@ -456,7 +453,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Liquid Staking Token',
     symbol: 'LST',
-    logoURI: 'https://storage.googleapis.com/static-marginfi/lst.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/8b3b89f3-6bf3-4c6c-c2e5-9506e81aaf00/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'liquid-staking-token',
@@ -469,7 +467,7 @@ export const tokenList: Token[] = [
     name: 'Peepo',
     symbol: 'PEEP',
     logoURI:
-      'https://zk3y35n3ess4i2a4ya5a6hcllkelztul6a5vm2hk7wfjlq7fgypa.arweave.net/yreN9bskpcRoHMA6DxxLWoi8zovwO1Zo6v2KlcPlNh4',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d3e18bd8-ff44-447d-cd65-01bddd628d00/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'peepo-sol',
@@ -482,7 +480,7 @@ export const tokenList: Token[] = [
     name: 'GST',
     symbol: 'GST',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/AFbX8oGjGpmVFywbVouvhQSRmiW2aR1mohfahi4Y2AdB/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/94163a5c-81c0-4fce-5dfd-01304ef8b500/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'green-satoshi-token',
@@ -494,7 +492,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Only Possible On Solana',
     symbol: 'OPOS',
-    logoURI: 'https://arweave.net/k8uU2yLoYwL4zTBZ-TO-7bs6hgtLNaHhzP4FLUMuaS0',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e1c082e1-5f80-48da-fd88-b79ece430500/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'only-possible-on-solana',
@@ -507,7 +506,7 @@ export const tokenList: Token[] = [
     name: 'GMT',
     symbol: 'GMT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/7i5KKsX2weiTkry7jA4ZwSuXGhs5eJBEjY8vVxR4pfRx/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/5456bbe4-6c0e-40e3-9d15-8f99fbf90700/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'stepn',
@@ -520,7 +519,7 @@ export const tokenList: Token[] = [
     name: 'COCO Token',
     symbol: 'COCO',
     logoURI:
-      'https://shdw-drive.genesysgo.net/EV1ARo89dwRzR1kv7JMr7V97qrcXjffkcwEuNHMJfJmz/COCO_icon.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/13e269a1-2dba-448e-16e0-ac8ab462fe00/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'coco-theheist',
@@ -533,7 +532,7 @@ export const tokenList: Token[] = [
     name: 'DUST Protocol',
     symbol: 'DUST',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/DUSTawucrTsGU8hcqRdHDCbuYhCPADMLM2VcCb8VnFnQ/logo.jpg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/5a75d46a-2b19-40eb-9fbe-f9708dc74700/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'dust-protocol',
@@ -546,7 +545,7 @@ export const tokenList: Token[] = [
     name: 'Audius (Portal)',
     symbol: 'AUDIO',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/AUDIO_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ff2c4f15-e1b7-4319-a4c7-5188012beb00/public',
     tags: ['wormhole', 'old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'audius-wormhole',
@@ -559,7 +558,7 @@ export const tokenList: Token[] = [
     name: 'SushiToken (Portal)',
     symbol: 'SUSHI',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/SUSHI_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/40778eb2-3623-4a8d-6e12-b2bd3367fb00/public',
     tags: ['wormhole', 'old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'sushi',
@@ -571,7 +570,8 @@ export const tokenList: Token[] = [
     decimals: 6,
     name: 'AllDomains',
     symbol: 'ALL',
-    logoURI: 'https://arweave.net/FY7yQGrLCAvKAup_SYEsHDoTRZXsttuYyQjvHTnOrYk',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/b9edbb67-f3a5-44bd-6ee1-febe99728d00/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'alldomains',
@@ -584,7 +584,7 @@ export const tokenList: Token[] = [
     name: 'NANA Token',
     symbol: 'NANA',
     logoURI:
-      'https://shdw-drive.genesysgo.net/EV1ARo89dwRzR1kv7JMr7V97qrcXjffkcwEuNHMJfJmz/Banan.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/4a272641-31be-439a-7c5a-83fed0ff6b00/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'nana-token',
@@ -597,7 +597,7 @@ export const tokenList: Token[] = [
     name: 'Guacamole',
     symbol: 'GUAC',
     logoURI:
-      'https://shdw-drive.genesysgo.net/36JhGq9Aa1hBK6aDYM4NyFjR5Waiu9oHrb44j1j8edUt/image.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/48019e5e-f05a-4a60-ab01-1736639c7000/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'guacamole',
@@ -610,7 +610,7 @@ export const tokenList: Token[] = [
     name: 'Dark Protocol',
     symbol: 'DARK',
     logoURI:
-      'https://www.arweave.net/3VPYgJz-wlRAm1H5_4zrsAckyz55qa5ILyk3Uq6l4Ms?ext=png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/2a1a6275-bd41-4974-2a63-0d3980a3b200/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'dark-protocol',
@@ -623,7 +623,7 @@ export const tokenList: Token[] = [
     name: 'Helium IOT',
     symbol: 'IOT',
     logoURI:
-      'https://shdw-drive.genesysgo.net/CsDkETHRRR1EcueeN346MJoqzymkkr7RFjMqGpZMzAib/iot.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/67322b50-3e13-4ff1-e6fb-7fb43b4bee00/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'helium-iot',
@@ -635,7 +635,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Hades',
     symbol: 'HADES',
-    logoURI: 'https://arweave.net/dvKu5BgpSo6j-iGzQOyVXYZ8OU7iyfhHNpkkJ_8qkkQ',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/90dfbb31-4a4a-48c7-1736-2a57f2146100/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'hades',
@@ -648,7 +649,7 @@ export const tokenList: Token[] = [
     name: 'PIP',
     symbol: 'PIP',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/HHjoYwUp5aU6pnrvN4s2pwEErwXNZKhxKGYjRJMoBjLw/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/96b6b704-3acc-4853-88f0-673fbae25300/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'pip',
@@ -661,7 +662,7 @@ export const tokenList: Token[] = [
     name: 'HONEY',
     symbol: 'HONEY',
     logoURI:
-      'https://hivemapper-marketing-public.s3.us-west-2.amazonaws.com/Hivemapper_HONEY_token.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/dc052c37-ab56-41f7-37ce-212a01ce9300/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'hivemapper',
@@ -674,7 +675,7 @@ export const tokenList: Token[] = [
     name: 'Serum',
     symbol: 'SRM',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/bf9a8791-23a1-43d2-39d6-dded04899d00/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'serum',
@@ -687,7 +688,7 @@ export const tokenList: Token[] = [
     name: 'Saber Protocol Token',
     symbol: 'SBR',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Saber2gLauYim4Mvftnrasomsv6NvAuncvMEZwcLpD1/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9fbc81ba-4f1c-4c7c-cbed-117a7f79f700/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'saber',
@@ -699,7 +700,8 @@ export const tokenList: Token[] = [
     decimals: 6,
     name: 'Jupiter Perps',
     symbol: 'JLP',
-    logoURI: 'https://static.jup.ag/jlp/icon.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/a07c1c57-544b-45da-8290-d66105e80600/public',
     tags: ['community'],
   },
   {
@@ -709,7 +711,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped USDC (Allbridge from Ethereum)',
     symbol: 'aeUSDC',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/fe19a11e-e4a6-41e7-73a3-071bc9705f00/public',
     tags: ['old-registry'],
   },
   {
@@ -718,7 +720,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'KING',
     symbol: 'KING',
-    logoURI: 'https://i.imgur.com/IQ4rEmD.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/cdec32fc-0d1d-46db-8362-55d8f0d95000/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'king-2',
@@ -730,7 +733,8 @@ export const tokenList: Token[] = [
     decimals: 5,
     name: 'BonkEarn',
     symbol: 'BERN',
-    logoURI: 'https://i.imgur.com/nd9AVZ4.jpeg',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/b8c9a12d-2ae1-4c6a-8436-02e37ef16400/public',
     tags: ['community', 'token-2022'],
     extensions: {
       coingeckoId: 'bonkearn',
@@ -743,7 +747,7 @@ export const tokenList: Token[] = [
     name: 'Crowny token',
     symbol: 'CRWNY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/CRWNYkqdgvhGGae9CKfNka58j6QQkaD5bLhKXvUYqnc1/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/8001d3fa-1635-4650-771f-8abb590ed100/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'crowny-token',
@@ -756,7 +760,7 @@ export const tokenList: Token[] = [
     name: 'Threshold Bitcoin',
     symbol: 'TBTC',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/TBTC_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c386b1d5-63ab-4fcb-8ec2-f6a90925db00/public',
     tags: ['wormhole', 'community'],
     extensions: {
       coingeckoId: 'tbtc',
@@ -769,7 +773,7 @@ export const tokenList: Token[] = [
     name: 'USDH Hubble Stablecoin',
     symbol: 'USDH',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/USDH1SM1ojwWUga67PGrgFWUHibbjqMvuMaDkRJTgkX/usdh.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e92872e1-df3d-4c68-77d4-f43dc1556b00/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'usdh',
@@ -781,7 +785,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Blaze',
     symbol: 'BLZE',
-    logoURI: 'https://solblaze.org/assets/blze.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/3636f364-7680-468b-cc93-e284bfff7d00/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'solblaze',
@@ -794,7 +799,7 @@ export const tokenList: Token[] = [
     name: 'PAI (Parrot USD)',
     symbol: 'PAI',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Ea5SjE2Y6yvCeW5dYTn7PYMuW5ikXkvbGdcmSnXeaLjS/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/a08e25a5-4e93-4823-5ac0-949908ea4500/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'parrot-usd',
@@ -807,7 +812,7 @@ export const tokenList: Token[] = [
     name: 'Hawksight',
     symbol: 'HAWK',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/BKipkearSqAUdNKa1WDstvcMjoPsSKBuNyvKDQDDu9WE/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/2b80d219-16dc-4248-8248-2bee6210ca00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'hawksight',
@@ -820,7 +825,7 @@ export const tokenList: Token[] = [
     name: 'Flowmatic',
     symbol: 'FM',
     logoURI:
-      'https://nftstorage.link/ipfs/bafybeighw6z7wdbk73tezruawliwt622xic6r43wmzgpk22rsnmqvjvkrm/Brando_logo_of_F_on_a_black_background_in_the_style_of_light_te_42b8cbea-cc40-4c9f-a098-62c381d624df.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e775be71-0abc-42ef-b385-034e4158c400/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'flowmatic',
@@ -832,7 +837,8 @@ export const tokenList: Token[] = [
     decimals: 5,
     name: 'KIN',
     symbol: 'KIN',
-    logoURI: 'https://i.imgur.com/do6LTig.jpeg',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ddb476ed-bbc9-403e-341e-0ca654b0b800/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'kin',
@@ -845,7 +851,7 @@ export const tokenList: Token[] = [
     name: 'ZEBEC',
     symbol: 'ZBC',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/zebeczgi5fSEtbpfQKVZKCJ3WgYXxjkMUkNNx7fLKAF/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/df8a8954-2158-4e70-9c8b-3e537893fd00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'zebec-protocol',
@@ -858,7 +864,7 @@ export const tokenList: Token[] = [
     name: 'Genopets',
     symbol: 'GENE',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/GENEtH5amGSi8kHAtQoezp1XEXwZJ8vcuePYnXdKrMYz/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/40cdd94c-0ca1-4e2d-1ca2-aa58fd92cc00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'genopets',
@@ -871,7 +877,7 @@ export const tokenList: Token[] = [
     name: 'WOOF',
     symbol: 'WOOF',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/9nEqaUcb16sQ3Tn1psbkWqyhPdLmfHWjKGymREjsAgTE/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/7cfc4a29-dbf0-4162-6c25-8097a8228e00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'woof-token',
@@ -883,7 +889,8 @@ export const tokenList: Token[] = [
     decimals: 6,
     name: 'Coin98',
     symbol: 'C98',
-    logoURI: 'https://coin98.s3.ap-southeast-1.amazonaws.com/Coin/c98-512.svg',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/bb80b755-2ce0-464e-5924-03b085efed00/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'coin98',
@@ -896,7 +903,7 @@ export const tokenList: Token[] = [
     name: 'StarLaunch',
     symbol: 'STARS',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/HCgybxq5Upy8Mccihrp7EsmwwFqYZtrHrsmsKwtGXLgW/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f4a9071a-57e3-404c-a751-8e9eec039d00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'starlaunch',
@@ -909,7 +916,7 @@ export const tokenList: Token[] = [
     name: 'DAI (Portal)',
     symbol: 'DAI',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/DAI_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d5330269-4bba-4b33-89f7-9f46cc0de000/public',
     tags: ['wormhole', 'old-registry'],
   },
   {
@@ -919,7 +926,7 @@ export const tokenList: Token[] = [
     name: 'MonkeyBucks',
     symbol: 'MBS',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Fm9rHUTF5v3hwMLbStjZXqNBBoZyGriQaFM6sTFz3K8A/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0803cef5-b3b5-43d4-cb10-ad53525b4900/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'monkeyball',
@@ -932,7 +939,7 @@ export const tokenList: Token[] = [
     name: 'xLifinity',
     symbol: 'xLFNTY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/xLfNTYy76B8Tiix3hA51Jyvc1kMSFV4sPdR7szTZsRu/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/bc16ec63-00ea-4c5d-c93a-cf81eb4f1c00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -941,7 +948,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Graphite',
     symbol: 'GP',
-    logoURI: 'https://arweave.net/ALLzymnuIihFPhoNUJpPxQzbGI8LodXKhNzXzbRMPbA',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/2a3345d5-880b-45aa-f2ad-16af33e44b00/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'graphite-protocol',
@@ -954,7 +962,7 @@ export const tokenList: Token[] = [
     name: 'Decimated',
     symbol: 'DIO',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/BiDB55p4G3n1fGhwKFpxsokBMqgctL4qnZpDH1bVQxMD/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/5c6719bc-b815-4d72-599a-478acc795300/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'decimated',
@@ -966,7 +974,8 @@ export const tokenList: Token[] = [
     decimals: 5,
     name: 'Ethrix',
     symbol: 'ETX',
-    logoURI: 'https://arweave.net/iOND5JLSsq_0dka0SnzTsDCl83hu0_-sOQ2fDbQDuTQ',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/69014f7c-1832-4a5f-ce06-24bb5c648c00/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'ethrix',
@@ -979,7 +988,7 @@ export const tokenList: Token[] = [
     name: 'Binance Coin (Portal)',
     symbol: 'BNB',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/BNB_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/5955e187-4b15-4f98-55cf-70c2a2f23d00/public',
     tags: ['wormhole', 'old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'binance-coin-wormhole',
@@ -991,7 +1000,8 @@ export const tokenList: Token[] = [
     decimals: 6,
     name: 'WEN',
     symbol: '$WEN',
-    logoURI: 'https://arweave.net/sfrKTJisIlWsNJfw6GWnsitsbUbN6WIjoVJZWMe2Mdk',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c904b85f-a74a-485c-4673-32d61978b700/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'wen-2',
@@ -1003,7 +1013,8 @@ export const tokenList: Token[] = [
     decimals: 6,
     name: 'Metaplex Token',
     symbol: 'MPLX',
-    logoURI: 'https://arweave.net/VRKOcXIvCxqp35RZ9I0-bDGk5qNfT46OTho-2oP9iGc',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/3e44af58-7845-4ded-400f-7a5e9a38b400/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'metaplex',
@@ -1016,7 +1027,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped USDC (Allbridge from Avalanche)',
     symbol: 'aaUSDC',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1c99dfca-1c26-42cb-9dd3-982891e85f00/public',
     tags: ['old-registry'],
   },
   {
@@ -1026,7 +1037,7 @@ export const tokenList: Token[] = [
     name: 'Lido DAO (Portal)',
     symbol: 'LDO',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/LDO_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/fe589fba-f4b0-4835-e5af-12c11fd8af00/public',
     tags: ['wormhole', 'old-registry'],
     extensions: {
       coingeckoId: 'lido-dao-wormhole',
@@ -1039,7 +1050,7 @@ export const tokenList: Token[] = [
     name: 'Hubble Protocol Token',
     symbol: 'HBB',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/HBB111SCo9jkCejsZfz8Ec8nH7T6THF8KEKSnvwT6XK6/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/3af46e3a-e8db-4738-7a22-4e1a42329c00/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'hubble',
@@ -1051,7 +1062,8 @@ export const tokenList: Token[] = [
     decimals: 2,
     name: 'CHILI',
     symbol: 'CHILI',
-    logoURI: 'https://iili.io/H5O87JS.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ed915d79-020c-43cc-5a82-d3fc5d5cdf00/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'chili',
@@ -1064,7 +1076,7 @@ export const tokenList: Token[] = [
     name: 'Gari',
     symbol: 'GARI',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/CKaKtYvz6dKPyMvYq9Rh3UBrnNqYZAyd7iF4hJtjUvks/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/a20d6ea8-94d9-4dcb-d219-4d2d8344a800/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'gari-network',
@@ -1077,7 +1089,7 @@ export const tokenList: Token[] = [
     name: 'Jelly',
     symbol: 'JELLY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/9WMwGcY6TcbSfy9XPpQymY3qNEsvEaYL3wivdwPG2fpp/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/3b736847-ccf6-43ce-34b5-3c0c4b9d2200/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'jelly-esports',
@@ -1090,7 +1102,7 @@ export const tokenList: Token[] = [
     name: 'Solend',
     symbol: 'SLND',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/SLNDpmoWTVADgEdndyvWzroNL7zSi1dF9PC3xHGtPwp/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9df62c54-785e-47f6-3ec3-c965679ab700/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'solend',
@@ -1103,7 +1115,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped ETH (Allbridge from Ethereum)',
     symbol: 'aeWETH',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/FeGn77dhg1KXRRFeSwwMiykZnZPw5JXW6naf2aQgZDQf/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1fb1a054-83ac-4ca2-92de-93d6f0e1ff00/public',
     tags: ['old-registry'],
   },
   {
@@ -1113,7 +1125,7 @@ export const tokenList: Token[] = [
     name: 'Blockasset',
     symbol: 'BLOCK',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/NFTUkR4u7wKxy9QLaX2TGvd9oZSWoMo4jqSJqdMb7Nk/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/13d484c2-d5e4-44fb-c8db-d530e1188500/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'blockasset',
@@ -1126,7 +1138,7 @@ export const tokenList: Token[] = [
     name: 'Cryowar Token',
     symbol: 'CWAR',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/HfYFjMKNZygfMC8LsQ8LtpPsPxEJoXJx4M6tqi75Hajo/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d73bfc7c-2b28-4056-9121-07ca9b7d4000/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'cryowar-token',
@@ -1139,7 +1151,7 @@ export const tokenList: Token[] = [
     name: 'Lifinity',
     symbol: 'LFNTY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/LFNTYraetVioAPnGJht4yNg2aUZFXR776cMeN9VMjXp/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/573ac33c-c08b-4bc0-1c6b-ea87bc5ec000/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'lifinity',
@@ -1152,7 +1164,7 @@ export const tokenList: Token[] = [
     name: 'Hxro (Portal)',
     symbol: 'HXRO',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/HXRO_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1042164e-9acd-400b-93e8-a6a7c53af800/public',
     tags: ['wormhole', 'old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'hxro',
@@ -1165,7 +1177,7 @@ export const tokenList: Token[] = [
     name: 'International Stable Currency',
     symbol: 'ISC',
     logoURI:
-      'https://raw.githubusercontent.com/theISCTeam/isc_meta/master/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/998ac3ac-33a2-4591-e099-e92e4555bc00/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'international-stable-currency',
@@ -1178,7 +1190,7 @@ export const tokenList: Token[] = [
     name: 'dYdX (Portal)',
     symbol: 'DYDX',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/DYDX_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/a441eb6d-60ca-4e1f-8caa-c4170deba400/public',
     tags: ['wormhole', 'old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'dydx-wormhole',
@@ -1190,7 +1202,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Midas',
     symbol: 'MDS',
-    logoURI: 'https://arweave.net/DcmraYTxxarO5sZ1fIKdPIo1f76lRMZB_-q7y1d3Qqw',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/506b5886-4141-4eb4-646e-0f85ac817900/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'midas-token',
@@ -1203,7 +1216,7 @@ export const tokenList: Token[] = [
     name: 'COPE',
     symbol: 'COPE',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/8HGyAAB1yoM1ttS7pXjHMa3dukTFGQggnFFH3hJZgzQh/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e500a797-1b1c-4d87-fbbf-d15d3cd51900/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'cope',
@@ -1216,7 +1229,7 @@ export const tokenList: Token[] = [
     name: 'basis',
     symbol: 'BASIS',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Basis9oJw9j8cw53oMV7iqsgo6ihi9ALw4QR31rcjUJa/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/7e87d3d4-ccd3-442b-0316-c2d9579e9400/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'basis-markets',
@@ -1228,7 +1241,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'BOOTY',
     symbol: 'BOOTY',
-    logoURI: 'https://arweave.net/N-9sTPFfUhoFzJ6prtY2hItNkVaHVAktRDiuQrHwWhQ',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/42304ec0-19ae-400f-455c-7c987dd6ee00/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'booty',
@@ -1241,7 +1255,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped USDT (Allbridge from Ethereum)',
     symbol: 'aeUSDT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/b7ab9e93-a659-4167-3d47-76b5037a8b00/public',
     tags: ['old-registry'],
   },
   {
@@ -1251,7 +1265,7 @@ export const tokenList: Token[] = [
     name: 'Space Falcon',
     symbol: 'FCON',
     logoURI:
-      'https://raw.githubusercontent.com/spacefalcon-io/crypto/main/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/3ca945d9-368f-404e-5845-fff44e2fe600/public',
     tags: ['old-registry'],
   },
   {
@@ -1261,7 +1275,7 @@ export const tokenList: Token[] = [
     name: 'DeFi Land',
     symbol: 'DFL',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/DFL1zNkaGPWm1BqAVqRjCZvHmwTFrEaJtbzJWgseoNJh/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/bb81ea54-a554-4c59-f954-ef69b30f0d00/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'defi-land',
@@ -1274,7 +1288,7 @@ export const tokenList: Token[] = [
     name: 'Project SEED Token',
     symbol: 'SHILL',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/6cVgJUqo4nmvQpbgrDZwyfd6RwWw5bfnCamS3M9N1fd/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ef985de8-3fc8-4aa7-b28b-7f9dafd15700/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'shill-token',
@@ -1287,7 +1301,7 @@ export const tokenList: Token[] = [
     name: 'Pepe',
     symbol: 'PEPE',
     logoURI:
-      'https://shdw-drive.genesysgo.net/8XiSN28HJqb9czfsBYXsTkLtf4wgAupLpozEaUyA419K/pepecoin.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0d1655d5-6dce-4f29-ddb6-ab92d7fa1600/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'pepesol',
@@ -1300,7 +1314,7 @@ export const tokenList: Token[] = [
     name: 'zSOL',
     symbol: 'zSOL',
     logoURI:
-      'https://raw.githubusercontent.com/LP-Finance-Inc/token-image/main/zSOL.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/5b88b731-ef0f-4e6e-87c0-a22487ece300/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'zsol',
@@ -1312,7 +1326,8 @@ export const tokenList: Token[] = [
     decimals: 4,
     name: 'GM',
     symbol: 'GM',
-    logoURI: 'https://arweave.net/jhNqKLDDC2ZtanzmFt-OZZJLFEYRpzus3rzhl7MGiOU',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c097aea6-5bfc-45c8-af6b-3f55db50f700/public',
     tags: ['community'],
   },
   {
@@ -1322,7 +1337,7 @@ export const tokenList: Token[] = [
     name: 'Tether USD (PoS) (Portal from Polygon)',
     symbol: 'USDTpo',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/USDTpo_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9064001d-baf0-4867-64c3-52fc227e4f00/public',
     tags: ['wormhole', 'old-registry'],
     extensions: {
       coingeckoId: 'tether-usd-pos-wormhole',
@@ -1335,7 +1350,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped USDC (Allbridge from Polygon)',
     symbol: 'apUSDC',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/BXXkv6z8ykpG1yuvUDPgh732wzVHB69RnB9YgSYh3itW/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c231121c-7d93-48bc-7676-99ce5c100100/public',
     tags: ['old-registry'],
   },
   {
@@ -1345,7 +1360,7 @@ export const tokenList: Token[] = [
     name: 'Tulip',
     symbol: 'TULIP',
     logoURI:
-      'https://raw.githubusercontent.com/sol-farm/token-logos/main/tulip.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0a4cd975-e029-472b-9ab5-9a914bf1f600/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'solfarm',
@@ -1358,7 +1373,7 @@ export const tokenList: Token[] = [
     name: 'Step',
     symbol: 'STEP',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/StepAscQoEioFxxWGnh2sLBDFp9d8rvKz2Yp39iDpyT/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/de4cd483-f23a-4178-4fa1-605cc5a72000/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'step-finance',
@@ -1371,7 +1386,7 @@ export const tokenList: Token[] = [
     name: 'Mango',
     symbol: 'MNGO',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/MangoCzJ36AjZyKwVj3VnYU4GTonjfVEnJmvvWaxLac/token.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c2465acd-7dcb-490e-820d-d2da79a34b00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'mango-markets',
@@ -1383,7 +1398,8 @@ export const tokenList: Token[] = [
     decimals: 6,
     name: 'lambda.markets',
     symbol: 'LMDA',
-    logoURI: 'https://arweave.net/6y2eY-KEaBu4KbZLJwLCTQQUXhWVPKxjgdyW69DwI0o',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c91dde03-4896-4fbf-c9bc-cb8ba2149b00/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'lambda-markets',
@@ -1396,7 +1412,7 @@ export const tokenList: Token[] = [
     name: 'Tether USD (Portal from BSC)',
     symbol: 'USDTbs',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/USDTbs_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/41b5535a-069d-4d4a-65f7-7998439c2b00/public',
     tags: ['wormhole', 'old-registry'],
   },
   {
@@ -1406,7 +1422,7 @@ export const tokenList: Token[] = [
     name: 'SolAPE Token',
     symbol: 'SOLAPE',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/GHvFFSZ9BctWsEc5nujR1MTmmJWY7tgQz2AXE6WVFtGN/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ef3b012d-3037-4b60-99b9-b389f6e37200/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'solape-token',
@@ -1419,7 +1435,7 @@ export const tokenList: Token[] = [
     name: 'AVAX (Allbridge from Avalanche)',
     symbol: 'AVAX',
     logoURI:
-      'https://assets.coingecko.com/coins/images/12559/small/coin-round-red.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/89be1410-021f-489f-aa17-c07cb4dbb300/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -1429,7 +1445,7 @@ export const tokenList: Token[] = [
     name: 'Walken',
     symbol: 'WLKN',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EcQCUYv57C4V6RoPxkVUiDwtX1SP8y8FP5AEToYL8Az/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9f46c546-3974-45e6-d79e-f03a59886d00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'walken',
@@ -1442,7 +1458,7 @@ export const tokenList: Token[] = [
     name: 'Fronk',
     symbol: 'FRONK',
     logoURI:
-      'https://shdw-drive.genesysgo.net/8tfWzweVe7MAfi8qwiKFnzLq6wuLT7WAPMoQC7DH47Fq/fronk.gif',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/118d47f8-cdf8-4cdd-3c88-9be248ce6600/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'fronk',
@@ -1455,7 +1471,7 @@ export const tokenList: Token[] = [
     name: 'Cheems',
     symbol: 'CHEEMS',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/3FoUAsGDbvTD6YZ4wVKJgTB76onJUKz7GPEBNiR5b8wc/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1154bc7d-5c49-4b12-e54d-8d3117523e00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'cheems',
@@ -1468,7 +1484,7 @@ export const tokenList: Token[] = [
     name: 'SolDoge',
     symbol: 'SDOGE',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/8ymi88q5DtmdNTn2sPRNFkvMkszMHuLJ1e3RVdWjPa3s/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0e8af7ed-2231-4c31-1b43-21b414e76100/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'soldoge',
@@ -1481,7 +1497,7 @@ export const tokenList: Token[] = [
     name: 'Rafkróna',
     symbol: 'ISKT',
     logoURI:
-      'https://raw.githubusercontent.com/rafmyntasjodur/iskt-metadata/main/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/536b18f5-4576-4e3b-fdd8-92c1246b5400/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'rafkrona',
@@ -1494,7 +1510,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped FTT (Sollet)',
     symbol: 'soFTT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/AGFEad2et2ZJif9jaGpdMixQqvW5i81aBdvKe7PHNfz3/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/de961fd4-1b57-4e52-8339-48b300fc3500/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'ftx-token',
@@ -1507,7 +1523,7 @@ export const tokenList: Token[] = [
     name: 'CropperFinance',
     symbol: 'CRP',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/DubwWZNWiNGMMeeQHPnMATNj77YZPZSAz2WVR5WjLJqz/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/6f0e6d62-fdb3-4c25-0b2a-32c6a1fa8b00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'cropperfinance',
@@ -1520,7 +1536,7 @@ export const tokenList: Token[] = [
     name: 'FRAKT Token',
     symbol: 'FRKT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/ErGB9xa24Szxbk1M28u2Tx8rKPqzL6BroNkkzk5rG4zj/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e8270fde-45d4-43a3-920e-78d2c74f0b00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'frakt-token',
@@ -1533,7 +1549,7 @@ export const tokenList: Token[] = [
     name: 'UXP Governance Token',
     symbol: 'UXP',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/UXPhBoR3qG4UCiGNJfV7MqhHyFqKN68g45GoYvAeL2M/uxp-icon-black.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/aa84bec7-2e7a-484e-e8f9-363d5c624b00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'uxd-protocol-token',
@@ -1546,7 +1562,7 @@ export const tokenList: Token[] = [
     name: 'Taki',
     symbol: 'TAKI',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Taki7fi3Zicv7Du1xNAWLaf6mRK7ikdn77HeGzgwvo4/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f2ce957b-8653-4e83-3bc8-804c89d78c00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'taki',
@@ -1559,7 +1575,7 @@ export const tokenList: Token[] = [
     name: 'CHAD',
     symbol: 'CHAD',
     logoURI:
-      'https://bafybeicl7hj53czkh3vqclya2tltuuj3f4r7acwbchwjjajfv3jvff62iu.ipfs.nftstorage.link/',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/401b4a60-96ec-49d3-5f4d-e4032a432900/public',
     tags: ['community', 'token-2022'],
     extensions: {
       coingeckoId: 'chad-on-solana',
@@ -1572,7 +1588,7 @@ export const tokenList: Token[] = [
     name: 'Cope',
     symbol: 'Cope',
     logoURI:
-      'https://shdw-drive.genesysgo.net/HNTiV9QS4UDrcxpucyKRGTKQTqKGLif61GwM6tpd5R5V/image.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d92b28ad-cda1-461b-ccc2-61626cb77300/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'cope-token',
@@ -1585,7 +1601,7 @@ export const tokenList: Token[] = [
     name: 'HTO',
     symbol: 'HTO',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/htoHLBJV1err8xP5oxyQdV2PLQhtVjxLXpKB7FsgJQD/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/eda55b4b-77a1-48dc-4e5a-f181185bd700/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'heavenland-hto',
@@ -1598,7 +1614,7 @@ export const tokenList: Token[] = [
     name: 'PRISM',
     symbol: 'PRISM',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/PRSMNsEPqhGVCH1TtWiJqPjJyh2cKrLostPZTNy1o5x/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/52765e3a-2bd9-40aa-0494-946093beff00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'prism',
@@ -1611,7 +1627,7 @@ export const tokenList: Token[] = [
     name: 'PRNT',
     symbol: 'PRNT',
     logoURI:
-      'https://shdw-drive.genesysgo.net/EYH4kEfffWwRnF63G6Sx68sHdhkue4trzuSeUji9UJSe/prnt.jpg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/709d95c6-f8b1-4004-e931-a89237704600/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'prnt',
@@ -1624,7 +1640,7 @@ export const tokenList: Token[] = [
     name: 'FORGE',
     symbol: 'FORGE',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/FoRGERiW7odcCBGU1bztZi16osPBHjxharvDathL5eds/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/163ff128-c9bb-43c9-49d5-ad6fd3c8d500/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'blocksmith-labs-forge',
@@ -1637,7 +1653,7 @@ export const tokenList: Token[] = [
     name: 'Dexlab',
     symbol: 'DXL',
     logoURI:
-      'https://raw.githubusercontent.com/dexlab-project/assets/master/dexlab/dexlab_symbol_logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/77d8b484-1986-4208-2163-580a68747000/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'dexlab',
@@ -1650,7 +1666,7 @@ export const tokenList: Token[] = [
     name: 'HALLAIN Token',
     symbol: 'HALLAIN',
     logoURI:
-      'https://bafybeiastsqhe3a62ezhnefecwgvv43x3rc2jjgl2hs2ew5txfoz4zrcye.ipfs.w3s.link/hallain.png?ext=PNG',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/2b15827b-3bf3-4906-8c60-a1b2e5301000/public',
     tags: ['community'],
   },
   {
@@ -1659,7 +1675,8 @@ export const tokenList: Token[] = [
     decimals: 6,
     name: 'EUROe Stablecoin',
     symbol: 'EUROe',
-    logoURI: 'https://dev.euroe.com/persistent/token-icon/png/256x256.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/081482c8-b1a5-4fc1-fef5-b58f29e1b900/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'euroe-stablecoin',
@@ -1671,7 +1688,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'JIMMY',
     symbol: 'JIMMY',
-    logoURI: 'https://arweave.net/5NmSALkMrjr5p33OrjuQlA5a3LRPLv0Ta07SnEWt1fk',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0d5883fe-804e-44c0-75c8-5d442faf7d00/public',
     tags: ['community'],
   },
   {
@@ -1681,7 +1699,7 @@ export const tokenList: Token[] = [
     name: 'MATIC (Portal from Polygon)',
     symbol: 'MATICpo',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/MATICpo_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/6e166924-548b-4217-184f-a18ea4d23400/public',
     tags: ['wormhole', 'solana-fm'],
     extensions: {
       coingeckoId: 'matic-wormhole',
@@ -1694,7 +1712,7 @@ export const tokenList: Token[] = [
     name: 'Larix',
     symbol: 'LARIX',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Lrxqnh6ZHKbGy3dcrCED43nsoLkM1LTzU2jRfWe8qUC/logo.jpg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/b8955cf8-cdb5-446d-ceed-02c1d0d5ab00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'larix',
@@ -1707,7 +1725,7 @@ export const tokenList: Token[] = [
     name: 'USD Coin (PoS) (Portal from Polygon)',
     symbol: 'USDCpo',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/USDCpo_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/97afce78-56d1-4229-f140-2dfdbfaf2700/public',
     tags: ['wormhole', 'old-registry'],
     extensions: {
       coingeckoId: 'usd-coin-pos-wormhole',
@@ -1720,7 +1738,7 @@ export const tokenList: Token[] = [
     name: 'Basic Attention Token (Portal)',
     symbol: 'BAT',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/BAT_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d7d0ffcc-2744-4dda-17f4-9ad0ad916d00/public',
     tags: ['wormhole', 'old-registry', 'solana-fm'],
   },
   {
@@ -1730,7 +1748,7 @@ export const tokenList: Token[] = [
     name: 'PUGAI',
     symbol: 'PUGAI',
     logoURI:
-      'https://shdw-drive.genesysgo.net/CS412vMTyfY1J4u1Ve7UjAdhGu7V9jCJibkVussMnaKr/pug1%20(2).png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/696f4198-8b3b-49b9-85fb-a23a1cff5c00/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'pug-ai',
@@ -1743,7 +1761,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped USDC (Allbridge from BSC)',
     symbol: 'abUSDC',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/BXXkv6z8ykpG1yuvUDPgh732wzVHB69RnB9YgSYh3itW/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/29ce6a40-f3ee-4c6a-c349-091d3cb26f00/public',
     tags: ['old-registry'],
   },
   {
@@ -1753,7 +1771,7 @@ export const tokenList: Token[] = [
     name: 'Bonfida',
     symbol: 'FIDA',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EchesyfXePKdLtoiZSL8pBe8Myagyy8ZRqsACNCFGnvp/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c23fde01-5e89-42c8-9969-7ecc947b5c00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'bonfida',
@@ -1766,7 +1784,7 @@ export const tokenList: Token[] = [
     name: 'Famous Fox Federation',
     symbol: 'FOXY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/FoXyMu5xwXre7zEoSvzViRk3nGawHUp9kUh97y2NDhcq/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9505ca70-e463-4252-ba19-47e878232700/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'famous-fox-federation',
@@ -1779,7 +1797,7 @@ export const tokenList: Token[] = [
     name: 'FISHY by sharky.fi',
     symbol: 'FISHY',
     logoURI:
-      'https://shdw-drive.genesysgo.net/CpRahRvMZad2VNTJDN24m4Bk6PsWRBm14w684RatY1bd/The%20winning%20logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9bc3ee08-f429-4186-febc-a060522a3d00/public',
     tags: ['community'],
   },
   {
@@ -1789,7 +1807,7 @@ export const tokenList: Token[] = [
     name: 'MEAN',
     symbol: 'MEAN',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/MEANeD3XDdUmNMsRGjASkSWdC8prLYsoRJ61pPeHctD/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/fb8a880c-a6d0-49bf-b68f-b6e7da175500/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'meanfi',
@@ -1801,7 +1819,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Moon Roll Coin',
     symbol: 'MRC',
-    logoURI: 'https://moonroll-bucket.s3.amazonaws.com/token-image/Frame.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/56a46941-4b33-438a-f17b-856207532700/public',
     tags: ['community'],
   },
   {
@@ -1810,7 +1829,8 @@ export const tokenList: Token[] = [
     decimals: 6,
     name: 'Access Protocol',
     symbol: 'ACS',
-    logoURI: 'https://ap-staging.fra1.digitaloceanspaces.com/1663691449945',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/714a3d70-18ed-4a7f-ac8f-13dcc9e65a00/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'access-protocol',
@@ -1823,7 +1843,7 @@ export const tokenList: Token[] = [
     name: 'prtSOL (Parrot Staked SOL)',
     symbol: 'prtSOL',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/BdZPG9xWrG3uFrx2KrUW1jT4tZ9VKPDWknYihzoPRJS3/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/71857ef5-743c-40fb-120f-30eb5ff11d00/public',
     tags: ['old-registry'],
   },
   {
@@ -1833,7 +1853,7 @@ export const tokenList: Token[] = [
     name: 'Flying Spaghetti Monster',
     symbol: 'FSM',
     logoURI:
-      'https://bafybeibxoen5asgzdf7kz6jlac6656s3a2xpfc2m3t77m73pfwy6keh6gu.ipfs.nftstorage.link',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/25df4c9b-4aba-416c-b117-e75729aacf00/public',
     tags: ['community'],
   },
   {
@@ -1843,7 +1863,7 @@ export const tokenList: Token[] = [
     name: 'SynesisOne',
     symbol: 'SNS',
     logoURI:
-      'https://raw.githubusercontent.com/Synesis-One/spl-token/main/icon.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/87051a1b-d1d9-4420-d300-46ae9e370c00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'synesis-one',
@@ -1856,7 +1876,7 @@ export const tokenList: Token[] = [
     name: 'Trust Wallet (Portal)',
     symbol: 'TWT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/HZNpqL7RT9gxf9eWoWsWzC5DfjzQ41XTQgEA7p3VzaaD/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/09f333bb-f594-4d83-71c1-a98855270a00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -1866,7 +1886,7 @@ export const tokenList: Token[] = [
     name: 'Lido Wrapped Staked ETH',
     symbol: 'wstETH',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/ZScHuTtqZukUrtZS43teTKGs2VqkKL8k4QCouR2n6Uo/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1033baed-9913-4343-49e5-7d77fb619700/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -1876,7 +1896,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped USDT (Allbridge from BSC)',
     symbol: 'abUSDT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/BQcdHdAQW1hczDbBi9hiegXAR7A98Q9jx3X3iBBBDiq4/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1706164d-a2dd-4d70-e24a-e6cfccca9000/public',
     tags: ['old-registry'],
   },
   {
@@ -1886,7 +1906,7 @@ export const tokenList: Token[] = [
     name: 'Hedge USD',
     symbol: 'USH',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/9iLH8T7zoWhY7sBmj1WK9ENbWdS1nL8n9wAxaeRitTa6/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/30674017-49e5-424e-6732-5ed25dee4c00/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'hedge-usd',
@@ -1899,7 +1919,7 @@ export const tokenList: Token[] = [
     name: 'Shiba Inu (Portal)',
     symbol: 'SHIB',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/SHIB_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/a23046ac-c9e9-40b0-ec0f-e79eb17e6900/public',
     tags: ['wormhole', 'old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'shiba-inu-wormhole',
@@ -1912,7 +1932,7 @@ export const tokenList: Token[] = [
     name: 'Allbridge',
     symbol: 'ABR',
     logoURI:
-      'https://raw.githubusercontent.com/allbridge-io/media/main/token.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/b103b24c-6e58-4fd1-2a11-3d1d1d30f300/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'allbridge',
@@ -1925,7 +1945,7 @@ export const tokenList: Token[] = [
     name: 'Aleph.im (Portal)',
     symbol: 'ALEPH',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/ALEPH_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/aefd843d-6cd8-4f66-d59e-e3addae59500/public',
     tags: ['wormhole', 'old-registry', 'solana-fm'],
   },
   {
@@ -1935,7 +1955,7 @@ export const tokenList: Token[] = [
     name: 'Slow Protocol',
     symbol: 'SLOW',
     logoURI:
-      'https://t3wsqd23o7n5d2pjgvspqafxi3jcznjfrdgwkh6acmgf3zjpnsgq.arweave.net/nu0oD1t329Hp6TVk-AC3RtIstSWIzWUfwBMMXeUvbI0',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/12a5f02b-e839-4e58-64e8-180c0b5d8c00/public',
     tags: ['community'],
   },
   {
@@ -1945,7 +1965,7 @@ export const tokenList: Token[] = [
     name: 'Solice',
     symbol: 'SLC',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/METAmTMXwdb8gYzyCPfXXFmZZw4rUsXX58PNsDg7zjL/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d7105255-6f7f-4779-00d1-b2ff58eedf00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'solice',
@@ -1958,7 +1978,7 @@ export const tokenList: Token[] = [
     name: 'STYLE',
     symbol: 'STYLE',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/3FHpkMTQ3QyAJoLoXVdBpH4TfHiehnL2kXmv9UXBpYuF/style.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c9a6ca9f-079a-447d-284e-1b58a6cfca00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'style',
@@ -1980,7 +2000,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Sdrive Coin',
     symbol: 'SCOIN',
-    logoURI: 'https://arweave.net/O5kTUpi6mNl-FWY2zq01MqK0qkwRKy3O5cyaoosyJwM',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c017f3e5-e92f-4976-e98a-a9c6ce26cc00/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'sdrive-app',
@@ -1993,7 +2014,7 @@ export const tokenList: Token[] = [
     name: 'Kineko',
     symbol: 'KNK',
     logoURI:
-      'https://www.arweave.net/u7prAs3T9UHwykErAXDfX306yAxFU08PpgvN819K_so?ext=png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/297cea88-8e7a-4048-6c10-6e3fcd825300/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'kineko-knk',
@@ -2006,7 +2027,7 @@ export const tokenList: Token[] = [
     name: 'USD Coin (Portal from Avalanche)',
     symbol: 'USDCav',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/USDCav_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e357ac35-0050-4381-f927-ff07d36f3200/public',
     tags: ['wormhole'],
   },
   {
@@ -2016,7 +2037,7 @@ export const tokenList: Token[] = [
     name: 'USD Coin (Portal from BSC)',
     symbol: 'USDCbs',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/USDCbs_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/3536d8ff-59fc-4a76-744b-0c5b2d31fc00/public',
     tags: ['wormhole', 'old-registry'],
   },
   {
@@ -2026,7 +2047,7 @@ export const tokenList: Token[] = [
     name: 'SHIBONK',
     symbol: 'SBONK',
     logoURI:
-      'https://raw.githubusercontent.com/Sperlo64/SHIBONK/main/bonklogo2.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/fc427210-f834-4458-8780-18c09ad46a00/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'shibonk-311f81df-a4ea-4f31-9e61-df0af8211bd7',
@@ -2039,7 +2060,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped Bitcoin (Sollet)',
     symbol: 'soBTC',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/9n4nbM75f5Ui33ZbPYXn59EwSgE8CGsHtAeTH5YFeJ9E/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1d6f6b50-efb4-4ef9-9d0b-12bae83ada00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'wrapped-bitcoin-sollet',
@@ -2052,7 +2073,7 @@ export const tokenList: Token[] = [
     name: 'PsyOptions',
     symbol: 'PSY',
     logoURI:
-      'https://user-images.githubusercontent.com/32071703/149460918-3694084f-2a37-4c95-93d3-b5aaf078d444.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/be595a27-87e2-4bf7-1d17-7e888f564f00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'psyoptions',
@@ -2065,7 +2086,7 @@ export const tokenList: Token[] = [
     name: 'Socean staked SOL',
     symbol: 'scnSOL',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/5oVNBeEEQvYi1cX3ir8Dx5n1P7pdxydbGF2X4TxVusJm/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/8699416c-7443-4d50-daf9-189f87f4bd00/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'socean-staked-sol',
@@ -2078,7 +2099,7 @@ export const tokenList: Token[] = [
     name: 'Sunny Governance Token',
     symbol: 'SUNNY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/SUNNYWgPQmFxe9wTZzNK7iPnJ3vYDrkgnxJRJm1s3ag/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/7ad28d50-164a-49dd-2d1a-3fe88a85e900/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'sunny-aggregator',
@@ -2091,7 +2112,7 @@ export const tokenList: Token[] = [
     name: 'Binance USD (Portal from BSC)',
     symbol: 'BUSDbs',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/BUSDbs_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/a48741b4-9633-4585-8d63-9b1b52b7b300/public',
     tags: ['wormhole', 'old-registry'],
   },
   {
@@ -2101,7 +2122,7 @@ export const tokenList: Token[] = [
     name: 'Oxygen Protocol',
     symbol: 'OXY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/z3dn17yLaGMKffVogeFHQ9zWVcXgqgf3PQnDsNs2g6M/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/89cacb0b-5bdb-4ca9-8c66-071fe345d100/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'oxygen',
@@ -2114,7 +2135,7 @@ export const tokenList: Token[] = [
     name: 'BIRDIES',
     symbol: 'BIRDS',
     logoURI:
-      'https://raw.githubusercontent.com/ArashiSol/Birdies/main/photo1695208363.jpeg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9adf877d-2b1a-4c8d-2428-56d240221400/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'birdies',
@@ -2127,7 +2148,7 @@ export const tokenList: Token[] = [
     name: 'Grape',
     symbol: 'GRAPE',
     logoURI:
-      'https://lh3.googleusercontent.com/y7Wsemw9UVBc9dtjtRfVilnS1cgpDt356PPAjne5NvMXIwWz9_x7WKMPH99teyv8vXDmpZinsJdgiFQ16_OAda1dNcsUxlpw9DyMkUk=s0',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e7fbcea3-9573-4b6f-ceca-e7b588275500/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'grape-2',
@@ -2140,7 +2161,7 @@ export const tokenList: Token[] = [
     name: 'Realy Token',
     symbol: 'REAL',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/AD27ov5fVU2XzwsbvnFvb1JpCBaCB5dRXrczV9CqSVGb/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f7c8a60a-daf9-4645-499e-867a78cd2500/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'realy-metaverse',
@@ -2153,7 +2174,7 @@ export const tokenList: Token[] = [
     name: 'Kurobi',
     symbol: 'KURO',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/2Kc38rfQ49DFaKHQaWbijkE7fcymUMLY5guUiUsDmFfn/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/aa48166f-ca28-41e7-5c44-836406749700/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'kurobi',
@@ -2166,7 +2187,7 @@ export const tokenList: Token[] = [
     name: 'Port Finance Token',
     symbol: 'PORT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/PoRTjZMPXb9T7dyU7tpLEZRQj7e6ssfAE62j2oQuc6y/PORT.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/30524d5f-c35e-4410-1eb3-183ce7d5e300/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'port-finance',
@@ -2179,7 +2200,7 @@ export const tokenList: Token[] = [
     name: 'Sator',
     symbol: 'SAO',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/2HeykdKjzHKGm2LKHw8pDYwjKPiFEoXAz74dirhUgQvq/Sator_Logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e36c4516-6c3d-419c-06a1-5228aad08f00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'sator',
@@ -2192,7 +2213,7 @@ export const tokenList: Token[] = [
     name: 'Synthetify',
     symbol: 'SNY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/4dmKkXNHdgYsXqBHCuMikNQWwVomZURhYvkkX5c4pQ7y/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/6c3d4f50-4fc5-4ce0-d8c3-f26aebcae600/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'synthetify-token',
@@ -2205,7 +2226,7 @@ export const tokenList: Token[] = [
     name: 'SUPER TOKEN',
     symbol: 'SUPER',
     logoURI:
-      'https://nftstorage.link/ipfs/bafkreibxcsqfuls3yiitufaid3wnjzrgx2gdswtteo33g6fojoxctob5na',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/25d50e87-0bf2-4fc4-251e-16b4ddb98900/public',
     tags: ['community'],
   },
   {
@@ -2215,7 +2236,7 @@ export const tokenList: Token[] = [
     name: 'Genopets Ki',
     symbol: 'KI',
     logoURI:
-      'https://arweave.net/WfPR8w5dEoerG_bI3S2o2_nuSfWY3p8M4YbQ6ijd1cQ?ext=png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/51399363-2210-468e-5582-765951617500/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'genopet-ki',
@@ -2228,7 +2249,7 @@ export const tokenList: Token[] = [
     name: 'xHashtag Token',
     symbol: 'XTAG',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/5gs8nf4wojB5EXgDUWNLwXpknzgV2YWDhveAeBZpVLbp/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/3ada991b-90ab-4248-0f40-19c992b26b00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'xhashtag',
@@ -2241,7 +2262,7 @@ export const tokenList: Token[] = [
     name: 'Kitty Coin',
     symbol: 'KITTY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/6XWfkyg5mzGtKNftSDgYjyoPyUsLRf2rafj95XSFSFrr/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/dd0ab386-0f5b-473f-7faf-baab2ed78e00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'kitty-coin-solana',
@@ -2254,7 +2275,7 @@ export const tokenList: Token[] = [
     name: 'FLTH',
     symbol: 'FLTH',
     logoURI:
-      'https://www.arweave.net/6cZ-d9BnAsCqxkpzazYmKjLpUN2kE-jYnU3WDV4_lo0?ext=png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/daded390-a97d-4d65-9dca-840bee5d9100/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'liberty-square-filth',
@@ -2267,7 +2288,7 @@ export const tokenList: Token[] = [
     name: 'The Suites Token',
     symbol: 'SUITE',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/4h41QKUkQPd2pCAFXNNgZUyGUxQ6E7fMexaZZHziCvhh/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/18f88e1a-964e-4ecd-e265-31438854b600/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -2277,7 +2298,7 @@ export const tokenList: Token[] = [
     name: 'RaceFi Token',
     symbol: 'RACEFI',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/AAmGoPDFLG6bE82BgZWjVi8k95tj9Tf3vUN7WvtUm2BU/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/83e0b5c9-f8ea-43af-b529-bfe17f7b4b00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'racefi',
@@ -2290,7 +2311,7 @@ export const tokenList: Token[] = [
     name: 'Solrise Finance',
     symbol: 'SLRS',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/SLRSSpSLUTP7okbCUBYStWCo1vUgyt775faPqz8HUMr/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/705c20f9-9ed4-4441-d808-d7c75d416100/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'solrise-finance',
@@ -2303,7 +2324,7 @@ export const tokenList: Token[] = [
     name: 'Saber Wrapped USD Coin (8 decimals)',
     symbol: 'sUSDC-8',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/88881Hu2jGMfCs9tMu5Rr7Ah7WBNBuXqde4nR5ZmKYYy/icon.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ddceaf5e-e566-4b90-204d-ef43af8f1c00/public',
     tags: ['old-registry'],
   },
   {
@@ -2313,7 +2334,7 @@ export const tokenList: Token[] = [
     name: 'Atlas Dex',
     symbol: 'ATS',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/HJbNXx2YMRxgfUJ6K4qeWtjatMK5KYQT1QnsCdDWywNv/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/770a1c50-141c-40b6-a576-c69f13913d00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'atlas-dex',
@@ -2326,7 +2347,7 @@ export const tokenList: Token[] = [
     name: '2080',
     symbol: '2080',
     logoURI:
-      'https://raw.githubusercontent.com/resources-pub/token-info/main/fidelion_logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/805cf1d1-43a3-42ab-8f72-52b8a778b800/public',
     tags: ['community'],
     extensions: {
       coingeckoId: '2080',
@@ -2339,7 +2360,7 @@ export const tokenList: Token[] = [
     name: 'CATO',
     symbol: 'CATO',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/5p2zjqCd1WJzAVgcEnjhb9zWDU7b9XVhFhx4usiyN7jB/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/fe9f07e9-8740-47f7-9571-a75269849d00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'cato',
@@ -2352,7 +2373,7 @@ export const tokenList: Token[] = [
     name: 'Solcial token',
     symbol: 'SLCL',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/SLCLww7nc1PD2gQPQdGayHviVVcpMthnqUz2iWKhNQV/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/345b113b-78ee-479d-0aae-72d9d04d8200/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'solcial',
@@ -2365,7 +2386,7 @@ export const tokenList: Token[] = [
     name: 'APYSwap',
     symbol: 'APYS',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/5JnZ667P3VcjDinkJFysWh2K2KtViy63FZ3oL5YghEhW/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1a527bc2-54da-4598-6f17-b30a7a650d00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'apyswap',
@@ -2378,7 +2399,7 @@ export const tokenList: Token[] = [
     name: 'Elumia Crowns',
     symbol: 'ELU',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/4tJZhSdGePuMEfZQ3h5LaHjTPsw1iWTRFTojnZcwsAU6/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/07b26c15-b045-4f08-3278-23b64d1d6600/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'elumia',
@@ -2391,7 +2412,7 @@ export const tokenList: Token[] = [
     name: 'PUFF',
     symbol: 'PUFF',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/G9tt98aYSznRk7jWsfuz9FnTdokxS6Brohdo9hSmjTRB/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ba1a192f-e4a7-476e-dd8d-60bd8b613b00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'puff',
@@ -2404,7 +2425,7 @@ export const tokenList: Token[] = [
     name: 'MOONLANA',
     symbol: 'MOLA',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/AMdnw9H5DFtQwZowVFr4kUgSXJzLokKSinvgGiUoLSps/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0752fd22-86bb-482a-22d1-416e0632a100/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'moonlana',
@@ -2417,7 +2438,7 @@ export const tokenList: Token[] = [
     name: 'Plutonian DAO',
     symbol: 'PLD',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/2cJgFtnqjaoiu9fKVX3fny4Z4pRzuaqfJ3PBTMk2D9ur/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/a94ec947-c9f9-48e0-0422-ea76b5fed100/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'plutonian-dao',
@@ -2430,7 +2451,7 @@ export const tokenList: Token[] = [
     name: 'Physis',
     symbol: 'PHY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EswgBj2hZKdgovX2ihWSUDnuBg9VNbGmSGoH5yjNsPRa/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c8575a72-36ec-42ea-872b-7a11f481f400/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'physis',
@@ -2443,7 +2464,7 @@ export const tokenList: Token[] = [
     name: 'Ratio Governance Token',
     symbol: 'RATIO',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/ratioMVg27rSZbSvBopUvsdrGUzeALUfFma61mpxc8J/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/70424bf1-e9a1-48cf-93ad-6f47bfc02600/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'ratio-finance',
@@ -2455,7 +2476,8 @@ export const tokenList: Token[] = [
     decimals: 0,
     name: 'NeonGame Credits',
     symbol: '$NEON',
-    logoURI: 'https://arweave.net/VPS4BrOgXT4rg-mwGfCLqXL8vtbII0ianMBsw_L2CeE',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/09909bd9-3e96-4f7b-8c66-4179568dd800/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -2465,7 +2487,7 @@ export const tokenList: Token[] = [
     name: 'KIRA',
     symbol: 'KIRA',
     logoURI:
-      'https://www.arweave.net/71SbFojNuoFeQ_n4cfMYKzX87xPvsQvNr59R_ZM7ucQ?ext=png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/a987dd38-ab4a-43ee-e8c7-4b3c03241000/public',
     tags: ['community'],
   },
   {
@@ -2475,7 +2497,7 @@ export const tokenList: Token[] = [
     name: 'Phoenix',
     symbol: 'PHNX',
     logoURI:
-      'https://bafybeicmwtzskjhcsnoymhsv5fmlruwoxgounmcweiei2qnxh6ayesupiq.ipfs.nftstorage.link',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c6941378-f1cf-4a89-2c40-a610759e3b00/public',
     tags: ['community', 'token-2022'],
   },
   {
@@ -2485,7 +2507,7 @@ export const tokenList: Token[] = [
     name: 'PRT (Parrot Protocol)',
     symbol: 'PRT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/PRT88RkA4Kg5z7pKnezeNH4mafTvtQdfFgpQTGRjz44/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d8633b1c-92de-4fef-5db4-c054b4478700/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'parrot-protocol',
@@ -2498,7 +2520,7 @@ export const tokenList: Token[] = [
     name: 'AVAX (Portal)',
     symbol: 'AVAX',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/AVAX_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/cd4dff60-82b6-4704-2b3d-deb528998500/public',
     tags: ['wormhole', 'old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'avalanche-wormhole',
@@ -2511,7 +2533,7 @@ export const tokenList: Token[] = [
     name: 'Rope Token',
     symbol: 'ROPE',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/8PMHT4swUMtBzgHnh5U564N5sjPSiUz2cjEQzFnnP1Fo/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/41cab41d-32ac-4795-c1e1-7aada7cc1500/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'rope-token',
@@ -2524,7 +2546,7 @@ export const tokenList: Token[] = [
     name: 'The Sandbox (Portal)',
     symbol: 'SAND',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/SAND_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/114e3597-514a-4067-4da6-7880e3c84000/public',
     tags: ['wormhole', 'old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'the-sandbox-wormhole',
@@ -2537,7 +2559,7 @@ export const tokenList: Token[] = [
     name: 'MAI Stablecoin',
     symbol: 'MAI',
     logoURI:
-      'https://raw.githubusercontent.com/0xlaozi/qidao/main/images/mimatic-red.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/4f5f93d9-bafa-4361-0b34-7d36a15c0b00/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'mimatic',
@@ -2550,7 +2572,7 @@ export const tokenList: Token[] = [
     name: 'Crypto Cavemen',
     symbol: 'CAVE',
     logoURI:
-      'https://ftoblquxiunjey7bu4eevlz2u7kwg5s3yvou7adgge2jbihcu7qq.arweave.net/LNwVwpdFGpJj4acISq86p9VjdlvFXU-AZjE0kKDip-E/?ext=png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/77433b4a-fd61-413f-bfd8-176cdf90e300/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'cave',
@@ -2563,7 +2585,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped HAPI',
     symbol: 'wHAPI',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/6VNKqgz9hk7zRShTFdg5AnkfKwZUcojzwAkzxSH3bnUm/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c8facd96-1c6c-44ad-5158-34f842eadd00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'hapi',
@@ -2576,7 +2598,7 @@ export const tokenList: Token[] = [
     name: 'Apricot',
     symbol: 'APT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/APTtJyaRX5yGTsJU522N4VYWg3vCvSb65eam5GrPT5Rt/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e5ab1f51-4810-46a1-a0b0-3df6205b2f00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'apricot',
@@ -2589,7 +2611,7 @@ export const tokenList: Token[] = [
     name: 'Baby Samo Coin',
     symbol: 'BABY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Uuc6hiKT9Y6ASoqs2phonGGw2LAtecfJu9yEohppzWH/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/7fa6a95a-b3c9-4f77-29c2-d772ea054500/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'baby-samo-coin',
@@ -2602,7 +2624,7 @@ export const tokenList: Token[] = [
     name: '1sol.io (Portal)',
     symbol: '1SOL',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/1SOL_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/959ac0f6-3b3c-40b4-ce58-57e3b8254200/public',
     tags: ['wormhole', 'old-registry'],
     extensions: {
       coingeckoId: '1sol-io-wormhole',
@@ -2615,7 +2637,7 @@ export const tokenList: Token[] = [
     name: 'FTM (Allbridge from Fantom)',
     symbol: 'FTM',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EsPKhGTMf3bGoy4Qm7pCv3UCcWqAmbC1UGHBTDxRjjD4/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e324dbd2-ae72-4d6e-e2ba-765be6cab700/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -2625,7 +2647,7 @@ export const tokenList: Token[] = [
     name: 'Threshold Network Token',
     symbol: 'T',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/T_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/483f4858-d24f-46d5-2444-918915400400/public',
     tags: ['wormhole'],
   },
   {
@@ -2635,7 +2657,7 @@ export const tokenList: Token[] = [
     name: 'Hydrazine',
     symbol: 'N2H4',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/4q5UBXJxE91BZKX548qhU8i5QBWvZdXzS3RZwfTgLQda/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/87dd4fc8-7447-4761-d72e-9381eeb09500/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -2645,7 +2667,7 @@ export const tokenList: Token[] = [
     name: 'Sypool',
     symbol: 'SYP',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/b0e47e39f84cffb655f406eb569c57a88b5211cc/assets/mainnet/FnKE9n6aGjQoNWRBZXy4RW6LZVao7qwBonUbiD7edUmZ/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/fd2464cd-4757-420c-65e6-67bdab850000/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'sypool',
@@ -2668,7 +2690,7 @@ export const tokenList: Token[] = [
     name: 'LIQ Protocol',
     symbol: 'LIQ',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/4wjPQJ6PrkC4dHhYghwJzGBVP78DkBzA2U3kHoFNBuhj/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c2609d9a-c031-467f-7db6-192004d7d000/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'liq-protocol',
@@ -2681,7 +2703,7 @@ export const tokenList: Token[] = [
     name: 'ALL ART',
     symbol: 'AART',
     logoURI:
-      'https://raw.githubusercontent.com/allartprotocol/token-list/main/assets/mainnet/F3nefJBcejYbtdREjui1T9DPh5dBgpkKq7u2GAAMXs5B/logo.jpg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/5205919c-0094-44ce-c009-6ae7dce8ed00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'all-art',
@@ -2693,7 +2715,8 @@ export const tokenList: Token[] = [
     decimals: 8,
     name: 'NINJA TURTLES',
     symbol: 'NINJA',
-    logoURI: 'https://arweave.net/2J8mJ6N6GCg7BWTHtcPZMEZsF2iuTYBRI9jdtnHS77o',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/03f62d88-2c5e-49c5-28d5-be3863bf3300/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'ninja-turtles',
@@ -2706,7 +2729,7 @@ export const tokenList: Token[] = [
     name: 'Yawww',
     symbol: 'YAW',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/YAWtS7vWCSRPckx1agB6sKidVXiXiDUfehXdEUSRGKE/yaw.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/4002a025-0bd1-42b9-2612-0880fa290d00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'yawww',
@@ -2719,7 +2742,7 @@ export const tokenList: Token[] = [
     name: 'SolChicks',
     symbol: 'CHICKS',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/cxxShYRVcepDudXhe7U62QHvw8uBJoKFifmzggGKVC2/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/8572df4f-68cc-4d3f-d85d-89efa25ab000/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'solchicks-token',
@@ -2731,7 +2754,8 @@ export const tokenList: Token[] = [
     decimals: 5,
     name: 'SWEETS',
     symbol: '$SWTS',
-    logoURI: 'https://arweave.net/TIiNLtJtWuC0yxXPXXQpXalXyGaUFp4rT7h8WG5EwH4',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/08aeb244-d66c-4a2c-ed08-c609b26e1d00/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'sweets',
@@ -2744,7 +2768,7 @@ export const tokenList: Token[] = [
     name: 'NEAR (Allbridge from Near)',
     symbol: 'NEAR',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/BYPsjxa3YuZESQz1dKuBw1QSFCSpecsm8nCQhY5xbU1Z/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0b801b26-7a67-43a8-012c-8279e2ae7e00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -2754,7 +2778,7 @@ export const tokenList: Token[] = [
     name: 'Boring Protocol',
     symbol: 'BOP',
     logoURI:
-      'https://raw.githubusercontent.com/boringprotocol/brand-assets/main/boplogo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0dd0ee09-8a42-4164-94f5-2d2ba129d800/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'boring-protocol',
@@ -2767,7 +2791,7 @@ export const tokenList: Token[] = [
     name: 'DOGELON SOLANA',
     symbol: 'DOGELON',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/HYoGYzMcbYq3tAvpg15d8VFYVHw6jWEVuGgpNTrG8hps/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/18054c01-0e0a-4bf1-9964-834b6c788400/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -2776,7 +2800,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Boo Network',
     symbol: 'BOO',
-    logoURI: 'https://arweave.net/Reo2_w4k9PGdtYX3p8BllNZpSbbIJ-zype0qdbQgsoE',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/de329e7a-3de1-487f-4cf9-d0941dada200/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'ghostkids',
@@ -2789,7 +2814,7 @@ export const tokenList: Token[] = [
     name: 'Staked Step',
     symbol: 'xSTEP',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/xStpgUCss9piqeFUk2iLVcvJEGhAdJxJQuwLkXP555G/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/41ea2f5c-87ab-4a38-b820-4ccd22aea500/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -2798,7 +2823,8 @@ export const tokenList: Token[] = [
     decimals: 5,
     name: 'WOLF SOLANA',
     symbol: 'WOLF',
-    logoURI: 'https://arweave.net/vqdJ1M-3GLpOKuMKZLXNbd-odMLzGrXdgVis8wSEt-M',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/32df883e-f10b-46a1-2b90-4e4ddf13b700/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'wolf-solana',
@@ -2811,7 +2837,7 @@ export const tokenList: Token[] = [
     name: 'ARB Protocol',
     symbol: 'ARB',
     logoURI:
-      'https://raw.githubusercontent.com/ARBProtocol/arbprotocol/main/IMG_3600.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/30f9a0c8-5a02-4522-2fb2-12999714f700/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'arb-protocol',
@@ -2824,7 +2850,7 @@ export const tokenList: Token[] = [
     name: 'DOGGO',
     symbol: 'DOGGO',
     logoURI:
-      'https://shdw-drive.genesysgo.net/BBwXjBB6LtWGjKW5GveUSau5z9KZv2CK5AWmb7FCDF6K/doggies_coin.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/2194d681-0bd7-4f34-f963-9ee6bc57e200/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'doggo',
@@ -2836,7 +2862,8 @@ export const tokenList: Token[] = [
     decimals: 2,
     name: 'Playground Waves Floor Index',
     symbol: 'WAVES',
-    logoURI: 'https://i.imgur.com/TMyD8MN.jpg',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/b6ccc93d-14ec-45cb-95cb-cc8231e5ff00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'playground-waves-floor-index',
@@ -2848,7 +2875,8 @@ export const tokenList: Token[] = [
     decimals: 2,
     name: "𝝠ndre's Fleet Share",
     symbol: 'AFSeX',
-    logoURI: 'https://arweave.net/l5d0WrtUcpUEqwknqjvxlo2QyGryLL3SDsRbigT9HA0',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/41a5dabc-a65d-4b0b-86aa-3e602979c900/public',
     tags: ['community'],
   },
   {
@@ -2858,7 +2886,7 @@ export const tokenList: Token[] = [
     name: 'SolRazr',
     symbol: 'SOLR',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/7j7H7sgsnNDeCngAPjpaCN4aaaru4HS7NAFYSEUyzJ3k/SOLR.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/3dc9b0e5-e86d-4b5a-0c38-5a64ebb6f300/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'solrazr',
@@ -2870,7 +2898,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Venture Coin',
     symbol: 'VC',
-    logoURI: 'https://arweave.net/6HvW8RLbLhBbw09QDRpPd6HX-N3Sk9kF2vvdaZGHExU',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/444d7809-d7b9-4f16-fb76-1ea314809400/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'venture-coin-2',
@@ -2883,7 +2912,7 @@ export const tokenList: Token[] = [
     name: 'MAPS',
     symbol: 'MAPS',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/MAPS41MDahZ9QdKXhVa4dWB9RuyfV4XqhyAZ8XcYepb/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/3d342d61-356d-4f1f-4ccf-81f4a54ebe00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'maps',
@@ -2896,7 +2925,7 @@ export const tokenList: Token[] = [
     name: 'FLOOF',
     symbol: 'FLOOF',
     logoURI:
-      'https://raw.githubusercontent.com/GreenFailure/Floof/main/OkyT9kpz_400x400.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/87c0add2-7c13-44aa-78ad-c5f0aaa15b00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'floof',
@@ -2909,7 +2938,7 @@ export const tokenList: Token[] = [
     name: 'Sentre',
     symbol: 'SNTR',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/SENBBKVCM7homnf5RX9zqpf1GFe935hnbU4uVzY1Y6M/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/44e5b08d-d97a-481a-410e-36f7479b9500/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'sentre',
@@ -2922,7 +2951,7 @@ export const tokenList: Token[] = [
     name: 'GARY',
     symbol: '$GARY',
     logoURI:
-      'https://raw.githubusercontent.com/puresec-ng/gary/main/GARY_coin.jpg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/197b67e2-89d5-4c89-835b-ecf10a012a00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'gary',
@@ -2935,7 +2964,7 @@ export const tokenList: Token[] = [
     name: 'Equinox',
     symbol: 'ENX',
     logoURI:
-      'https://ixrjpmbgkspkjaueqzmyhb3fbca5atffgsrqyt527d2x3ycdlgqq.arweave.net/ReKXsCZUnqSChIZZg4dlCIHQTKU0owxPuvj1feBDWaE',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/cd8a1227-d644-43d3-8da5-e5c10ccaa600/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'equinox',
@@ -2948,7 +2977,7 @@ export const tokenList: Token[] = [
     name: 'MatrixETF DAO Finance',
     symbol: 'MDF',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/ALQ9KMWjFmxVbew3vMkJj3ypbAKuorSgGst6svCHEe2z/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/824f5843-ffff-400f-fa56-df5048efa900/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'matrixetf',
@@ -2961,7 +2990,7 @@ export const tokenList: Token[] = [
     name: 'DeFi Land Gold',
     symbol: 'GOLDY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/GoLDYyyiVeXnVf9qgoK712N5esm1cCbHEK9aNJFx47Sx/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/21158177-7615-4323-44a4-820f8f28de00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'defi-land-gold',
@@ -2974,7 +3003,7 @@ export const tokenList: Token[] = [
     name: 'POTATO',
     symbol: 'POTATO',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/GEYrotdkRitGUK5UMv3aMttEhVAZLhRJMcG82zKYsaWB/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/834915de-35ee-45c2-1d62-ed425d24be00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -2984,7 +3013,7 @@ export const tokenList: Token[] = [
     name: 'Solex Finance',
     symbol: 'SLX',
     logoURI:
-      'https://raw.githubusercontent.com/solexfin/token-list/main/assets/mainnet/AASdD9rAefJ4PP7iM89MYUsQEyCQwvBofhceZUGDh5HZ/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/395987dc-552a-4409-ac37-132c04029100/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'solex-finance',
@@ -2997,7 +3026,7 @@ export const tokenList: Token[] = [
     name: 'Mercurial(Deprecated)',
     symbol: 'MER',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/MERt85fc5boKw3BW1eYdxonEuJNvXbiMbs6hvheau5K/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c48eac41-9029-40e9-ea70-434841f85000/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'mercurial',
@@ -3009,7 +3038,8 @@ export const tokenList: Token[] = [
     decimals: 6,
     name: 'Klausen Art',
     symbol: 'KART',
-    logoURI: 'https://arweave.net/X9ohmd49MmOEYi4dfMyOv_M24NnnyzQXZEoALTuQ0ao',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/966a8306-070b-4e01-3a67-f1969ba14300/public',
     tags: ['community'],
   },
   {
@@ -3019,7 +3049,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped Ethereum (Sollet)',
     symbol: 'soETH',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/2FPyTwcZLUg1MDrwsyoP4D6s1tM7hAkHYRjkNb5w6Pxk/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/7437a13d-1f34-492e-3b4b-d8fd35849900/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'wrapped-ethereum-sollet',
@@ -3032,7 +3062,7 @@ export const tokenList: Token[] = [
     name: 'yPRT (Parrot Yield Token)',
     symbol: 'yPRT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/yPRTUpLDftNej7p6QofNYgRArRXsm6Mvkzohj4bh4WM/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/65d7999c-cc08-42dd-5d39-925f2781bd00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -3042,7 +3072,7 @@ export const tokenList: Token[] = [
     name: 'Good Vibes',
     symbol: 'GV',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/7TQTpG1qBvE9ui7J9yQWKFAYpQahkaKPKqGTsqSm1wUv/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c65e7582-74ae-4713-10af-5b90fc7fc700/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -3051,7 +3081,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Magic Crystal Coin',
     symbol: 'MC',
-    logoURI: 'https://arweave.net/Nwami1xs2ciMI7mUcawKMkUTKf_UUrLjYvIqUSL1ShI',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c39f40f9-034a-441b-81f4-c6694d5fb900/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'tap-fantasy-mc',
@@ -3064,7 +3095,7 @@ export const tokenList: Token[] = [
     name: 'Sonar Watch',
     symbol: 'SONAR',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/sonarX4VtVkQemriJeLm6CKeW3GDMyiBnnAEMw1MRAE/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f895470f-9ef9-4ed5-38dc-297d9c5d5300/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'sonarwatch',
@@ -3077,7 +3108,7 @@ export const tokenList: Token[] = [
     name: 'Kugle GU',
     symbol: 'GU',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/5KV2W2XPdSo97wQWcuAVi6G4PaCoieg4Lhhi61PAMaMJ/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e9f9b285-52fb-45c1-1d3e-cd47fc813500/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'gu',
@@ -3090,7 +3121,7 @@ export const tokenList: Token[] = [
     name: 'NOVA FINANCE',
     symbol: 'NOVA',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/BDrL8huis6S5tpmozaAaT5zhE5A7ZBAB2jMMvpKEeF8A/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/5f5145ed-9225-455c-d4be-e0fe7f5a9700/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'nova-finance',
@@ -3103,7 +3134,7 @@ export const tokenList: Token[] = [
     name: 'ChikinCoin',
     symbol: 'CKC',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/8s9FCz99Wcr3dHpiauFRi6bLXzshXfcGTfgQE7UEopVx/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d0200df9-be10-44bc-4333-0de0b178dc00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'chikincoin',
@@ -3115,7 +3146,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Aevum',
     symbol: 'AEVUM',
-    logoURI: 'https://arweave.net/mqtxUgbHYOu4lEUzMZy5YFZtItQQZtjZWbFUIbcM6cU',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/dbc1a825-0bd4-436c-2491-bbe5012fa500/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'aevum-ore',
@@ -3128,7 +3160,7 @@ export const tokenList: Token[] = [
     name: 'Dogelana',
     symbol: 'DGLN',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/E6UU5M1z4CvSAAF99d9wRoXsasWMEXsvHrz3JQRXtm2X/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/41dd5c4e-4ec3-4e87-8b77-7a5cf355d300/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'dogelana',
@@ -3141,7 +3173,7 @@ export const tokenList: Token[] = [
     name: 'Waggle Network',
     symbol: 'WAG',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/5tN42n9vMi6ubp67Uy4NnmM5DMZYN8aS8GeB3bEDHr6E/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ae6d8ae8-122f-409f-8475-f64bbd927700/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'waggle-network',
@@ -3154,7 +3186,7 @@ export const tokenList: Token[] = [
     name: 'UST (Portal)',
     symbol: 'UST',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/UST_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0b70efc1-345b-40c4-cc65-82afef831800/public',
     tags: ['wormhole', 'old-registry'],
     extensions: {
       coingeckoId: 'terrausd-wormhole',
@@ -3167,7 +3199,7 @@ export const tokenList: Token[] = [
     name: 'Unique Venture Clubs',
     symbol: 'UNQ',
     logoURI:
-      'https://www.arweave.net/X58AnJYdgZRbTNyf5HzavUD7daqAtuPnz0JcUACU70Y?ext=jpg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/25220614-92db-4f8e-92d2-cc1e8670d200/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'unq',
@@ -3180,7 +3212,7 @@ export const tokenList: Token[] = [
     name: 'Modul',
     symbol: 'MODUL',
     logoURI:
-      'https://raw.githubusercontent.com/parametrise/ParametriseLogo/main/Modul_Logomark_White_Pinky_Background.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/b9c1ac52-4a37-4214-6d40-1e630bbeb300/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -3190,7 +3222,7 @@ export const tokenList: Token[] = [
     name: 'Capybara',
     symbol: 'CAPY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/CAPYD6Lrm7bTZ6C7t7JvSxvpEcfKQ9YNB7kUjh6p6XBN/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d395befd-c962-4724-7d03-327d2708dc00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'capybara',
@@ -3203,7 +3235,7 @@ export const tokenList: Token[] = [
     name: 'FABRIC',
     symbol: 'FAB',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EdAhkbj5nF9sRM7XN7ewuW8C9XEUMs8P7cnoQ57SYE96/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/97e798e1-7237-4e06-df49-b84099d5d500/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'fabric',
@@ -3216,7 +3248,7 @@ export const tokenList: Token[] = [
     name: 'Aldrin',
     symbol: 'RIN',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/E5ndSkaB17Dm7CsD22dvcjfrYSDLCxFcMd6z8ddCk5wp/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/16a62801-27f7-4f5c-ae42-874ee19c5100/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'aldrin',
@@ -3229,7 +3261,7 @@ export const tokenList: Token[] = [
     name: 'Jet Protocol',
     symbol: 'JET',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/JET6zMJWkCN9tpRT2v2jfAmm5VnQFDpUBCyaKojmGtz/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/972c41d8-6423-40c0-b458-8f5cdd86f700/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'jet',
@@ -3242,7 +3274,7 @@ export const tokenList: Token[] = [
     name: 'renBTC',
     symbol: 'renBTC',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/CDJWUqTcYTVAKXAVXoQZFes5JUFc7owSeq7eMQcDSbo5/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/3807c111-be06-4222-4e3f-7db075787c00/public',
     tags: ['old-registry'],
   },
   {
@@ -3251,7 +3283,8 @@ export const tokenList: Token[] = [
     decimals: 8,
     name: 'ZAP Token',
     symbol: 'ZAP',
-    logoURI: 'https://www.zap.org/static/zapSplash.svg',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/2daf9c29-f25f-444e-1325-90ab62940d00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'zap',
@@ -3263,7 +3296,8 @@ export const tokenList: Token[] = [
     decimals: 8,
     name: 'Wrapped Dingocoin',
     symbol: 'wDingocoin',
-    logoURI: 'https://wrap.dingocoin.org/wDingocoin.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ec548cfc-92f3-4eda-9b7d-8e555ee5ac00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'dingocoin',
@@ -3275,7 +3309,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'CLUB',
     symbol: 'CLUB',
-    logoURI: 'https://arweave.net/XSWZOeipKasgKjDKm54O2R0S3Rrld1B6gQV_rtIjfF4',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/064a79bd-e2b7-4660-4e23-68ee86552000/public',
     tags: ['community'],
   },
   {
@@ -3285,7 +3320,7 @@ export const tokenList: Token[] = [
     name: 'Whole Earth Coin',
     symbol: 'WEC',
     logoURI:
-      'https://ipfs.moralis.io:2053/ipfs/QmStqd3JLmEA9bfcUzt2CWF2iPzt7tgPmnkgou7JxauUkz',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/54901b75-036a-401f-f0ce-bd07c4306c00/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'whole-earth-coin',
@@ -3308,7 +3343,7 @@ export const tokenList: Token[] = [
     name: 'UncleMine',
     symbol: 'UM',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/DMCUFm2ZAnSU7UgsdVq23gRogMU3MEBjPgQF1gK53rEn/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d7d82d9f-b95c-4263-3e90-f48b1db3b300/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'unclemine',
@@ -3321,7 +3356,7 @@ export const tokenList: Token[] = [
     name: 'daoSOL Token',
     symbol: 'daoSOL',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/GEJpt3Wjmr628FqXxTgxMce1pLntcPV4uFi8ksxMyPQh/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/cd08e533-11be-4aae-0ca7-b36b59a9e900/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'daosol',
@@ -3334,7 +3369,7 @@ export const tokenList: Token[] = [
     name: 'Compendium Finance',
     symbol: 'CMFI',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/5Wsd311hY8NXQhkt9cWHwTnqafk7BGEbLu8Py3DSnPAr/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/056a0892-9a7b-4126-3e9c-8ed4f15e2700/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'compendium-fi',
@@ -3347,7 +3382,7 @@ export const tokenList: Token[] = [
     name: 'SOL BABAY DOGE COIN',
     symbol: 'SBABYDOGE',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/BABYsocP6cB95xvBDXnjXKX96VBNC37dmNWUtaV9Jk6v/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1421b369-da4b-4fe0-ac06-851660fe0a00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'sol-baby-doge',
@@ -3360,7 +3395,7 @@ export const tokenList: Token[] = [
     name: 'Solbank',
     symbol: 'SBNK',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/uNrix3Q5g51MCEUrYBUEBDdQ96RQDQspQJJnnQ4T3Vc/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e368a073-ffbf-425e-02bf-fc1365f53300/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'solbank-token',
@@ -3373,7 +3408,7 @@ export const tokenList: Token[] = [
     name: 'Saber Wrapped USDT (9 decimals)',
     symbol: 'sUSDT-9',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/AEUT5uFm1D575FVCoQd5Yq891FJEqkncZUbBFoFcAhTV/icon.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e3cd6636-ba49-42ab-fa6c-1a2ad40d1c00/public',
     tags: ['old-registry'],
   },
   {
@@ -3383,7 +3418,7 @@ export const tokenList: Token[] = [
     name: 'Saber Wrapped USD Coin (9 decimals)',
     symbol: 'sUSDC-9',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/JEFFSQ3s8T3wKsvp4tnRAsUBW7Cqgnf8ukBZC4C8XBm1/icon.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9a433efb-fd61-48cc-00e4-915c598f4000/public',
     tags: ['old-registry'],
   },
   {
@@ -3393,7 +3428,7 @@ export const tokenList: Token[] = [
     name: 'Poor token',
     symbol: 'POOR',
     logoURI:
-      'https://shdw-drive.genesysgo.net/AZgm3Vdo1QLf8bKUjyearDC9NygpRHmmtzPaBNQcF4jt/IMG_1640.JPG',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/aa7c74bb-2f40-4459-1623-4425c01c9600/public',
     tags: ['community'],
   },
   {
@@ -3403,7 +3438,7 @@ export const tokenList: Token[] = [
     name: 'Bamboo',
     symbol: 'BMBO',
     logoURI:
-      'https://raw.githubusercontent.com/rishkumaria/bamboo/main/bamboo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1c9aecd4-83a8-4d1d-089e-7948dc3a5700/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'bamboo-coin',
@@ -3416,7 +3451,7 @@ export const tokenList: Token[] = [
     name: 'Shibalana',
     symbol: 'SHIBA',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Dhg9XnzJWzSQqH2aAnhPTEJHGQAkALDfD98MA499A7pa/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9beb0f33-1451-490f-bc2b-628f3db3f600/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'shibalana',
@@ -3428,7 +3463,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'FEEL',
     symbol: 'FEEL',
-    logoURI: 'https://api.feel.market/static/feel.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/cee6733e-0b17-41fc-3ca2-dc6db8e8fc00/public',
     tags: ['community'],
   },
   {
@@ -3438,7 +3474,7 @@ export const tokenList: Token[] = [
     name: 'PEPESOLANA',
     symbol: 'PEPE',
     logoURI:
-      'https://shdw-drive.genesysgo.net/85Mup8SQSvcTXsykzNTAtypV2v3zYrYu9eFTRvUUwmXK/logopep200x200.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d2509ca6-6294-4faf-d00a-902f09119700/public',
     tags: ['community'],
   },
   {
@@ -3447,7 +3483,8 @@ export const tokenList: Token[] = [
     decimals: 5,
     name: 'KITTI TOKEN',
     symbol: 'KITTI',
-    logoURI: 'https://arweave.net/I1RzcnSel2oghDkMBE-lZBV9b6AuyDJc0Ywo6QmDlSQ',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/df6e9d9a-5218-41f9-14b4-bd83de58a200/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'kitti',
@@ -3460,7 +3497,7 @@ export const tokenList: Token[] = [
     name: 'SAIL',
     symbol: 'SAIL',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/6kwTqmdQkJd8qRr9RjSnUX9XJ24RmJRSrU1rsragP97Y/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/6f09de60-e79a-4ab8-ecb7-3f7462ef7800/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'sail',
@@ -3473,7 +3510,7 @@ export const tokenList: Token[] = [
     name: 'ConstitutionDAO (Portal)',
     symbol: 'PEOPLE',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/PEOPLE_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/7f9c637c-c079-4adb-638e-f7e542731300/public',
     tags: ['wormhole', 'old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'constitutiondao-wormhole',
@@ -3485,7 +3522,8 @@ export const tokenList: Token[] = [
     decimals: 2,
     name: "Trippin' Ape Tribe Floor Index",
     symbol: 'TAPES',
-    logoURI: 'https://i.imgur.com/iFgvQva.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/33931206-fce8-4364-1756-be441651f900/public',
     tags: ['community'],
   },
   {
@@ -3495,7 +3533,7 @@ export const tokenList: Token[] = [
     name: 'HONEY',
     symbol: '$HONEY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/HonyeYAaTPgKUgQpayL914P6VAqbQZPrbkGMETZvW4iN/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/273f9e08-5998-41d6-7fc4-bd0ed2b79900/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'honey-finance',
@@ -3508,7 +3546,7 @@ export const tokenList: Token[] = [
     name: 'DAWG',
     symbol: 'DAWG',
     logoURI:
-      'https://user-images.githubusercontent.com/15795037/143055147-72513c02-be9b-4639-bb30-3c1c037cb030.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/dd3fb74c-442c-4b9a-e04e-c51f2078ba00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'dawg',
@@ -3521,7 +3559,7 @@ export const tokenList: Token[] = [
     name: 'Republic Credits',
     symbol: 'RPC',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EAefyXw6E8sny1cX3LTH6RSvtzH6E5EFy1XsE2AiH1f3/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e2617fb2-8c45-4fc4-f31e-cfefed5da400/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'republic-credits',
@@ -3534,7 +3572,7 @@ export const tokenList: Token[] = [
     name: 'Yorkipoo',
     symbol: 'YORK',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/5K1JtWpdSksVKaL6R2DuLpCDAjzxK6sq2CpXaXDWHVLg/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0e4995f0-e5a8-44ec-3e6b-64e29a39df00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -3543,7 +3581,8 @@ export const tokenList: Token[] = [
     decimals: 6,
     name: 'Wrapped ALGO',
     symbol: 'xALGO',
-    logoURI: 'https://arweave.net/zZizaipiM5GvJ5upulPUzg9VW9bui0VaMCY6k1QyHgs',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/96ff476d-8eba-4c52-954d-e91726b69700/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'wrapped-algo',
@@ -3556,7 +3595,7 @@ export const tokenList: Token[] = [
     name: 'RIBBET',
     symbol: 'RIBBET',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/32gaR4rn9JyzoDVwMzZ5j3NgcHc5RQhMSJby55FFKnq3/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/29a44fa9-2fb1-4607-8410-1dc5a1807a00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -3566,7 +3605,7 @@ export const tokenList: Token[] = [
     name: 'BAT',
     symbol: 'BATT',
     logoURI:
-      'https://batt.finance/static/media/logo.6284c2cd472e1bacd3e5c370044f6a0e.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/58792753-cca5-4bf5-8b74-da7800713c00/public',
     tags: ['community'],
   },
   {
@@ -3575,7 +3614,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Vivaion Token',
     symbol: 'VIVAION',
-    logoURI: 'https://arweave.net/Xz7ErS3TZYmBnoh3OPkIQM_O6TPotyEJb6H5WFOe_qc',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/5aecb15a-98c6-4590-268f-f1eea2a9c000/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -3585,7 +3625,7 @@ export const tokenList: Token[] = [
     name: 'Solster',
     symbol: 'STR',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/9zoqdwEBKWEi9G5Ze8BSkdmppxGgVv1Kw4LuigDiNr9m/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/bae3c59c-102a-47ee-a8a1-df9d1ef9e200/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'solster',
@@ -3597,7 +3637,8 @@ export const tokenList: Token[] = [
     decimals: 6,
     name: 'Pink',
     symbol: 'PINK',
-    logoURI: 'https://arweave.net/_ZVGjmZaB-1kxDkJzamQFo-kxJD0Kl0NhVx8dowP5zE',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/99fd9c56-b464-4280-0ddf-81099d3eae00/public',
     tags: ['community', 'token-2022'],
   },
   {
@@ -3607,7 +3648,7 @@ export const tokenList: Token[] = [
     name: 'TabTrader Token',
     symbol: 'TTT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/FNFKRV3V8DtA3gVJN6UshMiLGYA8izxFwkNWmJbFjmRj/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1e2ff35e-03c8-4ae9-76aa-b2272a8ef300/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'tabtrader',
@@ -3620,7 +3661,7 @@ export const tokenList: Token[] = [
     name: 'Rally (Legacy - deprecated)',
     symbol: 'sRLY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/RLYv2ubRMDLcGG2UyvPmnPmkfuQTsMbg4Jtygc7dmnq/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/868b2fac-fafc-4465-1c28-cbaf7115eb00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -3630,7 +3671,7 @@ export const tokenList: Token[] = [
     name: 'Solpad Finance',
     symbol: 'SOLPAD',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/GfJ3Vq2eSTYf1hJP6kKLE9RT6u7jF9gNszJhZwo5VPZp/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/7ddb17d3-a159-4ffb-7400-07f711a4b800/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'solpad-finance',
@@ -3642,7 +3683,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Solareum',
     symbol: 'XSB',
-    logoURI: 'https://solareum.app/icons/XSB-G.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/365d01a6-9d9a-4b95-bca7-698cd5581300/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'solareum-wallet',
@@ -3655,7 +3697,7 @@ export const tokenList: Token[] = [
     name: 'Boryoku Dragonz',
     symbol: 'BOKU',
     logoURI:
-      'https://boryoku-dragonz-public.s3.us-east-2.amazonaws.com/BokuBrew.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/4d08f0e6-1eb7-4e8b-03e0-4781dc1f3400/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'boku',
@@ -3668,7 +3710,7 @@ export const tokenList: Token[] = [
     name: 'GEM',
     symbol: 'GEM',
     logoURI:
-      'https://bafkreifpm7rbwohp4yys2guyibfzqbctu3bist6zetmyq456om2rqvk544.ipfs.nftstorage.link/',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f0e8f9b8-bf2c-4f8a-e0a4-2f51550d9a00/public',
     tags: ['community', 'token-2022'],
   },
   {
@@ -3678,7 +3720,7 @@ export const tokenList: Token[] = [
     name: 'SolClout',
     symbol: 'SCT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/4Te4KJgjtnZe4aE2zne8G4NPfrPjCwDmaiEx9rKnyDVZ/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/15720a80-b1a0-4f50-7e07-129fb44b8c00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'solclout',
@@ -3690,7 +3732,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Mad Bears Club',
     symbol: 'MBC',
-    logoURI: 'https://arweave.net/7jp6IaYj-kCiCDuHzk-zJLf2wRctrhIa1m_PO0rQuig',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e796be36-8a2c-41d0-aaa3-1707c006c900/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'mad-bears-club-2',
@@ -3703,7 +3746,7 @@ export const tokenList: Token[] = [
     name: 'Swole Doge',
     symbol: 'SWOLE',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/4BzxVoBQzwKoqm1dQc78r42Yby3EzAeZmMiYFdCjeu5Z/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/3f6a5d00-4fb2-4ce3-a48d-ea1532cebf00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -3713,7 +3756,7 @@ export const tokenList: Token[] = [
     name: 'NIRV',
     symbol: 'NIRV',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/NRVwhjBQiUPYtfDT5zRBVJajzFQHaBUNtC7SNVvqRFa/NIRV.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/bc2e227c-ad4c-4caa-89f6-ef6766f8ff00/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'nirvana-nirv',
@@ -3726,7 +3769,7 @@ export const tokenList: Token[] = [
     name: 'pSOL (Parrot SOL)',
     symbol: 'pSOL',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/9EaLkQrbjmbbuZG9Wdpo8qfNUEjHATJFSycEmw6f1rGX/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1ee07c2e-7528-4621-f874-002831494100/public',
     tags: ['old-registry'],
   },
   {
@@ -3736,7 +3779,7 @@ export const tokenList: Token[] = [
     name: 'LP Finance DAO',
     symbol: 'LPFi',
     logoURI:
-      'https://raw.githubusercontent.com/LP-Finance-Inc/token-image/main/LPFiToken.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/beffd602-c737-4ff5-da0c-6f437dd58900/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'lp-finance',
@@ -3749,7 +3792,7 @@ export const tokenList: Token[] = [
     name: 'CoreStarter',
     symbol: 'CSTR',
     logoURI:
-      'https://raw.githubusercontent.com/CoreStarter/token-logo/main/corestarter_logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/2180b0d9-d129-4172-acc5-9d2771db1900/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'corestarter',
@@ -3762,7 +3805,7 @@ export const tokenList: Token[] = [
     name: 'Sola Token',
     symbol: 'SOLA',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/FYfQ9uaRaYvRiaEGUmct45F9WKam3BYXArTrotnTNFXF/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/5e00fdb6-dfdc-4b21-a564-b25f502f1400/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'sola-token',
@@ -3774,7 +3817,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'HolyGrails',
     symbol: 'HOLY',
-    logoURI: 'https://arweave.net/TDvr4xgh3VxmHG8GglxruoSwm41wkYOLPF7EBrhBiBY',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/cacf8fbd-573e-475f-314c-897c21948b00/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'holygrails-io',
@@ -3787,7 +3831,7 @@ export const tokenList: Token[] = [
     name: 'SolYard Finance',
     symbol: 'YARD',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/8RYSc3rrS4X4bvBCtSJnhcpPpMaAJkXnVKZPzANxQHgz/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/cc85b77d-acf7-4a58-45b0-9f3d799d4f00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'solyard-finance',
@@ -3799,7 +3843,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'BEAR',
     symbol: '$BEAR',
-    logoURI: 'https://arweave.net/7Qzb-BKL734z8w77fPNJ8lu3f6TtA87nbiw2A-qmCK0',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/110fe268-fdd9-4ad5-c473-e024d037ea00/public',
     tags: ['community'],
   },
   {
@@ -3809,7 +3854,7 @@ export const tokenList: Token[] = [
     name: 'Charactbit',
     symbol: 'CHB',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/6D4aGWykMymkFaeVzDS6MiH6QEujsHUze2pPGbJEyh7y/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/754cb3bd-8558-4857-0000-1f20bab31300/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'charactbit',
@@ -3821,7 +3866,8 @@ export const tokenList: Token[] = [
     decimals: 3,
     name: 'Mycelium McToken',
     symbol: 'TOKE',
-    logoURI: 'https://arweave.net/kVddfi0QG_NfS_cRQQ0vehEt7n25wVk3O4ilHaeidqY',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f1e4f8a6-e0ed-4d05-a197-508e529c1000/public',
     tags: ['community'],
   },
   {
@@ -3831,7 +3877,7 @@ export const tokenList: Token[] = [
     name: 'MILK',
     symbol: 'MILK',
     logoURI:
-      'https://www.arweave.net/HayHyYd_wWkVl0-LqTXKfBqxGTLnXkSB8wQwtbXe8c0?ext=png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/dfa7cf00-eeb0-46ff-e92f-adee9e916300/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'udder-chaos-milk',
@@ -3844,7 +3890,7 @@ export const tokenList: Token[] = [
     name: 'sRLY (Rally Solana)',
     symbol: 'sRLY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/RLYv2ubRMDLcGG2UyvPmnPmkfuQTsMbg4Jtygc7dmnq/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f1dce0af-8bcf-4cef-a348-334dd444a700/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'rally-solana',
@@ -3857,7 +3903,7 @@ export const tokenList: Token[] = [
     name: 'Gobi',
     symbol: 'GOBI',
     logoURI:
-      'https://arweave.net/uscHuZUd7GsiPIJz2zS_et6_boil-DhtF0zJdrX8hM8?ext=png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/62bef04d-0a1d-4475-545d-3f2d25bc3000/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'gobi-labs',
@@ -3870,7 +3916,7 @@ export const tokenList: Token[] = [
     name: 'XCOPE',
     symbol: 'XCOPE',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/3K6rftdAaQYMPunrtNRHgnK2UAtjm2JwyT2oCiTDouYE/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0187bf3f-77d7-4290-6478-b86f99bbe600/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -3892,7 +3938,7 @@ export const tokenList: Token[] = [
     name: 'Enrex',
     symbol: 'ENRX',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/5s4BYUXLuvs9ZcVDTxkTpKhThWFSpaU8GG55q2iySe2N/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/13d1f98b-ff45-43a5-1d04-5f8ebac9f700/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'enrex',
@@ -3905,7 +3951,7 @@ export const tokenList: Token[] = [
     name: 'Phil Overdrive | Youtube',
     symbol: 'POVT',
     logoURI:
-      'https://raw.githubusercontent.com/PhilOverdrive/Token/main/Logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/77e2c27b-2935-4e9e-c399-4cc6ef6dd700/public',
     tags: ['community'],
   },
   {
@@ -3915,7 +3961,7 @@ export const tokenList: Token[] = [
     name: 'YoloNolo Coin',
     symbol: 'YOLO',
     logoURI:
-      'https://nftstorage.link/ipfs/bafybeiepttutbes4mzojtmlvx3iqgwvs673czt5g7k7uoficx4vmjunmie/YOLO LOGO.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/90ad9d47-51d7-492d-5475-e592befcf100/public',
     tags: ['community'],
   },
   {
@@ -3925,7 +3971,7 @@ export const tokenList: Token[] = [
     name: 'APEX',
     symbol: 'APEX',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/51tMb3zBKDiQhNwGqpgwbavaGH54mk8fXFzxTc1xnasg/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0ffd30fe-dc55-40ed-1b40-9ebe18a95a00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'apexit-finance',
@@ -3938,7 +3984,7 @@ export const tokenList: Token[] = [
     name: 'Learning Star',
     symbol: 'LSTAR',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/D3yigvdWq6qobhAwQL6UiSide5W9W7zcJbuVvKa3T231/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/b550e450-0c9d-4d27-a5cb-28907970a200/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'learning-star',
@@ -3951,7 +3997,7 @@ export const tokenList: Token[] = [
     name: 'CORE',
     symbol: 'CORE',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/2x4fH7kWNgSLpBjCuFBKKKiNHMcJb6fHs8ahQZUWJj1p/Core.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d2385807-cf58-4d59-ca00-869b4242ad00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -3960,7 +4006,8 @@ export const tokenList: Token[] = [
     decimals: 6,
     name: 'JEFF',
     symbol: 'JEFF',
-    logoURI: 'https://arweave.net/Pi-s2vzZT8pfYVvFbNjgC0kSrW45PXb1_VPb5HoHuyI',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ec13e0bd-967d-4203-1b2e-78a0369ed300/public',
     tags: ['community', 'token-2022'],
   },
   {
@@ -3970,7 +4017,7 @@ export const tokenList: Token[] = [
     name: 'JPOOL Solana Token',
     symbol: 'JSOL',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/7Q2afV64in6N6SeZsAAB81TJzwDoD6zpqmHkzi9Dcavn/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/58e58487-47ad-4cef-235b-20a50a55ec00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'jpool',
@@ -3983,7 +4030,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped USDT (Allbridge from Polygon)',
     symbol: 'apUSDT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/BQcdHdAQW1hczDbBi9hiegXAR7A98Q9jx3X3iBBBDiq4/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/b1f170ea-d7df-47f6-f8d4-879bd51f5300/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'wrapped-usdt-allbridge-from-polygon',
@@ -3996,7 +4043,7 @@ export const tokenList: Token[] = [
     name: 'DINO',
     symbol: 'DINO',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/6Y7LbYB3tfGBG6CSkyssoxdtHb77AEMTRVXe8JUJRwZ7/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/39a47090-6dd9-40ef-fe05-0c2c3c198100/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'dino',
@@ -4022,7 +4069,7 @@ export const tokenList: Token[] = [
     name: 'Solberg',
     symbol: 'SLB',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/2uRFEWRBQLEKpLmF8mohFZGDcFQmrkQEEZmHQvMUBvY7/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/7a640e9a-5bcd-4688-c065-c1c60c426f00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'solberg',
@@ -4034,7 +4081,8 @@ export const tokenList: Token[] = [
     decimals: 10,
     name: 'BOOP',
     symbol: 'BOOP',
-    logoURI: 'https://arweave.net/2ArDrNlyF34gjZ7UdXmMVl_ET9igdcyDiAY-VFsw3ao',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/429c443c-6217-484b-cb57-ab92cb81db00/public',
     tags: ['community'],
   },
   {
@@ -4044,7 +4092,7 @@ export const tokenList: Token[] = [
     name: 'Nest Arcade',
     symbol: 'NESTA',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Czt7Fc4dz6BpLh2vKiSYyotNK2uPPDhvbWrrLeD9QxhV/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c362500f-5fa4-4c03-e9c1-b756e500da00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'nest-arcade',
@@ -4057,7 +4105,7 @@ export const tokenList: Token[] = [
     name: 'MetaMall',
     symbol: 'MALL',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/5EbpXhW7t8ypBF3Q1X7odFaHjuh7XJfCohXR3VYAW32i/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/dbf00cea-8eef-4dc0-14b0-d9feb9c6d900/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'metamall',
@@ -4069,7 +4117,8 @@ export const tokenList: Token[] = [
     decimals: 6,
     name: 'Dual DAO Token',
     symbol: 'DUAL',
-    logoURI: 'https://www.dual.finance/images/token-logos/dual.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/183e6d86-45d5-419a-9daf-8ce8c6699500/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'dual-finance',
@@ -4082,7 +4131,7 @@ export const tokenList: Token[] = [
     name: 'Saber Wrapped Bitcoin (Sollet) (8 decimals)',
     symbol: 'sBTC-8',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/SBTCB6pWqeDo6zGi9WVRMLCsKsN6JiR1RMUqvLtgSRv/icon.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/b5e9a41c-1d0f-4584-54b7-bbc21d41ad00/public',
     tags: ['old-registry'],
   },
   {
@@ -4091,7 +4140,8 @@ export const tokenList: Token[] = [
     decimals: 3,
     name: 'SCRAP',
     symbol: 'SCRAP',
-    logoURI: 'https://art.pixilart.com/bd1b1275fdc0ac1.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/6c69a75c-2e58-43ed-3241-52ba0e9d1800/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'scrap',
@@ -4104,7 +4154,7 @@ export const tokenList: Token[] = [
     name: 'Run Token',
     symbol: 'RUN',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/6F9XriABHfWhit6zmMUYAQBSy6XK5VF1cHXuW5LDpRtC/RunGear.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/3b9767f9-9070-4ef4-295e-76432d7e8f00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'run',
@@ -4117,7 +4167,7 @@ export const tokenList: Token[] = [
     name: 'Binance USD (Portal from Ethereum)',
     symbol: 'BUSDet',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/BUSDet_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/8f19873b-e4f7-426c-e104-e8bc439aa400/public',
     tags: ['wormhole', 'old-registry'],
   },
   {
@@ -4126,7 +4176,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Food Token',
     symbol: 'FOOD',
-    logoURI: 'https://arweave.net/mq0Euf7EQja8Hr1s7TvhfzLi5GeDWMe3ryvnNJItP3c',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/043b9aed-b18f-4fe9-acd8-c401984ae300/public',
     tags: ['community'],
   },
   {
@@ -4136,7 +4187,7 @@ export const tokenList: Token[] = [
     name: 'CRY Coin',
     symbol: 'CRYY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/56tNQ29XBrbovm5K5SThuQatjCy92w2wKUaUeQ8WCD9g/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e955a6ab-eca2-4ca2-aa41-11f9711c1900/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'cry-coin',
@@ -4149,7 +4200,7 @@ export const tokenList: Token[] = [
     name: 'SolChicks Shards',
     symbol: 'SHARDS',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/8j3hXRK5rdoZ2vSpGLRmXtWmW6iYaRUw5xVk4Kzmc9Hp/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d12c8edc-a771-45c5-9e2f-ac097a66fc00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'solchicks-shards',
@@ -4162,7 +4213,7 @@ export const tokenList: Token[] = [
     name: 'Solvent',
     symbol: 'SVT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/svtMpL5eQzdmB3uqK9NXaQkq8prGZoKQFNVJghdWCkV/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/6fabdd29-d15e-4483-8331-dd1382b6d600/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4172,7 +4223,7 @@ export const tokenList: Token[] = [
     name: 'Creamy',
     symbol: 'CREAMY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/CREAMpdDimXxj2zTCwP5wMEtba4NYaKCrTBEQTSKtqHe/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ea54365c-ed39-4ca9-7877-8924638ea200/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'creamy',
@@ -4185,7 +4236,7 @@ export const tokenList: Token[] = [
     name: 'Uniswap (Portal)',
     symbol: 'UNI',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/UNI_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9b892b28-3e5c-4c83-c139-3626454c8500/public',
     tags: ['wormhole', 'old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'uniswap-wormhole',
@@ -4221,7 +4272,8 @@ export const tokenList: Token[] = [
     decimals: 6,
     name: 'Synthetic USD',
     symbol: 'xUSD',
-    logoURI: 'https://www.synthetify.io/icons/xusd.svg',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/3dd9ce4d-d590-4c48-9b3c-02287a9bad00/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'synthetic-usd',
@@ -4234,7 +4286,7 @@ export const tokenList: Token[] = [
     name: 'Winerz',
     symbol: '$WNZ',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/WNZzxM1WqWFH8DpDZSqr6EoHKWXeMx9NLLd2R5RzGPA/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/750d7372-b69c-42a3-c4fc-e1e6e54bd100/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'winerz',
@@ -4247,7 +4299,7 @@ export const tokenList: Token[] = [
     name: 'NftEyez Coin',
     symbol: 'EYE',
     logoURI:
-      'https://raw.githubusercontent.com/NftEyez/assets/main/assets/eye-coin.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/29c641c1-8cfc-4d83-f12a-d63638c8c200/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'nfteyez',
@@ -4260,7 +4312,7 @@ export const tokenList: Token[] = [
     name: 'BULL',
     symbol: 'BULL',
     logoURI:
-      'https://shdw-drive.genesysgo.net/GVxcsjC2PMpAS1E6aVp78YH7FqpfqxPY1ujeqNduhD1f/bull.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/a59593d0-c623-447f-3713-ca0443c53100/public',
     tags: ['community'],
   },
   {
@@ -4270,7 +4322,7 @@ export const tokenList: Token[] = [
     name: 'Saber Wrapped Wrapped FTT (Sollet) (9 decimals)',
     symbol: 'sFTT-9',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/FTT9rBBrYwcHam4qLvkzzzhrsihYMbZ3k6wJbdoahxAt/icon.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/8ddcf293-d6e9-4474-9084-46c935447100/public',
     tags: ['old-registry'],
   },
   {
@@ -4280,7 +4332,7 @@ export const tokenList: Token[] = [
     name: 'VOID Token',
     symbol: 'VOID',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/DjPt6xxMoZx1DyyWUHGs4mwqWWX48Fwf6ZJgqv2F9qwc/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9af4a091-b8e9-4871-6cb1-df2b3f033700/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'void-games',
@@ -4293,7 +4345,7 @@ export const tokenList: Token[] = [
     name: 'Particle',
     symbol: 'PART',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/AVKnbqNQgXDY8kbnno9eSGfwpVz5idimBnDKiz1vbWAh/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/733a3714-89b0-4d7f-4964-af6b8cb24b00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'particle-technology',
@@ -4306,7 +4358,7 @@ export const tokenList: Token[] = [
     name: 'Cykura',
     symbol: 'CYS',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/BRLsMczKuaR5w9vSubF4j8HwEGGprVAyyVgS4EX7DKEg/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9fef48d4-0f7b-4fa4-5f86-5366c24a5c00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'cyclos',
@@ -4318,7 +4370,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Deo',
     symbol: 'DEO',
-    logoURI: 'https://arweave.net/RuNPo7tAR05f_7g_Yz36NMyVKHAFrOXjIEKPtOZx2Qc',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/79f59b0d-ca19-4f7c-8349-be9740eb5a00/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'player-2',
@@ -4331,7 +4384,7 @@ export const tokenList: Token[] = [
     name: 'Seeded Network',
     symbol: 'SEEDED',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/seedEDBqu63tJ7PFqvcbwvThrYUkQeqT6NLf81kLibs/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/a6068dbf-6f71-4bbe-5580-dbaa21277b00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'seeded-network',
@@ -4344,7 +4397,7 @@ export const tokenList: Token[] = [
     name: 'Frax (Portal)',
     symbol: 'FRAX',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/FRAX_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/4a1a6ec1-64bc-47ab-764c-b580541e5f00/public',
     tags: ['wormhole', 'old-registry'],
     extensions: {
       coingeckoId: 'frax',
@@ -4356,7 +4409,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Nasi Lemak',
     symbol: 'NLTK',
-    logoURI: 'https://raw.githubusercontent.com/avaelon/nltk/main/logo.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/013958d6-02ff-4276-dcb7-01aa72ac2b00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4366,7 +4420,7 @@ export const tokenList: Token[] = [
     name: 'StayFly',
     symbol: '$FLY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/4h4LvS6NsVjZ87uBwrYyTeppTm1ii5PtRN9A6Ld2kZjw/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/a417a66d-4f87-44c2-e181-d90264ad5200/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4375,7 +4429,8 @@ export const tokenList: Token[] = [
     decimals: 7,
     name: 'GM Solana',
     symbol: 'GM',
-    logoURI: 'https://cdn.jsdelivr.net/gh/brendanhernou/gm/GMSolana.jpg',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/20e7500e-92f3-4de0-684e-c50cac221500/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4385,7 +4440,7 @@ export const tokenList: Token[] = [
     name: 'Solanium Ecosystem Index',
     symbol: 'SEI',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/CRkwd2QedqDi5u6W2w6jeAViAUd1pR4AXs2aKvh7GW7M/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/6c8e51ae-70f4-4117-a1cb-7faeebaaf700/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4395,7 +4450,7 @@ export const tokenList: Token[] = [
     name: 'RAD',
     symbol: 'RAD',
     logoURI:
-      'https://raw.githubusercontent.com/NFTBrickLayer/zillaz-assets/main/RAD-logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/6d6b3174-97fb-47f7-9e43-3aafe983c100/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'rad',
@@ -4408,7 +4463,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped Chainlink (Sollet)',
     symbol: 'soLINK',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/CWE8jPTUYhdCTZYWPTe1o5DFqfdjzWKc9WKz6rSjQUdG/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/2bb314e7-6d46-4af7-df61-f2872e84a500/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4418,7 +4473,7 @@ export const tokenList: Token[] = [
     name: 'QUACK',
     symbol: 'QUACK',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/GP9zY2D8CgMreoUdYQjyn7Fo7XCq9ubVnX3u4ot1wpgt/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c216f3cf-c1f4-41bb-3e14-4980f9f07e00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4428,7 +4483,7 @@ export const tokenList: Token[] = [
     name: 'DINOEGG',
     symbol: 'DINOEGG',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/2TxM6S3ZozrBHZGHEPh9CtM74a9SVXbr7NQ7UxkRvQij/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/209e44d2-58c2-43d0-e97d-3268759eeb00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'dinoegg',
@@ -4441,7 +4496,7 @@ export const tokenList: Token[] = [
     name: 'Pussy',
     symbol: 'PUSSY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/BjTUmZjNUUAPKHVdTs8yZsCmecW5isSK4AbuFihXoUwa/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/bc14a10f-1c1b-40b1-e003-d43c700e4f00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4451,7 +4506,7 @@ export const tokenList: Token[] = [
     name: 'SouloCoin',
     symbol: 'SOULO',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Gz3u6eJaKEviYpPC5AwUziz891kNX76PNdsmJrnaNNY4/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/2af30ff7-0e69-4575-459a-461e71250e00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'soulocoin',
@@ -4463,7 +4518,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Froggo',
     symbol: 'Froggo',
-    logoURI: 'https://froggotoken.com/token_logo.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/014876d4-05eb-4fac-4cd7-308672259500/public',
     tags: ['community'],
   },
   {
@@ -4482,7 +4538,7 @@ export const tokenList: Token[] = [
     name: 'Super Mario',
     symbol: 'MARIO',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/7rmV64vLfbrbS5rTFvojYWzCVEn8dnJ9RfSRx3nD6C5E/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1c3a3bc6-e2f8-4ef5-a022-00f9ffbe8700/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4492,7 +4548,7 @@ export const tokenList: Token[] = [
     name: 'Epics Token',
     symbol: 'EPCT',
     logoURI:
-      'https://bafybeibal7k2hz6frznyjbl4qcnzcwlsuzxmquatrsaly6ttmuppgmdvwe.ipfs.dweb.link/EpicsCoin.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/539b5383-7bfa-4215-89f8-f80134b1b100/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'epics-token',
@@ -4505,7 +4561,7 @@ export const tokenList: Token[] = [
     name: 'Project Paradise - CHI Token',
     symbol: 'CHI',
     logoURI:
-      'https://raw.githubusercontent.com/benthebape/projekt-paradise-chi-token/main/Moneda_1.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0014be88-33e5-4b1e-0b04-670a900de700/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4514,7 +4570,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'solana green',
     symbol: 'green',
-    logoURI: 'https://arweave.net/W68r4cNKbj0t_GRf1km_e9nzm4BLfspy0X-yX8mh4fQ',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d85db1ef-2a1a-4db6-b941-68ce117afd00/public',
     tags: ['community'],
   },
   {
@@ -4524,7 +4581,7 @@ export const tokenList: Token[] = [
     name: 'NINJA',
     symbol: 'NINJA',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/FgX1WD9WzMU3yLwXaFSarPfkgzjLb2DZCqmkx9ExpuvJ/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d3e5a349-13f5-4e32-f7d3-726b1219e400/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'ninja-protocol',
@@ -4537,7 +4594,7 @@ export const tokenList: Token[] = [
     name: 'Axie Infinity Shard (Portal from Ethereum)',
     symbol: 'AXSet',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/AXSet_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/54b031ef-5736-4ef0-e945-7d31818baf00/public',
     tags: ['wormhole', 'old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'axie-infinity-shard-wormhole',
@@ -4550,7 +4607,7 @@ export const tokenList: Token[] = [
     name: 'VentureCapital',
     symbol: 'VCC',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/FZgL5motNWEDEa24xgfSdBDfXkB9Ru9KxfEsey9S58bb/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/a0633bfc-e273-4ed2-7e05-ceb9b20a4b00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4560,7 +4617,7 @@ export const tokenList: Token[] = [
     name: 'Oxbull Sol',
     symbol: 'OXS',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/4TGxgCSJQx2GQk9oHZ8dC5m3JNXTYZHjXumKAW3vLnNx/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/6bd7ec40-d379-4328-2c67-047f586f0a00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'oxbull-solana',
@@ -4572,7 +4629,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'GameYoo Token',
     symbol: 'GYC',
-    logoURI: 'https://raw.githubusercontent.com/gameyoo/materials/main/gyc.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/db01dd6a-60cb-4a8f-9bd8-390409313700/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4582,7 +4640,7 @@ export const tokenList: Token[] = [
     name: 'Starbots Token',
     symbol: 'BOT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/AkhdZGVbJXPuQZ53u2LrimCjkRP6ZyxG1SoM85T98eE1/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/4d20c1b5-54ea-4dc0-6895-30addcfa6200/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'starbots',
@@ -4595,7 +4653,7 @@ export const tokenList: Token[] = [
     name: 'Lost At Sea WAVE',
     symbol: 'WAVE',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/GS6E87SLTioRDG3uSVRwQmuKKMxDmWU7fktCTJ5xkEM8/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/b731b590-88d4-4bbf-befb-0a128685b200/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4605,7 +4663,7 @@ export const tokenList: Token[] = [
     name: 'SolanaLite',
     symbol: 'SLITE',
     logoURI:
-      'https://raw.githubusercontent.com/SolanaLite/SolanaLite-Brand-Kit/main/SolanaLite%20(SLITE)%20Logo%20Solana%20Blockchain.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1a04d70f-ac18-4e17-38ba-c1f4062eb300/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4614,7 +4672,8 @@ export const tokenList: Token[] = [
     decimals: 4,
     name: 'OPOS Coin',
     symbol: 'OPOS',
-    logoURI: 'https://arweave.net/fivrynPZdJv5ajd4d1TXW1yHArDA-RvkYYfDoh-_4EU',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/125cdb3d-5bb9-4fee-5ffa-95b99dc1a400/public',
     tags: ['community'],
   },
   {
@@ -4624,7 +4683,7 @@ export const tokenList: Token[] = [
     name: 'Maneki-neko',
     symbol: 'NEKI',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/ALKiRVrfLgzeAV2mCT7cJHKg3ZoPvsCRSV7VCRWnE8zQ/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/193e9148-cfb1-4683-5a40-9427e6986600/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'maneki-neko',
@@ -4637,7 +4696,7 @@ export const tokenList: Token[] = [
     name: 'Astrals GLXY',
     symbol: 'GLXY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/CJ5U6wPmjxFUyTJpUTS7Rt1UqhTmSVRMvmJ8WD4nndXW/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d90db250-b6b3-469b-0d1c-e41ae31a4300/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'astrals-glxy',
@@ -4649,7 +4708,8 @@ export const tokenList: Token[] = [
     decimals: 6,
     name: 'ROL',
     symbol: 'ROL',
-    logoURI: 'https://assets.blockstars.gg/static/ROL.svg',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/97adbe41-21de-4e78-4853-4e971b448f00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4659,7 +4719,7 @@ export const tokenList: Token[] = [
     name: 'Shibana',
     symbol: 'BANA',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/BhPXDQio8xtNC6k5Bg5fnUVL9kGN8uvRDNwW8MZBu8DL/Shibana.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/cbc725d2-adc5-4379-fffe-89318d168e00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'shibana',
@@ -4672,7 +4732,7 @@ export const tokenList: Token[] = [
     name: 'UPS token (UPFI Network)',
     symbol: 'UPS',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EwJN2GqUGXXzYmoAciwuABtorHczTA5LqbukKXV1viH7/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d825bc23-b084-4e77-c8e3-2496eb8e4200/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'upfi-network',
@@ -4685,7 +4745,7 @@ export const tokenList: Token[] = [
     name: 'Glitter Finance',
     symbol: 'XGLI',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/FsPncBfeDV3Uv9g6yyx1NnKidvUeCaAiT2NtBAPy17xg/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/5540284b-eae4-4d64-4449-ff73abec9a00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'glitter-finance',
@@ -4698,7 +4758,7 @@ export const tokenList: Token[] = [
     name: 'Bitch Of Solana',
     symbol: 'BITCH',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/AMNoi4727tzy7adu4wnx3cN2VQbQdG71DqaPoSm7isJ3/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/3a551014-893e-48ee-9cb8-78f1f3cd4200/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4708,7 +4768,7 @@ export const tokenList: Token[] = [
     name: 'DARC Token',
     symbol: 'DARC',
     logoURI:
-      'https://raw.githubusercontent.com/Konstellation/DARC_token/main/256darctoken.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/01d0e261-50cf-447c-bee8-448308e01c00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'darcmatter-coin',
@@ -4720,7 +4780,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'WipeMyAss',
     symbol: 'WIPE',
-    logoURI: 'https://cdn.jsdelivr.net/gh/rxrxrxrx/WipeMyAss/wipemyass.jpg',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/233e88f8-bd00-4032-66c6-3cf15d0c3f00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'wipemyass',
@@ -4733,7 +4794,7 @@ export const tokenList: Token[] = [
     name: 'ᗪOᖇK ᒪOᖇᗪ',
     symbol: 'DORKL',
     logoURI:
-      'https://bafkreicufnhs5evfdochjopzpjaeuxoh5s6uhyl54dlfeb2cm4bqjfi4dq.ipfs.nftstorage.link',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/20598f08-cf49-4b95-8620-5b0c8db2de00/public',
     tags: ['community'],
   },
   {
@@ -4743,7 +4804,7 @@ export const tokenList: Token[] = [
     name: 'ANA',
     symbol: 'ANA',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/ANAxByE6G2WjFp7A4NqtWYXb3mgruyzZYg3spfxe6Lbo/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/01c9058c-f38c-4791-f03a-13b8144f2100/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'nirvana-ana',
@@ -4769,7 +4830,7 @@ export const tokenList: Token[] = [
     name: 'Million Monke',
     symbol: 'MIMO',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/9TE7ebz1dsFo1uQ2T4oYAKSm39Y6fWuHrd6Uk6XaiD16/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ff245951-442b-4290-09d6-fbdf8b1c2000/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'million-monke',
@@ -4782,7 +4843,7 @@ export const tokenList: Token[] = [
     name: 'SOL100',
     symbol: 'SOL100',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/GkDg1ZfoFkroLAwLqtJNXhxCDg8gmKxHAGxSUZagYFfE/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/2209e1c2-677e-4ab8-b25a-d7a0542d5400/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4792,7 +4853,7 @@ export const tokenList: Token[] = [
     name: 'RING',
     symbol: 'RING',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/7SEsxCsiNiYqCpYG16wx4c9u2YGLZphnEFTAU9ENAizD/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/6437cb53-5876-4314-2b41-629635f08800/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4801,7 +4862,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'SOUL',
     symbol: 'SOUL',
-    logoURI: 'https://arweave.net/ipj9IdEAQAXt0LS6lOt7jQY7W4iazsVFBkN60U7M4iQ',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d5405865-f41d-4f8f-252c-1897e928cf00/public',
     tags: ['community'],
   },
   {
@@ -4811,7 +4873,7 @@ export const tokenList: Token[] = [
     name: 'vBLSH',
     symbol: 'vBLSH',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/FNMLmBPkhh7nBFyGHsdrmCuvgEf6ygpaVqFejimHEx9V/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/581c89fe-990d-4b68-f94b-37e62cb29e00/public',
     tags: ['community', 'solana-fm'],
   },
   {
@@ -4820,7 +4882,8 @@ export const tokenList: Token[] = [
     decimals: 6,
     name: 'Atellix',
     symbol: 'ATX',
-    logoURI: 'https://media.atellix.net/token/atx.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ff8cfa48-195a-4cd3-d561-567aee205b00/public',
     tags: ['community'],
   },
   {
@@ -4830,7 +4893,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped Capsule Coin (Wormhole v1)',
     symbol: 'wCAPS_v1',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/FeLoyXk8ac2AYVmDhAWEKNWWT63Z9TczeidYbpDvxF3T/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/df1dd15f-fec4-4ad6-4125-d1c916153700/public',
     tags: ['old-registry'],
   },
   {
@@ -4840,7 +4903,7 @@ export const tokenList: Token[] = [
     name: 'BITXBIT',
     symbol: 'BITXBIT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/DK6PWMyuZ4NMjsm9AWNCTMKrajQYrtfMjMJ3QauX2UH5/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1e0a23c6-39c4-4c7c-4609-cb9723ecde00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4850,7 +4913,7 @@ export const tokenList: Token[] = [
     name: 'Crypt',
     symbol: '$CRYPT',
     logoURI:
-      'https://aql3kfuqpqpkdchvrzuwyx6pdnjw6p6pualx7kie5erqalavewgq.arweave.net/BBe1FpB8HqGI9Y5pbF_PG1NvP8-gF3-pBOkjACwVJY0?ext=png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/8bcc8ba4-da09-4b76-cd66-cdd6a40bd400/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'secret-skellies-society',
@@ -4862,7 +4925,8 @@ export const tokenList: Token[] = [
     decimals: 2,
     name: 'ACF Game',
     symbol: 'ACF',
-    logoURI: 'https://shop.alienchickenfarm.com/logos/acf-token.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/88cd61f0-920a-4b5f-3adb-8ba47b531700/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'alien-chicken-farm',
@@ -4875,7 +4939,7 @@ export const tokenList: Token[] = [
     name: 'Solana Condoms',
     symbol: 'CONDOMS',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EzL6LLmv4vgfF7irkjG7ZxM92bTJ9f6nFopDXJTow7zj/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/06ead16c-a44b-406b-abbf-e46d4f475400/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4885,7 +4949,7 @@ export const tokenList: Token[] = [
     name: 'DragonWar',
     symbol: 'DRAW',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/48AEwauAHsJibyt3WqjQ6EoHnFBcnyHASfo7vB2eCXPS/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f25ffc0f-998a-44ad-1ea7-7a3247e4d700/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'dragon-war',
@@ -4898,7 +4962,7 @@ export const tokenList: Token[] = [
     name: 'TOYPOODLE COIN',
     symbol: 'TPC',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/5WWRMYPchxgh3VmYGPqoq2kfzCtBLxXB9vFH2TeFeR9m/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/da308e2f-d9dc-400d-0f4e-a99fbc73bf00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4908,7 +4972,7 @@ export const tokenList: Token[] = [
     name: 'FUJI',
     symbol: 'FUJI',
     logoURI:
-      'https://raw.githubusercontent.com/MarkSackerberg/token-list/main/assets/mainnet/fujiCeCeP9AFDVCv27P5JRcKLoH7wfs2C9xmDECs24m/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/10a3a0d2-03e4-46d4-3767-2536901efb00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4917,7 +4981,8 @@ export const tokenList: Token[] = [
     decimals: 5,
     name: 'BABS',
     symbol: 'BABS',
-    logoURI: 'https://iili.io/HaOytTu.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/49c82584-112e-45c2-44d4-632583dc1600/public',
     tags: ['community'],
   },
   {
@@ -4926,7 +4991,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'ProtoReality Games Token',
     symbol: 'PRGC',
-    logoURI: 'https://www.protorealitygames.com/images/PRGC_Token.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/7545724f-b8af-4244-6fcd-831cf0af0d00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4936,7 +5002,7 @@ export const tokenList: Token[] = [
     name: 'tudaBirds Token',
     symbol: 'BURD',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Qikhhhg9Ta3Jg7WoDFbSYuCAE14hx9hPvdz1zVp3zUw/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/28dba361-42e4-4706-fa31-207e23425d00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'tudabirds',
@@ -4949,7 +5015,7 @@ export const tokenList: Token[] = [
     name: 'MOAR GAINZ',
     symbol: 'MOAR',
     logoURI:
-      'https://bafkreidv3a37niwg56nytrh2dijfs3vqzebedww6dt5fp2kr46pst7kyui.ipfs.nftstorage.link',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/78bdc0fc-e771-40a6-d52c-b43325405c00/public',
     tags: ['community', 'token-2022'],
   },
   {
@@ -4959,7 +5025,7 @@ export const tokenList: Token[] = [
     name: 'TOKAMAK ON SOLANA',
     symbol: 'TKMK',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/TKMKgSh3aADsmjr4yFWG52tkCQvmDxsQC1he1aBsi65/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c6916674-90b8-47ce-c798-f50e00ec9c00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4969,7 +5035,7 @@ export const tokenList: Token[] = [
     name: 'Phantasia',
     symbol: 'FANT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/FANTafPFBAt93BNJVpdu25pGPmca3RfwdsDsRrT3LX1r/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0a2b5fd7-71c6-424a-c7c1-264222ea8300/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4979,7 +5045,7 @@ export const tokenList: Token[] = [
     name: 'BAIL COIN',
     symbol: 'BAIL',
     logoURI:
-      'https://raw.githubusercontent.com/ApeLabsNFT/solpatrol/main/hammer.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/fd9f9611-0518-4e4f-c3f1-4ee93a92b100/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4989,7 +5055,7 @@ export const tokenList: Token[] = [
     name: 'SunnySideUp staked SOL (sSOL)',
     symbol: 'sSOL',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/8EDaoeBqpcVACwvkYXh1vAcU29HiBiNhqoF4pRsuUsZS/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ae0801c3-6c4d-4d73-c920-22268cfd6700/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -4998,7 +5064,8 @@ export const tokenList: Token[] = [
     decimals: 6,
     name: 'DBank Coin',
     symbol: 'DBC',
-    logoURI: 'https://arweave.net/g4a4JTGvXRxWYFIkuJtyEIDdIp2b487R_2YdTSUreXM',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/63a30e2c-0a4c-4b50-4272-51279b9a7500/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5008,7 +5075,7 @@ export const tokenList: Token[] = [
     name: 'Decentraland (Portal)',
     symbol: 'MANA',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/MANA_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/90469f4c-4865-4a95-d895-c982935a6400/public',
     tags: ['wormhole', 'old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'decentraland-wormhole',
@@ -5021,7 +5088,7 @@ export const tokenList: Token[] = [
     name: 'Cricket Star Manager',
     symbol: 'CSM',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EzfnjRUKtc5vweE1GCLdHV4MkDQ3ebSpQXLobSKgQ9RB/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0362c966-bd64-4318-015d-76b7330ced00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'cricket-star-manager',
@@ -5034,7 +5101,7 @@ export const tokenList: Token[] = [
     name: 'ASTRALIS',
     symbol: 'ASTRALIS',
     logoURI:
-      'https://shdw-drive.genesysgo.net/AcG1tjtJ3vR1XzSCcVArheGLrwmMsphqExa6VodLymGF/astralis_1500x1500_8bit.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/6e11c991-34b4-43cd-2963-04f347017700/public',
     tags: ['community'],
   },
   {
@@ -5044,7 +5111,7 @@ export const tokenList: Token[] = [
     name: 'BIJU',
     symbol: 'BIJU',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/4onzDs1X6ubktirorHB8iYbve3K4bBtkGpYehqzGm9So/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/161aba06-ecda-465c-67ec-3fe1dbb3af00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5054,7 +5121,7 @@ export const tokenList: Token[] = [
     name: 'Synchrony',
     symbol: 'SCY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/SCYfrGCw8aDiqdgcpdGjV6jp4UVVQLuphxTDLNWu36f/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/b88ef1f8-2d29-411f-1d2b-093e34689300/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'synchrony',
@@ -5067,7 +5134,7 @@ export const tokenList: Token[] = [
     name: 'Soltato FRIES',
     symbol: 'FRIES',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/FriCEbw1V99GwrJRXPnSQ6su2TabHabNxiZ3VNsVFPPN/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/93642e16-efe9-4df9-5a35-297952404800/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'soltato-fries',
@@ -5079,7 +5146,8 @@ export const tokenList: Token[] = [
     decimals: 6,
     name: 'HRHC Token',
     symbol: 'ROLL',
-    logoURI: 'https://hrhc.io/images/logo.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/a5d65d1a-f60a-427a-0921-006c02764c00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'high-roller-hippo-clique',
@@ -5092,7 +5160,7 @@ export const tokenList: Token[] = [
     name: 'sunSBR',
     symbol: 'sunSBR',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/sunSBR8hRLZy13HCHdrT3hjJZVRpkVfXF3QaaJYjxZ2/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/99666423-535d-462b-a4bf-e289c3ae5a00/public',
     tags: ['community'],
   },
   {
@@ -5102,7 +5170,7 @@ export const tokenList: Token[] = [
     name: 'Saber Wrapped Ethereum (Sollet) (8 decimals)',
     symbol: 'sETH-8',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/SL819j8K9FuFPL84UepVcFkEZqDUUvVzwDmJjCHySYj/icon.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/a0401d64-95c0-48da-3f32-38114c27c300/public',
     tags: ['old-registry'],
   },
   {
@@ -5112,7 +5180,7 @@ export const tokenList: Token[] = [
     name: 'Chimp',
     symbol: 'CHIMP',
     logoURI:
-      'https://raw.githubusercontent.com/tsbsoltn/soltn/main/chimp/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/8bd20625-3fff-4887-2aeb-36ea15d5b800/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5122,7 +5190,7 @@ export const tokenList: Token[] = [
     name: 'DarleyGo Essence',
     symbol: 'DGE',
     logoURI:
-      'https://raw.githubusercontent.com/DarleyGo/token-list/main/assets/mainnet/AAXng5czWLNtTXHdWEn9Ef7kXMXEaraHj2JQKo7ZoLux/icon.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c20b6ca8-aac3-44e9-40eb-d79eaf3d1300/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'darleygo-essence',
@@ -5135,7 +5203,7 @@ export const tokenList: Token[] = [
     name: 'QDOT',
     symbol: 'QDOT',
     logoURI:
-      'https://www.arweave.net/qyhe_8Lmd82_NWRwxdfPX0fm_CItn18KXV1Skp-x6N0?ext=jpg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d15b590d-f0c0-49a7-f55c-906624ae4200/public',
     tags: ['old-registry'],
   },
   {
@@ -5145,7 +5213,7 @@ export const tokenList: Token[] = [
     name: 'Saber Wrapped Ether (Portal) (9 decimals)',
     symbol: 'swhETH-9',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/KNVfdSJyq1pRQk9AKKv1g5uyGuk6wpm4WG16Bjuwdma/icon.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/fcc6ea97-5368-45d1-7de8-406e994ebc00/public',
     tags: ['old-registry'],
   },
   {
@@ -5155,7 +5223,7 @@ export const tokenList: Token[] = [
     name: 'RICE',
     symbol: 'RICE',
     logoURI:
-      'https://raw.githubusercontent.com/kakasonz112/robocock-token/main/assets/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f87c2434-4aa1-4f3d-f95e-929e8f976b00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5165,7 +5233,7 @@ export const tokenList: Token[] = [
     name: 'Gosu',
     symbol: 'GOSU',
     logoURI:
-      'https://raw.githubusercontent.com/jGosu/gosu/main/GOSU%20COIN.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/2213b315-88cb-4810-aa43-7c78c22e1d00/public',
     tags: ['old-registry'],
   },
   {
@@ -5175,7 +5243,7 @@ export const tokenList: Token[] = [
     name: 'SuperBonds Token',
     symbol: 'SB',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/SuperbZyz7TsSdSoFAZ6RYHfAWe9NmjXBLVQpS8hqdx/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d837b0aa-1b52-4f6f-6d25-be06b49c6a00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5185,7 +5253,7 @@ export const tokenList: Token[] = [
     name: 'Serum (Portal from Ethereum)',
     symbol: 'SRMet',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/SRMet_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/65642abc-9ba1-40d7-f453-632faa019d00/public',
     tags: ['wormhole', 'old-registry'],
   },
   {
@@ -5195,7 +5263,7 @@ export const tokenList: Token[] = [
     name: 'HEX (Wormhole v1)',
     symbol: 'wHEX_v1',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/ELSnGFd5XnSdYFFSgYQp7n89FEbDqxN4npuRLW4PPPLv/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c9d08620-54f0-4a0b-a2fb-2bce1b80c900/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5205,7 +5273,7 @@ export const tokenList: Token[] = [
     name: 'Positron',
     symbol: 'POT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/9iz45n44TQUPyoRymdZXEunqvZUksZyhzS6zQ7sLMadj/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9c576c21-6d7f-4e72-9a76-af5a41b19300/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'positron-token',
@@ -5218,7 +5286,7 @@ export const tokenList: Token[] = [
     name: 'Matrix Solana Index',
     symbol: 'MSI',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/2e7yNwrmTgXp9ABUmcPXvFJTSrEVLj4YMyrb4GUM4Pdd/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/5fb2d9a4-4925-438f-2485-682a33faf700/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5228,7 +5296,7 @@ export const tokenList: Token[] = [
     name: 'everwave',
     symbol: 'WVE',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/33MJjPS6H7P2nwD648uiTiUu8v5fJ1zKyjnVqeWZ344F/logo.jpg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/fdda4038-d3c3-44d9-6135-2575f6b67300/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5238,7 +5306,7 @@ export const tokenList: Token[] = [
     name: 'Jungle DeFi',
     symbol: 'JFI',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/GePFQaZKHcWE5vpxHfviQtH5jgxokSs51Y5Q4zgBiMDs/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/cc625114-6ff5-429c-6969-c435cbb04500/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'jungle-defi',
@@ -5251,7 +5319,7 @@ export const tokenList: Token[] = [
     name: 'Luna Yield',
     symbol: 'LUNY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/7a4cXVvVT7kF6hS5q5LDqtzWfHfys4a9PoK6pf87RKwf/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/3bfadc25-eb0e-4386-75c9-9e720e3f8100/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5271,7 +5339,7 @@ export const tokenList: Token[] = [
     name: 'Pixels.so Token',
     symbol: 'PIXL',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/5L2YboFbHAUpBDDJjvDB5M6pu9CW2FRjyDB2asZyvjtE/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/5e76b56a-c440-4aa6-5465-9649a7ad9500/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5281,7 +5349,7 @@ export const tokenList: Token[] = [
     name: 'Spore',
     symbol: 'SPORE',
     logoURI:
-      'https://bafkreidodmcqrprsgoelphtr5vyqintuqscwixqfh6ndaqurvp2mnnx2h4.ipfs.nftstorage.link/',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/8021b2ab-23a7-4efc-8e11-fee633965100/public',
     tags: ['community'],
   },
   {
@@ -5300,7 +5368,7 @@ export const tokenList: Token[] = [
     name: 'Parasol',
     symbol: 'PSOL',
     logoURI:
-      'https://raw.githubusercontent.com/parasol-finance/white-paper/main/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f1e627bb-34a2-4729-3d2e-ff6e9b8e0900/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'parasol-finance',
@@ -5313,7 +5381,7 @@ export const tokenList: Token[] = [
     name: 'Saber Wrapped Wrapped FTT (Sollet) (8 decimals)',
     symbol: 'ssoFTT-8',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/FTT8cGNp3rfTC6c44uPTuEFLqmsVDhjd2BhH65v2uppr/icon.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/711cb050-936c-4472-e903-13756eb7bb00/public',
     tags: ['old-registry'],
   },
   {
@@ -5323,7 +5391,7 @@ export const tokenList: Token[] = [
     name: 'Mikuko Token',
     symbol: 'Miku',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/7GNyprqrpvJHNwzWSj4KVkqw9cKyV5aR3ehM2HeE5pw/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ff32ebfe-9b9a-4a55-d288-b7ee7c838400/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5333,7 +5401,7 @@ export const tokenList: Token[] = [
     name: 'UNKN',
     symbol: 'UNKN',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/unknXbA1bDg39nuBqVgMNZ5qSZa8pw5HditgkPe5eFA/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f7028664-9735-4d3b-4078-592e0a9c0400/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5343,7 +5411,7 @@ export const tokenList: Token[] = [
     name: 'The Ticket Finance',
     symbol: 'TICKET',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/AymKzSDznoLT7Vhsb4wSRnCj1gjcG3zkgYFY8fxsHHer/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/631935d5-03bd-4f9f-38e5-d4df4fb8f000/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5353,7 +5421,7 @@ export const tokenList: Token[] = [
     name: 'OOINK',
     symbol: 'OOINK',
     logoURI:
-      'https://raw.githubusercontent.com/danvernon/tiny-dogz-logo/main/oink.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/bf61ca77-5aae-483b-b3c0-9aacf8015f00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5363,7 +5431,7 @@ export const tokenList: Token[] = [
     name: 'Chimp Frens',
     symbol: 'FRENS',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/HNm1VgnyhaMZZF71RjNFNiYLN76zyZTDcBZPjYveWFXX/chimp.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f31bd39e-7017-4fd0-e534-6882ee401b00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5381,7 +5449,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Hunter Diamond',
     symbol: 'HUNT',
-    logoURI: 'https://tokenhunters.app/assets/img/icons/chest-close.svg',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/5b7d44ed-5233-4620-d36a-9c77b1faeb00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5401,7 +5470,7 @@ export const tokenList: Token[] = [
     name: 'FakeBiz',
     symbol: 'FBZ',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/BKydRTNdaMJ8B4zPva3YhwUQcpvAsyZaGJnKA6F44fX7/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9f716b53-ae9d-4b64-fd75-3f48b6609f00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5410,7 +5479,8 @@ export const tokenList: Token[] = [
     decimals: 2,
     name: 'FEED on ACF Game',
     symbol: 'FEED',
-    logoURI: 'https://shop.alienchickenfarm.com/logos/feed-token.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/a1058d6b-3074-44d4-884a-7d426e921a00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5420,7 +5490,7 @@ export const tokenList: Token[] = [
     name: 'DevCoin',
     symbol: 'DEV',
     logoURI:
-      'https://raw.githubusercontent.com/thedevdojo/devcoin/main/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0c0476f9-f2f2-4606-fb4a-cb97e7f0b000/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5430,7 +5500,7 @@ export const tokenList: Token[] = [
     name: 'SPACEGOLD',
     symbol: 'SPACEGOLD',
     logoURI:
-      'https://raw.githubusercontent.com/cosmic-condos/SPACEGOLD/main/logo-icon.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ae5e46c4-e56e-43e4-5bb9-eafd81015500/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5440,7 +5510,7 @@ export const tokenList: Token[] = [
     name: 'Eversol staked SOL',
     symbol: 'eSOL',
     logoURI:
-      'https://raw.githubusercontent.com/everstake/solana-program-library/master/stake-pool/static-content/images/esol_token.jpg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1308a5ed-4fd1-44ed-d636-fb93dcfd2100/public',
     tags: ['old-registry'],
   },
   {
@@ -5450,7 +5520,7 @@ export const tokenList: Token[] = [
     name: 'FUMoney',
     symbol: 'FUM',
     logoURI:
-      'https://raw.githubusercontent.com/FUMoney801/token-list/main/assets/mainnet/EZF2sPJRe26e8iyXaCrmEefrGVBkqqNGv9UPGG9EnTQz/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d67db96d-fa79-4252-fdb8-28fa84c5f800/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'fumoney',
@@ -5463,7 +5533,7 @@ export const tokenList: Token[] = [
     name: 'BunnyDucky Token',
     symbol: 'BUD',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/BUD1144GGYwmMRFs4Whjfkom5UHqC9a8dZHPVvR2vfPx/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d186ab84-0de5-4738-da67-d5669549a200/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5473,7 +5543,7 @@ export const tokenList: Token[] = [
     name: 'prANA',
     symbol: 'PRANA',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/PRAxfbouRoJ9yZqhyejEAH6RvjJ86Y82vfiZTBSM3xG/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f0a680dd-67b5-4d41-806f-5b60af1a7800/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'nirvana-prana',
@@ -5486,7 +5556,7 @@ export const tokenList: Token[] = [
     name: 'SMRAI',
     symbol: 'SMRAI',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/rvxo8t7TKeSmAgpdqK1CY9ddZi3NyowRCh1m2d7KrUc/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/574f211b-0b20-4500-8f80-866ef3918900/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5496,7 +5566,7 @@ export const tokenList: Token[] = [
     name: 'Glitter',
     symbol: 'GLTR',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/GHAhTrgtYW7jRkojQQWPGkMbmG5jGK25QBu6FSj5tvZ5/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9aeb740d-44f0-442b-6541-6d77535eea00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5505,7 +5575,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'TAP Coin',
     symbol: 'TAP',
-    logoURI: 'https://arweave.net/gHPUUFpbtWac5AnYtV10nGXa3VBgu0PgBiA7gDHJkJE',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0102d53d-ee96-4d2f-09f3-0ab7b2f99f00/public',
     tags: ['community'],
   },
   {
@@ -5514,7 +5585,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Shear Ego Coin',
     symbol: 'EGO',
-    logoURI: 'https://raw.githubusercontent.com/jcards26/sol/main/new-new.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/82fe0591-c46e-4870-c9b7-4334a0f75300/public',
     tags: ['old-registry'],
   },
   {
@@ -5524,7 +5596,7 @@ export const tokenList: Token[] = [
     name: 'ZIG Coin',
     symbol: 'ZIG',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/ANqY8h3sRSwkC29FvGJenAh7VGRABVVx7Ls6Mq4BuGT/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/99bf85c9-8ca6-4991-a7c4-0ad21f26ab00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5534,7 +5606,7 @@ export const tokenList: Token[] = [
     name: 'Milk',
     symbol: '$MILK',
     logoURI:
-      'https://shdw-drive.genesysgo.net/Ck7ByKk3NZfC9EFTNiGBrLkvquKGyDL7KLk3h1rdW2P4/image.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ccfd58a9-6751-4bff-44df-21b7614f8900/public',
     tags: ['community'],
   },
   {
@@ -5554,7 +5626,7 @@ export const tokenList: Token[] = [
     name: 'DeadKnight Token',
     symbol: 'DKM',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/HtbhBYdcfXbbD2JiH6jtsTt2m2FXjn7h4k6iXfz98k5W/dkmlogo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f30c4886-c247-48e0-ad87-1e8cd50a1300/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5564,7 +5636,7 @@ export const tokenList: Token[] = [
     name: 'Saber Wrapped Bitcoin (Sollet) (9 decimals)',
     symbol: 'sBTC-9',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/9999j2A8sXUtHtDoQdk528oVzhaKBsXyRGZ67FKGoi7H/icon.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/35695b61-4708-4b50-28aa-c3f2ca955500/public',
     tags: ['old-registry'],
   },
   {
@@ -5574,7 +5646,7 @@ export const tokenList: Token[] = [
     name: 'Final Frontier',
     symbol: 'FRNT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/3vHSsV6mgvpa1JVuuDZVB72vYbeUNzW4mBxiBftwzHEA/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/daf112ef-928a-4386-1273-8dccdb494700/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'final-frontier',
@@ -5587,7 +5659,7 @@ export const tokenList: Token[] = [
     name: 'GOD',
     symbol: 'GOD',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/9kt93AW5QMjFL6ZxomnSq3FbWiU5ibNeTSgBz9UDFSB6/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1bc06454-73b9-4865-72e4-fd8230a8c900/public',
     tags: ['old-registry'],
   },
   {
@@ -5597,7 +5669,7 @@ export const tokenList: Token[] = [
     name: 'Santaclaus',
     symbol: 'SANTA',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EctmRn2jMAdTDvQdG7mxadyiTvhGZiGYNrt9PWe6zioG/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/657d6f7a-ffb2-472f-2efc-20b437492600/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5607,7 +5679,7 @@ export const tokenList: Token[] = [
     name: 'Space Vizsla',
     symbol: 'SVIZ',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/GV6n9Uow3XzMWSs8vwTCML8SvMA6ozbidaEfdPoSoraQ/VizslaMoonLogo100x100.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/8dc36929-05ee-40ec-1f0e-0acad10daa00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5617,7 +5689,7 @@ export const tokenList: Token[] = [
     name: 'Crema',
     symbol: 'CRM',
     logoURI:
-      'https://www.arweave.net/E6II9rfGbg3zzLugMjtbPGf5sM-JKKky2iXGA5SoYjQ?ext=png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f8c2cb9f-f69f-47f3-a1ee-0bc42cd6ab00/public',
     tags: ['community'],
   },
   {
@@ -5627,7 +5699,7 @@ export const tokenList: Token[] = [
     name: 'BMT',
     symbol: 'BMT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/FanJWA4yEVUJj1r83tR7XybxmDGF6bNH8M81ag9aeUbF/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/b43c1196-4a59-4155-f269-96ff7b350400/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5637,7 +5709,7 @@ export const tokenList: Token[] = [
     name: 'SOL Frens',
     symbol: 'FREN',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/7xd71KP4HwQ4sM936xL8JQZCwE4amUko1AdCCf6Znjrt/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ca127569-9935-4187-f078-e9573bbc7500/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5647,7 +5719,7 @@ export const tokenList: Token[] = [
     name: 'MOONBURN',
     symbol: 'MOONBURN',
     logoURI:
-      'https://raw.githubusercontent.com/Joblo197/Crypto/main/Shroom%20Logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d7c4bacd-2ac6-48f4-ff6b-668f458c8800/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5657,7 +5729,7 @@ export const tokenList: Token[] = [
     name: 'Catalina Whale Mixer Floor Index',
     symbol: 'WHALES',
     logoURI:
-      'https://bafkreicadecx3rbffm6tqtgtc67bi6r2xiibtmawcejje7pfu7id2zxwwy.ipfs.dweb.link/',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f54aa1c4-dad8-4b6c-3c31-77841d729400/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'catalina-whales-index',
@@ -5670,7 +5742,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped BUSD (Allbridge from BSC)',
     symbol: 'abBUSD',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/AJ1W9A9N9dEMdVyoDiam2rV44gnBm2csrPDP7xqcapgX/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/5a1c1b2b-c539-4dcf-1dc3-e1fd700a1f00/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'wrapped-busd-allbridge-from-bsc',
@@ -5683,7 +5755,7 @@ export const tokenList: Token[] = [
     name: 'Crypto Health Plus',
     symbol: 'CHP',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/DHVUoxNqv3D7EgktBxUsxFF2Wx83hVDmD2wBBpUaw3jn/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c37dfd87-1390-4bb5-2d89-621b1c2cea00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5692,7 +5764,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Whalemap',
     symbol: 'WMP',
-    logoURI: 'https://raw.githubusercontent.com/ssi91/crypto/main/logo.svg',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ffee20bd-ae34-4a80-fa0d-fa34eeffa300/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5702,7 +5775,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped ALEPH (Sollet)',
     symbol: 'soALEPH',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/CsZ5LZkDS7h9TDKjrbL7VAwQZ9nsRu8vJLhRYfmGaN8K/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/323a3be4-6ae4-47f3-031a-ab20b066c900/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5712,7 +5785,7 @@ export const tokenList: Token[] = [
     name: 'Saber Wrapped UST (Portal) (8 decimals)',
     symbol: 'sUST-8',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/UST8SCn7jrqsq51odVLqcmvnC658HkqrKrPL3w2hHQ7/icon.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d650df59-ba7e-4a2f-f91e-6dc437592900/public',
     tags: ['old-registry'],
   },
   {
@@ -5721,7 +5794,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Race Raiders Rewards',
     symbol: 'RRR',
-    logoURI: 'https://arweave.net/SH106hrChudKjQ_c6e6yd0tsGUbFIScv2LL6Dp-LDiI',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1c5cf2da-1124-4174-1cdb-449650c0fa00/public',
     tags: ['community'],
   },
   {
@@ -5731,7 +5805,7 @@ export const tokenList: Token[] = [
     name: 'Playground Art Collection',
     symbol: 'PLAYA',
     logoURI:
-      'https://ybtrj4uri4zn4ob36ww7gdkqek3tkpm3uqq3mhsavul4ls5us3aa.arweave.net/wGcU8pFHMt44O_Wt8w1QIrc1PZukIbYeQK0Xxcu0lsA/?ext=png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/7573553f-a454-441d-d038-467b3b98c100/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5741,7 +5815,7 @@ export const tokenList: Token[] = [
     name: 'Viral Inu',
     symbol: 'VINU',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/CgbJxXyaHeU8VsquBpySuFXA94b6LWXxioZ28wRr8fs9/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/7c64a260-0007-46cc-4b47-f0bae34f3b00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'viral-inu',
@@ -5754,7 +5828,7 @@ export const tokenList: Token[] = [
     name: 'Jungle',
     symbol: 'JUNGLE',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Aogv6j1wWiBAZcqRNN1Y89eozda2ke6rkc4CYy7c4iCi/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/4588628e-4e1d-4a0f-52ac-85980bea8300/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'jungle',
@@ -5767,7 +5841,7 @@ export const tokenList: Token[] = [
     name: 'Random Blockasset Legends',
     symbol: 'rLGND',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/9m8E1yLHaG1B2TFSNeWahsitQh5yQRnrbyw756HFAcEa/rLGND.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/26e240b0-e138-409a-202c-524607631400/public',
     tags: ['old-registry'],
   },
   {
@@ -5777,7 +5851,7 @@ export const tokenList: Token[] = [
     name: 'NECTAR2 Token',
     symbol: 'NECTAR2',
     logoURI:
-      'https://raw.githubusercontent.com/agave-com/nectar-token/main/logo-sq.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d7908cb7-7f2f-4f54-cae0-1239b1037300/public',
     tags: ['old-registry'],
   },
   {
@@ -5787,7 +5861,7 @@ export const tokenList: Token[] = [
     name: 'CIKKA',
     symbol: 'CKKA',
     logoURI:
-      'https://raw.githubusercontent.com/baba7ji/crypto/main/cikka.png.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/098ac087-c117-4a77-0499-4eaebe7b9100/public',
     tags: ['community'],
   },
   {
@@ -5796,7 +5870,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'ELIXIR',
     symbol: 'ELIXIR',
-    logoURI: 'https://raw.githubusercontent.com/zaptors/image/main/elixir.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f09d88ed-b91e-4030-02bf-5f486475d600/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5806,7 +5881,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped USDT (Allbridge from Avalanche)',
     symbol: 'aaUSDT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/3688443b-0b19-4897-73ca-2b5e379ec300/public',
     tags: ['old-registry'],
   },
   {
@@ -5816,7 +5891,7 @@ export const tokenList: Token[] = [
     name: 'DREAM TOKEN',
     symbol: 'DREAM',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/HuMShjViKhcfihmHkgvctcFAyeyxAk8hK5K58zWpuRKf/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/2e4ef1bc-ee5c-43e6-78c2-76e60f12a200/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5825,7 +5900,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Cogent SOL',
     symbol: 'cgntSOL',
-    logoURI: 'https://cogent-cogs.s3.us-west-2.amazonaws.com/cgntSOL.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/381a655f-cd3b-48d2-e7b0-ca65f7efbd00/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'cogent-sol',
@@ -5850,7 +5926,7 @@ export const tokenList: Token[] = [
     name: 'Random FRAKTs',
     symbol: 'rFRAKT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/7V5AaqHTwiySegaAmNPLekQfTAoK4WvEVgfi2R8V44tB/rFRAKT.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/6069a179-c171-4132-637c-e5d76a579600/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5860,7 +5936,7 @@ export const tokenList: Token[] = [
     name: 'NEO3D TOKEN',
     symbol: 'NEO',
     logoURI:
-      'https://raw.githubusercontent.com/minh-git/docusaurus-2/main/static/img/neo3d-logo.jpg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/cd3f7362-a0df-44f7-c947-6b929f49fa00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5869,7 +5945,8 @@ export const tokenList: Token[] = [
     decimals: 7,
     name: 'BEN',
     symbol: '$BEN',
-    logoURI: 'https://arweave.net/vvRsvtg1dtVxoUL6XNeRp-cOIYp8BRbaDigmuKvLazk',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/3b30d106-7332-4c15-0b81-896d723c8a00/public',
     tags: ['community'],
   },
   {
@@ -5878,7 +5955,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Tiddy Juice Coin',
     symbol: 'MILK',
-    logoURI: 'https://arweave.net/S71DNASA5TYlrK9giRy7QgqFNw1m4mxqY6OdtgY1E7k',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/54255c57-72d2-4ea0-4015-3060e3059200/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5888,7 +5966,7 @@ export const tokenList: Token[] = [
     name: 'EDO',
     symbol: 'EDO',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/7sWMHQaJJPn1rkeizq41iPiW5gG7Ry7PXYAVHaUwY4qu/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/5f84f110-d459-4df3-8f79-81de1fc1c100/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5898,7 +5976,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped YFI (Sollet)',
     symbol: 'soYFI',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/3JSf5tPeuscJGtaCp5giEiDhv51gQ4v3zWg8DGgyLfAB/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/22cad7f1-f41b-40bd-197e-eebcda0e4900/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5907,7 +5985,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Wrapped CUSD (Allbridge from Celo)',
     symbol: 'acUSD',
-    logoURI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/7236.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c1d2d448-6673-40fa-27bc-d47c530e2c00/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'wrapped-cusd-allbridge-from-celo',
@@ -5919,7 +5998,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'The Islanders',
     symbol: 'ISL',
-    logoURI: 'https://cdn.jsdelivr.net/gh/koudydev/crypto/main/islIcon.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e43e93fc-8a51-406f-ccfd-cd35d01fc700/public',
     tags: ['old-registry'],
   },
   {
@@ -5929,7 +6009,7 @@ export const tokenList: Token[] = [
     name: 'Saber Wrapped USDT (8 decimals)',
     symbol: 'sUSDT-8',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/T8KdT8hDzNhbGx5sjpEUxepnbDB1TZoCa7vtC5JjsMw/icon.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/12b21709-deb5-4073-a466-82d90e374600/public',
     tags: ['old-registry'],
   },
   {
@@ -5939,7 +6019,7 @@ export const tokenList: Token[] = [
     name: 'fWAVE999',
     symbol: 'WAV',
     logoURI:
-      'https://www.arweave.net/qV0rFkGG-cTdtgRu7le-k8DstT8_-pzG2MWsceSlXjQ?ext=png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9ce2799a-2688-4d4d-2bf7-1b746922a100/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5949,7 +6029,7 @@ export const tokenList: Token[] = [
     name: 'aSOL Aggregate Solana Stake Pool',
     symbol: 'aSOL',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/ASoLXbfe7cd6igh5yiEsU8M7FW64QRxPKkxk7sjAfond/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e5c42363-0ce2-4330-99b6-5414e7412000/public',
     tags: ['old-registry'],
   },
   {
@@ -5959,7 +6039,7 @@ export const tokenList: Token[] = [
     name: 'Tenkai Token',
     symbol: 'TENKAI',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/TKDrcm3n4mfXFfPKZoLp5soRSdFQSmyWLdomdKL3ktU/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/344ab0fb-b78f-4dc0-3c0d-b6fb175be700/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5969,7 +6049,7 @@ export const tokenList: Token[] = [
     name: 'BitLegacy Token',
     symbol: 'BTL',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/aYZPYgohjK6LYM8o1v6pnr3ZinhuRzSHd6TRDVDUBkK/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/68c251bf-8059-4d41-8b9f-c4850fec3200/public',
     tags: ['old-registry'],
   },
   {
@@ -5979,7 +6059,7 @@ export const tokenList: Token[] = [
     name: 'TEST',
     symbol: '$TEST',
     logoURI:
-      'https://bafkreia7lr4higfpv6xc5owc3m2vjgcq2zzb7nqoaeut2lqcfy4pplpy5u.ipfs.nftstorage.link',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c29d4f40-3957-48cc-9231-8dc2c5d34d00/public',
     tags: ['community'],
   },
   {
@@ -5989,7 +6069,7 @@ export const tokenList: Token[] = [
     name: 'Crystal',
     symbol: 'CRY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/HbrmyoumgcK6sDFBi6EZQDi4i4ZgoN16eRB2JseKc7Hi/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/6733c743-f389-4c9e-199d-7ff0a85ddf00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -5999,7 +6079,7 @@ export const tokenList: Token[] = [
     name: 'DARK COIN',
     symbol: 'DMV',
     logoURI:
-      'https://raw.githubusercontent.com/Shaik-Sirajuddin/RepoForUploadsNeverDelete/master/Images/darkcoin.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/fd1054b3-c860-456d-3548-3d8e47ef9900/public',
     tags: ['old-registry'],
   },
   {
@@ -6009,7 +6089,7 @@ export const tokenList: Token[] = [
     name: 'PerpeTraders',
     symbol: 'PERP',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EBQ6gWBQNxA2zB4twR5GWP6CkeAhqZZZeDgeP7BTtdM3/logo.jpg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e4ff8e83-d63b-40d3-bfa5-984462ab4a00/public',
     tags: ['old-registry'],
   },
   {
@@ -6019,7 +6099,7 @@ export const tokenList: Token[] = [
     name: 'ENG Token',
     symbol: 'ENG',
     logoURI:
-      'https://www.arweave.net/N_pDeYTYERWexWo2E3-mzZhqMtqdcqA_ZktPva4ImnY?ext=png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/5aa854c3-5b5d-404e-6b6a-e525cb48cc00/public',
     tags: ['community'],
   },
   {
@@ -6029,7 +6109,7 @@ export const tokenList: Token[] = [
     name: 'HottoShotto',
     symbol: 'HOTTO',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Bqd2ujCTEzpKzfjb1FHL7FKrdM6n1rZSnRecJK57EoKz/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1b4511c9-856e-4755-39a8-facb50a16d00/public',
     tags: ['old-registry'],
   },
   {
@@ -6049,7 +6129,7 @@ export const tokenList: Token[] = [
     name: 'Agave Zwolf',
     symbol: 'AGVZ',
     logoURI:
-      'https://raw.githubusercontent.com/GrupoZwolf/cryptozw/main/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d721f048-c1fe-4293-2d44-b2f91c968600/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6058,7 +6138,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'IP3',
     symbol: 'IP3',
-    logoURI: 'https://cripco.com/token/image/ip3?ext=png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/48bbb328-9b67-48ca-10b6-d379b3365a00/public',
     tags: ['community', 'solana-fm'],
   },
   {
@@ -6067,7 +6148,8 @@ export const tokenList: Token[] = [
     decimals: 5,
     name: 'Quantity build',
     symbol: 'QB',
-    logoURI: 'https://arweave.net/Pg5DdUVvKwY6iaqFMsXwomg7H40CFzHyG14E7PJyn9s',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ef3cd0c4-5b4f-47fb-30b1-d5eb4ef04100/public',
     tags: ['community'],
   },
   {
@@ -6077,7 +6159,7 @@ export const tokenList: Token[] = [
     name: 'VIBEZ',
     symbol: 'VIBEZ',
     logoURI:
-      'https://github.com/ArthurPaivaT/token-list/blob/main/assets/mainnet/FyNuYGBBry5LAtPEkh8Y73izjTUNT2td2J3sGCK7E9Ju/logo.png?raw=true',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9eec8073-1b34-4e9d-36bf-bbcf48bcf800/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6087,7 +6169,7 @@ export const tokenList: Token[] = [
     name: 'PULP',
     symbol: 'PULP',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/5YtGSyQ7YxFgDc9oj4SpZGTjoS5p5Fubkg8sMauQqXoS/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/95fd4d11-2b9b-4a56-01d7-6b38eca63c00/public',
     tags: ['old-registry'],
   },
   {
@@ -6097,7 +6179,7 @@ export const tokenList: Token[] = [
     name: 'Maars',
     symbol: 'MRX',
     logoURI:
-      'https://raw.githubusercontent.com/maarstoken/crypto/main/maars-800x800.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e915a088-0806-498e-9ce9-e4797df22400/public',
     tags: ['old-registry'],
   },
   {
@@ -6107,7 +6189,7 @@ export const tokenList: Token[] = [
     name: 'HypeProxy',
     symbol: 'HYPE',
     logoURI:
-      'https://raw.githubusercontent.com/hypeproxy/hypeproxy/main/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ccba9c7b-98e3-419c-b052-9f2ed5617a00/public',
     tags: ['old-registry'],
   },
   {
@@ -6117,7 +6199,7 @@ export const tokenList: Token[] = [
     name: 'QUEST',
     symbol: 'QUEST',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/6ybxMQpMgQhtsTLhvHZqk8uqao7kvoexY6e8JmCTqAB1/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/dad44fde-dd72-4b54-887a-e53b14651900/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6127,7 +6209,7 @@ export const tokenList: Token[] = [
     name: 'Yokoito Crew Hone',
     symbol: 'HONE',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/hone3CJTYjczb5nJh45KCNMkjrKMt7SCnHkWGWsVfVu/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0c4097a9-d227-4e0e-70b5-6e02c9ed2f00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6136,7 +6218,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'YETI',
     symbol: '$YETI',
-    logoURI: 'https://raw.githubusercontent.com/yet777/tokenlogo/main/logo.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ee0e2505-8096-411c-518e-bce92a9cd900/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6146,7 +6229,7 @@ export const tokenList: Token[] = [
     name: 'Solily Protocol Coin',
     symbol: 'LILY',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/LiLyT885cG9xZKYQk9x6VWMzmcui4ueV9J1uzPDDajY/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/48aa9c42-e7ab-4f34-be0d-98769ed19600/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6156,7 +6239,7 @@ export const tokenList: Token[] = [
     name: 'Force',
     symbol: '$FORCE',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/9MjAmgHXbu5drkNa9XpzfozgsM5Dcq6bSnKZzdNrwscC/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/4a78ab50-215e-443b-bf8c-6091a38e1800/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6166,7 +6249,7 @@ export const tokenList: Token[] = [
     name: 'Doggy Style',
     symbol: 'DoggyStyle',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/3in9a9yHtdjDFRjDyGTTpGUwJpT9zZBcyjQ8J7nqqNtq/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/81d956af-6d69-4346-3ef3-feb755f92a00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6185,7 +6268,7 @@ export const tokenList: Token[] = [
     name: 'Orbs',
     symbol: 'Orbs',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/7JnHPPJBBKSTJ7iEmsiGSBcPJgbcKw28uCRXtQgimncp/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/bcae7030-d876-48b2-0f80-0f1baaf18100/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6194,7 +6277,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'PozzCoin',
     symbol: 'POZZ',
-    logoURI: 'https://raw.githubusercontent.com/dc215007/pozz1/main/logo1.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/4c9c5d5b-64cc-4c4b-75c5-6c1661a3fe00/public',
     tags: ['old-registry'],
   },
   {
@@ -6204,7 +6288,7 @@ export const tokenList: Token[] = [
     name: 'WNDO',
     symbol: 'WNDO',
     logoURI:
-      'https://static1.squarespace.com/static/6252f1590fac8d79fb6d772e/t/627682f25295251e0967c29c/1651933939477/wndocoin.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9877066f-9029-4624-6353-ec3551045300/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6214,7 +6298,7 @@ export const tokenList: Token[] = [
     name: 'Cyborg Apes BORG',
     symbol: 'BORG',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/CFbdjaKonbBQTYG2GC6CmB7exofgDYGCDR8tp8KVGS7T/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f98de27f-c48b-4d6c-4a85-3bd98251f000/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'cyborg-apes',
@@ -6227,7 +6311,7 @@ export const tokenList: Token[] = [
     name: 'Garlic',
     symbol: 'GRLC',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/88YqDBWxYhhwPbExF966EdaCYBKP51xVm1oGBcbWzcf2/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/538154c1-273b-4c2d-6c7f-95cb951cf000/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6237,7 +6321,7 @@ export const tokenList: Token[] = [
     name: 'Neon Rocket Coin',
     symbol: 'NRC',
     logoURI:
-      'https://raw.githubusercontent.com/neontechanoah/neon_rocket_coin/main/asset/NRC_Logo_100px.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ba895ceb-df3c-4d0b-00ea-2d787d5c6100/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6247,7 +6331,7 @@ export const tokenList: Token[] = [
     name: 'AlienUniverse Token',
     symbol: 'ALIEN',
     logoURI:
-      'https://raw.githubusercontent.com/alien-universe/assets/main/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/bb496a48-f8f5-477a-644d-008c51cf6b00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6257,7 +6341,7 @@ export const tokenList: Token[] = [
     name: 'IDOLZ Token',
     symbol: 'IDOLZ',
     logoURI:
-      'https://arweave.net/mdvmPYEgiX_uPGRtiIZA3HrpilDK5JfW2bXkDBRuzVM?ext=png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c2ba5182-2cc9-4943-3d90-f6adf8148e00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6277,7 +6361,7 @@ export const tokenList: Token[] = [
     name: 'CHAI (Portal)',
     symbol: 'CHAI',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/CHAI_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1c0a6aee-9ff0-48f6-3d26-81df392e5b00/public',
     tags: ['wormhole'],
     extensions: {
       coingeckoId: 'chai',
@@ -6289,7 +6373,8 @@ export const tokenList: Token[] = [
     decimals: 6,
     name: 'SolBird',
     symbol: 'BIRD',
-    logoURI: 'https://arweave.net/K_IaCXwL9YQTPJnZfvi302k2lhANDvmzkiy6e0Y6Zho',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/4621603a-27ec-43e2-dc91-8f0b95329800/public',
     tags: ['community'],
   },
   {
@@ -6308,7 +6393,7 @@ export const tokenList: Token[] = [
     name: 'JJC',
     symbol: 'JJJJC',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/6FLsSkF4AqQeDuqEmGPyBZvVebc4WWWntnZP2QZyBzG8/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/4fb77035-7fad-451a-0426-712be0822500/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6318,7 +6403,7 @@ export const tokenList: Token[] = [
     name: 'SolDate(DATE) Token',
     symbol: 'DATE',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Ce3PSQfkxT5ua4r2JqCoWYrMwKWC5hEzwsrT9Hb7mAz9/DATE.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f99d8259-bef8-4136-618c-adf8de043400/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6327,7 +6412,8 @@ export const tokenList: Token[] = [
     decimals: 2,
     name: 'Komoverse Token',
     symbol: 'KOMO',
-    logoURI: 'https://komoverse.io/assets/img/favicon.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/af88c1d3-8c02-4744-fe29-39c03409a600/public',
     tags: ['community'],
   },
   {
@@ -6337,7 +6423,7 @@ export const tokenList: Token[] = [
     name: 'Laine Stake',
     symbol: 'laineSOL',
     logoURI:
-      'https://shdw-drive.genesysgo.net/4DUkKJB966oMk8zq57KkAUxqg9HpuWtZ3BKobhmYph39/laineSOL.webp',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/66059327-5a77-4dcb-3613-02d218637800/public',
     tags: ['community', 'solana-fm'],
     extensions: {
       coingeckoId: 'laine-stake',
@@ -6350,7 +6436,7 @@ export const tokenList: Token[] = [
     name: 'SolanaPrime',
     symbol: 'PRIME',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/PRiME7gDoiG1vGr95a3CRMv9xHY7UGjd4JKvfSkmQu2/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/5f117235-07bb-4e23-5556-092c76315400/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'solanaprime',
@@ -6363,7 +6449,7 @@ export const tokenList: Token[] = [
     name: 'DegenAlley',
     symbol: 'DGNA',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/8iSagwHZNj4Hx4CMeoZwLLMVbWt4mUT6qk42TxiHkRtn/DGNA.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/27916994-7351-4440-f649-96ab13f52a00/public',
     tags: ['old-registry'],
   },
   {
@@ -6373,7 +6459,7 @@ export const tokenList: Token[] = [
     name: 'ILoveU Token',
     symbol: 'ILU',
     logoURI:
-      'https://raw.githubusercontent.com/rjdrar/crypto/main/symbol-1.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/fbb6c0ee-a9d6-407a-edfb-c9fb8dc17000/public',
     tags: ['old-registry'],
   },
   {
@@ -6382,7 +6468,8 @@ export const tokenList: Token[] = [
     decimals: 4,
     name: 'Water Bears',
     symbol: 'WTRBR',
-    logoURI: 'https://arweave.net/GZNQl83S1kK5kvak1yvMrI8muuPVm80fdliPcgwsWfw',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/913e65ed-6cf0-4d8b-b1c9-ee0a1a5d7300/public',
     tags: ['community'],
   },
   {
@@ -6392,7 +6479,7 @@ export const tokenList: Token[] = [
     name: 'Staked MEAN',
     symbol: 'sMEAN',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/sMEANebFMnd9uTYpyntGzBmTmzEukRFwCjEcnXT2E8z/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/08c4ba82-8a9a-480f-4953-2455352c9400/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6402,7 +6489,7 @@ export const tokenList: Token[] = [
     name: 'Drippies Floor Index',
     symbol: 'DRIPSPLIT',
     logoURI:
-      'https://creator-hub-prod.s3.us-east-2.amazonaws.com/drippies_pfp_1648415706808.gif',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/b5ee066c-4df4-44fc-de15-d339585dd300/public',
     tags: ['old-registry'],
   },
   {
@@ -6412,7 +6499,7 @@ export const tokenList: Token[] = [
     name: 'Acacia',
     symbol: 'ACA',
     logoURI:
-      'https://raw.githubusercontent.com/qubelabsllc/ACALogo/main/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/2d616a00-3332-42a5-228f-037632bb0000/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6422,7 +6509,7 @@ export const tokenList: Token[] = [
     name: 'Weble Ecosystem Token',
     symbol: 'WET',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/7R7rZ7SsLDXkYAfJyRCBScLuZwizeMWaTWrwFhSZU2Jq/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/6e1688d5-f45a-421c-7d7a-b2ddae60ef00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6432,7 +6519,7 @@ export const tokenList: Token[] = [
     name: 'Mushroom Racers Token',
     symbol: 'VROOM',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/KARTdF5K68Q2nGppizG3DeCzp7AhHy6YXf2uTQjBSQx/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/12080238-b9dc-4bdf-1df0-78843723aa00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6442,7 +6529,7 @@ export const tokenList: Token[] = [
     name: 'Dusk',
     symbol: 'DUSK',
     logoURI:
-      'https://firebasestorage.googleapis.com/v0/b/mom-prod-625e5.appspot.com/o/TokensNoBG%2FDusk_Coin_INV.png?alt=media&token=66709e38-8d35-40b0-8c0d-9499372f421f',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/69471789-3d43-4c5d-22dd-71d85a230900/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6452,7 +6539,7 @@ export const tokenList: Token[] = [
     name: 'Investin Protocol',
     symbol: 'IVN',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/iVNcrNE9BRZBC9Aqf753iZiZfbszeAVUoikgT9yvr2a/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9f188492-f60c-4e43-2721-694a400b8200/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'investin',
@@ -6465,7 +6552,7 @@ export const tokenList: Token[] = [
     name: 'AIO Exchange Token',
     symbol: 'AIO',
     logoURI:
-      'https://raw.githubusercontent.com/adminesc/AIO_EXCHANGE_Token/main/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/2eff2962-a701-4add-39a6-6183955fb500/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6474,7 +6561,8 @@ export const tokenList: Token[] = [
     decimals: 8,
     name: 'DABLOONS',
     symbol: 'DABLNS',
-    logoURI: 'https://arweave.net/AYbNmLsPhYrlgrVtCERbp7UysLGL-IXQQrTL826ai6Y',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/302e1065-6ad9-478f-f0d3-4af0405cca00/public',
     tags: ['community'],
   },
   {
@@ -6484,7 +6572,7 @@ export const tokenList: Token[] = [
     name: 'Shuttlecoin',
     symbol: 'SHUT',
     logoURI:
-      'https://raw.githubusercontent.com/Mikkel76543/crypto9/main/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/987771ef-04e3-4464-13d1-d8fcbb8d6700/public',
     tags: ['old-registry'],
   },
   {
@@ -6494,7 +6582,7 @@ export const tokenList: Token[] = [
     name: 'COBAN',
     symbol: 'COBAN',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/7udMmYXh6cuWVY6qQVCd9b429wDVn2J71r5BdxHkQADY/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c5e8c3fe-50c3-4c70-01df-71abf35bed00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'coban',
@@ -6516,7 +6604,7 @@ export const tokenList: Token[] = [
     name: 'Infinity Diamonds ICE',
     symbol: 'ICE',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/icex2Fy2KtXjfiAAUEHLPHu7XKDLvwiyVUPP9PNpSkF/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/78c66790-cc18-4401-7af0-c52a242a8600/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6526,7 +6614,7 @@ export const tokenList: Token[] = [
     name: 'Solcubator',
     symbol: 'SOLC',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Bx1fDtvTN6NvE4kjdPHQXtmGSg582bZx9fGy4DQNMmAT/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/651d9f81-6be0-40cd-45f7-483f6a270000/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'solcubator',
@@ -6539,7 +6627,7 @@ export const tokenList: Token[] = [
     name: 'Hydrogencoin',
     symbol: 'HCOIN',
     logoURI:
-      'https://raw.githubusercontent.com/dataalg/Hydrogen/main/4B619RbcXbXrKTzNVgDSRiUn9wfxWgA1w1oFLveGacNy/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/b37c498b-786c-4e74-e7ef-752ca68e1b00/public',
     tags: ['old-registry'],
   },
   {
@@ -6549,7 +6637,7 @@ export const tokenList: Token[] = [
     name: 'Project Wisdom',
     symbol: 'WIZE',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/7rrJLRar2WjZwRoF3iJKHKnA7d7d9YJT1X9HAJnwUH3Z/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0b9a78f1-993f-4e85-276d-86549e555600/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6567,7 +6655,8 @@ export const tokenList: Token[] = [
     decimals: 2,
     name: 'Stoned Ape Crew Index',
     symbol: 'SAC',
-    logoURI: 'https://i.imgur.com/sxmJbDr.jpg',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/808b7f3d-4600-45f0-4566-be821cb03500/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6577,7 +6666,7 @@ export const tokenList: Token[] = [
     name: 'BofB',
     symbol: 'BOFB',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/45wdSjpSqZCk9mkqmq5Nh7beCEqqUJMJcVduwYCip5eq/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/71838c25-c827-4845-8718-c64776167e00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6587,7 +6676,7 @@ export const tokenList: Token[] = [
     name: 'Nectar',
     symbol: 'NCTR',
     logoURI:
-      'https://www.arweave.net/8imTwET4YerNLKAL8nEmI6ONDlMXBHZ96YC7TeFTI1s?ext=png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/73238ae1-e511-47ab-dfe2-1b68b7b24a00/public',
     tags: ['community'],
   },
   {
@@ -6597,7 +6686,7 @@ export const tokenList: Token[] = [
     name: 'WATT token',
     symbol: 'WATT',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/GjdreVe7iUG4hyESSweGyFzgekWufhEwGJqAaa1hr7pf/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/bc3c5b5f-b2d3-41d7-7c8f-a07c4adabe00/public',
     tags: ['old-registry'],
   },
   {
@@ -6607,7 +6696,7 @@ export const tokenList: Token[] = [
     name: 'Ribh',
     symbol: 'RIBH',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/8UaGbxQbV9v2rsMxy2G2NEh1JYQ8T9dmggq1oesrXD9c/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/fce24721-7289-4dab-40a8-c55136d06200/public',
     tags: ['old-registry'],
   },
   {
@@ -6629,7 +6718,7 @@ export const tokenList: Token[] = [
     name: 'Tiny Bonez',
     symbol: 'T1NY',
     logoURI:
-      'https://raw.githubusercontent.com/danvernon/tiny-dogz-logo/main/coin.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/6282eba7-c424-44dd-96c5-88c4fe1e6500/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'tiny-bonez',
@@ -6642,7 +6731,7 @@ export const tokenList: Token[] = [
     name: 'Saber Wrapped UST (Portal) (9 decimals)',
     symbol: 'swtUST-9',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/UST98bfV6EASdTFQrRwCBczpehdMFwYCUdLT5tEbhpW/icon.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/85bb0e44-67c8-42ba-cff3-228acd2ace00/public',
     tags: ['old-registry'],
   },
   {
@@ -6652,7 +6741,7 @@ export const tokenList: Token[] = [
     name: 'Frog',
     symbol: '$FROG',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Frog8vt6gmuuUuuerd7ispP6yavssBUtMpEP5DCEuUgD/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d174c22c-18f5-465e-145a-984262c1be00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6662,7 +6751,7 @@ export const tokenList: Token[] = [
     name: 'BRAWNDO',
     symbol: 'BRWNDO',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/At5j3zhbEj8mfFsSy1MPbjVhrX2uNmRMPEDZiyFcETNX/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/eab73f23-de70-4faf-2f16-1dc949cac200/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6672,7 +6761,7 @@ export const tokenList: Token[] = [
     name: 'BRZ',
     symbol: 'BRZ',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/FtgGSFADXBtroxq8VCausXRr2of47QBf5AS1NtZCu4GD/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/1bd158f8-3927-46e6-74be-b27ac3075d00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'brz',
@@ -6685,7 +6774,7 @@ export const tokenList: Token[] = [
     name: 'ARTE',
     symbol: 'ARTE',
     logoURI:
-      'https://raw.githubusercontent.com/ArtPunks/ARTE-token/main/assets/token_512.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/32a68551-490d-4f07-6fb1-480c9d99ad00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6695,7 +6784,7 @@ export const tokenList: Token[] = [
     name: 'KRILL',
     symbol: 'KRILL',
     logoURI:
-      'https://raw.githubusercontent.com/solanahodlwhales/whitelist/main/Krill_towen.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ffa59fdd-e379-4cc9-6076-c6195c8cdb00/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'krill',
@@ -6707,7 +6796,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Athens',
     symbol: 'ATH',
-    logoURI: 'https://arweave.net/GNYZdT1icjRPLbRoivdtSU9_GqBM7LF6khrpV9qCBtM',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/8e31c9cb-055f-4961-9da0-754641ad4500/public',
     tags: ['community'],
   },
   {
@@ -6716,7 +6806,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: '611Coin',
     symbol: 'SIXY',
-    logoURI: 'https://raw.githubusercontent.com/dc215007/611/main/logo.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/5689be09-8f78-49c0-67e8-6c7a04bae300/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6726,7 +6817,7 @@ export const tokenList: Token[] = [
     name: 'Marijuana Joint',
     symbol: 'MARIJUANA',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/DYbRXaQcnj44SH9woxvyFdtcKkSoPoCEshRTQDZSjsBm/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/752b3de3-2dc1-44e5-9d28-b9cd9b5e8700/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6736,7 +6827,7 @@ export const tokenList: Token[] = [
     name: 'SunnySideUp Token',
     symbol: 'SSU',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/AGkFkKgXUEP7ZXazza5a25bSKbz5dDpgafPhqywuQnpf/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ae770145-5d8b-4509-1ffe-01659e0a1100/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'sunnysideup',
@@ -6749,7 +6840,7 @@ export const tokenList: Token[] = [
     name: 'KKO Protocol',
     symbol: 'KKO',
     logoURI:
-      'https://www.arweave.net/lxCJWYgYzilFtAEzqbdvS9xN98-9cG4EvizAkgx1dCY?ext=png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/ca2daf81-c462-4ecc-8c83-310321ee4300/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'kineko',
@@ -6761,7 +6852,8 @@ export const tokenList: Token[] = [
     decimals: 2,
     name: 'SMB Index',
     symbol: 'MONKES',
-    logoURI: 'https://i.imgur.com/FczxrLa.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/dcc724e7-0cc9-4062-bce4-a97dc0b25000/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6771,7 +6863,7 @@ export const tokenList: Token[] = [
     name: 'White Solana',
     symbol: 'white',
     logoURI:
-      'https://raw.githubusercontent.com/loufly1/Birdies/main/photo1697130653.jpeg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/4ddf5c08-ba04-45eb-ac58-3716b6e01d00/public',
     tags: ['community'],
   },
   {
@@ -6781,7 +6873,7 @@ export const tokenList: Token[] = [
     name: 'Solana Eco Index',
     symbol: 'SIX',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/HWSqJdwemji7TNiKQPudUj86LXyF3vGAtWm5ePk5KzgD/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f80fcdb3-57c3-4acc-a78e-1db493f46d00/public',
     tags: ['old-registry'],
   },
   {
@@ -6791,7 +6883,7 @@ export const tokenList: Token[] = [
     name: 'Godz Token',
     symbol: 'GODZ',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/BB33fYoeBVA2uv119be9tKvmXeuwtcx1W25N9KFNd2ca/logo.jpg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f23f7d1a-abfa-4990-c7e1-80a01157ee00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6800,7 +6892,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Sunrise gSOL',
     symbol: 'GSOL',
-    logoURI: 'https://arweave.net/46QNhUyat533ptVC2myiNVb5BvSP7PAFzM5ILCZTrGU',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/3b5f080c-95ba-4ec5-b857-ac76f6221f00/public',
     tags: ['community', 'solana-fm'],
   },
   {
@@ -6809,7 +6902,8 @@ export const tokenList: Token[] = [
     decimals: 8,
     name: 'DLP8 Coin',
     symbol: 'DLP8',
-    logoURI: 'https://arweave.net/T2RURwcLfB2xSjrfksI7R2SL3fKyZoqlTPiLCE3fsBo',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/343ec14e-2841-4cb8-2d4b-2a1a08a80200/public',
     tags: ['community'],
   },
   {
@@ -6819,7 +6913,7 @@ export const tokenList: Token[] = [
     name: 'Keeshond Coin',
     symbol: '$KSH',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/6j14WyX1Ag2pLWvn99euK4xp2VcZD62VeJv2iwCrYmT8/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/92c82685-1ced-4785-f99b-bcf486754100/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6829,7 +6923,7 @@ export const tokenList: Token[] = [
     name: 'Tether USD (Portal from Avalanche)',
     symbol: 'USDTav',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/USDTav_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0e0974ed-f0e1-4e7e-def1-83587f11f300/public',
     tags: ['wormhole'],
   },
   {
@@ -6839,7 +6933,7 @@ export const tokenList: Token[] = [
     name: 'mma',
     symbol: 'MMA',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/MMAx26JtJgSWv6yH48nEHCGZcVvRbf9Lt9ALa7jSipe/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/4e3dcef5-9ff2-4d53-8ecb-e6c1345d8000/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6849,7 +6943,7 @@ export const tokenList: Token[] = [
     name: 'Random Zaysan Raptors',
     symbol: 'rZOOM',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/Vjq9T5xmqRzLXQRyvigzyZzpHCGCsbYAJ7afLVuF8j9/rZOOM.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/2435349d-c6fe-4f14-bba9-09285ac93900/public',
     tags: ['old-registry'],
   },
   {
@@ -6869,7 +6963,7 @@ export const tokenList: Token[] = [
     name: 'Chairman Chow',
     symbol: 'CCC',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/E9bjYSAqabYAd2Zaev4qAMVNAiX7Z2Dp4Sn1JgsTn2b6/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/824c0186-f846-433f-b049-e97da32ab700/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6879,7 +6973,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped SUSHI (Sollet)',
     symbol: 'soSUSHI',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/AR1Mtgh7zAtxuxGd2XPovXPVjcSdY3i4rQYisNadjfKy/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/406c640a-1d7e-4d27-ee50-0f2b1071bb00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6889,7 +6983,7 @@ export const tokenList: Token[] = [
     name: 'BONES Token',
     symbol: 'BONES',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/bonegFPgrpZ4bfVn3kQK1aMbGYddWtfMAywNt5LsuVE/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/153eb8b4-9115-42e2-b745-bd7a7edec600/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'soul-dog-city-bones',
@@ -6901,7 +6995,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'SchimmelPeter Monster',
     symbol: 'SPM',
-    logoURI: 'https://www.schimmelpeter.de/spm_solana.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c2bdea3b-d60b-425c-8109-5a7ac438ca00/public',
     tags: ['old-registry'],
   },
   {
@@ -6910,7 +7005,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Kleyne Gelt',
     symbol: 'KLGT',
-    logoURI: 'https://raw.githubusercontent.com/klglt/Crypto/main/menorah.png',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/2a16922f-0ce8-434e-5d08-66ba674d6300/public',
     tags: ['old-registry'],
   },
   {
@@ -6920,7 +7016,7 @@ export const tokenList: Token[] = [
     name: 'JUNK',
     symbol: 'JUNKz',
     logoURI:
-      'https://raw.githubusercontent.com/XAGBack/JUNKToken1/main/JunkToken.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/7c5ea193-3be9-4e25-8e33-7ecfa7801500/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6930,7 +7026,7 @@ export const tokenList: Token[] = [
     name: 'Extra Reality',
     symbol: 'XTR',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/6ABQdaTwRvmacto7aeRBGghS6Pxctd6cFGL8gDdwV1dd/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9f67419c-9d99-4520-3643-9810c8ed3000/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6940,7 +7036,7 @@ export const tokenList: Token[] = [
     name: 'FamilySOL',
     symbol: 'FamSOL',
     logoURI:
-      'https://raw.githubusercontent.com/solodevo/FamilySOL/main/LOGOFamilySOL.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/7c5da280-0cc9-4631-5e9c-2d0e20b10600/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6949,7 +7045,8 @@ export const tokenList: Token[] = [
     decimals: 7,
     name: 'TURBO on Solana',
     symbol: '$TURBO',
-    logoURI: 'https://arweave.net/FVrzsx6r7mwCakD64Axt59qAB_g-nvYfA0wvWydw5u0',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/2a6c2385-5d76-4c24-f84e-c75a36c80e00/public',
     tags: ['community'],
   },
   {
@@ -6959,7 +7056,7 @@ export const tokenList: Token[] = [
     name: 'WOOP',
     symbol: 'WOOP',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/A3HyGZqe451CBesNqieNPfJ4A9Mu332ui8ni6dobVSLB/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0aa3db89-fbc4-4ffc-9a18-e963fc48c700/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'woop',
@@ -6972,7 +7069,7 @@ export const tokenList: Token[] = [
     name: 'calUSD Stablecoin',
     symbol: 'calUSD',
     logoURI:
-      'https://user-images.githubusercontent.com/8619106/167318344-e9ea9147-8969-4818-877c-5c75de10aecc.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/fa05eabc-5bf0-4035-e537-b8889ef92e00/public',
     tags: ['old-registry'],
   },
   {
@@ -6982,7 +7079,7 @@ export const tokenList: Token[] = [
     name: 'HUSD Stablecoin (Wormhole v1)',
     symbol: 'wHUSD_v1',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/BybpSTBoZHsmKnfxYG47GDhVPKrnEKX31CScShbrzUhX/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e4a4e923-29aa-48f4-83cb-92f669f32f00/public',
     tags: ['old-registry'],
   },
   {
@@ -6992,7 +7089,7 @@ export const tokenList: Token[] = [
     name: 'USN (Allbridge from Near)',
     symbol: 'USN',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/PUhuAtMHsKavMTwZsLaDeKy2jb7ciETHJP7rhbKLJGY/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/5de9db5a-fe61-40d8-27dc-680c1daa4400/public',
     tags: ['old-registry'],
   },
   {
@@ -7002,7 +7099,7 @@ export const tokenList: Token[] = [
     name: 'Plutonium 238',
     symbol: 'PU238',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/7p6zGHdmWHvCH4Lsik2MoMBXqPGhFbSPSceSBXd8KNEC/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/132c65c3-7d64-4f9c-11aa-a6e31b063f00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -7012,7 +7109,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped UST (Wormhole v1)',
     symbol: 'wUST_v1',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/CXLBjMMcwkc17GfJtBos6rQCo1ypeH6eDbB82Kby4MRm/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/74439ebe-6059-46af-7d84-a3cebefd8000/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'wrapped-ust',
@@ -7025,7 +7122,7 @@ export const tokenList: Token[] = [
     name: 'xLP Finance',
     symbol: 'xLPFi',
     logoURI:
-      'https://raw.githubusercontent.com/LP-Finance-Inc/token-image/main/xLPFi.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/bb8d45be-26ee-445c-8aef-15121b5f1c00/public',
     tags: ['community', 'solana-fm'],
   },
   {
@@ -7035,7 +7132,7 @@ export const tokenList: Token[] = [
     name: 'Frax (Wormhole v1)',
     symbol: 'wFRAX_v1',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/8L8pDf3jutdpdr4m3np68CL9ZroLActrqwxi6s9Ah5xU/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/8c811197-d7da-4fcb-c6a5-f622bce98400/public',
     tags: ['old-registry'],
   },
   {
@@ -7045,7 +7142,7 @@ export const tokenList: Token[] = [
     name: 'Dai Stablecoin (Wormhole v1)',
     symbol: 'wDAI_v1',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/FYpdBuyAHSbdaAyD1sKkxyLWbAP8uUW9h6uvdhK74ij1/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d1f2a7b5-a88d-45ea-8531-d07f1af93500/public',
     tags: ['old-registry'],
   },
   {
@@ -7055,7 +7152,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped USDC (Allbridge from Celo)',
     symbol: 'acUSDC',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/2301dbbd-e4c3-4b54-467c-4d8ab9afd800/public',
     tags: ['old-registry'],
   },
   {
@@ -7065,7 +7162,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped DAI (Allbridge from Avalanche)',
     symbol: 'aaDAI',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/FYpdBuyAHSbdaAyD1sKkxyLWbAP8uUW9h6uvdhK74ij1/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/5424a179-b0f8-47f2-49fe-dfa7f3dbf000/public',
     tags: ['old-registry'],
   },
   {
@@ -7075,7 +7172,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped DAI (Allbridge from Ethereum)',
     symbol: 'aeDAI',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/FYpdBuyAHSbdaAyD1sKkxyLWbAP8uUW9h6uvdhK74ij1/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/b22cbc9a-0a9c-4530-1db9-8d6ff4918000/public',
     tags: ['old-registry'],
   },
   {
@@ -7085,7 +7182,7 @@ export const tokenList: Token[] = [
     name: 'Binance USD (Wormhole v1)',
     symbol: 'wBUSD_v1',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/AJ1W9A9N9dEMdVyoDiam2rV44gnBm2csrPDP7xqcapgX/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/cefa31c4-3498-4830-5170-1d76a2b90e00/public',
     tags: ['old-registry'],
   },
   {
@@ -7095,7 +7192,7 @@ export const tokenList: Token[] = [
     name: 'USDK (Portal)',
     symbol: 'USDK',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/USDK_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/a4e8dc4b-b10c-4923-a279-a22f3a0a8500/public',
     tags: ['wormhole', 'old-registry'],
   },
   {
@@ -7105,7 +7202,7 @@ export const tokenList: Token[] = [
     name: 'Wrapped ETH (Allbridge from BSC)',
     symbol: 'abETH',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/FeGn77dhg1KXRRFeSwwMiykZnZPw5JXW6naf2aQgZDQf/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0135a780-7d34-407b-22b4-c5bb0acc9800/public',
     tags: ['old-registry'],
   },
   {
@@ -7114,7 +7211,8 @@ export const tokenList: Token[] = [
     decimals: 9,
     name: 'Synthetic ETH',
     symbol: 'xETH',
-    logoURI: 'https://www.synthetify.io/icons/xeth.svg',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e67b359b-d6d6-459a-105a-7c93615cb500/public',
     tags: ['old-registry'],
   },
   {
@@ -7124,7 +7222,7 @@ export const tokenList: Token[] = [
     name: 'Interest Bearing Bitcoin (Portal)',
     symbol: 'ibBTC',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/ibBTC_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/7c71253a-7550-49cf-254d-60d8f53aa200/public',
     tags: ['wormhole'],
   },
   {
@@ -7134,7 +7232,7 @@ export const tokenList: Token[] = [
     name: 'Huobi BTC (Portal)',
     symbol: 'HBTC',
     logoURI:
-      'https://raw.githubusercontent.com/wormhole-foundation/wormhole-token-list/main/assets/HBTC_wh.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/3202c616-1dd5-4358-8f0f-f386be730000/public',
     tags: ['wormhole', 'old-registry'],
     extensions: {
       coingeckoId: 'huobi-btc-wormhole',
@@ -7147,7 +7245,7 @@ export const tokenList: Token[] = [
     name: 'pBTC (Parrot BTC)',
     symbol: 'pBTC',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/DYDWu4hE4MN3aH897xQ3sRTs5EAjJDmQsKLNhbpUiKun/logo.svg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/601d03fc-6df3-4d8f-95d7-df5a84c74f00/public',
     tags: ['old-registry'],
   },
   {
@@ -7157,7 +7255,7 @@ export const tokenList: Token[] = [
     name: 'Saber Wrapped renBTC (9 decimals)',
     symbol: 'srenBTC-9',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/FACTQhZBfRzC7A76antnpAoZtiwYmUfdAN8wz7e8rxC5/icon.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/72b629dc-364c-4a0a-c127-e21fad84e700/public',
     tags: ['old-registry'],
   },
   {
@@ -7167,7 +7265,7 @@ export const tokenList: Token[] = [
     name: 'Saber Wrapped renBTC (10 decimals)',
     symbol: 'srenBTC-10',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/BtX7AfzEJLnU8KQR1AgHrhGH5s2AHUTbfjhUQP8BhPvi/icon.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/be2b5d31-cb75-41fe-5e9e-37735ebb2700/public',
     tags: ['old-registry'],
   },
   {
@@ -7177,7 +7275,7 @@ export const tokenList: Token[] = [
     name: 'FTT (Wormhole v1)',
     symbol: 'wFTT_v1',
     logoURI:
-      'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/GbBWwtYTMPis4VHb8MrBbdibPhn28TSrLB53KvUmb7Gi/logo.png',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/a5324102-7a26-41f6-2fa3-229ce07f1600/public',
     tags: ['old-registry'],
   },
 ];

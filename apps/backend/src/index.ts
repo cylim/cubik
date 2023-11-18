@@ -1,8 +1,5 @@
-import logger from "./middleware/logger";
-import { authRouter } from "routes/auth.router";
-import { envConfig } from "config";
-import { squadsRouter } from "routes/squads.router";
 import bodyParser from 'body-parser';
+import { envConfig } from 'config';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { config } from 'dotenv';
@@ -12,8 +9,12 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import morganBody from 'morgan-body';
 import { scheduleJob } from 'node-schedule';
+import { authRouter } from 'routes/auth.router';
 import priceController from 'routes/price';
+import { squadsRouter } from 'routes/squads.router';
 import { syncCommunity } from 'service/community-sync/syncCommunity';
+
+import logger from './middleware/logger';
 
 const main = async () => {
   config();
@@ -43,9 +44,9 @@ const main = async () => {
     res.send('Server is running');
   });
 
-  app.use(basePath + "/token", tokenRouter);
-  app.use(basePath + "/auth", authRouter);
-  app.use(basePath + "/squads", squadsRouter);
+  app.use(basePath + '/token', tokenRouter);
+  app.use(basePath + '/auth', authRouter);
+  app.use(basePath + '/squads', squadsRouter);
   app.use(basePath + '/price/', priceController);
 
   app.listen(PORT, async () => {

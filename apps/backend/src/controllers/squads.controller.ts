@@ -1,31 +1,58 @@
-import type { Request, Response } from "express";
-import * as anchor from "@coral-xyz/anchor";
-import fs from "fs";
-import { getVault, getMsAddress, getAllTx } from "utils/squads";
+import * as anchor from '@coral-xyz/anchor';
+import * as sqds from '@sqds/multisig';
+import type { Request, Response } from 'express';
 
-const keyPair = anchor.web3.Keypair.fromSecretKey(
-  Uint8Array.from(JSON.parse(fs.readFileSync(process.env.KEYPAIR!).toString()))
-);
+const RPC_URL = process.env.RPC_URL || 'https://rpc.cubik.so';
 
-const wallet = new anchor.Wallet(keyPair);
+const connection = new anchor.web3.Connection(RPC_URL);
+
+const { Multisig, VaultTransaction, Proposal } = sqds.accounts;
 
 export const getSquadsTxs = async (req: Request, res: Response) => {
   try {
-    /*
-    1. get createKey of multisig
-    2. get multisig pda
-    3. get all transactions for that pda
-    4. get all ixs for each txs
-    */
     const { createKey } = req.query;
-    // const squads = await getSquads(wallet);
-    const multiSigAccount = await getMsAddress(wallet, createKey as string);
-    const vault = await getVault(wallet, multiSigAccount);
-    const txs = await getAllTx(wallet, createKey as string);
+    const [multisigPda] = sqds.getMultisigPda({
+      createKey: new anchor.web3.PublicKey(createKey as string),
+    });
+
+    const multisigAccount = await Multisig.fromAccountAddress(
+      connection,
+      multisigPda,
+    );
+
+    const getTxsPromise = [];
+    const getProposalsPromise = [];
+    let allTxs: sqds.generated.VaultTransaction[] = [];
+    let allProposals: sqds.generated.Proposal[] = [];
+
+    for (let i = 0; i < Number(multisigAccount.transactionIndex); i++) {
+      const [transactionPda] = sqds.getTransactionPda({
+        multisigPda,
+        index: BigInt(i + 1),
+      });
+
+      getTxsPromise.push(
+        VaultTransaction.fromAccountAddress(connection, transactionPda),
+      );
+
+      const [proposalPda] = sqds.getProposalPda({
+        multisigPda,
+        transactionIndex: BigInt(i + 1),
+      });
+
+      getProposalsPromise.push(
+        Proposal.fromAccountAddress(connection, proposalPda),
+      );
+
+      allTxs = await Promise.all(getTxsPromise);
+      allProposals = await Promise.all(getProposalsPromise);
+    }
 
     res.status(200).json({
-      vault,
-      txs,
+      msMembers: multisigAccount.members,
+      multisigAccount,
+      allTxs,
+      allProposals,
     });
   } catch (error) {
     console.error(error);

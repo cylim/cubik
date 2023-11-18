@@ -32,3 +32,27 @@ export const fetchSolPrice = async () => {
   const price = response.data.data[WRAPPED_SOL.toString()].price;
   return price;
 };
+
+export const txBuilder = async (
+  swapRoute: any,
+  wallet: anchor.web3.PublicKey,
+) => {
+  try {
+    const transactions = await axios.post('https://quote-api.jup.ag/v6/swap', {
+      quoteResponse: swapRoute,
+      userPublicKey: wallet.toString(),
+      asLegacyTransaction: true,
+    });
+
+    const { swapTransaction } = transactions.data;
+
+    const transaction = anchor.web3.Transaction.from(
+      Buffer.from(swapTransaction, 'base64'),
+    );
+
+    return transaction;
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
+};

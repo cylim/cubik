@@ -1,6 +1,8 @@
 import * as anchor from '@coral-xyz/anchor';
 import axios from 'axios';
 
+import { Token } from '@cubik/common-types/src/token';
+
 export const USDC_TOKEN = new anchor.web3.PublicKey(
   'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
 );
@@ -9,14 +11,14 @@ export const WRAPPED_SOL = new anchor.web3.PublicKey(
 );
 
 export const fetchPossibleSwapRoute = async (
-  inputToken: string,
+  inputToken: Token,
   amount: number,
 ) => {
   const response = await axios.get('https://quote-api.jup.ag/v6/quote', {
     params: {
-      inputMint: inputToken,
-      outputMint: USDC_TOKEN.toString(),
-      amount: new anchor.BN(amount * 10 ** 6).toNumber(),
+      inputMint: inputToken.address,
+      outputMint: USDC_TOKEN.toBase58(),
+      amount: new anchor.BN(amount * 10 ** inputToken.decimals).toNumber(),
       swapMode: 'ExactOut',
       slippageBps: 50,
       asLegacyTransaction: true,
@@ -33,7 +35,7 @@ export const fetchSolPrice = async () => {
   return price;
 };
 
-export const txBuilder = async (
+export const txBuilderJupiter = async (
   swapRoute: any,
   wallet: anchor.web3.PublicKey,
 ) => {

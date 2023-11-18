@@ -19,6 +19,8 @@
     "@cubik/auth": "workspace:^",
     "@cubik/common-types": "workspace:*",
     "@cubik/database": "workspace:*",
+    "@sqds/multisig": "^1.10.0",
+    "@sqds/sdk": "^2.0.4",
     "@types/body-parser": "^1.19.2",
     "@types/request-ip": "^0.0.38",
     "axios": "^1.3.4",

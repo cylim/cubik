@@ -3,7 +3,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { EmptyStateHOC } from '@/app/components/common/empty-state/EmptyStateHOC';
-import { Button, Center, Spinner } from '@/utils/chakra';
+import { Spinner } from '@/utils/chakra';
+
+import { Button } from '@cubik/ui';
 
 import { ContributionTable } from './ContributionTable';
 import type { ContributionRowType } from './index';
@@ -24,12 +26,7 @@ export const Contributions = ({ contributions, isLoading }: Props) => {
 
   if (contributions?.length === 0) {
     return (
-      <Center
-        w="full"
-        border="1px dashed"
-        borderColor={'neutral.3'}
-        rounded="12px"
-      >
+      <div className="flex w-full items-center justify-center rounded-xl border border-dashed border-neutral-300">
         <EmptyStateHOC
           heading={'No Contributions Yet'}
           subHeading={
@@ -37,16 +34,11 @@ export const Contributions = ({ contributions, isLoading }: Props) => {
           }
           CTA={
             <Link href="/projects">
-              <Button
-                variant="cubikFilled"
-                size={{ base: 'cubikMini', md: 'cubikSmall' }}
-              >
-                Make a contribution
-              </Button>
+              <Button variant={'primary'}>Make a contribution</Button>
             </Link>
           }
         />
-      </Center>
+      </div>
     );
   }
   return <ContributionTable contribution={contributions ?? []} />;

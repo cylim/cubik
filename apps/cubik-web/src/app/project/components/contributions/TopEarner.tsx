@@ -1,8 +1,6 @@
 import React from 'react';
 import ProfilePictureAvatar from '@/app/components/common/profile-picture';
 import {
-  Box,
-  HStack,
   Table,
   TableContainer,
   Tbody,
@@ -11,7 +9,6 @@ import {
   Th,
   Thead,
   Tr,
-  VStack,
 } from '@/utils/chakra';
 import { useQuery } from '@tanstack/react-query';
 
@@ -30,9 +27,9 @@ export const TopEarner = () => {
   });
 
   return (
-    <VStack mt={4} w="full" align={'start'}>
-      <HStack align={'center'}>
-        <Box borderRadius={4} border={'1.5px solid #2B1449'} p={2}>
+    <div className="mt-4 flex w-full flex-col items-start">
+      <div className="flex items-center gap-2">
+        <div className="rounded-md border-[1.5px] border-[#2B1449] p-2">
           <svg
             width="18"
             height="18"
@@ -48,11 +45,10 @@ export const TopEarner = () => {
               strokeLinejoin="round"
             />
           </svg>
-        </Box>
-        <Box color={'white'} fontSize={'lg'} fontWeight={600}>
-          Top Contributors
-        </Box>
-      </HStack>
+        </div>
+
+        <div className="text-lg font-semibold text-white">Top Contributors</div>
+      </div>
       <TableContainer mt={4} w={'full'}>
         <Table variant={'unstyled'} w={'full'}>
           <Thead color="neutral.8" fontFamily={'Inter'}>
@@ -102,7 +98,7 @@ export const TopEarner = () => {
                     </span>
                   </Td>
                   <Td p={1}>
-                    <HStack align={'start'} gap={2}>
+                    <div className="flex items-start gap-2">
                       <ProfilePictureAvatar
                         NFTProfile={
                           earner.user?.profileNft as unknown as NFTProfile
@@ -129,15 +125,16 @@ export const TopEarner = () => {
                           xl: '36px',
                         }}
                       />
-                      <Box color={'white'} fontWeight={600} fontSize={'md'}>
+
+                      <div className="text-md font-semibold text-white">
                         @{earner.user?.username}
-                      </Box>
-                    </HStack>
+                      </div>
+                    </div>
                   </Td>
                   <Td textAlign="end" p={1}>
-                    <Text color={'white'} fontWeight={600}>
+                    <div className="font-semibold text-white">
                       ${earner.totalUsdAmount}
-                    </Text>
+                    </div>
                   </Td>
                 </Tr>
               );
@@ -145,6 +142,6 @@ export const TopEarner = () => {
           </Tbody>
         </Table>
       </TableContainer>
-    </VStack>
+    </div>
   );
 };

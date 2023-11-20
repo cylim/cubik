@@ -1,7 +1,6 @@
 'use client';
 
 import React, { Suspense, useState } from 'react';
-import { Container, VStack } from '@/utils/chakra';
 import { useQuery } from '@tanstack/react-query';
 
 import type { Prisma } from '@cubik/database';
@@ -44,34 +43,19 @@ export const ContributionSection = () => {
   return (
     <>
       <Suspense fallback={'Loading...'}>
-        <Container
-          display={'flex'}
-          flexDirection={{
-            base: 'column',
-            lg: 'row',
-          }}
-          w={'full'}
-          maxW={'7xl'}
-          mx={'auto'}
-          gap={10}
-        >
-          <VStack w="full">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 lg:flex-row">
+          <div className="flex w-full flex-col">
             <Contributions
               isLoading={contributions.isLoading}
               contributions={contributions.data ?? []}
             />
-          </VStack>
-          <VStack
-            w={'full'}
-            maxW={{
-              base: 'full',
-              lg: 'sm',
-            }}
-          >
+          </div>
+
+          <div className="flex w-full max-w-full flex-col lg:max-w-sm">
             <VaultInfo />
             <TopEarner />
-          </VStack>
-        </Container>
+          </div>
+        </div>
       </Suspense>
     </>
   );

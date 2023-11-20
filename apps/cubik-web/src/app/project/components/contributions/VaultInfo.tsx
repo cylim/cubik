@@ -1,12 +1,11 @@
 import React from 'react';
-import { Box, HStack, VStack } from '@/utils/chakra';
 
 export const VaultInfo = () => {
   return (
-    <VStack align={'start'} w="full">
-      <HStack align={'center'} justify={'space-between'} w="full">
-        <HStack>
-          <Box borderRadius={4} border={'1.5px solid #241E00'} p={2}>
+    <div className="flex w-full flex-col items-start">
+      <div className="flex w-full items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div className="rounded-md border-[1.5px] border-[#241E00] p-2">
             <svg
               width="18"
               height="18"
@@ -22,12 +21,12 @@ export const VaultInfo = () => {
                 strokeLinejoin="round"
               />
             </svg>
-          </Box>
-          <Box color={'white'} fontSize={'lg'} fontWeight={600}>
+          </div>
+          <div className="text-lg font-semibold text-white">
             Project Treasury
-          </Box>
-        </HStack>
-        <Box>
+          </div>
+        </div>
+        <div>
           <svg
             width="25"
             height="24"
@@ -57,15 +56,15 @@ export const VaultInfo = () => {
               strokeLinejoin="round"
             />
           </svg>
-        </Box>
-      </HStack>
-      <HStack h={20} align={'end'}>
-        <VStack gap={0} align={'start'}>
-          <Box color={'white'} fontSize={'xl'} fontWeight={600}>
-            $333
-          </Box>
-          <HStack gap={0}>
-            <Box>
+        </div>
+      </div>
+
+      <div className="flex h-20 items-end">
+        <div className="flex flex-col items-start gap-0">
+          <div className="text-xl font-semibold text-white">$333</div>
+
+          <div className="flex items-center gap-0">
+            <div>
               <svg
                 width="14"
                 height="14"
@@ -80,13 +79,12 @@ export const VaultInfo = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-            </Box>
-            <Box color={'#31B702'} fontSize={'md'} fontWeight={600}>
-              00%
-            </Box>
-          </HStack>
-        </VStack>
-      </HStack>
-    </VStack>
+            </div>
+
+            <div className="text-md font-semibold text-[#31B702]">00%</div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };

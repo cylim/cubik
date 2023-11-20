@@ -24,15 +24,9 @@ export const Description = ({ longDescription }: Props) => {
     p: (props: any) => {
       const { children } = props;
       return (
-        <Text
-          fontSize={{ base: '14px', md: '16px' }}
-          lineHeight={{ base: '22px', md: '24px' }}
-          fontWeight="400"
-          letterSpacing="normal"
-          color="#D7E0DF"
-        >
+        <p className="text-xs font-normal leading-5 text-[#D7E0DF] md:text-sm md:leading-6">
           {children}
-        </Text>
+        </p>
       );
     },
     h1: (props: any) => {

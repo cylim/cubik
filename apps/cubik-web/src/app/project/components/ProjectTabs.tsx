@@ -1,13 +1,6 @@
 import React from 'react';
-import {
-  Box,
-  HStack,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-} from '@/utils/chakra';
+
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
 
 import { ContributionSection } from './contributions/index';
 import { DetailSection } from './details';
@@ -20,47 +13,43 @@ interface Props {
 export const ProjectTabs = ({ slug }: Props) => {
   return (
     <>
-      <Box
-        display={'flex'}
-        w="full"
-        flexDir="column"
-        alignItems={{ base: 'end', lg: 'center' }}
-        minH={'30rem'}
-      >
-        <Tabs variant={'cubik'} alignSelf={'start'} w="full">
-          <Box bg={'cubik.grey.700'} w={'full'}>
-            <TabList
-              w="full"
-              maxW={'7xl'}
-              mx={'auto'}
-              overflowY={{ base: 'hidden', md: 'inherit' }}
-              overflowX={{ base: 'scroll', md: 'inherit' }}
-            >
-              <Tab>About</Tab>
-              <Tab>Contributions</Tab>
-              <Tab>Team</Tab>
-              <Tab>
-                <HStack>
-                  <Box>More</Box>
-                </HStack>
+      <div className="flex min-h-[30rem] w-full flex-col items-end lg:items-center">
+        <Tabs
+          defaultValue={0}
+          size="md"
+          className="md:overflow-x-inherit w-full overflow-y-hidden overflow-x-scroll bg-[#212121] pb-0"
+        >
+          <div className="mx-auto max-w-7xl">
+            <TabList className=" ">
+              <Tab value={0}>
+                <div className="p-2 text-base font-semibold">About</div>
+              </Tab>
+              <Tab value={1}>
+                <div className="p-2">Contributions</div>
+              </Tab>
+              <Tab value={2}>
+                <div className="p-2">Team</div>
+              </Tab>
+              <Tab value={3}>
+                <div className="p-2">More</div>
               </Tab>
             </TabList>
-          </Box>
-          <TabPanels p="0">
-            <TabPanel>
-              {/* @ts-expect-error  Async Server Component   */}
+          </div>
+
+          <TabPanels className="bg-[#0D0D0D]">
+            <TabPanel value={0}>
               <DetailSection slug={slug} />
             </TabPanel>
-            <TabPanel>
+            <TabPanel value={1}>
               <ContributionSection />
             </TabPanel>
-            <TabPanel>
-              {/* @ts-expect-error  Async Server Component   */}
+            <TabPanel value={2}>
               <TeamSection slug={slug} />
             </TabPanel>
+            <TabPanel value={3}>.</TabPanel>
           </TabPanels>
         </Tabs>
-      </Box>
+      </div>
     </>
   );
 };

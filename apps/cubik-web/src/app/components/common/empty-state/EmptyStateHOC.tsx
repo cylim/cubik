@@ -16,9 +16,9 @@ export const EmptyStateHOC = ({
 }) => {
   return (
     <div
-      className={`mx-auto flex w-full flex-col items-center justify-center rounded-xl p-24 ${
+      className={`mx-auto flex w-full flex-col items-center justify-center gap-2 rounded-xl p-24 ${
         margin ? 'my-' + margin : 'my-24'
-      } gap-4 border border-dashed border-neutral-200`}
+      } `}
     >
       {children ? (
         <>{children}</>
@@ -88,7 +88,7 @@ export const EmptyStateHOC = ({
         </div>
       )}
 
-      <div className="flex w-full flex-col gap-2">
+      <div className="flex w-full flex-col items-center justify-center gap-4">
         <div className="mx-auto max-w-[24rem] text-center text-2xl text-gray-700">
           {heading}
         </div>

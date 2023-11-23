@@ -14,7 +14,7 @@ export const Popover = ({ content, trigger, open, setOpen }: Props) => {
     <RadixPopover.Root open={open} onOpenChange={() => setOpen(!open)}>
       <RadixPopover.Trigger>{trigger}</RadixPopover.Trigger>
       <RadixPopover.Portal>
-        <RadixPopover.Content side={'top'}>
+        <RadixPopover.Content side={'top'} className="z-[20]">
           <>
             {content} <RadixPopover.Arrow className="PopoverArrow" />
           </>

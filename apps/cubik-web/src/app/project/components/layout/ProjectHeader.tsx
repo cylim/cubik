@@ -4,8 +4,6 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { ProjectPageLayoutType } from '@/types/project';
-import { Box, Stack } from '@/utils/chakra';
-import { InterFont } from '@/utils/fonts/inter';
 import { parseDateISO } from '@/utils/helpers/date';
 import { isFuture } from 'date-fns';
 

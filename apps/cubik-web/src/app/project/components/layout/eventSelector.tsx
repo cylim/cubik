@@ -3,13 +3,8 @@
 import React, { useEffect } from 'react';
 import type { ProjectPageEventType } from '@/types/project';
 import { Button, Menu, MenuButton, MenuItem, MenuList } from '@/utils/chakra';
-import {
-  isFutureAndHowMuch,
-  isPastAndHowMuch,
-  parseDateISO,
-} from '@/utils/helpers/date';
-import { daysInWeek, isFuture, isPast } from 'date-fns';
-import { DateTime } from 'luxon';
+import { parseDateISO } from '@/utils/helpers/date';
+import { isFuture, isPast } from 'date-fns';
 
 import { useProjectEventStore } from '../store';
 

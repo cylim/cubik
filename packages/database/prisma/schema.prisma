@@ -15,7 +15,6 @@ model User {
   mainWallet       String             @unique
   email            String?
   profileNft       Json?
-  userSybil        UserSybilStatus    @default(NONE)
   profilePicture   String?            @db.VarChar(500)
   tx               String?            @db.VarChar(500)
   createdAt        DateTime           @default(now())
@@ -34,6 +33,7 @@ model User {
   Activity         Activity[]
   CommunityMembers CommunityMembers[]
   Notification     Notification[]
+  Event            Event[]
 
   @@fulltext([username])
 }
@@ -45,7 +45,7 @@ model Communities {
   background       String             @db.VarChar(500)
   shortDescription String             @db.VarChar(2000)
   method           COMM
-  collection       Json? // {collection:string}[]
+  collection       Json?
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   isArchive        Boolean            @default(true)
@@ -64,36 +64,6 @@ model CommunityMembers {
 
   @@index([userId])
   @@index([communityId])
-}
-
-enum COMM {
-  DISCORD
-  MINT_ADD
-  LIST_ADD
-}
-
-enum ActivityType {
-  WELCOME
-  CREATE_NEW_PROJECT
-  PROJECT_STATUS_APPROVED
-  PROJECT_STATUS_REJECTED
-  PROJECT_JOIN_ROUND
-  PROJECT_JOIN_ROUND_APPROVED
-  PROJECT_JOIN_ROUND_REJECTED
-  PROOF_COLLECTED
-  PROJECT_BAN_IN_ROUND
-  CONTRIBUTION_TO_PROJECT
-  CONTRIBUTION_TO_USER
-  GENERIC
-}
-
-enum NotificationType {
-  PROJECT_STATUS_APPROVED
-  PROJECT_STATUS_REJECTED
-  CONTRIBUTION_TO_PROJECT
-  CONTRIBUTION_TO_USER
-  PROJECT_JOIN_ROUND_APPROVED
-  PROJECT_JOIN_ROUND_REJECTED
 }
 
 model Activity {
@@ -136,7 +106,6 @@ model Proof {
   isActive  Boolean   @default(true)
   isArchive Boolean   @default(false)
   user      User      @relation(fields: [userId], references: [id])
-  pda       String?   @unique
 
   @@index([userId])
 }
@@ -189,9 +158,52 @@ model Project {
   contribution         Contribution[]
   team                 Team[]
   projectJoinHackathon ProjectJoinHackathon[]
-  pda                  String?                @unique
+  ProjectEventJoin     ProjectEventJoin[]
 
   @@index([ownerPublickey])
+}
+
+model Event {
+  id               String             @id @default(uuid()) @map("_id")
+  name             String
+  slug             String?            @unique
+  background       String?            @default("")
+  logo             String?            @default("")
+  matchedPool      Float              @default(0)
+  userId           String
+  type             EventType
+  description      String             @db.Text
+  shortDescription String             @default("") @db.VarChar(2000)
+  user             User               @relation(fields: [userId], references: [id])
+  isActive         Boolean            @default(true)
+  isArchive        Boolean            @default(false)
+  tx               String             @db.VarChar(500)
+  timeline         Json
+  sponsor          Sponsor[]
+  projectJoinRound ProjectJoinRound[]
+  contribution     Contribution[]
+  AdminAccess      AdminAccess[]
+  ProjectEventJoin ProjectEventJoin[]
+
+  @@index([userId])
+}
+
+model ProjectEventJoin {
+  id                    String         @id @default(uuid()) @map("_id")
+  eventId               String
+  type                  EventType
+  amount                Float          @default(0)
+  communityContribution Float          @default(0)
+  Project               Project        @relation(fields: [projectId], references: [id])
+  Event                 Event          @relation(fields: [eventId], references: [id])
+  Contribution          Contribution[]
+  projectId             String
+  tx                    String         @db.VarChar(500)
+  isActive              Boolean        @default(true)
+  isArchive             Boolean        @default(false)
+
+  @@index([eventId])
+  @@index([projectId])
 }
 
 model Round {
@@ -220,7 +232,6 @@ model Round {
   projectJoinRound      ProjectJoinRound[]
   contribution          Contribution[]
   AdminAccess           AdminAccess[]
-  pda                   String?            @unique
 
   @@index([userId])
 }
@@ -236,8 +247,11 @@ model Sponsor {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   round     Round    @relation(fields: [roundId], references: [id])
+  Event     Event?   @relation(fields: [eventId], references: [id])
+  eventId   String?
 
   @@index([roundId])
+  @@index([eventId])
 }
 
 model ProjectJoinRound {
@@ -254,10 +268,12 @@ model ProjectJoinRound {
   project       Project                @relation(fields: [projectId], references: [id])
   round         Round                  @relation(fields: [roundId], references: [id])
   contribution  Contribution[]
-  pda           String?                @unique
+  Event         Event?                 @relation(fields: [eventId], references: [id])
+  eventId       String?
 
   @@index([projectId])
   @@index([roundId])
+  @@index([eventId])
 }
 
 model Team {
@@ -366,7 +382,6 @@ model ProjectJoinHackathon {
   hackathon    Hackathon      @relation(fields: [hackathonId], references: [id])
   project      Project        @relation(fields: [projectId], references: [id])
   contribution Contribution[]
-  pda          String?        @unique
 
   @@index([hackathonId])
   @@index([projectId])
@@ -395,7 +410,10 @@ model Contribution {
   hackathon              Hackathon?            @relation(fields: [hackathonId], references: [id])
   projectJoinRound       ProjectJoinRound?     @relation(fields: [projectJoinRoundId], references: [id])
   projectJoinHackathon   ProjectJoinHackathon? @relation(fields: [projectJoinHackathonId], references: [id])
-  pda                    String?               @unique
+  Event                  Event?                @relation(fields: [eventId], references: [id])
+  eventId                String?
+  ProjectEventJoin       ProjectEventJoin?     @relation(fields: [projectEventJoinId], references: [id])
+  projectEventJoinId     String?
 
   @@index([projectId])
   @@index([roundId])
@@ -403,6 +421,8 @@ model Contribution {
   @@index([projectJoinRoundId])
   @@index([hackathonId])
   @@index([projectJoinHackathonId])
+  @@index([eventId])
+  @@index([projectEventJoinId])
 }
 
 model Comments {
@@ -447,10 +467,18 @@ model AdminAccess {
   hackathon   Hackathon? @relation(fields: [hackathonId], references: [id])
   round       Round?     @relation(fields: [roundId], references: [id])
   isActive    Boolean    @default(true)
+  Event       Event?     @relation(fields: [eventId], references: [id])
+  eventId     String?
 
   @@index([userId])
   @@index([hackathonId])
   @@index([roundId])
+  @@index([eventId])
+}
+
+enum EventType {
+  ROUND
+  HACKATHON
 }
 
 enum SponsorShipTier {
@@ -500,4 +528,34 @@ enum ProjectJoinRoundStatus {
   PENDING
   APPROVED
   REJECTED
+}
+
+enum COMM {
+  DISCORD
+  MINT_ADD
+  LIST_ADD
+}
+
+enum ActivityType {
+  WELCOME
+  CREATE_NEW_PROJECT
+  PROJECT_STATUS_APPROVED
+  PROJECT_STATUS_REJECTED
+  PROJECT_JOIN_ROUND
+  PROJECT_JOIN_ROUND_APPROVED
+  PROJECT_JOIN_ROUND_REJECTED
+  PROOF_COLLECTED
+  PROJECT_BAN_IN_ROUND
+  CONTRIBUTION_TO_PROJECT
+  CONTRIBUTION_TO_USER
+  GENERIC
+}
+
+enum NotificationType {
+  PROJECT_STATUS_APPROVED
+  PROJECT_STATUS_REJECTED
+  CONTRIBUTION_TO_PROJECT
+  CONTRIBUTION_TO_USER
+  PROJECT_JOIN_ROUND_APPROVED
+  PROJECT_JOIN_ROUND_REJECTED
 }

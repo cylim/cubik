@@ -9,8 +9,8 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import morganBody from 'morgan-body';
 import { scheduleJob } from 'node-schedule';
-import priceController from 'routes/price';
 import { squadsRouter } from 'routes/squads.router';
+import { TokenRouter } from 'routes/token.router';
 import { syncCommunity } from 'service/community-sync/syncCommunity';
 
 import logger from './middleware/logger';
@@ -44,7 +44,7 @@ const main = async () => {
   });
 
   app.use(basePath + '/squads', squadsRouter);
-  app.use(basePath + '/price/', priceController);
+  app.use(basePath + '/price', TokenRouter);
 
   app.listen(PORT, async () => {
     if (process.env.CRON_ENABLED === '1') {

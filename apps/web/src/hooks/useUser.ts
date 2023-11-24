@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 export interface User {
   id: string;
@@ -13,7 +13,6 @@ interface UserState {
   logout: () => void;
 }
 
-
 export const useUser = create<UserState>()((set) => ({
   setUser: (user) => {
     return set({
@@ -21,9 +20,9 @@ export const useUser = create<UserState>()((set) => ({
     });
   },
   user: null,
-  logout:()=> {
+  logout: () => {
     return set({
-        user: null
-    })
-  }
+      user: null,
+    });
+  },
 }));

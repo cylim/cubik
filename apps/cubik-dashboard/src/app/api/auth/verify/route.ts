@@ -57,12 +57,12 @@ export const POST = async (req: NextRequest) => {
       select: {
         user: true,
         eventId: true,
-        Event:{
-          select:{
-            name:true,
-            type:true
-          }
-        }
+        Event: {
+          select: {
+            name: true,
+            type: true,
+          },
+        },
       },
     });
     if (user.length > 0) {
@@ -72,7 +72,7 @@ export const POST = async (req: NextRequest) => {
         accessScope.push({
           event_id: e.eventId as string,
           event_name: e.Event?.name as string,
-          event_type: e.Event?.type || "ROUND",
+          event_type: e.Event?.type || 'ROUND',
         }),
       );
 

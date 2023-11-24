@@ -33,7 +33,6 @@ const fetchProject = async (
         logo: true,
         projectLink: true,
         mutliSigAddress: true,
-       
       },
     });
     if (!project) {

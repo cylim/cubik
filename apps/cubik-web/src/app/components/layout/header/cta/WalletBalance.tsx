@@ -66,8 +66,8 @@ export const WalletBalance = ({ size }: Props) => {
           ? size === 'sm'
             ? { base: '2px', md: '4px' }
             : size === 'md'
-            ? { base: '6px', md: '10px' }
-            : { base: '8px', md: '12px' }
+              ? { base: '6px', md: '10px' }
+              : { base: '8px', md: '12px' }
           : { base: '2px', md: '2px' }
       }
       px="8px"
@@ -92,8 +92,8 @@ export const WalletBalance = ({ size }: Props) => {
                   ? size === 'sm'
                     ? { base: '18px', md: '20px' }
                     : size === 'md'
-                    ? { base: '24px', md: '30px' }
-                    : { base: '28px', md: '38px' }
+                      ? { base: '24px', md: '30px' }
+                      : { base: '28px', md: '38px' }
                   : { base: '18px', md: '20px' }
               }
             />
@@ -144,8 +144,8 @@ export const WalletBalance = ({ size }: Props) => {
                   {data.nativeBalance / LAMPORTS_PER_SOL === 0
                     ? 0
                     : data.nativeBalance / LAMPORTS_PER_SOL < 0.01
-                    ? (data.nativeBalance / LAMPORTS_PER_SOL).toFixed(4)
-                    : (data.nativeBalance / LAMPORTS_PER_SOL).toFixed(1)}
+                      ? (data.nativeBalance / LAMPORTS_PER_SOL).toFixed(4)
+                      : (data.nativeBalance / LAMPORTS_PER_SOL).toFixed(1)}
                 </Box>
               </Skeleton>
             </HStack>
@@ -164,8 +164,8 @@ export const WalletBalance = ({ size }: Props) => {
                       ? size === 'sm'
                         ? { base: '18px', md: '20px' }
                         : size === 'md'
-                        ? { base: '24px', md: '30px' }
-                        : { base: '28px', md: '38px' }
+                          ? { base: '24px', md: '30px' }
+                          : { base: '28px', md: '38px' }
                       : { base: '18px', md: '20px' }
                   }
                 />
@@ -203,8 +203,8 @@ export const WalletBalance = ({ size }: Props) => {
                   {tokenBalance === 0
                     ? 0
                     : tokenBalance < 0.01
-                    ? tokenBalance.toFixed(4)
-                    : formatNumberWithK(+tokenBalance.toFixed(1))}
+                      ? tokenBalance.toFixed(4)
+                      : formatNumberWithK(+tokenBalance.toFixed(1))}
                 </Box>
               </Skeleton>
               <Skeleton isLoaded={!priceLoading}>
@@ -223,8 +223,8 @@ export const WalletBalance = ({ size }: Props) => {
                   {tokenBalance === 0
                     ? 0
                     : tokenBalance < 0.01
-                    ? tokenBalance.toFixed(4)
-                    : formatNumberWithK(+tokenBalance.toFixed(1))}
+                      ? tokenBalance.toFixed(4)
+                      : formatNumberWithK(+tokenBalance.toFixed(1))}
                 </Box>
               </Skeleton>
             </HStack>

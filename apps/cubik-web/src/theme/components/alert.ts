@@ -38,12 +38,12 @@ const cubik = definePartsStyle((props) => {
         status === 'error'
           ? '#FF333D'
           : status === 'warning'
-          ? 'yellow.400'
-          : status === 'info'
-          ? '#1D1F1E'
-          : status === 'success'
-          ? 'green.400'
-          : 'gray.400',
+            ? 'yellow.400'
+            : status === 'info'
+              ? '#1D1F1E'
+              : status === 'success'
+                ? 'green.400'
+                : 'gray.400',
       background: '#0C0D0D',
     },
     icon: {
@@ -54,36 +54,36 @@ const cubik = definePartsStyle((props) => {
         status === 'error'
           ? '#FF333D'
           : status === 'warning'
-          ? 'yellow.400'
-          : status === 'info'
-          ? '#636666'
-          : status === 'success'
-          ? 'green.400'
-          : 'gray.400',
+            ? 'yellow.400'
+            : status === 'info'
+              ? '#636666'
+              : status === 'success'
+                ? 'green.400'
+                : 'gray.400',
     },
     title: {
       color:
         status === 'error'
           ? '#FF333D'
           : status === 'warning'
-          ? 'yellow.400'
-          : status === 'info'
-          ? '#636666'
-          : status === 'success'
-          ? 'green.400'
-          : 'gray.400',
+            ? 'yellow.400'
+            : status === 'info'
+              ? '#636666'
+              : status === 'success'
+                ? 'green.400'
+                : 'gray.400',
     },
     description: {
       color:
         status === 'error'
           ? '#FF333D'
           : status === 'warning'
-          ? 'yellow.400'
-          : status === 'info'
-          ? '#636666'
-          : status === 'success'
-          ? 'green.400'
-          : 'gray.400',
+            ? 'yellow.400'
+            : status === 'info'
+              ? '#636666'
+              : status === 'success'
+                ? 'green.400'
+                : 'gray.400',
     },
   };
 });

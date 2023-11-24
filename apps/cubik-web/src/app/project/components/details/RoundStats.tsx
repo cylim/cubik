@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { Box, HStack, VStack } from '@chakra-ui/react';
 import { useQuery } from '@tanstack/react-query';
 
 import { useProjectEventStore } from '../store';
@@ -20,9 +19,9 @@ export const RoundStats = () => {
 
   return (
     <>
-      <VStack gap={4} align={'start'} w="full">
-        <HStack align={'start'}>
-          <Box>
+      <div className="flex w-full flex-col items-start gap-4">
+        <div className="flex items-start">
+          <div>
             <svg
               width="24"
               height="24"
@@ -38,28 +37,12 @@ export const RoundStats = () => {
                 strokeLinejoin="round"
               />
             </svg>
-          </Box>
-          <Box color={'white'} fontSize={'xl'} fontWeight={700}>
-            Round Stats
-          </Box>
-        </HStack>
-        <HStack
-          borderRadius={8}
-          p={4}
-          w="full"
-          border={'1.5px solid'}
-          borderColor={'#1A1A1A'}
-        >
-          <Box
-            border={'1.5px solid'}
-            borderColor={'#003810'}
-            fontSize={'md'}
-            display={'flex'}
-            justifyContent={'center'}
-            alignItems={'center'}
-            p={3}
-            borderRadius={8}
-          >
+          </div>
+
+          <div className="text-xl font-bold text-white">Round Stats</div>
+        </div>
+        <div className="w-full rounded-[2rem] border-[1.5px] border-[#1A1A1A] p-4">
+          <div className="font-md flex items-center justify-center rounded-[2rem] border-[1.5px] border-[#003810] p-3">
             <svg
               width="24"
               height="24"
@@ -75,34 +58,20 @@ export const RoundStats = () => {
                 strokeLinejoin="round"
               />
             </svg>
-          </Box>
-          <VStack align={'start'} spacing={0}>
-            <Box color={'white'} opacity={0.6} fontSize={'sm'} fontWeight={700}>
-              Estimated Match
-            </Box>
-            <Box color={'white'} fontSize={'lg'} fontWeight={700}>
-              ${stats.data?.estimatedMatch.toFixed(2)}
-            </Box>
-          </VStack>
-        </HStack>
+          </div>
 
-        <HStack
-          borderRadius={8}
-          p={4}
-          w="full"
-          border={'1.5px solid'}
-          borderColor={'#1A1A1A'}
-        >
-          <Box
-            border={'1.5px solid'}
-            borderColor={'#312C00'}
-            fontSize={'md'}
-            display={'flex'}
-            justifyContent={'center'}
-            alignItems={'center'}
-            p={3}
-            borderRadius={8}
-          >
+          <div className="flex flex-col items-start">
+            <div className="text-sm font-bold text-white opacity-60">
+              Estimated Match
+            </div>
+            <div className="text-lg font-bold text-white">
+              ${stats.data?.estimatedMatch.toFixed(2)}
+            </div>
+          </div>
+        </div>
+
+        <div className="w-full rounded-[2rem] border-[1.5px] border-[#1A1A1A] p-4">
+          <div className="font-md flex items-center justify-center rounded-[2rem] border-[1.5px] border-[#312C00] p-3">
             <svg
               width="24"
               height="22"
@@ -118,34 +87,20 @@ export const RoundStats = () => {
                 strokeLinejoin="round"
               />
             </svg>
-          </Box>
-          <VStack align={'start'} spacing={0}>
-            <Box color={'white'} opacity={0.6} fontSize={'sm'} fontWeight={700}>
-              Community Contributions
-            </Box>
-            <Box color={'white'} fontSize={'lg'} fontWeight={700}>
-              ${stats.data?.communityMatch}
-            </Box>
-          </VStack>
-        </HStack>
+          </div>
 
-        <HStack
-          borderRadius={8}
-          p={4}
-          w="full"
-          border={'1.5px solid'}
-          borderColor={'#1A1A1A'}
-        >
-          <Box
-            border={'1.5px solid'}
-            borderColor={'#1B0D2E'}
-            fontSize={'md'}
-            display={'flex'}
-            justifyContent={'center'}
-            alignItems={'center'}
-            p={3}
-            borderRadius={8}
-          >
+          <div className="flex flex-col items-start">
+            <div className="text-sm font-bold text-white opacity-60">
+              Community Contributions
+            </div>
+            <div className="text-lg font-bold text-white">
+              ${stats.data?.communityMatch}
+            </div>
+          </div>
+        </div>
+
+        <div className="flex w-full rounded-md border border-gray-800 p-4">
+          <div className="font-md flex items-center justify-center rounded-[2rem] border-[1.5px] border-[#1B0D2E] p-3">
             <svg
               width="24"
               height="24"
@@ -161,17 +116,18 @@ export const RoundStats = () => {
                 strokeLinejoin="round"
               />
             </svg>
-          </Box>
-          <VStack align={'start'} spacing={0}>
-            <Box color={'white'} opacity={0.6} fontSize={'sm'} fontWeight={700}>
+          </div>
+
+          <div className="flex flex-col items-start">
+            <div className="text-sm font-bold text-white opacity-60">
               Contributors
-            </Box>
-            <Box color={'white'} fontSize={'lg'} fontWeight={700}>
+            </div>
+            <div className="text-lg font-bold text-white">
               {stats.data?.contributors}
-            </Box>
-          </VStack>
-        </HStack>
-      </VStack>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

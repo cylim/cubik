@@ -30,12 +30,8 @@ export async function generateMetadata(
           comments: true,
         },
       },
-     
-      
     },
   });
-
-
 
   const newImage = `/api/og?name=${utils.bytes.base64.encode(
     Buffer.from(project?.name ?? 'default'),

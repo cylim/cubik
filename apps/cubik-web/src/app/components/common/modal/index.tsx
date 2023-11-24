@@ -40,9 +40,7 @@ export const CustomModal = ({ children }: Props) => {
 
   return (
     <>
-    <div className='bg-[rgba(0, 0, 0.10)] min-h-screen'>
-    sss
-    </div>
+      <div className="bg-[rgba(0, 0, 0.10)] min-h-screen">sss</div>
     </>
   );
 };

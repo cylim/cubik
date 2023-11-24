@@ -9,12 +9,9 @@ import {
 } from '@solana/wallet-adapter-react';
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import {
-  BackpackWalletAdapter,
   CoinbaseWalletAdapter,
-  GlowWalletAdapter,
   PhantomWalletAdapter,
   SolflareWalletAdapter,
-  SolletExtensionWalletAdapter,
   TokenaryWalletAdapter,
   TorusWalletAdapter,
 } from '@solana/wallet-adapter-wallets';
@@ -27,19 +24,7 @@ const WalletContext: FC<{ children: ReactNode }> = ({ children }) => {
       ? WalletAdapterNetwork.Mainnet
       : WalletAdapterNetwork.Devnet;
   const endpoint = useMemo(() => web3.clusterApiUrl(network), [network]);
-  const wallets = useMemo(
-    () => [
-      new BackpackWalletAdapter(),
-      new CoinbaseWalletAdapter(),
-      new GlowWalletAdapter(),
-      new PhantomWalletAdapter(),
-      new SolflareWalletAdapter(),
-      new SolletExtensionWalletAdapter(),
-      new TorusWalletAdapter(),
-      new TokenaryWalletAdapter(),
-    ],
-    [],
-  );
+  const wallets = useMemo(() => [], []);
 
   return (
     <ConnectionProvider endpoint={endpoint}>

@@ -56,16 +56,13 @@ export const POST = async (req: NextRequest) => {
       },
       select: {
         user: true,
-        hackathon: {
-          select: {
-            name: true,
-          },
-        },
-        round: {
-          select: {
-            name: true,
-          },
-        },
+        eventId: true,
+        Event:{
+          select:{
+            name:true,
+            type:true
+          }
+        }
       },
     });
     if (user.length > 0) {
@@ -73,11 +70,9 @@ export const POST = async (req: NextRequest) => {
 
       user.forEach((e) =>
         accessScope.push({
-          event_id: e.roundId || (e.hackathonId as string),
-          event_name: e.roundId
-            ? (e.round?.name as string)
-            : (e.hackathon?.name as string),
-          event_type: e.roundId ? 'grant' : 'hackathon',
+          event_id: e.eventId as string,
+          event_name: e.Event?.name as string,
+          event_type: e.Event?.type || "ROUND",
         }),
       );
 

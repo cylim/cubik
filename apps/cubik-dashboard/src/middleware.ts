@@ -6,7 +6,6 @@ export async function middleware(req: NextRequest) {
   const isDashboardInMaintenanceMode = await get<boolean>(
     'isDashboardInMaintenanceMode',
   );
-  console.log(isDashboardInMaintenanceMode);
   if (!isDashboardInMaintenanceMode) {
     return NextResponse.rewrite(new URL('/maintenance', req.url));
   }

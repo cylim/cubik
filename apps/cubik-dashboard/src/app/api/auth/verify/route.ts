@@ -55,8 +55,6 @@ export const POST = async (req: NextRequest) => {
         isActive: true,
       },
       select: {
-        roundId: true,
-        hackathonId: true,
         user: true,
         hackathon: {
           select: {

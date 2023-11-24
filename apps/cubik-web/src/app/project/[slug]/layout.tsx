@@ -33,67 +33,36 @@ const fetchProject = async (
         logo: true,
         projectLink: true,
         mutliSigAddress: true,
-        projectJoinHackathon: {
-          where: {
-            isArchive: false,
-          },
-          select: {
-            id: true,
-            hackathonId: true,
-            hackathon: {
-              select: {
-                name: true,
-                votingStartDate: true,
-                votingEndDate: true,
-              },
-            },
-          },
-        },
-        projectJoinRound: {
-          where: {
-            isArchive: false,
-          },
-          select: {
-            id: true,
-            roundId: true,
-            round: {
-              select: {
-                name: true,
-                startTime: true,
-                endTime: true,
-              },
-            },
-          },
-        },
+       
       },
     });
     if (!project) {
       return [null, null];
     }
-    const hackathons: ProjectPageEventType[] = project.projectJoinHackathon.map(
-      (hackathon) => {
-        return {
-          eventId: hackathon.hackathonId,
-          eventType: 'hackathon',
-          name: hackathon.hackathon.name,
-          joinId: hackathon.id,
-          startTime: hackathon.hackathon.votingStartDate || new Date(),
-          endTime: hackathon.hackathon.votingEndDate || new Date(),
-        };
-      },
-    );
-    const rounds: ProjectPageEventType[] = project.projectJoinRound.map(
-      (round) => {
-        return {
-          eventId: round.roundId,
-          eventType: 'round',
-          name: round.round.name,
-          joinId: round.id,
-          startTime: round.round.startTime,
-          endTime: round.round.endTime,
-        };
-      },
-    );
+    // const hackathons: ProjectPageEventType[] = project.projectJoinHackathon.map(
+    //   (hackathon) => {
+    //     return {
+    //       eventId: hackathon.hackathonId,
+    //       eventType: 'hackathon',
+    //       name: hackathon.hackathon.name,
+    //       joinId: hackathon.id,
+    //       startTime: hackathon.hackathon.votingStartDate || new Date(),
+    //       endTime: hackathon.hackathon.votingEndDate || new Date(),
+    //     };
+    //   },
+    // );
+    // const rounds: ProjectPageEventType[] = project.projectJoinRound.map(
+    //   (round) => {
+    //     return {
+    //       eventId: round.roundId,
+    //       eventType: 'round',
+    //       name: round.round.name,
+    //       joinId: round.id,
+    //       startTime: round.round.startTime,
+    //       endTime: round.round.endTime,
+    //     };
+    //   },
+    // );
     const layoutData: ProjectPageLayoutType = {
       id: project?.id,
       name: project?.name,
@@ -101,7 +70,7 @@ const fetchProject = async (
       logo: project?.logo,
       projectLink: project?.projectLink,
       mutliSigAddress: project?.mutliSigAddress,
-      events: [...hackathons, ...rounds],
+      events: [],
     };
     return [layoutData, null];
   } catch (error) {

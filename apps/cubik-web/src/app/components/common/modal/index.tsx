@@ -40,35 +40,9 @@ export const CustomModal = ({ children }: Props) => {
 
   return (
     <>
-      <Box
-        zIndex={10}
-        position={'fixed'}
-        top={0}
-        bottom={0}
-        left={0}
-        right={0}
-        mx="auto"
-        bg={'rgba(0, 0, 0, 0.10)'}
-        backdropFilter={'blur(10px)'}
-        ref={overlay}
-        onClick={onClick}
-        minH={'100vh'}
-        mt={20}
-      >
-        <Box
-          w={{
-            base: '90%',
-            md: '80%',
-          }}
-          pb={20}
-          mx="auto"
-          borderRadius={'12px'}
-          overflowY={'auto'}
-          maxHeight={'100vh'}
-        >
-          {children}
-        </Box>
-      </Box>
+    <div className='bg-[rgba(0, 0, 0.10)] min-h-screen'>
+    sss
+    </div>
     </>
   );
 };

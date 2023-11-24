@@ -74,7 +74,7 @@ export default function RootLayout({
       {/* @todo update the colors */}
       <body className={cn(`${PlusJakartaSans.className}`, 'bg-black')}>
         <WalletContext>
-          <AuthProvider>
+          <AuthProvider> 
             <Providers>
               <Header />
               <AxiomWebVitals />

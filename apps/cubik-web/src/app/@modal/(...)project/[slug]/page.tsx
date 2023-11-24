@@ -30,60 +30,12 @@ export async function generateMetadata(
           comments: true,
         },
       },
-      projectJoinHackathon: {
-        where: {
-          hackathon: {
-            isActive: true,
-          },
-        },
-        select: {
-          _count: {
-            select: {
-              contribution: true,
-            },
-          },
-          hackathon: {
-            select: {
-              name: true,
-            },
-          },
-        },
-      },
-      projectJoinRound: {
-        where: {
-          round: {
-            isActive: true,
-          },
-        },
-        select: {
-          _count: {
-            select: {
-              contribution: true,
-            },
-          },
-          round: {
-            select: {
-              name: true,
-            },
-          },
-        },
-      },
+     
+      
     },
   });
 
-  if (
-    project?.projectJoinHackathon &&
-    project?.projectJoinHackathon.length > 0
-  ) {
-    eventName = project?.projectJoinHackathon[0]?.hackathon.name;
-    contributors = project?.projectJoinHackathon[0]?._count.contribution ?? 0;
-  } else if (
-    project?.projectJoinRound &&
-    project?.projectJoinRound.length > 0
-  ) {
-    eventName = project?.projectJoinRound[0]?.round.name;
-    contributors = project?.projectJoinRound[0]?._count.contribution ?? 0;
-  }
+
 
   const newImage = `/api/og?name=${utils.bytes.base64.encode(
     Buffer.from(project?.name ?? 'default'),

@@ -13,7 +13,7 @@ import { clusterApiUrl } from '@solana/web3.js';
 
 require('@solana/wallet-adapter-react-ui/styles.css');
 
-const WalletContext: FC<{ children: ReactNode }> = ({ children }) => {
+const WalletContext = ({ children }:{ children: ReactNode }) => {
   const network =
     env.NEXT_PUBLIC_SOLANA_NETWORK === 'mainnet-beta'
       ? WalletAdapterNetwork.Mainnet

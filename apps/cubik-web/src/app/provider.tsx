@@ -1,9 +1,5 @@
 'use client';
-
 import { useState } from 'react';
-import theme from '@/config/chakra.config';
-import { ChakraProvider } from '@/utils/chakra';
-import { CacheProvider } from '@chakra-ui/next-js';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 export function Providers({ children }: { children: React.ReactNode }) {
@@ -11,9 +7,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <QueryClientProvider client={client}>
-      <CacheProvider>
-        <ChakraProvider theme={theme}>{children}</ChakraProvider>
-      </CacheProvider>
+     {children}
     </QueryClientProvider>
   );
 }

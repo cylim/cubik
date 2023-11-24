@@ -1,5 +1,4 @@
 import "./src/env.mjs";
-// @ts-ignore
 import { PrismaPlugin } from "@prisma/nextjs-monorepo-workaround-plugin";
 import { withAxiom } from "next-axiom"
 import {
@@ -18,10 +17,6 @@ const config = {
     if (isServer) {
       config.plugins = [...config.plugins, new PrismaPlugin()];
     }
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ["@svgr/webpack"],
-    });
     return config;
   },
   transpilePackages: ["@cubik/database", "@cubik/ui"],

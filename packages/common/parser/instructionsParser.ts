@@ -1,5 +1,6 @@
 import { BorshCoder, web3 } from '@coral-xyz/anchor';
-import { IDL } from 'src/types/cubik_contract_v2';
+
+import { IDL } from '../IDL';
 
 const coder = new BorshCoder(IDL);
 

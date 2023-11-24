@@ -1,5 +1,6 @@
 import { BorshCoder, EventParser, web3 } from '@coral-xyz/anchor';
-import { IDL } from 'src/types/cubik_contract_v2';
+
+import { IDL } from '../IDL';
 
 const PROGRAM_ID = new web3.PublicKey(process.env.PROGRAM_ID as string);
 

@@ -1,7 +1,4 @@
-import React, { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { SolanaMobileWalletAdapterWalletName } from '@solana-mobile/wallet-adapter-mobile';
+import React, { ReactNode, useEffect, useMemo, useState } from 'react';
 import {
   Adapter,
   WalletName,
@@ -16,7 +13,7 @@ import {
   useUnifiedWalletContext,
 } from '../../contexts/UnifiedWalletContext';
 import { usePreviouslyConnected } from '../../contexts/WalletConnectionProvider/previouslyConnectedProvider';
-import { isMobile, useOutsideClick } from '../../misc/utils';
+import { isMobile } from '../../misc/utils';
 import { OnboardingFlow } from './Onboarding';
 import { WalletIcon, WalletListItem } from './WalletListItem';
 
@@ -65,7 +62,7 @@ const ListOfWallets: React.FC<{
     ),
     [handleConnectClick, list.others],
   );
-  // console.log('renerwalletlist - ', renderWalletList);
+  console.log('renerwalletlist - ', renderWalletList);
   const hasNoWallets = useMemo(() => {
     return list.highlight.length === 0 && list.others.length === 0;
   }, [list]);
@@ -95,6 +92,7 @@ const ListOfWallets: React.FC<{
         {list.highlight.map((adapter, idx) => {
           return (
             <div
+              className="cursor-pointer pointer-events-auto"
               key={idx}
               onClick={(event) => handleConnectClick(event, adapter)}
             >
@@ -106,10 +104,11 @@ const ListOfWallets: React.FC<{
             </div>
           );
         })}
-        {/* {list.others.map((adapter, idx) => {
+        {list.others.map((adapter, idx) => {
           return (
             <div
               key={idx}
+              className="cursor-pointer pointer-events-auto"
               onClick={(event) => handleConnectClick(event, adapter)}
             >
               {isMobile() ? (
@@ -119,7 +118,7 @@ const ListOfWallets: React.FC<{
               )}
             </div>
           );
-        })} */}
+        })}
       </div>
 
       {walletlistExplanation && list.others.length === 0 ? (
@@ -188,7 +187,7 @@ const sortByPrecedence =
     return 0;
   };
 
-const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = ({ onClose }) => {
+const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = () => {
   const { wallets } = useUnifiedWallet();
   const { walletPrecedence } = useUnifiedWalletContext();
   const [isOpen, onToggle] = useToggle(false);
@@ -302,10 +301,8 @@ const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = ({ onClose }) => {
     return { highlightedBy: 'TopWallet', highlight: top3, others };
   }, [wallets, previouslyConnected]);
 
-  const contentRef = useRef<HTMLDivElement>(null);
-  useOutsideClick(contentRef, onClose);
   return (
-    <div className="py-4 w-full overflow-x-scroll" ref={contentRef}>
+    <div className="py-4 w-full overflow-x-scroll">
       <ListOfWallets list={list} onToggle={onToggle} isOpen={isOpen} />
     </div>
   );

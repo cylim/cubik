@@ -203,13 +203,8 @@ const UnifiedWalletContextProvider = ({
         walletlistExplanation: config.walletlistExplanation,
       }}
     >
-      {isMobile() && (
-        <Drawer
-          // snapPoints={['200px']}
-          // activeSnapPoint={'200px'}
-          open={showModal}
-          onOpenChange={setShowModal}
-        >
+      {isMobile() ? (
+        <Drawer open={showModal} onOpenChange={setShowModal}>
           <DrawerOverlay className={cn(!isMobile() ? 'hidden' : '')} />
           <DrawerPortal>
             <DrawerContent className={cn(!isMobile() ? 'hidden' : '')}>
@@ -332,131 +327,132 @@ const UnifiedWalletContextProvider = ({
             </DrawerContent>
           </DrawerPortal>
         </Drawer>
-      )}
-      <Modal
-        dialogSize="md"
-        open={showModal}
-        onClose={() => setShowModal(false)}
-      >
-        <ModalHeader
-          RingSVG={
-            <svg
-              width="112"
-              height="112"
-              viewBox="0 0 112 112"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect
-                opacity="0.01"
-                x="0.5"
-                y="0.5"
-                width="111"
-                height="111"
-                rx="55.5"
-                stroke="white"
-              />
-              <rect
-                opacity="0.05"
-                x="7.5"
-                y="7.5"
-                width="97"
-                height="97"
-                rx="48.5"
-                stroke="white"
-              />
-              <rect
-                opacity="0.1"
-                x="17.5"
-                y="17.5"
-                width="77"
-                height="77"
-                rx="38.5"
-                stroke="white"
-              />
-              <rect
-                opacity="0.2"
-                x="25.5"
-                y="25.5"
-                width="61"
-                height="61"
-                rx="30.5"
-                stroke="white"
-              />
-              <rect
-                opacity="0.6"
-                x="35.5"
-                y="35.5"
-                width="41"
-                height="41"
-                rx="20.5"
-                stroke="white"
-              />
-              <path
-                d="M46 58.5V55C46 52.1997 46 50.7996 46.545 49.73C47.0243 48.7892 47.7892 48.0243 48.73 47.545C49.7996 47 51.1997 47 54 47H57.5C58.8978 47 59.5967 47 60.1481 47.2284C60.8831 47.5328 61.4672 48.1169 61.7716 48.8519C61.979 49.3525 61.9981 49.9747 61.9998 51.1313M46 58.5C46 59.8297 46 60.9946 46.3806 61.9134C46.8881 63.1386 47.8614 64.1119 49.0866 64.6194C49.783 64.9079 50.6208 64.9778 52 64.9947M46 58.5C46 56.1703 46 55.0054 46.3806 54.0866C46.8881 52.8614 47.8614 51.8881 49.0866 51.3806C50.0054 51 51.1703 51 53.5 51H58.5C60.1339 51 61.1949 51 61.9998 51.1313M58 56H61M61.9998 51.1313C62.3426 51.1872 62.639 51.2669 62.9134 51.3806C64.1386 51.8881 65.1119 52.8614 65.6194 54.0866C65.9079 54.783 65.9777 55.6208 65.9946 57M62.9648 60H63.0022C64.6579 60 66 61.3431 66 63C66 64.6569 64.6579 66 63.0022 66H62.9648M59.0352 60H58.9978C57.3421 60 56 61.3431 56 63C56 64.6569 57.3421 66 58.9978 66H59.0352M59.9971 63H61.9956"
-                stroke="white"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          }
-          heading={'Connect Wallet'}
-          headingSize={'sm'}
+      ) : (
+        <Modal
+          dialogSize="md"
+          open={showModal}
           onClose={() => setShowModal(false)}
-        />
-        <UnifiedWalletModal onClose={() => setShowModal(false)} />
-        <div className="w-full h-[1px] bg-[var(--color-border-primary)]" />
-        <div
-          style={{
-            padding: '1rem',
-          }}
         >
-          <div className="flex flex-col px-6 py-4">
-            <div className="flex item-start space-x-3">
-              <Icon
-                name="eyeClose2"
-                strokeWidth={1.5}
-                className="min-w-[18px]"
-                stroke="var(--color-fg-tertiary)"
+          <ModalHeader
+            RingSVG={
+              <svg
+                width="112"
+                height="112"
+                viewBox="0 0 112 112"
                 fill="none"
-                width={18}
-                height={18}
-              />
-              <span className="text-[12px] text-[var(--color-fg-tertiary)]">
-                View only permissions. We will never do anything without your
-                approval.
-              </span>
-            </div>
-            <div className="flex item-start space-x-3 mt-4">
-              <Icon
-                name="shieldCheck"
-                strokeWidth={1.5}
-                stroke="var(--color-fg-tertiary)"
-                fill="none"
-                width={18}
-                height={18}
-              />
-              <span className="text-[12px] text-[var(--color-fg-tertiary)]">
-                Audited Smart Contracts
-              </span>
-            </div>
-            <div className="flex item-start space-x-3 mt-4">
-              <Icon
-                name="userSecurity"
-                strokeWidth={1.5}
-                stroke="var(--color-fg-tertiary)"
-                fill="none"
-                width={18}
-                height={18}
-              />
-              <span className="text-[12px] text-[var(--color-fg-tertiary)]">
-                Trusted by 1,568 Users
-              </span>
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  opacity="0.01"
+                  x="0.5"
+                  y="0.5"
+                  width="111"
+                  height="111"
+                  rx="55.5"
+                  stroke="white"
+                />
+                <rect
+                  opacity="0.05"
+                  x="7.5"
+                  y="7.5"
+                  width="97"
+                  height="97"
+                  rx="48.5"
+                  stroke="white"
+                />
+                <rect
+                  opacity="0.1"
+                  x="17.5"
+                  y="17.5"
+                  width="77"
+                  height="77"
+                  rx="38.5"
+                  stroke="white"
+                />
+                <rect
+                  opacity="0.2"
+                  x="25.5"
+                  y="25.5"
+                  width="61"
+                  height="61"
+                  rx="30.5"
+                  stroke="white"
+                />
+                <rect
+                  opacity="0.6"
+                  x="35.5"
+                  y="35.5"
+                  width="41"
+                  height="41"
+                  rx="20.5"
+                  stroke="white"
+                />
+                <path
+                  d="M46 58.5V55C46 52.1997 46 50.7996 46.545 49.73C47.0243 48.7892 47.7892 48.0243 48.73 47.545C49.7996 47 51.1997 47 54 47H57.5C58.8978 47 59.5967 47 60.1481 47.2284C60.8831 47.5328 61.4672 48.1169 61.7716 48.8519C61.979 49.3525 61.9981 49.9747 61.9998 51.1313M46 58.5C46 59.8297 46 60.9946 46.3806 61.9134C46.8881 63.1386 47.8614 64.1119 49.0866 64.6194C49.783 64.9079 50.6208 64.9778 52 64.9947M46 58.5C46 56.1703 46 55.0054 46.3806 54.0866C46.8881 52.8614 47.8614 51.8881 49.0866 51.3806C50.0054 51 51.1703 51 53.5 51H58.5C60.1339 51 61.1949 51 61.9998 51.1313M58 56H61M61.9998 51.1313C62.3426 51.1872 62.639 51.2669 62.9134 51.3806C64.1386 51.8881 65.1119 52.8614 65.6194 54.0866C65.9079 54.783 65.9777 55.6208 65.9946 57M62.9648 60H63.0022C64.6579 60 66 61.3431 66 63C66 64.6569 64.6579 66 63.0022 66H62.9648M59.0352 60H58.9978C57.3421 60 56 61.3431 56 63C56 64.6569 57.3421 66 58.9978 66H59.0352M59.9971 63H61.9956"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            }
+            heading={'Connect Wallet'}
+            headingSize={'sm'}
+            onClose={() => setShowModal(false)}
+          />
+          <UnifiedWalletModal onClose={() => setShowModal(false)} />
+          <div className="w-full h-[1px] bg-[var(--color-border-primary)]" />
+          <div
+            style={{
+              padding: '1rem',
+            }}
+          >
+            <div className="flex flex-col px-6 py-4">
+              <div className="flex item-start space-x-3">
+                <Icon
+                  name="eyeClose2"
+                  strokeWidth={1.5}
+                  className="min-w-[18px]"
+                  stroke="var(--color-fg-tertiary)"
+                  fill="none"
+                  width={18}
+                  height={18}
+                />
+                <span className="text-[12px] text-[var(--color-fg-tertiary)]">
+                  View only permissions. We will never do anything without your
+                  approval.
+                </span>
+              </div>
+              <div className="flex item-start space-x-3 mt-4">
+                <Icon
+                  name="shieldCheck"
+                  strokeWidth={1.5}
+                  stroke="var(--color-fg-tertiary)"
+                  fill="none"
+                  width={18}
+                  height={18}
+                />
+                <span className="text-[12px] text-[var(--color-fg-tertiary)]">
+                  Audited Smart Contracts
+                </span>
+              </div>
+              <div className="flex item-start space-x-3 mt-4">
+                <Icon
+                  name="userSecurity"
+                  strokeWidth={1.5}
+                  stroke="var(--color-fg-tertiary)"
+                  fill="none"
+                  width={18}
+                  height={18}
+                />
+                <span className="text-[12px] text-[var(--color-fg-tertiary)]">
+                  Trusted by 1,568 Users
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-      </Modal>
+        </Modal>
+      )}
       {children}
     </UnifiedWalletContext.Provider>
   );

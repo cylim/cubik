@@ -708,6 +708,9 @@ importers:
       '@cubik/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      '@ducanh2912/next-pwa':
+        specifier: ^9.7.2
+        version: 9.7.2(next@14.0.2)(webpack@5.89.0)
       '@prisma/nextjs-monorepo-workaround-plugin':
         specifier: ^5.6.0
         version: 5.6.0
@@ -738,6 +741,9 @@ importers:
       uploadthing:
         specifier: ^5.7.4
         version: 5.7.4
+      zod:
+        specifier: ^3.22.4
+        version: 3.22.4
       zustand:
         specifier: ^4.4.6
         version: 4.4.6(@types/react@18.2.38)(react@18.2.0)
@@ -1475,7 +1481,7 @@ packages:
     resolution: {integrity: sha512-oLcVCTeIFadUoArDTwpluncplrYBmTCCZZgXCbgNGvOBBiSDDK3eWO4b/+eOTli5tKv1lg+a5/NAXg+nTcei1w==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/types': 7.17.0
+      '@babel/types': 7.23.4
       jsesc: 2.5.2
       source-map: 0.5.7
     dev: false
@@ -4242,6 +4248,30 @@ packages:
       clean-webpack-plugin: 4.0.0(webpack@5.89.0)
       fast-glob: 3.3.1
       next: 14.0.0(@babel/core@7.23.3)(babel-plugin-macros@3.1.0)(react-dom@18.2.0)(react@18.2.0)
+      semver: 7.5.4
+      terser-webpack-plugin: 5.3.9(esbuild@0.18.20)(webpack@5.89.0)
+      webpack: 5.89.0(esbuild@0.18.20)
+      workbox-build: 7.0.0
+      workbox-core: 7.0.0
+      workbox-webpack-plugin: 7.0.0(webpack@5.89.0)
+      workbox-window: 7.0.0
+    transitivePeerDependencies:
+      - '@swc/core'
+      - '@types/babel__core'
+      - esbuild
+      - supports-color
+      - uglify-js
+    dev: false
+
+  /@ducanh2912/next-pwa@9.7.2(next@14.0.2)(webpack@5.89.0):
+    resolution: {integrity: sha512-KNdWIr8297L6TRyEeJQUzZqgP+m10GmaV6tacZ6wIcON9J+b6Nz34eLx6B5Q5mQKxqbYHTDayVoMRc2uuA/Ahg==}
+    peerDependencies:
+      next: '>=11.0.0'
+      webpack: '>=5.9.0'
+    dependencies:
+      clean-webpack-plugin: 4.0.0(webpack@5.89.0)
+      fast-glob: 3.3.1
+      next: 14.0.2(@babel/core@7.23.3)(react-dom@18.2.0)(react@18.2.0)
       semver: 7.5.4
       terser-webpack-plugin: 5.3.9(esbuild@0.18.20)(webpack@5.89.0)
       webpack: 5.89.0(esbuild@0.18.20)

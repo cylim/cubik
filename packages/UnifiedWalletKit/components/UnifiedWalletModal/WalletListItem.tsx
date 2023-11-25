@@ -33,7 +33,7 @@ export const WalletIcon: FC<WalletIconProps> = ({
 
   if (wallet && wallet.icon && !hasError) {
     return (
-      <div className="w-fit-content flex items-center justify-center gap-2 px-[16px] py-[12px]">
+      <div className="w-fit-content  flex items-center justify-center gap-2 px-[16px] py-[12px]">
         <div
           className="w-fit flex flex-col items-center justify-center gap-2"
           style={{ minWidth: width, minHeight: height }}

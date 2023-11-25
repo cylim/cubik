@@ -2,26 +2,12 @@
 
 import React, { useState } from 'react';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
-import { WalletAddress } from '@/app/components/common/wallet';
-import type { User } from '@/app/context/user';
-import type { AuthVerifyReturn } from '@/types/auth';
-import {
-  Box,
-  Button,
-  Center,
-  HStack,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  VStack,
-} from '@/utils/chakra';
-import { getMessage } from '@/utils/helpers/auth';
+import { User } from '@/hooks/useUser';
+import { getMessage } from '@/utils/auth/getMessage';
 import { utils } from '@coral-xyz/anchor';
 
 import { createMessage } from '@cubik/auth';
+import { AuthVerifyReturn } from '@cubik/common-types';
 
 interface Props {
   publicKey?: string;
@@ -106,74 +92,5 @@ export const VerifyModal = ({
       onClose();
     }
   };
-  return (
-    <Modal variant="cubik" isOpen={isOpen} onClose={async () => {}}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>
-          <HStack>
-            <Box
-              as="p"
-              textStyle={{ base: 'title3', md: 'title2' }}
-              color="neutral.11"
-            >
-              Verify Wallet
-            </Box>
-            {publicKey && (
-              <Center
-                backgroundColor={'neutral.5'}
-                p={{ base: '6px 10px', md: '8px 12px' }}
-                rounded="8px"
-              >
-                <WalletAddress size="xs" walletAddress={publicKey} />
-              </Center>
-            )}
-          </HStack>
-        </ModalHeader>
-        <ModalBody>
-          <VStack pt="16px" align={'start'} gap="16px">
-            <Box
-              as="p"
-              textStyle={{ base: 'body5', md: 'body3' }}
-              color="white"
-            >
-              Verify Wallet to prove ownership. No SOL will be charged
-            </Box>{' '}
-            {/* {verifyWalletError && (
-              <Alert status="error" variant="cubik">
-                <AlertIcon />
-                <AlertDescription
-                  fontSize={{ base: "10px", md: "11px", xl: "12px" }}
-                  lineHeight={{ base: "14px", md: "14px", xl: "16px" }}
-                >
-                  {verifyWalletError}
-                </AlertDescription>
-              </Alert>
-            )} */}
-          </VStack>
-        </ModalBody>
-
-        <ModalFooter display="flex" justifyContent="space-between">
-          <Button
-            variant={'cubikOutlined'}
-            onClick={async () => {
-              await disconnect();
-              onClose();
-            }}
-          >
-            Cancel
-          </Button>
-
-          <Button
-            variant={'cubikFilled'}
-            loadingText="Verifying"
-            isLoading={isLoading}
-            onClick={handleVerify}
-          >
-            {'Verify Wallet'}
-          </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
-  );
+  return <></>;
 };

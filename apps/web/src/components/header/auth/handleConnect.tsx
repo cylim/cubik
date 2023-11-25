@@ -2,28 +2,32 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useUser } from '@/app/context/user';
-import type { AuthCheckReturn } from '@/types/auth';
-import { Spinner, useDisclosure } from '@/utils/chakra';
-import { handleLogout } from '@/utils/helpers/auth';
-import { useWallet } from '@solana/wallet-adapter-react';
-import { useWalletModal } from '@solana/wallet-adapter-react-ui';
+import { useUser } from '@/hooks/useUser';
+import { handleLogout } from '@/utils/auth/logout';
+import { useUnifiedWalletContext, useWallet } from '@/utils/wallet';
 
 import { Button } from '@cubik/ui';
 
-import UserNavbarMenuButton from '../cta/user-navbar-menu';
+// import UserNavbarMenuButton from '../cta/user-navbar-menu';
+
 import { VerifyModal } from './verifyModal';
 
 export const WalletConnect = () => {
   const { connected, publicKey, disconnect, signMessage } = useWallet();
-  const { setVisible } = useWalletModal();
+  const { showModal, setShowModal } = useUnifiedWalletContext();
   const [modalStatus, setModalStatus] = useState<'NEW_USER' | 'EXISTING_USER'>(
     'NEW_USER',
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
   const { setUser, user } = useUser();
-  const { isOpen, onClose, onOpen } = useDisclosure();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const onClose = () => {
+    setIsOpen(false);
+  };
+  const onOpen = () => {
+    setIsOpen(true);
+  };
 
   useEffect(() => {
     const connect = async () => {
@@ -40,7 +44,7 @@ export const WalletConnect = () => {
             },
             cache: 'no-cache',
           });
-          const checkResponse = (await res.json()) as AuthCheckReturn;
+          const checkResponse = await res.json();
 
           if (checkResponse.data?.type === 'USER_FOUND') {
             // ********* Create token with verify message *********
@@ -94,7 +98,7 @@ export const WalletConnect = () => {
 
   if (!connected && !publicKey && !user) {
     return (
-      <Button variant="primary" size="md" onClick={() => setVisible(true)}>
+      <Button variant="primary" size="md" onClick={() => setShowModal(true)}>
         Login
       </Button>
     );
@@ -112,21 +116,17 @@ export const WalletConnect = () => {
           status={modalStatus}
           publicKey={publicKey.toBase58()}
         />
-        <Spinner
+        {/* <Spinner
           onClick={() => disconnect()}
           thickness="2px"
           speed="0.65s"
           emptyColor="gray.200"
           color="cubik"
           size="sm"
-        />
+        /> */}
       </>
     );
   }
 
-  return (
-    <>
-      <UserNavbarMenuButton />
-    </>
-  );
+  return <>{/* <UserNavbarMenuButton /> */}</>;
 };

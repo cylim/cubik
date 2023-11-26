@@ -172,11 +172,7 @@ export const VerifyModal = ({
           <li>This confirm you&apos;re the wallet owner</li>
         </ul>
         <div className="flex items-center justify-center gap-5">
-          <Button
-            size={'full'}
-            onClick={onClose}
-            variant={'secondary'}
-          >
+          <Button size={'full'} onClick={onClose} variant={'secondary'}>
             Cancel
           </Button>
           <Button

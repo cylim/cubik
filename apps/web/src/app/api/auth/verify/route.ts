@@ -44,7 +44,7 @@ export const POST = async (req: NextRequest) => {
       }
       // const trackInfo = await getTrackInfo();
       const session = await createToken({
-        ip: "",
+        ip: '',
         mainWallet: publicKey,
         id: user.id,
         profilePicture: user.profilePicture as string,
@@ -53,7 +53,7 @@ export const POST = async (req: NextRequest) => {
       });
 
       const userSessionPayload: AuthPayload = {
-        ip: "",
+        ip: '',
         mainWallet: publicKey,
         id: user.id,
         profilePicture: user.profilePicture as string,

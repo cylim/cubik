@@ -3,7 +3,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 
 import { cn, handleMediaQuery } from '../../../lib/utils';
 
-const buttonVariants = cva('font-semibold rounded-[8px]', {
+const buttonVariants = cva('font-semibold rounded-[8px] pointer-events-auto', {
   variants: {
     variant: {
       primary: cn(
@@ -47,6 +47,7 @@ const buttonVariants = cva('font-semibold rounded-[8px]', {
       ),
     },
     size: {
+      full: 'h-[44px] w-full',
       md: 'h-[44px] py-0 px-[16px]',
       sm: 'h-[36px] py-0 px-[16px]',
       xs: 'h-[32px] py-0 px-[16px]',

@@ -6,7 +6,7 @@ import { useUser } from '@/hooks/useUser';
 import { handleLogout } from '@/utils/auth/logout';
 import { useUnifiedWalletContext, useWallet } from '@/utils/wallet';
 
-import { Button } from '@cubik/ui';
+import { Button, Spinner } from '@cubik/ui';
 
 // import UserNavbarMenuButton from '../cta/user-navbar-menu';
 
@@ -116,17 +116,20 @@ export const WalletConnect = () => {
           status={modalStatus}
           publicKey={publicKey.toBase58()}
         />
-        {/* <Spinner
-          onClick={() => disconnect()}
-          thickness="2px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="cubik"
-          size="sm"
-        /> */}
+        <Spinner
+          onClick={() => {
+            onClose();
+            disconnect();
+          }}
+        />
       </>
     );
   }
 
-  return <>{/* <UserNavbarMenuButton /> */}</>;
+  return (
+    <>
+      <div className="text-white">{publicKey?.toBase58()}</div>
+      {/* <UserNavbarMenuButton /> */}
+    </>
+  );
 };

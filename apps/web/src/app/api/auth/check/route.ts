@@ -1,7 +1,8 @@
 import { cookies } from 'next/headers';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-import { getTrackInfo } from '@/utils/helpers/track';
+
+// import { getTrackInfo } from '@/utils/helpers/track';
 
 import { decodeToken } from '@cubik/auth';
 import type { AuthCheckReturn } from '@cubik/common-types';
@@ -66,11 +67,11 @@ export const POST = async (req: NextRequest) => {
       });
     } else {
       const decodedToken = await decodeToken(authCookie.value);
-      const trackInfo = await getTrackInfo();
+      // const trackInfo = await getTrackInfo();
       if (
         !decodedToken ||
         decodedToken.mainWallet !== wallet ||
-        decodedToken?.ip !== trackInfo?.ip
+        decodedToken?.ip !== ''
       ) {
         return NextResponse.json({
           data: null,

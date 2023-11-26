@@ -1,5 +1,8 @@
 import * as React from 'react';
+import { ClassValue } from 'clsx';
 import * as Dialog from 'vaul';
+
+import { cn } from '../../../lib/utils';
 
 interface WithFadeFromProps {
   snapPoints: (number | string)[];
@@ -39,6 +42,7 @@ interface DrawerPortalProps {
 }
 interface DrawerContentProps {
   children: React.ReactNode;
+  className?: ClassValue;
 }
 interface DrawerHeaderProps {
   children: React.ReactNode;
@@ -59,12 +63,19 @@ const DrawerPortal = ({ children }: DrawerPortalProps) => {
   return <Dialog.Drawer.Portal>{children}</Dialog.Drawer.Portal>;
 };
 
-const DrawerOverlay = () => (
-  <Dialog.Drawer.Overlay className="fixed inset-0 bg-black/60" />
+const DrawerOverlay = ({ className }: { className?: ClassValue }) => (
+  <Dialog.Drawer.Overlay
+    className={cn('fixed inset-0 bg-black/60', className)}
+  />
 );
 
-const DrawerContent = ({ children }: DrawerContentProps) => (
-  <Dialog.Drawer.Content className="fixed rounded-t-lg overflow-hidden z-[100] mt-24 bottom-[-200px] w-screen bg-[var(--color-bg-secondary)] h-full">
+const DrawerContent = ({ children, className }: DrawerContentProps) => (
+  <Dialog.Drawer.Content
+    className={cn(
+      className,
+      'fixed rounded-t-lg overflow-hidden z-[100] mt-24 bottom-[-200px] w-screen bg-[var(--color-surface-primary)] h-full',
+    )}
+  >
     {children}
   </Dialog.Drawer.Content>
 );

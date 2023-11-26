@@ -38,7 +38,7 @@ export interface AuthCheckReturn {
 
 export interface AuthVerifyReturn {
   data: boolean;
-  accessToken?: string;
+  user?: AuthPayload | null;
   error: string | null;
 }
 

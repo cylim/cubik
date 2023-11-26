@@ -87,7 +87,7 @@ const UnifiedWalletContextProvider = ({
   const { publicKey, wallet, select, connect } = useUnifiedWallet();
   const previousPublicKey = usePrevious<PublicKey | null>(publicKey);
   const previousWallet = usePrevious<Wallet | null>(wallet);
-  console.log('wallet from unified wallet context provider ', wallet);
+  // console.log('wallet from unified wallet context provider ', wallet);
   // Weird quirks for autoConnect to require select and connect
   const [nonAutoConnectAttempt, setNonAutoConnectAttempt] = useState(false);
   useEffect(() => {

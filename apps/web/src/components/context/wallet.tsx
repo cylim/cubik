@@ -65,6 +65,7 @@ export const WalletProvider = ({ children }: { children: any }) => {
     return [...walletAdapters, walletConnectWalletAdapter].filter(
       (item) => item && item.name && item.icon,
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [metadata]);
 
   const params: Omit<Parameters<typeof UnifiedWalletProvider>[0], 'children'> =

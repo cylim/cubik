@@ -51,8 +51,8 @@ export const ProjectCard = (props: Props) => {
         <div
           className={cn(
             props.className,
-            'flex justify-between items-center p-6',
-            'hover:bg-white/10',
+            'flex justify-between items-center px-6 py-5',
+            'hover:bg-[#212121] rounded-lg',
           )}
           {...props}
         >

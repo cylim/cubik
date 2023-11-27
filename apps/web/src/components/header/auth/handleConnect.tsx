@@ -128,7 +128,7 @@ export const WalletConnect = () => {
 
   return (
     <>
-      <div className="text-white">{publicKey?.toBase58()}</div>
+      <div className="text-white">{user?.username}</div>
       {/* <UserNavbarMenuButton /> */}
     </>
   );

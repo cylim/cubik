@@ -17,6 +17,7 @@ const config = {
     if (isServer) {
       config.plugins = [...config.plugins, new PrismaPlugin()];
     }
+    config.externals.push("pino-pretty", "lokijs", "encoding");
     return config;
   },
   transpilePackages: ["@cubik/database", "@cubik/ui"],

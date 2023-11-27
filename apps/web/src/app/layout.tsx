@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html className="dark" lang="en">
-      <body className={cn(inter.className, 'bg-black')}>
+      <body className={cn(inter.className, 'bg-[var(--color-neutral-950)]')}>
         <Provider>
           <Header />
           {children}

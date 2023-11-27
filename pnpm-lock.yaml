@@ -950,9 +950,6 @@ importers:
       eslint:
         specifier: ^7.32.0
         version: 7.32.0
-      wallet-adapter-mobile:
-        specifier: link:@types/solana-mobile/wallet-adapter-mobile
-        version: link:@types/solana-mobile/wallet-adapter-mobile
 
   packages/auth:
     dependencies:

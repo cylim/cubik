@@ -1,4 +1,4 @@
-:root {
+html[class="light"], :root {
     --Color: #FFFFFF;
     --color-surface-primary-inverse: var(--color-neutral-850);
     --color-interaction-muted: var(--color-neutral-75);

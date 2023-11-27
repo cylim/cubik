@@ -96,7 +96,7 @@ export const OnboardingFlow = ({
 
   return (
     <div ref={contentRef} className="hideScrollbar">
-      {flow === 'Onboarding' ? (
+      {/* {flow === 'Onboarding' ? (
         <OnboardingIntro
           showBack={showBack}
           flow={flow}
@@ -106,7 +106,7 @@ export const OnboardingFlow = ({
       ) : null}
       {flow === 'Get Wallet' ? (
         <OnboardingGetWallets flow={flow} setFlow={setFlowAnimated} />
-      ) : null}
+      ) : null} */}
     </div>
   );
 };

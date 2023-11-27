@@ -14,13 +14,13 @@ import {
   WalletContextState,
 } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
+import { useMediaQuery } from '@uidotdev/usehooks';
 import { usePrevious } from 'react-use';
 
 import {
   Drawer,
   DrawerBody,
   DrawerContent,
-  DrawerFooter,
   DrawerOverlay,
   DrawerPortal,
 } from '@cubik/ui';
@@ -30,7 +30,7 @@ import { Modal, ModalHeader } from '../../ui/components/ui/Modal';
 import { Icon } from '../../ui/icons/icon';
 //import ModalDialog from '../components/ModalDialog';
 import UnifiedWalletModal from '../components/UnifiedWalletModal';
-import { isMobile, shortenAddress } from '../misc/utils';
+import { shortenAddress } from '../misc/utils';
 import {
   UnifiedWalletContext,
   UnifiedWalletValueContext,
@@ -89,6 +89,7 @@ const UnifiedWalletContextProvider = ({
   const previousWallet = usePrevious<Wallet | null>(wallet);
   // console.log('wallet from unified wallet context provider ', wallet);
   // Weird quirks for autoConnect to require select and connect
+  const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
   const [nonAutoConnectAttempt, setNonAutoConnectAttempt] = useState(false);
   useEffect(() => {
     if (nonAutoConnectAttempt && !config.autoConnect && wallet?.adapter.name) {
@@ -203,11 +204,11 @@ const UnifiedWalletContextProvider = ({
         walletlistExplanation: config.walletlistExplanation,
       }}
     >
-      {isMobile() ? (
+      {isSmallDevice ? (
         <Drawer open={showModal} onOpenChange={setShowModal}>
-          <DrawerOverlay className={cn(!isMobile() ? 'hidden' : '')} />
+          <DrawerOverlay className={cn(!isSmallDevice ? 'hidden' : '')} />
           <DrawerPortal>
-            <DrawerContent className={cn(!isMobile() ? 'hidden' : '')}>
+            <DrawerContent className={cn(!isSmallDevice ? 'hidden' : 'h-max')}>
               <ModalHeader
                 RingSVG={
                   <svg
@@ -277,11 +278,14 @@ const UnifiedWalletContextProvider = ({
               />
               <DrawerBody>
                 <UnifiedWalletModal onClose={() => setShowModal(false)} />
-              </DrawerBody>
-              <div className="w-full h-[1px] bg-[var(--color-border-primary)]" />
-              <DrawerFooter>
-                <div className="flex flex-col px-6 py-4">
-                  <div className="flex item-start space-x-3">
+                <div
+                  style={{
+                    border: '0.5px solid #E6E6E61A',
+                  }}
+                  className="w-full"
+                />
+                <div className="flex flex-col p-4">
+                  <div className="flex item-start gap-2">
                     <Icon
                       name="eyeClose2"
                       strokeWidth={1.5}
@@ -296,7 +300,7 @@ const UnifiedWalletContextProvider = ({
                       your approval.
                     </span>
                   </div>
-                  <div className="flex item-start space-x-3 mt-4">
+                  {/* <div className="flex item-start space-x-3 mt-4">
                     <Icon
                       name="shieldCheck"
                       strokeWidth={1.5}
@@ -308,8 +312,8 @@ const UnifiedWalletContextProvider = ({
                     <span className="text-[12px] text-[var(--color-fg-tertiary)]">
                       Audited Smart Contracts
                     </span>
-                  </div>
-                  <div className="flex item-start space-x-3 mt-4">
+                  </div> */}
+                  {/* <div className="flex item-start space-x-3 mt-4">
                     <Icon
                       name="userSecurity"
                       strokeWidth={1.5}
@@ -321,9 +325,10 @@ const UnifiedWalletContextProvider = ({
                     <span className="text-[12px] text-[var(--color-fg-tertiary)]">
                       Trusted by 1,568 Users
                     </span>
-                  </div>
+                  </div> */}
                 </div>
-              </DrawerFooter>
+              </DrawerBody>
+              {/* <DrawerFooter></DrawerFooter> */}
             </DrawerContent>
           </DrawerPortal>
         </Drawer>
@@ -402,11 +407,7 @@ const UnifiedWalletContextProvider = ({
           />
           <UnifiedWalletModal onClose={() => setShowModal(false)} />
           <div className="w-full h-[1px] bg-[var(--color-border-primary)]" />
-          <div
-            style={{
-              padding: '1rem',
-            }}
-          >
+          <div>
             <div className="flex flex-col px-6 py-4">
               <div className="flex item-start space-x-3">
                 <Icon

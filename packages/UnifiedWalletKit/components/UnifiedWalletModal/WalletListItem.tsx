@@ -8,9 +8,9 @@ import React, {
 } from 'react';
 import Image from 'next/image';
 import { Adapter } from '@solana/wallet-adapter-base';
+import { useMediaQuery } from '@uidotdev/usehooks';
 
 import UnknownIconSVG from '../../icons/UnknownIconSVG';
-import { isMobile } from '../../misc/utils';
 
 export interface WalletIconProps
   extends DetailedHTMLProps<
@@ -74,10 +74,10 @@ export const WalletListItem = ({
     if (!wallet) return '';
     return wallet.name;
   }, [wallet?.name]);
-
+  const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
   return (
     <li className="border border-red-500" onClick={handleClick}>
-      {isMobile() ? (
+      {isSmallDevice ? (
         <WalletIcon wallet={wallet} width={48} height={48} />
       ) : (
         <WalletIcon wallet={wallet} width={60} height={60} />

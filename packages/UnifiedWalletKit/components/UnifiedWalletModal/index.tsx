@@ -1,19 +1,23 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { ReactNode, useEffect, useMemo, useState } from 'react';
 import {
   Adapter,
   WalletName,
   WalletReadyState,
 } from '@solana/wallet-adapter-base';
+import { useMediaQuery } from '@uidotdev/usehooks';
 import { useToggle } from 'react-use';
 
+import { AvatarGroup } from '@cubik/ui';
 import { cn } from '@cubik/ui/lib/utils';
 
 import {
   useUnifiedWallet,
   useUnifiedWalletContext,
 } from '../../contexts/UnifiedWalletContext';
+import HardcodedWalletStandardAdapter from '../../contexts/WalletConnectionProvider/HardcodedWalletStandardAdapter';
 import { usePreviouslyConnected } from '../../contexts/WalletConnectionProvider/previouslyConnectedProvider';
-import { isMobile } from '../../misc/utils';
+import { HARDCODED_WALLET_STANDARDS } from '../../misc/constants';
 import { OnboardingFlow } from './Onboarding';
 import { WalletIcon, WalletListItem } from './WalletListItem';
 
@@ -27,44 +31,38 @@ const ListOfWallets: React.FC<{
   isOpen: boolean;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 }> = ({ list, onToggle, isOpen }) => {
+  const [showMore, setShowMore] = useState<boolean>(false);
   const { handleConnectClick, walletlistExplanation } =
     useUnifiedWalletContext();
   const [showOnboarding, setShowOnboarding] = useState(false);
-
+  const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
   // remaining wallet list which opens when button is clicked
   const renderWalletList = useMemo(
-    () => (
-      <>
-        <div className="">
-          {list.others.map((adapter, index) => {
-            return (
-              <ul key={index}>
-                <WalletListItem
-                  handleClick={(event) => handleConnectClick(event, adapter)}
-                  wallet={adapter}
-                />
-              </ul>
-            );
-          })}
-        </div>
-        {list.highlightedBy !== 'Onboarding' && walletlistExplanation ? (
-          <div>
-            <a
-              href={walletlistExplanation.href}
-              target="_blank"
-              rel="noopener noreferrer"
+    () =>
+      list.others
+        .filter((e) => e.readyState !== 'NotDetected')
+        .map((adapter, index) => {
+          return (
+            <div
+              className="cursor-pointer pointer-events-auto"
+              key={index}
+              onClick={(event) => handleConnectClick(event, adapter)}
             >
-              <span> Cant find your wallet? </span>
-            </a>
-          </div>
-        ) : null}
-      </>
-    ),
+              {isSmallDevice ? (
+                <WalletIcon wallet={adapter} width={48} height={48} />
+              ) : (
+                <WalletIcon wallet={adapter} width={60} height={30} />
+              )}
+            </div>
+          );
+        }),
     [handleConnectClick, list.others],
   );
-  console.log('renerwalletlist - ', renderWalletList);
   const hasNoWallets = useMemo(() => {
-    return list.highlight.length === 0 && list.others.length === 0;
+    return list.highlight.filter((e) => e.readyState !== 'NotDetected')
+      .length === 0
+      ? false
+      : true;
   }, [list]);
 
   useEffect(() => {
@@ -85,9 +83,10 @@ const ListOfWallets: React.FC<{
   return (
     <>
       <div
-        className={cn(
-          isMobile() ? 'flex w-full flex-row px-[24px]' : 'flex flex-wrap',
-        )}
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+        }}
       >
         {list.highlight.map((adapter, idx) => {
           return (
@@ -96,7 +95,7 @@ const ListOfWallets: React.FC<{
               key={idx}
               onClick={(event) => handleConnectClick(event, adapter)}
             >
-              {isMobile() ? (
+              {isSmallDevice ? (
                 <WalletIcon wallet={adapter} width={48} height={48} />
               ) : (
                 <WalletIcon wallet={adapter} width={60} height={30} />
@@ -104,34 +103,54 @@ const ListOfWallets: React.FC<{
             </div>
           );
         })}
-        {list.others.map((adapter, idx) => {
-          return (
-            <div
-              key={idx}
-              className="cursor-pointer pointer-events-auto"
-              onClick={(event) => handleConnectClick(event, adapter)}
-            >
-              {isMobile() ? (
-                <WalletIcon wallet={adapter} width={48} height={48} />
-              ) : (
-                <WalletIcon wallet={adapter} width={60} height={30} />
-              )}
-            </div>
-          );
-        })}
-      </div>
+        {showMore && renderWalletList}
 
-      {walletlistExplanation && list.others.length === 0 ? (
-        <div>
-          <a
-            href={walletlistExplanation.href}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span> Cant find your wallet </span>
-          </a>
+        {walletlistExplanation && list.others.length === 0 ? (
+          <div className="text-xs flex justify-center items-center w-full font-semibold mt-4 pointer-events-auto -mb-2 text-white/80 underline cursor-pointer">
+            <a
+              href={walletlistExplanation.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>Can&apos;t find your wallet?</span>
+            </a>
+          </div>
+        ) : null}
+        {list.others.length > 0 && (
+          <>
+            <div
+              className={cn(
+                showMore
+                  ? 'hidden'
+                  : 'pointer-events-auto flex justify-center items-center',
+              )}
+              onClick={() => setShowMore(true)}
+            >
+              <AvatarGroup
+                avatars={list.others
+                  .filter((e) => e.readyState !== 'NotDetected')
+                  .map((e) => {
+                    return {
+                      src: e.icon,
+                      alt: e.name,
+                    };
+                  })}
+                shape="square"
+                variant="squared-horizontal"
+                maxCount={3}
+              />
+            </div>
+          </>
+        )}
+      </div>
+      {showMore && (
+        <div
+          onClick={() => setShowMore(false)}
+          className="text-xs flex justify-center items-center w-full font-semibold mt-4 pointer-events-auto -mb-2 text-white underline cursor-pointer"
+        >
+          <span>Show Less</span>
         </div>
-      ) : null}
+      )}
     </>
   );
 };
@@ -250,7 +269,7 @@ const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = () => {
 
     if (filteredAdapters.previouslyConnected.length > 0) {
       const { previouslyConnected, ...rest } = filteredAdapters;
-      console.log('previously connected wallet -', previouslyConnected);
+
       const highlight = filteredAdapters.previouslyConnected.slice(0, 3);
       let others = Object.values(rest)
         .flat()
@@ -274,7 +293,6 @@ const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = () => {
     if (filteredAdapters.installed.length > 0) {
       const { installed, ...rest } = filteredAdapters;
       const highlight = filteredAdapters.installed.slice(0, 3);
-      console.log('installed wallets - ', installed);
       const others = Object.values(rest)
         .flat()
         .sort((a, b) => PRIORITISE[a.readyState] - PRIORITISE[b.readyState])
@@ -302,7 +320,7 @@ const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = () => {
   }, [wallets, previouslyConnected]);
 
   return (
-    <div className="py-4 w-full overflow-x-scroll">
+    <div className="py-4">
       <ListOfWallets list={list} onToggle={onToggle} isOpen={isOpen} />
     </div>
   );

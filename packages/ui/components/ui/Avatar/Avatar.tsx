@@ -93,7 +93,7 @@ const Avatar = ({
         alt={alt}
         fill={true}
         style={{
-          objectFit: 'cover',
+          objectFit: variant === 'circle' ? 'cover' : 'contain',
           background: 'transparent',
           borderRadius: variant === 'circle' ? '100%' : '8px',
         }}

@@ -23,17 +23,22 @@ const getProjects = async () => {
   if (isEventActive) {
     return [];
   }
-  const projects = await prisma.project.findMany({
-    select: {
-      id: true,
-      name: true,
-      logo: true,
-      shortDescription: true,
-    },
-    take: 30,
-  });
-  return projects;
-};
+  try {
+    
+    const projects = await prisma.project.findMany({
+      select: {
+        id: true,
+        name: true,
+        logo: true,
+        shortDescription: true,
+      },
+      take: 30,
+    });
+    return projects;
+  } catch (error) {
+   return [] 
+  }
+  };
 
 export default async function Home() {
   const projects = await getProjects();

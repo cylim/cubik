@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import * as anchor from '@coral-xyz/anchor';
 import * as sqds from '@sqds/multisig';
 import type { Request, Response } from 'express';

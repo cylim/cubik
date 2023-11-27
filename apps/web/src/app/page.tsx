@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { get } from '@vercel/edge-config';
 
 import { prisma } from '@cubik/database';
 import { Icon, ProjectCard, SaveButton, SubHead } from '@cubik/ui';
-import {get} from "@vercel/edge-config"
 
 export const metadata: Metadata = {
   title: 'Cubik',
@@ -19,9 +19,9 @@ export const metadata: Metadata = {
   },
 };
 const getProjects = async () => {
-  const isEventActive = await get("isEventActive")
-  if(isEventActive){
-    return []
+  const isEventActive = await get('isEventActive');
+  if (isEventActive) {
+    return [];
   }
   const projects = await prisma.project.findMany({
     select: {
@@ -36,10 +36,10 @@ const getProjects = async () => {
 };
 
 export default async function Home() {
-   const projects = await getProjects();
+  const projects = await getProjects();
   return (
     <>
-   <div className="mt-20 flex min-h-screen w-full flex-col items-center  lg:flex-row lg:items-start 2xl:mx-auto 2xl:max-w-7xl">
+      <div className="mt-20 flex min-h-screen w-full flex-col items-center  lg:flex-row lg:items-start 2xl:mx-auto 2xl:max-w-7xl">
         <div className="h-full w-full lg:w-2/3">
           <div className="px-6 pt-10 lg:px-20">
             <SubHead

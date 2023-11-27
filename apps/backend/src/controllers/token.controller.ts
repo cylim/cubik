@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import type { Request, Response } from 'express';
 import { tokenPrice } from 'utils/price';
 

@@ -1,12 +1,11 @@
 import React from 'react';
-import { Box, HStack, VStack } from '@/utils/chakra';
 
 export const Comments = () => {
   return (
     <>
-      <VStack>
-        <HStack>
-          <Box>
+      <div className="flex flex-col">
+        <div className="flex items-center gap-2">
+          <div>
             <svg
               width="20"
               height="20"
@@ -22,12 +21,10 @@ export const Comments = () => {
                 strokeLinejoin="round"
               />
             </svg>
-          </Box>
-          <Box color={'white'} fontWeight={600} fontSize={'lg'}>
-            Comments
-          </Box>
-        </HStack>
-      </VStack>
+          </div>
+          <div className="text-lg font-semibold text-white"> Comments</div>
+        </div>
+      </div>
     </>
   );
 };

@@ -1,6 +1,5 @@
 import React from 'react';
 import type { JSX, ReactNode } from 'react';
-import { Box, Center, VStack } from '@/utils/chakra';
 
 export const EmptyStateHOC = ({
   heading,
@@ -16,22 +15,15 @@ export const EmptyStateHOC = ({
   margin?: string;
 }) => {
   return (
-    <VStack
-      my={margin ? margin : '6rem'}
-      alignContent={'center'}
-      w="full"
-      mx="auto"
-      rounded="12px"
-      p="6rem"
-      align="center"
-      gap="16px"
-      border={'1px dashed'}
-      borderColor="neutral.2"
+    <div
+      className={`mx-auto flex w-full flex-col items-center justify-center gap-2 rounded-xl p-24 ${
+        margin ? 'my-' + margin : 'my-24'
+      } `}
     >
       {children ? (
         <>{children}</>
       ) : (
-        <Center width={{ base: '15vw', md: '8vw' }} height="12vh">
+        <div className="flex h-[12vh] w-[15vw] items-center justify-center md:w-[8vw]">
           <svg
             width="128"
             height="132"
@@ -93,28 +85,19 @@ export const EmptyStateHOC = ({
               strokeDasharray="4 4"
             />
           </svg>
-        </Center>
+        </div>
       )}
-      <VStack w="full" gap="8px">
-        <Box
-          as="p"
-          textStyle={{ base: 'title3', md: 'title2' }}
-          color="neutral.11"
-        >
+
+      <div className="flex w-full flex-col items-center justify-center gap-4">
+        <div className="mx-auto max-w-[24rem] text-center text-2xl text-gray-700">
           {heading}
-        </Box>
-        <Box
-          maxW={'24rem'}
-          textAlign="center"
-          mx="auto"
-          as="p"
-          textStyle={{ base: 'body5', md: 'body4' }}
-          color="neutral.7"
-        >
+        </div>
+
+        <div className="mx-auto max-w-[24rem] text-center text-gray-700">
           {subHeading}
-        </Box>
+        </div>
         {CTA ? CTA : <></>}
-      </VStack>
-    </VStack>
+      </div>
+    </div>
   );
 };

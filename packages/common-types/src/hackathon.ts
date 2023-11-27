@@ -1,5 +1,3 @@
-import type { Prisma } from '@cubik/database';
-
 export interface HackathonHost {
   name: string;
   wallet: string;
@@ -50,15 +48,3 @@ export interface HackathonSocial {
   icon_link: string;
   link: string;
 }
-
-export type HackathonGetAll = Prisma.HackathonGetPayload<{
-  select: {
-    name: true;
-    id: true;
-    background: true;
-    logo: true;
-    short_description: true;
-    prize_pool: true;
-    timeline: true;
-  };
-}>;

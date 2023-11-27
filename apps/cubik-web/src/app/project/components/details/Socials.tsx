@@ -1,5 +1,4 @@
 import React from 'react';
-import { Box, HStack, VStack } from '@/utils/chakra';
 
 interface Props {
   discordLink?: string;
@@ -49,9 +48,9 @@ export const Socials = ({
   }
   return (
     <>
-      <VStack gap={4} align={'start'} w="full">
-        <HStack align={'start'}>
-          <Box>
+      <div className="flex w-full flex-col items-start gap-4">
+        <div className="flex items-start">
+          <div>
             <svg
               width="28"
               height="28"
@@ -67,24 +66,14 @@ export const Socials = ({
                 strokeLinejoin="round"
               />
             </svg>
-          </Box>
-          <Box color={'white'} fontSize={'xl'} fontWeight={700}>
-            Socials
-          </Box>
-        </HStack>
+          </div>
+
+          <div className="text-xl font-bold text-white">Socials</div>
+        </div>
 
         {projectLink && (
-          <HStack
-            p={5}
-            gap={5}
-            w={'full'}
-            border={'1px solid'}
-            borderColor={'#383301'}
-            borderRadius={10}
-            bg="rgba(0, 0, 0, 0.20)"
-            overflow={'hidden'}
-          >
-            <Box>
+          <div className="flex w-full gap-5 overflow-hidden rounded-xl border border-[#383301] bg-black p-5">
+            <div>
               <svg
                 width="24"
                 height="24"
@@ -100,30 +89,23 @@ export const Socials = ({
                   strokeLinejoin="round"
                 />
               </svg>
-            </Box>
-            <Box
-              noOfLines={1}
-              fontSize={'lg'}
-              color={'#FFE818'}
-              fontWeight={600}
+            </div>
+            <div
+              className="overflow-hidden break-words text-lg font-semibold text-[#FFE818]"
+              style={{
+                WebkitLineClamp: 1,
+                display: '-webkit-box',
+                WebkitBoxOrient: 'vertical',
+              }}
             >
               {projectLink}
-            </Box>
-          </HStack>
+            </div>
+          </div>
         )}
 
         {githubLink && (
-          <HStack
-            p={5}
-            gap={5}
-            overflow={'hidden'}
-            w={'full'}
-            border={'1px solid'}
-            borderColor={'#400253'}
-            borderRadius={10}
-            bg="rgba(0, 0, 0, 0.20)"
-          >
-            <Box>
+          <div className="flex w-full gap-5 overflow-hidden rounded-xl border border-[#400253] bg-black p-5">
+            <div>
               <svg
                 width="24"
                 height="24"
@@ -139,30 +121,24 @@ export const Socials = ({
                   strokeLinejoin="round"
                 />
               </svg>
-            </Box>
-            <Box
-              noOfLines={1}
-              fontSize={'lg'}
-              color={'#D14AFA'}
-              fontWeight={600}
+            </div>
+
+            <div
+              className="overflow-hidden break-words text-lg font-semibold text-[#D14AFA]"
+              style={{
+                WebkitLineClamp: 1,
+                display: '-webkit-box',
+                WebkitBoxOrient: 'vertical',
+              }}
             >
               {getGithubRepoName(githubLink)}
-            </Box>
-          </HStack>
+            </div>
+          </div>
         )}
 
         {twitterHandle && (
-          <HStack
-            p={5}
-            overflow={'hidden'}
-            gap={5}
-            w={'full'}
-            border={'1px solid'}
-            borderColor={'#004A5A'}
-            borderRadius={10}
-            bg="rgba(0, 0, 0, 0.20)"
-          >
-            <Box>
+          <div className="flex w-full gap-5 overflow-hidden rounded-xl border border-[#004A5A] bg-black p-5">
+            <div>
               <svg
                 width="24"
                 height="24"
@@ -178,30 +154,23 @@ export const Socials = ({
                   strokeLinejoin="round"
                 />
               </svg>
-            </Box>
-            <Box
-              noOfLines={1}
-              fontSize={'lg'}
-              color={'#00D1FF'}
-              fontWeight={600}
+            </div>
+            <div
+              className="overflow-hidden break-words text-lg font-semibold text-[#00D1FF]"
+              style={{
+                WebkitLineClamp: 1,
+                display: '-webkit-box',
+                WebkitBoxOrient: 'vertical',
+              }}
             >
               {getTwitterName(twitterHandle)}
-            </Box>
-          </HStack>
+            </div>
+          </div>
         )}
 
         {discordLink && (
-          <HStack
-            p={5}
-            gap={5}
-            overflow={'hidden'}
-            w={'full'}
-            border={'1px solid'}
-            borderColor={'#004A5A'}
-            borderRadius={10}
-            bg="rgba(0, 0, 0, 0.20)"
-          >
-            <Box>
+          <div className="flex w-full gap-5 overflow-hidden rounded-xl border border-[#004A5A] bg-black p-5">
+            <div>
               <svg
                 width="24"
                 height="24"
@@ -217,18 +186,21 @@ export const Socials = ({
                   strokeLinejoin="round"
                 />
               </svg>
-            </Box>
-            <Box
-              noOfLines={1}
-              fontSize={'lg'}
-              color={'#00D1FF'}
-              fontWeight={600}
+            </div>
+
+            <div
+              className="overflow-hidden break-words text-lg font-semibold text-[#00D1FF]"
+              style={{
+                WebkitLineClamp: 1,
+                display: '-webkit-box',
+                WebkitBoxOrient: 'vertical',
+              }}
             >
               {discordLink}
-            </Box>
-          </HStack>
+            </div>
+          </div>
         )}
-      </VStack>
+      </div>
     </>
   );
 };

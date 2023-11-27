@@ -83,10 +83,8 @@ export const generateSemantic = () => {
   darkColors?.variables.forEach((e) => {
     if (typeof e.value !== 'string') {
       finalDark = {
-        ['--' +
-        e.name.split('/')[
-          e.name.split('/').length - 1
-        ]]: `var(${convertStringToPrimitive(e.value.name)})`,
+        ['--' + e.name.split('/')[e.name.split('/').length - 1]]:
+          `var(${convertStringToPrimitive(e.value.name)})`,
         ...finalDark,
       };
     } else {
@@ -106,10 +104,8 @@ export const generateSemantic = () => {
   lightColors?.variables.forEach((e) => {
     if (typeof e.value !== 'string') {
       finalLight = {
-        ['--' +
-        e.name.split('/')[
-          e.name.split('/').length - 1
-        ]]: `var(${convertStringToPrimitive(e.value.name)})`,
+        ['--' + e.name.split('/')[e.name.split('/').length - 1]]:
+          `var(${convertStringToPrimitive(e.value.name)})`,
         ...finalLight,
       };
     } else {

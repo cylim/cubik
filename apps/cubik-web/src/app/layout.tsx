@@ -25,12 +25,8 @@ const PlusJakartaSans = Inter({
 
 const APP_NAME = 'CUBIK';
 const APP_DEFAULT_TITLE = 'CUBIK';
-const APP_TITLE_TEMPLATE = '%s - PWA App';
+const APP_TITLE_TEMPLATE = '';
 const APP_DESCRIPTION = 'The genesis for leading Solana initiatives';
-
-export const viewport: Viewport = {
-  themeColor: '#141414',
-};
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,

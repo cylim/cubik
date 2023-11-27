@@ -35,3 +35,4 @@ export * from './components/ui/Button';
 export * from './components/ui/Subhead';
 export * from './hooks/useTheme';
 export * from './hooks/useTokenPrice';
+export * from './components/ui/Spinner';

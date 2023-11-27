@@ -51,37 +51,20 @@ export const DetailSection = async ({ slug }: Props) => {
 
   return (
     <>
-      <Container
-        display={'flex'}
-        flexDirection={{
-          base: 'column-reverse',
-          lg: 'row',
-        }}
-        w={'full'}
-        maxW={'7xl'}
-        mx={'auto'}
-        gap={10}
-      >
-        <VStack align={'start'} w="full">
-          <VStack gap={5} align={'start'}>
-            <Box color={'white'} fontWeight={700} fontSize={'xl'}>
+      <div className="mx-auto flex w-full max-w-7xl flex-col-reverse gap-10 lg:flex-row">
+        <div className="flex w-full flex-col items-start">
+          <div className="flex flex-col items-start gap-5">
+            <div className="text-xl font-bold text-white">
               About {details?.name}
-            </Box>
+            </div>
             <Description longDescription={details?.longDescription || ''} />
-            <Box bg="#1E1E1E" w={'full'} h={'0.5'} />
+
+            <div className="h-[0.125rem] w-full bg-[#1E1E1E]" />
             <Comments />
-          </VStack>
-        </VStack>
-        <VStack
-          w={'full'}
-          align={'start'}
-          maxW={{
-            base: 'full',
-            lg: 'sm',
-          }}
-          gap={8}
-          color={'white'}
-        >
+          </div>
+        </div>
+
+        <div className="flex w-full max-w-full flex-col items-start gap-8 text-white lg:max-w-sm">
           <ProjectTags tags={details?.industry || ''} />
           <RoundStats />
           <Socials
@@ -91,8 +74,8 @@ export const DetailSection = async ({ slug }: Props) => {
             twitterHandle={details?.twitterHandle}
             githubLink={details?.githubLink}
           />
-        </VStack>
-      </Container>
+        </div>
+      </div>
     </>
   );
 };

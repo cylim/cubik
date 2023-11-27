@@ -4,10 +4,11 @@ import { useRouter } from 'next/navigation';
 import { SOL, USDC } from '@/app/components/common/tags/TokenTags';
 import Username from '@/app/components/common/username';
 import { TruncatedAddr } from '@/app/components/common/wallet';
-import { Avatar, Box, Center, HStack, Td, Tr, VStack } from '@/utils/chakra';
 import { formatNumberWithK } from '@/utils/helpers/formatNumberWithK';
 import { timeSince } from '@/utils/helpers/timeSince';
 import { fullTokenList } from '@/utils/helpers/tokenlist';
+
+import { Avatar, TableCell, TableRow } from '@cubik/ui';
 
 type Props = {
   id: string;
@@ -23,79 +24,59 @@ type Props = {
 export const ContributorRow: React.FC<Props> = (props) => {
   const router = useRouter();
   return (
-    <Tr
-      w={'full'}
+    <TableRow
       onClick={() => {
         router.push(`/${props?.username}`);
       }}
-      cursor="pointer"
-      _hover={{ backgroundColor: '#0000008A' }}
     >
-      <Td p="18px">
-        <HStack align={'start'} gap={{ base: '8px', md: '16px' }}>
+      <TableCell>
+        <div className="flex items-start gap-2 md:gap-4">
           <Avatar
-            width={{ base: '36px', md: '44px' }}
-            height={{ base: '36px', md: '44px' }}
             src={props.avatar}
+            alt="avatar image"
+            className="h-[36px] w-[36px] md:h-[44px] md:w-[44px]"
           />
-          <VStack
-            align={'start'}
-            justify="center"
-            spacing={{ base: '8px', md: '8px' }}
-          >
+
+          <div className="flex flex-col items-start justify-center space-y-2">
             <Username isLoading={false} username={props?.username} size="sm" />
-            <Box
-              as="p"
-              textStyle={{ base: 'body6', md: 'body5' }}
-              color="neutral.7"
-            >
+
+            <div className="text-md text-gray-700">
               {TruncatedAddr({
                 walletAddress: props.walletAddress,
               })}
-            </Box>
-          </VStack>
-        </HStack>
-      </Td>
-      <Td p="18px">
-        <HStack gap="8px" align={'center'}>
-          <Center>
+            </div>
+          </div>
+        </div>
+      </TableCell>
+      <TableCell>
+        <div className="flex items-center gap-2">
+          <div className="flex items-center justify-center">
             {fullTokenList.find(
               (e) => e.name.includes('Solana') && e.address === props.token,
             ) && <SOL size={'32px'} />}
             {fullTokenList.find(
               (e) => e.name.includes('USDC') && e.address === props.token,
             ) && <USDC size={'32px'} />}
-          </Center>
-          <VStack justify={'center'} spacing="2px" align={'start'}>
-            <HStack align={'baseline'} color="white">
-              <Box as="p" textStyle={{ base: 'title5', md: 'title4' }}>
-                {formatNumberWithK(props.amount)}
-              </Box>
-              <Box as="p" textStyle={{ base: 'title6', md: 'title7' }}>
+          </div>
+          <div className="flex flex-col items-start justify-center gap-1">
+            <div className="flex items-baseline gap-1 text-white">
+              <p className="text-xl">{formatNumberWithK(props.amount)}</p>
+              <p className="text-xl">
                 {fullTokenList.find((e) => e.address === props.token)?.name}
-              </Box>
-            </HStack>
-
-            <Box
-              as="p"
-              color="neutral.8"
-              textStyle={{ base: 'body6', md: 'body5' }}
-            >
+              </p>
+            </div>
+            <p className="text-md text-gray-800">
               ${formatNumberWithK(props.usd)}
-            </Box>
-          </VStack>
-        </HStack>
-      </Td>
-      <Td p="18px">
-        <Box
-          as="p"
-          textStyle={{ base: 'body5', md: 'body4' }}
-          color="neutral.11"
-        >
+            </p>
+          </div>
+        </div>
+      </TableCell>
+      <TableCell>
+        <p className="text-md text-gray-800 md:text-sm">
           {timeSince(new Date(props.timestamp))}
-        </Box>
-      </Td>
-      <Td p="18px">
+        </p>
+      </TableCell>
+      <TableCell>
         <svg
           width="8"
           height="12"
@@ -108,7 +89,7 @@ export const ContributorRow: React.FC<Props> = (props) => {
             fill="white"
           />
         </svg>
-      </Td>
-    </Tr>
+      </TableCell>
+    </TableRow>
   );
 };

@@ -1,5 +1,7 @@
 import { JwtPayload } from 'jsonwebtoken';
 
+import { EventType } from '@cubik/database';
+
 export type AccessType = 'GOD' | 'ADMIN';
 export type AuthPayload = {
   id: string;
@@ -13,7 +15,7 @@ export type AuthPayload = {
 export interface AccessScope {
   event_name: string;
   event_id: string;
-  event_type: 'hackathon' | 'grant';
+  event_type: EventType;
 }
 
 export interface AuthAdminVerifyReturn {

@@ -1,21 +1,16 @@
 import React from 'react';
 import ProfilePictureAvatar from '@/app/components/common/profile-picture';
-import {
-  Box,
-  HStack,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Text,
-  Th,
-  Thead,
-  Tr,
-  VStack,
-} from '@/utils/chakra';
 import { useQuery } from '@tanstack/react-query';
 
 import type { NFTProfile } from '@cubik/common-types';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@cubik/ui';
 
 import { useProjectEventStore } from '../store';
 import { getTopEarner } from './getContributors';
@@ -30,9 +25,9 @@ export const TopEarner = () => {
   });
 
   return (
-    <VStack mt={4} w="full" align={'start'}>
-      <HStack align={'center'}>
-        <Box borderRadius={4} border={'1.5px solid #2B1449'} p={2}>
+    <div className="mt-4 flex w-full flex-col items-start">
+      <div className="flex items-center gap-2">
+        <div className="rounded-md border-[1.5px] border-[#2B1449] p-2">
           <svg
             width="18"
             height="18"
@@ -48,103 +43,86 @@ export const TopEarner = () => {
               strokeLinejoin="round"
             />
           </svg>
-        </Box>
-        <Box color={'white'} fontSize={'lg'} fontWeight={600}>
-          Top Contributors
-        </Box>
-      </HStack>
-      <TableContainer mt={4} w={'full'}>
-        <Table variant={'unstyled'} w={'full'}>
-          <Thead color="neutral.8" fontFamily={'Inter'}>
-            <Tr>
-              <Th textAlign={'start'} p={1}>
-                <Text fontSize={{ base: '12px', md: '14px' }} color={'#515251'}>
-                  Rank
-                </Text>
-              </Th>
-              <Th textAlign={'start'} p={1}>
-                <Text color={'#515251'} fontSize={{ base: '12px', md: '14px' }}>
-                  Contributor
-                </Text>
-              </Th>
-              <Th
-                p={1}
-                textAlign="end"
-                fontSize={{ base: '12px', md: '14px' }}
-                color={'#515251'}
-              >
-                Amount
-              </Th>
-            </Tr>
-          </Thead>
-          <Tbody gap={3}>
-            {topEarner.data?.map((earner, index: number) => {
-              return (
-                <Tr key={earner.id}>
-                  <Td p={1} textAlign={'center'}>
-                    <span
-                      style={{
-                        color: '#3B3D3D',
-                        fontWeight: 600,
-                        fontSize: '16px',
+        </div>
+
+        <div className="text-lg font-semibold text-white">Top Contributors</div>
+      </div>
+      <Table className="mt-4 w-full">
+        <TableHeader className="font-inter text-md w-full text-[#515251]">
+          <TableRow className="">
+            <TableHead className=" font-semibole"> Rank</TableHead>
+            <TableHead className=" font-semibole"> Contributor</TableHead>
+            <TableHead className=" font-semibole">Amount</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody className="flex gap-3">
+          {topEarner.data?.map((earner, index: number) => {
+            return (
+              <TableRow key={earner.id}>
+                <TableCell className="p-1 text-center">
+                  <span
+                    style={{
+                      color: '#3B3D3D',
+                      fontWeight: 600,
+                      fontSize: '16px',
+                    }}
+                  >
+                    #
+                  </span>
+                  <span
+                    style={{
+                      color: 'white',
+                      fontWeight: 600,
+                      fontSize: '20px',
+                    }}
+                  >
+                    {index + 1}
+                  </span>
+                </TableCell>
+                <TableCell>
+                  <div className="flex items-start gap-2">
+                    <ProfilePictureAvatar
+                      NFTProfile={
+                        earner.user?.profileNft as unknown as NFTProfile
+                      }
+                      asNFT={earner.user?.profileNft ? true : false}
+                      profilePicture={
+                        earner.user?.profileNft
+                          ? undefined
+                          : earner.user?.profilePicture!
+                      }
+                      username={earner.user?.username as string}
+                      width={{
+                        base: '36px',
+                        sm: '36px',
+                        md: '36px',
+                        lg: '36px',
+                        xl: '36px',
                       }}
-                    >
-                      #
-                    </span>
-                    <span
-                      style={{
-                        color: 'white',
-                        fontWeight: 600,
-                        fontSize: '20px',
+                      height={{
+                        base: '36px',
+                        sm: '36px',
+                        md: '36px',
+                        lg: '36px',
+                        xl: '36px',
                       }}
-                    >
-                      {index + 1}
-                    </span>
-                  </Td>
-                  <Td p={1}>
-                    <HStack align={'start'} gap={2}>
-                      <ProfilePictureAvatar
-                        NFTProfile={
-                          earner.user?.profileNft as unknown as NFTProfile
-                        }
-                        asNFT={earner.user?.profileNft ? true : false}
-                        profilePicture={
-                          earner.user?.profileNft
-                            ? undefined
-                            : earner.user?.profilePicture!
-                        }
-                        username={earner.user?.username as string}
-                        width={{
-                          base: '36px',
-                          sm: '36px',
-                          md: '36px',
-                          lg: '36px',
-                          xl: '36px',
-                        }}
-                        height={{
-                          base: '36px',
-                          sm: '36px',
-                          md: '36px',
-                          lg: '36px',
-                          xl: '36px',
-                        }}
-                      />
-                      <Box color={'white'} fontWeight={600} fontSize={'md'}>
-                        @{earner.user?.username}
-                      </Box>
-                    </HStack>
-                  </Td>
-                  <Td textAlign="end" p={1}>
-                    <Text color={'white'} fontWeight={600}>
-                      ${earner.totalUsdAmount}
-                    </Text>
-                  </Td>
-                </Tr>
-              );
-            })}
-          </Tbody>
-        </Table>
-      </TableContainer>
-    </VStack>
+                    />
+
+                    <div className="text-md font-semibold text-white">
+                      @{earner.user?.username}
+                    </div>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="font-semibold text-white">
+                    ${earner.totalUsdAmount}
+                  </div>
+                </TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+    </div>
   );
 };

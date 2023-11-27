@@ -7,7 +7,6 @@ import {
   PHASE_PRODUCTION_BUILD,
 } from "next/constants.js";
 
-
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,

@@ -24,6 +24,7 @@ const getProjects = async () => {
       name: true,
       logo: true,
       shortDescription: true,
+      slug: true,
     },
     take: 30,
   });
@@ -51,7 +52,7 @@ export default async function Home() {
             {projects.map((project) => {
               return (
                 <ProjectCard
-                  href={'/project'}
+                  href={`/project/${project.slug}`}
                   Button={<SaveButton />}
                   description={project.shortDescription}
                   name={project.name}

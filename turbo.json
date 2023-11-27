@@ -2,7 +2,10 @@
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local", "tsconfig.json"],
   "pipeline": {
-    "db:generate": {
+    "db:gen": {
+      "cache": false
+    },
+    "db:gen:meta": {
       "cache": false
     },
     "db:push": {
@@ -13,11 +16,11 @@
       "cache": false
     },
     "build": {
-      "dependsOn": ["^build", "^db:generate"],
+      "dependsOn": ["^build", "^db:gen", "^db:gen:meta"],
       "outputs": [".next/**", ".expo/**"]
     },
     "type-check": {
-      "dependsOn": ["^db:generate"],
+      "dependsOn": ["^db:gen"],
       "cache": false
     },
     "clean": {

@@ -5,7 +5,7 @@
     "dev": "NODE_ENV=development dotenv --  turbo run dev",
     "lint": "dotenv --  eslint .",
     "format": "prettier  --write \"**/*.{ts,tsx,md}\" --ignore-path .prettierignore",
-    "generate": "dotenv -- turbo run db:generate",
+    "generate": "dotenv -- turbo run db:gen && turbo run db:gen:meta",
     "db:push": "dotenv -- turbo run db:push",
     "build:wallet": "turbo run build-lib",
     "db:studio": "dotenv -- pnpm -F @cubik/database dev",

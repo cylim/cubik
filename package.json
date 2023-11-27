@@ -9,7 +9,7 @@
     "db:push": "dotenv -- turbo run db:push",
     "build:wallet": "turbo run build-lib",
     "db:studio": "dotenv -- pnpm -F @cubik/database dev",
-    "postinstall": "dotenv -- turbo run db:generate",
+    "postinstall": "dotenv -- turbo run db:gen && turbo run db:gen:meta",
     "check-types": "npx tsc --noEmit --pretty",
     "prepare": "husky install"
   },

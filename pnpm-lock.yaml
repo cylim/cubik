@@ -650,9 +650,6 @@ importers:
       sonner:
         specifier: ^1.2.3
         version: 1.2.3(react-dom@18.2.0)(react@18.2.0)
-      wallet-adapter-mobile:
-        specifier: link:@types/solana-mobile/wallet-adapter-mobile
-        version: link:@types/solana-mobile/wallet-adapter-mobile
       zustand:
         specifier: ^4.4.6
         version: 4.4.6(@types/react@18.2.38)(react@18.2.0)

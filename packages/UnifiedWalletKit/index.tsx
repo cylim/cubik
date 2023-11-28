@@ -1,4 +1,5 @@
-// Base libs
+'use client';
+
 export * from '@solana/wallet-adapter-base';
 export * from '@solana/wallet-adapter-react';
 

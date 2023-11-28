@@ -14,7 +14,6 @@ import {
   WalletContextState,
 } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
-import { useMediaQuery } from '@uidotdev/usehooks';
 import { usePrevious } from 'react-use';
 
 import {
@@ -27,9 +26,9 @@ import {
 import { cn } from '@cubik/ui/lib/utils';
 
 import { Modal, ModalHeader } from '../../ui/components/ui/Modal';
-import { Icon } from '../../ui/icons/icon';
 //import ModalDialog from '../components/ModalDialog';
 import UnifiedWalletModal from '../components/UnifiedWalletModal';
+import { useMediaQuery } from '../hooks/helperHooks';
 import { shortenAddress } from '../misc/utils';
 import {
   UnifiedWalletContext,
@@ -278,55 +277,6 @@ const UnifiedWalletContextProvider = ({
               />
               <DrawerBody>
                 <UnifiedWalletModal onClose={() => setShowModal(false)} />
-                <div
-                  style={{
-                    border: '0.5px solid #E6E6E61A',
-                  }}
-                  className="w-full"
-                />
-                <div className="flex flex-col p-4">
-                  <div className="flex item-start gap-2">
-                    <Icon
-                      name="eyeClose2"
-                      strokeWidth={1.5}
-                      className="min-w-[18px]"
-                      stroke="var(--color-fg-tertiary)"
-                      fill="none"
-                      width={18}
-                      height={18}
-                    />
-                    <span className="text-[12px] text-[var(--color-fg-tertiary)]">
-                      View only permissions. We will never do anything without
-                      your approval.
-                    </span>
-                  </div>
-                  {/* <div className="flex item-start space-x-3 mt-4">
-                    <Icon
-                      name="shieldCheck"
-                      strokeWidth={1.5}
-                      stroke="var(--color-fg-tertiary)"
-                      fill="none"
-                      width={18}
-                      height={18}
-                    />
-                    <span className="text-[12px] text-[var(--color-fg-tertiary)]">
-                      Audited Smart Contracts
-                    </span>
-                  </div> */}
-                  {/* <div className="flex item-start space-x-3 mt-4">
-                    <Icon
-                      name="userSecurity"
-                      strokeWidth={1.5}
-                      stroke="var(--color-fg-tertiary)"
-                      fill="none"
-                      width={18}
-                      height={18}
-                    />
-                    <span className="text-[12px] text-[var(--color-fg-tertiary)]">
-                      Trusted by 1,568 Users
-                    </span>
-                  </div> */}
-                </div>
               </DrawerBody>
               {/* <DrawerFooter></DrawerFooter> */}
             </DrawerContent>
@@ -406,52 +356,6 @@ const UnifiedWalletContextProvider = ({
             onClose={() => setShowModal(false)}
           />
           <UnifiedWalletModal onClose={() => setShowModal(false)} />
-          <div className="w-full h-[1px] bg-[var(--color-border-primary)]" />
-          <div>
-            <div className="flex flex-col px-6 py-4">
-              <div className="flex item-start space-x-3">
-                <Icon
-                  name="eyeClose2"
-                  strokeWidth={1.5}
-                  className="min-w-[18px]"
-                  stroke="var(--color-fg-tertiary)"
-                  fill="none"
-                  width={18}
-                  height={18}
-                />
-                <span className="text-[12px] text-[var(--color-fg-tertiary)]">
-                  View only permissions. We will never do anything without your
-                  approval.
-                </span>
-              </div>
-              <div className="flex item-start space-x-3 mt-4">
-                <Icon
-                  name="shieldCheck"
-                  strokeWidth={1.5}
-                  stroke="var(--color-fg-tertiary)"
-                  fill="none"
-                  width={18}
-                  height={18}
-                />
-                <span className="text-[12px] text-[var(--color-fg-tertiary)]">
-                  Audited Smart Contracts
-                </span>
-              </div>
-              <div className="flex item-start space-x-3 mt-4">
-                <Icon
-                  name="userSecurity"
-                  strokeWidth={1.5}
-                  stroke="var(--color-fg-tertiary)"
-                  fill="none"
-                  width={18}
-                  height={18}
-                />
-                <span className="text-[12px] text-[var(--color-fg-tertiary)]">
-                  Trusted by 1,568 Users
-                </span>
-              </div>
-            </div>
-          </div>
         </Modal>
       )}
       {children}

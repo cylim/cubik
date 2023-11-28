@@ -14,6 +14,8 @@ import {
   WalletAdapterWithMutableSupportedTransactionVersions,
 } from '@cubik/wallet-connect';
 
+import { useIsClient } from '@cubik/wallet-connect/hooks/helperHooks';
+
 export const MWA_NOT_FOUND_ERROR = 'MWA_NOT_FOUND_ERROR';
 
 export const metadata = {
@@ -26,6 +28,10 @@ export const metadata = {
 };
 
 export const WalletProvider = ({ children }: { children: any }) => {
+   const isClient = useIsClient();
+
+  
+
   const wallets = useMemo(() => {
     if (typeof window === 'undefined') {
       return [];
@@ -94,6 +100,10 @@ export const WalletProvider = ({ children }: { children: any }) => {
       }),
       [wallets],
     );
+
+     if (!isClient) {
+    return children
+   }
 
   return <UnifiedWalletProvider {...params}>{children}</UnifiedWalletProvider>;
 };

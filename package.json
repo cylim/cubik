@@ -5,11 +5,11 @@
     "dev": "NODE_ENV=development dotenv --  turbo run dev",
     "lint": "dotenv --  eslint .",
     "format": "prettier  --write \"**/*.{ts,tsx,md}\" --ignore-path .prettierignore",
-    "generate": "dotenv -- turbo run db:gen && turbo run db:gen:meta",
+    "generate": "dotenv -- turbo run db:gen",
     "db:push": "dotenv -- turbo run db:push",
     "build:wallet": "turbo run build-lib",
     "db:studio": "dotenv -- pnpm -F @cubik/database dev",
-    "postinstall": "dotenv -- turbo run db:gen && turbo run db:gen:meta",
+    "postinstall": "dotenv -- turbo run db:gen",
     "check-types": "npx tsc --noEmit --pretty",
     "prepare": "husky install"
   },

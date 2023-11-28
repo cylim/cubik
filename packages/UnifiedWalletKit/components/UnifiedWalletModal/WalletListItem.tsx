@@ -1,3 +1,5 @@
+'use client';
+
 import React, {
   DetailedHTMLProps,
   FC,
@@ -8,8 +10,8 @@ import React, {
 } from 'react';
 import Image from 'next/image';
 import { Adapter } from '@solana/wallet-adapter-base';
-import { useMediaQuery } from '@uidotdev/usehooks';
 
+import { useMediaQuery } from '../../hooks/helperHooks';
 import UnknownIconSVG from '../../icons/UnknownIconSVG';
 
 export interface WalletIconProps

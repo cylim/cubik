@@ -5,9 +5,6 @@
     "db:gen": {
       "cache": false
     },
-    "db:gen:meta": {
-      "cache": false
-    },
     "db:push": {
       "cache": false
     },
@@ -16,7 +13,7 @@
       "cache": false
     },
     "build": {
-      "dependsOn": ["^build", "^db:gen", "^db:gen:meta"],
+      "dependsOn": ["^build", "^db:gen"],
       "outputs": [".next/**", ".expo/**"]
     },
     "type-check": {

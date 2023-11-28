@@ -24,7 +24,6 @@ const getProjects = async () => {
     return [];
   }
   try {
-    
     const projects = await prisma.project.findMany({
       select: {
         id: true,
@@ -36,9 +35,9 @@ const getProjects = async () => {
     });
     return projects;
   } catch (error) {
-   return [] 
+    return [];
   }
-  };
+};
 
 export default async function Home() {
   const projects = await getProjects();

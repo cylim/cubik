@@ -4,11 +4,8 @@
   "types": "./index.ts",
   "scripts": {
     "db:gen": "prisma generate --schema prisma/default.prisma",
-    "db:gen:meta": "prisma generate --schema prisma/metadata.prisma",
     "db:push": "dotenv -e ../../.env -- npx prisma db push --skip-generate --schema prisma/default.prisma",
-    "db:push:meta": "dotenv -e ../../.env -- npx prisma db push --skip-generate --schema prisma/metadata.prisma",
     "db:pull": "dotenv -e ../../.env -- npx prisma db pull --skip-generate --schema prisma/default.prisma",
-    "db:pull:meta": "dotenv -e ../../.env -- npx prisma db pull --skip-generate --schema prisma/metadata.prisma",
     "dev": "dotenv -e ../../.env -- npx prisma studio --port 5556"
   },
   "dependencies": {

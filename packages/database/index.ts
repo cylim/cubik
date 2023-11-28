@@ -7,11 +7,9 @@ export * from '@prisma/client';
 config();
 declare global {
   var prisma: PrismaClient;
-  var metaPrisma: PrismaClient;
 }
 
 let prisma: PrismaClient;
-let metaPrisma: PrismaClient;
 
 if (typeof window === 'undefined') {
   if (process.env.NODE_ENV === 'production') {
@@ -19,13 +17,6 @@ if (typeof window === 'undefined') {
       datasources: {
         db: {
           url: process.env.PROD_DATABASE_URL,
-        },
-      },
-    });
-    metaPrisma = new PrismaClient({
-      datasources: {
-        db: {
-          url: process.env.METADATA_DATABASE_URL,
         },
       },
     });
@@ -38,18 +29,10 @@ if (typeof window === 'undefined') {
           },
         },
       });
-
-      global.metaPrisma = new PrismaClient({
-        datasources: {
-          db: {
-            url: process.env.METADATA_DATABASE_URL,
-          },
-        },
-      });
     }
     prisma = global.prisma;
   }
 }
 
 // const prisma = new PrismaClient();
-export { prisma, metaPrisma };
+export { prisma };

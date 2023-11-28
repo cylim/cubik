@@ -5,10 +5,9 @@ import {
   WalletName,
   WalletReadyState,
 } from '@solana/wallet-adapter-base';
-import { useMediaQuery } from '@uidotdev/usehooks';
 import { useToggle } from 'react-use';
 
-import { AvatarGroup } from '@cubik/ui';
+import { AvatarGroup, Icon } from '@cubik/ui';
 import { cn } from '@cubik/ui/lib/utils';
 
 import {
@@ -17,6 +16,7 @@ import {
 } from '../../contexts/UnifiedWalletContext';
 import HardcodedWalletStandardAdapter from '../../contexts/WalletConnectionProvider/HardcodedWalletStandardAdapter';
 import { usePreviouslyConnected } from '../../contexts/WalletConnectionProvider/previouslyConnectedProvider';
+import { useMediaQuery } from '../../hooks/helperHooks';
 import { HARDCODED_WALLET_STANDARDS } from '../../misc/constants';
 import { OnboardingFlow } from './Onboarding';
 import { WalletIcon, WalletListItem } from './WalletListItem';
@@ -59,10 +59,7 @@ const ListOfWallets: React.FC<{
     [handleConnectClick, list.others],
   );
   const hasNoWallets = useMemo(() => {
-    return list.highlight.filter((e) => e.readyState !== 'NotDetected')
-      .length === 0
-      ? false
-      : true;
+    return list.highlightedBy === 'TopWallet' ? true : false;
   }, [list]);
 
   useEffect(() => {
@@ -72,12 +69,7 @@ const ListOfWallets: React.FC<{
   }, [hasNoWallets]);
 
   if (showOnboarding) {
-    return (
-      <OnboardingFlow
-        showBack={!hasNoWallets}
-        onClose={() => setShowOnboarding(false)}
-      />
-    );
+    return <OnboardingFlow />;
   }
 
   return (
@@ -307,6 +299,7 @@ const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = () => {
       return { highlightedBy: 'Installed', highlight, others };
     }
 
+    // console.log(filteredAdapters.loadable[1].readyState);
     if (filteredAdapters.loadable.length === 0) {
       return { highlightedBy: 'Onboarding', highlight: [], others: [] };
     }
@@ -322,6 +315,54 @@ const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = () => {
   return (
     <div className="py-4">
       <ListOfWallets list={list} onToggle={onToggle} isOpen={isOpen} />
+      {list.highlightedBy !== 'TopWallet' && (
+        <>
+          <div className="w-full h-[1px] bg-[var(--color-border-primary)]" />
+          <div className="flex flex-col px-6 py-4">
+            <div className="flex item-start space-x-3">
+              <Icon
+                name="eyeClose2"
+                strokeWidth={1.5}
+                className="min-w-[18px]"
+                stroke="var(--color-fg-tertiary)"
+                fill="none"
+                width={18}
+                height={18}
+              />
+              <span className="text-[12px] text-[var(--color-fg-tertiary)]">
+                View only permissions. We will never do anything without your
+                approval.
+              </span>
+            </div>
+            <div className="flex item-start space-x-3 mt-4">
+              <Icon
+                name="shieldCheck"
+                strokeWidth={1.5}
+                stroke="var(--color-fg-tertiary)"
+                fill="none"
+                width={18}
+                height={18}
+              />
+              <span className="text-[12px] text-[var(--color-fg-tertiary)]">
+                Audited Smart Contracts
+              </span>
+            </div>
+            <div className="flex item-start space-x-3 mt-4">
+              <Icon
+                name="userSecurity"
+                strokeWidth={1.5}
+                stroke="var(--color-fg-tertiary)"
+                fill="none"
+                width={18}
+                height={18}
+              />
+              <span className="text-[12px] text-[var(--color-fg-tertiary)]">
+                Trusted by 1,568 Users
+              </span>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

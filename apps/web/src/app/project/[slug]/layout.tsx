@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
 import type { Metadata, ResolvingMetadata } from 'next';
-import {utils} from "@coral-xyz/anchor"
+import { utils } from '@coral-xyz/anchor';
+
 interface OgProps {
   params: { slug: string };
   searchParams: Record<string, string | string[] | undefined>;
@@ -58,7 +59,6 @@ export async function generateMetadata(
   };
 }
 
-
 interface Props {
   params: {
     slug: string;
@@ -66,9 +66,7 @@ interface Props {
   children: React.JSX.Element | React.JSX.Element[];
 }
 
-const fetchProject = async (
-  slug: string,
-) => {
+const fetchProject = async (slug: string) => {
   try {
     const project = await prisma.project.findFirst({
       where: {
@@ -87,8 +85,8 @@ const fetchProject = async (
     if (!project) {
       return [null, null];
     }
-   
-    const layoutData= {
+
+    const layoutData = {
       id: project?.id,
       name: project?.name,
       shortDescription: project?.shortDescription,
@@ -103,10 +101,8 @@ const fetchProject = async (
   }
 };
 
- const ProjectLayout = ({children,params}:Props) => {
-  return (
-    <div>ProjectLayout</div>
-  )
-}
+const ProjectLayout = ({ children, params }: Props) => {
+  return <div>ProjectLayout</div>;
+};
 
-export default ProjectLayout
+export default ProjectLayout;

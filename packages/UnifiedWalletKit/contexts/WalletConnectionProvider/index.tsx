@@ -9,9 +9,7 @@ import { WalletProvider } from '@solana/wallet-adapter-react';
 import { Cluster } from '@solana/web3.js';
 
 import { IUnifiedTheme } from '../UnifiedWalletContext';
-import HardcodedWalletStandardAdapter, {
-  IHardcodedWalletStandardAdapter,
-} from './HardcodedWalletStandardAdapter';
+import { IHardcodedWalletStandardAdapter } from './HardcodedWalletStandardAdapter';
 import { PreviouslyConnectedProvider } from './previouslyConnectedProvider';
 
 const noop = (error: WalletError, adapter?: Adapter) => {
@@ -66,12 +64,7 @@ const WalletConnectionProvider: FC<
   }
 > = ({ wallets: passedWallets, config, children }) => {
   const wallets = useMemo(() => {
-    return [
-      ...passedWallets,
-      ...(config.hardcodedWallets || []).map(
-        (item) => new HardcodedWalletStandardAdapter(item),
-      ),
-    ];
+    return [...passedWallets];
   }, []);
 
   return (

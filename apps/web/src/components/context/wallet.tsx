@@ -101,7 +101,7 @@ export const WalletProvider = ({ children }: { children: any }) => {
       [wallets],
     );
 
-     if (!isClient) {
+  if (!isClient) {
     return children
    }
 

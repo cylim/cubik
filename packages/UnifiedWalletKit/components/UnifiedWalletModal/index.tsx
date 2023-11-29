@@ -260,21 +260,24 @@ const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = () => {
     );
 
     if (filteredAdapters.previouslyConnected.length > 0) {
-      const { previouslyConnected, ...rest } = filteredAdapters;
+      const { previouslyConnected, installed, ...rest } = filteredAdapters;
 
-      const highlight = filteredAdapters.previouslyConnected.slice(0, 3);
-      let others = Object.values(rest)
+      const highlight = [
+        ...filteredAdapters.installed,
+        ...filteredAdapters.previouslyConnected.slice(0, 3),
+      ];
+      const others = Object.values(rest)
         .flat()
         .sort((a, b) => PRIORITISE[a.readyState] - PRIORITISE[b.readyState])
         .sort(sortByPrecedence(walletPrecedence || []));
+
       others.unshift(
         ...filteredAdapters.previouslyConnected.slice(
           3,
           filteredAdapters.previouslyConnected.length,
         ),
       );
-      others = others.filter(Boolean);
-
+      // others = others.filter(Boolean);
       return {
         highlightedBy: 'PreviouslyConnected',
         highlight,
@@ -311,7 +314,7 @@ const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = () => {
       .sort(sortByPrecedence(walletPrecedence || []));
     return { highlightedBy: 'TopWallet', highlight: top3, others };
   }, [wallets, previouslyConnected]);
-
+  // console.log('----', filteredAdapters);
   return (
     <div className="py-4">
       <ListOfWallets list={list} onToggle={onToggle} isOpen={isOpen} />

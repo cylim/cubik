@@ -76,6 +76,7 @@ export const WalletListItem = ({
     if (!wallet) return '';
     return wallet.name;
   }, [wallet?.name]);
+
   const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
   return (
     <li className="border border-red-500" onClick={handleClick}>

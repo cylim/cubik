@@ -1,12 +1,12 @@
 import { config } from 'dotenv';
 
-import {
-  seedPDAInContributionV2,
-  // seedPDAInProject,
-  // seedPDAInProjectJoinRound,
-  // seedPDAInRound,
-  // seedPDAInUser,
-} from './utils/pdaSeeder';
+// import {
+//   // seedPDAInContributionV2,
+//   // seedPDAInProject,
+//   // seedPDAInProjectJoinRound,
+//   // seedPDAInRound,
+//   // seedPDAInUser,
+// } from './utils/pdaSeeder';
 
 export * from './src/color/serializeSemantic';
 export * from './src/color/generateCSS';
@@ -38,7 +38,7 @@ async function run() {
     // await seedPDAInRound(); seed length error
     // await seedPDAInProject();
     // await seedPDAInProjectJoinRound(); // round data dont exist so couldn't seed
-    await seedPDAInContributionV2();
+    // await seedPDAInContributionV2();
   } catch (error: any) {
     console.error('Error:', error.message);
   }

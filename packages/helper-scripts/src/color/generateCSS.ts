@@ -32,7 +32,7 @@ function convertToCSS(styles: { [key: string]: string }): string {
   return css;
 }
 export const createComponentNames = () => {
-  const componentColorDump = data.collections2.find(
+  const componentColorDump = data.collections3.find(
     (e) => e.name === 'Component ( Colors )',
   );
 
@@ -74,7 +74,9 @@ export const generateSemantic = () => {
   //   (e) => e.name === 'Semantic ( Colors )',
   // );
 
-  const newSemanticDump = data.collections2.find((e) => e.modes.length > 1);
+  const newSemanticDump = data.collections3.find(
+    (e) => e.name === 'Semantic ( Colors )',
+  );
 
   const lightColors = newSemanticDump?.modes.find((e) => e.name == 'Light');
   const darkColors = newSemanticDump?.modes.find((e) => e.name == 'Dark');
@@ -123,14 +125,14 @@ export const generateSemantic = () => {
       }
     }
   });
-  // fs.writeFileSync(
-  //   __dirname.replace('/helper-scripts/src/color', '') +
-  //     '/presets/styles/lightColor.style.css',
-  //   convertToCSS(finalLight),
-  // );
-  // fs.writeFileSync(
-  //   __dirname.replace('/helper-scripts/src/color', '') +
-  //     '/presets/styles/darkColors.styles.css',
-  //   convertToCSS(finalDark),
-  // );
+  fs.writeFileSync(
+    __dirname.replace('/helper-scripts/src/color', '') +
+      '/presets/styles/lightColor.style.css',
+    convertToCSS(finalLight),
+  );
+  fs.writeFileSync(
+    __dirname.replace('/helper-scripts/src/color', '') +
+      '/presets/styles/darkColors.styles.css',
+    convertToCSS(finalDark),
+  );
 };

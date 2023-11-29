@@ -1,7 +1,10 @@
 import {
   createComponentNames,
-  generateSemantic,
+  // generateSemantic,
 } from './src/color/generateCSS';
 
-generateSemantic();
+// import { convertToCSSVariables } from './src/color/primitive';
+
+// generateSemantic();
 createComponentNames();
+// convertToCSSVariables();

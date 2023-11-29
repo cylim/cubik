@@ -20,7 +20,7 @@ export const SideMenuMobile = (props: Props) => {
     return <></>;
   }
   return (
-    <div className="relative right-0 ml-auto flex min-h-screen w-fit items-end justify-end overflow-y-scroll border-l border-l-[var(--color-border-primary)] bg-[var(--color-surface-secondary)] p-6 md:mt-0 md:p-8">
+    <div className="relative right-0 ml-auto flex min-h-screen w-fit items-end justify-start overflow-y-scroll border-l border-l-[var(--color-border-primary)] bg-[var(--color-surface-secondary)] p-6 md:mt-0 md:p-8">
       <NavigationItems />
     </div>
   );

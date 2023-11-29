@@ -5,11 +5,13 @@ import React, {
   FC,
   ImgHTMLAttributes,
   MouseEventHandler,
-  useCallback,
+  //  useCallback,
   useMemo,
 } from 'react';
-import Image from 'next/image';
+//import Image from 'next/image';
 import { Adapter } from '@solana/wallet-adapter-base';
+
+import { Avatar } from '@cubik/ui';
 
 import { useMediaQuery } from '../../hooks/helperHooks';
 import UnknownIconSVG from '../../icons/UnknownIconSVG';
@@ -29,25 +31,27 @@ export const WalletIcon: FC<WalletIconProps> = ({
   width = 24,
   height = 24,
 }) => {
-  const [hasError, setHasError] = React.useState(false);
+  //const [hasError, setHasError] = React.useState(false);
 
-  const onError = useCallback(() => setHasError(true), []);
+  // const onError = useCallback(() => setHasError(true), []);
 
-  if (wallet && wallet.icon && !hasError) {
+  if (wallet && wallet.icon) {
+    // && !hasError
     return (
       <div className="w-fit-content  flex items-center justify-center gap-2 px-[16px] py-[12px]">
         <div
-          className="w-fit flex flex-col items-center justify-center gap-2"
+          className="ˀw-fit flex flex-col items-center justify-center gap-2"
           style={{ minWidth: width, minHeight: height }}
         >
-          <Image
-            className={`rounded-[8px] min-h-[${height}px]`}
+          <Avatar alt={wallet.name} src={wallet.icon} size="lg" />
+          {/* <Image
+            className={`border border-blue-400 rounded-[8px] min-h-[${height}px]`}
             width={width}
             height={height}
             src={wallet.icon}
             alt={`${wallet.name} icon`}
             onError={onError}
-          />
+          /> */}
           <p className="text-[var(--color-fg-primary)] line-clamp-1 text-[12px] md:text-[14px]">
             {wallet.name}
           </p>

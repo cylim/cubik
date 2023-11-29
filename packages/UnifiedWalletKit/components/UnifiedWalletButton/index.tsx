@@ -3,6 +3,8 @@ import React, { ReactNode, useCallback } from 'react';
 // @ts-ignore
 import { SolanaMobileWalletAdapterWalletName } from '@solana-mobile/wallet-adapter-mobile';
 
+import { Button } from '@cubik/ui';
+
 import { MWA_NOT_FOUND_ERROR } from '../../contexts/UnifiedWalletContext';
 import {
   useUnifiedWallet,
@@ -26,19 +28,19 @@ export const UnifiedWalletButton: React.FC<{
     <>
       {connecting && (
         <span>
-          <span>Connecting...</span>
+          <Button>Connecting...</Button>
         </span>
       )}
       {/* Mobile */}
       {!connecting && (
         <span>
-          <span>Connect</span>
+          <Button>Connect</Button>
         </span>
       )}
       {/* Desktop */}
       {!connecting && (
         <span>
-          <span>Connect Wallet</span>
+          <Button>Connect Wallet</Button>
         </span>
       )}
     </>

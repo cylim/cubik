@@ -166,7 +166,7 @@ const NavigationItems: FC = () => {
   const pathname = usePathname();
 
   return (
-    <ul className="flex w-fit list-none flex-col gap-4 pl-0">
+    <ul className="flex min-h-screen w-fit list-none flex-col gap-4 overflow-y-scroll pl-0">
       {navigationData.map((item) => (
         <ListItem key={item.id} item={item} pathname={pathname} />
       ))}

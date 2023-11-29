@@ -15168,7 +15168,7 @@ export const data: DataVariables = {
               name: 'Colors/Surfaces/Cool/color-surface-cool-transparent',
               type: 'color',
               isAlias: false,
-              value: '#FFFFFF1A',
+              value: '#FFFFFF03',
             },
             {
               name: 'Colors/Surfaces/Negative/color-surface-negative-base',
@@ -16885,7 +16885,7 @@ export const data: DataVariables = {
               name: 'Colors/Surfaces/Cool/color-surface-cool-transparent',
               type: 'color',
               isAlias: false,
-              value: '#0000001A',
+              value: '#00000003',
             },
             {
               name: 'Colors/Surfaces/Negative/color-surface-negative-base',

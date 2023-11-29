@@ -6,11 +6,12 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 import {
   dark,
+  lightfair,
   githubGist,
 } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { toast } from 'sonner';
 
-import { Button, useTheme } from '@cubik/ui';
+import { Button, Icon, useTheme } from '@cubik/ui';
 
 interface Props {
   codeString?: string;
@@ -32,28 +33,42 @@ const CodeComponent = ({ codeString }: { codeString: string }) => {
     ...firacode.style,
   };
 
+  const CopyButton = () => (
+    <Button
+      size="sm"
+      onClick={() => {
+        navigator.clipboard.writeText(codeString);
+        toast.success('Copied to clipboard!');
+      }}
+      variant="outline"
+    >
+      <Icon name="copy"
+        strokeWidth={2}
+        width={20}
+        height={20}
+        stroke="var(--color-fg-primary)"
+        fill="transparent"
+      />
+    </Button>
+  )
+
   return (
     <div>
-      <Button
-        size="sm"
-        onClick={() => {
-          navigator.clipboard.writeText(codeString);
-          toast.success('Copied to clipboard!');
-        }}
-        variant="outline"
-      >
-        Copy
-      </Button>
-      <SyntaxHighlighter
-        language={jsx}
-        style={{
-          ...githubGist,
-          ...(theme === 'dark' ? dark : {}),
-        }}
-        customStyle={customStyle}
-      >
-        {codeString.trim()}
-      </SyntaxHighlighter>
+      <div className='relative overflow-hidden rounded-lg'>
+        <div className='absolute right-[10px] top-[10px]'>
+          <CopyButton />
+        </div>
+        <SyntaxHighlighter
+          language={jsx}
+          style={{
+            ...githubGist,
+            ...(theme === 'dark' ? dark : {}),
+          }}
+          customStyle={customStyle}
+        >
+          {codeString.trim()}
+        </SyntaxHighlighter>
+      </div>
     </div>
   );
 };

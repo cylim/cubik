@@ -28,7 +28,7 @@ export const Modal = ({
         <Dialog.Portal>
           <Dialog.Overlay
             onClick={onClose}
-            className="bg-black/50 data-[state=open]:animate-overlayShow fixed inset-0"
+            className="bg-black/70 data-[state=open]:animate-overlayShow fixed inset-0"
           />
           <Dialog.Content
             className={cn(

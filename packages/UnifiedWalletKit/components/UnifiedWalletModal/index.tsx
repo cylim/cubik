@@ -198,6 +198,59 @@ const sortByPrecedence =
     return 0;
   };
 
+const UnifiedWalletModalFooter: React.FC = () => {
+  return (
+    <div className="flex flex-col px-6 py-4 gap-4">
+      <div className="flex gap-2 item-start space-x-3">
+        <div className="min-w-[20px]">
+          <Icon
+            name="eyeClose"
+            strokeWidth={1.5}
+            className="min-w-[18px]"
+            stroke="var(--color-fg-primary-subdued)"
+            fill="none"
+            width={20}
+            height={20}
+          />
+        </div>
+        <span className="text-[14px] md:text-[16px] font-light  text-[var(--color-fg-primary-subdued)]">
+          View only permissions. We will never do anything without your
+          approval.
+        </span>
+      </div>
+      <div className="flex gap-2 item-start space-x-3">
+        <div className="min-w-[20px]">
+          <Icon
+            name="shieldCheck"
+            strokeWidth={1.5}
+            stroke="var(--color-fg-primary-subdued)"
+            fill="none"
+            width={20}
+            height={20}
+          />
+        </div>
+        <span className="text-[14px] md:text-[16px] font-light text-[var(--color-fg-primary-subdued)]">
+          Open Source and Audited Smart Contracts
+        </span>
+      </div>
+      <div className="flex gap-2 item-start space-x-3">
+        <div className="min-w-[20px]">
+          <Icon
+            name="userSecurity"
+            strokeWidth={1.5}
+            stroke="var(--color-fg-primary-subdued)"
+            fill="none"
+            width={20}
+            height={20}
+          />
+        </div>
+        <span className="text-[14px] md:text-[16px] font-light  text-[var(--color-fg-primary-subdued)]">
+          Trusted by 1,568 Users
+        </span>
+      </div>
+    </div>
+  );
+};
 const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = () => {
   const { wallets } = useUnifiedWallet();
   const { walletPrecedence } = useUnifiedWalletContext();
@@ -287,17 +340,12 @@ const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = () => {
 
     if (filteredAdapters.installed.length > 0) {
       const { installed, ...rest } = filteredAdapters;
-      const highlight = filteredAdapters.installed.slice(0, 3);
+      const highlight = filteredAdapters.installed;
       const others = Object.values(rest)
         .flat()
         .sort((a, b) => PRIORITISE[a.readyState] - PRIORITISE[b.readyState])
         .sort(sortByPrecedence(walletPrecedence || []));
-      others.unshift(
-        ...filteredAdapters.installed.slice(
-          3,
-          filteredAdapters.installed.length,
-        ),
-      );
+      others.unshift(...filteredAdapters.installed);
 
       return { highlightedBy: 'Installed', highlight, others };
     }
@@ -314,58 +362,12 @@ const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = () => {
       .sort(sortByPrecedence(walletPrecedence || []));
     return { highlightedBy: 'TopWallet', highlight: top3, others };
   }, [wallets, previouslyConnected]);
-  // console.log('----', filteredAdapters);
+  console.log('----', list);
   return (
-    <div className="py-4">
+    <div className="py-6 flex flex-col gap-6">
       <ListOfWallets list={list} onToggle={onToggle} isOpen={isOpen} />
-      {list.highlightedBy !== 'TopWallet' && (
-        <>
-          <div className="w-full h-[1px] bg-[var(--color-border-primary)]" />
-          <div className="flex flex-col px-6 py-4">
-            <div className="flex item-start space-x-3">
-              <Icon
-                name="eyeClose2"
-                strokeWidth={1.5}
-                className="min-w-[18px]"
-                stroke="var(--color-fg-tertiary)"
-                fill="none"
-                width={18}
-                height={18}
-              />
-              <span className="text-[12px] text-[var(--color-fg-tertiary)]">
-                View only permissions. We will never do anything without your
-                approval.
-              </span>
-            </div>
-            <div className="flex item-start space-x-3 mt-4">
-              <Icon
-                name="shieldCheck"
-                strokeWidth={1.5}
-                stroke="var(--color-fg-tertiary)"
-                fill="none"
-                width={18}
-                height={18}
-              />
-              <span className="text-[12px] text-[var(--color-fg-tertiary)]">
-                Audited Smart Contracts
-              </span>
-            </div>
-            <div className="flex item-start space-x-3 mt-4">
-              <Icon
-                name="userSecurity"
-                strokeWidth={1.5}
-                stroke="var(--color-fg-tertiary)"
-                fill="none"
-                width={18}
-                height={18}
-              />
-              <span className="text-[12px] text-[var(--color-fg-tertiary)]">
-                Trusted by 1,568 Users
-              </span>
-            </div>
-          </div>
-        </>
-      )}
+      <div className="w-full h-[1px] bg-[var(--color-border-primary-base)]" />
+      {list.highlightedBy !== 'TopWallet' && <UnifiedWalletModalFooter />}
     </div>
   );
 };

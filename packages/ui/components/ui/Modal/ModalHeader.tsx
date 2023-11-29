@@ -30,13 +30,13 @@ export const ModalHeader = ({
 }: Props) => {
   return (
     <>
-      <Dialog.Title className="pointer-events-auto h-14 relative bg-[var(--color-surface-tertiary)] overflow-hidden flex justify-between items-center p-2 md:p-4 m-0 text-[17px] rounded-t-[12px] font-medium">
+      <Dialog.Title className="pointer-events-auto h-14 relative bg-[var(--color-surface-cool-transparent)] overflow-hidden flex justify-between items-center p-2 md:p-4 m-0 text-[17px] rounded-t-[12px] font-medium">
         <div className="flex justify-center items-center gap-3">
           <div className="absolute -left-6">{RingSVG}</div>
           {IconComponent}
           <p
             className={cn(
-              'text-[var(--color-fg-primary)] ml-12',
+              `text-[var(--color-fg-primary)] ${RingSVG && 'ml-12'}`,
               HeadingSizeStyles[headingSize],
             )}
           >

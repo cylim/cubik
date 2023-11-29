@@ -16,14 +16,14 @@ const headingVariant = cva('', {
 });
 
 interface TextProps extends VariantProps<typeof headingVariant> {
-  label: string;
+  children: React.ReactNode;
   as: string;
   variant?: string;
   className?: string;
 }
 
 const Text: React.FC<TextProps> = ({
-  label,
+  children,
   as,
   color,
   variant,
@@ -32,12 +32,12 @@ const Text: React.FC<TextProps> = ({
   return (
     <p
       className={cn(
+        className,
         headingVariant({ color }),
         variant ? `${as}-primary-${variant}` : `${as}-${color}`,
-        className,
       )}
     >
-      {label}
+      {children}
     </p>
   );
 };

@@ -9,5 +9,6 @@
   "tailwindCSS.experimental.classRegex": [
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
   ],
+  "prettier.configPath": "prettier.config.js",
   "cSpell.words": ["Leaderboard"]
 }

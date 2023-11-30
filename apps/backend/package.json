@@ -16,8 +16,10 @@
   "dependencies": {
     "@coral-xyz/anchor": "^0.27.0",
     "@cubik/auth": "workspace:^",
+    "@cubik/common": "workspace:^0.1.0",
     "@cubik/common-types": "workspace:*",
     "@cubik/database": "workspace:*",
+    "@cubik/helper-scripts": "workspace:^1.0.0",
     "@cubik/presets": "workspace:*",
     "@sqds/multisig": "^1.11.0",
     "@sqds/sdk": "^2.0.4",

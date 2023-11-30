@@ -6,8 +6,8 @@ import SyntaxHighlighter from 'react-syntax-highlighter';
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 import {
   dark,
-  lightfair,
   githubGist,
+  lightfair,
 } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { toast } from 'sonner';
 
@@ -42,7 +42,8 @@ const CodeComponent = ({ codeString }: { codeString: string }) => {
       }}
       variant="outline"
     >
-      <Icon name="copy"
+      <Icon
+        name="copy"
         strokeWidth={2}
         width={20}
         height={20}
@@ -50,12 +51,12 @@ const CodeComponent = ({ codeString }: { codeString: string }) => {
         fill="transparent"
       />
     </Button>
-  )
+  );
 
   return (
     <div>
-      <div className='relative overflow-hidden rounded-lg'>
-        <div className='absolute right-[10px] top-[10px]'>
+      <div className="relative overflow-hidden rounded-lg">
+        <div className="absolute right-[10px] top-[10px]">
           <CopyButton />
         </div>
         <SyntaxHighlighter

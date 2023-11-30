@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
 // @todo: make this work or uninstll it - import SwipeableViews from 'react-swipeable-views';
+import React from 'react';
 
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
 import { UnifiedWalletButton } from '@cubik/wallet-connect';
@@ -71,17 +71,19 @@ const WalletConnectPage = () => {
             </Tab>
           </TabList>
           <TabPanels>
-           <TabPanel value={0}>  <div>
-                  <div>
-                    <CodeComponent codeString='import { Tag } from "@cubik/ui' />
-                  </div>
-                  <div className="mt-10">
-                    <UnifiedWalletButton />
-                  </div>
-            </div>
+            <TabPanel value={0}>
+              {' '}
+              <div>
+                <div>
+                  <CodeComponent codeString='import { Tag } from "@cubik/ui' />
+                </div>
+                <div className="mt-10">
+                  <UnifiedWalletButton />
+                </div>
+              </div>
             </TabPanel>
             <TabPanel value={1}>Content for Tab 2</TabPanel>
-            <TabPanel value={2}>Content for Tab 3</TabPanel>  
+            <TabPanel value={2}>Content for Tab 3</TabPanel>
           </TabPanels>
         </Tabs>
       </div>

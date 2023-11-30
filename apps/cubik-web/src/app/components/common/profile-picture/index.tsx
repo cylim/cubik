@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
 //import { TbCurrencySolana } from "react-icons/tb";
+import React, { useRef, useState } from 'react';
 import type { NFTProfile } from '@/types/NFTProfile';
 import {
   Avatar,

@@ -29,7 +29,8 @@
     --font-spacing-tight: -2.5%;
 }
 
-/* xxs styles */
+@layer utilities {
+    /* xxs styles */
 .text-xxs-regular {
     font-size: var(--text-size-xxs);
     font-weight: var(--font-weight-regular);
@@ -264,478 +265,108 @@
 }
 
 .l3-heavy{
-    @apply text-xxs-semibold;
-   
-}
-@media (min-width: 480px) { 
-    .l3-heavy{
-        @apply text-xxs-semibold;
-
-    }
-}
-@media (min-width: 769px) { 
-    .l3-heavy{
-        @apply text-xs-semibold;
-
-    }
+    @apply text-xxs-semibold lg:text-xs-semibold
 }
 
 .l3{
-    @apply text-xxs-medium;
-   
+    @apply text-xxs-medium lg:text-xs-medium
 }
-@media (min-width: 480px) { 
-    .l3-heavy{
-        @apply text-xxs-medium;
-
-    }
-}
-@media (min-width: 769px) { 
-    .l3-heavy{
-        @apply text-xs-medium;
-
-    }
-}
-
 .l3-light{
-    @apply text-xxs-regular;
-   
+    @apply text-xxs-regular lg:text-xs-regular
 }
-@media (min-width: 480px) { 
-    .l3-light{
-        @apply text-xxs-regular;
-
-    }
-}
-@media (min-width: 769px) { 
-    .l3-light{
-        @apply text-xs-regular;
-
-    }
-}
-
 .l2-heavy, .b4-heavy{
-    @apply text-xxs-semibold;
-   
+    @apply text-xxs-semibold md:text-xs-semibold lg:text-sm-semibold
 }
-@media (min-width: 480px) { 
-    .l2-heavy, .b4-heavy{
-        @apply text-xs-semibold;
-
-    }
-}
-@media (min-width: 769px) { 
-    .l2-heavy, .b4-heavy{
-        @apply text-sm-semibold;
-
-    }
-}
-
 .l2, .b4{
-    @apply text-xxs-medium;
-   
-}
-@media (min-width: 480px) { 
-    .l2, .b4{
-        @apply text-xs-medium;
-
-    }
-}
-@media (min-width: 769px) { 
-    .l2, .b4{
-        @apply text-sm-medium;
-
-    }
+    @apply text-xxs-medium md:text-xs-medium lg:text-sm-medium;
 }
 
 .l2-light, .b4-light{
-    @apply text-xxs-regular;
-   
-}
-@media (min-width: 480px) { 
-    .l2-light, .b4-light{
-        @apply text-xs-regular;
-
-    }
-}
-@media (min-width: 769px) { 
-    .l2-light, .b4-light{
-        @apply text-sm-regular;
-
-    }
+    @apply text-xxs-regular md:text-xs-regular lg:text-sm-regular;
 }
 
 .l1-heavy, .b3-heavy, .h6{
-    @apply text-xs-semibold;
-   
+    @apply text-xs-semibold md:text-sm-semibold lg:text-md-semibold
 }
-@media (min-width: 480px) { 
-    .l1-heavy, .b3-heavy, .h6{
-        @apply text-sm-semibold;
-
-    }
-}
-@media (min-width: 769px) { 
-    .l1-heavy, .b3-heavy, .h6{
-        @apply text-md-semibold;
-
-    }
-}
-
 .l1, .b3, .h6-light{
-    @apply text-xs-medium;
+    @apply text-xs-medium md:text-sm-medium lg:text-md-medium;
    
 }
-@media (min-width: 480px) { 
-    .l1, .b3, .h6-light{
-        @apply text-sm-medium;
-
-    }
-}
-@media (min-width: 769px) { 
-    .l1, .b3, .h6-light{
-        @apply text-md-medium;
-
-    }
-}
-
 .l1-light, .b3-light{
-    @apply text-xs-regular;
+    @apply text-xs-regular md:text-sm-regular lg:text-md-regular;
    
 }
-@media (min-width: 480px) { 
-    .l1-light, .b3-light{
-        @apply text-sm-regular;
-
-    }
-}
-@media (min-width: 769px) { 
-    .l1-light, .b3-light{
-        @apply text-md-regular;
-
-    }
-}
-
 .b2-heavy, .h5{
-    @apply text-sm-semibold;
+    @apply text-sm-semibold md:text-md-semibold lg:text-lg-semibold;
    
 }
-@media (min-width: 480px) { 
-    .b2-heavy, .h5{
-        @apply text-md-semibold;
-
-    }
-}
-@media (min-width: 769px) { 
-    .b2-heavy, .h5{
-        @apply text-lg-semibold;
-
-    }
-}
-
 .b2, .h5-light{
-    @apply text-sm-medium;
+    @apply text-sm-medium md:text-md-medium lg:text-lg-medium;
    
-}
-@media (min-width: 480px) { 
-    .b2, .h5-light{
-        @apply text-md-medium;
-
-    }
-}
-@media (min-width: 769px) { 
-    .b2, .h5-light{
-        @apply text-lg-medium;
-
-    }
 }
 
 .b2-light{
-    @apply text-sm-regular;
+    @apply text-sm-regular md:text-md-regular lg:text-lg-regular;
    
 }
-@media (min-width: 480px) { 
-    .b2-light{
-        @apply text-md-regular;
-
-    }
-}
-@media (min-width: 769px) { 
-    .b2-light{
-        @apply text-lg-regular;
-
-    }
-}
-
 .b1-heavy, .h4{
-    @apply text-md-semibold;
+    @apply text-md-semibold md:text-lg-semibold lg:text-xl-semibold;
    
 }
-@media (min-width: 480px) { 
-    .b1-heavy, .h4{
-        @apply text-lg-semibold;
-
-    }
-}
-@media (min-width: 769px) { 
-    .b1-heavy, .h4{
-        @apply text-xl-semibold;
-
-    }
-}
-
 .b1, .h4-light{
-    @apply text-md-medium;
+    @apply text-md-medium md:text-lg-medium lg:text-xl-medium;
    
 }
-@media (min-width: 480px) { 
-    .b1, .h4-light{
-        @apply text-lg-medium;
-
-    }
-}
-@media (min-width: 769px) { 
-    .b1, .h4-light{
-        @apply text-xl-medium;
-
-    }
-}
-
 .b1-light{
-    @apply text-md-regular;
+    @apply text-md-regular md:text-lg-regular lg:text-xl-regular;
    
 }
-@media (min-width: 480px) { 
-    .b1-light{
-        @apply text-lg-regular;
-
-    }
-}
-@media (min-width: 769px) { 
-    .b1-light{
-        @apply text-xl-regular;
-
-    }
-}
-
 .h6-heavy{
-    @apply text-xs-bold;
+    @apply text-xs-bold md:text-sm-bold lg:text-md-bold;
    
 }
-@media (min-width: 480px) { 
-    .h6-heavy{
-        @apply text-sm-bold;
-
-    }
-}
-@media (min-width: 769px) { 
-    .h6-heavy{
-        @apply text-md-bold;
-
-    }
-}
-
 .h5-heavy{
-    @apply text-sm-bold;
+    @apply text-sm-bold md:text-md-bold lg:text-lg-bold;
    
 }
-@media (min-width: 480px) { 
-    .h5-heavy{
-        @apply text-md-bold;
-
-    }
-}
-@media (min-width: 769px) { 
-    .h5-heavy{
-        @apply text-lg-bold;
-
-    }
-}
-
 .h4-heavy{
-    @apply text-md-bold;
+    @apply text-md-bold md:text-lg-bold lg:text-xl-bold;
    
 }
-@media (min-width: 480px) { 
-    .h4-heavy{
-        @apply text-lg-bold;
-
-    }
-}
-@media (min-width: 769px) { 
-    .h4-heavy{
-        @apply text-xl-bold;
-
-    }
-}
-
 .h3-heavy{
-    @apply text-lg-bold;
+    @apply text-lg-bold md:text-xl-bold lg:text-2xl-bold;
    
 }
-@media (min-width: 480px) { 
-    .h3-heavy{
-        @apply text-xl-bold;
-
-    }
-}
-@media (min-width: 769px) { 
-    .h3-heavy{
-        @apply text-2xl-bold;
-
-    }
-}
-
 .h3{
-    @apply text-lg-semibold;
+    @apply text-lg-semibold md:text-xl-semibold lg:text-2xl-semibold;
    
 }
-@media (min-width: 480px) { 
-    .h3{
-        @apply text-xl-semibold;
-
-    }
-}
-@media (min-width: 769px) { 
-    .h3{
-        @apply text-2xl-semibold;
-
-    }
-}
-
 .h3-light{
-    @apply text-lg-medium;
+    @apply text-lg-medium md:text-xl-medium lg:text-2xl-medium;
    
 }
-@media (min-width: 480px) { 
-    .h3-light{
-        @apply text-xl-medium;
-
-    }
-}
-@media (min-width: 769px) { 
-    .h3-light{
-        @apply text-2xl-medium;
-
-    }
-}
-
 .h2-heavy{
-    @apply text-xl-bold;
+    @apply text-xl-bold md:text-2xl-bold lg:text-3xl-bold;
    
 }
-@media (min-width: 480px) { 
-    .h2-heavy{
-        @apply text-2xl-bold;
-
-    }
-}
-@media (min-width: 769px) { 
-    .h2-heavy{
-        @apply text-3xl-bold;
-
-    }
-}
-
 .h2{
-    @apply text-xl-semibold;
+    @apply text-xl-semibold md:text-2xl-semibold lg:text-3xl-semibold;
    
 }
-@media (min-width: 480px) { 
-    .h2{
-        @apply text-2xl-semibold;
-
-    }
-}
-@media (min-width: 769px) { 
-    .h2{
-        @apply text-3xl-semibold;
-
-    }
-}
-
 .h2-light{
-    @apply text-xl-medium;
+    @apply text-xl-medium md:text-2xl-medium lg:text-3xl-medium;
    
 }
-@media (min-width: 480px) { 
-    .h2-light{
-        @apply text-2xl-medium;
-
-    }
-}
-@media (min-width: 769px) { 
-    .h2-light{
-        @apply text-3xl-medium;
-
-    }
-}
-
 .h1-heavy{
-    @apply text-2xl-bold;
+    @apply text-2xl-bold md:text-3xl-bold lg:text-4xl-bold;
    
 }
-@media (min-width: 480px) { 
-    .h1-heavy{
-        @apply text-3xl-bold;
-
-    }
-}
-@media (min-width: 769px) { 
-    .h1-heavy{
-        @apply text-4xl-bold;
-
-    }
-}
-
 .h1{
-    @apply text-2xl-semibold;
+    @apply text-2xl-semibold md:text-3xl-semibold lg:text-4xl-semibold;
    
 }
-@media (min-width: 480px) { 
-    .h1{
-        @apply text-3xl-semibold;
-
-    }
-}
-@media (min-width: 769px) { 
-    .h1{
-        @apply text-4xl-semibold;
-
-    }
-}
-
 .h1-light{
-    @apply text-2xl-medium;
+    @apply text-2xl-medium md:text-3xl-medium lg:text-4xl-medium;
    
 }
-@media (min-width: 480px) { 
-    .h1-light{
-        @apply text-3xl-medium;
-
-    }
-}
-@media (min-width: 769px) { 
-    .h1-light{
-        @apply text-4xl-medium;
-
-    }
-}
-
-
-/* .l3-secondary-heavy{
-    @apply text-xxs-semibold  text-[var(--color-fg-subdued)];
-   
-}
-@media (min-width: 480px) { 
-    .l3-secondary-heavy{
-        @apply text-xxs-semibold;
-
-    }
-}
-@media (min-width: 769px) { 
-    .l3-secondary-heavy{
-        @apply text-xs-semibold;
-
-    }
-} */
+} 

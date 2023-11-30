@@ -12,7 +12,7 @@ const headingVariant = cva('', {
     },
   },
   defaultVariants: {
-    color: 'primary',
+    color: 'inherit',
   },
 });
 

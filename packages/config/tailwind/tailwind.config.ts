@@ -16,6 +16,17 @@ const config: Config = {
         '2xl': '1400px',
       },
     },
+    fontSize: {
+      xxs: '10px',
+      xs: '12px',
+      sm: '14px',
+      base: '16px',
+      lg: '20px',
+      xl: '24px',
+      '2xl': '32px',
+      '3xl': '40px',
+      '4xl': '48px',
+    },
     extend: {
       fontFamily: {
         'text-xs-500': 'Inter',

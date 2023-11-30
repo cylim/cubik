@@ -8,6 +8,7 @@ const headingVariant = cva('', {
     color: {
       primary: 'text-[var(--color-fg-primary-depth)]',
       secondary: 'text-[var(--color-fg-primary-subdued)]',
+      inherit: '',
     },
   },
   defaultVariants: {
@@ -16,30 +17,12 @@ const headingVariant = cva('', {
 });
 
 interface TextProps extends VariantProps<typeof headingVariant> {
-  label: string;
-  as: string;
-  variant?: string;
+  children: React.ReactNode;
   className?: string;
 }
 
-const Text: React.FC<TextProps> = ({
-  label,
-  as,
-  color,
-  variant,
-  className,
-}) => {
-  return (
-    <p
-      className={cn(
-        headingVariant({ color }),
-        variant ? `${as}-primary-${variant}` : `${as}-${color}`,
-        className,
-      )}
-    >
-      {label}
-    </p>
-  );
+const Text: React.FC<TextProps> = ({ children, color, className }) => {
+  return <p className={cn(className, headingVariant({ color }))}>{children}</p>;
 };
 
 export { Text };

@@ -24,7 +24,7 @@ const jsonSchema: z.ZodSchema<Json> = z.lazy(() =>
   z.union([literalSchema, z.array(jsonSchema), z.record(jsonSchema)]),
 );
 
-export const MetadataEventValidate = z.object({
+export const MetadataEventValidator = z.object({
   name: z.string(),
   slug: z.string().nullish(),
   background: z.string().nullish(),

@@ -1,6 +1,6 @@
 import { writeFileSync } from 'fs';
 
-import { data } from '../..';
+import { convertToCSS, data } from '../..';
 
 export const primitiveColors = {
   '--white-white-50': '#FFFFFF',
@@ -140,13 +140,20 @@ export function convertToCSSVariables() {
     // Split the name and take the relevant parts
     const parts = color.name.split('/');
     const variableName = parts.slice(1).join('-').toLowerCase();
-
+    if (!variableName) {
+      return (newdata = {
+        ...newdata,
+        [`--color-${parts[0].toLowerCase()}`]: color.value,
+      });
+    }
     // Return the CSS variable format
+    const vn = `${variableName.replace('\\', '-')}`;
+    const finalVN = vn.split('-').slice(1, vn.split('-').length).join('-');
     newdata = {
       ...newdata,
-      [`--${variableName.replace('//', '--')}`]: color.value,
+      [`--color-${finalVN}`]: color.value,
     };
   });
-  writeFileSync('colors.json', JSON.stringify(newdata));
+  writeFileSync('colors.json', convertToCSS(newdata));
   console.log(newdata);
 }

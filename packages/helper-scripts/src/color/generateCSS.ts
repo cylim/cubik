@@ -23,7 +23,7 @@ function convertStringToPrimitive(s: string) {
     return '--' + split[0];
   }
 }
-function convertToCSS(styles: { [key: string]: string }): string {
+export function convertToCSS(styles: { [key: string]: string }): string {
   let css = ':root {\n';
   for (const [key, value] of Object.entries(styles)) {
     css += `    ${key}: ${value};\n`;

@@ -1,10 +1,9 @@
-import {
-  createComponentNames,
-  // generateSemantic,
-} from './src/color/generateCSS';
+import './src/color/generateCSS'; // createComponentNames,
 
-// import { convertToCSSVariables } from './src/color/primitive';
+// generateSemantic,
+
+import { convertToCSSVariables } from './src/color/primitive';
 
 // generateSemantic();
-createComponentNames();
-// convertToCSSVariables();
+// createComponentNames();
+convertToCSSVariables();

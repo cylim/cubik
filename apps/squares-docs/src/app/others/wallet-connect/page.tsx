@@ -1,8 +1,7 @@
 'use client';
 
-import React from 'react';
-
 // @todo: make this work or uninstll it - import SwipeableViews from 'react-swipeable-views';
+import React from 'react';
 
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
 import { UnifiedWalletButton } from '@cubik/wallet-connect';

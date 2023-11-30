@@ -7,7 +7,6 @@ const Table = React.forwardRef<
   React.HTMLAttributes<HTMLTableElement>
 >(({ className, ...props }, ref) => (
   <div className="relative w-full overflow-auto">
-    {/* @ts-ignore */}
     <table
       ref={ref}
       className={cn('w-full caption-bottom text-sm', className)}
@@ -21,7 +20,6 @@ const TableHeader = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
-  // @ts-ignore
   <thead ref={ref} className={cn('[&_tr]:border-b-0', className)} {...props} />
 ));
 TableHeader.displayName = 'TableHeader';
@@ -30,7 +28,6 @@ const TableBody = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
-  // @ts-ignore
   <tbody
     ref={ref}
     className={cn('[&_tr:last-child]:border-0', className)}
@@ -43,7 +40,6 @@ const TableFooter = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
-  // @ts-ignore
   <tfoot
     ref={ref}
     className={cn('bg-primary font-medium text-primary-foreground', className)}
@@ -56,7 +52,6 @@ const TableRow = React.forwardRef<
   HTMLTableRowElement,
   React.HTMLAttributes<HTMLTableRowElement>
 >(({ className, ...props }, ref) => (
-  // @ts-ignore
   <tr
     ref={ref}
     className={cn(
@@ -72,7 +67,6 @@ const TableHead = React.forwardRef<
   HTMLTableCellElement,
   React.ThHTMLAttributes<HTMLTableCellElement>
 >(({ className, ...props }, ref) => (
-  // @ts-ignore
   <th
     ref={ref}
     className={cn(
@@ -88,7 +82,6 @@ const TableCell = React.forwardRef<
   HTMLTableCellElement,
   React.TdHTMLAttributes<HTMLTableCellElement>
 >(({ className, ...props }, ref) => (
-  // @ts-ignore
   <td
     ref={ref}
     className={cn(
@@ -104,7 +97,6 @@ const TableCaption = React.forwardRef<
   HTMLTableCaptionElement,
   React.HTMLAttributes<HTMLTableCaptionElement>
 >(({ className, ...props }, ref) => (
-  // @ts-ignore
   <caption
     ref={ref}
     className={cn('mt-4 text-sm text-muted-foreground', className)}

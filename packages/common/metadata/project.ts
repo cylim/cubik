@@ -33,7 +33,7 @@ const jsonSchema: z.ZodSchema<Json> = z.lazy(() =>
   z.union([literalSchema, z.array(jsonSchema), z.record(jsonSchema)]),
 );
 
-export const MetadataProjectValidation = z.object({
+export const MetadataProjectValidator = z.object({
   name: z.string(),
   slug: z.string().nullish(),
   slides: jsonSchema,

@@ -1,4 +1,4 @@
-html[class="light"],:root {
+html[class='light'],:root {
     --gradient-yellow: #F4D03F33;
     --gradient-green: #3FF47E33;
     --gradient-blue: #1199FF66;
@@ -148,7 +148,7 @@ html[class="light"],:root {
     --color-surface-negative-muted: var(--color-neutral-75);
     --color-surface-negative-emphasis: var(--color-red-100);
     --color-surface-negative-base: var(--color-red-50);
-    --undefined: #0000001A;
+    --undefined: #00000003;
     --color-surface-cool-muted: var(--color-neutral-75);
     --color-surface-cool-emphasis: var(--color-neutral-100);
     --color-surface-cool-base: var(--color-white);

@@ -7,5 +7,5 @@ export async function middleware(req: NextRequest) {
   if (!isWebInMaintenanceMode) {
     return NextResponse.rewrite(new URL('/maintenance', req.url));
   }
-  return   NextResponse.next();
+  return NextResponse.next();
 }

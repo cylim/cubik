@@ -2,7 +2,7 @@ import { headers } from 'next/headers';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import { env } from '@/env.mjs';
-import { getTrackInfo } from '@/utils/helpers/track';
+// import { getTrackInfo } from '@/utils/helpers/track';
 import { utils, web3 } from '@coral-xyz/anchor';
 
 import { createToken, verifyMessage } from '@cubik/auth';
@@ -42,9 +42,9 @@ export const POST = async (req: NextRequest) => {
           },
         );
       }
-      const trackInfo = await getTrackInfo();
+      // const trackInfo = await getTrackInfo();
       const session = await createToken({
-        ip: trackInfo?.ip as string,
+        ip: '',
         mainWallet: publicKey,
         id: user.id,
         profilePicture: user.profilePicture as string,
@@ -53,7 +53,7 @@ export const POST = async (req: NextRequest) => {
       });
 
       const userSessionPayload: AuthPayload = {
-        ip: trackInfo?.ip as string,
+        ip: '',
         mainWallet: publicKey,
         id: user.id,
         profilePicture: user.profilePicture as string,
@@ -75,17 +75,17 @@ export const POST = async (req: NextRequest) => {
         path: '/',
       });
 
-      await prisma.session.create({
-        data: {
-          userId: user.id,
-          ipAddress: trackInfo?.ip as string,
-          userAgent: trackInfo?.userAgent as string,
-          country: trackInfo?.country as string,
-          latitude: trackInfo?.latitude as string,
-          longitude: trackInfo?.longitude as string,
-          createdAt: new Date(),
-        },
-      });
+      // await prisma.session.create({
+      //   data: {
+      //     userId: user.id,
+      //     ipAddress: trackInfo?.ip as string,
+      //     userAgent: trackInfo?.userAgent as string,
+      //     country: trackInfo?.country as string,
+      //     latitude: trackInfo?.latitude as string,
+      //     longitude: trackInfo?.longitude as string,
+      //     createdAt: new Date(),
+      //   },
+      // });
 
       return response;
     } else {

@@ -30,26 +30,20 @@ export const ModalHeader = ({
 }: Props) => {
   return (
     <>
-      <Dialog.Title className=" relative bg-[var(--color-surface-tertiary)] flex justify-between items-center p-2 md:p-4 m-0 text-[17px] rounded-t-[12px] font-medium">
+      <Dialog.Title className="pointer-events-auto relative bg-[var(--color-surface-tertiary)] overflow-hidden flex justify-between items-center p-2 md:p-4 m-0 text-[17px] rounded-t-[12px] font-medium">
         <div className="flex justify-center items-center gap-3">
-          <div className="absolute left-0"></div>
-          {IconComponent ? (
-            IconComponent
-          ) : (
-            <div className="ml-2">
-              <Icon name="danger" />
-            </div>
-          )}
+          <div className="absolute -left-6">{RingSVG}</div>
+          {IconComponent}
           <p
             className={cn(
-              'text-[var(--color-fg-primary)]',
+              'text-[var(--color-fg-primary)] ml-12',
               HeadingSizeStyles[headingSize],
             )}
           >
             {heading}
           </p>
         </div>
-        <button onClick={onClose}>
+        <button className="pointer-events-auto" onClick={onClose}>
           <Icon name="cross" width={16} height={16} />
         </button>
       </Dialog.Title>

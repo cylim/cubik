@@ -3,40 +3,41 @@
 import React, { useEffect } from 'react';
 import { useUser } from '@/hooks/useUser';
 
-// import Logo from '../../common/logo';
-// import { WalletConnect } from './auth/handleConnect';
+import Logo from '../common/logo';
+import { WalletConnect } from './auth/handleConnect';
 import Links from './links';
 
 const Header = () => {
   const { setUser } = useUser();
-  // useEffect(() => {
-  //   const checkAuth = async () => {
-  //     try {
-  //       const userRes = await fetch('/api/auth/decode', {
-  //         method: 'GET',
-  //         cache: 'no-cache',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //       });
-  //       const dataRes = await userRes.json();
-  //       const user = dataRes.data;
-  //       if (dataRes.data) {
-  //         setUser({
-  //           id: user.id,
-  //           mainWallet: user.mainWallet,
-  //           profilePicture: user.profilePicture,
-  //           username: user.username,
-  //         });
-  //       } else {
-  //         setUser(null);
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   checkAuth();
-  // }, []);
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const userRes = await fetch('/api/auth/decode', {
+          method: 'GET',
+          cache: 'no-cache',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const dataRes = await userRes.json();
+        const user = dataRes.data;
+        if (dataRes.data) {
+          setUser({
+            id: user.id,
+            mainWallet: user.mainWallet,
+            profilePicture: user.profilePicture,
+            username: user.username,
+          });
+        } else {
+          setUser(null);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    checkAuth();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <div
@@ -49,10 +50,10 @@ const Header = () => {
       >
         <div className="mx-auto flex w-full max-w-5xl items-center justify-between lg:max-w-6xl xl:max-w-screen-2xl">
           <div className="flex items-center justify-start gap-10">
-            {/* <Logo /> */}
+            <Logo />
             <Links />
           </div>
-          {/* <WalletConnect /> */}
+          <WalletConnect />
         </div>
       </div>
     </>

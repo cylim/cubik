@@ -6,8 +6,10 @@ import '@cubik/presets/styles/component.style.css';
 
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { cn } from '@cubik/ui/lib/utils';
+import { Provider } from '@/app/provider';
 import Header from '@/components/header';
+
+import { cn } from '@cubik/ui/lib/utils';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,11 +24,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className='dark' lang="en">
-      <body className={cn(inter.className,'bg-black')}>
-        <Header/>
-        {children}
-        </body>
+    <html className="dark" lang="en">
+      <body className={cn(inter.className, 'bg-[var(--color-neutral-950)]')}>
+        <Provider>
+          <Header />
+          {children}
+        </Provider>
+      </body>
     </html>
   );
 }

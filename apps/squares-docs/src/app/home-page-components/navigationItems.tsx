@@ -70,7 +70,7 @@ const SubItem: FC<{
               }
               className="mr-2 flex w-full flex-row items-center justify-between"
             >
-              <Text className="l2-light" color='primary'>
+              <Text className="l2-light" color="primary">
                 {subItem.name}
               </Text>
               <Icon
@@ -132,7 +132,9 @@ const ThirdItem: FC<{
               }
               className="mr-2"
             >
-                <Text className='l2-light' color='primary' 
+              <Text
+                className="l2-light"
+                color="primary"
                 // className={`${
                 //   pathname === thirdItem.link ? 'text-purple-500' : 'text-black'
                 // } `}
@@ -153,7 +155,9 @@ const ThirdItem: FC<{
             </button>
           ) : (
             <div className="mr-2 flex w-full flex-row items-center justify-between">
-              <Text className='l2-light' color='primary'>{thirdItem.name}</Text>
+              <Text className="l2-light" color="primary">
+                {thirdItem.name}
+              </Text>
             </div>
           )}
         </div>

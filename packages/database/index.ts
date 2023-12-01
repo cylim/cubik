@@ -13,22 +13,10 @@ let prisma: PrismaClient;
 
 if (typeof window === 'undefined') {
   if (process.env.NODE_ENV === 'production') {
-    prisma = new PrismaClient({
-      datasources: {
-        db: {
-          url: process.env.PROD_DATABASE_URL,
-        },
-      },
-    });
+    prisma = new PrismaClient();
   } else {
     if (!global.prisma) {
-      global.prisma = new PrismaClient({
-        datasources: {
-          db: {
-            url: process.env.PROD_DATABASE_URL,
-          },
-        },
-      });
+      global.prisma = new PrismaClient();
     }
     prisma = global.prisma;
   }

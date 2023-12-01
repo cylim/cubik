@@ -1,5 +1,5 @@
 import React from 'react';
-import { Metadata } from 'next/types';
+import { Metadata, Viewport } from 'next/types';
 
 import PageHOC from './home-page-components/components/pageHOC';
 
@@ -8,7 +8,6 @@ export const metadata: Metadata = {
   description: 'The Design System that powers Cubik',
   applicationName: 'Squares',
   //manifest: './manifest.json',
-  themeColor: '#141414',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
@@ -33,6 +32,7 @@ export const metadata: Metadata = {
 };
 
 export default function OthersPage() {
+
   return (
     <PageHOC
       pages={[{ name: 'Others', href: '/others', current: true }]}

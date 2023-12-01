@@ -6,7 +6,7 @@ import NavigationItems from './navigationItems';
 
 const SideMenu: React.FC = () => {
   return (
-    <div className="mt-12 hidden min-h-screen w-fit border-r border-[var(--color-border-primary)] bg-[var(--color-surface-secondary)] p-8 md:mt-0 md:flex">
+    <div className="mt-12 hidden min-h-screen w-fit border-r border-[var(--color-border-primary-base)] bg-[var(--body-surface)] p-8 md:mt-0 md:flex">
       <NavigationItems />
     </div>
   );

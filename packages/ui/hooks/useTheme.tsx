@@ -51,8 +51,16 @@ function ThemeProvider({ children }: ThemeProviderProps) {
   useEffect(() => {
     if (typeof document !== 'undefined') {
       const htmlElement = document.querySelector('html');
+      const themeMetaTag = document.querySelector('meta[name="theme-color"]');
       if (htmlElement) {
         htmlElement.className = theme;
+        htmlElement.setAttribute('data-theme', theme);
+      }
+      if (themeMetaTag) {
+        themeMetaTag.setAttribute(
+          'content',
+          theme === 'light' ? '#ffffff' : '#272727',
+        );
       }
     }
   }, [theme]);

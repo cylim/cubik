@@ -37,16 +37,16 @@ const TextPage = () => {
         </div>
         <div className="mt-10">
           <p className="text-2xl">h1 - primary</p>
-          <Text color="primary" className="h1-heavy md:h2-light">
+          <Text className="h1-heavy md:h2-light">
             Label Text
           </Text>
           <Text color="secondary" className="h1-heavy">
             Label Text
           </Text>
-          <Text color="primary" className="h1">
+          <Text className="h1">
             Label Text
           </Text>
-          <Text color="primary" className="h1-light">
+          <Text className="h1-light">
             Label Text
           </Text>
         </div>

@@ -1,9 +1,14 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { envConfig } from 'config';
 import type { Request, Response } from 'express';
 import { MetadataUploadRequest } from 'types/metadata';
+
+import {
+  MetadataEventValidator,
+  MetadataProjectValidator,
+  MetadataUserValidator,
+} from '@cubik/common';
 import { uploadToIPFS } from '@cubik/helper-scripts/utils/uploadToIPFS';
-import { envConfig } from 'config';
-import { MetadataUserValidator, MetadataProjectValidator, MetadataEventValidator } from '@cubik/common';
 
 export const getMetadata = async (req: Request, res: Response) => {
   // /:type/:pda
@@ -30,19 +35,19 @@ export const uploadMetadata = async (req: Request, res: Response) => {
     return res.status(400).json({
       error: 'Missing required fields in upload metadata request',
     });
-  };
+  }
 
   let validated;
 
   switch (type) {
     case 'user':
-      validated =  await MetadataUserValidator.safeParseAsync(metadata);
+      validated = await MetadataUserValidator.safeParseAsync(metadata);
       break;
     case 'project':
-      validated =  await MetadataProjectValidator.safeParseAsync(metadata);
+      validated = await MetadataProjectValidator.safeParseAsync(metadata);
       break;
     case 'event':
-      validated =  await MetadataEventValidator.safeParseAsync(metadata);
+      validated = await MetadataEventValidator.safeParseAsync(metadata);
       break;
     default:
       return res.status(400).json({
@@ -50,12 +55,11 @@ export const uploadMetadata = async (req: Request, res: Response) => {
       });
   }
 
-
   if (!validated.success) {
     return res.status(400).json({
       error: 'Invalid metadata in upload metadata request',
     });
-  };
+  }
 
   const data = await uploadToIPFS(
     envConfig.infura_api_key,
@@ -83,7 +87,7 @@ export const uploadMetadata = async (req: Request, res: Response) => {
 
   return res.status(200).json({
     message: 'Metadata uploaded successfully',
-    data
+    data,
   });
 };
 

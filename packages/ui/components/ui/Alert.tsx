@@ -1,5 +1,6 @@
 import React from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
+import { Text } from 'components/ui/text/text';
 
 import { Icon } from '../../icons/icon';
 import { iconLibrary } from '../../icons/iconLibrary';
@@ -108,27 +109,24 @@ const Alert: React.FC<AlertProps> = ({
         stroke={cn(alertVariants({ color }))}
         fill={cn(alertVariants({ fill: color }))}
         strokeWidth={1}
+        className="flex items-center"
       />
       <div
         className={cn('items-center', alertVariants({ contentSpacing: type }))}
       >
         <div className={cn('gap-1 flex', alertVariants({ textSpacing: type }))}>
-          <h3
-            className={cn(
-              'text-sm font-semibold',
-              alertVariants({ titleColor: color }),
-            )}
+          <Text
+            className={cn('l2-heavy', alertVariants({ titleColor: color }))}
           >
             {title}
-          </h3>
-          <p
-            className={cn(
-              'text-sm font-normal',
-              alertVariants({ titleColor: color }),
-            )}
+          </Text>
+
+          <Text
+            className={cn('l2-light', alertVariants({ titleColor: color }))}
           >
+            {' '}
             {content}
-          </p>
+          </Text>
         </div>
 
         <Button

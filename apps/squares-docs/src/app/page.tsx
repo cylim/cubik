@@ -32,7 +32,6 @@ export const metadata: Metadata = {
 };
 
 export default function OthersPage() {
-
   return (
     <PageHOC
       pages={[{ name: 'Others', href: '/others', current: true }]}

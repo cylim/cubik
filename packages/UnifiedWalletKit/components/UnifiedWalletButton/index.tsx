@@ -26,22 +26,18 @@ export const UnifiedWalletButton: React.FC<{
 
   const content = (
     <>
-      {connecting && (
-        <span>
-          <Button>Connecting...</Button>
-        </span>
-      )}
+      {connecting && <Button>Connecting...</Button>}
       {/* Mobile */}
       {!connecting && (
-        <span>
-          <Button>Connect</Button>
-        </span>
+        <Button variant="primary" size="md">
+          Connect
+        </Button>
       )}
       {/* Desktop */}
       {!connecting && (
-        <span>
-          <Button>Connect Wallet</Button>
-        </span>
+        <Button variant="primary" size="md">
+          Connect Wallet
+        </Button>
       )}
     </>
   );

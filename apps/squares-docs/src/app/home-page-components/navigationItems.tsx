@@ -4,7 +4,7 @@ import { FC, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { Icon } from '@cubik/ui';
+import { Icon, Text } from '@cubik/ui';
 
 import navigationData from '../navigationData';
 
@@ -70,9 +70,9 @@ const SubItem: FC<{
               }
               className="mr-2 flex w-full flex-row items-center justify-between"
             >
-              <span className="font-regular text-[12px] text-[var(--color-fg-primary)] md:text-[14px]">
+              <Text className="l2-light" color='primary'>
                 {subItem.name}
-              </span>
+              </Text>
               <Icon
                 name={'chevronDown'}
                 stroke={'var(--color-fg-secondary)'}
@@ -132,13 +132,13 @@ const ThirdItem: FC<{
               }
               className="mr-2"
             >
-              <span
-                className={`${
-                  pathname === thirdItem.link ? 'text-purple-500' : 'text-black'
-                } text-[12px] md:text-[14px]`}
+                <Text className='l2-light' color='primary' 
+                // className={`${
+                //   pathname === thirdItem.link ? 'text-purple-500' : 'text-black'
+                // } `}
               >
                 {thirdItem.name}
-              </span>
+              </Text>
               <Icon
                 className={
                   toggledThirdItem === thirdItem.id ? 'rotate-180' : ''
@@ -153,7 +153,7 @@ const ThirdItem: FC<{
             </button>
           ) : (
             <div className="mr-2 flex w-full flex-row items-center justify-between">
-              <span>{thirdItem.name}</span>
+              <Text className='l2-light' color='primary'>{thirdItem.name}</Text>
             </div>
           )}
         </div>

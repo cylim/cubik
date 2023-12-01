@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@axiomhq/winston": "1.0.0-rc.1",
     "@coral-xyz/anchor": "^0.27.0",
     "@cubik/auth": "workspace:^",
     "@cubik/common": "workspace:^0.1.0",

@@ -15,7 +15,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="flex h-[70px] w-screen content-center items-center border-b border-b-[var(--color-border-primary)] bg-[var(--color-surface-secondary)] py-4 lg:static lg:overflow-y-visible">
+      <header className="flex h-[70px] w-screen content-center items-center border-b border-b-[var(--color-border-primary-base)] bg-[var(--body-surface)] py-4 lg:static lg:overflow-y-visible">
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <div className="flex shrink-0 items-center">

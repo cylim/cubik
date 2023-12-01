@@ -140,36 +140,77 @@
 // };
 
 import React from 'react';
+import { cva, VariantProps } from 'class-variance-authority';
 
 import { Icon } from '../../../icons/icon';
 import { iconLibrary } from '../../../icons/iconLibrary';
+import { cn } from '../../../lib/utils';
 import { Avatar } from '../Avatar/Avatar';
 import { Text } from '../text/text';
 
-interface TagIconProps {
+interface TagIconProps extends VariantProps<typeof tagIconVariants> {
   iconName: keyof typeof iconLibrary;
 }
+const tagIconVariants = cva('', {
+  variants: {
+    size: {
+      desktop: 'w-[22px] h-[22px]',
+      tablet: 'w-[18px] h-[18px]',
+      mobile: 'w-[16px] h-[16px]',
+    },
+    color: {
+      // green: 'stroke-[var(--tag-solid-text-green)]',
+      // red: 'stroke-[var(--tag-solid-text-red)]',
+      // orange: 'stroke-[var(--tag-solid-text-orange)]',
+      // blue: 'stroke-[var(--tag-solid-text-blue)]',
+      // purple: 'stroke-[var(--tag-solid-text-purple)]',
+      // yellow: 'stroke-[var(--tag-solid-text-yellow)]',
+      // default: 'stroke-[var(--tag-solid-text-default)]',
+    },
+  },
+  defaultVariants: {
+    size: 'desktop',
+  },
+});
 
-const TagIcon: React.FC<TagIconProps> = ({ iconName }) => {
+const TagIcon: React.FC<TagIconProps> = ({ iconName, size, color }) => {
   return (
     <Icon
       name={iconName}
       strokeWidth={1.5}
       stroke="#000"
-      className=""
-      height={22}
-      width={22}
+      className={cn(tagIconVariants({ size, color }))}
     />
   );
 };
 
-interface TagAvatarProps {
+interface TagAvatarProps extends VariantProps<typeof tagAvatarVariants> {
   src: string;
   alt?: string;
 }
 
-const TagAvatar: React.FC<TagAvatarProps> = ({ src, alt }) => {
-  return <Avatar variant="circle" src={src} alt={alt ? alt : ''} size="xs" />;
+const tagAvatarVariants = cva('', {
+  variants: {
+    size: {
+      desktop: '!w-[20px] !h-[20px]',
+      tablet: '!w-[16px] !h-[16px]',
+      mobile: '!w-[14px] !h-[14px]',
+    },
+  },
+  defaultVariants: {
+    size: 'desktop',
+  },
+});
+
+const TagAvatar: React.FC<TagAvatarProps> = ({ src, alt, size }) => {
+  return (
+    <Avatar
+      variant="circle"
+      src={src}
+      alt={alt ? alt : ''}
+      className={cn(tagAvatarVariants({ size }))}
+    />
+  );
 };
 
 interface TagLabelProps {
@@ -184,31 +225,87 @@ const TagLabel: React.FC<TagLabelProps> = ({ children }) => {
   );
 };
 
-interface TagRightIconProps {
+interface TagRightIconProps extends VariantProps<typeof tagRightIconVariants> {
   iconName: keyof typeof iconLibrary;
 }
 
-const TagRightIcon: React.FC<TagRightIconProps> = ({ iconName }) => {
+const tagRightIconVariants = cva('', {
+  variants: {
+    size: {
+      desktop: 'w-[18px] h-[18px]',
+      tablet: 'w-[18px] h-[18px]',
+      mobile: 'w-[16px] h-[16px]',
+    },
+  },
+  defaultVariants: {
+    size: 'desktop',
+  },
+});
+
+const TagRightIcon: React.FC<TagRightIconProps> = ({ iconName, size }) => {
   return (
     <Icon
       name={iconName}
       strokeWidth={1.5}
       stroke="#808080"
-      className="w-[22px] h-[22px]"
-      height={22}
-      width={22}
+      className={cn(tagRightIconVariants({ size }))}
     />
   );
 };
 
-interface TagProps {
+interface TagProps extends VariantProps<typeof tagVariants> {
   children: React.ReactNode;
+  variant: 'solid' | 'subtle';
+  size: 'desktop' | 'tablet' | 'mobile';
+  border: boolean;
 }
 
-const Tag: React.FC<TagProps> = ({ children }) => {
+const tagVariants = cva('', {
+  variants: {
+    color: {
+      green: 'bg-[var(--tag-solid-surface-green)]',
+      red: 'bg-[var(--tag-solid-surface-red)]',
+      orange: 'bg-[var(--tag-solid-surface-orange)]',
+      blue: 'bg-[var(--tag-solid-surface-blue)]',
+      purple: 'bg-[var(--tag-solid-surface-purple)]',
+      yellow: 'bg-[var(--tag-solid-surface-yellow)]',
+      default: 'bg-[var(--tag-solid-surface-default)]',
+      'subtle-green': 'stroke-[var(--tag-subtle-surface-default)]',
+    },
+  },
+  defaultVariants: {
+    color: 'default',
+  },
+});
+
+const Tag: React.FC<TagProps> = ({
+  children,
+  color,
+  variant,
+  size,
+  border,
+}) => {
+  const childrenWithProps = React.Children.map(children, (child) => {
+    // Checking if the child is a valid element before cloning it to prevent errors
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child, {
+        color,
+        variant,
+        size,
+        border,
+      } as Partial<typeof child.props>);
+    }
+    return child;
+  });
+
   return (
-    <div className="inline-flex justify-center items-center bg-[var(--color-green-500-10)] rounded-full py-2 px-2">
-      {children}
+    <div
+      className={cn(
+        tagVariants({ color }),
+        'inline-flex justify-center items-center rounded-full py-2 px-2',
+      )}
+    >
+      {childrenWithProps}
     </div>
   );
 };

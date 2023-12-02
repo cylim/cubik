@@ -35,7 +35,7 @@ jobs:
       - name: Install Dependencies
         run: |
           cd apps/backend
-          npm ci
+          npm install
 
       - name: Deploy to Droplet
         if: ${{ steps.filter.outputs.backend_filter == true }}

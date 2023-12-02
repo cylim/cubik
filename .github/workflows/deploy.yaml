@@ -24,6 +24,10 @@ jobs:
         with:
           node-version: 14
 
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
       - name: Check for backend changes
         uses: dorny/paths-filter@v2
         id: filter
@@ -34,8 +38,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          cd apps/backend
-          npm install
+          pnpm install
 
       - name: Deploy to Droplet
         if: ${{ steps.filter.outputs.backend_filter == true }}
@@ -49,7 +52,7 @@ jobs:
             source ~/.nvm/nvm.sh
             cd apps/backend
             git pull origin main
-            npm install
-            npm run build
+            pnpm install
+            pnpm build
             # Add any additional steps needed for deployment
             echo 'Deployment finished'

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
 import { AxiomWebVitals } from 'next-axiom';
+
 import { ClientCookiesProvider } from '../app/home-page-components/providers/cookies';
 
 import './globals.css';
@@ -63,51 +64,52 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  themeColor: '#272727'
-}
+  themeColor: '#272727',
+};
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-  }) {
-  
+}) {
   const announcement = {
     bg: 'bg-[var(--color-surface-secondary)]',
     text: '',
     link: '',
   };
   return (
-    <html lang="en" dir="ltr" >
-      <body className={`${inter.className} ${announcement.bg} bg-[var(--color-bg-primary-depth)]`}>
+    <html lang="en" dir="ltr">
+      <body
+        className={`${inter.className} ${announcement.bg} bg-[var(--color-bg-primary-depth)]`}
+      >
         <ClientCookiesProvider value={cookies().getAll()}>
           <ThemeProvider>
             <WalletProvider>
-            <div className="absolute min-h-screen overflow-hidden">
-              <div className="relative z-[-1]">
-                <Background />
-              </div>{' '}
-              <div className="z-1 fixed overflow-visible">
-                {announcement.text.length > 0 && (
-                  <div
-                    className={`h-[60px] w-screen ${announcement.bg}`}
-                  ></div>
-                )}
-                <Header />
-              </div>
-              <AxiomWebVitals />
-              <div className="z-0 mt-0 flex w-full flex-row md:mt-[70px]">
-                <Toaster />
-                <div className={`fixed h-[calc(100vh-72px)]`}>
-                  <Sidebar />
+              <div className="absolute min-h-screen overflow-hidden">
+                <div className="relative z-[-1]">
+                  <Background />
+                </div>{' '}
+                <div className="z-1 fixed overflow-visible">
+                  {announcement.text.length > 0 && (
+                    <div
+                      className={`h-[60px] w-screen ${announcement.bg}`}
+                    ></div>
+                  )}
+                  <Header />
                 </div>
-                <div className="w-screen overflow-y-scroll pt-[70px] md:pl-[285px] md:pt-0">
-                  {children}
+                <AxiomWebVitals />
+                <div className="z-0 mt-0 flex w-full flex-row md:mt-[70px]">
+                  <Toaster />
+                  <div className={`fixed h-[calc(100vh-72px)]`}>
+                    <Sidebar />
+                  </div>
+                  <div className="w-screen overflow-y-scroll pt-[70px] md:pl-[285px] md:pt-0">
+                    {children}
+                  </div>
                 </div>
               </div>
-            </div>
-          </WalletProvider>
-         </ThemeProvider>
+            </WalletProvider>
+          </ThemeProvider>
         </ClientCookiesProvider>
       </body>
     </html>

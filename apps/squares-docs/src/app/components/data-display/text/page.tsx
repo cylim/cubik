@@ -37,18 +37,12 @@ const TextPage = () => {
         </div>
         <div className="mt-10">
           <p className="text-2xl">h1 - primary</p>
-          <Text className="h1-heavy md:h2-light">
-            Label Text
-          </Text>
+          <Text className="h1-heavy md:h2-light">Label Text</Text>
           <Text color="secondary" className="h1-heavy">
             Label Text
           </Text>
-          <Text className="h1">
-            Label Text
-          </Text>
-          <Text className="h1-light">
-            Label Text
-          </Text>
+          <Text className="h1">Label Text</Text>
+          <Text className="h1-light">Label Text</Text>
         </div>
       </div>
     </PageHOC>

@@ -25,7 +25,7 @@ import {
 } from '@cubik/ui';
 import { cn } from '@cubik/ui/lib/utils';
 
-import { Modal, ModalHeader } from '../../ui/components/ui/Modal';
+import { Modal } from '../../ui/components/ui/Modal';
 //import ModalDialog from '../components/ModalDialog';
 import UnifiedWalletModal from '../components/UnifiedWalletModal';
 import { useMediaQuery } from '../hooks/helperHooks';
@@ -205,14 +205,14 @@ const UnifiedWalletContextProvider = ({
     >
       {isSmallDevice ? (
         <Drawer open={showModal} onOpenChange={setShowModal}>
-          <DrawerOverlay className={cn(!isSmallDevice ? 'hidden' : '')} />
           <DrawerPortal>
+            <DrawerOverlay className={cn(!isSmallDevice ? 'hidden' : '')} />
             <DrawerContent className={cn(!isSmallDevice ? 'hidden' : 'h-max')}>
-              <ModalHeader
+              {/* <ModalHeader
                 heading={'Connect Wallet'}
                 headingSize={'sm'}
                 onClose={() => setShowModal(false)}
-              />
+              /> */}
               <DrawerBody>
                 <UnifiedWalletModal onClose={() => setShowModal(false)} />
               </DrawerBody>
@@ -226,11 +226,11 @@ const UnifiedWalletContextProvider = ({
           open={showModal}
           onClose={() => setShowModal(false)}
         >
-          <ModalHeader
+          {/* <ModalHeader
             heading={'Connect Wallet'}
             headingSize={'sm'}
             onClose={() => setShowModal(false)}
-          />
+          /> */}
           <UnifiedWalletModal onClose={() => setShowModal(false)} />
         </Modal>
       )}

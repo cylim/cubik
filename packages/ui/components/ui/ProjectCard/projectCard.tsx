@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
-import Link from 'next/link';
+
+// import Link from 'next/link';
 
 import { Icon } from '../../../icons/icon';
 import { cn } from '../../../lib/utils';
@@ -14,7 +15,7 @@ interface Props
   logo: string;
   name: string;
   description: string;
-  Button: ReactNode;
+  Button?: ReactNode;
   href: string;
 }
 interface ButtonProps
@@ -47,25 +48,23 @@ export const SaveButton = (props: ButtonProps) => {
 export const ProjectCard = (props: Props) => {
   return (
     <>
-      <Link href={props.href}>
-        <div
-          className={cn(
-            props.className,
-            'flex justify-between items-center px-6 py-5',
-            'hover:bg-[#212121] rounded-lg',
-          )}
-          {...props}
-        >
-          <AvatarLabelGroup
-            avatarSrc={props.logo ?? '/logo.svg'} // updated backup image
-            size={'lg'}
-            title={props.name}
-            avatarShape="square"
-            description={props.description}
-          />
-          {props.Button}
-        </div>
-      </Link>
+      {/* <Link href={props.href}> */}
+      <div
+        className={cn(
+          props.className,
+          'p-[4px] flex justify-between items-center',
+        )}
+        {...props}
+      >
+        <AvatarLabelGroup
+          avatarSrc={props.logo ?? '/logo.svg'} // updated backup image
+          size={'xl'}
+          title={props.name}
+          avatarShape="square"
+          description={props.description}
+        />
+      </div>
+      {/* </Link> */}
     </>
   );
 };

@@ -58,7 +58,6 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
             key={index}
             src={avatar.src}
             alt={avatar.alt}
-            size={size}
             variant={shape}
           />
         ))}

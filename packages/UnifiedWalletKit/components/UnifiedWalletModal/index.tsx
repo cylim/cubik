@@ -364,7 +364,7 @@ const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = () => {
   }, [wallets, previouslyConnected]);
   console.log('----', list);
   return (
-    <div className="py-6 flex flex-col gap-6">
+    <div className="flex flex-col gap-6">
       <ListOfWallets list={list} onToggle={onToggle} isOpen={isOpen} />
       <div className="w-full h-[1px] bg-[var(--color-border-primary-base)]" />
       {list.highlightedBy !== 'TopWallet' && <UnifiedWalletModalFooter />}

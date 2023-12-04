@@ -56,7 +56,7 @@ interface DrawerFooterProps {
 
 const Drawer = ({ open, children, onOpenChange, ...props }: DrawerProps) => (
   <Dialog.Drawer.Root
-    shouldScaleBackground
+    //shouldScaleBackground
     open={open}
     onOpenChange={onOpenChange}
     {...props}
@@ -70,7 +70,7 @@ const DrawerPortal = ({ children }: DrawerPortalProps) => {
 
 const DrawerOverlay = ({ className }: { className?: ClassValue }) => (
   <Dialog.Drawer.Overlay
-    className={cn('fixed inset-0 bg-black/60', className)}
+    className={cn('fixed inset-0 bg-black/75', className)}
   />
 );
 
@@ -78,7 +78,7 @@ const DrawerContent = ({ children, className }: DrawerContentProps) => (
   <Dialog.Drawer.Content
     className={cn(
       className,
-      'fixed max-h-[90%] mt-24 bottom-0 left-0 right-0 rounded-t-lg overflow-hidden z-[100]  w-screen bg-[var(--color-surface-primary)]',
+      'fixed max-h-[90%] mt-24 bottom-0 left-0 right-0 rounded-t-[12px] overflow-hidden w-screen bg-[var(--color-surface-primary)]',
     )}
   >
     {children}

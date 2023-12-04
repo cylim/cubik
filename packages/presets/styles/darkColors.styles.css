@@ -151,6 +151,7 @@ html[class='dark'],:root {
     --color-surface-cool-muted: var(--color-black-600);
     --color-surface-cool-emphasis: var(--color-black-700);
     --color-surface-cool-base: var(--color-black-800);
+    --color-surface-cool-transparent: #ffffff10;
     --color-surface-primary-subdued: var(--color-black-400);
     --color-surface-primary-depth: var(--color-black-600);
     --color-surface-primary-base: var(--color-black-500);

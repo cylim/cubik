@@ -214,19 +214,19 @@ const MarkdownEditor = ({
                 componentSize === 'sm'
                   ? { base: '6px', md: '10px' }
                   : componentSize === 'md'
-                  ? { base: '8px', md: '13px' }
-                  : componentSize === 'lg'
-                  ? { base: '10px', md: '14px' }
-                  : { base: '8px', md: '13px' }
+                    ? { base: '8px', md: '13px' }
+                    : componentSize === 'lg'
+                      ? { base: '10px', md: '14px' }
+                      : { base: '8px', md: '13px' }
               }
               height={
                 componentSize === 'sm'
                   ? { base: '6px', md: '10px' }
                   : componentSize === 'md'
-                  ? { base: '8px', md: '13px' }
-                  : componentSize === 'lg'
-                  ? { base: '10px', md: '14px' }
-                  : { base: '8px', md: '13px' }
+                    ? { base: '8px', md: '13px' }
+                    : componentSize === 'lg'
+                      ? { base: '10px', md: '14px' }
+                      : { base: '8px', md: '13px' }
               }
             >
               <svg
@@ -255,19 +255,19 @@ const MarkdownEditor = ({
                 componentSize === 'sm'
                   ? { base: '6px', md: '10px' }
                   : componentSize === 'md'
-                  ? { base: '8px', md: '13px' }
-                  : componentSize === 'lg'
-                  ? { base: '10px', md: '14px' }
-                  : { base: '8px', md: '13px' }
+                    ? { base: '8px', md: '13px' }
+                    : componentSize === 'lg'
+                      ? { base: '10px', md: '14px' }
+                      : { base: '8px', md: '13px' }
               }
               height={
                 componentSize === 'sm'
                   ? { base: '6px', md: '10px' }
                   : componentSize === 'md'
-                  ? { base: '8px', md: '13px' }
-                  : componentSize === 'lg'
-                  ? { base: '10px', md: '14px' }
-                  : { base: '8px', md: '13px' }
+                    ? { base: '8px', md: '13px' }
+                    : componentSize === 'lg'
+                      ? { base: '10px', md: '14px' }
+                      : { base: '8px', md: '13px' }
               }
             >
               <svg
@@ -298,19 +298,19 @@ const MarkdownEditor = ({
                 componentSize === 'sm'
                   ? { base: '6px', md: '10px' }
                   : componentSize === 'md'
-                  ? { base: '8px', md: '13px' }
-                  : componentSize === 'lg'
-                  ? { base: '10px', md: '14px' }
-                  : { base: '8px', md: '13px' }
+                    ? { base: '8px', md: '13px' }
+                    : componentSize === 'lg'
+                      ? { base: '10px', md: '14px' }
+                      : { base: '8px', md: '13px' }
               }
               height={
                 componentSize === 'sm'
                   ? { base: '7px', md: '8px' }
                   : componentSize === 'md'
-                  ? { base: '9px', md: '10px' }
-                  : componentSize === 'lg'
-                  ? { base: '10px', md: '11px' }
-                  : { base: '10px', md: '11px' }
+                    ? { base: '9px', md: '10px' }
+                    : componentSize === 'lg'
+                      ? { base: '10px', md: '11px' }
+                      : { base: '10px', md: '11px' }
               }
             >
               <svg
@@ -340,19 +340,19 @@ const MarkdownEditor = ({
                 componentSize === 'sm'
                   ? { base: '9px', md: '13px' }
                   : componentSize === 'md'
-                  ? { base: '11px', md: '16px' }
-                  : componentSize === 'lg'
-                  ? { base: '13px', md: '17px' }
-                  : { base: '11px', md: '16px' }
+                    ? { base: '11px', md: '16px' }
+                    : componentSize === 'lg'
+                      ? { base: '13px', md: '17px' }
+                      : { base: '11px', md: '16px' }
               }
               height={
                 componentSize === 'sm'
                   ? { base: '9px', md: '13px' }
                   : componentSize === 'md'
-                  ? { base: '11px', md: '16px' }
-                  : componentSize === 'lg'
-                  ? { base: '13px', md: '17px' }
-                  : { base: '11px', md: '16px' }
+                    ? { base: '11px', md: '16px' }
+                    : componentSize === 'lg'
+                      ? { base: '13px', md: '17px' }
+                      : { base: '11px', md: '16px' }
               }
             >
               <svg
@@ -382,19 +382,19 @@ const MarkdownEditor = ({
                 componentSize === 'sm'
                   ? { base: '10px', md: '16px' }
                   : componentSize === 'md'
-                  ? { base: '12px', md: '18px' }
-                  : componentSize === 'lg'
-                  ? { base: '16px', md: '20px' }
-                  : { base: '12px', md: '18px' }
+                    ? { base: '12px', md: '18px' }
+                    : componentSize === 'lg'
+                      ? { base: '16px', md: '20px' }
+                      : { base: '12px', md: '18px' }
               }
               height={
                 componentSize === 'sm'
                   ? { base: '10px', md: '16px' }
                   : componentSize === 'md'
-                  ? { base: '12px', md: '18px' }
-                  : componentSize === 'lg'
-                  ? { base: '16px', md: '20px' }
-                  : { base: '12px', md: '18px' }
+                    ? { base: '12px', md: '18px' }
+                    : componentSize === 'lg'
+                      ? { base: '16px', md: '20px' }
+                      : { base: '12px', md: '18px' }
               }
             >
               <svg
@@ -425,19 +425,19 @@ const MarkdownEditor = ({
                 componentSize === 'sm'
                   ? { base: '10px', md: '16px' }
                   : componentSize === 'md'
-                  ? { base: '12px', md: '18px' }
-                  : componentSize === 'lg'
-                  ? { base: '16px', md: '20px' }
-                  : { base: '12px', md: '18px' }
+                    ? { base: '12px', md: '18px' }
+                    : componentSize === 'lg'
+                      ? { base: '16px', md: '20px' }
+                      : { base: '12px', md: '18px' }
               }
               height={
                 componentSize === 'sm'
                   ? { base: '10px', md: '16px' }
                   : componentSize === 'md'
-                  ? { base: '12px', md: '18px' }
-                  : componentSize === 'lg'
-                  ? { base: '16px', md: '20px' }
-                  : { base: '12px', md: '18px' }
+                    ? { base: '12px', md: '18px' }
+                    : componentSize === 'lg'
+                      ? { base: '16px', md: '20px' }
+                      : { base: '12px', md: '18px' }
               }
             >
               <svg
@@ -468,19 +468,19 @@ const MarkdownEditor = ({
                 componentSize === 'sm'
                   ? { base: '10px', md: '16px' }
                   : componentSize === 'md'
-                  ? { base: '12px', md: '18px' }
-                  : componentSize === 'lg'
-                  ? { base: '16px', md: '20px' }
-                  : { base: '12px', md: '18px' }
+                    ? { base: '12px', md: '18px' }
+                    : componentSize === 'lg'
+                      ? { base: '16px', md: '20px' }
+                      : { base: '12px', md: '18px' }
               }
               height={
                 componentSize === 'sm'
                   ? { base: '10px', md: '16px' }
                   : componentSize === 'md'
-                  ? { base: '12px', md: '18px' }
-                  : componentSize === 'lg'
-                  ? { base: '16px', md: '20px' }
-                  : { base: '12px', md: '18px' }
+                    ? { base: '12px', md: '18px' }
+                    : componentSize === 'lg'
+                      ? { base: '16px', md: '20px' }
+                      : { base: '12px', md: '18px' }
               }
             >
               <svg
@@ -523,10 +523,10 @@ const MarkdownEditor = ({
             componentSize === 'sm'
               ? '20rem'
               : componentSize === 'md'
-              ? '30rem'
-              : componentSize === 'lg'
-              ? '60vh'
-              : '20rem'
+                ? '30rem'
+                : componentSize === 'lg'
+                  ? '60vh'
+                  : '20rem'
           }
           overflow="scroll"
           p="0.5rem 1.6rem"
@@ -541,10 +541,10 @@ const MarkdownEditor = ({
             componentSize === 'sm'
               ? { base: '100%', md: '100%' }
               : componentSize === 'md'
-              ? { base: '100%', md: '100%' }
-              : componentSize === 'lg'
-              ? { base: '100%', md: '100%' }
-              : { base: '100%', md: '100%' }
+                ? { base: '100%', md: '100%' }
+                : componentSize === 'lg'
+                  ? { base: '100%', md: '100%' }
+                  : { base: '100%', md: '100%' }
           }
           overflow="scroll"
         >
@@ -575,10 +575,10 @@ const MarkdownEditor = ({
                 componentSize === 'sm'
                   ? '20rem'
                   : componentSize === 'md'
-                  ? '30rem'
-                  : componentSize === 'lg'
-                  ? '60vh'
-                  : '20rem',
+                    ? '30rem'
+                    : componentSize === 'lg'
+                      ? '60vh'
+                      : '20rem',
               overflow: 'scroll',
               border: 'none !important',
             }}

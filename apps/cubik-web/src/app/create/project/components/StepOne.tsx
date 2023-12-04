@@ -180,8 +180,8 @@ const StepOne: React.FC<StepOneProps> = ({
                 watch('tagline')?.length === 0
                   ? 'neutral.7'
                   : watch('tagline')?.length > 80
-                  ? 'surface.red.2'
-                  : 'surface.green.2'
+                    ? 'surface.red.2'
+                    : 'surface.green.2'
               }
               fontWeight={'600'}
             >

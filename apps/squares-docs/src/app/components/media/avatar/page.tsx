@@ -15,22 +15,22 @@ const Page = () => {
           <h3 className="text-xl font-bold">Avatar with Title and Icon</h3>
           <div className="flex gap-10">
             <div>
-              <TitleWithIcon variant="xs" text="Title" icon="github" />
-              <TitleWithIcon text="Title" variant="sm" icon="github" />
-              <TitleWithIcon text="Title" variant="md" icon="github" />
-              <TitleWithIcon text="Title" variant="lg" icon="github" />
-              <TitleWithIcon text="Title" variant="xl" icon="github" />
-              <TitleWithIcon text="Title" variant="2xl" icon="github" />
-              <TitleWithIcon text="Title" variant="3xl" icon="github" />
+              <TitleWithIcon text="Title" icon="github" />
+              <TitleWithIcon text="Title" icon="github" />
+              <TitleWithIcon text="Title" icon="github" />
+              <TitleWithIcon text="Title" icon="github" />
+              <TitleWithIcon text="Title" icon="github" />
+              <TitleWithIcon text="Title" icon="github" />
+              <TitleWithIcon text="Title" icon="github" />
             </div>
             <div>
-              <TitleWithIcon variant="xs" text="Title" />
-              <TitleWithIcon text="Title" variant="sm" />
-              <TitleWithIcon text="Title" variant="md" />
-              <TitleWithIcon text="Title" variant="lg" />
-              <TitleWithIcon text="Title" variant="xl" />
-              <TitleWithIcon text="Title" variant="2xl" />
-              <TitleWithIcon text="Title" variant="3xl" />
+              <TitleWithIcon text="Title" />
+              <TitleWithIcon text="Title" />
+              <TitleWithIcon text="Title" />
+              <TitleWithIcon text="Title" />
+              <TitleWithIcon text="Title" />
+              <TitleWithIcon text="Title" />
+              <TitleWithIcon text="Title" />
             </div>
           </div>
         </div>
@@ -83,7 +83,6 @@ const Page = () => {
               variant="circle"
               src="https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg"
               alt="Image"
-              size="3xl"
               iconName="infoCircle"
             />
           </div>
@@ -134,7 +133,6 @@ const Page = () => {
               variant="square"
               src="https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg"
               alt="Image"
-              size="3xl"
               iconName="infoCircle"
             />
           </div>
@@ -748,14 +746,6 @@ const Page = () => {
               subtitle="subtitle"
               size="2xl"
             />
-            <AvatarLabelGroup
-              avatarSrc="https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg"
-              shape="circle"
-              title="Title"
-              description="description"
-              subtitle="subtitle"
-              size="3xl"
-            />
           </div>
 
           <div className="flex flex-col gap-8">
@@ -806,14 +796,6 @@ const Page = () => {
               longDescription="Borem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
               subtitle="subtitle"
               size="2xl"
-            />
-            <AvatarLabelGroup
-              avatarSrc="https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg"
-              shape="circle"
-              title="Title"
-              longDescription="Borem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
-              subtitle="subtitle"
-              size="3xl"
             />
           </div>
         </div>

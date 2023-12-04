@@ -26,8 +26,8 @@ const useUserSupabase = (client: SupabaseClient) => {
       event === 'SIGNED_IN'
         ? setUser(user)
         : event === 'SIGNED_OUT'
-          ? setUser(null)
-          : null;
+        ? setUser(null)
+        : null;
 
       setIsLoading(false);
     });

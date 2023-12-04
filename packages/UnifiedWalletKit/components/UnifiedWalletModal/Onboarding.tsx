@@ -78,24 +78,22 @@ export const OnboardingFlow = () => {
   const [state, setState] = useState<IOnboardingFlow>('Onboarding');
   if (state === 'Onboarding') {
     return (
-      <div className="flex justify-center items-center flex-col px-4 md:px-8">
+      <div className="flex justify-center gap-8 md:gap-14 items-center flex-col px-4 md:px-8">
         <div
-          className="flex flex-col justify-center items-center py-8 md:py-14 gap-4"
+          className="flex flex-col justify-center items-center gap-4"
           color="secondary"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            alt="something"
+            alt="Solana Ledger"
+            style={{ height: 'clamp(110px, 20vw, 150px)', width: 'full' }}
             src="https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d1513aa9-d2b4-482f-8091-5c21aa68c000/public"
           />
           <div className="flex justify-center items-center text-center flex-col gap-2">
             <Text className="h4 md:h5" color="primary">
               No Solana Wallet Found?
             </Text>
-            <Text
-              className="b2-light md:b3-light text-center"
-              color="secondary"
-            >
+            <Text className="b2-light md:b3-light text-center" color="tertiary">
               Wallet is an essential utility that lets you explore and
               participate in the fast evolving world of web3. Get a Solana
               wallet or{' '}
@@ -108,7 +106,7 @@ export const OnboardingFlow = () => {
             </Text>
           </div>
         </div>
-        <div className="flex justify-center gap-3 px-4 md:px-12 items-center flex-col w-full">
+        <div className="flex justify-center gap-3 items-center flex-col w-full pb-12">
           <Button
             onClick={() => setState('Get Wallet')}
             variant={'secondary'}
@@ -133,29 +131,27 @@ export const OnboardingFlow = () => {
   }
   if (state === 'Copy Wallet') {
     return (
-      <div className="flex justify-center items-center flex-col px-4 md:px-8">
+      <div className="flex justify-center gap-8 md:gap-14 items-center flex-col px-4 md:px-8">
         <div
-          className="flex flex-col justify-center items-center py-8 md:py-14 gap-4"
+          className="flex flex-col justify-center items-center gap-4"
           color="secondary"
         >
           <img
-            alt="something"
+            alt="Solana Mobile - Saga"
+            style={{ height: 'clamp(100px, 20vw, 130px)', width: 'full' }}
             src="https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/4c14abdb-7e20-4c81-fe3c-0d210c0c7a00/public"
           />
           <div className="flex justify-center items-center text-center flex-col gap-2">
             <Text className="h4 md:h5" color="primary">
               Open any Wallet app
             </Text>
-            <Text
-              className="b2-light md:b3-light text-center"
-              color="secondary"
-            >
+            <Text className="b2-light md:b3-light text-center" color="tertiary">
               Open any wallet app and navigate to the in app browser of the
               wallet. Paste the copied url and you should be good to go.
             </Text>
           </div>
         </div>
-        <div className="flex justify-center gap-3 px-4 md:px-12 items-center flex-col w-full">
+        <div className="flex justify-center gap-3 items-center flex-col w-full">
           <Button variant={'secondary'} size={'lg'} className="w-full">
             Link copied
           </Button>

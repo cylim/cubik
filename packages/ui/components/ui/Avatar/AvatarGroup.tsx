@@ -38,7 +38,7 @@ export interface AvatarGroupProps
 export const AvatarGroup: React.FC<AvatarGroupProps> = ({
   avatars,
   shape,
-  size = 'sm',
+  size,
   variant = 'circular',
   maxCount = 3,
 }) => {
@@ -59,6 +59,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
             src={avatar.src}
             alt={avatar.alt}
             variant={shape}
+            size="xs"
           />
         ))}
         {variant === 'squared-horizontal' && overflowCount && (

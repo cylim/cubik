@@ -78,8 +78,8 @@ export const CategorySelect = ({
                     watch('category')?.length > 3
                       ? 'surface.red.2'
                       : watch('category')?.length > 0
-                        ? 'surface.green.2'
-                        : 'neutral.7'
+                      ? 'surface.green.2'
+                      : 'neutral.7'
                   }
                   fontWeight={'600'}
                 >
@@ -190,8 +190,8 @@ export const CategorySelect = ({
                     backgroundColor: state.isSelected
                       ? '#010F0D'
                       : state.isFocused
-                        ? '#010F0D'
-                        : '#0F0F0F',
+                      ? '#010F0D'
+                      : '#0F0F0F',
                     _hover: {
                       backgroundColor: '#010F0D',
                     },
@@ -399,8 +399,8 @@ export const TeamSelect = ({
                 backgroundColor: state.isSelected
                   ? '#010F0D'
                   : state.isFocused
-                    ? '#010F0D'
-                    : '#0F0F0F',
+                  ? '#010F0D'
+                  : '#0F0F0F',
                 _hover: {
                   backgroundColor: '#010F0D',
                 },

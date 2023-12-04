@@ -16,19 +16,7 @@ import {
 import { PublicKey } from '@solana/web3.js';
 import { usePrevious } from 'react-use';
 
-import {
-  Drawer,
-  DrawerBody,
-  DrawerContent,
-  DrawerOverlay,
-  DrawerPortal,
-} from '@cubik/ui';
-import { cn } from '@cubik/ui/lib/utils';
-
-import { Modal } from '../../ui/components/ui/Modal';
-//import ModalDialog from '../components/ModalDialog';
-import UnifiedWalletModal from '../components/UnifiedWalletModal';
-import { useMediaQuery } from '../hooks/helperHooks';
+import WalletModal from '../components/Modal/modal';
 import { shortenAddress } from '../misc/utils';
 import {
   UnifiedWalletContext,
@@ -88,7 +76,6 @@ const UnifiedWalletContextProvider = ({
   const previousWallet = usePrevious<Wallet | null>(wallet);
   // console.log('wallet from unified wallet context provider ', wallet);
   // Weird quirks for autoConnect to require select and connect
-  const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
   const [nonAutoConnectAttempt, setNonAutoConnectAttempt] = useState(false);
   useEffect(() => {
     if (nonAutoConnectAttempt && !config.autoConnect && wallet?.adapter.name) {
@@ -203,37 +190,7 @@ const UnifiedWalletContextProvider = ({
         walletlistExplanation: config.walletlistExplanation,
       }}
     >
-      {isSmallDevice ? (
-        <Drawer open={showModal} onOpenChange={setShowModal}>
-          <DrawerPortal>
-            <DrawerOverlay className={cn(!isSmallDevice ? 'hidden' : '')} />
-            <DrawerContent className={cn(!isSmallDevice ? 'hidden' : 'h-max')}>
-              {/* <ModalHeader
-                heading={'Connect Wallet'}
-                headingSize={'sm'}
-                onClose={() => setShowModal(false)}
-              /> */}
-              <DrawerBody>
-                <UnifiedWalletModal onClose={() => setShowModal(false)} />
-              </DrawerBody>
-              {/* <DrawerFooter></DrawerFooter> */}
-            </DrawerContent>
-          </DrawerPortal>
-        </Drawer>
-      ) : (
-        <Modal
-          dialogSize="md"
-          open={showModal}
-          onClose={() => setShowModal(false)}
-        >
-          {/* <ModalHeader
-            heading={'Connect Wallet'}
-            headingSize={'sm'}
-            onClose={() => setShowModal(false)}
-          /> */}
-          <UnifiedWalletModal onClose={() => setShowModal(false)} />
-        </Modal>
-      )}
+      <WalletModal showModal={showModal} setShowModal={setShowModal} />
       {children}
     </UnifiedWalletContext.Provider>
   );

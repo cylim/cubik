@@ -64,9 +64,9 @@ const main = async () => {
 
 main()
   .then(() => {
-    logger.info('App started '+ new Date().toISOString());
+    logger.info('App started ' + new Date().toISOString());
   })
   .catch((err) => {
-    logger.error('App failed '+ new Date().toISOString());
+    logger.error('App failed ' + new Date().toISOString());
     logger.error(err.stack);
   });

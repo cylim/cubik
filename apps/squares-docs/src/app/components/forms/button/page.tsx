@@ -27,7 +27,7 @@ const ButtonPage = () => {
           <CodeComponent codeString='import { Button } from "@cubik/ui"' />
         </div>
         <div className="flex flex-col justify-center gap-20">
-          <Button type="primary" size="xl">
+          <Button type="primary" size="xl" disabled={true}>
             Button
           </Button>
           {/* <Button type="primary" size="lg">
@@ -47,6 +47,9 @@ const ButtonPage = () => {
             Button
           </Button>
           <Button type="tertiary" size="xl">
+            Button
+          </Button>
+          <Button type="link" size="xl">
             Button
           </Button>
           <Button type="danger" size="xl">

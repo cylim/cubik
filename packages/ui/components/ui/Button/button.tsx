@@ -6,7 +6,7 @@ import { iconLibrary } from '../../../icons/iconLibrary';
 import { cn } from '../../../lib/utils';
 import { Text } from '../text/text';
 
-const bgVariants = cva('fit-content', {
+const bgVariants = cva('', {
   variants: {
     variant: {
       primary:
@@ -97,7 +97,7 @@ const Button = ({
     <button
       className={cn(
         bgVariants({ variant, size }),
-        'rounded-md flex items-center justify-center gap-1  px-[12px]',
+        'rounded-md flex items-center justify-center w-[fit-content] gap-1 px-[12px] ',
         className,
       )}
       {...props}

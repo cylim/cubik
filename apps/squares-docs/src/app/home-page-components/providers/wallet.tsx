@@ -11,7 +11,7 @@ import * as AllWalletAdapters from '@solana/wallet-adapter-wallets';
 import {
   HARDCODED_WALLET_STANDARDS,
   UnifiedWalletProvider,
-  WalletAdapterWithMutableSupportedTransactionVersions
+  WalletAdapterWithMutableSupportedTransactionVersions,
 } from '@cubik/wallet-connect';
 
 export const MWA_NOT_FOUND_ERROR = 'MWA_NOT_FOUND_ERROR';

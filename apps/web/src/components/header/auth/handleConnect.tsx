@@ -4,7 +4,11 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useUser } from '@/hooks/useUser';
 import { handleLogout } from '@/utils/auth/logout';
-import { useUnifiedWalletContext, useWallet } from '@/utils/wallet';
+import {
+  UnifiedWalletButton,
+  useUnifiedWalletContext,
+  useWallet,
+} from '@/utils/wallet';
 
 import { Button, Spinner } from '@cubik/ui';
 
@@ -97,11 +101,7 @@ export const WalletConnect = () => {
   }, [publicKey]);
 
   if (!connected && !publicKey && !user) {
-    return (
-      <Button variant="primary" size="md" onClick={() => setShowModal(true)}>
-        Login
-      </Button>
-    );
+    return <UnifiedWalletButton />;
   }
   if (connected && publicKey && !user && isLoading) {
     return (

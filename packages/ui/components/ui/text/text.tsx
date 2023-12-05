@@ -1,5 +1,6 @@
 import React from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
+import { ClassValue } from 'clsx';
 
 import { cn } from '../../../lib/utils';
 
@@ -19,7 +20,7 @@ const headingVariant = cva('', {
 
 interface TextProps extends VariantProps<typeof headingVariant> {
   children: React.ReactNode;
-  className?: string;
+  className?: ClassValue;
 }
 
 const Text: React.FC<TextProps> = ({ children, color, className }) => {

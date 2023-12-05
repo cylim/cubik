@@ -84,6 +84,7 @@ const Button = ({
   size,
   disabled = false,
   className,
+  ...props
 }: ButtonProps) => {
   return (
     <button
@@ -93,6 +94,7 @@ const Button = ({
         className,
       )}
       disabled={disabled}
+      {...props}
     >
       <Icon
         name="plus"

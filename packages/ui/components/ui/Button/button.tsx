@@ -7,7 +7,7 @@ import { Text } from '../text/text';
 
 const bgVariants = cva('fit-content', {
   variants: {
-    type: {
+    variant: {
       primary:
         'bg-[var(--button-primary-surface-default)] hover:bg-[var(--button-primary-surface-hovered)] !text-[var(--button-primary-text-default)] hover:!text-[var(--button-primary-text-hovered)] !stroke-[var(--button-primary-text-default)] hover:!stroke-[var(--button-primary-text-hovered)] focus:border-2 focus:border-[var(--button-primary-border-focused)] focus:!text-[var(--button-primary-text-focused)] disabled:bg-[var(--button-primary-surface-disabled)] disabled:!text-[var(--button-primary-text-disabled)] disabled:!stroke-[var(--button-primary-text-disabled)] disabled:cursor-not-allowed',
       secondary:
@@ -30,14 +30,14 @@ const bgVariants = cva('fit-content', {
     },
   },
   defaultVariants: {
-    type: 'primary',
+    variant: 'primary',
     size: 'md',
   },
 });
 
 const buttonVariants = cva('', {
   variants: {
-    type: {
+    variant: {
       primary: 'stroke-inherit l2-heavy',
       secondary: 'stroke-[var(--button-secondary-text-default)] l2-heavy',
       outline:
@@ -52,7 +52,7 @@ const buttonVariants = cva('', {
     },
   },
   defaultVariants: {
-    type: 'primary',
+    variant: 'primary',
   },
 });
 
@@ -75,14 +75,22 @@ interface ButtonProps
     VariantProps<typeof bgVariants> {
   children: React.ReactNode;
   disabled?: boolean;
+  className?: string;
 }
 
-const Button = ({ children, type, size, disabled = false }: ButtonProps) => {
+const Button = ({
+  children,
+  variant,
+  size,
+  disabled = false,
+  className,
+}: ButtonProps) => {
   return (
     <button
       className={cn(
-        bgVariants({ type, size }),
+        bgVariants({ variant, size }),
         'rounded-md flex items-center justify-center gap-1  px-[12px] w-[120px]',
+        className,
       )}
       disabled={disabled}
     >
@@ -91,9 +99,9 @@ const Button = ({ children, type, size, disabled = false }: ButtonProps) => {
         stroke="#000"
         height={16}
         width={16}
-        className={cn(buttonVariants({ type }), iconVariants({ size }))}
+        className={cn(buttonVariants({ variant }), iconVariants({ size }))}
       />
-      <Text className={buttonVariants({ type })} color="inherit">
+      <Text className={buttonVariants({ variant })} color="inherit">
         {children}
       </Text>
       <Icon
@@ -101,10 +109,10 @@ const Button = ({ children, type, size, disabled = false }: ButtonProps) => {
         stroke="#000"
         height={16}
         width={16}
-        className={buttonVariants({ type })}
+        className={buttonVariants({ variant })}
       />
     </button>
   );
 };
 
-export default Button;
+export { Button };

@@ -4,7 +4,7 @@ import React from 'react';
 import CodeComponent from '@/app/home-page-components/code-component';
 import PageHOC from '@/app/home-page-components/components/pageHOC';
 
-import Button from '@cubik/ui/components/ui/Button/button';
+import { Button } from '@cubik/ui';
 
 // import { Button } from '@cubik/ui';
 
@@ -27,35 +27,35 @@ const ButtonPage = () => {
           <CodeComponent codeString='import { Button } from "@cubik/ui"' />
         </div>
         <div className="flex flex-col justify-center gap-20">
-          <Button type="primary" size="xl" disabled={true}>
+          <Button variant="primary" size="xl" disabled={true}>
             Button
           </Button>
-          {/* <Button type="primary" size="lg">
+          {/* <Button variant="primary" size="lg">
             Button
           </Button>
-          <Button type="primary" size="md">
+          <Button variant="primary" size="md">
             Button
           </Button>
-          <Button type="primary" size="sm">
+          <Button variant="primary" size="sm">
             Button
           </Button> */}
 
-          <Button type="secondary" size="xl">
+          <Button variant="secondary" size="xl">
             Button
           </Button>
-          <Button type="outline" size="xl">
+          <Button variant="outline" size="xl">
             Button
           </Button>
-          <Button type="tertiary" size="xl">
+          <Button variant="tertiary" size="xl">
             Button
           </Button>
-          <Button type="link" size="xl">
+          <Button variant="link" size="xl">
             Button
           </Button>
-          <Button type="danger" size="xl">
+          <Button variant="danger" size="xl">
             Button
           </Button>
-          <Button type="success" size="xl">
+          <Button variant="success" size="xl">
             Button
           </Button>
         </div>

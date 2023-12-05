@@ -1,5 +1,6 @@
 import React from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
+import { iconLibrary } from 'icons/iconLibrary';
 
 import { Icon } from '../../../icons/icon';
 import { cn } from '../../../lib/utils';
@@ -79,12 +80,16 @@ interface ButtonProps
     VariantProps<typeof bgVariants> {
   children: React.ReactNode;
   className?: string;
+  leftIconName?: keyof typeof iconLibrary;
+  rightIconName?: keyof typeof iconLibrary;
 }
 
 const Button = ({
   children,
   variant,
   size,
+  leftIconName,
+  rightIconName,
   className,
   ...props
 }: ButtonProps) => {
@@ -97,23 +102,27 @@ const Button = ({
       )}
       {...props}
     >
-      <Icon
-        name="plus"
-        stroke="#000"
-        height={16}
-        width={16}
-        className={cn(buttonVariants({ variant }), iconVariants({ size }))}
-      />
+      {leftIconName && (
+        <Icon
+          name={leftIconName}
+          stroke="#000"
+          height={16}
+          width={16}
+          className={cn(buttonVariants({ variant }), iconVariants({ size }))}
+        />
+      )}
       <Text className={buttonVariants({ variant })} color="inherit">
         {children}
       </Text>
-      <Icon
-        name="plus"
-        stroke="#000"
-        height={16}
-        width={16}
-        className={buttonVariants({ variant })}
-      />
+      {rightIconName && (
+        <Icon
+          name={rightIconName}
+          stroke="#000"
+          height={16}
+          width={16}
+          className={buttonVariants({ variant })}
+        />
+      )}
     </button>
   );
 };

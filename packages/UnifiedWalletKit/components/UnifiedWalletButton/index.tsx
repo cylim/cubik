@@ -27,15 +27,9 @@ export const UnifiedWalletButton: React.FC<{
   const content = (
     <>
       {connecting && <Button>Connecting...</Button>}
-      {/* Mobile */}
-      {!connecting && (
-        <Button variant="primary" size="md">
-          Connect
-        </Button>
-      )}
       {/* Desktop */}
       {!connecting && (
-        <Button variant="primary" size="md">
+        <Button variant="primary" size="lg">
           Connect Wallet
         </Button>
       )}
@@ -60,10 +54,7 @@ export const UnifiedWalletButton: React.FC<{
   return (
     <>
       {!wallet?.adapter.connected ? (
-        <div
-          className={`${className} border border-red-500`}
-          onClick={handleClick}
-        >
+        <div className={`${className}`} onClick={handleClick}>
           {overrideContent || content}
         </div>
       ) : (

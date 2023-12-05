@@ -36,3 +36,6 @@ export * from './components/ui/Subhead';
 export * from './hooks/useTheme';
 export * from './hooks/useTokenPrice';
 export * from './components/ui/Spinner';
+export * from './components/ui/Logo';
+export * from './components/ui/Navbar';
+export * from './components/ui/Skeleton';

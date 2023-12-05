@@ -3,9 +3,9 @@ import * as Dialog from '@radix-ui/react-dialog';
 
 import { cn } from '../../../lib/utils';
 
-const DialogSize = {
+export const DialogSize = {
   sm: 'max-w-[320px]',
-  md: 'max-w-[480px]',
+  md: 'max-w-[500px]',
   lg: 'max-w-[600px]',
 };
 
@@ -28,7 +28,7 @@ export const Modal = ({
         <Dialog.Portal>
           <Dialog.Overlay
             onClick={onClose}
-            className="bg-black/70 data-[state=open]:animate-overlayShow fixed inset-0"
+            className="bg-black/75 data-[state=open]:animate-overlayShow fixed inset-0"
           />
           <Dialog.Content
             className={cn(

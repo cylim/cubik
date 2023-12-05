@@ -42,12 +42,12 @@ const Username = ({ isLoading, username, size }: usernameProps) => {
         size === 'xs'
           ? { base: '2px', sm: '3px', md: '4px' }
           : size === 'sm'
-            ? { base: '2px', sm: '3px', md: '6px' }
-            : size === 'md'
-              ? { base: '4px', sm: '5px', md: '6px' }
-              : size === 'lg'
-                ? { base: '6px', sm: '7px', md: '8px' }
-                : { base: '4px', sm: '5px', md: '6px' }
+          ? { base: '2px', sm: '3px', md: '6px' }
+          : size === 'md'
+          ? { base: '4px', sm: '5px', md: '6px' }
+          : size === 'lg'
+          ? { base: '6px', sm: '7px', md: '8px' }
+          : { base: '4px', sm: '5px', md: '6px' }
       }
     >
       <Skeleton
@@ -62,24 +62,24 @@ const Username = ({ isLoading, username, size }: usernameProps) => {
             size === 'xs'
               ? { base: 'title6', sm: 'title5', md: 'title4' }
               : size === 'sm'
-                ? { base: 'title5', sm: 'title4', md: 'title3' }
-                : size === 'md'
-                  ? { base: 'title4', sm: 'title3', md: 'title2' }
-                  : size === 'lg'
-                    ? { base: 'title3', sm: 'title2', md: 'title1' }
-                    : { base: 'title4', sm: 'title3', md: 'title2' }
+              ? { base: 'title5', sm: 'title4', md: 'title3' }
+              : size === 'md'
+              ? { base: 'title4', sm: 'title3', md: 'title2' }
+              : size === 'lg'
+              ? { base: 'title3', sm: 'title2', md: 'title1' }
+              : { base: 'title4', sm: 'title3', md: 'title2' }
           }
           //  border="1px dashed"
           borderColor={
             size === 'xs'
               ? { base: 'green', sm: 'blue', md: 'red' }
               : size === 'sm'
-                ? { base: 'purple', sm: 'blue', md: 'white' }
-                : size === 'md'
-                  ? { base: 'pink', sm: 'red', md: 'purple' }
-                  : size === 'lg'
-                    ? { base: 'pink', sm: 'white', md: 'green' }
-                    : { base: 'yellow', sm: 'yellow', md: 'yellow' }
+              ? { base: 'purple', sm: 'blue', md: 'white' }
+              : size === 'md'
+              ? { base: 'pink', sm: 'red', md: 'purple' }
+              : size === 'lg'
+              ? { base: 'pink', sm: 'white', md: 'green' }
+              : { base: 'yellow', sm: 'yellow', md: 'yellow' }
           }
           color={'neutral.11'}
         >

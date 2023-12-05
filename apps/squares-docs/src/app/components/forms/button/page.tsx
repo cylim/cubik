@@ -26,26 +26,6 @@ const ButtonPage = () => {
         </div>
         <div className="flex justify-center gap-20">
           <div className="flex w-fit flex-col justify-start gap-10">
-            <Button size="xs" variant="primary">
-              Hello World
-            </Button>
-            <Button size="xs" variant="secondary">
-              Hello World
-            </Button>
-            <Button size="xs" variant="outline">
-              Hello World
-            </Button>
-            <Button size="xs" variant="link">
-              Hello World
-            </Button>
-            <Button size="xs" variant="danger">
-              Hello World
-            </Button>
-            <Button size="xs" variant="success">
-              Hello World
-            </Button>
-          </div>
-          <div className="flex w-fit flex-col justify-start gap-10">
             <Button size="sm" variant="primary">
               Hello World
             </Button>

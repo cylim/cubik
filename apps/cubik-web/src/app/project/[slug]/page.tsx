@@ -39,8 +39,9 @@ export async function generateMetadata(
     Buffer.from(project?.shortDescription ?? 'default'),
   )}&logo=${utils.bytes.base64.encode(
     Buffer.from(project?.logo ?? 'default'),
-  )}&contributors=${contributors}&comments=${project?._count
-    .comments}&eventName=${eventName}`;
+  )}&contributors=${contributors}&comments=${
+    project?._count.comments
+  }&eventName=${eventName}`;
 
   const previousImages = (await parent)?.openGraph?.images ?? [];
 

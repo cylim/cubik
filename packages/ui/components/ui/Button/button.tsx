@@ -1,8 +1,8 @@
 import React from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
-import { iconLibrary } from 'icons/iconLibrary';
 
 import { Icon } from '../../../icons/icon';
+import { iconLibrary } from '../../../icons/iconLibrary';
 import { cn } from '../../../lib/utils';
 import { Text } from '../text/text';
 

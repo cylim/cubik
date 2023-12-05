@@ -76,6 +76,7 @@ interface ButtonProps
   children: React.ReactNode;
   disabled?: boolean;
   className?: string;
+  onClick: () => void;
 }
 
 const Button = ({
@@ -84,6 +85,7 @@ const Button = ({
   size,
   disabled = false,
   className,
+  onClick,
   ...props
 }: ButtonProps) => {
   return (
@@ -94,6 +96,7 @@ const Button = ({
         className,
       )}
       disabled={disabled}
+      onClick={onClick}
       {...props}
     >
       <Icon

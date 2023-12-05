@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Button } from '@cubik/ui';
+import { Button, Text } from '@cubik/ui';
 
 import { HARDCODED_WALLET_STANDARDS } from '../../misc/constants';
 import ExternalIcon from '../icons/ExternalIcon';
@@ -78,56 +78,44 @@ export const OnboardingFlow = () => {
   const [state, setState] = useState<IOnboardingFlow>('Onboarding');
   if (state === 'Onboarding') {
     return (
-      <div className="px-6 flex justify-center items-center flex-col gap-6">
-        <img
-          alt="something"
-          src="https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d1513aa9-d2b4-482f-8091-5c21aa68c000/public"
-        />
-        <div className="flex justify-center items-center flex-col">
-          <h1 className="text-[16px] text-[var(--color-fg-primary-depth)]">
-            No Solana Wallet Found?
-          </h1>
-          <p className="text-[var(--color-fg-primary-subdued)] text-[14px]">
-            Wallet is an essential utility that lets you explore and participate
-            in the fast evolving world of web3. Get a Solana wallet or
-            <span
-              style={{
-                color: 'var(--color-blue-500)',
-              }}
-              className="px-2 pointer-events-auto cursor-pointer"
-              onClick={() => setState('Copy Wallet')}
-            >
-              Open inside a wallet
-            </span>
-          </p>
+      <div className="flex justify-center gap-8 md:gap-14 items-center flex-col px-4 md:px-8">
+        <div
+          className="flex flex-col justify-center items-center gap-4"
+          color="secondary"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            alt="Solana Ledger"
+            style={{ height: 'clamp(110px, 20vw, 150px)', width: 'full' }}
+            src="https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/d1513aa9-d2b4-482f-8091-5c21aa68c000/public"
+          />
+          <div className="flex justify-center items-center text-center flex-col gap-2">
+            <Text className="h4 md:h5" color="primary">
+              No Solana Wallet Found?
+            </Text>
+            <Text className="b2-light md:b3-light text-center" color="tertiary">
+              Wallet is an essential utility that lets you explore and
+              participate in the fast evolving world of web3. Get a Solana
+              wallet or{' '}
+              <a
+                className="text-[var(--color-fg-info-base)]"
+                onClick={() => setState('Copy Wallet')}
+              >
+                Open inside a wallet
+              </a>
+            </Text>
+          </div>
         </div>
-        <div className="flex justify-center items-center flex-col w-full">
+        <div className="flex justify-center gap-3 items-center flex-col w-full pb-12">
           <Button
             onClick={() => setState('Get Wallet')}
             variant={'secondary'}
-            size={'xl'}
-            className="pointer-events-auto"
+            size="lg"
+            className="pointer-events-auto w-full"
           >
-            <div className="flex justify-center items-center font-normal gap-1">
-              <p>Get a Wallet</p>
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 17 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M6.5 12C7.95386 10.9486 9.2576 9.71803 10.3781 8.34007C10.5406 8.1402 10.5406 7.85977 10.3781 7.6599C9.2576 6.28194 7.95386 5.05132 6.5 3.99998"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
+            Get a Wallet
           </Button>
-          <Button variant={'link'} size={'xl'}>
+          <Button variant={'link'} size={'lg'}>
             Learn More
           </Button>
         </div>
@@ -143,42 +131,31 @@ export const OnboardingFlow = () => {
   }
   if (state === 'Copy Wallet') {
     return (
-      <div className="px-6 flex justify-center items-center flex-col gap-6">
-        <img
-          alt="something"
-          src="https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/4c14abdb-7e20-4c81-fe3c-0d210c0c7a00/public"
-        />
-        <div className="flex justify-center items-center flex-col">
-          <h1 className="text-[16px] text-[var(--color-fg-primary-depth)]">
-            Open any Wallet app
-          </h1>
-          <p className="text-[var(--color-fg-primary-subdued)] text-[14px]">
-            Open any wallet app and navigate to the in app browser of the
-            wallet. Paste the copied url and you should be good to go.
-          </p>
+      <div className="flex justify-center gap-8 md:gap-14 items-center flex-col px-4 md:px-8">
+        <div
+          className="flex flex-col justify-center items-center gap-4"
+          color="secondary"
+        >
+          <img
+            alt="Solana Mobile - Saga"
+            style={{ height: 'clamp(100px, 20vw, 130px)', width: 'full' }}
+            src="https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/4c14abdb-7e20-4c81-fe3c-0d210c0c7a00/public"
+          />
+          <div className="flex justify-center items-center text-center flex-col gap-2">
+            <Text className="h4 md:h5" color="primary">
+              Open any Wallet app
+            </Text>
+            <Text className="b2-light md:b3-light text-center" color="tertiary">
+              Open any wallet app and navigate to the in app browser of the
+              wallet. Paste the copied url and you should be good to go.
+            </Text>
+          </div>
         </div>
-        <div className="flex justify-center items-center flex-col w-full">
-          <Button variant={'secondary'} size={'xl'}>
-            <div className="flex justify-center text-white items-center font-normal gap-1">
-              <p>Link copied</p>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M11.2679 11.2679C11.425 11.2446 11.5649 11.213 11.6967 11.1702C12.7115 10.8405 13.5071 10.0449 13.8369 9.03006C14 8.52795 14 7.90752 14 6.66667C14 5.42581 14 4.80539 13.8369 4.30328C13.5071 3.28848 12.7115 2.49287 11.6967 2.16314C11.1946 2 10.5742 2 9.33333 2C8.09248 2 7.47205 2 6.96994 2.16314C5.95515 2.49287 5.15954 3.28848 4.82981 4.30328C4.787 4.43505 4.75542 4.57498 4.73212 4.73212M11.2679 11.2679C11.3333 10.8262 11.3333 10.2485 11.3333 9.33333C11.3333 8.09248 11.3333 7.47205 11.1702 6.96994C10.8405 5.95515 10.0449 5.15954 9.03006 4.82981C8.52795 4.66667 7.90752 4.66667 6.66667 4.66667C5.75147 4.66667 5.17377 4.66667 4.73212 4.73212M11.2679 11.2679C11.2446 11.425 11.213 11.5649 11.1702 11.6967C10.8405 12.7115 10.0449 13.5071 9.03006 13.8369C8.52795 14 7.90752 14 6.66667 14C5.42581 14 4.80539 14 4.30328 13.8369C3.28848 13.5071 2.49287 12.7115 2.16314 11.6967C2 11.1946 2 10.5742 2 9.33333C2 8.09248 2 7.47205 2.16314 6.96994C2.49287 5.95515 3.28848 5.15954 4.30328 4.82981C4.43505 4.787 4.57498 4.75542 4.73212 4.73212M4.66667 9.50578L6.02414 10.8618C6.67703 9.72016 7.58058 8.74164 8.66667 8"
-                  stroke="currentColor"
-                  strokeWidth={1}
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </div>
+        <div className="flex justify-center gap-3 items-center flex-col w-full">
+          <Button variant={'secondary'} size={'lg'} className="w-full">
+            Link copied
           </Button>
-          <Button variant={'link'} size={'xl'}>
+          <Button variant={'link'} size={'lg'} className="w-full">
             Get a Wallet
           </Button>
         </div>

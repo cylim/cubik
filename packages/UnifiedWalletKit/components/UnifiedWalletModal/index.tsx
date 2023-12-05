@@ -7,7 +7,7 @@ import {
 } from '@solana/wallet-adapter-base';
 import { useToggle } from 'react-use';
 
-import { AvatarGroup, Icon } from '@cubik/ui';
+import { AvatarGroup, Icon, Text } from '@cubik/ui';
 import { cn } from '@cubik/ui/lib/utils';
 
 import {
@@ -29,8 +29,10 @@ const ListOfWallets: React.FC<{
   };
   onToggle: (nextValue?: any) => void;
   isOpen: boolean;
+  // setshowheader takes in boolean
+  setShowHeader: (show: boolean) => void;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-}> = ({ list, onToggle, isOpen }) => {
+}> = ({ list, onToggle, isOpen, setShowHeader }) => {
   const [showMore, setShowMore] = useState<boolean>(false);
   const { handleConnectClick, walletlistExplanation } =
     useUnifiedWalletContext();
@@ -69,6 +71,7 @@ const ListOfWallets: React.FC<{
   }, [hasNoWallets]);
 
   if (showOnboarding) {
+    setShowHeader(false);
     return <OnboardingFlow />;
   }
 
@@ -76,8 +79,12 @@ const ListOfWallets: React.FC<{
     <>
       <div
         style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+          display: 'flex',
+          flexWrap: isSmallDevice ? 'nowrap' : 'wrap',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+          overflowY: 'scroll',
+          paddingTop: '24px',
         }}
       >
         {list.highlight.map((adapter, idx) => {
@@ -111,11 +118,15 @@ const ListOfWallets: React.FC<{
         {list.others.length > 0 && (
           <>
             <div
-              className={cn(
-                showMore
-                  ? 'hidden'
-                  : 'pointer-events-auto flex justify-center items-center',
-              )}
+              style={{
+                minWidth: 'clamp(84px,10vw,123px)',
+                minHeight: 'clamp(108px,10vw,120px)',
+                display: showMore ? 'hidden' : 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'column',
+                gap: '8px',
+              }}
               onClick={() => setShowMore(true)}
             >
               <AvatarGroup
@@ -129,8 +140,12 @@ const ListOfWallets: React.FC<{
                   })}
                 shape="square"
                 variant="squared-horizontal"
+                size="sm"
                 maxCount={3}
               />
+              <Text className="b2 md:b3-light" color="primary">
+                More
+              </Text>
             </div>
           </>
         )}
@@ -140,7 +155,9 @@ const ListOfWallets: React.FC<{
           onClick={() => setShowMore(false)}
           className="text-xs flex justify-center items-center w-full font-semibold mt-4 pointer-events-auto -mb-2 text-white underline cursor-pointer"
         >
-          <span>Show Less</span>
+          <Text className="b2 md:b3-light" color="primary">
+            View Less
+          </Text>
         </div>
       )}
     </>
@@ -176,6 +193,7 @@ const TOP_WALLETS: WalletName[] = [
 
 interface IUnifiedWalletModal {
   onClose: () => void;
+  setShowHeader: (show: boolean) => void;
 }
 
 const sortByPrecedence =
@@ -251,7 +269,9 @@ const UnifiedWalletModalFooter: React.FC = () => {
     </div>
   );
 };
-const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = () => {
+const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = ({
+  setShowHeader,
+}) => {
   const { wallets } = useUnifiedWallet();
   const { walletPrecedence } = useUnifiedWalletContext();
   const [isOpen, onToggle] = useToggle(false);
@@ -362,12 +382,28 @@ const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = () => {
       .sort(sortByPrecedence(walletPrecedence || []));
     return { highlightedBy: 'TopWallet', highlight: top3, others };
   }, [wallets, previouslyConnected]);
-  console.log('----', list);
+
   return (
-    <div className="py-6 flex flex-col gap-6">
-      <ListOfWallets list={list} onToggle={onToggle} isOpen={isOpen} />
-      <div className="w-full h-[1px] bg-[var(--color-border-primary-base)]" />
-      {list.highlightedBy !== 'TopWallet' && <UnifiedWalletModalFooter />}
+    <div className="flex flex-col gap-6">
+      <ListOfWallets
+        list={list}
+        onToggle={onToggle}
+        setShowHeader={setShowHeader}
+        isOpen={isOpen}
+      />
+
+      {list.highlightedBy !== 'TopWallet' && (
+        <div className="flex flex-col gap-6">
+          <div
+            style={{
+              height: '1px',
+              background: 'var(--color-border-primary-base)',
+            }}
+          />
+          <UnifiedWalletModalFooter />
+        </div>
+      )}
+      <div className="h-48px" />
     </div>
   );
 };

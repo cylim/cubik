@@ -7,7 +7,8 @@ const headingVariant = cva('', {
   variants: {
     color: {
       primary: 'text-[var(--color-fg-primary-depth)]',
-      secondary: 'text-[var(--color-fg-primary-subdued)]',
+      secondary: 'text-[var(--color-fg-primary-base)]',
+      tertiary: 'text-[var(--color-fg-primary-subdued)]',
       inherit: '',
     },
   },

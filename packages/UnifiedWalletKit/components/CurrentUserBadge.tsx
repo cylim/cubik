@@ -1,9 +1,10 @@
 import React, { useMemo } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 
+import { Avatar } from '@cubik/ui';
+
 import { useAccounts } from '../contexts/accounts';
 import { WRAPPED_SOL_MINT } from '../misc/constants';
-import { shortenAddress } from '../misc/utils';
 
 export const CurrentUserBadge: React.FC<{
   onClick?: () => void;
@@ -25,20 +26,16 @@ export const CurrentUserBadge: React.FC<{
   }
 
   return (
-    <div onClick={onClick} className={className}>
-      <div style={{ position: 'relative' }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          alt="Wallet logo"
-          width={16}
-          height={16}
-          src={wallet?.adapter?.icon}
-        />
-      </div>
-
-      <div>
-        <div>{shortenAddress(`${publicKey}`)}</div>
-      </div>
+    <div
+      onClick={onClick}
+      className={`${className} flex justify-center items-center border border-red-500`}
+    >
+      <Avatar
+        variant={'circle'}
+        src={wallet?.adapter?.icon}
+        size={'md'}
+        alt={'wallet logo'}
+      />
     </div>
   );
 };

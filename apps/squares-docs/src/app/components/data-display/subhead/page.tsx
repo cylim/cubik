@@ -55,7 +55,6 @@ const SubHeadPage = () => {
                 Hello world
               </Button>
             }
-            size="md"
             heading="heading"
             subheading="this is a subheading"
           />

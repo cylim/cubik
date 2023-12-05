@@ -71,32 +71,30 @@ const iconVariants = cva('', {
 });
 
 interface ButtonProps
-  extends VariantProps<typeof buttonVariants>,
+  extends React.DetailedHTMLProps<
+      React.ButtonHTMLAttributes<HTMLButtonElement>,
+      HTMLButtonElement
+    >,
+    VariantProps<typeof buttonVariants>,
     VariantProps<typeof bgVariants> {
   children: React.ReactNode;
-  disabled?: boolean;
   className?: string;
-  onClick: () => void;
 }
 
 const Button = ({
   children,
   variant,
   size,
-  disabled = false,
   className,
-  onClick,
   ...props
 }: ButtonProps) => {
   return (
     <button
       className={cn(
         bgVariants({ variant, size }),
-        'rounded-md flex items-center justify-center gap-1  px-[12px] w-[120px]',
+        'rounded-md flex items-center justify-center gap-1  px-[12px]',
         className,
       )}
-      disabled={disabled}
-      onClick={onClick}
       {...props}
     >
       <Icon

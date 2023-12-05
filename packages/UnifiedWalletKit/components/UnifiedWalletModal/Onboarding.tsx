@@ -105,7 +105,7 @@ export const OnboardingFlow = () => {
           <Button
             onClick={() => setState('Get Wallet')}
             variant={'secondary'}
-            size={'full'}
+            size={'xl'}
             className="pointer-events-auto"
           >
             <div className="flex justify-center items-center font-normal gap-1">
@@ -127,7 +127,7 @@ export const OnboardingFlow = () => {
               </svg>
             </div>
           </Button>
-          <Button variant={'link'} size={'full'}>
+          <Button variant={'link'} size={'xl'}>
             Learn More
           </Button>
         </div>
@@ -158,7 +158,7 @@ export const OnboardingFlow = () => {
           </p>
         </div>
         <div className="flex justify-center items-center flex-col w-full">
-          <Button variant={'secondary'} size={'full'}>
+          <Button variant={'secondary'} size={'xl'}>
             <div className="flex justify-center text-white items-center font-normal gap-1">
               <p>Link copied</p>
               <svg
@@ -178,7 +178,7 @@ export const OnboardingFlow = () => {
               </svg>
             </div>
           </Button>
-          <Button variant={'link'} size={'full'}>
+          <Button variant={'link'} size={'xl'}>
             Get a Wallet
           </Button>
         </div>

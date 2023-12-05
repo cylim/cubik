@@ -11,7 +11,7 @@ import {
 } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { toast } from 'sonner';
 
-import { useTheme } from '@cubik/ui';
+import { Button, Icon, useTheme } from '@cubik/ui';
 
 interface Props {
   codeString?: string;
@@ -34,24 +34,23 @@ const CodeComponent = ({ codeString }: { codeString: string }) => {
   };
 
   const CopyButton = () => (
-    // <Button
-    //   size="sm"
-    //   onClick={() => {
-    //     navigator.clipboard.writeText(codeString);
-    //     toast.success('Copied to clipboard!');
-    //   }}
-    //   variant="outline"
-    // >
-    //   <Icon
-    //     name="copy"
-    //     strokeWidth={2}
-    //     width={20}
-    //     height={20}
-    //     stroke="var(--color-fg-primary)"
-    //     fill="transparent"
-    //   />
-    // </Button>
-    <button>dsffds</button>
+    <Button
+      size="sm"
+      onClick={() => {
+        navigator.clipboard.writeText(codeString);
+        toast.success('Copied to clipboard!');
+      }}
+      variant="outline"
+    >
+      <Icon
+        name="copy"
+        strokeWidth={2}
+        width={20}
+        height={20}
+        stroke="var(--color-fg-primary)"
+        fill="transparent"
+      />
+    </Button>
   );
 
   return (

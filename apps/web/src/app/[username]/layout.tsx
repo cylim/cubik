@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 
 import { prisma } from '@cubik/database';
+import { ProfileCard } from '@cubik/ui';
 
 const getProfile = async (username: string) => {
   return await prisma.user.findUnique({
@@ -22,7 +23,6 @@ const Profile = async ({
   params: { username: string };
   children: React.ReactNode;
 }) => {
-  console.log(username);
   const profile = await getProfile(username);
 
   if (!profile) {
@@ -32,7 +32,13 @@ const Profile = async ({
   return (
     <div>
       <div>
-        {username}
+        <div className="w-full bg-[var(--body-surface)]">
+          <ProfileCard
+            avatar={profile.profilePicture ?? ''}
+            title={username}
+            description="Something Something"
+          />
+        </div>
         {children}
       </div>
     </div>

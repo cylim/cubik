@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { ProfileTabs } from '@/app/[username]/components/tabs';
 
 interface Props {
   params: { username: string };
@@ -20,7 +21,11 @@ export const metadata: Metadata = {
   },
 };
 const Details = ({ params: { username } }: Props) => {
-  return <>Hello world</>;
+  return (
+    <>
+      <ProfileTabs />
+    </>
+  );
 };
 
 export default Details;

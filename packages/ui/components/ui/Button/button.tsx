@@ -1,20 +1,107 @@
 import React from 'react';
+import { cva, VariantProps } from 'class-variance-authority';
 
 import { Icon } from '../../../icons/icon';
+import { cn } from '../../../lib/utils';
 import { Text } from '../text/text';
 
-interface ButtonProps {
+const bgVariants = cva('fit-content', {
+  variants: {
+    type: {
+      primary:
+        'bg-[var(--button-primary-surface-default)] hover:bg-[var(--button-primary-surface-hovered)] !text-[var(--button-primary-text-default)] hover:!text-[var(--button-primary-text-hovered)]',
+      secondary:
+        'bg-[var(--button-secondary-surface-default)] hover:bg-[var(--button-secondary-surface-hovered)] !text-[var(--button-secondary-text-default)] hover:!text-[var(--button-secondary-text-hovered)]',
+      outline:
+        'bg-[var(--button-secondary-outline-default)]  border border-[var(--button-outline-border-default)] hover:bg-[var(--button-outline-surface-hovered)] !text-[var(--button-outline-text-default)] hover:!text-[var(--button-outline-text-hovered)]',
+      tertiary:
+        'bg-[var(--button-tertiary-surface-default)] hover:bg-[var(--button-tertiary-surface-hovered)] !text-[var(--button-tertiary-text-default)] hover:!text-[var(--button-tertiary-text-hovered)]',
+      link: 'bg-transparent hover:bg-transparent !text-[var(--button-link-text-default)] hover:!text-[var(--button-link-text-hovered)]',
+      danger:
+        'bg-[var(--button-danger-surface-default)] hover:bg-[var(--button-danger-surface-hovered)] !text-[var(--button-danger-text-default)] hover:!text-[var(--button-danger-text-hovered)]',
+      success:
+        'bg-[var(--button-success-surface-default)] hover:bg-[var(--button-success-surface-hovered)] !text-[var(--button-success-text-default)] hover:!text-[var(--button-success-text-hovered)]',
+    },
+    size: {
+      xl: 'h-[44px] md:h-[48px]',
+      lg: 'h-[40px] md:h-[44px]',
+      md: 'h-[36px] md:h-[40px]',
+      sm: 'h-[32px] md:h-[36px]',
+    },
+  },
+  defaultVariants: {
+    type: 'primary',
+    size: 'md',
+  },
+});
+
+const buttonVariants = cva('', {
+  variants: {
+    type: {
+      primary:
+        'stroke-[var(--button-primary-text-default)] hover:stroke-[var(--button-primary-text-hovered)] l2-heavy',
+      secondary: 'stroke-[var(--button-secondary-text-default)] l2-heavy',
+      outline:
+        'stroke-[var(--button-outline-text-default)] !text-[var(--button-outline-text-default)] l2-heavy',
+      tertiary:
+        'stroke-[var(--button-tertiary-text-default)] !text-[var(--button-tertiary-text-default)] l2-heavy',
+      link: 'stroke-[var(--button-link-text-default)] !text-[var(--button-link-text-default)] l2-heavy',
+      danger:
+        'stroke-[var(--button-danger-text-default)] !text-[var(--button-danger-text-default)] l2-heavy',
+      success:
+        'stroke-[var(--button-success-text-default)] !text-[var(--button-success-text-default)] l2-heavy',
+    },
+  },
+  defaultVariants: {
+    type: 'primary',
+  },
+});
+
+const iconVariants = cva('', {
+  variants: {
+    size: {
+      xl: 'h-[16px]',
+      lg: 'h-[16px] ',
+      md: 'h-[16px] ',
+      sm: 'h-[12px] ',
+    },
+  },
+  defaultVariants: {
+    size: 'md',
+  },
+});
+
+interface ButtonProps
+  extends VariantProps<typeof buttonVariants>,
+    VariantProps<typeof bgVariants> {
   children: React.ReactNode;
 }
 
-const Button = ({ children }: ButtonProps) => {
+const Button = ({ children, type, size }: ButtonProps) => {
   return (
-    <button className="bg-gray-200 rounded-md flex items-center justify-center gap-1 h-[48px] px-[12px]">
-      <Icon name="plus" stroke="#000" height={16} width={16} />
-      <Text className="l2-heavy" color="primary">
+    <button
+      className={cn(
+        bgVariants({ type, size }),
+        'rounded-md flex items-center justify-center gap-1  px-[12px] w-[120px]',
+      )}
+    >
+      <Icon
+        name="plus"
+        stroke="#000"
+        height={16}
+        width={16}
+        className={cn(buttonVariants({ type }), iconVariants({ size }))}
+      />
+      <Text className={buttonVariants({ type })} color="inherit">
         {children}
       </Text>
-      <Icon name="plus" stroke="#000" height={16} width={16} />
+      <Icon
+        name="plus"
+        stroke="#000"
+        height={16}
+        width={16}
+        className={buttonVariants({ type })}
+      />
     </button>
   );
 };

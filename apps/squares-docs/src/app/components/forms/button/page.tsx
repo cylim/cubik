@@ -26,8 +26,35 @@ const ButtonPage = () => {
         <div className="border-[var(--color-border-primary) overflow-hidden rounded-[8px] border bg-[var(--white)] px-6 py-4">
           <CodeComponent codeString='import { Button } from "@cubik/ui"' />
         </div>
-        <div className="flex justify-center gap-20">
-          <Button>Button</Button>
+        <div className="flex flex-col justify-center gap-20">
+          <Button type="primary" size="xl">
+            Button
+          </Button>
+          {/* <Button type="primary" size="lg">
+            Button
+          </Button>
+          <Button type="primary" size="md">
+            Button
+          </Button>
+          <Button type="primary" size="sm">
+            Button
+          </Button> */}
+
+          <Button type="secondary" size="xl">
+            Button
+          </Button>
+          <Button type="outline" size="xl">
+            Button
+          </Button>
+          <Button type="tertiary" size="xl">
+            Button
+          </Button>
+          <Button type="danger" size="xl">
+            Button
+          </Button>
+          <Button type="success" size="xl">
+            Button
+          </Button>
         </div>
       </div>
     </PageHOC>

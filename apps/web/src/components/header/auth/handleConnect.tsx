@@ -128,7 +128,16 @@ export const WalletConnect = () => {
 
   return (
     <>
-      <div className="text-white">{user?.username}</div>
+      <div
+        onClick={async () => {
+          setUser(null);
+          await disconnect();
+          await handleLogout();
+        }}
+        className="cursor-pointer text-white"
+      >
+        {user?.username}
+      </div>
       {/* <UserNavbarMenuButton /> */}
     </>
   );

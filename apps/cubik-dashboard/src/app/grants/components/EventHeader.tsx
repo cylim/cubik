@@ -11,7 +11,7 @@ export const EventHeader = () => {
   const { user } = useUser();
   return (
     <>
-      <div className="flex min-h-[12rem] w-full items-center  justify-center">
+      <div className="flex min-h-[12rem] w-full items-center justify-center  bg-[var(--body-surface)]">
         <div className="mx-auto flex h-full w-full max-w-7xl items-center">
           <div className="flex items-center justify-start gap-3">
             <Text color={'primary'} className="h5">

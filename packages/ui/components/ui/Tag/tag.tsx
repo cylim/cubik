@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { FunctionComponent } from 'react';
 import { cva } from 'class-variance-authority';
 
@@ -108,8 +109,6 @@ interface Props {
   size: keyof typeof Size;
   variant: keyof typeof Variants;
   className?: string;
-  onClickPlus?: () => void;
-  onClickCross?: () => void;
 }
 
 export const Tag: FunctionComponent<Props> = ({
@@ -117,16 +116,14 @@ export const Tag: FunctionComponent<Props> = ({
   size,
   variant,
   className,
-  onClickCross,
-  onClickPlus,
 }) => {
   return (
     <div className={cn(tagVariant({ variant, size }), className)}>
-      <div onClick={onClickPlus}>
+      {/* <div onClick={onClickPlus}>
         <Icon name="plus" className={cn(tagIconPlus({ size, variant }))} />
-      </div>
+      </div> */}
       <div className={cn(tagVariant({ size, variant }))}>{children}</div>
-      <div onClick={onClickCross}>
+      {/* <div onClick={onClickCross}>
         <Icon
           name="cross"
           className={cn(
@@ -134,7 +131,7 @@ export const Tag: FunctionComponent<Props> = ({
             tagIconCross({ size }),
           )}
         />
-      </div>
+      </div> */}
     </div>
   );
 };

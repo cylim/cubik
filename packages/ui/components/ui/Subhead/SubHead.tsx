@@ -9,14 +9,14 @@ interface Props {
   heading: string;
   iconName?: keyof typeof iconLibrary;
   leftElement?: React.ReactNode;
-  size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 }
 export const SubHead = ({
   heading,
   subheading,
   leftElement,
   iconName,
-  size,
+  size = 'md',
 }: Props) => {
   return (
     <>

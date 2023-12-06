@@ -67,7 +67,7 @@ export default async function Home() {
           <SubHead
             heading="Collection"
             size="lg"
-            icon={<Icon name="grid" className="fill-none stroke-white" />}
+            iconName="grid"
             leftElement={
               <Link
                 href={'/'}

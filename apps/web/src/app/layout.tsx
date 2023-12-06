@@ -16,7 +16,7 @@ import { cn } from '@cubik/ui/lib/utils';
 
 const APP_NAME = 'Cubik';
 const APP_DEFAULT_TITLE = 'Cubik';
-const APP_TITLE_TEMPLATE = '%s - PWA App';
+const APP_TITLE_TEMPLATE = '';
 const APP_DESCRIPTION = 'The genesis for leading Solana initiatives';
 
 export const metadata: Metadata = {
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport = {
+export const viewport: Viewport = {
   themeColor: '#fff',
 };
 
@@ -67,7 +67,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className="light" lang="en">
+    <html className="dark" lang="en">
       <body
         className={cn(inter.className, 'bg-[var(--color-bg-primary-depth)]')}
       >

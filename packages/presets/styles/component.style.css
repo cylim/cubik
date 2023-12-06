@@ -76,7 +76,6 @@
     --avatar-status-icon: var(--color-fg-info);
     --avatar-status: var(--color-bg-primary);
     --avatar-surface: var(--color-surface-tertiary);
-    --modal-header-surface: var(--color-surface-cool-transparent)
     --button-success-border-focused: var(--green-300);
     --button-success-text-disabled: var(--color-bg-positive-muted);
     --button-success-text-focused: var(--color-bg-positive-base);

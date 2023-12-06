@@ -152,7 +152,6 @@ html[class='light'],:root {
     --color-surface-cool-muted: var(--color-neutral-75);
     --color-surface-cool-emphasis: var(--color-neutral-100);
     --color-surface-cool-base: var(--color-white);
-    --color-surface-cool-transparent: #00000010;
     --color-surface-primary-subdued: var(--color-white-400);
     --color-surface-primary-depth: var(--color-white-50);
     --color-surface-primary-base: var(--color-white);

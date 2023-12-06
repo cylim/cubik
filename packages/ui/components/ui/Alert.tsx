@@ -1,11 +1,11 @@
 import React from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
-import { Text } from 'components/ui/text/text';
 
 import { Icon } from '../../icons/icon';
 import { iconLibrary } from '../../icons/iconLibrary';
 import { cn } from '../../lib/utils';
 import { Button } from './Button/button';
+import { Text } from './text/text';
 
 const alertVariants = cva('', {
   variants: {
@@ -95,7 +95,7 @@ const Alert: React.FC<AlertProps> = ({
   return (
     <div
       className={cn(
-        'flex gap-2  p-3',
+        'flex gap-2 p-2',
         className,
         alertVariants(
           type === 'inline' || type === 'border'
@@ -124,7 +124,6 @@ const Alert: React.FC<AlertProps> = ({
           <Text
             className={cn('l2-light', alertVariants({ titleColor: color }))}
           >
-            {' '}
             {content}
           </Text>
         </div>

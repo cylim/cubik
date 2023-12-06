@@ -6,6 +6,8 @@ import PageHOC from '@/app/home-page-components/components/pageHOC';
 
 import { Button } from '@cubik/ui';
 
+// import { Button } from '@cubik/ui';
+
 const ButtonPage = () => {
   return (
     <PageHOC
@@ -24,47 +26,38 @@ const ButtonPage = () => {
         <div className="border-[var(--color-border-primary) overflow-hidden rounded-[8px] border bg-[var(--white)] px-6 py-4">
           <CodeComponent codeString='import { Button } from "@cubik/ui"' />
         </div>
-        <div className="flex justify-center gap-20">
-          <div className="flex w-fit flex-col justify-start gap-10">
-            <Button size="sm" variant="primary">
-              Hello World
-            </Button>
-            <Button size="sm" variant="secondary">
-              Hello World
-            </Button>
-            <Button size="sm" variant="outline">
-              Hello World
-            </Button>
-            <Button size="sm" variant="link">
-              Hello World
-            </Button>
-            <Button size="sm" variant="danger">
-              Hello World
-            </Button>
-            <Button size="sm" variant="success">
-              Hello World
-            </Button>
-          </div>
-          <div className="flex w-fit flex-col justify-start gap-10">
-            <Button size="md" variant="primary">
-              Hello World
-            </Button>
-            <Button size="md" variant="secondary">
-              Hello World
-            </Button>
-            <Button size="md" variant="outline">
-              Hello World
-            </Button>
-            <Button size="md" variant="link">
-              Hello World
-            </Button>
-            <Button size="md" variant="danger">
-              Hello World
-            </Button>
-            <Button size="md" variant="success">
-              Hello World
-            </Button>
-          </div>
+        <div className="flex flex-col justify-center gap-20">
+          <Button variant="primary" size="xl">
+            Button
+          </Button>
+          {/* <Button variant="primary" size="lg">
+            Button
+          </Button>
+          <Button variant="primary" size="md">
+            Button
+          </Button>
+          <Button variant="primary" size="sm">
+            Button
+          </Button> */}
+
+          <Button variant="secondary" size="xl">
+            Button
+          </Button>
+          <Button variant="outline" size="xl">
+            Button
+          </Button>
+          <Button variant="tertiary" size="xl">
+            Button
+          </Button>
+          <Button variant="link" size="xl">
+            Button
+          </Button>
+          <Button variant="danger" size="xl">
+            Button
+          </Button>
+          <Button variant="success" size="xl">
+            Button
+          </Button>
         </div>
       </div>
     </PageHOC>

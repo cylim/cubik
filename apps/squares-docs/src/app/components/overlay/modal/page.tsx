@@ -28,7 +28,7 @@ const Page = () => {
           <Modal dialogSize="md" onClose={() => setOpen(false)} open={open}>
             <ModalHeader
               heading="this is heading"
-              headingSize="md"
+              size="md"
               onClose={() => setOpen(false)}
             />
             <div className="h-80 w-full bg-red-400"></div>

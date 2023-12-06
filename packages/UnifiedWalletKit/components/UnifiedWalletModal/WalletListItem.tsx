@@ -11,7 +11,7 @@ import React, {
 //import Image from 'next/image';
 import { Adapter } from '@solana/wallet-adapter-base';
 
-import { Avatar } from '@cubik/ui';
+import { Avatar, Text } from '@cubik/ui';
 
 import { useMediaQuery } from '../../hooks/helperHooks';
 import UnknownIconSVG from '../../icons/UnknownIconSVG';
@@ -38,9 +38,17 @@ export const WalletIcon: FC<WalletIconProps> = ({
   if (wallet && wallet.icon) {
     // && !hasError
     return (
-      <div className="w-fit-content  flex items-center justify-center gap-2 px-[16px] py-[12px]">
+      <div
+        style={{
+          minWidth: 'clamp(84px,10vw,123px)',
+          minHeight: 'clamp(108px,10vw,120px)',
+          width: 'full',
+          height: 'full',
+        }}
+        className="flex items-center justify-center gap-2 px-[16px] py-[12px]"
+      >
         <div
-          className="ˀw-fit flex flex-col items-center justify-center gap-2"
+          className="w-fit flex flex-col items-center justify-center gap-2"
           style={{ minWidth: width, minHeight: height }}
         >
           <Avatar alt={wallet.name} src={wallet.icon} size="lg" />
@@ -52,9 +60,9 @@ export const WalletIcon: FC<WalletIconProps> = ({
             alt={`${wallet.name} icon`}
             onError={onError}
           /> */}
-          <p className="text-[var(--color-fg-primary)] line-clamp-1 text-[12px] md:text-[14px]">
+          <Text className="b2 md:b3-light" color="primary">
             {wallet.name}
-          </p>
+          </Text>
         </div>
       </div>
     );

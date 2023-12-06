@@ -1,50 +1,77 @@
 import React from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
+import { cva } from 'class-variance-authority';
 
 import { Icon } from '../../../icons/icon';
 import { cn } from '../../../lib/utils';
+import { Text } from '../text/text';
+import { DialogSize } from './Modal';
 
-export const HeadingSizeStyles = {
-  lg: 'text-[22px]',
-  md: 'text-[20px]',
-  sm: 'text-[18px]',
-  xs: 'text-[14px]',
-};
+const ModalTitleVariants = cva('text-[var(--avatar-label-title)]', {
+  variants: {
+    size: {
+      sm: 'b4-heavy',
+      md: 'h6',
+      lg: 'h5',
+    },
+  },
+  defaultVariants: {
+    size: 'lg',
+  },
+});
+
+const ModalTitleContainerVariants = cva(
+  'pointer-events-auto flex justify-between items-center',
+  {
+    variants: {
+      size: {
+        sm: 'h-[32px] md:h-[40px] px-[16px]',
+        md: 'h-[44px] md:h-[48px] px-[16px] md:px-[24px]',
+        lg: 'h-[48px] md:h-[64px] px-[24px]',
+      },
+    },
+    defaultVariants: {
+      size: 'lg',
+    },
+  },
+);
 
 interface Props {
-  heading: string;
-  headingSize: keyof typeof HeadingSizeStyles;
+  heading?: string;
+  children?: JSX.Element;
+  size?: keyof typeof DialogSize;
   onClose: () => void;
-  // Icon component for heading
-  IconComponent?: React.JSX.Element;
-
-  // Ring SVG background for header
-  RingSVG?: JSX.Element;
+  background?: boolean;
+  className?: string;
 }
 export const ModalHeader = ({
-  IconComponent,
   heading,
-  headingSize,
+  size,
+  className,
+  background,
   onClose,
-  RingSVG,
+  children,
 }: Props) => {
   return (
     <>
-      <Dialog.Title className="pointer-events-auto h-14 relative bg-[var(--color-surface-cool-transparent)] overflow-hidden flex justify-between items-center p-2 md:p-4 m-0 text-[17px] rounded-t-[12px] font-medium">
-        <div className="flex justify-center items-center gap-3">
-          <div className="absolute -left-6">{RingSVG}</div>
-          {IconComponent}
-          <p
-            className={cn(
-              `text-[var(--color-fg-primary)] ${RingSVG && 'ml-12'}`,
-              HeadingSizeStyles[headingSize],
-            )}
-          >
-            {heading}
-          </p>
-        </div>
+      <Dialog.Title
+        className={cn(
+          className,
+          background ? 'var(--modal-header-surface)' : background,
+          ModalTitleContainerVariants({ size }),
+        )}
+      >
+        <Text className={cn(ModalTitleVariants({ size }))}>
+          {heading ? heading : ''}
+        </Text>
+        {children}
         <button className="pointer-events-auto" onClick={onClose}>
-          <Icon name="cross" width={16} height={16} />
+          <Icon
+            name="cross"
+            width={20}
+            stroke="var(--modal-header-cancel-icon)"
+            height={20}
+          />
         </button>
       </Dialog.Title>
     </>

@@ -13,13 +13,12 @@ const avatarVariants = cva('', {
       circle: 'rounded-full',
     },
     size: {
-      xs: 'w-6 h-6',
-      sm: 'w-8 h-8',
-      md: 'w-8 h-8 md:w-10 md:h-10',
-      lg: 'w-[3.375rem] h-[3.375rem]',
-      xl: 'w-16 h-16',
-      '2xl': 'w-20 h-20',
-      '3xl': 'w-[5.875rem] h-[5.875rem]',
+      xs: 'w-[16px] h-[16px] md:w-[24px] md:h-[24px]', // [var(--size-sm)]
+      sm: 'w-[24px] h-[24px] md:w-[32px] md:h-[32px] ',
+      md: 'w-[32px] h-[32px] md:w-[44px] md:h-[44px] ',
+      lg: 'w-[44px] h-[44px] md:w-[56px] md:h-[56px] ',
+      xl: 'w-[56px] h-[56px] md:w-[72px] md:h-[72px] ',
+      '2xl': 'w-[64px] h-[64px] md:w-[80px] md:h-[80px] ',
     },
   },
   defaultVariants: {
@@ -43,7 +42,6 @@ const iconVariants = cva(
         lg: 'w-[0.875rem] h-[0.875rem]',
         xl: 'w-4 h-4',
         '2xl': 'w-5 h-5',
-        '3xl': 'w-5 h-5',
       },
     },
   },
@@ -93,7 +91,7 @@ const Avatar = ({
         alt={alt}
         fill={true}
         style={{
-          objectFit: variant === 'circle' ? 'cover' : 'contain',
+          objectFit: 'cover',
           background: 'transparent',
           borderRadius: variant === 'circle' ? '100%' : '8px',
         }}

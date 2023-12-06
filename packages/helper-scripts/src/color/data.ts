@@ -11630,6 +11630,15 @@ export const data: DataVariables = {
               },
             },
             {
+              name: 'Body/body-border',
+              type: 'color',
+              isAlias: true,
+              value: {
+                collection: 'Semantic ( Colors )',
+                name: 'Colors/Borders/Primary/color-border-primary-base',
+              },
+            },
+            {
               name: 'Button/Primary/Surface/button-primary-surface-default',
               type: 'color',
               isAlias: true,
@@ -11999,12 +12008,12 @@ export const data: DataVariables = {
               },
             },
             {
-              name: 'Alert/Info/alert-info-title',
+              name: 'Alert/Warning/alert-warning-surface',
               type: 'color',
               isAlias: true,
               value: {
                 collection: 'Semantic ( Colors )',
-                name: 'Colors/Foregrounds/Information/color-fg-info-base',
+                name: 'Colors/Surfaces/Caution/color-surface-caution-transparent',
               },
             },
             {
@@ -12017,12 +12026,12 @@ export const data: DataVariables = {
               },
             },
             {
-              name: 'Alert/Warning/alert-warning-surface',
+              name: 'Alert/Info/alert-info-title',
               type: 'color',
               isAlias: true,
               value: {
                 collection: 'Semantic ( Colors )',
-                name: 'Colors/Surfaces/Caution/color-surface-caution-transparent',
+                name: 'Colors/Foregrounds/Information/color-fg-info-base',
               },
             },
             {
@@ -12071,21 +12080,21 @@ export const data: DataVariables = {
               },
             },
             {
-              name: 'Alert/Warning/alert-warning-icon-fill',
-              type: 'color',
-              isAlias: true,
-              value: {
-                collection: 'Semantic ( Colors )',
-                name: 'Colors/Backgrounds/Caution/color-bg-caution-base',
-              },
-            },
-            {
               name: 'Alert/Info/alert-info-border',
               type: 'color',
               isAlias: true,
               value: {
                 collection: 'Semantic ( Colors )',
                 name: 'Colors/Borders/Information/color-border-info-base',
+              },
+            },
+            {
+              name: 'Alert/Warning/alert-warning-icon-fill',
+              type: 'color',
+              isAlias: true,
+              value: {
+                collection: 'Semantic ( Colors )',
+                name: 'Colors/Backgrounds/Caution/color-bg-caution-base',
               },
             },
             {
@@ -12152,7 +12161,7 @@ export const data: DataVariables = {
               },
             },
             {
-              name: 'Alert/Error/alert-info-border',
+              name: 'Alert/Error/alert-error-border',
               type: 'color',
               isAlias: true,
               value: {
@@ -12229,7 +12238,7 @@ export const data: DataVariables = {
               isAlias: true,
               value: {
                 collection: 'Semantic ( Colors )',
-                name: 'Colors/Backgrounds/Innovative/color-bg-innovative-base',
+                name: 'Colors/Foregrounds/Innovative/color-fg-innovative-base',
               },
             },
             {
@@ -12274,7 +12283,7 @@ export const data: DataVariables = {
               isAlias: true,
               value: {
                 collection: 'Semantic ( Colors )',
-                name: 'Colors/Surface [Older]/color-surface-primary',
+                name: 'Colors/Surfaces/Primary/color-surface-primary-depth',
               },
             },
             {
@@ -12334,44 +12343,65 @@ export const data: DataVariables = {
             {
               name: 'Tag/Subtle/Surface/tag-subtle-surface-default',
               type: 'color',
-              isAlias: false,
-              value: '#A1A1A11A',
+              isAlias: true,
+              value: {
+                collection: 'Semantic ( Colors )',
+                name: 'Colors/Surfaces/Cool/color-surface-cool-transparent',
+              },
             },
             {
               name: 'Tag/Subtle/Surface/tag-subtle-surface-green',
               type: 'color',
-              isAlias: false,
-              value: '#3FF47E1A',
+              isAlias: true,
+              value: {
+                collection: 'Semantic ( Colors )',
+                name: 'Colors/Surfaces/Positive/color-surface-positive-transparent',
+              },
             },
             {
               name: 'Tag/Subtle/Surface/tag-subtle-surface-yellow',
               type: 'color',
-              isAlias: false,
-              value: '#F4D03F1A',
+              isAlias: true,
+              value: {
+                collection: 'Semantic ( Colors )',
+                name: 'Colors/Surfaces/Caution/color-surface-caution-transparent',
+              },
             },
             {
               name: 'Tag/Subtle/Surface/tag-subtle-surface-orange',
               type: 'color',
-              isAlias: false,
-              value: '#F47B3F1A',
+              isAlias: true,
+              value: {
+                collection: 'Semantic ( Colors )',
+                name: 'Colors/Surfaces/Alert/color-surface-alert-transparent',
+              },
             },
             {
               name: 'Tag/Subtle/Surface/tag-subtle-surface-red',
               type: 'color',
-              isAlias: false,
-              value: '#F43F5E1A',
+              isAlias: true,
+              value: {
+                collection: 'Semantic ( Colors )',
+                name: 'Colors/Surfaces/Negative/color-surface-negative-transparent',
+              },
             },
             {
               name: 'Tag/Subtle/Surface/tag-subtle-surface-blue',
               type: 'color',
-              isAlias: false,
-              value: '#1199FF1A',
+              isAlias: true,
+              value: {
+                collection: 'Semantic ( Colors )',
+                name: 'Colors/Surfaces/Information/color-surface-info-transparent',
+              },
             },
             {
               name: 'Tag/Subtle/Surface/tag-subtle-surface-purple',
               type: 'color',
-              isAlias: false,
-              value: '#9946FC1A',
+              isAlias: true,
+              value: {
+                collection: 'Semantic ( Colors )',
+                name: 'Colors/Surfaces/Innovative/color-surface-innovative-transparent',
+              },
             },
             {
               name: 'Tag/alert-cancel',
@@ -12686,21 +12716,21 @@ export const data: DataVariables = {
               },
             },
             {
-              name: 'Form/Input Field/Border/form-input-border-disabled',
-              type: 'color',
-              isAlias: true,
-              value: {
-                collection: 'Semantic ( Colors )',
-                name: 'Colors/Borders/Primary/color-border-primary-depth',
-              },
-            },
-            {
               name: 'Form/Checkbox/Surface/form-checkbox-surface-default',
               type: 'color',
               isAlias: true,
               value: {
                 collection: 'Component ( Colors )',
                 name: 'Form/Input Field/Surface/form-input-surface-default',
+              },
+            },
+            {
+              name: 'Form/Input Field/Border/form-input-border-disabled',
+              type: 'color',
+              isAlias: true,
+              value: {
+                collection: 'Semantic ( Colors )',
+                name: 'Colors/Borders/Primary/color-border-primary-depth',
               },
             },
             {
@@ -13445,7 +13475,7 @@ export const data: DataVariables = {
               },
             },
             {
-              name: 'Tag/Solid/Icon/tag-solid-icon-purple',
+              name: 'Tag/Solid/Border/tag-solid-border-default',
               type: 'color',
               isAlias: true,
               value: {
@@ -13454,7 +13484,7 @@ export const data: DataVariables = {
               },
             },
             {
-              name: 'Tag/Solid/Border/tag-solid-border-default',
+              name: 'Tag/Solid/Icon/tag-solid-icon-purple',
               type: 'color',
               isAlias: true,
               value: {
@@ -13508,7 +13538,7 @@ export const data: DataVariables = {
               },
             },
             {
-              name: 'Tag/Solid/Border/alert-subtle-surface-purple',
+              name: 'Tag/Solid/Border/alert-solid-surface-purple',
               type: 'color',
               isAlias: true,
               value: {
@@ -13571,21 +13601,21 @@ export const data: DataVariables = {
               },
             },
             {
-              name: 'Tag/Subtle/Text/tag-subtle-text-purple',
-              type: 'color',
-              isAlias: true,
-              value: {
-                collection: 'Semantic ( Colors )',
-                name: 'Colors/Foregrounds/Innovative/color-fg-innovative-base',
-              },
-            },
-            {
               name: 'Tag/Subtle/Icon/tag-subtle-icon-default',
               type: 'color',
               isAlias: true,
               value: {
                 collection: 'Semantic ( Colors )',
                 name: 'Colors/Foregrounds/Primary/color-fg-primary-depth',
+              },
+            },
+            {
+              name: 'Tag/Subtle/Text/tag-subtle-text-purple',
+              type: 'color',
+              isAlias: true,
+              value: {
+                collection: 'Semantic ( Colors )',
+                name: 'Colors/Foregrounds/Innovative/color-fg-innovative-base',
               },
             },
             {
@@ -13865,30 +13895,6 @@ export const data: DataVariables = {
               },
             },
             {
-              name: 'Button/Danger/Surface/button-danger-outline-default',
-              type: 'color',
-              isAlias: false,
-              value: '#FFFFFF00',
-            },
-            {
-              name: 'Button/Danger/Surface/button-outline-surface-hovered',
-              type: 'color',
-              isAlias: false,
-              value: '#FFFFFF00',
-            },
-            {
-              name: 'Button/Danger/Surface/button-outline-surface-focused',
-              type: 'color',
-              isAlias: false,
-              value: '#FFFFFF03',
-            },
-            {
-              name: 'Button/Danger/Surface/button-outline-surface-disabled',
-              type: 'color',
-              isAlias: false,
-              value: '#FFFFFF00',
-            },
-            {
               name: 'Button/Success/Surface/button-success-surface-default',
               type: 'color',
               isAlias: true,
@@ -13968,30 +13974,6 @@ export const data: DataVariables = {
                 collection: '_primitives ( Colors )',
                 name: 'Color/Green/green-300',
               },
-            },
-            {
-              name: 'Button/Success/Surface/button-success-outline-default',
-              type: 'color',
-              isAlias: false,
-              value: '#FFFFFF00',
-            },
-            {
-              name: 'Button/Success/Surface/button-outline-surface-hovered',
-              type: 'color',
-              isAlias: false,
-              value: '#FFFFFF00',
-            },
-            {
-              name: 'Button/Success/Surface/button-outline-surface-focused',
-              type: 'color',
-              isAlias: false,
-              value: '#FFFFFF03',
-            },
-            {
-              name: 'Button/Success/Surface/button-outline-surface-disabled',
-              type: 'color',
-              isAlias: false,
-              value: '#FFFFFF00',
             },
             {
               name: 'Avatar/avatar-surface',
@@ -14107,7 +14089,7 @@ export const data: DataVariables = {
               isAlias: true,
               value: {
                 collection: 'Semantic ( Colors )',
-                name: 'Colors/Surfaces/Primary/color-surface-primary-depth',
+                name: 'Colors/Surfaces/Cool/color-surface-cool-transparent',
               },
             },
             {
@@ -14615,15 +14597,6 @@ export const data: DataVariables = {
               },
             },
             {
-              name: 'Empty State/empty_state-icon-yellow-stroke',
-              type: 'color',
-              isAlias: true,
-              value: {
-                collection: 'Semantic ( Colors )',
-                name: 'Colors/Foregrounds/Alert/color-fg-alert-base',
-              },
-            },
-            {
               name: 'Empty State/empty_state-icon-yellow-fill',
               type: 'color',
               isAlias: true,
@@ -14633,12 +14606,12 @@ export const data: DataVariables = {
               },
             },
             {
-              name: 'Empty State/empty_state-icon-orange-fill',
+              name: 'Empty State/empty_state-icon-yellow-stroke',
               type: 'color',
               isAlias: true,
               value: {
                 collection: 'Semantic ( Colors )',
-                name: 'Colors/Surfaces/Caution/color-surface-caution-transparent',
+                name: 'Colors/Foregrounds/Alert/color-fg-alert-base',
               },
             },
             {
@@ -14648,6 +14621,15 @@ export const data: DataVariables = {
               value: {
                 collection: 'Semantic ( Colors )',
                 name: 'Colors/Foregrounds/Caution/color-fg-caution-base',
+              },
+            },
+            {
+              name: 'Empty State/empty_state-icon-orange-fill',
+              type: 'color',
+              isAlias: true,
+              value: {
+                collection: 'Semantic ( Colors )',
+                name: 'Colors/Surfaces/Caution/color-surface-caution-transparent',
               },
             },
             {
@@ -15168,7 +15150,7 @@ export const data: DataVariables = {
               name: 'Colors/Surfaces/Cool/color-surface-cool-transparent',
               type: 'color',
               isAlias: false,
-              value: '#FFFFFF03',
+              value: '#FFFFFF0D',
             },
             {
               name: 'Colors/Surfaces/Negative/color-surface-negative-base',
@@ -15455,7 +15437,7 @@ export const data: DataVariables = {
               isAlias: true,
               value: {
                 collection: '_primitives ( Colors )',
-                name: 'Color/Red/red-500',
+                name: 'Color/Red/red-400',
               },
             },
             {
@@ -15464,7 +15446,7 @@ export const data: DataVariables = {
               isAlias: true,
               value: {
                 collection: '_primitives ( Colors )',
-                name: 'Color/Red/red-600',
+                name: 'Color/Red/red-500',
               },
             },
             {
@@ -15509,7 +15491,7 @@ export const data: DataVariables = {
               isAlias: true,
               value: {
                 collection: '_primitives ( Colors )',
-                name: 'Color/Yellow/yellow-500',
+                name: 'Color/Yellow/yellow-400',
               },
             },
             {
@@ -15599,7 +15581,7 @@ export const data: DataVariables = {
               isAlias: true,
               value: {
                 collection: '_primitives ( Colors )',
-                name: 'Color/Purple/purple-600',
+                name: 'Color/Purple/purple-500',
               },
             },
             {
@@ -15933,21 +15915,21 @@ export const data: DataVariables = {
               },
             },
             {
-              name: 'Colors/Foreground [Older]/color-fg-primary',
-              type: 'color',
-              isAlias: true,
-              value: {
-                collection: '_primitives ( Colors )',
-                name: 'White',
-              },
-            },
-            {
               name: 'Colors/Surface [Older]/colors-surface-success',
               type: 'color',
               isAlias: true,
               value: {
                 collection: '_primitives ( Colors )',
                 name: 'Color/Neutral/neutral-800',
+              },
+            },
+            {
+              name: 'Colors/Foreground [Older]/color-fg-primary',
+              type: 'color',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'White',
               },
             },
             {
@@ -16032,21 +16014,21 @@ export const data: DataVariables = {
               },
             },
             {
-              name: 'Colors/Surface [Older]/color-surface-info',
-              type: 'color',
-              isAlias: true,
-              value: {
-                collection: '_primitives ( Colors )',
-                name: 'Color/Neutral/neutral-800',
-              },
-            },
-            {
               name: 'Colors/Foreground [Older]/color-fg-tertiary',
               type: 'color',
               isAlias: true,
               value: {
                 collection: '_primitives ( Colors )',
                 name: 'Color/Neutral/neutral-500',
+              },
+            },
+            {
+              name: 'Colors/Surface [Older]/color-surface-info',
+              type: 'color',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Neutral/neutral-800',
               },
             },
             {
@@ -16885,7 +16867,7 @@ export const data: DataVariables = {
               name: 'Colors/Surfaces/Cool/color-surface-cool-transparent',
               type: 'color',
               isAlias: false,
-              value: '#00000003',
+              value: '#0000000D',
             },
             {
               name: 'Colors/Surfaces/Negative/color-surface-negative-base',
@@ -17199,7 +17181,7 @@ export const data: DataVariables = {
               isAlias: true,
               value: {
                 collection: '_primitives ( Colors )',
-                name: 'Color/Green/green-500',
+                name: 'Color/Green/green-600',
               },
             },
             {
@@ -17208,7 +17190,7 @@ export const data: DataVariables = {
               isAlias: true,
               value: {
                 collection: '_primitives ( Colors )',
-                name: 'Color/Green/green-600',
+                name: 'Color/Green/green-700',
               },
             },
             {
@@ -17316,7 +17298,7 @@ export const data: DataVariables = {
               isAlias: true,
               value: {
                 collection: '_primitives ( Colors )',
-                name: 'Color/Purple/purple-600',
+                name: 'Color/Purple/purple-500',
               },
             },
             {
@@ -17653,21 +17635,21 @@ export const data: DataVariables = {
               },
             },
             {
-              name: 'Colors/Foreground [Older]/color-fg-primary',
-              type: 'color',
-              isAlias: true,
-              value: {
-                collection: '_primitives ( Colors )',
-                name: 'Color/Neutral/neutral-950',
-              },
-            },
-            {
               name: 'Colors/Surface [Older]/colors-surface-success',
               type: 'color',
               isAlias: true,
               value: {
                 collection: '_primitives ( Colors )',
                 name: 'Color/Green/green-50',
+              },
+            },
+            {
+              name: 'Colors/Foreground [Older]/color-fg-primary',
+              type: 'color',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Neutral/neutral-950',
               },
             },
             {
@@ -17752,21 +17734,21 @@ export const data: DataVariables = {
               },
             },
             {
-              name: 'Colors/Surface [Older]/color-surface-info',
-              type: 'color',
-              isAlias: true,
-              value: {
-                collection: '_primitives ( Colors )',
-                name: 'Color/Blue/blue-50',
-              },
-            },
-            {
               name: 'Colors/Foreground [Older]/color-fg-tertiary',
               type: 'color',
               isAlias: true,
               value: {
                 collection: '_primitives ( Colors )',
                 name: 'Color/Neutral/neutral-400',
+              },
+            },
+            {
+              name: 'Colors/Surface [Older]/color-surface-info',
+              type: 'color',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Blue/blue-50',
               },
             },
             {

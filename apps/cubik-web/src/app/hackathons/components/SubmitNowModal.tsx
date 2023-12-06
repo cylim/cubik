@@ -495,8 +495,8 @@ export const SubmitNowModal = ({
                                   backgroundColor: state.isSelected
                                     ? '#010F0D'
                                     : state.isFocused
-                                      ? '#010F0D'
-                                      : '#0F0F0F',
+                                    ? '#010F0D'
+                                    : '#0F0F0F',
                                   _hover: {
                                     backgroundColor: '#010F0D',
                                   },

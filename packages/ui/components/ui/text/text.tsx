@@ -1,5 +1,6 @@
 import React from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
+import { ClassValue } from 'clsx';
 
 import { cn } from '../../../lib/utils';
 
@@ -7,7 +8,8 @@ const headingVariant = cva('', {
   variants: {
     color: {
       primary: 'text-[var(--color-fg-primary-depth)]',
-      secondary: 'text-[var(--color-fg-primary-subdued)]',
+      secondary: 'text-[var(--color-fg-primary-base)]',
+      tertiary: 'text-[var(--color-fg-primary-subdued)]',
       inherit: '',
     },
   },
@@ -18,7 +20,7 @@ const headingVariant = cva('', {
 
 interface TextProps extends VariantProps<typeof headingVariant> {
   children: React.ReactNode;
-  className?: string;
+  className?: ClassValue;
 }
 
 const Text: React.FC<TextProps> = ({ children, color, className }) => {

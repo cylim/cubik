@@ -27,8 +27,8 @@ const CustomStepper = ({ steps, currentStep }: CustomStepperProps) => {
           step.index < currentStep
             ? 'complete'
             : step.index === currentStep
-              ? 'active'
-              : 'inactive';
+            ? 'active'
+            : 'inactive';
 
         return (
           <Box
@@ -45,8 +45,8 @@ const CustomStepper = ({ steps, currentStep }: CustomStepperProps) => {
               status === 'inactive'
                 ? 'linear(to-r, Transparent, Transparent)'
                 : status === 'active'
-                  ? 'linear(to-r, #010F0D, #010F0D)'
-                  : 'linear(to-r, #14665B, #001F1A)'
+                ? 'linear(to-r, #010F0D, #010F0D)'
+                : 'linear(to-r, #14665B, #001F1A)'
             }
           >
             <MotionHStack
@@ -70,8 +70,8 @@ const CustomStepper = ({ steps, currentStep }: CustomStepperProps) => {
                   status === 'complete'
                     ? 'white'
                     : status === 'active'
-                      ? 'white'
-                      : 'neutral.6'
+                    ? 'white'
+                    : 'neutral.6'
                 }
                 color={'black'}
                 textStyle={{ base: 'body7', sm: 'body6' }}
@@ -83,8 +83,8 @@ const CustomStepper = ({ steps, currentStep }: CustomStepperProps) => {
                     status === 'complete'
                       ? { opacity: 0 }
                       : status === 'active'
-                        ? { opacity: 1 }
-                        : { opacity: 1 }
+                      ? { opacity: 1 }
+                      : { opacity: 1 }
                   }
                   transition={{ duration: 0.1 }}
                 >

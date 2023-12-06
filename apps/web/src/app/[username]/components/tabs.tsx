@@ -13,7 +13,7 @@ export const ProfileTabs = ({ username }: Props) => {
       <Tabs
         defaultValue={0}
         size="md"
-        className="md:overflow-x-inherit w-full overflow-y-hidden overflow-x-scroll pb-0"
+        className="md:overflow-x-inherit w-full overflow-y-hidden overflow-x-scroll"
       >
         <div className="bg-[var(--body-surface)]">
           <TabList className="mx-auto max-w-7xl px-[16px]">

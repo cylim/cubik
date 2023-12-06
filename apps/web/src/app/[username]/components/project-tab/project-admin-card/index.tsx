@@ -1,28 +1,64 @@
 import React from 'react';
 
+import ProjectHeader from '@/app/[username]/components/project-tab/project-admin-card/project-header';
+import ProjectAdminGrantsTab from '@/app/[username]/components/project-tab/project-admin-card/tabs/grants';
+
 import {
   AvatarLabelGroup,
   Card,
   CardBody,
   CardFooter,
   CardHeader,
+  Divider,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
 } from '@cubik/ui';
 
-const ProjectAdminCard = () => {
+export type ProjectProps = {
+  name: string;
+  slug: string | null;
+  shortDescription: string;
+  logo: string;
+};
+
+const ProjectAdminCardBody = () => {
+  return (
+    <Tabs defaultValue={0} size="sm">
+      <div className="border-b border-b-[var(--card-border-secondary)] bg-[var(--card-surface-primary)] pt-[16px]">
+        <TabList className="mx-auto max-w-7xl px-[16px] md:px-[32px]">
+          <Tab value={0}>Grants</Tab>
+          <Tab value={1}>Stats</Tab>
+          <Tab value={2}>Treasury</Tab>
+          <Tab value={3}>Contributors</Tab>
+          <Tab value={4}>Integrations</Tab>
+        </TabList>
+      </div>
+      <Divider />
+      <TabPanels>
+        <TabPanel value={0}>
+          <ProjectAdminGrantsTab />
+        </TabPanel>
+        <TabPanel value={1}> </TabPanel>
+        <TabPanel value={2}> </TabPanel>
+        <TabPanel value={3}> </TabPanel>
+        <TabPanel value={4}> </TabPanel>
+      </TabPanels>
+    </Tabs>
+  );
+};
+
+const ProjectAdminCard = ({ project }: { project: ProjectProps }) => {
   return (
     <Card size="md">
       <CardHeader>
-        <div className="flex flex-row items-center justify-between">
-          <AvatarLabelGroup
-            avatarSrc={
-              'https://beta.cubik.so/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdo7tp4u57%2Fimage%2Fupload%2Fv1691136234%2Fecw9wjki4yt7cx1ekz6o.jpg&w=2048&q=75'
-            }
-            title={'Superteam Earn'}
-            description="Get paid in crypto by participating in bounties and freelance opportunities from top Solana companies."
-            size={'md'}
-          />
-        </div>
+        <ProjectHeader project={project} isAdmin={true} />
       </CardHeader>
+      <CardBody>
+        <ProjectAdminCardBody />
+      </CardBody>
       {/* <CardBody>World</CardBody> */}
       {/* <CardFooter>this is me</CardFooter> */}
     </Card>

@@ -149,8 +149,8 @@ html[class='light'],:root {
     --color-surface-negative-emphasis: var(--color-red-100);
     --color-surface-negative-base: var(--color-red-50);
     --undefined: #0000000D;
-    --color-surface-cool-muted: var(--color-neutral-75);
-    --color-surface-cool-emphasis: var(--color-neutral-100);
+    --color-surface-cool-muted: var(--color-white-200);
+    --color-surface-cool-emphasis: var(--color-white-300);
     --color-surface-cool-base: var(--color-white);
     --color-surface-primary-subdued: var(--color-white-400);
     --color-surface-primary-depth: var(--color-white-50);

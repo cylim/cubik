@@ -27,7 +27,7 @@ export const TabContext = createContext<TabContextType>({
 const tabVariants = cva('', {
   variants: {
     size: {
-      sm: ' pb-[4px]',
+      sm: 'pb-[4px]',
       md: 'pb-[8px]',
       lg: 'pb-[8px]',
     },
@@ -126,7 +126,11 @@ const Tabs: React.FC<TabsProps> = ({
         <RadixTabs.Root
           defaultValue={selectedTab.toString()}
           onValueChange={(value) => setSelectedTab(Number(value))}
-          className={cn(tabVariants({ size }), className)}
+          className={cn(
+            tabVariants({ size }),
+            className,
+            'md:overflow-x-inherit w-full overflow-y-hidden overflow-x-scroll',
+          )}
         >
           {children}
         </RadixTabs.Root>

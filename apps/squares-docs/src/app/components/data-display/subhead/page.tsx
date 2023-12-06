@@ -50,13 +50,13 @@ const SubHeadPage = () => {
             //     />
             //   </svg>
             // }
-            leftElement={
-              <Button size="sm" variant="danger">
-                Hello world
-              </Button>
-            }
+            // leftElement={
+            //   <Button size="sm" variant="danger">
+            //     Hello world
+            //   </Button>
+            // }
             heading="heading"
-            subheading="this is a subheading"
+            // subheading="this is a subheading"
           />
         </div>
       </div>

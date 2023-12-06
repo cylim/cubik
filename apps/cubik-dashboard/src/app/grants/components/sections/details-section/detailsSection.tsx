@@ -1,6 +1,8 @@
 import React from 'react';
+import { ProjectSegment } from '@/app/grants/components/sections/details-section/project-segment';
 
 import {
+  MetricsItem,
   Segment,
   SegmentContainer,
   SegmentContent,
@@ -11,20 +13,28 @@ import {
 
 export const DetailsSection = () => {
   return (
-    <div>
-      <SubHead heading="Overview" />
-
+    <div className="">
+      <div className="my-16 inline-flex w-full flex-col gap-11">
+        <SubHead heading="Overview" />
+        <div className=" flex w-full items-center justify-start gap-10">
+          <MetricsItem />
+          <MetricsItem />
+          <MetricsItem />
+        </div>
+      </div>
       <SegmentContainer size="sm">
-        <Segment defaultValue="cubik">
+        <Segment defaultValue="projects">
           <div className="flex justify-between">
             <SubHead heading="Stats" />
             <SegmentList className="max-w-[20rem]" position="end">
-              <SegmentTrigger value="project">Projects</SegmentTrigger>
-              <SegmentTrigger value="account">Account</SegmentTrigger>
+              <SegmentTrigger value="projects">Projects</SegmentTrigger>
+              <SegmentTrigger value="contributors">Contributors</SegmentTrigger>
             </SegmentList>
           </div>
-          <SegmentContent value={'cubik'}></SegmentContent>
-          <SegmentContent value="sponsor"></SegmentContent>
+          <SegmentContent value="projects">
+            <ProjectSegment />
+          </SegmentContent>
+          <SegmentContent value="contributors">Contributors</SegmentContent>
         </Segment>
       </SegmentContainer>
     </div>

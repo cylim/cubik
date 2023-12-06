@@ -4,7 +4,7 @@ import '@cubik/presets/styles/lightColor.style.css';
 import '@cubik/presets/styles/darkColors.styles.css';
 import '@cubik/presets/styles/component.style.css';
 
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { Provider } from '@/app/provider';
 import Background from '@/components/common/bg/background';

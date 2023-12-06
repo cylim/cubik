@@ -1,5 +1,6 @@
 import React from 'react';
 import { cookies } from 'next/headers';
+import { Background } from '@/app/grants/components/Background';
 import { IsUserLoginServer } from '@/utils/helpers/isUserLogin';
 
 import { EventHeader } from './components/EventHeader';
@@ -19,6 +20,7 @@ const EventInfoPage = async () => {
   return (
     <>
       <EventHeader />
+      <Background />
       <TabsSection />
     </>
   );

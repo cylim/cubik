@@ -52,8 +52,8 @@ html[class='light'],:root {
     --color-surface-info-muted: var(--color-neutral-75);
     --color-surface-info-tertiary: var(--color-blue-500);
     --color-surface-info-secondary: var(--color-blue-50);
-    --color-fg-tertiary: var(--color-neutral-400);
     --color-surface-info: var(--color-blue-50);
+    --color-fg-tertiary: var(--color-neutral-400);
     --color-surface-alert-tertiary: var(--color-yellow-600);
     --color-surface-alert-secondary: var(--color-yellow-50);
     --color-surface-alert: var(--color-yellow-50);
@@ -63,8 +63,8 @@ html[class='light'],:root {
     --color-surface-warn: var(--color-orange-50);
     --colors-surface-success-tertiary: var(--color-green-500);
     --colors-surface-success-secondary: var(--color-green-50);
-    --colors-surface-success: var(--color-green-50);
     --color-fg-primary: var(--color-neutral-950);
+    --colors-surface-success: var(--color-green-50);
     --color-surface-danger-tertiary: var(--color-red-500);
     --color-surface-danger-secondary: var(--color-red-50);
     --color-surface-danger: var(--color-red-50);
@@ -101,7 +101,7 @@ html[class='light'],:root {
     --color-border-primary-depth: var(--color-white-400);
     --color-border-primary-base: var(--color-white-300);
     --color-fg-innovative-muted: var(--color-purple-100);
-    --color-fg-innovative-emphasis: var(--color-purple-600);
+    --color-fg-innovative-emphasis: var(--color-purple-500);
     --color-fg-innovative-base: var(--color-purple-500);
     --color-fg-alert-muted: var(--color-orange-100);
     --color-fg-alert-emphasis: var(--color-orange-600);
@@ -113,8 +113,8 @@ html[class='light'],:root {
     --color-fg-caution-emphasis: var(--color-yellow-600);
     --color-fg-caution-base: var(--color-yellow-500);
     --color-fg-positive-muted: var(--color-green-100);
-    --color-fg-positive-emphasis: var(--color-green-600);
-    --color-fg-positive-base: var(--color-green-500);
+    --color-fg-positive-emphasis: var(--color-green-700);
+    --color-fg-positive-base: var(--color-green-600);
     --color-fg-negative-muted: var(--color-red-100);
     --color-fg-negative-emphasis: var(--color-red-600);
     --color-fg-negative-base: var(--color-red-500);
@@ -148,7 +148,7 @@ html[class='light'],:root {
     --color-surface-negative-muted: var(--color-neutral-75);
     --color-surface-negative-emphasis: var(--color-red-100);
     --color-surface-negative-base: var(--color-red-50);
-    --undefined: #00000003;
+    --undefined: #0000000D;
     --color-surface-cool-muted: var(--color-neutral-75);
     --color-surface-cool-emphasis: var(--color-neutral-100);
     --color-surface-cool-base: var(--color-white);

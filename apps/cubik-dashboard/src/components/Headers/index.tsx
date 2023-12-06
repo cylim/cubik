@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 
+import { Logo, Tag, Text } from '@cubik/ui';
+
 import { VerifyModal } from '../modals/verifyModal';
 import { HandleConnect } from './handleConnect';
 
@@ -11,10 +13,26 @@ export const Header = () => {
     <>
       <VerifyModal open={open} setOpen={setOpen} />
       <div className="w-full dark:bg-neutral-800">
-        <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between">
-          <p className="text-2xl font-bold uppercase tracking-[0.4rem] text-black dark:text-white  ">
-            CUBIK
-          </p>
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between py-6">
+          <div className="flex justify-start gap-10">
+            <div className="flex items-center justify-center">
+              <Logo />
+              <Tag size="md" variant="solid-yellow">
+                Admin
+              </Tag>
+            </div>
+            <div className="flex items-center justify-center gap-5">
+              <Text color={'primary'} className="l1">
+                Quadratic Funding
+              </Text>
+              <Text color={'primary'} className="l1">
+                RPGF
+              </Text>
+              <Text color={'primary'} className="l1">
+                Projects
+              </Text>
+            </div>
+          </div>
           <HandleConnect />
         </div>
       </div>

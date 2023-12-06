@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { DetailsSection } from '@/app/grants/components/sections/details-section';
 
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
 
@@ -9,19 +10,31 @@ import { RegistrationsSection } from './sections/registration-section/Registrati
 
 export const TabsSection = () => {
   return (
-    <div className="mx-auto w-full  text-white">
+    <div className="mx-auto w-full">
       <Tabs size="sm" defaultValue={0}>
-        <TabList className="w-full  overflow-x-auto whitespace-nowrap bg-neutral-800">
-          <div className="mx-auto flex w-full  max-w-7xl justify-start gap-4">
-            <Tab value={0}>Details</Tab>
-            <Tab value={1}>Registrations</Tab>
-            <Tab value={2}>Multi</Tab>
-            <Tab value={3}>Analytics</Tab>
-            <Tab value={4}>Settings</Tab>
-          </div>
-        </TabList>
+        <div className="bg-[var(--body-surface)]">
+          <TabList className="mx-auto max-w-7xl">
+            <Tab value={0}>
+              <div className="p-2">Details</div>
+            </Tab>
+            <Tab value={1}>
+              <div className="p-2">Registrations</div>
+            </Tab>
+            <Tab value={2}>
+              <div className="p-2">Multi</div>
+            </Tab>
+            <Tab value={3}>
+              <div className="p-2">Analytics</div>
+            </Tab>
+            <Tab value={4}>
+              <div className="p-2">Settings</div>
+            </Tab>
+          </TabList>
+        </div>
         <TabPanels className="mx-auto w-full max-w-7xl">
-          <TabPanel value={0}>Make changes to your account here.</TabPanel>
+          <TabPanel value={0}>
+            <DetailsSection />
+          </TabPanel>
           <TabPanel value={1}>
             <RegistrationsSection />
           </TabPanel>

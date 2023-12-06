@@ -77,11 +77,10 @@ const ProjectCardSkeleton = ({
 export default async function Home() {
   const projects = await getProjects();
 
-  console.log(projects);
   return (
     <>
       {/* Body Container*/}
-      <div className="ml:mx-auto flex min-h-screen w-full flex-col items-center lg:flex-row  lg:items-start 2xl:max-w-7xl">
+      <div className="flex min-h-screen w-full flex-col items-center md:mx-auto lg:flex-row  lg:items-start 2xl:max-w-7xl">
         {/* Projects Section */}
         <div className="flex h-full w-full flex-col gap-8 px-4 py-8 lg:w-2/3">
           <ProjectHeader />

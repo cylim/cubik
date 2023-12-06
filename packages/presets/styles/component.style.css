@@ -47,7 +47,7 @@
     --round_card-name: var(--color-fg-primary-depth);
     --round_card-surface: var(--color-surface-primary-depth);
     --segment_control-border-active: var(--color-fg-primary-depth);
-    --segment_control-surface-inactive: var(--color-surface-primary-depth);
+    --segment_control-surface-inactive: var(--color-surface-cool-muted);
     --segment_control-surface-active: var(--color-surface-primary-base);
     --segment_control-fg-inactive: var(--color-fg-primary-subdued);
     --segment_control-fg-active: var(--color-fg-primary-depth);

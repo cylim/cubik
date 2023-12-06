@@ -17,7 +17,12 @@ export const Header = () => {
           <div className="flex justify-start gap-10">
             <div className="flex items-center justify-center">
               <Logo />
-              <Tag size="desktop" color={'yellow'} variant="solid">
+              <Tag
+                border={true}
+                size="desktop"
+                color={'yellow'}
+                variant="solid"
+              >
                 Admin
               </Tag>
             </div>

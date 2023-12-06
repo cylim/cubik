@@ -5,6 +5,7 @@ import { Icon } from '../../icons/icon';
 import { iconLibrary } from '../../icons/iconLibrary';
 import { cn } from '../../lib/utils';
 import { Button } from './Button/button';
+import { Text } from './text/text';
 
 const alertVariants = cva('', {
   variants: {
@@ -94,7 +95,7 @@ const Alert: React.FC<AlertProps> = ({
   return (
     <div
       className={cn(
-        'flex gap-2  p-3',
+        'flex gap-2 p-2',
         className,
         alertVariants(
           type === 'inline' || type === 'border'
@@ -108,27 +109,23 @@ const Alert: React.FC<AlertProps> = ({
         stroke={cn(alertVariants({ color }))}
         fill={cn(alertVariants({ fill: color }))}
         strokeWidth={1}
+        className="flex items-center"
       />
       <div
         className={cn('items-center', alertVariants({ contentSpacing: type }))}
       >
         <div className={cn('gap-1 flex', alertVariants({ textSpacing: type }))}>
-          <h3
-            className={cn(
-              'text-sm font-semibold',
-              alertVariants({ titleColor: color }),
-            )}
+          <Text
+            className={cn('l2-heavy', alertVariants({ titleColor: color }))}
           >
             {title}
-          </h3>
-          <p
-            className={cn(
-              'text-sm font-normal',
-              alertVariants({ titleColor: color }),
-            )}
+          </Text>
+
+          <Text
+            className={cn('l2-light', alertVariants({ titleColor: color }))}
           >
             {content}
-          </p>
+          </Text>
         </div>
 
         <Button

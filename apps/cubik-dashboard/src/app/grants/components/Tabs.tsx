@@ -12,7 +12,7 @@ export const TabsSection = () => {
   return (
     <div className="mx-auto w-full">
       <Tabs size="sm" defaultValue={0}>
-        <div className="bg-[var(--body-surface)]">
+        <div className="overflow-scroll bg-[var(--body-surface)]">
           <TabList className="mx-auto max-w-7xl">
             <Tab value={0}>
               <div className="p-2">Details</div>

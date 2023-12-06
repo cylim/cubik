@@ -1,12 +1,11 @@
 import React from 'react';
 import { cookies } from 'next/headers';
-
 import ProjectAdminCard from '@/app/[username]/components/project-tab/project-admin-card';
 import TabLayout from '@/components/common/tabs/TabLayout';
 import { IsUserLoginServer } from '@/utils/auth/isUserLoginServer';
 
 import { prisma } from '@cubik/database';
-import { Button, SubHead } from '@cubik/ui'; 
+import { Button, SubHead } from '@cubik/ui';
 
 interface Props {
   username: string;

@@ -11,54 +11,74 @@ import * as RadixTabs from '@radix-ui/react-tabs';
 import { cva } from 'class-variance-authority';
 
 import { cn } from '../../../lib/utils';
+import { Text } from '../text/text';
 import { useTabMeasurements } from './useTabMeasurements';
 
 export type TabContextType = {
-  size: 'xxs' | 'xs' | 'sm' | 'md' | 'lg';
+  size: 'sm' | 'md' | 'lg';
   className?: string;
 };
 
 export const TabContext = createContext<TabContextType>({
-  size: 'lg',
+  size: 'md',
   className: '',
 });
-//border-b-[2px] data-[state=active]:border-b-[2px] data-[state=active]:border-[var(--tab-border-active)] font-normal border-b-transparent
-const tabVariants = cva(
-  ' leading-loose text-lg text-[var(--tab-fg-inactive)]   data-[state=active]:text-[var(--tab-fg-active)] font-medium ',
-  {
-    variants: {
-      size: {
-        xxs: 'text-xs leading-3 pb-[0.375rem]',
-        xs: 'text-sm leading-4 pb-[0.375rem]',
-        sm: 'text-base leading-5 pb-2',
-        md: 'text-lg leading-6 pb-4',
-        lg: 'text-xl leading-7 pb-4',
-      },
-    },
-    defaultVariants: {
-      size: 'lg',
-    },
-  },
-);
-const tabListVariants = cva('', {
+
+const tabVariants = cva('', {
   variants: {
     size: {
-      xxs: '',
-      xs: 'flex flex-row gap-4',
-      sm: 'flex flex-row gap-4',
-      md: 'flex flex-row gap-4',
-      lg: '',
+      sm: ' pb-[4px]',
+      md: 'pb-[8px]',
+      lg: 'pb-[8px]',
     },
   },
   defaultVariants: {
-    size: 'lg',
+    size: 'md',
+  },
+});
+const tabTextVariants = cva('', {
+  variants: {
+    size: {
+      sm: 'b3',
+      md: 'b2',
+      lg: 'b1',
+    },
+  },
+  defaultVariants: {
+    size: 'md',
+  },
+});
+
+const tabTextContainerVariants = cva('', {
+  variants: {
+    size: {
+      sm: 'p-[4px] md:p-[4px]',
+      md: 'p-[4px] md:p-[8px]',
+      lg: 'p-[4px] md:p-[8px]',
+    },
+  },
+  defaultVariants: {
+    size: 'md',
+  },
+});
+
+const tabListVariants = cva('', {
+  variants: {
+    size: {
+      sm: 'flex flex-row pb-[4px] gap-[12px] md:gap-[16px]',
+      md: 'flex flex-row pb-[8px] gap-[16px] md:gap-[20px]',
+      lg: 'flex flex-row pb-[8px] gap-[20px] md:gap-[32px]',
+    },
+  },
+  defaultVariants: {
+    size: 'md',
   },
 });
 
 interface TabsProps {
   children: ReactNode;
   defaultValue?: number;
-  size: 'xxs' | 'xs' | 'sm' | 'md' | 'lg';
+  size: 'sm' | 'md' | 'lg';
   className?: string;
 }
 
@@ -140,8 +160,8 @@ const TabList: React.FC<TabListProps> = ({ children, className }) => {
     width: `${measurements[selectedTab]?.width}px`,
     position: 'absolute',
     bottom: 0,
-    height: '2px',
-    borderRadius: '2px',
+    //height: '2px',
+    borderRadius: '4px',
     transform: 'translateY(1px)',
     transition:
       'left 200ms cubic-bezier(0, 0, 0.2, 1), width 200ms cubic-bezier(0, 0, 0.2, 1)',
@@ -150,7 +170,9 @@ const TabList: React.FC<TabListProps> = ({ children, className }) => {
   return (
     <RadixTabs.List
       className={cn(tabListStyles, className)}
-      style={{ position: 'relative' }}
+      style={{
+        position: 'relative',
+      }}
       ref={tabListContainerRef}
     >
       <>
@@ -160,7 +182,10 @@ const TabList: React.FC<TabListProps> = ({ children, className }) => {
           });
         })}
       </>
-      <div className={`bg-[var(--tab-fg-active)]`} style={indicatorStyle} />
+      <div
+        className={`bg-[var(--tab-fg-active)] h-[2px]`}
+        style={indicatorStyle}
+      />
     </RadixTabs.List>
   );
 };
@@ -168,8 +193,10 @@ const TabList: React.FC<TabListProps> = ({ children, className }) => {
 const Tab: React.FC<TabProps> = React.forwardRef<HTMLDivElement, TabProps>(
   ({ children, value, className }, ref: any) => {
     const { size } = useContext(TabContext);
+    const context = useContext(SelectedTabContext);
+    const selectedTab = context?.selectedTab;
 
-    const tabStyles = cn(tabVariants({ size }));
+    const tabStyles = cn(tabTextContainerVariants({ size }));
 
     return (
       <RadixTabs.Trigger
@@ -177,14 +204,19 @@ const Tab: React.FC<TabProps> = React.forwardRef<HTMLDivElement, TabProps>(
         className={`${tabStyles} ${className}`}
         ref={ref}
       >
-        {children}
+        <Text
+          className={cn(tabTextVariants({ size }))}
+          color={selectedTab === value ? 'primary' : 'tertiary'}
+        >
+          {children}
+        </Text>
       </RadixTabs.Trigger>
     );
   },
 );
 
 const TabPanels: React.FC<TabPanelsProps> = ({ children, className }) => (
-  <div className={cn('p-4', className)}>{children}</div>
+  <div className={cn('w-full', className)}>{children}</div>
 );
 
 const TabPanel: React.FC<TabPanelProps> = ({ children, value }) => (

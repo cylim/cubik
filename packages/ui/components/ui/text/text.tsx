@@ -4,7 +4,7 @@ import { ClassValue } from 'clsx';
 
 import { cn } from '../../../lib/utils';
 
-const headingVariant = cva('', {
+const headingVariant = cva('antialiased', {
   variants: {
     color: {
       primary: 'text-[var(--color-fg-primary-depth)]',

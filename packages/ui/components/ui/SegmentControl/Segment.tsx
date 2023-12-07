@@ -3,7 +3,6 @@ import React from 'react';
 import { cn } from '../../../lib/utils';
 import { Text } from '../../ui/text/text';
 
-
 interface SegmentContainerProps {
   children: React.ReactNode;
   size: 'l3' | 'l2' | 'l1';
@@ -11,18 +10,12 @@ interface SegmentContainerProps {
 interface SegmentItemsProps {
   children: React.ReactNode;
   onClick: () => void;
-<<<<<<< HEAD
-
-
-export const SegmentContainer = ({ children }: SegmentContainerProps) => {
-=======
   isActive: boolean;
 }
 export const SegmentContainer = ({
   children,
   size = 'l2',
 }: SegmentContainerProps) => {
->>>>>>> fca93e81 (fix: segment)
   return (
     <div
       className={cn(
@@ -35,16 +28,11 @@ export const SegmentContainer = ({
   );
 };
 
-<<<<<<< HEAD
-
-export const SegmentItems = ({ children, onClick }: SegmentItemsProps) => {
-=======
 export const SegmentItems = ({
   children,
   onClick,
   isActive,
 }: SegmentItemsProps) => {
->>>>>>> fca93e81 (fix: segment)
   return (
     <div
       onClick={onClick}
@@ -60,6 +48,4 @@ export const SegmentItems = ({
       </Text>
     </div>
   );
-
-
 };

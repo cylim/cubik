@@ -12,7 +12,7 @@ export const Header = () => {
   return (
     <>
       <VerifyModal open={open} setOpen={setOpen} />
-      <div className="w-full dark:bg-neutral-800">
+      <div className="w-full bg-[var(--body-surface)] px-4 md:px-0">
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between py-6">
           <div className="flex justify-start gap-10">
             <div className="flex items-center justify-center">
@@ -26,7 +26,7 @@ export const Header = () => {
                 Admin
               </Tag>
             </div>
-            <div className="flex items-center justify-center gap-5">
+            {/* <div className="flex items-center justify-center gap-5">
               <Text color={'primary'} className="l1">
                 Quadratic Funding
               </Text>
@@ -36,7 +36,7 @@ export const Header = () => {
               <Text color={'primary'} className="l1">
                 Projects
               </Text>
-            </div>
+            </div> */}
           </div>
           <HandleConnect />
         </div>

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import fs from 'fs';
 import path from 'path';
@@ -39,12 +40,21 @@ export const createComponentNames = () => {
   let finalData = {};
   componentColorDump?.modes[0].variables.forEach((e) => {
     if (typeof e.value !== 'string') {
+      let value = e.value.name
+        .split('/')
+        [e.value.name.split('/').length - 1].toLowerCase();
+
+      if (
+        !value.startsWith('#') &&
+        !value.includes('color') &&
+        value.split('-').length < 3
+      ) {
+        value = `color-${value}`;
+      }
+
       finalData = {
         ['--' + e.name.split('/')[e.name.split('/').length - 1]]: `var(${
-          '--' +
-          e.value.name
-            .split('/')
-            [e.value.name.split('/').length - 1].toLowerCase()
+          '--' + value
         })`,
         ...finalData,
       };
@@ -60,7 +70,7 @@ export const createComponentNames = () => {
       //       ...finalData,
       //     };
       //   }
-      console.log(e.value);
+      // console.log(e.value);
     }
   });
   fs.writeFileSync(
@@ -85,8 +95,10 @@ export const generateSemantic = () => {
   darkColors?.variables.forEach((e) => {
     if (typeof e.value !== 'string') {
       finalDark = {
-        ['--' + e.name.split('/')[e.name.split('/').length - 1]]:
-          `var(${convertStringToPrimitive(e.value.name)})`,
+        ['--' +
+        e.name.split('/')[
+          e.name.split('/').length - 1
+        ]]: `var(${convertStringToPrimitive(e.value.name)})`,
         ...finalDark,
       };
     } else {
@@ -106,8 +118,10 @@ export const generateSemantic = () => {
   lightColors?.variables.forEach((e) => {
     if (typeof e.value !== 'string') {
       finalLight = {
-        ['--' + e.name.split('/')[e.name.split('/').length - 1]]:
-          `var(${convertStringToPrimitive(e.value.name)})`,
+        ['--' +
+        e.name.split('/')[
+          e.name.split('/').length - 1
+        ]]: `var(${convertStringToPrimitive(e.value.name)})`,
         ...finalLight,
       };
     } else {

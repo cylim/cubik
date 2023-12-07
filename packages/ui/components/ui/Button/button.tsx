@@ -61,9 +61,9 @@ const iconVariants = cva('', {
   variants: {
     size: {
       xl: 'h-[16px]',
-      lg: 'h-[16px] ',
-      md: 'h-[16px] ',
-      sm: 'h-[12px] ',
+      lg: 'h-[16px]',
+      md: 'h-[16px]',
+      sm: 'h-[12px]',
     },
   },
   defaultVariants: {
@@ -78,7 +78,7 @@ interface ButtonProps
     >,
     VariantProps<typeof buttonVariants>,
     VariantProps<typeof bgVariants> {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
   leftIconName?: keyof typeof iconLibrary;
   rightIconName?: keyof typeof iconLibrary;
@@ -97,7 +97,7 @@ const Button = ({
     <button
       className={cn(
         bgVariants({ variant, size }),
-        'rounded-md flex items-center justify-center w-[fit-content] gap-1 px-[12px] ',
+        'rounded-md whitespace-nowrap flex items-center justify-center w-[fit-content] gap-[6px] px-[14px] md:px-[16px]',
         className,
       )}
       {...props}
@@ -111,9 +111,11 @@ const Button = ({
           className={cn(buttonVariants({ variant }), iconVariants({ size }))}
         />
       )}
-      <Text className={buttonVariants({ variant })} color="inherit">
-        {children}
-      </Text>
+      {children && (
+        <Text className={buttonVariants({ variant })} color="inherit">
+          {children}
+        </Text>
+      )}
       {rightIconName && (
         <Icon
           name={rightIconName}

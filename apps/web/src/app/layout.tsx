@@ -11,6 +11,7 @@ import Background from '@/components/common/bg/background';
 import TopNavbar from '@/components/header/navigation';
 import BottomNav from '@/components/mobile-bottom-nav';
 
+import { Divider } from '@cubik/ui';
 import { cn } from '@cubik/ui/lib/utils';
 
 const APP_NAME = 'Cubik';
@@ -55,7 +56,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#fff',
+  themeColor: '#fff', // #272727
 };
 
 const inter = Inter({ subsets: ['latin'] });
@@ -66,14 +67,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className="dark" lang="en">
+    <html className="light" lang="en">
       <body
         className={cn(inter.className, 'bg-[var(--color-bg-primary-depth)]')}
       >
         <Provider>
           <main className="relative z-[0]">
             <TopNavbar />
-            <Background />
             {children}
             <BottomNav name={'home'} />
           </main>

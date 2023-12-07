@@ -1,11 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { Icon } from '@cubik/ui';
 
 const BottomNav = (props: { name: any }) => {
   const [activeTabs, setActiveTabs] = useState(props.name);
+  const router = useRouter();
   useEffect(() => {
     switch (activeTabs) {
       case 'home':
@@ -17,7 +19,7 @@ const BottomNav = (props: { name: any }) => {
       case 'saved':
         //router.push('/saved')
         break;
-      case 'account':
+      case 'dhruvsol':
         //router.push('/account')
         break;
       default:
@@ -72,14 +74,14 @@ const BottomNav = (props: { name: any }) => {
             }
           />
         </div>
-        <div className={'p-3'}>
+        <div className={'p-3'} onClick={() => router.push('/dhruvsol')}>
           <Icon
             name={'bell'}
             width={28}
             stroke="var(--color-fg-primary-depth)"
             height={28}
             fill={
-              activeTabs === 'search'
+              activeTabs === 'dhruvsol'
                 ? 'var(--color-fg-primary-depth)'
                 : 'var(--body-surface)'
             }

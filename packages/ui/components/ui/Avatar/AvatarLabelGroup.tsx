@@ -16,6 +16,7 @@ interface AvatarLabelProps {
   longDescription?: string;
   size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
   avatarShape?: 'circle' | 'square';
+  className?: string;
 }
 
 const subTitleVariants = cva('flex relative', {
@@ -93,11 +94,12 @@ const AvatarLabelGroup: React.FC<AvatarLabelProps> = ({
   description,
   longDescription,
   size,
+  className,
 }) => {
   return (
-    <div className={cn(avatarLabelContainerVariants({ size }))}>
+    <div className={cn(avatarLabelContainerVariants({ size }), className)}>
       {/* Image Container */}
-      <div className="flex-shrink-0">
+      <div className="flex-shrink-0 flex">
         {typeof avatarSrc === 'string' ? (
           <Avatar src={avatarSrc} alt="sample" size={size} variant={shape} />
         ) : (
@@ -105,7 +107,7 @@ const AvatarLabelGroup: React.FC<AvatarLabelProps> = ({
         )}
       </div>
       {/* Text Container */}
-      <div className={cn(gapVariants({ size }))}>
+      <div className={cn(gapVariants({ size }), '')}>
         <div className="flex items-center">
           <TitleWithIcon text={title} size={size} />
           {subtitle && (
@@ -113,7 +115,10 @@ const AvatarLabelGroup: React.FC<AvatarLabelProps> = ({
           )}
         </div>
         {description && (
-          <Text color="secondary" className={cn(descriptionVariants({ size }))}>
+          <Text
+            color="secondary"
+            className={cn(descriptionVariants({ size }), 'break-all')}
+          >
             {description}
           </Text>
         )}

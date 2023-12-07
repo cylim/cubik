@@ -1,15 +1,14 @@
 import React from 'react';
 import { ContributionSegment } from '@/app/grants/components/sections/details-section/contributors-segment';
 import { ProjectSegment } from '@/app/grants/components/sections/details-section/project-segment';
+import { SegmentSwitch } from '@/app/grants/components/sections/details-section/segmentSwitch';
 
-import {
-  MetricsItem,
-  SegmentContainer,
-  SegmentItems,
-  SubHead,
-} from '@cubik/ui';
+import { MetricsItem, SubHead } from '@cubik/ui';
 
-export const DetailsSection = () => {
+interface Props {
+  searchParams: { [key in string]: string };
+}
+export const DetailsSection = ({ searchParams }: Props) => {
   return (
     <div className="">
       <div className="my-8 inline-flex w-full flex-col gap-11 md:my-16">
@@ -20,28 +19,17 @@ export const DetailsSection = () => {
           <MetricsItem />
         </div>
       </div>
-      <SegmentContainer>
-        <SegmentItems onClick={() => {}}>TabItem2</SegmentItems>
-        <SegmentItems onClick={() => {}}>TabItem2</SegmentItems>
-        <SegmentItems onClick={() => {}}>TabItem2</SegmentItems>
-      </SegmentContainer>
-      {/* <SegmentContainer size="sm">
-        <Segment defaultValue="projects">
-          <div className="flex flex-col items-start gap-3 px-4 md:flex-row md:justify-between md:px-0 ">
-            <SubHead heading="Stats" />
-            <SegmentList className="max-w-[20rem]" position="start">
-              <SegmentTrigger value="projects">Projects</SegmentTrigger>
-              <SegmentTrigger value="contributors">Contributors</SegmentTrigger>
-            </SegmentList>
-          </div>
-          <SegmentContent value="projects">
-            <ProjectSegment />
-          </SegmentContent>
-          <SegmentContent value="contributors">
-            <ContributionSegment />
-          </SegmentContent>
-        </Segment>
-      </SegmentContainer> */}
+      <div className="flex flex-col items-start gap-3 px-4 md:flex-row md:justify-between md:px-0 ">
+        <SubHead heading="Stats" />
+        <div className="w-1/3">
+          <SegmentSwitch />
+        </div>
+      </div>
+      {searchParams.section === 'contributors' ? (
+        <ContributionSegment />
+      ) : (
+        <ProjectSegment />
+      )}
     </div>
   );
 };

@@ -92,7 +92,7 @@ export const InputFieldContainer = ({
       className={cn(
         isDisabled && 'cursor-not-allowed',
         variant === 'md' ? 'h-[40px]' : 'h-[36px]',
-        'mt-2 flex rounded-[8px] w-full',
+        'flex rounded-[8px] w-full',
         isError
           ? 'border-[var(--form-input-border-error)] bg-[var(--form-input-surface-error)] text-[var(--form-input-fg-error)]'
           : 'border-[var(--form-input-border-default)]',
@@ -120,7 +120,7 @@ export const InputField = (props: Props) => {
         className={cn(
           'bg-[var(--form-input-surface-default)]',
           'disabled:text-[var(--form-input-fg-disabled)] disabled:cursor-not-allowed disabled:opacity-50 disabled:border-[var(--form-input-border-disabled)] disabled:bg-[var(--form-input-surface-disabled)',
-          'block w-full flex-1 px-2 rounded-[8px] border-0 py-1.5 placeholder:px-2 placeholder:text-[var(--form-input-border-default)] outline-none',
+          'block w-full flex-1 rounded-[8px] border-0 py-1.5 placeholder:px-2 placeholder:text-[var(--form-input-border-default)] outline-none',
         )}
         {...props}
       />

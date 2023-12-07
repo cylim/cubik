@@ -10,7 +10,6 @@ import { Provider } from '@/app/provider';
 import Background from '@/components/common/bg/background';
 import TopNavbar from '@/components/header/navigation';
 import BottomNav from '@/components/mobile-bottom-nav';
-import { GeistSans } from 'geist/font/sans'; // @todo uninstall this
 
 import { Divider } from '@cubik/ui';
 import { cn } from '@cubik/ui/lib/utils';

@@ -23,14 +23,16 @@ const MenuButton = ({ children }: MenuButtonProps) => {
 
 interface MenuListProps {
   children: React.ReactNode;
+  align?: 'end' | 'start' | 'center';
 }
 
-const MenuList = ({ children }: MenuListProps) => {
+const MenuList = ({ children, align = 'end' }: MenuListProps) => {
   return (
     <DropdownMenu.Portal>
       <DropdownMenu.Content
         className="min-w-[220px] border border-[var(--menu_list-border)] bg-[var(--menu_list-surface)] rounded-xl will-change-[opacity,transform] p-2"
         sideOffset={10}
+        align={align}
       >
         {children}
       </DropdownMenu.Content>
@@ -94,7 +96,7 @@ const SubMenuList = ({ children }: SubMenuListProps) => {
     <DropdownMenu.Portal>
       <DropdownMenu.SubContent
         className="min-w-[220px] border border-[var(--menu_list-border)] bg-[var(--menu_list-surface)] rounded-xl will-change-[opacity,transform] p-2"
-        sideOffset={10}
+        sideOffset={20}
       >
         {children}
       </DropdownMenu.SubContent>

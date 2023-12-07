@@ -4,6 +4,7 @@ html[class='dark'],:root {
     --gradient-blue: #1199FF00;
     --gradient-red: #F43F5E00;
     --Color: #FFFFFF;
+    --color-surface-cool-transparent:var(--color-white-10),
     --color-surface-primary-inverse: var(--color-white-50);
     --color-interaction-muted: var(--color-neutral-800);
     --color-interaction-tertiary: var(--color-yellow-500);

@@ -4,6 +4,7 @@ html[class='light'],:root {
     --gradient-blue: #1199FF66;
     --gradient-red: #F43F5E99;
     --Color: #FFFFFF;
+    --color-surface-cool-transparent: var(--color-black-10),
     --color-surface-primary-inverse: var(--color-black-900);
     --color-interaction-muted: var(--color-neutral-75);
     --color-interaction-tertiary: var(--color-yellow-600);
@@ -148,7 +149,6 @@ html[class='light'],:root {
     --color-surface-negative-muted: var(--color-neutral-75);
     --color-surface-negative-emphasis: var(--color-red-100);
     --color-surface-negative-base: var(--color-red-50);
-    --undefined: #0000000D;
     --color-surface-cool-muted: var(--color-white-200);
     --color-surface-cool-emphasis: var(--color-white-300);
     --color-surface-cool-base: var(--color-white);

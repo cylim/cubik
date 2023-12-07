@@ -40,3 +40,4 @@ export * from './components/ui/Logo';
 export * from './components/ui/Navbar';
 export * from './components/ui/Skeleton';
 export * from './components/ui/ProfileCard';
+export * from './components/ui/MenuList';

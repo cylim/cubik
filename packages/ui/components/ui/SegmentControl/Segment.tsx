@@ -23,23 +23,13 @@ const SegmentSizing = {
     content: '',
     list: 'p-[8px] gap-[8px] w-[652px]',
   },
-  xl: {
-    trigger: 'px-[16px] py-[8px] h-[36px]',
-    content: '',
-    list: 'p-[8px] gap-[8px] w-[710px]',
-  },
-  '2xl': {
-    trigger: 'px-[16px] py-[8px] h-[36px]',
-    content: '',
-    list: 'p-[8px] gap-[8px] w-[775px]',
-  },
 };
 
 interface SegmentContextType {
   size: keyof typeof SegmentSizing;
 }
 const SegmentContext = React.createContext<SegmentContextType>({
-  size: 'lg',
+  size: 'md',
 });
 
 interface Props {
@@ -63,6 +53,7 @@ type SegmentListProps = React.ComponentPropsWithoutRef<
 > & {
   position?: keyof typeof SegmentPosition;
 };
+
 const SegmentList = React.forwardRef<
   React.ElementRef<typeof SegmentPrimitive.List>,
   SegmentListProps
@@ -73,7 +64,7 @@ const SegmentList = React.forwardRef<
       <SegmentPrimitive.List
         ref={ref}
         className={cn(
-          'inline-flex h-12  items-center justify-evenly bg-[var(--tab-surface-inactive)] rounded-full',
+          'inline-flex h-12 items-center justify-evenly bg-[var(--segment_control-surface-inactive)] rounded-[8px]',
           className,
           SegmentSizing[context.size].list,
         )}
@@ -94,7 +85,7 @@ const SegmentTrigger = React.forwardRef<
       ref={ref}
       className={cn(
         SegmentSizing[context.size].trigger,
-        'inline-flex items-center w-full justify-center whitespace-nowrap text-sm font-medium transition-all  data-[state=active]:bg-[var(--tab-surface-active)] text-[var(--tab-fg-inactive)] data-[state=active]:text-[var(--tab-fg-active)] rounded-full ',
+        'inline-flex items-center w-full justify-center whitespace-nowrap text-sm font-medium transition-all data-[state=active]:bg-[var(--segment_control-surface-active)] text-[var(--segment_control-fg-inactive)] data-[state=active]:text-[var(--segment_control-fg-active)] rounded-[8px] data-[state=active]:shadow-md',
         className,
       )}
       {...props}

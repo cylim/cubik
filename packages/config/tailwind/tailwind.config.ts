@@ -28,6 +28,10 @@ const config: Config = {
       '4xl': '48px',
     },
     extend: {
+      '*': {
+        '-webkit-font-smoothing': 'antialiased',
+        '-webkit-tap-highlight-color': 'rgba(0,0,0,0)',
+      },
       fontFamily: {
         'text-xs-500': 'Inter',
       },

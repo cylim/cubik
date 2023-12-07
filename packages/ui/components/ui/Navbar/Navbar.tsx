@@ -30,7 +30,7 @@ interface NavbarProps extends VariantProps<typeof navbarVariants> {}
 
 export const Navbar = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="py-4 md:py-6 bg-[var(--body-surface)] border-b border-[var(--color-border-primary-base)] w-full top-0 bg-">
+    <div className="py-4 md:py-6 bg-[var(--body-surface)] w-full top-0 bg-">
       <div className="container mx-auto max-w-[1320px] px-6 h-full">
         <div className="flex justify-between items-center h-full">
           <Logo variant="text" />

@@ -2,14 +2,13 @@ import React from 'react';
 
 import { Text } from '../../ui/text/text';
 
-
 interface SegmentContainerProps {
   children: React.ReactNode;
 }
 interface SegmentItemsProps {
   children: React.ReactNode;
   onClick: () => void;
-
+}
 
 export const SegmentContainer = ({ children }: SegmentContainerProps) => {
   return (
@@ -18,7 +17,6 @@ export const SegmentContainer = ({ children }: SegmentContainerProps) => {
     </div>
   );
 };
-
 
 export const SegmentItems = ({ children, onClick }: SegmentItemsProps) => {
   return (
@@ -31,6 +29,4 @@ export const SegmentItems = ({ children, onClick }: SegmentItemsProps) => {
       </Text>
     </div>
   );
-
-
 };

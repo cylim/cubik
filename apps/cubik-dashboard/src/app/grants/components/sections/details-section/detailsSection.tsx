@@ -4,11 +4,8 @@ import { ProjectSegment } from '@/app/grants/components/sections/details-section
 
 import {
   MetricsItem,
-  Segment,
   SegmentContainer,
-  SegmentContent,
-  SegmentList,
-  SegmentTrigger,
+  SegmentItems,
   SubHead,
 } from '@cubik/ui';
 
@@ -17,13 +14,18 @@ export const DetailsSection = () => {
     <div className="">
       <div className="my-8 inline-flex w-full flex-col gap-11 md:my-16">
         <SubHead heading="Overview" />
-        <div className=" flex w-full flex-wrap items-center justify-start gap-10">
+        <div className="flex w-full flex-wrap items-center justify-start gap-10 md:flex-nowrap">
           <MetricsItem />
           <MetricsItem />
           <MetricsItem />
         </div>
       </div>
-      <SegmentContainer size="sm">
+      <SegmentContainer>
+        <SegmentItems onClick={() => {}}>TabItem2</SegmentItems>
+        <SegmentItems onClick={() => {}}>TabItem2</SegmentItems>
+        <SegmentItems onClick={() => {}}>TabItem2</SegmentItems>
+      </SegmentContainer>
+      {/* <SegmentContainer size="sm">
         <Segment defaultValue="projects">
           <div className="flex flex-col items-start gap-3 px-4 md:flex-row md:justify-between md:px-0 ">
             <SubHead heading="Stats" />
@@ -39,7 +41,7 @@ export const DetailsSection = () => {
             <ContributionSegment />
           </SegmentContent>
         </Segment>
-      </SegmentContainer>
+      </SegmentContainer> */}
     </div>
   );
 };

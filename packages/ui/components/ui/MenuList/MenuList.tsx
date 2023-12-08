@@ -30,7 +30,7 @@ const MenuList = ({ children, align = 'end' }: MenuListProps) => {
   return (
     <DropdownMenu.Portal>
       <DropdownMenu.Content
-        className="min-w-[220px] border border-[var(--menu_list-border)] bg-[var(--menu_list-surface)] rounded-xl will-change-[opacity,transform] p-2"
+        className="min-w-[220px] border border-[var(--menu-list-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] p-2"
         sideOffset={10}
         align={align}
       >
@@ -48,7 +48,7 @@ interface MenuItemProps {
 
 const MenuItem = ({ children, text, leftIcon }: MenuItemProps) => {
   return (
-    <DropdownMenu.Item className="relative cursor-pointer p-2 hover:bg-[var(--menu_list_item-surface-hovered)] hover:text-[var(--menu_list_item-fg-hovered)] hover:stroke-[var(--menu_list_item-fg-hovered)] stroke-[var(--menu_list_item-surface-default)] focus-visible:outline-none">
+    <DropdownMenu.Item className="relative cursor-pointer p-2 hover:bg-[var(--menu-list-item-surface-hovered)] hover:text-[var(--menu-list-item-fg-hovered)] hover:stroke-[var(--menu-list-item-fg-hovered)] stroke-[var(--menu-list-item-surface-default)] focus-visible:outline-none">
       <div className="flex justify-between">
         <div className="flex gap-2">
           {leftIcon && (
@@ -78,7 +78,7 @@ interface SubMenuButtonProps {
 
 const SubMenuButton = ({ children }: SubMenuButtonProps) => {
   return (
-    <DropdownMenu.SubTrigger className="relative cursor-pointer hover:bg-[var(--menu_list_item-surface-hovered)] hover:text-[var(--menu_list_item-fg-hovered)] hover:stroke-[var(--menu_list_item-fg-hovered)] stroke-[var(--menu_list_item-surface-default)] focus-visible:outline-none">
+    <DropdownMenu.SubTrigger className="relative cursor-pointer hover:bg-[var(--menu-list-item-surface-hovered)] hover:text-[var(--menu-list-item-fg-hovered)] hover:stroke-[var(--menu-list-item-fg-hovered)] stroke-[var(--menu-list-item-surface-default)] focus-visible:outline-none">
       <div className="flex justify-between items-center ">
         <Text className="l2 p-2">{children}</Text>
         <Icon name="chevronRight" height={20} width={20} stroke="inherit" />
@@ -95,7 +95,7 @@ const SubMenuList = ({ children }: SubMenuListProps) => {
   return (
     <DropdownMenu.Portal>
       <DropdownMenu.SubContent
-        className="min-w-[220px] border border-[var(--menu_list-border)] bg-[var(--menu_list-surface)] rounded-xl will-change-[opacity,transform] p-2"
+        className="min-w-[220px] border border-[var(--menu-list-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] p-2"
         sideOffset={20}
       >
         {children}
@@ -106,7 +106,7 @@ const SubMenuList = ({ children }: SubMenuListProps) => {
 
 const MenuDivider = () => {
   return (
-    <DropdownMenu.Separator className="border border-[var(--menu_list-border)] -mx-2 my-2" />
+    <DropdownMenu.Separator className="border border-[var(--menu-list-border)] -mx-2 my-2" />
   );
 };
 

@@ -42,7 +42,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
   variant = 'circular',
   maxCount = 3,
 }) => {
-  const overflowCount = avatars.length > 3 ? true : false;
+  const overflowCount = avatars?.length > 3 ? true : false;
 
   return (
     <div className="flex items-center gap-2">
@@ -53,7 +53,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
           ),
         )}
       >
-        {avatars.slice(0, maxCount).map((avatar, index) => (
+        {avatars?.slice(0, maxCount).map((avatar, index) => (
           <Avatar
             key={index}
             src={avatar.src}
@@ -64,7 +64,7 @@ export const AvatarGroup: React.FC<AvatarGroupProps> = ({
         ))}
         {variant === 'squared-horizontal' && overflowCount && (
           <span className="flex items-center justify-center text-[var(--avatar-label-title)] text-xs font-medium rounded-full">
-            +{avatars.length - 3}
+            +{avatars?.length - 3}
           </span>
         )}
       </div>

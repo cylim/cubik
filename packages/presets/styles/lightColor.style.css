@@ -1,9 +1,9 @@
 html[class='light'],:root {
-    --gradient-yellow: #F4D03F53;
-    --gradient-green: #3FF47E33;
-    --gradient-blue: #1199FF66;
-    --gradient-red: #F43F5E99;
-    --Color: #FFFFFF;
+    --gradient-yellow: var(--color-yellow-500\60);
+    --gradient-green: var(--color-green-500\60);
+    --gradient-blue: var(--color-blue-500\60);
+    --gradient-red: var(--color-red-500\60);
+    --Color: var(--color-white);
     --color-surface-primary-inverse: var(--color-black-900);
     --color-interaction-muted: var(--color-neutral-75);
     --color-interaction-tertiary: var(--color-yellow-600);
@@ -19,7 +19,7 @@ html[class='light'],:root {
     --color-border-success: var(--color-green-100);
     --color-border-hovered: var(--color-blue-500);
     --color-border-focus: var(--color-blue-500);
-    --color-border-tertiary: #FFFFFF;
+    --color-border-tertiary: var(--color-white);
     --color-border-inverse: var(--color-neutral-500);
     --color-border-secondary: var(--color-neutral-150);
     --color-border-primary: var(--color-neutral-100);
@@ -29,7 +29,7 @@ html[class='light'],:root {
     --color-fg-red: var(--color-red-50);
     --color-fg-blue: var(--color-blue-50);
     --color-fg-green: var(--color-green-50);
-    --color-fg-overlay: #FFFFFF;
+    --color-fg-overlay: var(--color-white);
     --color-fg-inverse: var(--color-white);
     --color-fg-muted: var(--color-neutral-250);
     --color-fg-purple-secondary: var(--color-purple-900);
@@ -95,7 +95,7 @@ html[class='light'],:root {
     --color-border-cool-muted: var(--color-neutral-600);
     --color-border-cool-emphasis: var(--color-white-500);
     --color-border-cool-base: var(--color-white-400);
-    --color-border-primary-light_only: var(--color-white-200);
+    --color-border-primary-light-only: var(--color-white-200);
     --color-border-primary-inverse: var(--color-neutral-900);
     --color-border-primary-subdued: var(--color-white-200);
     --color-border-primary-depth: var(--color-white-400);
@@ -119,11 +119,11 @@ html[class='light'],:root {
     --color-fg-negative-emphasis: var(--color-red-600);
     --color-fg-negative-base: var(--color-red-500);
     --color-fg-cool-muted: var(--color-neutral-200);
-    --color-fg-cool-emphasis: var(--color-black);
-    --color-fg-cool-base: var(--color-black);
+    --color-fg-cool-emphasis: var(--black);
+    --color-fg-cool-base: var(--black);
     --color-fg-primary-inverse: var(--color-neutral-100);
     --color-fg-primary-subdued: var(--color-neutral-400);
-    --color-fg-primary-depth: var(--color-black);
+    --color-fg-primary-depth: var(--black);
     --color-fg-primary-base: var(--color-neutral-600);
     --color-surface-innovative-transparent: var(--color-purple-500\10);
     --color-surface-innovative-muted: var(--color-neutral-75);
@@ -148,7 +148,7 @@ html[class='light'],:root {
     --color-surface-negative-muted: var(--color-neutral-75);
     --color-surface-negative-emphasis: var(--color-red-100);
     --color-surface-negative-base: var(--color-red-50);
-    --undefined: #0000000D;
+    --color-surface-cool-transparent: var(--color-black-500 \10);
     --color-surface-cool-muted: var(--color-white-200);
     --color-surface-cool-emphasis: var(--color-white-300);
     --color-surface-cool-base: var(--color-white);

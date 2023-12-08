@@ -17,6 +17,7 @@ interface AvatarLabelProps {
   size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
   avatarShape?: 'circle' | 'square';
   className?: string;
+  children?: React.ReactNode;
 }
 
 const subTitleVariants = cva('flex relative', {
@@ -92,9 +93,9 @@ const AvatarLabelGroup: React.FC<AvatarLabelProps> = ({
   title,
   subtitle,
   description,
-  longDescription,
   size,
   className,
+  children,
 }) => {
   return (
     <div className={cn(avatarLabelContainerVariants({ size }), className)}>
@@ -114,7 +115,7 @@ const AvatarLabelGroup: React.FC<AvatarLabelProps> = ({
             <span className={cn(subTitleVariants({ size }))}>{subtitle}</span>
           )}
         </div>
-        {description && (
+        {description && !children && (
           <Text
             color="secondary"
             className={cn(descriptionVariants({ size }), 'break-all')}
@@ -122,9 +123,7 @@ const AvatarLabelGroup: React.FC<AvatarLabelProps> = ({
             {description}
           </Text>
         )}
-        {longDescription && (
-          <p className={cn(descriptionVariants({ size }))}>{longDescription}</p>
-        )}
+        {children}
       </div>
     </div>
   );

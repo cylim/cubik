@@ -52,7 +52,6 @@ export const ProjectTab = async ({ username }: Props) => {
             <></>
           )}
         </>
-        <ProjectAdminCard />
         {/* <AdminProjectEmptyState /> */}
       </TabLayout>
     );

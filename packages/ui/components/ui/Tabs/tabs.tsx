@@ -4,6 +4,7 @@ import React, {
   createContext,
   ReactNode,
   useContext,
+  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -39,7 +40,7 @@ const tabVariants = cva('', {
 const tabTextVariants = cva('', {
   variants: {
     size: {
-      sm: 'b3',
+      sm: 'b2 md:b3',
       md: 'b2',
       lg: 'b1',
     },
@@ -52,9 +53,9 @@ const tabTextVariants = cva('', {
 const tabTextContainerVariants = cva('', {
   variants: {
     size: {
-      sm: 'p-[4px] md:p-[4px]',
-      md: 'p-[4px] md:p-[8px]',
-      lg: 'p-[4px] md:p-[8px]',
+      sm: 'p-[8px] md:p-[12px]',
+      md: 'p-[8px] md:p-[12px]',
+      lg: 'p-[12px] md:p-[16px]',
     },
   },
   defaultVariants: {
@@ -149,8 +150,19 @@ const TabList: React.FC<TabListProps> = ({ children, className }) => {
     );
   }
   const { selectedTab } = context;
+  console.log('selected tab', selectedTab);
   const tabListStyles = cn(tabListVariants({ size }));
   const tabsRef = useRef<(HTMLElement | null)[]>([]);
+  const [, setForceUpdate] = useState(false);
+  const [initialized, setInitialized] = useState(false);
+
+  useEffect(() => {
+    // This will run after the component mounts and measurements are set
+    if (!initialized) {
+      setForceUpdate(true);
+      setInitialized(true);
+    }
+  }, [initialized]);
 
   // Use the measurements from the useTabMeasurements hook
   const measurements = useTabMeasurements(
@@ -158,18 +170,28 @@ const TabList: React.FC<TabListProps> = ({ children, className }) => {
     tabListContainerRef.current,
   );
 
-  // Use the selectedTab index and measurements to set the indicator style
-  const indicatorStyle: React.CSSProperties = {
-    left: `${measurements[selectedTab]?.left}px`,
-    width: `${measurements[selectedTab]?.width}px`,
-    position: 'absolute',
-    bottom: 0,
-    //height: '2px',
-    borderRadius: '4px',
-    transform: 'translateY(1px)',
-    transition:
-      'left 200ms cubic-bezier(0, 0, 0.2, 1), width 200ms cubic-bezier(0, 0, 0.2, 1)',
-  };
+  const indicatorStyle: React.CSSProperties = measurements[selectedTab]
+    ? {
+        left: `${measurements[selectedTab]?.left}px`,
+        width: `${measurements[selectedTab]?.width}px`,
+        opacity: initialized ? 1 : 0,
+        position: 'absolute',
+        bottom: 0,
+        borderRadius: '4px',
+        transform: 'translateY(1px) translate3d(0, 0, 0)', // Trigger hardware acceleration
+        WebkitTransform: 'translateY(1px) translate3d(0, 0, 0)', // Webkit prefix for Safari
+        transition: `left 200ms cubic-bezier(0, 0, 0.2, 1), 
+                   width 200ms cubic-bezier(0, 0, 0.2, 1),
+                   opacity 200ms ease-in-out`,
+        WebkitTransition: `left 200ms cubic-bezier(0, 0, 0.2, 1), 
+                         width 200ms cubic-bezier(0, 0, 0.2, 1),
+                         opacity 200ms ease-in-out`, // Webkit prefix for Safari
+      }
+    : {
+        opacity: 0,
+        transform: 'translate3d(0, 0, 0)',
+        WebkitTransform: 'translate3d(0, 0, 0)',
+      };
 
   return (
     <RadixTabs.List

@@ -10849,6 +10849,12 @@ export const data: DataVariables = {
               value: '#A8A8A8',
             },
             {
+              name: 'Color/White/white-500\\10',
+              type: 'color',
+              isAlias: false,
+              value: '#0000000D',
+            },
+            {
               name: 'Color/White/white-600',
               type: 'color',
               isAlias: false,
@@ -10867,16 +10873,16 @@ export const data: DataVariables = {
               value: '#757575',
             },
             {
-              name: 'Color/White/grey-800',
-              type: 'color',
-              isAlias: false,
-              value: '#5C5C5C',
-            },
-            {
               name: 'White',
               type: 'color',
               isAlias: false,
               value: '#FFFFFF',
+            },
+            {
+              name: 'Color/White/grey-800',
+              type: 'color',
+              isAlias: false,
+              value: '#5C5C5C',
             },
             {
               name: 'Color/Black/black-50',
@@ -10913,6 +10919,18 @@ export const data: DataVariables = {
               type: 'color',
               isAlias: false,
               value: '#333333',
+            },
+            {
+              name: 'Color/Black/black-500 \\0',
+              type: 'color',
+              isAlias: false,
+              value: '#FFFFFF00',
+            },
+            {
+              name: 'Color/Black/black-500 \\10',
+              type: 'color',
+              isAlias: false,
+              value: '#FFFFFF0D',
             },
             {
               name: 'Color/Black/black-600',
@@ -11035,10 +11053,22 @@ export const data: DataVariables = {
               value: '#1199FF',
             },
             {
+              name: 'Color/Blue/blue-500\\0',
+              type: 'color',
+              isAlias: false,
+              value: '#1199FF00',
+            },
+            {
               name: 'Color/Blue/blue-500\\10',
               type: 'color',
               isAlias: false,
               value: '#1199FF1A',
+            },
+            {
+              name: 'Color/Blue/blue-500\\60',
+              type: 'color',
+              isAlias: false,
+              value: '#1199FF99',
             },
             {
               name: 'Color/Blue/blue-600',
@@ -11101,10 +11131,22 @@ export const data: DataVariables = {
               value: '#9946FC',
             },
             {
+              name: 'Color/Purple/purple-500\\0',
+              type: 'color',
+              isAlias: false,
+              value: '#9946FC00',
+            },
+            {
               name: 'Color/Purple/purple-500\\10',
               type: 'color',
               isAlias: false,
               value: '#9946FC1A',
+            },
+            {
+              name: 'Color/Purple/purple-500\\60',
+              type: 'color',
+              isAlias: false,
+              value: '#9946FC99',
             },
             {
               name: 'Color/Purple/purple-600',
@@ -11167,10 +11209,22 @@ export const data: DataVariables = {
               value: '#F43F5E',
             },
             {
+              name: 'Color/Red/red-500\\0',
+              type: 'color',
+              isAlias: false,
+              value: '#F43F5E00',
+            },
+            {
               name: 'Color/Red/red-500\\10',
               type: 'color',
               isAlias: false,
               value: '#F43F5E1A',
+            },
+            {
+              name: 'Color/Red/red-500\\60',
+              type: 'color',
+              isAlias: false,
+              value: '#F43F5E99',
             },
             {
               name: 'Color/Red/red-600',
@@ -11233,10 +11287,22 @@ export const data: DataVariables = {
               value: '#F4D03F',
             },
             {
+              name: 'Color/Yellow/yellow-500\\0',
+              type: 'color',
+              isAlias: false,
+              value: '#F4D03F00',
+            },
+            {
               name: 'Color/Yellow/yellow-500\\10',
               type: 'color',
               isAlias: false,
               value: '#F4D03F1A',
+            },
+            {
+              name: 'Color/Yellow/yellow-500\\60',
+              type: 'color',
+              isAlias: false,
+              value: '#F4D03F99',
             },
             {
               name: 'Color/Yellow/yellow-600',
@@ -11299,10 +11365,22 @@ export const data: DataVariables = {
               value: '#3FF47E',
             },
             {
+              name: 'Color/Green/green-500\\0',
+              type: 'color',
+              isAlias: false,
+              value: '#3FF47E00',
+            },
+            {
               name: 'Color/Green/green-500\\10',
               type: 'color',
               isAlias: false,
               value: '#3FF47E1A',
+            },
+            {
+              name: 'Color/Green/green-500\\60',
+              type: 'color',
+              isAlias: false,
+              value: '#3FF47E99',
             },
             {
               name: 'Color/Green/green-600',
@@ -11365,10 +11443,22 @@ export const data: DataVariables = {
               value: '#F47B3F',
             },
             {
+              name: 'Color/Orange/orange-500\\0',
+              type: 'color',
+              isAlias: false,
+              value: '#F47B3F00',
+            },
+            {
               name: 'Color/Orange/orange-500\\10',
               type: 'color',
               isAlias: false,
               value: '#F47B3F1A',
+            },
+            {
+              name: 'Color/Orange/orange-500\\60',
+              type: 'color',
+              isAlias: false,
+              value: '#F47B3F99',
             },
             {
               name: 'Color/Orange/orange-600',
@@ -11431,10 +11521,22 @@ export const data: DataVariables = {
               value: '#F43FC4',
             },
             {
+              name: 'Color/Pink/pink-500\\0',
+              type: 'color',
+              isAlias: false,
+              value: '#F43FC400',
+            },
+            {
               name: 'Color/Pink/pink-500\\10',
               type: 'color',
               isAlias: false,
               value: '#F43FC41A',
+            },
+            {
+              name: 'Color/Pink/pink-500\\60',
+              type: 'color',
+              isAlias: false,
+              value: '#F43FC499',
             },
             {
               name: 'Color/Pink/pink-600',
@@ -11749,8 +11851,11 @@ export const data: DataVariables = {
             {
               name: 'Button/Tertiary/Surface/button-tertiary-surface-default',
               type: 'color',
-              isAlias: false,
-              value: '#00000000',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Black/black-500 \\0',
+              },
             },
             {
               name: 'Button/Tertiary/Surface/button-tertiary-surface-hovered',
@@ -11764,14 +11869,20 @@ export const data: DataVariables = {
             {
               name: 'Button/Tertiary/Surface/button-tertiary-surface-focused',
               type: 'color',
-              isAlias: false,
-              value: '#00000003',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Black/black-500 \\0',
+              },
             },
             {
               name: 'Button/Tertiary/Surface/button-tertiary-surface-disabled',
               type: 'color',
-              isAlias: false,
-              value: '#00000000',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Black/black-500 \\0',
+              },
             },
             {
               name: 'Button/Secondary/Text/button-secondary-text-default',
@@ -11794,8 +11905,11 @@ export const data: DataVariables = {
             {
               name: 'Button/Outline/Surface/button-outline-surface-default',
               type: 'color',
-              isAlias: false,
-              value: '#FFFFFF00',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Black/black-500 \\0',
+              },
             },
             {
               name: 'Button/Outline/Surface/button-outline-surface-hovered',
@@ -11809,14 +11923,20 @@ export const data: DataVariables = {
             {
               name: 'Button/Outline/Surface/button-outline-surface-focused',
               type: 'color',
-              isAlias: false,
-              value: '#FFFFFF03',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Black/black-500 \\10',
+              },
             },
             {
               name: 'Button/Outline/Surface/button-outline-surface-disabled',
               type: 'color',
-              isAlias: false,
-              value: '#FFFFFF00',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Black/black-500 \\0',
+              },
             },
             {
               name: 'Button/Secondary/Text/button-secondary-text-focused',
@@ -11977,7 +12097,7 @@ export const data: DataVariables = {
               isAlias: true,
               value: {
                 collection: 'Semantic ( Colors )',
-                name: 'Colors/Foreground [Older]/color-fg-primary',
+                name: 'Colors/Foregrounds/Primary/color-fg-primary-depth',
               },
             },
             {
@@ -11986,7 +12106,7 @@ export const data: DataVariables = {
               isAlias: true,
               value: {
                 collection: 'Semantic ( Colors )',
-                name: 'Colors/Foreground [Older]/color-fg-tertiary',
+                name: 'Colors/Foregrounds/Primary/color-fg-primary-base',
               },
             },
             {
@@ -12004,7 +12124,7 @@ export const data: DataVariables = {
               isAlias: true,
               value: {
                 collection: 'Semantic ( Colors )',
-                name: 'Colors/Foreground [Older]/color-fg-muted',
+                name: 'Colors/Foregrounds/Primary/color-fg-primary-subdued',
               },
             },
             {
@@ -12415,8 +12535,11 @@ export const data: DataVariables = {
             {
               name: 'Navbar/navbar-surface',
               type: 'color',
-              isAlias: false,
-              value: '#FFFFFF00',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Black/black-500 \\0',
+              },
             },
             {
               name: 'Navbar/navbar-fg-active',
@@ -12763,8 +12886,11 @@ export const data: DataVariables = {
             {
               name: 'Form/Checkbox/Surface/form-checkbox-surface-focused',
               type: 'color',
-              isAlias: false,
-              value: '#FFFFFF03',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/White/white-500\\10',
+              },
             },
             {
               name: 'Form/Checkbox/Surface/form-checkbox-surface-focused-checked',
@@ -12868,8 +12994,11 @@ export const data: DataVariables = {
             {
               name: 'Form/Media Upload/Surface/form-uploader-surface-default',
               type: 'color',
-              isAlias: false,
-              value: '#FFFFFF03',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Black/black-500 \\0',
+              },
             },
             {
               name: 'Form/Media Upload/Surface/form-uploader-surface-dropping',
@@ -12892,20 +13021,29 @@ export const data: DataVariables = {
             {
               name: 'Form/Media Upload/Surface/form-checkbox-surface-success',
               type: 'color',
-              isAlias: false,
-              value: '#FFFFFF03',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Black/black-500 \\0',
+              },
             },
             {
               name: 'Form/Media Upload/Surface/form-checkbox-surface-warning',
               type: 'color',
-              isAlias: false,
-              value: '#FFFFFF03',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Black/black-500 \\0',
+              },
             },
             {
               name: 'Form/Media Upload/Surface/form-checkbox-surface-error',
               type: 'color',
-              isAlias: false,
-              value: '#FFFFFF03',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Black/black-500 \\0',
+              },
             },
             {
               name: 'Form/Media Upload/Border/form-uploader-border-default',
@@ -13372,7 +13510,7 @@ export const data: DataVariables = {
               isAlias: true,
               value: {
                 collection: '_primitives ( Colors )',
-                name: 'Black',
+                name: 'Color/Black/black-900',
               },
             },
             {
@@ -13381,7 +13519,7 @@ export const data: DataVariables = {
               isAlias: true,
               value: {
                 collection: '_primitives ( Colors )',
-                name: 'Black',
+                name: 'Color/Black/black-900',
               },
             },
             {
@@ -13417,7 +13555,7 @@ export const data: DataVariables = {
               isAlias: true,
               value: {
                 collection: '_primitives ( Colors )',
-                name: 'White',
+                name: 'Color/White/white-50',
               },
             },
             {
@@ -13810,8 +13948,11 @@ export const data: DataVariables = {
             {
               name: 'Tab/tab-border-inactive',
               type: 'color',
-              isAlias: false,
-              value: '#FFFFFF00',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Black/black-500 \\0',
+              },
             },
             {
               name: 'Button/Danger/Surface/button-danger-surface-default',
@@ -14113,8 +14254,11 @@ export const data: DataVariables = {
             {
               name: 'Menu/List Header/menu-header-surface-default',
               type: 'color',
-              isAlias: false,
-              value: '#FFFFFF00',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Black/black-500 \\0',
+              },
             },
             {
               name: 'Menu/List Header/menu-header-surface-highlighted',
@@ -14146,14 +14290,20 @@ export const data: DataVariables = {
             {
               name: 'Menu/List Item/menu-list-item-surface-default',
               type: 'color',
-              isAlias: false,
-              value: '#FFFFFF00',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Black/black-500 \\0',
+              },
             },
             {
               name: 'Menu/List Item/menu-list-item-surface-hovered',
               type: 'color',
-              isAlias: false,
-              value: '#1199FF1A',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Blue/blue-500\\10',
+              },
             },
             {
               name: 'Menu/List Item/menu-list-item-fg-default',
@@ -14266,8 +14416,11 @@ export const data: DataVariables = {
             {
               name: 'Segment Control/segment-control-border-inactive',
               type: 'color',
-              isAlias: false,
-              value: '#FFFFFF00',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Black/black-500 \\0',
+              },
             },
             {
               name: 'Round Card/round-card-surface',
@@ -14326,8 +14479,11 @@ export const data: DataVariables = {
             {
               name: 'Round Card/round-card-live-animation-ring',
               type: 'color',
-              isAlias: false,
-              value: '#3FF47E33',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Green/green-500\\10',
+              },
             },
             {
               name: 'Text/text-primary',
@@ -15098,8 +15254,11 @@ export const data: DataVariables = {
             {
               name: 'Colors/Surfaces/Cool/color-surface-cool-transparent',
               type: 'color',
-              isAlias: false,
-              value: '#FFFFFF0D',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Black/black-500 \\10',
+              },
             },
             {
               name: 'Colors/Surfaces/Negative/color-surface-negative-base',
@@ -15581,8 +15740,11 @@ export const data: DataVariables = {
             {
               name: 'Colors/Borders/Primary/color-border-primary-light_only',
               type: 'color',
-              isAlias: false,
-              value: '#00000000',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Black/black-500 \\0',
+              },
             },
             {
               name: 'Colors/Borders/Cool/color-border-cool-base',
@@ -16399,26 +16561,38 @@ export const data: DataVariables = {
             {
               name: 'Colors/Gradient/gradient-red',
               type: 'color',
-              isAlias: false,
-              value: '#F43F5E00',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Red/red-500\\0',
+              },
             },
             {
               name: 'Colors/Gradient/gradient-blue',
               type: 'color',
-              isAlias: false,
-              value: '#1199FF00',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Blue/blue-500\\0',
+              },
             },
             {
               name: 'Colors/Gradient/gradient-green',
               type: 'color',
-              isAlias: false,
-              value: '#3FF47E00',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Green/green-500\\0',
+              },
             },
             {
               name: 'Colors/Gradient/gradient-yellow',
               type: 'color',
-              isAlias: false,
-              value: '#F4D03F00',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Yellow/yellow-500\\0',
+              },
             },
           ],
         },
@@ -16815,8 +16989,11 @@ export const data: DataVariables = {
             {
               name: 'Colors/Surfaces/Cool/color-surface-cool-transparent',
               type: 'color',
-              isAlias: false,
-              value: '#0000000D',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Black/black-500 \\10',
+              },
             },
             {
               name: 'Colors/Surfaces/Negative/color-surface-negative-base',
@@ -18135,26 +18312,38 @@ export const data: DataVariables = {
             {
               name: 'Colors/Gradient/gradient-red',
               type: 'color',
-              isAlias: false,
-              value: '#F43F5E99',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Red/red-500\\60',
+              },
             },
             {
               name: 'Colors/Gradient/gradient-blue',
               type: 'color',
-              isAlias: false,
-              value: '#1199FF66',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Blue/blue-500\\60',
+              },
             },
             {
               name: 'Colors/Gradient/gradient-green',
               type: 'color',
-              isAlias: false,
-              value: '#3FF47E33',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Green/green-500\\60',
+              },
             },
             {
               name: 'Colors/Gradient/gradient-yellow',
               type: 'color',
-              isAlias: false,
-              value: '#F4D03F33',
+              isAlias: true,
+              value: {
+                collection: '_primitives ( Colors )',
+                name: 'Color/Yellow/yellow-500\\60',
+              },
             },
           ],
         },

@@ -6,7 +6,10 @@ import { IsUserLoginServer } from '@/utils/helpers/isUserLogin';
 import { EventHeader } from './components/EventHeader';
 import { TabsSection } from './components/Tabs';
 
-const EventInfoPage = async () => {
+interface Props {
+  searchParams: { [key in string]: string };
+}
+const EventInfoPage = async ({ searchParams }: Props) => {
   const cookieStore = cookies();
   const token = cookieStore.get('authToken');
   if (!token) {
@@ -21,7 +24,7 @@ const EventInfoPage = async () => {
     <>
       <EventHeader />
       <Background />
-      <TabsSection />
+      <TabsSection searchParams={searchParams} />
     </>
   );
 };

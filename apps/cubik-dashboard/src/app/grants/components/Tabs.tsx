@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { DetailsSection } from '@/app/grants/components/sections/details-section';
 
@@ -8,7 +6,10 @@ import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
 import { MultisigSection } from './sections/multisig-section/Multisigs';
 import { RegistrationsSection } from './sections/registration-section/Registrations';
 
-export const TabsSection = () => {
+interface Props {
+  searchParams: { [key in string]: string };
+}
+export const TabsSection = ({ searchParams }: Props) => {
   return (
     <div className="mx-auto w-full">
       <Tabs size="sm" defaultValue={0}>
@@ -33,7 +34,7 @@ export const TabsSection = () => {
         </div>
         <TabPanels className="mx-auto w-full max-w-7xl">
           <TabPanel value={0}>
-            <DetailsSection />
+            <DetailsSection searchParams={searchParams} />
           </TabPanel>
           <TabPanel value={1}>
             <RegistrationsSection />

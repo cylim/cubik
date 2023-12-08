@@ -119,11 +119,11 @@ html[class='light'],:root {
     --color-fg-negative-emphasis: var(--color-red-600);
     --color-fg-negative-base: var(--color-red-500);
     --color-fg-cool-muted: var(--color-neutral-200);
-    --color-fg-cool-emphasis: var(--black);
-    --color-fg-cool-base: var(--black);
+    --color-fg-cool-emphasis: var(--color-black);
+    --color-fg-cool-base: var(--color-black);
     --color-fg-primary-inverse: var(--color-neutral-100);
     --color-fg-primary-subdued: var(--color-neutral-400);
-    --color-fg-primary-depth: var(--black);
+    --color-fg-primary-depth: var(--color-black);
     --color-fg-primary-base: var(--color-neutral-600);
     --color-surface-innovative-transparent: var(--color-purple-500\10);
     --color-surface-innovative-muted: var(--color-neutral-75);

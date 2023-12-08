@@ -155,7 +155,7 @@ const MinimalLineGraph: React.FC<MinimalLineGraphProps> = ({ chartData }) => {
   return (
     <div>
       <Chart
-        options={data.options}
+        options={data.options as any}
         series={data.series}
         type={'area'}
         height={350}

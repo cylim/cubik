@@ -1,6 +1,4 @@
 import React, { ReactNode, useCallback } from 'react';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import { SolanaMobileWalletAdapterWalletName } from '@solana-mobile/wallet-adapter-mobile';
 
 import { Button } from '@cubik/ui';
@@ -26,11 +24,9 @@ export const UnifiedWalletButton: React.FC<{
 
   const content = (
     <>
-      {connecting && <Button>Connecting...</Button>}
-      {/* Desktop */}
       {!connecting && (
-        <Button variant="primary" size="lg">
-          Connect Wallet
+        <Button variant="primary" size="lg" isLoading={connecting}>
+          {connecting ? 'Connecting' : 'Connect Wallet'}
         </Button>
       )}
     </>

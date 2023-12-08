@@ -1,5 +1,9 @@
 import React from 'react';
-import Chart from 'react-apexcharts';
+import dynamic from 'next/dynamic';
+
+const Chart = dynamic(() => import('react-apexcharts'), {
+  ssr: false,
+});
 
 type MinimalLineGraphProps = {
   chartData: { name: string; data: number[][] }[];
@@ -151,7 +155,6 @@ const MinimalLineGraph: React.FC<MinimalLineGraphProps> = ({ chartData }) => {
   return (
     <div>
       <Chart
-        //@ts-ignore
         options={data.options}
         series={data.series}
         type={'area'}

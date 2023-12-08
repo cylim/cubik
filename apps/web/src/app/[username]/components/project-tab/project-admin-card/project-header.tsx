@@ -2,18 +2,19 @@ import React from 'react';
 import { ProjectProps } from '@/app/[username]/components/project-tab/project-admin-card';
 
 import {
+  AvatarLabelGroup,
   Button,
-  Icon,
   Menu,
   MenuButton,
   MenuDivider,
   MenuItem,
   MenuList,
+  PingIcon,
   SubMenu,
   SubMenuButton,
   SubMenuList,
+  Text,
 } from '@cubik/ui';
-import { AvatarLabelGroup } from '@cubik/ui/components/ui/Avatar/AvatarLabelGroup';
 
 const ProjectHeader = ({
   project,
@@ -30,7 +31,14 @@ const ProjectHeader = ({
         description={project?.shortDescription}
         size={'xl'}
         className="w-full"
-      />
+      >
+        <div className="flex flex-row items-center gap-2">
+          <PingIcon />
+          <Text className="l2" color="positive">
+            Live in round
+          </Text>
+        </div>
+      </AvatarLabelGroup>
       <div className="flex flex-row gap-2">
         <Button variant={'secondary'} size="xl" className="hidden md:flex">
           View Details

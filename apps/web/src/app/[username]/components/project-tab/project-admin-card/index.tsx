@@ -1,6 +1,8 @@
 import React from 'react';
 import ProjectHeader from '@/app/[username]/components/project-tab/project-admin-card/project-header';
 import ProjectAdminGrantsTab from '@/app/[username]/components/project-tab/project-admin-card/tabs/grants';
+import ProjectAdminStatsTab from '@/app/[username]/components/project-tab/project-admin-card/tabs/stats';
+import ProjectAdminTreasuryTab from '@/app/[username]/components/project-tab/project-admin-card/tabs/treasury';
 
 import {
   AvatarLabelGroup,
@@ -40,8 +42,12 @@ const ProjectAdminCardBody = () => {
         <TabPanel value={0}>
           <ProjectAdminGrantsTab />
         </TabPanel>
-        <TabPanel value={1}> </TabPanel>
-        <TabPanel value={2}> </TabPanel>
+        <TabPanel value={1}>
+          <ProjectAdminStatsTab />
+        </TabPanel>
+        <TabPanel value={2}>
+          <ProjectAdminTreasuryTab />{' '}
+        </TabPanel>
         <TabPanel value={3}> </TabPanel>
         <TabPanel value={4}> </TabPanel>
       </TabPanels>

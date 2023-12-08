@@ -1,20 +1,14 @@
 import React from 'react';
 import TabLayout from '@/components/common/tabs/TabLayout';
 
-import {
-  EmptyState,
-  Segment,
-  SegmentContainer,
-  SegmentContent,
-  SegmentList,
-  SegmentTrigger,
-  SubHead,
-} from '@cubik/ui';
+import { Button, EmptyState, SubHead } from '@cubik/ui';
 
-const ProjectAdminGrantsTab = () => {
+const ProjectAdminTreasuryTab = () => {
   return (
     <TabLayout>
-      <SubHead heading={'Grants'} />
+      <SubHead heading={'Project Vault'}>
+        <Button leftIconName="threeDots" variant={'secondary'} size="md" />
+      </SubHead>
       <EmptyState
         title={'No Grants Round Found'}
         description={
@@ -26,4 +20,4 @@ const ProjectAdminGrantsTab = () => {
   );
 };
 
-export default ProjectAdminGrantsTab;
+export default ProjectAdminTreasuryTab;

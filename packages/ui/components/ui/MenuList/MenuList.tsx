@@ -30,7 +30,7 @@ const MenuList = ({ children, align = 'end' }: MenuListProps) => {
   return (
     <DropdownMenu.Portal>
       <DropdownMenu.Content
-        className="min-w-[220px] border border-[var(--menu-list-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] p-2"
+        className="min-w-[220px] border border-[var(--menu-list-item-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] p-2 flex flex-col gap-2"
         sideOffset={10}
         align={align}
       >
@@ -48,9 +48,9 @@ interface MenuItemProps {
 
 const MenuItem = ({ children, text, leftIcon }: MenuItemProps) => {
   return (
-    <DropdownMenu.Item className="relative cursor-pointer p-2 hover:bg-[var(--menu-list-item-surface-hovered)] hover:text-[var(--menu-list-item-fg-hovered)] hover:stroke-[var(--menu-list-item-fg-hovered)] stroke-[var(--menu-list-item-surface-default)] focus-visible:outline-none">
+    <DropdownMenu.Item className="relative cursor-pointer p-2 hover:bg-[var(--menu-list-item-surface-hovered)] hover:rounded-lg text-[var(--menu-list-item-fg-default)] hover:text-[var(--menu-list-item-fg-hovered)] hover:stroke-[var(--menu-list-item-hovered)] stroke-[var(--menu-list-item-icon)] focus-visible:outline-none">
       <div className="flex justify-between">
-        <div className="flex gap-2">
+        <div className="flex gap-[10px] items-center ">
           {leftIcon && (
             <Icon name={leftIcon} stroke="inherit" height={20} width={20} />
           )}
@@ -74,13 +74,20 @@ const SubMenu = ({ children }: SubMenuProps) => {
 
 interface SubMenuButtonProps {
   children: React.ReactNode;
+  leftIcon?: keyof typeof iconLibrary;
 }
 
-const SubMenuButton = ({ children }: SubMenuButtonProps) => {
+const SubMenuButton = ({ children, leftIcon }: SubMenuButtonProps) => {
   return (
-    <DropdownMenu.SubTrigger className="relative cursor-pointer hover:bg-[var(--menu-list-item-surface-hovered)] hover:text-[var(--menu-list-item-fg-hovered)] hover:stroke-[var(--menu-list-item-fg-hovered)] stroke-[var(--menu-list-item-surface-default)] focus-visible:outline-none">
+    <DropdownMenu.SubTrigger className="relative cursor-pointer hover:bg-[var(--menu-list-item-surface-hovered)] text-[var(--menu-list-item-fg-default)] hover:text-[var(--menu-list-item-fg-hovered)] hover:rounded-lg hover:stroke-[var(--menu-list-item-hovered)] stroke-[var(--menu-list-item-icon)] focus-visible:outline-none p-2 py-2">
       <div className="flex justify-between items-center ">
-        <Text className="l2 p-2">{children}</Text>
+        <div className="flex gap-[10px] items-center ">
+          {leftIcon && (
+            <Icon name={leftIcon} stroke="inherit" height={20} width={20} />
+          )}
+          <Text className="l2 ">{children}</Text>
+        </div>
+
         <Icon name="chevronRight" height={20} width={20} stroke="inherit" />
       </div>
     </DropdownMenu.SubTrigger>
@@ -95,7 +102,7 @@ const SubMenuList = ({ children }: SubMenuListProps) => {
   return (
     <DropdownMenu.Portal>
       <DropdownMenu.SubContent
-        className="min-w-[220px] border border-[var(--menu-list-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] p-2"
+        className="min-w-[220px] border border-[var(--menu-list-item-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] p-2"
         sideOffset={20}
       >
         {children}
@@ -106,7 +113,7 @@ const SubMenuList = ({ children }: SubMenuListProps) => {
 
 const MenuDivider = () => {
   return (
-    <DropdownMenu.Separator className="border border-[var(--menu-list-border)] -mx-2 my-2" />
+    <DropdownMenu.Separator className="border border-[var(--color-border-primary-subdued)] -mx-2 my-2" />
   );
 };
 

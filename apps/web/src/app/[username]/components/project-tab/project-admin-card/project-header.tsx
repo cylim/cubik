@@ -53,7 +53,7 @@ const ProjectHeader = ({
             <MenuDivider />
             <MenuItem text="View Vault" leftIcon="bank" />
             <SubMenu>
-              <SubMenuButton>Share Project</SubMenuButton>
+              <SubMenuButton leftIcon="share">Share Project</SubMenuButton>
               <SubMenuList>
                 <MenuItem text="Download"></MenuItem>
                 <MenuItem text="Create a Copy"></MenuItem>
@@ -62,7 +62,7 @@ const ProjectHeader = ({
               </SubMenuList>
             </SubMenu>
             <SubMenu>
-              <SubMenuButton>View On Explorer</SubMenuButton>
+              <SubMenuButton leftIcon="compass">View On Explorer</SubMenuButton>
               <SubMenuList>
                 <MenuItem text="Solana Explorer" leftIcon="solanaExplorer" />
                 <MenuItem text="Solana FM" leftIcon="solanaFM" />

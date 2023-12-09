@@ -45,5 +45,6 @@ export * from './components/ui/metrics';
 export * from './components/ui/Background';
 export * from './components/ui/EmptyState';
 export * from './components/ui/Card';
+export * from './components/ui/pagination';
 export * from './components/ui/PingIcon';
 export * from './components/ui/Graphs';

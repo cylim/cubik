@@ -71,7 +71,7 @@ const iconVariants = cva('', {
   },
 });
 
-interface ButtonProps
+export interface ButtonProps
   extends React.DetailedHTMLProps<
       React.ButtonHTMLAttributes<HTMLButtonElement>,
       HTMLButtonElement

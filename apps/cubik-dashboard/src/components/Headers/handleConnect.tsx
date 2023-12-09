@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { handleAccessOnServer } from '@/components/Headers/handleAccessOnServer';
 import { AccessStore } from '@/context/scope';
 import { useUser } from '@/context/user';
 import { Button } from '@/utils/ui';
@@ -30,6 +31,10 @@ export const HandleConnect = () => {
           (await userResponse.json()) as unknown as AuthDecodeResponse;
 
         if (userRes.data) {
+          const cookieIsSet = handleAccessOnServer(
+            userRes.data.accessScope[0].event_id,
+          );
+          if (!cookieIsSet) return;
           setAccessScope(userRes.data.accessScope[0], user?.accessType);
           return setUser(userRes.data);
         }

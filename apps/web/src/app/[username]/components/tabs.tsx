@@ -12,7 +12,7 @@ export const ProfileTabs = ({ username }: Props) => {
     <div className="flex min-h-screen w-full flex-col items-end lg:items-center">
       <Tabs
         defaultValue={0}
-        size="md"
+        size="sm"
         className="md:overflow-x-inherit w-full overflow-y-hidden overflow-x-scroll"
       >
         <div className="bg-[var(--body-surface)]">

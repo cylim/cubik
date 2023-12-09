@@ -82,6 +82,7 @@ export interface ButtonProps
   className?: string;
   leftIconName?: keyof typeof iconLibrary;
   rightIconName?: keyof typeof iconLibrary;
+  isLoading?: boolean;
 }
 
 const Button = ({
@@ -91,10 +92,12 @@ const Button = ({
   leftIconName,
   rightIconName,
   className,
+  isLoading,
   ...props
 }: ButtonProps) => {
   return (
     <button
+      disabled={isLoading}
       className={cn(
         bgVariants({ variant, size }),
         'rounded-md whitespace-nowrap flex items-center justify-center w-[fit-content] gap-[6px] px-[14px] md:px-[16px]',
@@ -116,13 +119,22 @@ const Button = ({
           {children}
         </Text>
       )}
-      {rightIconName && (
+      {rightIconName && !isLoading && (
         <Icon
           name={rightIconName}
           stroke="#000"
           height={16}
           width={16}
           className={buttonVariants({ variant })}
+        />
+      )}
+      {isLoading && (
+        <Icon
+          name={'spinner'}
+          stroke="#000"
+          height={18}
+          width={18}
+          className={cn(buttonVariants({ variant }), 'animate-spin')}
         />
       )}
     </button>

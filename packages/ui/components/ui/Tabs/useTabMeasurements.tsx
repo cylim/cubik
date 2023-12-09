@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
 type Measurements = {
   left: number;
@@ -14,17 +14,15 @@ export function useTabMeasurements(
     tabRefs.map(() => ({ left: 0, width: 0 })),
   );
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!tabListContainerRef) return;
 
-    // Calculate and set the initial measurements
     const updateMeasurements = () => {
       const containerRect = tabListContainerRef.getBoundingClientRect();
 
       const newMeasurements = tabRefs.map((tabRef) => {
-        if (tabRef) {
+        if (tabRef && tabRef.offsetParent !== null) {
           const tabRect = tabRef.getBoundingClientRect();
-          // Subtract the container's left from the tab's left to get the relative position
           const left = tabRect.left - containerRect.left;
           const { width } = tabRect;
           return { left, width };
@@ -35,21 +33,15 @@ export function useTabMeasurements(
       setMeasurements(newMeasurements);
     };
 
-    // Create an observer to re-measure when tabs resize
     const observer = new ResizeObserver(updateMeasurements);
-
-    // Observe each tab ref
     tabRefs.forEach((ref) => {
       if (ref) observer.observe(ref);
     });
 
-    // Call update measurements to set the initial measurements
-    updateMeasurements();
-
     return () => {
       observer.disconnect();
     };
-  }, [tabRefs, tabListContainerRef]); // Depend on both the tabRefs and the container ref
+  }, [tabRefs, tabListContainerRef]);
 
   return measurements;
 }

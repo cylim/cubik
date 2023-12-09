@@ -16,6 +16,7 @@
     "@cubik/database": "workspace:*",
     "@cubik/presets": "workspace:*",
     "@cubik/ui": "workspace:*",
+    "@cubik/dayjs": "workspace:*",
     "@cubik/wallet-connect": "workspace:*",
     "@ducanh2912/next-pwa": "^9.7.2",
     "@prisma/nextjs-monorepo-workaround-plugin": "^5.6.0",

@@ -5,7 +5,7 @@ import { Metrics } from '@/app/grants/components/sections/details-section/metric
 import { ProjectSegment } from '@/app/grants/components/sections/details-section/project-segment';
 import { SegmentSwitch } from '@/app/grants/components/sections/details-section/segmentSwitch';
 
-import { CircularSkeleton, Skeleton, SubHead, TextSkeleton } from '@cubik/ui';
+import { SubHead } from '@cubik/ui';
 
 interface Props {
   searchParams: { [key in string]: string };

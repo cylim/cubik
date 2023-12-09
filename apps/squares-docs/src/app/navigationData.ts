@@ -277,6 +277,12 @@ const navigationData: INavigationData[] = [
             link: '/components/overlay/tooltip',
             description: '',
           },
+          {
+            id: 255,
+            name: 'MenuList',
+            link: '/components/overlay/menuList',
+            description: '',
+          },
         ],
       },
       {

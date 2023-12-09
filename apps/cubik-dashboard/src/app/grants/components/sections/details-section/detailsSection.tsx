@@ -16,7 +16,7 @@ export const DetailsSection = ({ searchParams }: Props) => {
       <div className="my-8 inline-flex w-full flex-col gap-11 md:my-16">
         <SubHead heading="Overview" />
         <div className="flex w-full flex-wrap items-center justify-start gap-10 md:flex-nowrap">
-          <div className={'flex items-center justify-between p-[4px]'}>
+          {/* <div className={'flex items-center justify-between p-[4px]'}>
             <div className="flex w-full items-center gap-4">
               <CircularSkeleton size={'sm'} shape={'md'} />
               <div className="min-h-100% flex min-w-[16rem] flex-col justify-center gap-4 md:min-w-[24rem]">
@@ -26,7 +26,7 @@ export const DetailsSection = ({ searchParams }: Props) => {
                 <TextSkeleton lines={2} opacity={25} />
               </div>
             </div>
-          </div>
+          </div> */}
           <Metrics />
         </div>
       </div>
@@ -39,7 +39,7 @@ export const DetailsSection = ({ searchParams }: Props) => {
       {searchParams.section === 'contributors' ? (
         <ContributionSegment />
       ) : (
-        <ProjectSegment />
+        <ProjectSegment searchParams={searchParams} />
       )}
     </div>
   );

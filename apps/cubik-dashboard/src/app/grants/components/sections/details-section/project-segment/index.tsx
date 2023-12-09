@@ -2,11 +2,17 @@ import React from 'react';
 import { cookies } from 'next/headers';
 import { ProjectTable } from '@/app/grants/components/sections/details-section/project-segment/projectTable';
 
-export const ProjectSegment = () => {
+interface Props {
+  searchParams: { [key in string]: string };
+}
+export const ProjectSegment = ({ searchParams }: Props) => {
   const event_id = cookies().get('access-scope');
   return (
     <>
-      <ProjectTable eventId={event_id?.value || ' '} />
+      <ProjectTable
+        searchParams={searchParams}
+        eventId={event_id?.value || ' '}
+      />
     </>
   );
 };

@@ -307,8 +307,10 @@
     --button-outline-border-focused: var(--color-bg-info);
     --button-outline-border-hovered: var(--color-border-primary-base);
     --button-outline-border-default: var(--color-border-primary-base);
-    --button-secondary-border-focused: var(--color-blue-500);
-    --button-primary-border-focused: var(--color-blue-500);
+    --button-secondary-border-focused: var(--color-border-cool-base);
+    --button-secondary-border-disabled: var(--color-border-cool-muted);
+    --button-primary-border-disabled: var(--color-border-cool-base);
+    --button-primary-border-focused: var(--color-border-cool-emphasis);
     --button-tertiary-text-disabled: var(--color-fg-muted);
     --button-tertiary-text-focused: var(--color-fg-primary);
     --button-tertiary-text-hovered: var(--color-fg-primary);

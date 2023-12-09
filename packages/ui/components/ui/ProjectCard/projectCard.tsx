@@ -30,7 +30,7 @@ export const SaveButton = (props: ButtonProps) => {
       style={{
         border: '2px solid rgba(138, 138, 138, 0.25)',
       }}
-      variant="tertiary"
+      variant="secondary"
       size={'md'}
       {...props}
     >

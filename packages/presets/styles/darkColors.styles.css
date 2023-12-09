@@ -52,8 +52,8 @@ html[class='dark'],:root {
     --color-surface-info-muted: var(--color-neutral-880);
     --color-surface-info-tertiary: var(--color-neutral-500);
     --color-surface-info-secondary: var(--color-blue-900);
-    --color-surface-info: var(--color-neutral-800);
     --color-fg-tertiary: var(--color-neutral-500);
+    --color-surface-info: var(--color-neutral-800);
     --color-surface-alert-tertiary: var(--color-neutral-500);
     --color-surface-alert-secondary: var(--color-yellow-900);
     --color-surface-alert: var(--color-neutral-800);
@@ -95,7 +95,8 @@ html[class='dark'],:root {
     --color-border-cool-muted: var(--color-neutral-700);
     --color-border-cool-emphasis: var(--color-neutral-500);
     --color-border-cool-base: var(--color-neutral-600);
-    --color-border-primary-light-only: var(--color-black-500-0);
+    --color-border-primary-lightOnly: var(--color-black-500-0);
+    --color-border-primary-transparent: var(--color-black-500-10);
     --color-border-primary-inverse: var(--color-neutral-50);
     --color-border-primary-subdued: var(--color-black-400);
     --color-border-primary-depth: var(--color-black-800);
@@ -148,10 +149,13 @@ html[class='dark'],:root {
     --color-surface-negative-muted: var(--color-neutral-880);
     --color-surface-negative-emphasis: var(--color-neutral-800);
     --color-surface-negative-base: var(--color-neutral-850);
-    --color-surface-cool-transparent: var(--color-black-500-10);
+    --color-surface-cool-transparent: var(--color-black-500-20);
+    --color-surface-cool-inverse: var(--color-black-50);
     --color-surface-cool-muted: var(--color-black-600);
     --color-surface-cool-emphasis: var(--color-black-700);
     --color-surface-cool-base: var(--color-black-800);
+    --color-surface-primary-transparent: var(--color-black-500-10);
+    --color-surface-primary-inverse-hovered: var(--color-white-200);
     --color-surface-primary-subdued: var(--color-black-400);
     --color-surface-primary-depth: var(--color-black-600);
     --color-surface-primary-base: var(--color-black-500);

@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   createComponentNames,
-  // generateSemantic,
+  generateSemantic,
 } from './src/color/generateCSS';
+import { convertToCSSVariables } from './src/color/primitive';
 
-// import { convertToCSSVariables } from './src/color/primitive';
-
-// generateSemantic();
+generateSemantic();
 createComponentNames();
 // convertToCSSVariables();

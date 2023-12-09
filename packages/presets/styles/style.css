@@ -7,12 +7,14 @@
     --color-white-300: #E0E0E0;
     --color-white-400: #C2C2C2;
     --color-white-500: #A8A8A8;
-    --color-white-500-10: #0000000D;
+    --color-white-500-5: #0000000D;
+    --color-white-500-10: #0000001A;
+    --color-white-500-20: #00000033;
     --color-white-600: #8F8F8F;
     --color-black: #050505;
     --color-white-700: #757575;
     --color-white: #FFFFFF;
-    --color-grey-800: #282833;
+    --color-white-800: #5C5C5C;
     --color-black-50: #ABABAB;
     --color-black-100: #919191;
     --color-black-200: #787878;
@@ -20,7 +22,9 @@
     --color-black-400: #444444;
     --color-black-500: #333333;
     --color-black-500-0: #FFFFFF00;
-    --color-black-500-10: #FFFFFF0D;
+    --color-black-500-5: #FFFFFF0D;
+    --color-black-500-10: #FFFFFF1A;
+    --color-black-500-20: #FFFFFF33;
     --color-black-600: #272727;
     --color-black-700: #1F1F1F;
     --color-black-800: #1A1A1A;
@@ -33,6 +37,7 @@
     --color-grey-500: #6C6C89;
     --color-grey-600: #55556D;
     --color-grey-700: #3F3F50;
+    --color-grey-800: #282833;
     --color-grey-900: #121217;
     --color-blue-50: #F3FAFF;
     --color-blue-100: #E7F5FF;

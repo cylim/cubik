@@ -19,7 +19,6 @@ const TreasuryCard = ({
   symbol,
   classname,
 }: Props) => {
-  console.log('iconBg', classname);
   return (
     <div className="flex items-center space-x-3 rounded-lg border border-[#333333] bg-[#262626] p-4">
       <Avatar src={iconName} alt="alt image" variant="square" />

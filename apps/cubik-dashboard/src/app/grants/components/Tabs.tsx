@@ -32,7 +32,7 @@ export const TabsSection = ({ searchParams }: Props) => {
             </Tab>
           </TabList>
         </div>
-        <TabPanels className="mx-auto w-full max-w-7xl">
+        <TabPanels className="mx-auto w-full max-w-7xl px-4 xl:px-0">
           <TabPanel value={0}>
             <DetailsSection searchParams={searchParams} />
           </TabPanel>

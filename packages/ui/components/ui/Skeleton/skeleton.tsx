@@ -23,7 +23,6 @@ const circularSkeltonVariants = cva('', {
     size: 'md',
   },
 });
-
 const Skeleton = ({
   className,
   width,

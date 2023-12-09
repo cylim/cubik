@@ -20,7 +20,7 @@ import {
 export const ContributorsTable = () => {
   return (
     <div className="bg-[var(--card-bg-primary)]">
-      <div className="flex items-center justify-between p-5">
+      <div className="flex flex-col items-center justify-between gap-3 p-5 md:flex-row">
         <SubHead heading="All Contributors" />
         <div className="flex items-center justify-between gap-5">
           <InputFieldContainer variant={'md'}>

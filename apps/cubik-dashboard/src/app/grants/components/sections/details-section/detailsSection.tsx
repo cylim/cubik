@@ -1,32 +1,16 @@
-'use client';
-
 import React from 'react';
 import { ContributionSegment } from '@/app/grants/components/sections/details-section/contributors-segment';
 import { getMetrics } from '@/app/grants/components/sections/details-section/helpers/getMetrics';
+import { Metrics } from '@/app/grants/components/sections/details-section/metrics';
 import { ProjectSegment } from '@/app/grants/components/sections/details-section/project-segment';
 import { SegmentSwitch } from '@/app/grants/components/sections/details-section/segmentSwitch';
-import { AccessStore } from '@/context/scope';
-import { useUser } from '@/context/user';
-import { useQuery } from '@tanstack/react-query';
 
-import {
-  CircularSkeleton,
-  MetricsItem,
-  Skeleton,
-  SubHead,
-  TextSkeleton,
-} from '@cubik/ui';
+import { CircularSkeleton, Skeleton, SubHead, TextSkeleton } from '@cubik/ui';
 
 interface Props {
   searchParams: { [key in string]: string };
 }
 export const DetailsSection = ({ searchParams }: Props) => {
-  const { scope } = AccessStore();
-  const metrics = useQuery({
-    queryKey: ['metrics', scope?.event_id],
-    queryFn: ({ queryKey }) => getMetrics(queryKey[1] || ''),
-    enabled: !!scope,
-  });
   return (
     <div className="">
       <div className="my-8 inline-flex w-full flex-col gap-11 md:my-16">
@@ -43,26 +27,12 @@ export const DetailsSection = ({ searchParams }: Props) => {
               </div>
             </div>
           </div>
-          <MetricsItem
-            label="Contributions"
-            changePercent="10%"
-            subText={metrics.data?.contributions.toLocaleString() || '0'}
-          />
-          <MetricsItem
-            label="Contributors"
-            changePercent="10%"
-            subText={metrics.data?.contributors.toLocaleString() || '0'}
-          />
-          <MetricsItem
-            label="Matching Pool"
-            changePercent=""
-            subText={metrics.data?.matchingPool.toLocaleString() || '0'}
-          />
+          <Metrics />
         </div>
       </div>
-      <div className="mb-8 flex flex-col items-start gap-3  px-4 md:mb-16 md:flex-row md:justify-between md:px-0">
+      <div className="mb-8 flex items-start justify-between gap-3 md:px-0 ">
         <SubHead heading="Stats" />
-        <div className="w-1/3">
+        <div className="">
           <SegmentSwitch />
         </div>
       </div>

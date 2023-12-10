@@ -14,6 +14,8 @@ const ProjectAdminTreasuryTab = () => {
         <TreasuryInfoCard
           header="Outstanding Balance"
           headerIconName="infoCircle"
+          tooltipText="Outstanding Balance is the amount of balance that is outstanding
+          for this project."
           value="$456.8"
         />
         <Divider orientation="vertical" className=" !h-auto" />

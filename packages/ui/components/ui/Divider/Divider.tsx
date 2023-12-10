@@ -14,7 +14,7 @@ export const Divider = ({ orientation, background, className }: Props) => {
       orientation={orientation ?? 'horizontal'}
       decorative
       className={cn(
-        background ? background : 'var(--color-border-primary-base)',
+        background ? background : 'bg-[var(--color-border-primary-base)]',
         'min-h-[1px] data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px ',
         className,
       )}

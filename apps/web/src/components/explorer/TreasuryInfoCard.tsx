@@ -29,6 +29,7 @@ const TreasuryInfoCard = ({
                 height={12}
                 width={12}
                 stroke="var(--color-fg-primary-subdued)"
+                className=" hidden hover:stroke-[var(--color-bg-info)] md:block"
               />
             )}
           </TooltipTrigger>

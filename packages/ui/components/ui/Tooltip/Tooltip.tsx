@@ -9,7 +9,7 @@ interface TooltipProps {
 
 const Tooltip = ({ children }: TooltipProps) => {
   return (
-    <RadixTooltip.Provider>
+    <RadixTooltip.Provider delayDuration={100}>
       <RadixTooltip.Root>{children}</RadixTooltip.Root>
     </RadixTooltip.Provider>
   );

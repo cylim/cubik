@@ -214,6 +214,9 @@ importers:
       '@cubik/database':
         specifier: workspace:*
         version: link:../../packages/database
+      '@cubik/dayjs':
+        specifier: workspace:*
+        version: link:../../packages/dayjs
       '@cubik/presets':
         specifier: workspace:*
         version: link:../../packages/presets

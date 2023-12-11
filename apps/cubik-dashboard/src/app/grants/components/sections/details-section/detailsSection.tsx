@@ -1,6 +1,5 @@
 import React from 'react';
 import { ContributionSegment } from '@/app/grants/components/sections/details-section/contributors-segment';
-import { getMetrics } from '@/app/grants/components/sections/details-section/helpers/getMetrics';
 import { Metrics } from '@/app/grants/components/sections/details-section/metrics';
 import { ProjectSegment } from '@/app/grants/components/sections/details-section/project-segment';
 import { SegmentSwitch } from '@/app/grants/components/sections/details-section/segmentSwitch';
@@ -37,7 +36,7 @@ export const DetailsSection = ({ searchParams }: Props) => {
         </div>
       </div>
       {searchParams.section === 'contributors' ? (
-        <ContributionSegment />
+        <ContributionSegment searchParams={searchParams} />
       ) : (
         <ProjectSegment searchParams={searchParams} />
       )}

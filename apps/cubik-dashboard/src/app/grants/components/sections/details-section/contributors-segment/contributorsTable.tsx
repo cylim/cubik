@@ -3,6 +3,7 @@ import { handlePageSkip } from '@/utils/handlePage';
 
 import { getToken, TokenList } from '@cubik/common';
 import { prisma } from '@cubik/database';
+import dayjs from '@cubik/dayjs';
 import {
   AvatarLabelGroup,
   Button,
@@ -38,6 +39,7 @@ const getContributions = async (eventId: string, skip: number = 0) => {
         token: true,
         totalUsdAmount: true,
         totalAmount: true,
+        createdAt: true,
         user: {
           select: {
             profilePicture: true,
@@ -162,7 +164,7 @@ export const ContributorsTable = async ({ eventId, searchParams }: Props) => {
                     className="l3 text-[var(--avatar-label-title)]"
                     color="tertiary"
                   >
-                    Just Now
+                    {dayjs(contribution.createdAt).fromNow()}
                   </Text>
                 </TableCell>
                 <TableCell>

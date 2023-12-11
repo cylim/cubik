@@ -12,7 +12,13 @@ export const EmptyState = ({
 }: {
   title: string;
   description: string;
-  icon: 'cloudError' | 'alertInfoCircle' | 'alertTriangle' | 'danger';
+  icon:
+    | 'cloudError'
+    | 'alertInfoCircle'
+    | 'alertTriangle'
+    | 'danger'
+    | 'lock'
+    | 'key';
   children?: React.ReactNode;
   border?: boolean;
 }) => {

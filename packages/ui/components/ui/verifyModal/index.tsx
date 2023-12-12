@@ -49,12 +49,18 @@ export const VerifyModal = ({
             </ul>
           </Text>
           <div className="pointer-events-auto flex items-center justify-center gap-5">
-            <Button size={'full'} onClick={onClose} variant={'secondary'}>
+            <Button
+              className="w-full"
+              size={'xl'}
+              onClick={onClose}
+              variant={'secondary'}
+            >
               Cancel
             </Button>
             <Button
               isLoading={isLoading}
-              size={'full'}
+              size={'xl'}
+              className="w-full"
               variant={'primary'}
               onClick={handleVerify}
             >

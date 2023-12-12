@@ -21,8 +21,9 @@ export const VerifyModal = ({ open, setOpen }: Props) => {
     mutationFn: verifyUser,
     mutationKey: ['verify', 'user'],
     onSuccess: (data) => {
-      if (data?.error === "User Doesn't have access") {
-        // when user does'nt have
+      if (data?.error === 'Not a User') {
+        setOpen(false);
+        setUser(null);
       }
       if (data?.user) {
         setUser({
@@ -33,9 +34,13 @@ export const VerifyModal = ({ open, setOpen }: Props) => {
           profilePicture: data.user.profilePicture,
           username: data.user.username,
         });
+        return;
       }
+      setUser(null);
     },
-    onError: (error) => {},
+    onError: (error) => {
+      console.log(error);
+    },
   });
 
   return (

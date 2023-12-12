@@ -121,7 +121,12 @@ export const ProjectTable = async ({ eventId, searchParams }: Props) => {
         </div>
       </div>
       <Table className="">
-        <TableHeader className="border-b border-[var(--card-border-secondary)]">
+        <TableHeader
+          style={{
+            borderColor: 'var(--card-border-secondary)',
+          }}
+          className="border-b"
+        >
           <TableRow className="">
             <TableHead className="w-10"></TableHead>
             <TableHead>

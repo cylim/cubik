@@ -18,10 +18,7 @@ const nextConfig = {
     if (isServer) {
       config.plugins = [...config.plugins, new PrismaPlugin()];
     }
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack'],
-    });
+    config.externals.push('pino-pretty', 'lokijs', 'encoding');
     return config;
   },
   transpilePackages: ['@cubik/database'],

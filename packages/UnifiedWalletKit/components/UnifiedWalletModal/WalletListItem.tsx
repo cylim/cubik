@@ -51,7 +51,7 @@ export const WalletIcon: FC<WalletIconProps> = ({
           className="w-fit flex flex-col items-center justify-center gap-2"
           style={{ minWidth: width, minHeight: height }}
         >
-          <Avatar alt={wallet.name} src={wallet.icon} size="lg" />
+          <Avatar alt={wallet.name} src={wallet.icon} size="sm" />
           {/* <Image
             className={`border border-blue-400 rounded-[8px] min-h-[${height}px]`}
             width={width}
@@ -60,7 +60,7 @@ export const WalletIcon: FC<WalletIconProps> = ({
             alt={`${wallet.name} icon`}
             onError={onError}
           /> */}
-          <Text className="b2 md:b3-light" color="primary">
+          <Text className="b4 md:b4-light" color="primary">
             {wallet.name}
           </Text>
         </div>

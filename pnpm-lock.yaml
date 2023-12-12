@@ -1014,6 +1014,10 @@ importers:
       zod:
         specifier: ^3.22.4
         version: 3.22.4
+    devDependencies:
+      '@types/crypto-js':
+        specifier: ^4.2.1
+        version: 4.2.1
 
   packages/common-types:
     dependencies:
@@ -1360,6 +1364,9 @@ importers:
       '@radix-ui/react-tooltip':
         specifier: ^1.0.7
         version: 1.0.7(@types/react-dom@18.2.17)(@types/react@18.2.39)(react-dom@18.2.0)(react@18.2.0)
+      '@solana-mobile/wallet-adapter-mobile':
+        specifier: ^2.0.1
+        version: 2.0.1(@solana/web3.js@1.87.6)(react-native@0.72.7)
       '@storybook/react':
         specifier: ^7.5.3
         version: 7.6.1(react-dom@18.2.0)(react@18.2.0)(typescript@4.9.5)
@@ -9243,6 +9250,10 @@ packages:
     resolution: {integrity: sha512-8CGDvrBj1zgo2qE+oS3pOCyYNqCPryMWY2bGfwA0dcfopWGgxs+78df0Rs3rc9THP4JkOhLsAa+15VdpAqkcUA==}
     dependencies:
       '@types/node': 20.10.1
+    dev: true
+
+  /@types/crypto-js@4.2.1:
+    resolution: {integrity: sha512-FSPGd9+OcSok3RsM0UZ/9fcvMOXJ1ENE/ZbLfOPlBWj7BgXtEAM8VYfTtT760GiLbQIMoVozwVuisjvsVwqYWw==}
     dev: true
 
   /@types/debug@4.1.12:

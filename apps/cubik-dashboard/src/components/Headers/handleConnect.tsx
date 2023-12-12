@@ -29,14 +29,16 @@ export const HandleConnect = () => {
         const userResponse = await fetch('/api/auth/decode');
         const userRes =
           (await userResponse.json()) as unknown as AuthDecodeResponse;
-
         if (userRes.data) {
-          const cookieIsSet = handleAccessOnServer(
-            userRes.data.accessScope[0].event_id,
-          );
-          if (!cookieIsSet) return;
-          setAccessScope(userRes.data.accessScope[0], user?.accessType);
-          return setUser(userRes.data);
+          if (userRes.data.accessScope.length > 0) {
+            const cookieIsSet = handleAccessOnServer(
+              userRes.data.accessScope[0].event_id,
+            );
+            if (!cookieIsSet) return;
+            setAccessScope(userRes.data.accessScope[0], user?.accessType);
+          }
+          setUser(userRes.data);
+          return;
         }
         if (publicKey && connected && !user) {
           return setOpen(true);

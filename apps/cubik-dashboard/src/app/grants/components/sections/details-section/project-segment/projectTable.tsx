@@ -121,7 +121,12 @@ export const ProjectTable = async ({ eventId, searchParams }: Props) => {
         </div>
       </div>
       <Table className="">
-        <TableHeader className="border-b border-[var(--card-border-secondary)]">
+        <TableHeader
+          style={{
+            borderColor: 'var(--card-border-secondary)',
+          }}
+          className="border-b"
+        >
           <TableRow className="">
             <TableHead className="w-10"></TableHead>
             <TableHead>
@@ -201,7 +206,11 @@ export const ProjectTable = async ({ eventId, searchParams }: Props) => {
         </TableBody>
       </Table>
       <div className="w-full border-t border-[var(--card-border-secondary)] px-6 py-4">
-        <PaginationButton maxPage={Math.ceil(projectCount / 15)} page={page} />
+        <PaginationButton
+          maxPage={Math.ceil(projectCount / 15)}
+          route="/grants?section=projects&page="
+          page={page}
+        />
       </div>
     </div>
   );

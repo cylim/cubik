@@ -42,8 +42,9 @@ export const PaginationCounterButton = (props: Props) => {
 interface PaginationProps {
   page: number;
   maxPage: number;
+  route: string;
 }
-export const PaginationButton = ({ page, maxPage }: PaginationProps) => {
+export const PaginationButton = ({ page, maxPage, route }: PaginationProps) => {
   const router = useRouter();
   const pages = Array.from(Array(maxPage));
 
@@ -51,7 +52,7 @@ export const PaginationButton = ({ page, maxPage }: PaginationProps) => {
     <div className="flex h-14 w-full items-center justify-between px-1">
       <PreviousButton
         onClick={() => {
-          router.push(`/grants?section=projects&page=${page - 1}`, {
+          router.push(`${route}${page - 1}`, {
             scroll: false,
           });
         }}
@@ -65,7 +66,7 @@ export const PaginationButton = ({ page, maxPage }: PaginationProps) => {
                 <PaginationCounterButton
                   key={index}
                   onClick={() => {
-                    router.push(`/grants?section=projects&page=${index + 1}`, {
+                    router.push(`${route}${index + 1}`, {
                       scroll: false,
                     });
                   }}
@@ -92,14 +93,9 @@ export const PaginationButton = ({ page, maxPage }: PaginationProps) => {
                   }
                   size={'md'}
                   onClick={() => {
-                    router.push(
-                      `/grants?section=projects&page=${
-                        pages.length - (3 - index - 1)
-                      }`,
-                      {
-                        scroll: false,
-                      },
-                    );
+                    router.push(`${route}${pages.length - (3 - index - 1)}`, {
+                      scroll: false,
+                    });
                   }}
                 >
                   {pages.length - (3 - index - 1)}
@@ -117,7 +113,7 @@ export const PaginationButton = ({ page, maxPage }: PaginationProps) => {
                 variant={page === index + 1 ? 'secondary' : 'outline'}
                 size={'md'}
                 onClick={() => {
-                  router.push(`/grants?section=projects&page=${index + 1}`, {
+                  router.push(`${route}${index + 1}`, {
                     scroll: false,
                   });
                 }}
@@ -132,7 +128,7 @@ export const PaginationButton = ({ page, maxPage }: PaginationProps) => {
       <NextButton
         disabled={maxPage < page + 1 ? true : false}
         onClick={() => {
-          router.push(`/grants?section=projects&page=${page + 1}`, {
+          router.push(`${route}${page + 1}`, {
             scroll: false,
           });
         }}

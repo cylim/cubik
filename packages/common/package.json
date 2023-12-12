@@ -20,5 +20,8 @@
     "bs58": "^5.0.0",
     "crypto-js": "^4.2.0",
     "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.1"
   }
 }

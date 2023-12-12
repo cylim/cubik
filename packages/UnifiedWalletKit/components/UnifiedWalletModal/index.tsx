@@ -53,7 +53,7 @@ const ListOfWallets: React.FC<{
               {isSmallDevice ? (
                 <WalletIcon wallet={adapter} width={48} height={48} />
               ) : (
-                <WalletIcon wallet={adapter} width={60} height={30} />
+                <WalletIcon wallet={adapter} />
               )}
             </div>
           );
@@ -95,9 +95,9 @@ const ListOfWallets: React.FC<{
               onClick={(event) => handleConnectClick(event, adapter)}
             >
               {isSmallDevice ? (
-                <WalletIcon wallet={adapter} width={48} height={48} />
+                <WalletIcon wallet={adapter} />
               ) : (
-                <WalletIcon wallet={adapter} width={60} height={30} />
+                <WalletIcon wallet={adapter} />
               )}
             </div>
           );
@@ -115,7 +115,7 @@ const ListOfWallets: React.FC<{
             </a>
           </div>
         ) : null}
-        {list.others.length > 0 && (
+        {list.others.length > 0 && !showMore && (
           <>
             <div
               style={{
@@ -127,6 +127,7 @@ const ListOfWallets: React.FC<{
                 flexDirection: 'column',
                 gap: '8px',
               }}
+              className="pointer-events-auto"
               onClick={() => setShowMore(true)}
             >
               <AvatarGroup
@@ -140,10 +141,10 @@ const ListOfWallets: React.FC<{
                   })}
                 shape="square"
                 variant="squared-horizontal"
-                size="sm"
+                size="xs"
                 maxCount={3}
               />
-              <Text className="b2 md:b3-light" color="primary">
+              <Text className="b4 md:b4-light" color="primary">
                 More
               </Text>
             </div>

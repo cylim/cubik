@@ -12,6 +12,7 @@ interface Props {
 const EventInfoPage = async ({ searchParams }: Props) => {
   const cookieStore = cookies();
   const token = cookieStore.get('authToken');
+
   if (!token) {
     return <>No Token Found</>;
   }

@@ -1,9 +1,9 @@
-html[class='light'],:root {
+:root {
     --gradient-yellow: var(--color-yellow-500-60);
     --gradient-green: var(--color-green-500-60);
     --gradient-blue: var(--color-blue-500-60);
     --gradient-red: var(--color-red-500-60);
-    --Color: var(--color-white);
+    --color: var(--color-white);
     --color-surface-primary-inverse: var(--color-black-900);
     --color-interaction-muted: var(--color-neutral-75);
     --color-interaction-tertiary: var(--color-yellow-600);
@@ -95,7 +95,7 @@ html[class='light'],:root {
     --color-border-cool-muted: var(--color-neutral-600);
     --color-border-cool-emphasis: var(--color-white-500);
     --color-border-cool-base: var(--color-white-400);
-    --color-border-primary-lightOnly: var(--color-white-200);
+    --color-border-primary-lightonly: var(--color-white-200);
     --color-border-primary-transparent: var(--color-white-500-10);
     --color-border-primary-inverse: var(--color-neutral-900);
     --color-border-primary-subdued: var(--color-white-200);
@@ -190,7 +190,7 @@ html[class='light'],:root {
     --color-bg-warning: var(--color-orange-500);
     --color-bg-alert: var(--color-yellow-500);
     --color-bg-success: var(--color-green-500);
-    --color-bg-Error: var(--color-red-500);
+    --color-bg-error: var(--color-red-500);
     --color-bg-inverse: var(--color-neutral-920);
     --color-bg-tertiary: var(--color-neutral-50);
     --color-bg-secondary: var(--color-neutral-25);

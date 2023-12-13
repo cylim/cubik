@@ -53,7 +53,8 @@ export const createComponentNames = () => {
       }
 
       finalData = {
-        ['--' + e.name.split('/')[e.name.split('/').length - 1]]: `var(${
+        ['--' +
+        e.name.split('/')[e.name.split('/').length - 1].toLowerCase()]: `var(${
           '--' + value
         })`,
         ...finalData,
@@ -96,20 +97,22 @@ export const generateSemantic = () => {
     if (typeof e.value !== 'string') {
       finalDark = {
         ['--' +
-        e.name.split('/')[
-          e.name.split('/').length - 1
-        ]]: `var(${convertStringToPrimitive(e.value.name)})`,
+        e.name
+          .split('/')
+          [
+            e.name.split('/').length - 1
+          ].toLowerCase()]: `var(${convertStringToPrimitive(e.value.name)})`,
         ...finalDark,
       };
     } else {
       if (e.name.split('/').length > 3) {
         finalDark = {
-          ['--' + e.name.split('/')[4]]: e.value,
+          ['--' + e.name.split('/')[4].toLowerCase()]: e.value,
           ...finalDark,
         };
       } else if (e.name.split('/').length === 3) {
         finalDark = {
-          ['--' + e.name.split('/')[2]]: e.value,
+          ['--' + e.name.split('/')[2].toLowerCase()]: e.value,
           ...finalDark,
         };
       }
@@ -119,20 +122,22 @@ export const generateSemantic = () => {
     if (typeof e.value !== 'string') {
       finalLight = {
         ['--' +
-        e.name.split('/')[
-          e.name.split('/').length - 1
-        ]]: `var(${convertStringToPrimitive(e.value.name)})`,
+        e.name
+          .split('/')
+          [
+            e.name.split('/').length - 1
+          ].toLowerCase()]: `var(${convertStringToPrimitive(e.value.name)})`,
         ...finalLight,
       };
     } else {
       if (e.name.split('/').length > 3) {
         finalLight = {
-          ['--' + e.name.split('/')[4]]: e.value,
+          ['--' + e.name.split('/')[4].toLowerCase()]: e.value,
           ...finalLight,
         };
       } else if (e.name.split('/').length === 3) {
         finalLight = {
-          ['--' + e.name.split('/')[2]]: e.value,
+          ['--' + e.name.split('/')[2].toLowerCase()]: e.value,
           ...finalLight,
         };
       } else {

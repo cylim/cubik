@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers';
+import { ConnectWalletSection } from '@/components/wallet/ConnectWalletSection';
 import { IsUserLoginServer } from '@/utils/helpers/isUserLogin';
 
 import { Alert, Button, EmptyState, SubHead } from '@cubik/ui';
@@ -10,24 +11,7 @@ export default async function Home() {
   console.log('token', token);
   console.log('user', user);
   if (!token || !user) {
-    return (
-      <div className="mx-auto flex max-w-7xl flex-col gap-[32px] pt-12">
-        <SubHead heading="Grants Rounds" className="!h5" />
-        <div className="rounded-lg border border-[#e5e7eb] bg-[var(--empty-state-surface-primary)]">
-          <EmptyState
-            title={'Connect Wallet to Get In'}
-            description={
-              'To access this dashboard connect your wallet and verify your status.'
-            }
-            icon={'lock'}
-          >
-            <Button className="w-full md:w-fit" variant="outline">
-              Connect Wallet
-            </Button>
-          </EmptyState>
-        </div>
-      </div>
-    );
+    return <ConnectWalletSection />;
   }
   return (
     // <div className="max-w-7xl mx-auto pt-12 flex flex-col gap-[32px]">

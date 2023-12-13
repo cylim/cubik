@@ -1,16 +1,69 @@
 import React from 'react';
 import TabLayout from '@/components/common/tabs/TabLayout';
 
-import {
-  Button,
-  EmptyState,
-  LineChart,
-  MinimalColumnGraph,
-  MinimalLineGraph,
-  SubHead,
-} from '@cubik/ui';
+import { DateInterval, IntervalsToDate } from '@cubik/common';
+import { prisma } from '@cubik/database';
+import dayjs from '@cubik/dayjs';
+import { Button, EmptyState, MinimalLineGraph, SubHead } from '@cubik/ui';
 
-const ProjectAdminStatsTab = () => {
+const getProjectStats = async (projectId: string, date: DateInterval) => {
+  try {
+    const dateNow = dayjs();
+    console.log(projectId);
+    const data = await prisma.contribution.findMany({
+      where: {
+        projectId,
+        isArchive: false,
+
+        // createdAt: {
+        //   gte: dateNow.subtract(IntervalsToDate[date], 'D').toDate(),
+        // },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+      select: {
+        id: true,
+        user: {
+          select: { id: true },
+        },
+        totalUsdAmount: true,
+        createdAt: true,
+      },
+    });
+    const formattedData: {
+      [key: string]: { users: Set<string>; total: number };
+    } = {};
+    data.forEach((item) => {
+      const dayWithNoonTime = item.createdAt.toISOString().split('T')[0];
+      // const dayUnixTimestamp = new Date(dayWithNoonTime).getTime() / 1000;
+
+      const dayKey = dayWithNoonTime;
+      console.log(dayKey);
+      if (!formattedData[dayKey]) {
+        formattedData[dayKey] = { users: new Set(), total: 0 };
+      }
+      formattedData[dayKey].users.add(item.user.id);
+      formattedData[dayKey].total += item.totalUsdAmount;
+    });
+
+    return Object.keys(formattedData).map((dayKey) => ({
+      day: dayKey,
+      userCount: formattedData[dayKey].users.size,
+      contributionCount: formattedData[dayKey].total,
+    }));
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+
+interface Props {
+  projectId: string;
+}
+const ProjectAdminStatsTab = async ({ projectId }: Props) => {
+  const data = await getProjectStats(projectId, '30D');
+  console.log(data);
   return (
     <TabLayout>
       <SubHead heading={'Project Stats'}>

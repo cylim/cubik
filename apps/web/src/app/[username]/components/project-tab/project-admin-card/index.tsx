@@ -19,13 +19,18 @@ import {
 } from '@cubik/ui';
 
 export type ProjectProps = {
+  id: string;
   name: string;
   slug: string | null;
   shortDescription: string;
   logo: string;
 };
 
-const ProjectAdminCardBody = () => {
+interface Props {
+  projectId: string;
+}
+
+const ProjectAdminCardBody = ({ projectId }: Props) => {
   return (
     <Tabs defaultValue={0} size="sm">
       <div className="border-b border-b-[var(--card-border-secondary)] bg-[var(--card-surface-primary)] pt-[16px]">
@@ -43,10 +48,10 @@ const ProjectAdminCardBody = () => {
           <ProjectAdminGrantsTab />
         </TabPanel>
         <TabPanel value={1}>
-          <ProjectAdminStatsTab />
+          <ProjectAdminStatsTab projectId={projectId} />
         </TabPanel>
         <TabPanel value={2}>
-          <ProjectAdminTreasuryTab />{' '}
+          <ProjectAdminTreasuryTab />
         </TabPanel>
         <TabPanel value={3}> </TabPanel>
         <TabPanel value={4}> </TabPanel>
@@ -62,7 +67,7 @@ const ProjectAdminCard = ({ project }: { project: ProjectProps }) => {
         <ProjectHeader project={project} isAdmin={true} />
       </CardHeader>
       <CardBody>
-        <ProjectAdminCardBody />
+        <ProjectAdminCardBody projectId={project.id} />
       </CardBody>
       {/* <CardBody>World</CardBody> */}
       {/* <CardFooter>this is me</CardFooter> */}

@@ -6,6 +6,12 @@ const Chart = dynamic(() => import('react-apexcharts'), {
 });
 
 type MinimalLineGraphProps = {
+  xAxis: {
+    // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+    title: {
+      text: string;
+    };
+  };
   chartData: { name: string; data: number[][] }[];
 };
 

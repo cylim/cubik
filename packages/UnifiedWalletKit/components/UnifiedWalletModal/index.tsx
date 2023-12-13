@@ -53,7 +53,7 @@ const ListOfWallets: React.FC<{
               {isSmallDevice ? (
                 <WalletIcon wallet={adapter} width={48} height={48} />
               ) : (
-                <WalletIcon wallet={adapter} />
+                <WalletIcon wallet={adapter} width={48} height={48} />
               )}
             </div>
           );

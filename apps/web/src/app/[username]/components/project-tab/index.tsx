@@ -19,6 +19,7 @@ const getProjects = async (username: string) => {
       },
     },
     select: {
+      id: true,
       name: true,
       logo: true,
       shortDescription: true,

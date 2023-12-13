@@ -12,9 +12,9 @@ interface Props {
 export const DetailsSection = ({ searchParams }: Props) => {
   return (
     <div className="">
-      <div className="my-8 inline-flex w-full flex-col gap-11 md:my-16">
+      <div className="my-10 inline-flex w-full flex-col gap-10 md:my-10">
         <SubHead heading="Overview" />
-        <div className="flex w-full flex-wrap items-center justify-start gap-10 md:flex-nowrap">
+        <div className="flex w-full flex-wrap items-center justify-start gap-8 md:flex-nowrap">
           {/* <div className={'flex items-center justify-between p-[4px]'}>
             <div className="flex w-full items-center gap-4">
               <CircularSkeleton size={'sm'} shape={'md'} />

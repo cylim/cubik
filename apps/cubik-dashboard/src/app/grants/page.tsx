@@ -24,7 +24,6 @@ const EventInfoPage = async ({ searchParams }: Props) => {
   return (
     <>
       <EventHeader />
-      <Background />
       <TabsSection searchParams={searchParams} />
     </>
   );

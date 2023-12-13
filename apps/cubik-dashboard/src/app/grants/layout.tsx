@@ -4,11 +4,7 @@ interface Props {
   children: React.JSX.Element;
 }
 const EventLayout = ({ children }: Props) => {
-  return (
-    <>
-      <div>{children}</div>
-    </>
-  );
+  return <>{children}</>;
 };
 
 export default EventLayout;

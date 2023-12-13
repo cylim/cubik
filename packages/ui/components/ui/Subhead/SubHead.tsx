@@ -14,7 +14,7 @@ export const SubHead = ({ heading, children, className }: Props) => {
   return (
     <>
       <div className={cn('flex justify-between items-center', className)}>
-        <Text color="primary" className={'h4 md:h4'}>
+        <Text color="primary" className={'h4 md:h5'}>
           {heading}
         </Text>
         {children}

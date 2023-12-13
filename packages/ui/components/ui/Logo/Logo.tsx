@@ -12,7 +12,7 @@ const logoVariants = cva('', {
     },
     size: {
       xs: '',
-      sm: '',
+      sm: 'w-[24px] h-auto',
       md: 'w-[32px] h-auto',
       lg: '',
       xl: '',

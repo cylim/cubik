@@ -150,7 +150,7 @@ interface TagProps extends VariantProps<typeof tagVariants> {
   border: boolean;
 }
 
-const tagVariants = cva('', {
+const tagVariants = cva('h-[24px] md:h-[28px]', {
   variants: {
     color: {
       green: 'bg-[var(--tag-solid-surface-green)]',
@@ -198,7 +198,7 @@ const Tag: React.FC<TagProps> = ({
     <div
       className={cn(
         tagVariants({ color }),
-        'inline-flex justify-center items-center rounded-full py-2 px-2',
+        'inline-flex justify-center items-center rounded-md px-2',
       )}
     >
       {childrenWithProps}

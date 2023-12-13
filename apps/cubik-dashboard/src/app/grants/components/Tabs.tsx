@@ -1,7 +1,7 @@
 import React from 'react';
 import { DetailsSection } from '@/app/grants/components/sections/details-section';
 
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
+import { Background, Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
 
 import { MultisigSection } from './sections/multisig-section/Multisigs';
 import { RegistrationsSection } from './sections/registration-section/Registrations';
@@ -11,28 +11,19 @@ interface Props {
 }
 export const TabsSection = ({ searchParams }: Props) => {
   return (
-    <div className="mx-auto w-full">
+    <div className="mx-auto w-full border-red-500">
       <Tabs size="sm" defaultValue={0}>
-        <div className="overflow-scroll bg-[var(--body-surface)]">
-          <TabList className="mx-auto max-w-7xl">
-            <Tab value={0}>
-              <div className="p-2">Details</div>
-            </Tab>
-            <Tab value={1}>
-              <div className="p-2">Registrations</div>
-            </Tab>
-            <Tab value={2}>
-              <div className="p-2">Multi</div>
-            </Tab>
-            <Tab value={3}>
-              <div className="p-2">Analytics</div>
-            </Tab>
-            <Tab value={4}>
-              <div className="p-2">Settings</div>
-            </Tab>
+        <div className="overflow-scroll border-red-500 bg-[var(--body-surface)] px-4 md:px-6">
+          <TabList className="mx-auto max-w-6xl">
+            <Tab value={0}>Details</Tab>
+            <Tab value={1}>Registrations</Tab>
+            <Tab value={2}>Multi</Tab>
+            <Tab value={3}>Analytics</Tab>
+            <Tab value={4}>Settings</Tab>
           </TabList>
         </div>
-        <TabPanels className="mx-auto w-full max-w-7xl px-4 xl:px-0">
+        <Background />
+        <TabPanels className="mx-auto w-full max-w-6xl">
           <TabPanel value={0}>
             <DetailsSection searchParams={searchParams} />
           </TabPanel>

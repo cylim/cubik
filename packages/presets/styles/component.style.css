@@ -5,7 +5,7 @@
     --table-row-fg-secondary: var(--color-fg-primary-subdued);
     --table-row-fg-primary: var(--color-fg-primary-depth);
     --table-header-fg-primary: var(--color-fg-primary-subdued);
-    --table-row-border: var(--color-border-primary-lightonly);
+    --table-row-border: var(--color-border-primary-lightOnly);
     --table-row-surface-hovered: var(--color-surface-primary-subdued);
     --table-row-surface-default: var(--color-surface-primary-base);
     --table-bg: var(--color-bg-primary-base);
@@ -21,7 +21,7 @@
     --empty-state-icon-yellow-stroke: var(--color-fg-alert-base);
     --empty-state-icon-blue-fill: var(--color-surface-info-transparent);
     --empty-state-icon-blue-stroke: var(--color-fg-info-base);
-    --empty-state-border-secondary: var(--color-border-primary-lightonly);
+    --empty-state-border-secondary: var(--color-border-primary-lightOnly);
     --empty-state-border-primary: var(--color-border-primary-base);
     --empty-state-fg-tertiary: var(--color-fg-primary-subdued);
     --empty-state-fg-secondary: var(--color-fg-primary-base);
@@ -32,7 +32,7 @@
     --empty-state-surface-primary: var(--color-surface-primary-depth);
     --card-border-hovered: var(--color-border-primary-base);
     --card-border-selected: var(--color-border-info-base);
-    --card-border-secondary: var(--color-border-primary-lightonly);
+    --card-border-secondary: var(--color-border-primary-lightOnly);
     --card-border-primary: var(--color-border-primary-base);
     --card-fg-tertiary: var(--color-fg-primary-subdued);
     --card-fg-secondary: var(--color-fg-primary-base);
@@ -45,7 +45,7 @@
     --text-primary: var(--color-fg-primary);
     --round-card-live-animation-ring: var(--color-green-500-10);
     --round-card-live-animation: var(--color-green-500);
-    --round-card-border: var(--color-border-primary-lightonly);
+    --round-card-border: var(--color-border-primary-lightOnly);
     --round-card-time: var(--color-fg-primary-subdued);
     --round-card-stats: var(--color-fg-primary-depth);
     --round-card-name: var(--color-fg-primary-depth);
@@ -57,7 +57,7 @@
     --segment-control-fg-inactive: var(--color-fg-primary-subdued);
     --segment-control-fg-active: var(--color-fg-primary-depth);
     --modal-body-surface: var(--color-bg-primary-depth);
-    --menu-list-item-border: var(--color-border-primary-lightonly);
+    --menu-list-item-border: var(--color-border-primary-lightOnly);
     --menu-list-surface: var(--color-surface-primary-base);
     --menu-list-item-hovered: var(--color-blue-500);
     --menu-list-item-icon: var(--color-fg-primary-base);
@@ -65,7 +65,7 @@
     --menu-list-item-fg-default: var(--color-fg-primary-depth);
     --menu-list-item-surface-hovered: var(--color-blue-500-10);
     --menu-list-item-surface-default: var(--color-black-500-0);
-    --menu-header-fg-onhighlightedsurface: var(--color-fg-primary-base);
+    --menu-header-fg-onHighlightedSurface: var(--color-fg-primary-base);
     --menu-header-fg: var(--color-fg-primary-depth);
     --menu-header-surface-highlighted: var(--color-surface-cool-muted);
     --menu-header-surface-default: var(--color-black-500-0);

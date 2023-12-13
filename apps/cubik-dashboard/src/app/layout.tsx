@@ -20,7 +20,7 @@ const APP_DESCRIPTION =
   'Control center for CUBIK, a PWA app for managing your projects.';
 
 export const viewport: Viewport = {
-  themeColor: '#141414',
+  themeColor: '#272727',
 };
 
 export const metadata: Metadata = {

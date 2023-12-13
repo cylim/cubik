@@ -6,16 +6,22 @@ interface Props {
   label: string;
   subText?: string;
   changePercent?: string;
+  children?: React.ReactNode;
 }
-export const MetricsItem = ({ label, changePercent, subText }: Props) => {
+export const MetricsItem = ({
+  label,
+  changePercent,
+  subText,
+  children,
+}: Props) => {
   return (
-    <div className="w-full bg-[var(--card-surface-primary)]  rounded-lg p-4">
-      <div className="flex justify-between items-end">
-        <div className="flex flex-col gap-8">
-          <Text className="l2" color="secondary">
-            {label}
-          </Text>
-          <div>
+    <div className="w-full bg-[var(--card-surface-primary)] rounded-lg p-4">
+      <div className="flex flex-col justify-between items-start">
+        <Text className="l2-light" color="secondary">
+          {label}
+        </Text>
+        <div className="flex flex-row gap-14 justify-between align-bottom items-end w-full">
+          <div className="flex flex-col gap-1 items-start justify-end">
             <Text className="h4" color="primary">
               {subText}
             </Text>
@@ -23,18 +29,11 @@ export const MetricsItem = ({ label, changePercent, subText }: Props) => {
               className="l2 text-[var(--card-fg-primary)] flex justify-start items-center"
               color="primary"
             >
-              {/* <Icon
-              name="swap"
-              width={10}
-              height={10}
-              className="stroke-[var(--card-fg-primary)] stroke-1"
-            /> */}
-              {/* @todo - Fix the swap icon */}
               {changePercent}
             </Text>
           </div>
+          {children && <div className="w-full min-h-[80px]">{children}</div>}
         </div>
-        <div className="w-40 bg-red-500 h-20"></div>
       </div>
     </div>
   );

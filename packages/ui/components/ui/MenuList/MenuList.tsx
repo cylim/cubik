@@ -30,7 +30,7 @@ const MenuList = ({ children, align = 'end' }: MenuListProps) => {
   return (
     <DropdownMenu.Portal>
       <DropdownMenu.Content
-        className="min-w-[220px] border border-[var(--menu-list-item-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] p-2 flex flex-col gap-2"
+        className="pb-2 min-w-[220px] shadow-xl border border-[var(--menu-list-item-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] flex flex-col gap-2"
         sideOffset={10}
         align={align}
       >
@@ -48,7 +48,7 @@ interface MenuItemProps {
 
 const MenuItem = ({ children, text, leftIcon }: MenuItemProps) => {
   return (
-    <DropdownMenu.Item className="relative cursor-pointer p-2 hover:bg-[var(--menu-list-item-surface-hovered)] hover:rounded-lg text-[var(--menu-list-item-fg-default)] hover:text-[var(--menu-list-item-fg-hovered)] hover:stroke-[var(--menu-list-item-hovered)] stroke-[var(--menu-list-item-icon)] focus-visible:outline-none">
+    <DropdownMenu.Item className="relative cursor-pointer p-2 mx-2 hover:bg-[var(--menu-list-item-surface-hovered)] hover:rounded-lg text-[var(--menu-list-item-fg-default)] hover:text-[var(--menu-list-item-fg-hovered)] hover:stroke-[var(--menu-list-item-hovered)] stroke-[var(--menu-list-item-icon)] focus-visible:outline-none">
       <div className="flex justify-between">
         <div className="flex gap-[10px] items-center ">
           {leftIcon && (

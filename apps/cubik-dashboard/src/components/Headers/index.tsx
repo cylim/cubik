@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-import { Logo, Tag, Text } from '@cubik/ui';
+import { Logo, Tag, TagLabel, Text } from '@cubik/ui';
 
 import { VerifyModal } from '../modals/verifyModal';
 import { HandleConnect } from './handleConnect';
@@ -12,18 +12,18 @@ export const Header = () => {
   return (
     <>
       <VerifyModal open={open} setOpen={setOpen} />
-      <div className="w-full bg-[var(--body-surface)] px-4 md:px-0">
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between py-6">
+      <div className="w-full bg-[var(--body-surface)] px-4 md:px-6">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between py-6">
           <div className="flex justify-start gap-10">
-            <div className="flex items-center justify-center">
-              <Logo />
+            <div className="flex items-center justify-center gap-2">
+              <Logo size="sm" />
               <Tag
                 border={true}
                 size="desktop"
                 color={'yellow'}
                 variant="solid"
               >
-                Admin
+                <TagLabel>Admin</TagLabel>
               </Tag>
             </div>
             {/* <div className="flex items-center justify-center gap-5">

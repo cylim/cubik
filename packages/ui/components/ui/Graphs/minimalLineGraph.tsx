@@ -7,36 +7,47 @@ const Chart = dynamic(() => import('react-apexcharts'), {
 
 type MinimalLineGraphProps = {
   chartData: { name: string; data: number[][] }[];
+  color?: string[];
+  theme: 'light' | 'dark';
 };
 
-const MinimalLineGraph: React.FC<MinimalLineGraphProps> = ({ chartData }) => {
+const MinimalLineGraph: React.FC<MinimalLineGraphProps> = ({
+  chartData,
+  color,
+  theme,
+}) => {
+  const fontColor = theme === 'dark' ? 'white' : 'black';
+  const surfaceColor = theme === 'dark' ? '#333333' : '#ffffff';
   const data = {
     series: chartData,
     options: {
-      chart: {
-        type: 'area',
-        stacked: false,
-        toolbar: {
-          show: false,
-        },
-        height: 350,
-        zoom: {
-          enabled: false,
+      theme: {
+        mode: 'light',
+        monochrome: {
+          enabled: true,
         },
       },
-      grid: {
-        show: false,
+      chart: {
+        type: 'area',
+        height: 80,
+        sparkline: {
+          enabled: true,
+        },
       },
       stroke: {
         show: true,
         curve: 'smooth',
         lineCap: 'round',
-        colors: undefined,
-        width: 3,
+        colors: color,
+        width: 2,
         dashArray: 0,
       },
-      dataLabels: {
-        enabled: false,
+      // dataLabels: {
+      //   enabled: false,
+      // },
+      grid: {
+        show: false,
+        padding: { left: 20, right: 10, top: 0, bottom: 0 },
       },
       markers: {
         size: 0,
@@ -48,12 +59,12 @@ const MinimalLineGraph: React.FC<MinimalLineGraphProps> = ({ chartData }) => {
         offsetX: -10,
       },
       fill: {
-        colors: ['#1199FF'],
+        colors: color,
         type: 'gradient',
         gradient: {
           shade: 'dark',
           type: 'vertical',
-          gradientToColors: ['#1199FF'],
+          gradientToColors: color,
           shadeIntensity: 2,
           opacityFrom: 0.5,
           opacityTo: 0.1,
@@ -126,26 +137,21 @@ const MinimalLineGraph: React.FC<MinimalLineGraphProps> = ({ chartData }) => {
           const date = new Date(timestamp)
             .toLocaleDateString(undefined, {
               day: 'numeric',
-              month: 'long',
+              month: 'short',
             })
             .replace(/\s\d{4}$/, ''); // Removes the year part
 
           return `
           <div
           class="arrow_box"
-          style="display: flex; border: 1px solid red;  flex-direction: column; align-items: flex-start; justify-content: flex-start; background-color: white; padding: 16px; gap: 8px; align-items: center;"
+          style="border: 0px; outline: 0px; display: flex; flex-direction: row; align-items: flex-start; justify-content: flex-start; background-color: ${surfaceColor}; padding: 8px; gap: 4px; align-items: center;"
         >
-          <div style="display: flex; border: 1px solid red; justify-content: space-between;">
-            <span style="color: black;">${date}</span>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: ${fontColor};  font-size: 12px; opacity: 50%;">${date}:</span>
           </div>
-          <div style="display: flex;border: 1px solid red;">
-            <span style="color: black; fontWeight: 500;">
-              ${chartData[0].name} - 
-            </span>
-            <span style="color: black; fontWeight: 600;">
+            <span style="color: ${fontColor}; fontWeight: 600;  font-size: 12px">
               <strong>$${data}</strong>
             </span>
-          </div>
         </div>
           `;
         },
@@ -153,12 +159,12 @@ const MinimalLineGraph: React.FC<MinimalLineGraphProps> = ({ chartData }) => {
     },
   };
   return (
-    <div>
+    <div className="max-h-[100px] overflow-visible flex align-bottom items-end">
       <Chart
         options={data.options as any}
         series={data.series}
         type={'area'}
-        height={350}
+        height={80}
       />
     </div>
   );

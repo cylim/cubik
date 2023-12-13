@@ -1,4 +1,4 @@
-:root {
+html[class='light'],:root {
     --gradient-yellow: var(--color-yellow-500-60);
     --gradient-green: var(--color-green-500-60);
     --gradient-blue: var(--color-blue-500-60);

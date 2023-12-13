@@ -40,10 +40,8 @@ export const WalletIcon: FC<WalletIconProps> = ({
     return (
       <div
         style={{
-          minWidth: 'clamp(84px,10vw,123px)',
-          minHeight: 'clamp(108px,10vw,120px)',
-          width: 'full',
-          height: 'full',
+          width: 'clamp(84px,10vw,102px)',
+          height: 'clamp(108px,10vw,100px)',
         }}
         className="flex items-center justify-center gap-2 px-[16px] py-[12px]"
       >
@@ -51,7 +49,7 @@ export const WalletIcon: FC<WalletIconProps> = ({
           className="w-fit flex flex-col items-center justify-center gap-2"
           style={{ minWidth: width, minHeight: height }}
         >
-          <Avatar alt={wallet.name} src={wallet.icon} size="sm" />
+          <Avatar alt={wallet.name} src={wallet.icon} size="md" />
           {/* <Image
             className={`border border-blue-400 rounded-[8px] min-h-[${height}px]`}
             width={width}
@@ -91,7 +89,7 @@ export const WalletListItem = ({
 
   const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
   return (
-    <li className="border border-red-500" onClick={handleClick}>
+    <li onClick={handleClick}>
       {isSmallDevice ? (
         <WalletIcon wallet={wallet} width={48} height={48} />
       ) : (

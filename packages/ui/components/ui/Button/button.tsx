@@ -38,14 +38,14 @@ const buttonVariants = cva('', {
   variants: {
     variant: {
       primary: 'stroke-inherit l2-heavy',
-      secondary: 'stroke-[var(--button-secondary-text-default)] l2-heavy',
+      secondary: 'stroke-[var(--button-secondary-text-default)]',
       outline:
-        'stroke-[var(--button-outline-text-default)] !text-[var(--button-outline-text-default)] l2-heavy',
-      link: 'stroke-[var(--button-link-text-default)] !text-[var(--button-link-text-default)] l2-heavy',
+        'stroke-[var(--button-outline-text-default)] !text-[var(--button-outline-text-default)] ',
+      link: 'stroke-[var(--button-link-text-default)] !text-[var(--button-link-text-default)] ',
       danger:
-        'stroke-[var(--button-danger-text-default)] !text-[var(--button-danger-text-default)] l2-heavy',
+        'stroke-[var(--button-danger-text-default)] !text-[var(--button-danger-text-default)] ',
       success:
-        'stroke-[var(--button-success-text-default)] !text-[var(--button-success-text-default)] l2-heavy',
+        'stroke-[var(--button-success-text-default)] !text-[var(--button-success-text-default)] ',
     },
   },
   defaultVariants: {
@@ -66,7 +66,19 @@ const iconVariants = cva('', {
     size: 'md',
   },
 });
-
+const buttonTextVariants = cva('', {
+  variants: {
+    size: {
+      xl: 'l2-heavy md:l2-heavy',
+      lg: 'l2-heavy md:l2-heavy',
+      md: 'l2-heavy md:l2-heavy',
+      sm: 'l2-heavy md:l2-heavy',
+    },
+  },
+  defaultVariants: {
+    size: 'md',
+  },
+});
 export interface ButtonProps
   extends React.DetailedHTMLProps<
       React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -111,7 +123,7 @@ const Button = ({
         />
       )}
       {children && (
-        <Text className={buttonVariants({ variant })} color="inherit">
+        <Text className={buttonTextVariants({ size })} color="inherit">
           {children}
         </Text>
       )}

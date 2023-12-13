@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers';
+import PageLayout from '@/components/Layouts/PageLayout';
 import { ConnectWalletSection } from '@/components/wallet/ConnectWalletSection';
 import { IsUserLoginServer } from '@/utils/helpers/isUserLogin';
 
@@ -10,29 +11,19 @@ export default async function Home() {
   const user = token && (await IsUserLoginServer(token.value));
   console.log('token', token);
   console.log('user', user);
+
   if (!token || !user) {
-    return <ConnectWalletSection />;
+    return (
+      <PageLayout>
+        <SubHead heading="Grants Rounds" className="!h5" />
+        <ConnectWalletSection />
+      </PageLayout>
+    );
   }
+
   return (
-    // <div className="max-w-7xl mx-auto pt-12 flex flex-col gap-[32px]">
-    //   <SubHead heading="Grants Rounds" className="!h5">
-    //     <Button>New Grants Round</Button>
-    //   </SubHead>
-    //   <div className="rounded-lg bg-[var(--empty-state-surface-primary)] border border-[#e5e7eb]">
-    //     <EmptyState
-    //       title={'Access to this page is not Allowed'}
-    //       description={
-    //         'Only grants manager can access this page. If you are grant manager reachout to the team.'
-    //       }
-    //       icon={'key'}
-    //     >
-    //       <Button className="w-full md:w-fit" variant="outline">
-    //         Contact Team
-    //       </Button>
-    //     </EmptyState>
-    //   </div>
-    // </div>
-    <div className="mx-auto flex max-w-7xl flex-col gap-[32px] pt-12">
+    <PageLayout>
+      <SubHead heading="Grants Rounds" className="!h5" />
       <Alert
         type="inline"
         fill={'blue'}
@@ -43,6 +34,6 @@ export default async function Home() {
         closeIcon
         className=""
       />
-    </div>
+    </PageLayout>
   );
 }

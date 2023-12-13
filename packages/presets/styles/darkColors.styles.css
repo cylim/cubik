@@ -95,7 +95,7 @@ html[class='dark'],:root {
     --color-border-cool-muted: var(--color-neutral-700);
     --color-border-cool-emphasis: var(--color-neutral-500);
     --color-border-cool-base: var(--color-neutral-600);
-    --color-border-primary-lightonly: var(--color-black-500-0);
+    --color-border-primary-lightOnly: var(--color-black-500-0);
     --color-border-primary-transparent: var(--color-black-500-10);
     --color-border-primary-inverse: var(--color-neutral-50);
     --color-border-primary-subdued: var(--color-black-400);

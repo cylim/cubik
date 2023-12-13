@@ -60,6 +60,7 @@ const ListOfWallets: React.FC<{
         }),
     [handleConnectClick, list.others],
   );
+
   const hasNoWallets = useMemo(() => {
     return list.highlightedBy === 'TopWallet' ? true : false;
   }, [list]);
@@ -84,7 +85,8 @@ const ListOfWallets: React.FC<{
           justifyContent: 'flex-start',
           alignItems: 'center',
           overflowY: 'scroll',
-          paddingTop: '24px',
+          paddingTop: '8px',
+          paddingBottom: '8px',
         }}
       >
         {list.highlight.map((adapter, idx) => {
@@ -103,7 +105,6 @@ const ListOfWallets: React.FC<{
           );
         })}
         {showMore && renderWalletList}
-
         {walletlistExplanation && list.others.length === 0 ? (
           <div className="text-xs flex justify-center items-center w-full font-semibold mt-4 pointer-events-auto -mb-2 text-white/80 underline cursor-pointer">
             <a
@@ -154,9 +155,9 @@ const ListOfWallets: React.FC<{
       {showMore && (
         <div
           onClick={() => setShowMore(false)}
-          className="text-xs flex justify-center items-center w-full font-semibold mt-4 pointer-events-auto -mb-2 text-white underline cursor-pointer"
+          className="flex justify-center items-center w-full my-4 pointer-events-auto cursor-pointer"
         >
-          <Text className="b2 md:b3-light" color="primary">
+          <Text className="b1" color="primary">
             View Less
           </Text>
         </div>
@@ -385,7 +386,7 @@ const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = ({
   }, [wallets, previouslyConnected]);
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col">
       <ListOfWallets
         list={list}
         onToggle={onToggle}

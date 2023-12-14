@@ -14,6 +14,7 @@ export const ConnectWalletSection = () => {
         'To access this dashboard connect your wallet and verify your status.'
       }
       icon={'lock'}
+      border
     >
       <Button
         onClick={() => setShowModal(true)}

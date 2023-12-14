@@ -4,8 +4,6 @@ import React from 'react';
 import CodeComponent from '@/app/home-page-components/code-component';
 import PageHOC from '@/app/home-page-components/components/pageHOC';
 
-import { Tooltip } from '@cubik/ui';
-
 const TooltipPage = () => {
   return (
     <>
@@ -22,7 +20,7 @@ const TooltipPage = () => {
             <CodeComponent codeString='import { Tooltip } from "@cubik/ui"' />
           </div>
           <div className="mt-10">
-            <Tooltip
+            {/* <Tooltip
               trigger={
                 <button className="text-violet11 shadow-blackA4 hover:bg-violet3 inline-flex h-[35px] w-[35px] items-center justify-center rounded-full bg-white shadow-[0_2px_10px] outline-none focus:shadow-[0_0_0_2px] focus:shadow-black">
                   X
@@ -30,7 +28,7 @@ const TooltipPage = () => {
               }
             >
               <h1>asdf</h1>
-            </Tooltip>
+            </Tooltip> */}
           </div>
         </div>
       </PageHOC>

@@ -7,7 +7,6 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { useCookies } from 'next-client-cookies';
 import { Drawer } from 'vaul';
 
 type Theme = 'light' | 'dark';
@@ -32,17 +31,19 @@ interface ThemeProviderProps {
 }
 
 function ThemeProvider({ children }: ThemeProviderProps) {
-  const cookies = useCookies();
   const [theme, setTheme] = useState<Theme>(() => {
-    const storedTheme = cookies.get('theme');
-    return (storedTheme ?? 'dark') as Theme;
+    if (typeof window !== 'undefined') {
+      const storedTheme = localStorage.getItem('theme');
+      return (storedTheme ?? 'dark') as Theme;
+    }
+    return 'dark';
   });
 
   // Function to toggle the theme
   const toggleTheme = () => {
     setTheme((currentTheme) => {
       const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      cookies.set('theme', newTheme);
+      localStorage.setItem('theme', newTheme);
       return newTheme;
     });
   };

@@ -4,7 +4,6 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { cn } from '../../../lib/utils';
 
 export const DialogSize = {
-  xs: 'max-w-[320px]',
   sm: 'max-w-[408px]',
   md: 'max-w-[500px]',
   lg: 'max-w-[600px]',

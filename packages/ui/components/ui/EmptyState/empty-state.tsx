@@ -25,7 +25,7 @@ export const EmptyState = ({
   return (
     <div
       className={`flex items-center justify-center rounded-[8px] py-10 md:py-16 ${
-        border && 'border border-[var(--color-border-primary-base)]'
+        border && 'border border-[var(--empty-state-border-primary)]'
       }`}
     >
       <div className="item-center mx-auto flex max-w-[280px] flex-col items-center justify-center gap-4 text-center md:max-w-[360px] md:gap-6">

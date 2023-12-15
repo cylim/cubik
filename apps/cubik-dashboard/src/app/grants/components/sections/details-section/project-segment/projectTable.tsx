@@ -157,7 +157,9 @@ export const ProjectTable = async ({ eventId, searchParams }: Props) => {
                     className="border-b border-[var(--card-border-secondary)]"
                   >
                     <TableCell className="">
-                      {(page === 1 ? 0 : (page - 1) * 15) + index + 1}
+                      <Text color={'primary'} className="l2">
+                        {(page === 1 ? 0 : (page - 1) * 15) + index + 1}
+                      </Text>
                     </TableCell>
                     <TableCell>
                       <AvatarLabelGroup
@@ -167,8 +169,16 @@ export const ProjectTable = async ({ eventId, searchParams }: Props) => {
                         avatarSrc={project.project.logo}
                       />
                     </TableCell>
-                    <TableCell>{project.contribution.length}</TableCell>
-                    <TableCell>{project._count.contribution}</TableCell>
+                    <TableCell>
+                      <Text color={'primary'} className="l2">
+                        {project.contribution.length}
+                      </Text>
+                    </TableCell>
+                    <TableCell>
+                      <Text color={'primary'} className="l2">
+                        {project._count.contribution}
+                      </Text>
+                    </TableCell>
                     <TableCell>
                       <Text
                         className="l2 text-[var(--avatar-label-title)]"
@@ -191,10 +201,7 @@ export const ProjectTable = async ({ eventId, searchParams }: Props) => {
                       <div className="h-10 w-full bg-red-500"></div>
                     </TableCell>
                     <TableCell className="flex items-center justify-center">
-                      <Icon
-                        name="chevronRight"
-                        className="stroke-[var(--color-neutral-700)]"
-                      />
+                      <Icon name="chevronRight" className="l3" />
                     </TableCell>
                   </TableRow>
                 );

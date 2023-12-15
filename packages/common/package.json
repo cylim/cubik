@@ -9,7 +9,9 @@
     "./tokens",
     "./crypto",
     "./metadata",
-    "./parser"
+    "./parser",
+    "./backup-images",
+    "./formatters"
   ],
   "scripts": {},
   "dependencies": {

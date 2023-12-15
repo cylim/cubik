@@ -12,10 +12,12 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
+  useTheme,
 } from '@cubik/ui';
 
 export const UserInteraction = () => {
   const { user } = useUser();
+  const { theme, toggleTheme } = useTheme();
   return (
     <div>
       <Menu>
@@ -46,7 +48,7 @@ export const UserInteraction = () => {
             />
           </div>
           <MenuItem leftIcon="externalLink" text="Open Website" />
-          <MenuItem leftIcon="moon" text="Dark" />
+          <MenuItem onClick={toggleTheme} leftIcon="moon" text={theme} />
           <MenuItem leftIcon="logoutRight" text="Logout" />
         </MenuList>
       </Menu>

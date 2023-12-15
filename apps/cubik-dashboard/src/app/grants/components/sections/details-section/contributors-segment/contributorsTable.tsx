@@ -1,7 +1,12 @@
 import React from 'react';
 import { handlePageSkip } from '@/utils/handlePage';
 
-import { getToken, TokenList } from '@cubik/common';
+import {
+  generateUserBackupImage,
+  getToken,
+  Project_Backup,
+  TokenList,
+} from '@cubik/common';
 import { prisma } from '@cubik/database';
 import dayjs from '@cubik/dayjs';
 import {
@@ -136,7 +141,10 @@ export const ContributorsTable = async ({ eventId, searchParams }: Props) => {
                     size="xs"
                     title={contribution.user.username as string}
                     avatarShape="square"
-                    avatarSrc={contribution.user.profilePicture as string}
+                    avatarSrc={
+                      contribution.user.profilePicture ||
+                      generateUserBackupImage()
+                    }
                   />
                 </TableCell>
                 <TableCell>
@@ -151,10 +159,7 @@ export const ContributorsTable = async ({ eventId, searchParams }: Props) => {
                       }`}
                       avatarShape="circle"
                       description={`$${contribution.totalUsdAmount.toFixed(2)}`}
-                      avatarSrc={
-                        token?.logoURI ||
-                        'https://uploadthing.com/f/c2b1ffca-f2b6-433c-a126-72464f970a66_Screenshot%202023-08-22%20at%2012.02.18.png'
-                      }
+                      avatarSrc={token?.logoURI || ''}
                     />
                   </Text>
                 </TableCell>
@@ -172,15 +177,12 @@ export const ContributorsTable = async ({ eventId, searchParams }: Props) => {
                     size="xs"
                     title={contribution.project.name}
                     avatarShape="square"
-                    avatarSrc={contribution.project.logo}
+                    avatarSrc={contribution.project.logo || Project_Backup}
                   />
                 </TableCell>
 
                 <TableCell className="flex items-center justify-center">
-                  <Icon
-                    name="chevronRight"
-                    className="stroke-[var(--color-neutral-700)]"
-                  />
+                  <Icon name="chevronRight" className="l3" />
                 </TableCell>
               </TableRow>
             );

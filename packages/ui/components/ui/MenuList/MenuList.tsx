@@ -44,11 +44,15 @@ interface MenuItemProps {
   children?: React.ReactNode;
   text: string;
   leftIcon?: keyof typeof iconLibrary;
+  onClick?: () => void;
 }
 
-const MenuItem = ({ children, text, leftIcon }: MenuItemProps) => {
+const MenuItem = ({ children, text, leftIcon, onClick }: MenuItemProps) => {
   return (
-    <DropdownMenu.Item className="relative cursor-pointer p-2 mx-2 hover:bg-[var(--menu-list-item-surface-hovered)] hover:rounded-lg text-[var(--menu-list-item-fg-default)] hover:text-[var(--menu-list-item-fg-hovered)] hover:stroke-[var(--menu-list-item-hovered)] stroke-[var(--menu-list-item-icon)] focus-visible:outline-none">
+    <DropdownMenu.Item
+      onClick={onClick}
+      className="relative cursor-pointer p-2 mx-2 hover:bg-[var(--menu-list-item-surface-hovered)] hover:rounded-lg text-[var(--menu-list-item-fg-default)] hover:text-[var(--menu-list-item-fg-hovered)] hover:stroke-[var(--menu-list-item-hovered)] stroke-[var(--menu-list-item-icon)] focus-visible:outline-none"
+    >
       <div className="flex justify-between">
         <div className="flex gap-[10px] items-center ">
           {leftIcon && (

@@ -94,7 +94,7 @@ export default function RootLayout({
               <AxiomWebVitals />
               <div className="z-0 mt-0 flex w-full flex-row md:mt-[70px]">
                 <Toaster />
-                <div className={`fixed h-[calc(100vh-72px)]`}>
+                <div className={`fixed h-[calc(100vh-72px)] overflow-scroll`}>
                   <Sidebar />
                 </div>
                 <div className="w-screen overflow-y-scroll pt-[70px] md:pl-[285px] md:pt-0">

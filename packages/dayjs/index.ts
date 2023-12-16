@@ -7,6 +7,7 @@ import minmax from 'dayjs/plugin/minMax';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import timeZone from 'dayjs/plugin/timezone';
 import toArray from 'dayjs/plugin/toArray';
+import updateLocale from 'dayjs/plugin/updateLocale';
 import utc from 'dayjs/plugin/utc';
 
 dayjs.extend(customParseFormat);
@@ -18,7 +19,37 @@ dayjs.extend(timeZone);
 dayjs.extend(toArray);
 dayjs.extend(utc);
 dayjs.extend(minmax);
-
+dayjs.extend(updateLocale);
+dayjs.updateLocale('en', {
+  months: [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ],
+});
+export const ListOfMonths = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sept',
+  'Oct',
+  'Nov',
+  'Dec',
+];
 export type Dayjs = dayjs.Dayjs;
 
 export type { ConfigType } from 'dayjs';

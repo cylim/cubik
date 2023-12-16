@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useMemo } from 'react';
+import dynamic from 'next/dynamic';
 import {
   BaseSignerWalletAdapter,
   WalletAdapterNetwork,
@@ -10,10 +11,15 @@ import * as AllWalletAdapters from '@solana/wallet-adapter-wallets';
 
 import {
   HARDCODED_WALLET_STANDARDS,
-  UnifiedWalletProvider,
   WalletAdapterWithMutableSupportedTransactionVersions,
 } from '@cubik/wallet-connect';
-import { useIsClient } from '@cubik/wallet-connect/hooks/helperHooks';
+
+const UnifiedWalletProvider = dynamic(
+  () => import('@cubik/wallet-connect').then((e) => e.UnifiedWalletProvider),
+  {
+    ssr: false,
+  },
+);
 
 export const MWA_NOT_FOUND_ERROR = 'MWA_NOT_FOUND_ERROR';
 
@@ -27,8 +33,6 @@ export const metadata = {
 };
 
 export const WalletProvider = ({ children }: { children: any }) => {
-  const isClient = useIsClient();
-
   const wallets = useMemo(() => {
     if (typeof window === 'undefined') {
       return [];
@@ -71,36 +75,31 @@ export const WalletProvider = ({ children }: { children: any }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [metadata]);
 
-  const params: Omit<Parameters<typeof UnifiedWalletProvider>[0], 'children'> =
-    useMemo(
-      () => ({
-        wallets: wallets,
-        config: {
-          autoConnect: false,
-          env: 'mainnet-beta',
-          metadata: {
-            name: 'UnifiedWallet',
-            description: 'UnifiedWallet',
-            url: 'https://jup.ag',
-            iconUrls: ['https://jup.ag/favicon.ico'],
-          },
-          notificationCallback: undefined,
-          walletPrecedence: [
-            'OKX Wallet' as WalletName,
-            'WalletConnect' as WalletName,
-          ],
-          hardcodedWallets: HARDCODED_WALLET_STANDARDS,
-          walletlistExplanation: {
-            href: '',
-          },
+  const params: any = useMemo(
+    () => ({
+      wallets: wallets,
+      config: {
+        autoConnect: false,
+        env: 'mainnet-beta',
+        metadata: {
+          name: 'UnifiedWallet',
+          description: 'UnifiedWallet',
+          url: 'https://jup.ag',
+          iconUrls: ['https://jup.ag/favicon.ico'],
         },
-      }),
-      [wallets],
-    );
-
-  if (!isClient) {
-    return children;
-  }
+        notificationCallback: undefined,
+        walletPrecedence: [
+          'OKX Wallet' as WalletName,
+          'WalletConnect' as WalletName,
+        ],
+        hardcodedWallets: HARDCODED_WALLET_STANDARDS,
+        walletlistExplanation: {
+          href: '',
+        },
+      },
+    }),
+    [wallets],
+  );
 
   return <UnifiedWalletProvider {...params}>{children}</UnifiedWalletProvider>;
 };

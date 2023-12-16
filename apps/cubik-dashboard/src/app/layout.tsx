@@ -5,12 +5,16 @@ import '@cubik/presets/styles/darkColors.styles.css';
 import '@cubik/presets/styles/component.style.css';
 
 import type { Metadata, Viewport } from 'next';
+import dynamic from 'next/dynamic';
 import { Inter } from 'next/font/google';
 import { Header } from '@/components/Headers';
 import { AxiomWebVitals } from 'next-axiom';
-import { CookiesProvider } from 'next-client-cookies/server';
 
-import { Provider } from './provider';
+import { Provider } from '../providers/provider';
+
+const CookiesProvider = dynamic(() =>
+  import('next-client-cookies/server').then((e) => e.CookiesProvider),
+);
 
 const inter = Inter({ subsets: ['latin'] });
 

@@ -5,15 +5,19 @@ import '@cubik/presets/styles/darkColors.styles.css';
 import '@cubik/presets/styles/component.style.css';
 
 import type { Metadata, Viewport } from 'next';
+import dynamic from 'next/dynamic';
 import { Inter } from 'next/font/google';
-import { Provider } from '@/app/provider';
 import Background from '@/components/common/bg/background';
 import TopNavbar from '@/components/header/navigation';
 import BottomNav from '@/components/mobile-bottom-nav';
+import { Provider } from '@/providers/provider';
 
 import { Divider } from '@cubik/ui';
 import { cn } from '@cubik/ui/lib/utils';
 
+const CookiesProvider = dynamic(() =>
+  import('next-client-cookies/server').then((e) => e.CookiesProvider),
+);
 const APP_NAME = 'Cubik';
 const APP_DEFAULT_TITLE = 'Cubik';
 const APP_TITLE_TEMPLATE = '';
@@ -71,13 +75,15 @@ export default function RootLayout({
       <body
         className={cn(inter.className, 'bg-[var(--color-bg-primary-depth)]')}
       >
-        <Provider>
-          <main className="relative z-[0]">
-            <TopNavbar />
-            {children}
-            <BottomNav name={'home'} />
-          </main>
-        </Provider>
+        <CookiesProvider>
+          <Provider>
+            <main className="relative z-[0]">
+              <TopNavbar />
+              {children}
+              <BottomNav name={'home'} />
+            </main>
+          </Provider>
+        </CookiesProvider>
       </body>
     </html>
   );

@@ -268,6 +268,9 @@ importers:
       '@tanstack/react-query':
         specifier: ^4.36.1
         version: 4.36.1(react-dom@18.2.0)(react-native@0.73.0)(react@18.2.0)
+      '@tanstack/react-query-devtools':
+        specifier: ^5.14.0
+        version: 5.14.0(@tanstack/react-query@4.36.1)(react@18.2.0)
       '@vercel/edge-config':
         specifier: ^0.4.1
         version: 0.4.1
@@ -760,6 +763,12 @@ importers:
       '@t3-oss/env-nextjs':
         specifier: ^0.7.1
         version: 0.7.1(typescript@5.3.3)(zod@3.22.4)
+      '@tanstack/react-query':
+        specifier: ^4.36.1
+        version: 4.36.1(react-dom@18.2.0)(react-native@0.73.0)(react@18.2.0)
+      '@tanstack/react-query-devtools':
+        specifier: ^5.14.0
+        version: 5.14.0(@tanstack/react-query@4.36.1)(react@18.2.0)
       '@uploadthing/react':
         specifier: ^5.7.0
         version: 5.7.0(next@14.0.2)(react@18.2.0)(uploadthing@5.7.4)
@@ -775,6 +784,9 @@ importers:
       next-axiom:
         specifier: ^1.1.1
         version: 1.1.1(next@14.0.2)(react@18.2.0)
+      next-client-cookies:
+        specifier: ^1.1.0
+        version: 1.1.0(next@14.0.2)(react@18.2.0)
       prettier-plugin-tailwindcss:
         specifier: ^0.5.7
         version: 0.5.9(@ianvs/prettier-plugin-sort-imports@4.1.1)(@trivago/prettier-plugin-sort-imports@4.3.0)(prettier@3.1.0)
@@ -8754,6 +8766,21 @@ packages:
 
   /@tanstack/query-core@4.36.1:
     resolution: {integrity: sha512-DJSilV5+ytBP1FbFcEJovv4rnnm/CokuVvrBEtW/Va9DvuJ3HksbXUJEpI0aV1KtuL4ZoO9AVE6PyNLzF7tLeA==}
+    dev: false
+
+  /@tanstack/query-devtools@5.13.5:
+    resolution: {integrity: sha512-effSYz9AWcZ6sNd+c8LCBYFIuDZApoCTXEpRlEYChBZpMz9QUUVMLToThwCyUY49+T5pANL3XxgZf3HV7hwJlg==}
+    dev: false
+
+  /@tanstack/react-query-devtools@5.14.0(@tanstack/react-query@4.36.1)(react@18.2.0):
+    resolution: {integrity: sha512-A/I/jYeyyNduI3+Kb84emkvqw5YOt7+MpO1ZpfYFyfHzCd5dQ7nWuCZzI67gS/JARwqRfGkuuuJkTfuKnipEzA==}
+    peerDependencies:
+      '@tanstack/react-query': ^5.14.0
+      react: ^18.0.0
+    dependencies:
+      '@tanstack/query-devtools': 5.13.5
+      '@tanstack/react-query': 4.36.1(react-dom@18.2.0)(react-native@0.73.0)(react@18.2.0)
+      react: 18.2.0
     dev: false
 
   /@tanstack/react-query@4.36.1(react-dom@18.2.0)(react-native@0.73.0)(react@18.2.0):
@@ -17875,6 +17902,17 @@ packages:
     dependencies:
       js-cookie: 3.0.5
       next: 14.0.0(@babel/core@7.23.5)(babel-plugin-macros@3.1.0)(react-dom@18.2.0)(react@18.2.0)
+      react: 18.2.0
+    dev: false
+
+  /next-client-cookies@1.1.0(next@14.0.2)(react@18.2.0):
+    resolution: {integrity: sha512-e/rqQTXHSFuvUJELMeCDgM7dWW6IUNOGr7noWyRSgE/5l033UaqseDrjShfRZYG45JnrYKoX653OdXTJ8cn+NA==}
+    peerDependencies:
+      next: '>= 13.0.0'
+      react: '>= 16.8.0'
+    dependencies:
+      js-cookie: 3.0.5
+      next: 14.0.2(@babel/core@7.23.5)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
     dev: false
 

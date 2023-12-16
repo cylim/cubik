@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 import { WalletProvider } from '@/providers/wallet';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useCookies } from 'next-client-cookies';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import { ThemeProvider } from '@cubik/ui';
 
@@ -16,17 +15,14 @@ interface Props {
 
 export const Provider = ({ children }: Props) => {
   const [client] = useState(() => new QueryClient());
-  const cookies = useCookies();
-  const router = useRouter();
-
-  // useEffect(() => {
-  //   router.refresh();
-  // }, [cookies.get('authToken'), router]);
 
   return (
     <ThemeProvider>
       <WalletProvider>
-        <QueryClientProvider client={client}>{children}</QueryClientProvider>
+        <QueryClientProvider client={client}>
+          {children}
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
       </WalletProvider>
     </ThemeProvider>
   );

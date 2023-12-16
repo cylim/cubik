@@ -10,5 +10,5 @@
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
   ],
   "prettier.configPath": "prettier.config.js",
-  "cSpell.words": ["Leaderboard"]
+  "cSpell.words": ["Leaderboard", "tanstack"]
 }

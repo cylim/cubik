@@ -1,7 +1,9 @@
 'use client';
 
 import { Dispatch, SetStateAction, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import { useUser } from '@/context/user';
+import { handleRevalidation } from '@/utils/helpers/revalidate';
 import { verifyUser } from '@/utils/helpers/verifyUser';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { useMutation } from '@tanstack/react-query';
@@ -16,7 +18,7 @@ export const VerifyModal = ({ open, setOpen }: Props) => {
   const cancelButtonRef = useRef(null);
   const { signMessage, publicKey } = useWallet();
   const { setUser } = useUser();
-
+  const pathname = usePathname();
   const verifyMutation = useMutation({
     mutationFn: verifyUser,
     mutationKey: ['verify', 'user'],
@@ -34,9 +36,11 @@ export const VerifyModal = ({ open, setOpen }: Props) => {
           profilePicture: data.user.profilePicture,
           username: data.user.username,
         });
+        handleRevalidation(pathname || '/');
         return;
       }
       setUser(null);
+      handleRevalidation(pathname || '/');
     },
     onError: (error) => {
       console.log(error);

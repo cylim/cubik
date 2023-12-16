@@ -3,6 +3,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 import { Icon } from '../../../icons/icon';
 import { iconLibrary } from '../../../icons/iconLibrary';
+import { cn } from '../../../lib/utils';
 import { Text } from '../text/text';
 
 interface MenuProps {
@@ -45,13 +46,23 @@ interface MenuItemProps {
   text: string;
   leftIcon?: keyof typeof iconLibrary;
   onClick?: () => void;
+  isLoading?: boolean;
 }
 
-const MenuItem = ({ children, text, leftIcon, onClick }: MenuItemProps) => {
+const MenuItem = ({
+  children,
+  text,
+  leftIcon,
+  onClick,
+  isLoading,
+}: MenuItemProps) => {
   return (
     <DropdownMenu.Item
-      onClick={onClick}
-      className="relative cursor-pointer p-2 mx-2 hover:bg-[var(--menu-list-item-surface-hovered)] hover:rounded-lg text-[var(--menu-list-item-fg-default)] hover:text-[var(--menu-list-item-fg-hovered)] hover:stroke-[var(--menu-list-item-hovered)] stroke-[var(--menu-list-item-icon)] focus-visible:outline-none"
+      onClick={isLoading ? () => {} : onClick}
+      className={cn(
+        isLoading ? 'cursor-not-allowed' : 'cursor-pointer',
+        'relative p-2 mx-2 hover:bg-[var(--menu-list-item-surface-hovered)] hover:rounded-lg text-[var(--menu-list-item-fg-default)] hover:text-[var(--menu-list-item-fg-hovered)] hover:stroke-[var(--menu-list-item-hovered)] stroke-[var(--menu-list-item-icon)] focus-visible:outline-none',
+      )}
     >
       <div className="flex justify-between">
         <div className="flex gap-[10px] items-center ">
@@ -61,6 +72,15 @@ const MenuItem = ({ children, text, leftIcon, onClick }: MenuItemProps) => {
           <Text className="l2" color={'inherit'}>
             {text}
           </Text>
+          {isLoading && (
+            <Icon
+              name={'spinner'}
+              stroke="inherit"
+              height={18}
+              width={18}
+              className={cn('animate-spin')}
+            />
+          )}
         </div>
         {children}
       </div>

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { handleAccessOnServer } from '@/components/Headers/handleAccessOnServer';
 import { AccessStore } from '@/context/scope';
 import { useUser } from '@/context/user';
+import { handleRevalidation } from '@/utils/helpers/revalidate';
 import { Button } from '@/utils/ui';
 import { useWallet } from '@solana/wallet-adapter-react';
 
@@ -22,6 +24,7 @@ export const HandleConnect = () => {
   const [open, setOpen] = useState<boolean>(false);
   const { user, setUser } = useUser();
   const { setAccessScope } = AccessStore();
+  const pathname = usePathname();
   useEffect(() => {
     const fetchUser = async () => {
       setIsLoading(true);
@@ -38,14 +41,17 @@ export const HandleConnect = () => {
             setAccessScope(userRes.data.accessScope[0], user?.accessType);
           }
           setUser(userRes.data);
+          handleRevalidation(pathname || '/');
           return;
         }
         if (publicKey && connected && !user) {
+          handleRevalidation(pathname || '/');
           return setOpen(true);
         }
       } catch (error) {
         setUser(null);
         setIsLoading(false);
+        handleRevalidation(pathname || '/');
         console.log(error);
         return error;
       }

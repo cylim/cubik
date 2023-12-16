@@ -1,7 +1,12 @@
 'use client';
 
 import React from 'react';
+import { revalidatePath } from 'next/cache';
+import { AccessStore } from '@/context/scope';
 import { useUser } from '@/context/user';
+import { handleLogout } from '@/utils/auth';
+import { handleRevalidation } from '@/utils/helpers/revalidate';
+import { useMutation } from '@tanstack/react-query';
 
 import {
   Avatar,
@@ -14,10 +19,22 @@ import {
   MenuList,
   useTheme,
 } from '@cubik/ui';
+import { useUnifiedWallet } from '@cubik/wallet-connect';
 
 export const UserInteraction = () => {
-  const { user } = useUser();
+  const { user, setUser } = useUser();
+  const { disconnect } = useUnifiedWallet();
+  const { setAccessScope } = AccessStore();
   const { theme, toggleTheme } = useTheme();
+  const logoutMutation = useMutation({
+    mutationFn: async () => {
+      await handleLogout();
+      await disconnect();
+      setUser(null);
+      setAccessScope(null, undefined);
+      handleRevalidation('/');
+    },
+  });
   return (
     <div>
       <Menu>
@@ -49,7 +66,12 @@ export const UserInteraction = () => {
           </div>
           <MenuItem leftIcon="externalLink" text="Open Website" />
           <MenuItem onClick={toggleTheme} leftIcon="moon" text={theme} />
-          <MenuItem leftIcon="logoutRight" text="Logout" />
+          <MenuItem
+            isLoading={logoutMutation.isLoading}
+            onClick={logoutMutation.mutate}
+            leftIcon="logoutRight"
+            text="Logout"
+          />
         </MenuList>
       </Menu>
     </div>

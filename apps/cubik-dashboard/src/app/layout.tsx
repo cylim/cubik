@@ -8,6 +8,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { Header } from '@/components/Headers';
 import { AxiomWebVitals } from 'next-axiom';
+import { CookiesProvider } from 'next-client-cookies/server';
 
 import { Provider } from './provider';
 
@@ -63,13 +64,15 @@ export default function RootLayout({ children }: { children: JSX.Element }) {
   return (
     <html className="light" lang="en">
       <body className={`bg-[var(--body-bg)] ${inter.className}`}>
-        <Provider>
-          <>
-            <AxiomWebVitals />
-            <Header />
-            {children}
-          </>
-        </Provider>
+        <CookiesProvider>
+          <Provider>
+            <>
+              <AxiomWebVitals />
+              <Header />
+              {children}
+            </>
+          </Provider>
+        </CookiesProvider>
       </body>
     </html>
   );

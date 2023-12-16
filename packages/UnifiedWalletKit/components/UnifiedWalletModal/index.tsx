@@ -128,7 +128,7 @@ const ListOfWallets: React.FC<{
                 flexDirection: 'column',
                 gap: '8px',
               }}
-              className="pointer-events-auto"
+              className="pointer-events-auto cursor-pointer"
               onClick={() => setShowMore(true)}
             >
               <AvatarGroup
@@ -157,7 +157,7 @@ const ListOfWallets: React.FC<{
           onClick={() => setShowMore(false)}
           className="flex justify-center items-center w-full my-4 pointer-events-auto cursor-pointer"
         >
-          <Text className="b1" color="primary">
+          <Text className="b3 mb-2" color="primary">
             View Less
           </Text>
         </div>

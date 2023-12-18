@@ -5,6 +5,7 @@ import { AccessStore } from '@/context/scope';
 import { useUser } from '@/context/user';
 
 import { Icon, ProjectTimelineCard, Text } from '@cubik/ui';
+import { ProjectTimelineCard, Text } from '@cubik/ui';
 
 export const EventHeader = () => {
   const { scope } = AccessStore();

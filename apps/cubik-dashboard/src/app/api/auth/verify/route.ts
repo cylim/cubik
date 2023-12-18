@@ -50,17 +50,16 @@ export const POST = async (req: NextRequest) => {
         mainWallet: publicKey,
         isActive: true,
         isArchive: false,
-        AdminAccess: {},
       },
       select: {
         id: true,
         username: true,
         profilePicture: true,
         profileNft: true,
-        AdminAccess: {
+        adminAccess: {
           select: {
             eventId: true,
-            Event: {
+            event: {
               select: {
                 name: true,
                 type: true,
@@ -73,11 +72,11 @@ export const POST = async (req: NextRequest) => {
     if (user) {
       const accessScope: AccessScope[] = [];
 
-      user?.AdminAccess.forEach((e) =>
+      user?.adminAccess.forEach((e) =>
         accessScope.push({
           event_id: e.eventId as string,
-          event_name: e.Event?.name as string,
-          event_type: e.Event?.type || 'ROUND',
+          event_name: e.event?.name as string,
+          event_type: e.event?.type || 'ROUND',
         }),
       );
 

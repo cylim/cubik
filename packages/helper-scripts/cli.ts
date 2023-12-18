@@ -4,9 +4,12 @@ import {
   generateSemantic,
 } from './src/color/generateCSS';
 import { convertToCSSVariables } from './src/color/primitive';
+import { moveDataDevDB } from './src/data-move/move-dev-db';
 import { replaceSvgWithBackup } from './src/svgDetect';
 
-generateSemantic();
-createComponentNames();
-replaceSvgWithBackup();
-convertToCSSVariables();
+// generateSemantic();
+// createComponentNames();
+// replaceSvgWithBackup();
+// convertToCSSVariables();
+
+moveDataDevDB();

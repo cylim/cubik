@@ -7,12 +7,10 @@ import '@cubik/presets/styles/component.style.css';
 import type { Metadata, Viewport } from 'next';
 import dynamic from 'next/dynamic';
 import { Inter } from 'next/font/google';
-import Background from '@/components/common/bg/background';
 import TopNavbar from '@/components/header/navigation';
 import BottomNav from '@/components/mobile-bottom-nav';
 import { Provider } from '@/providers/provider';
 
-import { Divider } from '@cubik/ui';
 import { cn } from '@cubik/ui/lib/utils';
 
 const CookiesProvider = dynamic(() =>

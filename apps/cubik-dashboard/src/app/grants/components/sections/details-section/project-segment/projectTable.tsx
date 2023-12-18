@@ -23,13 +23,12 @@ import {
 
 const getProjects = async (eventId: string, skip: number = 0) => {
   try {
-    const eventJoinProjects = await prisma.projectEventJoin.findMany({
+    const eventJoinProjects = await prisma.projectJoinEvent.findMany({
       where: {
         eventId: eventId,
         isActive: true,
         isArchive: false,
         project: {
-          isActive: true,
           isArchive: false,
         },
       },
@@ -74,13 +73,12 @@ const getProjects = async (eventId: string, skip: number = 0) => {
 
 const getProjectCount = async (eventId: string) => {
   try {
-    return await prisma.projectEventJoin.count({
+    return await prisma.projectJoinEvent.count({
       where: {
         eventId,
         isActive: true,
         isArchive: false,
         project: {
-          isActive: true,
           isArchive: false,
         },
       },

@@ -49,4 +49,5 @@ export * from './components/ui/pagination';
 export * from './components/ui/PingIcon';
 export * from './components/ui/Graphs';
 export * from './components/ui/verifyModal';
+export * from './components/ui/Switch';
 export * from './components/ui/ProjectTimeline';

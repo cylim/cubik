@@ -220,53 +220,53 @@ const sortByPrecedence =
 
 const UnifiedWalletModalFooter: React.FC = () => {
   return (
-    <div className="flex flex-col px-6 py-4 gap-4">
-      <div className="flex gap-2 item-start space-x-3">
-        <div className="min-w-[20px]">
+    <div className="flex flex-col px-6 py-2 gap-4">
+      <div className="flex gap-[0px] item-start space-x-3">
+        <div className="min-w-[18px] py-[2px]">
           <Icon
             name="eyeClose"
             strokeWidth={1.5}
             className="min-w-[18px]"
             stroke="var(--color-fg-primary-subdued)"
             fill="none"
-            width={20}
-            height={20}
+            width={18}
+            height={18}
           />
         </div>
-        <span className="text-[14px] md:text-[16px] font-light  text-[var(--color-fg-primary-subdued)]">
+        <Text className="l2-light md:l2-light" color="tertiary">
           View only permissions. We will never do anything without your
           approval.
-        </span>
+        </Text>
       </div>
-      <div className="flex gap-2 item-start space-x-3">
-        <div className="min-w-[20px]">
+      <div className="flex gap-[0px] item-start space-x-3">
+        <div className="min-w-[18px] py-[2px]">
           <Icon
             name="shieldCheck"
             strokeWidth={1.5}
             stroke="var(--color-fg-primary-subdued)"
             fill="none"
-            width={20}
-            height={20}
+            width={18}
+            height={18}
           />
         </div>
-        <span className="text-[14px] md:text-[16px] font-light text-[var(--color-fg-primary-subdued)]">
+        <Text className="l2-light md:l2-light" color="tertiary">
           Open Source and Audited Smart Contracts
-        </span>
+        </Text>
       </div>
-      <div className="flex gap-2 item-start space-x-3">
-        <div className="min-w-[20px]">
+      <div className="flex gap-[0px] item-start space-x-3">
+        <div className="min-w-[18px] py-[2px]">
           <Icon
             name="userSecurity"
             strokeWidth={1.5}
             stroke="var(--color-fg-primary-subdued)"
             fill="none"
-            width={20}
-            height={20}
+            width={18}
+            height={18}
           />
         </div>
-        <span className="text-[14px] md:text-[16px] font-light  text-[var(--color-fg-primary-subdued)]">
+        <Text className="l2-light md:l2-light" color="tertiary">
           Trusted by 1,568 Users
-        </span>
+        </Text>
       </div>
     </div>
   );
@@ -403,9 +403,9 @@ const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = ({
             }}
           />
           <UnifiedWalletModalFooter />
+          <div className="h-48px" />
         </div>
       )}
-      <div className="h-48px" />
     </div>
   );
 };

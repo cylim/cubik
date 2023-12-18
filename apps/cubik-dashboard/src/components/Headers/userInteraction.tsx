@@ -14,9 +14,9 @@ import {
   Icon,
   Menu,
   MenuButton,
-  MenuDivider,
   MenuItem,
   MenuList,
+  Switch,
   useTheme,
 } from '@cubik/ui';
 import { useUnifiedWallet } from '@cubik/wallet-connect';
@@ -65,7 +65,9 @@ export const UserInteraction = () => {
             />
           </div>
           <MenuItem leftIcon="externalLink" text="Open Website" />
-          <MenuItem onClick={toggleTheme} leftIcon="moon" text={theme} />
+          <MenuItem leftIcon="moon" text={theme}>
+            <Switch onChange={toggleTheme} size="sm" />
+          </MenuItem>
           <MenuItem
             isLoading={logoutMutation.isLoading}
             onClick={logoutMutation.mutate}

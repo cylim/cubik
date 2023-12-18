@@ -4,7 +4,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { cn } from '../../../lib/utils';
 
 export const DialogSize = {
-  sm: 'max-w-[408px]',
+  sm: 'max-w-[410px]',
   md: 'max-w-[500px]',
   lg: 'max-w-[600px]',
 };
@@ -33,7 +33,7 @@ export const Modal = ({
           <Dialog.Content
             className={cn(
               DialogSize[dialogSize],
-              'text-white data-[state=open]:animate-contentShow fixed top-[40%] left-[50%] max-h-[85vh] w-full translate-x-[-50%] translate-y-[-50%] rounded-[12px] bg-[var(--color-bg-primary-base)] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none',
+              'text-white data-[state=open]:animate-contentShow fixed top-[20%] left-[50%] max-h-[85vh] w-full translate-x-[-50%] translate-y-[0%] rounded-[12px] bg-[var(--color-bg-primary-base)] shadow-md focus:outline-none',
             )}
           >
             <Dialog.Content className="z-50 relative">

@@ -3,6 +3,7 @@ import { ContributionSegment } from '@/app/grants/components/sections/details-se
 import { Metrics } from '@/app/grants/components/sections/details-section/metrics';
 import { ProjectSegment } from '@/app/grants/components/sections/details-section/project-segment';
 import { SegmentSwitch } from '@/app/grants/components/sections/details-section/segmentSwitch';
+import SectionLayout from '@/app/grants/components/sections/SectionLayout';
 
 import { SubHead } from '@cubik/ui';
 
@@ -11,35 +12,25 @@ interface Props {
 }
 export const DetailsSection = ({ searchParams }: Props) => {
   return (
-    <div className="">
-      <div className="my-10 inline-flex w-full flex-col gap-10 md:my-10">
+    <SectionLayout>
+      <div className="inline-flex w-full flex-col gap-12">
         <SubHead heading="Overview" />
         <div className="flex w-full flex-wrap items-center justify-start gap-8 md:flex-nowrap">
-          {/* <div className={'flex items-center justify-between p-[4px]'}>
-            <div className="flex w-full items-center gap-4">
-              <CircularSkeleton size={'sm'} shape={'md'} />
-              <div className="min-h-100% flex min-w-[16rem] flex-col justify-center gap-4 md:min-w-[24rem]">
-                <div className="w-[50%]">
-                  <Skeleton className={'w-1/2 rounded-full'} opacity={50} />
-                </div>
-                <TextSkeleton lines={2} opacity={25} />
-              </div>
-            </div>
-          </div> */}
           <Metrics />
         </div>
       </div>
-      <div className="mb-8 flex items-start justify-between gap-3 md:px-0 ">
-        <SubHead heading="Stats" />
-        <div className="">
+      <div className="inline-flex w-full flex-col gap-12">
+        <SubHead heading="Projects">
           <SegmentSwitch />
-        </div>
-      </div>
-      {searchParams.section === 'contributors' ? (
-        <ContributionSegment searchParams={searchParams} />
-      ) : (
+        </SubHead>
         <ProjectSegment searchParams={searchParams} />
-      )}
-    </div>
+      </div>
+      <div className="inline-flex w-full flex-col gap-12">
+        <SubHead heading="Contributors">
+          <SegmentSwitch />
+        </SubHead>
+        <ContributionSegment searchParams={searchParams} />
+      </div>
+    </SectionLayout>
   );
 };

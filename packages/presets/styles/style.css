@@ -1,4 +1,5 @@
 @import './text.style.css';
+@import './overwrite.css';
 
 :root {
     --color-white-50: #FFFFFF;

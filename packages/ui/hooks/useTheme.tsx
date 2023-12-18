@@ -7,7 +7,6 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { Drawer } from 'vaul';
 
 type Theme = 'light' | 'dark';
 
@@ -31,18 +30,23 @@ interface ThemeProviderProps {
 }
 
 function ThemeProvider({ children }: ThemeProviderProps) {
+  // const cookies = useCookies();
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== 'undefined') {
       const storedTheme = localStorage.getItem('theme');
+      // if (!storedTheme) {
+      //   cookies.set('theme', 'dark');
+      // }
       return (storedTheme ?? 'dark') as Theme;
     }
     return 'dark';
   });
-
+  console.log('theme - ', theme);
   // Function to toggle the theme
   const toggleTheme = () => {
     setTheme((currentTheme) => {
       const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      // cookies.set('theme', newTheme);
       localStorage.setItem('theme', newTheme);
       return newTheme;
     });
@@ -68,7 +72,7 @@ function ThemeProvider({ children }: ThemeProviderProps) {
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <Drawer.Root>{children}</Drawer.Root>
+      {children}
     </ThemeContext.Provider>
   );
 }

@@ -7,12 +7,10 @@ import '@cubik/presets/styles/component.style.css';
 import type { Metadata, Viewport } from 'next';
 import dynamic from 'next/dynamic';
 import { Inter } from 'next/font/google';
-import Background from '@/components/common/bg/background';
 import TopNavbar from '@/components/header/navigation';
 import BottomNav from '@/components/mobile-bottom-nav';
 import { Provider } from '@/providers/provider';
 
-import { Divider } from '@cubik/ui';
 import { cn } from '@cubik/ui/lib/utils';
 
 const CookiesProvider = dynamic(() =>
@@ -60,7 +58,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#272727', // #272727
+  themeColor: '#ffffff', // #272727
 };
 
 const inter = Inter({ subsets: ['latin'] });
@@ -71,7 +69,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className="dark" lang="en">
+    <html className="light" lang="en">
       <body
         className={cn(inter.className, 'bg-[var(--color-bg-primary-depth)]')}
       >
@@ -80,7 +78,7 @@ export default function RootLayout({
             <main className="relative z-[0]">
               <TopNavbar />
               {children}
-              <BottomNav name={'home'} />
+              {/* <BottomNav name={'home'} /> */}
             </main>
           </Provider>
         </CookiesProvider>

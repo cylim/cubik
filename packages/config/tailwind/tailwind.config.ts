@@ -29,6 +29,7 @@ const config: Config = {
     },
     extend: {
       '*': {
+        //todo put this into styles.css
         '-webkit-font-smoothing': 'antialiased',
         '-webkit-tap-highlight-color': 'rgba(0,0,0,0)',
       },

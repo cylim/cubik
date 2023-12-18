@@ -2,7 +2,7 @@ import React from 'react';
 
 import dayjs, { ListOfMonths } from '@cubik/dayjs';
 
-import { Icon } from '../../../icons/icon';
+import { PingIcon } from '../PingIcon/pingIcon';
 import { Text } from '../text/text';
 
 interface Props {
@@ -13,9 +13,9 @@ interface Props {
 export const ProjectTimelineCard = ({ date, type, subElement }: Props) => {
   return (
     <div className="flex justify-start gap-2 md:gap-4">
-      <div className="border-[1.25px] rounded-md md:rounded-xl w-[41px] md:w-[57px] overflow-hidden flex justify-center items-center flex-col border-[var(--color-border-primary-base)]">
-        <div className="bg-[var(--color-surface-primary-base)] h-[20px]  md:h-[28.5px] w-full flex justify-center items-center">
-          <p className="text-[var(--color-fg-primary-base)] uppercase text-xxs md:text-xs font-medium">
+      <div className="border-[1.25px] rounded-md md:rounded-xl w-[41px] md:w-[57px] overflow-hidden flex justify-center items-center flex-col border-[var(--color-border-primary-subdued)]">
+        <div className="h-[20px] md:h-[28.5px] w-full flex justify-center items-center">
+          <Text className="l3 uppercase" color="secondary">
             {
               ListOfMonths[
                 dayjs(date, {
@@ -23,12 +23,12 @@ export const ProjectTimelineCard = ({ date, type, subElement }: Props) => {
                 }).get('M')
               ]
             }
-          </p>
+          </Text>
         </div>
-        <div className="flex justify-center items-center  h-8">
-          <p className="text-[14px]  md:h5 text-[var(--color-fg-primary-base)]  w-full">
+        <div className="flex justify-center items-center bg-[var(--color-border-primary-subdued)] py-[2px] w-full">
+          <Text className="h5" color="secondary">
             {dayjs(date).get('D')}
-          </p>
+          </Text>
         </div>
       </div>
       <div className="flex justify-center flex-col items-start gap-2">
@@ -39,13 +39,10 @@ export const ProjectTimelineCard = ({ date, type, subElement }: Props) => {
             </Text>
           )}
           {type === 'Voting' && (
-            <div className="flex justify-center items-center">
-              <Icon
-                name="CircleDot"
-                className="fill-[var(--color-green-700)]" // Need to fix icon for this
-              />
+            <div className="flex justify-center items-center gap-[10px]">
+              <PingIcon />
               <Text className="h6" color={'primary'}>
-                Voting
+                Voting Live
               </Text>
             </div>
           )}

@@ -1,30 +1,58 @@
-import React from 'react';
+import React, { createContext, useContext } from 'react';
+import { cva } from 'class-variance-authority';
 
 import { cn } from '../../../lib/utils';
 import { Text } from '../../ui/text/text';
 
 interface SegmentContainerProps {
   children: React.ReactNode;
-  size: 'l3' | 'l2' | 'l1';
+  size: 'sm' | 'md' | 'lg';
 }
 interface SegmentItemsProps {
   children: React.ReactNode;
   onClick: () => void;
   isActive: boolean;
 }
-export const SegmentContainer = ({
-  children,
-  size = 'l2',
-}: SegmentContainerProps) => {
+
+const SizeContext = createContext<'sm' | 'md' | 'lg'>('md');
+
+const segmentTextVariant = cva('', {
+  variants: {
+    size: {
+      sm: 'l3',
+      md: 'l2',
+      lg: 'l1',
+    },
+  },
+  defaultVariants: {
+    size: 'md',
+  },
+});
+const segmentContainerVariant = cva('', {
+  variants: {
+    size: {
+      sm: 'h-[36px]',
+      md: 'h-[40px]',
+      lg: 'h-[44px]',
+    },
+  },
+  defaultVariants: {
+    size: 'md',
+  },
+});
+
+export const SegmentContainer = ({ children, size }: SegmentContainerProps) => {
   return (
-    <div
-      className={cn(
-        size,
-        'bg-[var(--segment-control-surface-inactive)] w-full p-1 gap-1 flex justify-center items-center rounded-lg',
-      )}
-    >
-      {children}
-    </div>
+    <SizeContext.Provider value={size}>
+      <div
+        className={cn(
+          segmentContainerVariant({ size }),
+          'bg-[var(--segment-control-surface-inactive)] w-full p-1 gap-1 flex justify-center items-center rounded-[8px]',
+        )}
+      >
+        {children}
+      </div>
+    </SizeContext.Provider>
   );
 };
 
@@ -33,17 +61,22 @@ export const SegmentItems = ({
   onClick,
   isActive,
 }: SegmentItemsProps) => {
+  const size = useContext(SizeContext);
+
   return (
     <div
       onClick={onClick}
       className={cn(
-        'px-4 py-1 w-full cursor-pointer text-center rounded-lg shadow-[0px 1px 3px 0px rgba(0, 0, 0, 0.10), 0px 1px 2px -1px rgba(0, 0, 0, 0.10)]',
+        'px-6 w-full h-full flex items-center justify-center gap-2 cursor-pointer text-center rounded-[6px] ',
         isActive
-          ? 'bg-[var(--segment-control-surface-active)]'
+          ? 'bg-[var(--segment-control-surface-active)] shadow-md'
           : 'bg-[var(--segment-control-surface-inactive)]',
       )}
     >
-      <Text className="" color="primary">
+      <Text
+        className={cn(segmentTextVariant({ size }))}
+        color={isActive ? 'primary' : 'tertiary'}
+      >
         {children}
       </Text>
     </div>

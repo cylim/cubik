@@ -21,6 +21,8 @@ export const Metrics = () => {
     queryFn: ({ queryKey }) => getMetrics(queryKey[1] || ''),
     enabled: !!scope,
   });
+
+  const roundMatchingPool = 30;
   return (
     <>
       <MetricsItem
@@ -33,18 +35,19 @@ export const Metrics = () => {
           chartData={[
             {
               name: 'Est Match',
+              type: 'area',
               data: [
-                [1701388800000, 24],
-                [1701475200000, 42],
-                [1701561600000, 15],
-                [1701648000000, 35],
-                [1701734400000, 77],
-                [1701820800000, 77],
-                [1701907200000, 41],
+                [1701388800000, 0],
+                [1701475200000, 0],
+                [1701561600000, 0],
+                [1701648000000, 0],
+                [1701734400000, 0],
+                [1701820800000, 0],
+                [1701907200000, 10],
               ],
             },
           ]}
-          color={['#1199FF']}
+          color={['#000000']}
         />
       </MetricsItem>
       <MetricsItem
@@ -53,7 +56,8 @@ export const Metrics = () => {
         subText={metrics.data?.contributors.toLocaleString() || '0'}
       >
         <MinimalColumnGraph
-          color={['#F53D6B']}
+          theme={theme}
+          color={['#000000']}
           chartData={[
             {
               name: 'Est Match',
@@ -61,6 +65,8 @@ export const Metrics = () => {
                 [1701388800000, 24],
                 [1701475200000, 42],
                 [1701561600000, 15],
+                [1701648000000, 35],
+                [1701648000000, 35],
                 [1701648000000, 35],
                 [1701734400000, 77],
                 [1701820800000, 77],
@@ -81,18 +87,31 @@ export const Metrics = () => {
       >
         <MinimalLineGraph
           theme={theme}
-          color={['#F53D6B']}
+          color={['#000000']}
+          annotations={{
+            yaxis: [
+              {
+                y: roundMatchingPool,
+                borderColor: '#c2c2c250',
+                strokeDashArray: 6,
+                label: {
+                  show: false,
+                },
+              },
+            ],
+          }}
           chartData={[
             {
               name: 'Est Match',
               data: [
-                [1701388800000, 12],
-                [1701475200000, 19],
-                [1701561600000, 16],
-                [1701648000000, 35],
-                [1701734400000, 21],
-                [1701820800000, 44],
-                [1701907200000, 16],
+                [1701388800000, 0],
+                [1701475200000, 0],
+                [1701561600000, 0],
+                [1701648000000, 25],
+                [1701734100000, 25],
+                [1701820800000, 25],
+                [1701907200000, 25],
+                [1702007200000, 25],
               ],
             },
           ]}

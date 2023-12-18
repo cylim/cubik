@@ -12,7 +12,7 @@ export const RegistrationsSection = () => {
   return (
     <>
       <div>
-        <div className="my-5 flex items-center justify-between px-3 md:px-0 ">
+        <div className="my-5 flex flex-col items-center justify-between px-3 md:px-0 ">
           <h3 className="flex gap-2 text-2xl font-semibold text-black dark:text-white">
             Registration
             <span className="hidden md:block">Overview</span>

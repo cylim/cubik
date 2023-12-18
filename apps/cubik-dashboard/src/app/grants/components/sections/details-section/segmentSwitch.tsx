@@ -10,30 +10,21 @@ export const SegmentSwitch = () => {
   const pathname = usePathname();
   const router = useRouter();
   return (
-    <SegmentContainer size="l2">
-      <SegmentItems
-        isActive={
-          searchParams.get('section') === 'projects' ||
-          !searchParams.get('section')
-        }
-        onClick={() =>
-          router.push(`${pathname}?section=projects`, {
-            scroll: false,
-          })
-        }
-      >
-        Projects
-      </SegmentItems>
-      <SegmentItems
-        isActive={searchParams.get('section') === 'contributors'}
-        onClick={() =>
-          router.push(`${pathname}?section=contributors`, {
-            scroll: false,
-          })
-        }
-      >
-        Contributors
-      </SegmentItems>
-    </SegmentContainer>
+    <div className="flex flex-row gap-4">
+      <SegmentContainer size="sm">
+        <SegmentItems isActive={false} onClick={() => {}}>
+          1W
+        </SegmentItems>
+        <SegmentItems isActive={true} onClick={() => {}}>
+          2W
+        </SegmentItems>
+        <SegmentItems isActive={false} onClick={() => {}}>
+          1M
+        </SegmentItems>
+        <SegmentItems isActive={false} onClick={() => {}}>
+          2M
+        </SegmentItems>
+      </SegmentContainer>
+    </div>
   );
 };

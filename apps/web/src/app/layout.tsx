@@ -60,7 +60,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#272727', // #272727
+  themeColor: '#ffffff', // #272727
 };
 
 const inter = Inter({ subsets: ['latin'] });
@@ -71,7 +71,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className="dark" lang="en">
+    <html className="light" lang="en">
       <body
         className={cn(inter.className, 'bg-[var(--color-bg-primary-depth)]')}
       >
@@ -80,7 +80,7 @@ export default function RootLayout({
             <main className="relative z-[0]">
               <TopNavbar />
               {children}
-              <BottomNav name={'home'} />
+              {/* <BottomNav name={'home'} /> */}
             </main>
           </Provider>
         </CookiesProvider>

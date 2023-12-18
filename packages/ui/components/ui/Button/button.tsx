@@ -113,30 +113,36 @@ const Button = ({
       )}
       {...props}
     >
-      {leftIconName && (
-        <Icon
-          name={leftIconName}
-          stroke="#000"
-          height={16}
-          width={16}
-          className={cn(buttonVariants({ variant }), iconVariants({ size }))}
-        />
-      )}
-      {children && (
-        <Text className={buttonTextVariants({ size })} color="inherit">
-          {children}
-        </Text>
-      )}
-      {rightIconName && !isLoading && (
-        <Icon
-          name={rightIconName}
-          stroke="#000"
-          height={16}
-          width={16}
-          className={buttonVariants({ variant })}
-        />
-      )}
-      {isLoading && (
+      {!isLoading ? (
+        <>
+          {leftIconName && (
+            <Icon
+              name={leftIconName}
+              stroke="#000"
+              height={16}
+              width={16}
+              className={cn(
+                buttonVariants({ variant }),
+                iconVariants({ size }),
+              )}
+            />
+          )}
+          {children && (
+            <Text className={buttonTextVariants({ size })} color="inherit">
+              {children}
+            </Text>
+          )}
+          {rightIconName && (
+            <Icon
+              name={rightIconName}
+              stroke="#000"
+              height={16}
+              width={16}
+              className={buttonVariants({ variant })}
+            />
+          )}
+        </>
+      ) : (
         <Icon
           name={'spinner'}
           stroke="#000"

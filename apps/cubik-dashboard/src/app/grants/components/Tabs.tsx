@@ -11,10 +11,10 @@ interface Props {
 }
 export const TabsSection = ({ searchParams }: Props) => {
   return (
-    <div className="mx-auto w-full border-red-500">
+    <div className="mx-auto w-full">
       <Tabs size="sm" defaultValue={0}>
-        <div className="overflow-scroll border-red-500 bg-[var(--body-surface)] px-4 md:px-6">
-          <TabList className="mx-auto max-w-6xl">
+        <div className="overflow-scroll bg-[var(--body-surface)]">
+          <TabList className="mx-auto max-w-7xl px-4 md:px-8">
             <Tab value={0}>Details</Tab>
             <Tab value={1}>Registrations</Tab>
             <Tab value={2}>Multi</Tab>
@@ -23,7 +23,7 @@ export const TabsSection = ({ searchParams }: Props) => {
           </TabList>
         </div>
         <Background />
-        <TabPanels className="mx-auto w-full max-w-6xl">
+        <TabPanels className="mx-auto w-full max-w-7xl px-4 md:px-8">
           <TabPanel value={0}>
             <DetailsSection searchParams={searchParams} />
           </TabPanel>

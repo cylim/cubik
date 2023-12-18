@@ -6,15 +6,17 @@ const Chart = dynamic(() => import('react-apexcharts'), {
 });
 
 type MinimalLineGraphProps = {
-  chartData: { name: string; data: number[][] }[];
+  chartData: { name: string; data: number[][]; type?: string }[];
   color?: string[];
   theme: 'light' | 'dark';
+  annotations?: any;
 };
 
 const MinimalLineGraph: React.FC<MinimalLineGraphProps> = ({
   chartData,
   color,
   theme,
+  annotations,
 }) => {
   const fontColor = theme === 'dark' ? 'white' : 'black';
   const surfaceColor = theme === 'dark' ? '#333333' : '#ffffff';
@@ -71,6 +73,7 @@ const MinimalLineGraph: React.FC<MinimalLineGraphProps> = ({
           stops: [0, 90],
         },
       },
+      annotations: annotations,
       noData: {
         text: 'No Data to display',
       },
@@ -131,6 +134,7 @@ const MinimalLineGraph: React.FC<MinimalLineGraphProps> = ({
       },
       tooltip: {
         shared: true,
+        theme: theme,
         custom: ({ series, seriesIndex, dataPointIndex, w }: any) => {
           const data = series[seriesIndex][dataPointIndex];
           const timestamp = w.globals.seriesX[seriesIndex][dataPointIndex];
@@ -144,14 +148,14 @@ const MinimalLineGraph: React.FC<MinimalLineGraphProps> = ({
           return `
           <div
           class="arrow_box"
-          style="border: 0px; outline: 0px; display: flex; flex-direction: row; align-items: flex-start; justify-content: flex-start; background-color: ${surfaceColor}; padding: 8px; gap: 4px; align-items: center;"
+          style="border: 0px; outline: 0px; display: flex; flex-direction: row; align-items: flex-start; justify-content: flex-start; background-color: ${surfaceColor}; padding: 8px; gap: 8px; align-items: center;"
         >
           <div style="display: flex; justify-content: space-between;">
-            <span style="color: ${fontColor};  font-size: 12px; opacity: 50%;">${date}:</span>
+            <span style="color: ${fontColor};  font-size: 14px; opacity: 50%;">${date}:</span>
           </div>
-            <span style="color: ${fontColor}; fontWeight: 600;  font-size: 12px">
+           <span style="color: ${fontColor}; fontWeight: 500;  font-size: 14px">
               <strong>$${data}</strong>
-            </span>
+           </span>
         </div>
           `;
         },

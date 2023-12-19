@@ -84,7 +84,7 @@ interface Props {
 }
 
 export const ContributorsTable = async ({ eventId, searchParams }: Props) => {
-  const page = handlePageSkip(searchParams?.page);
+  const page = handlePageSkip(searchParams?.contributors_page);
   const contributionCount = await getContributionCount(eventId);
   const contributions = await getContributions(
     eventId,
@@ -191,7 +191,7 @@ export const ContributorsTable = async ({ eventId, searchParams }: Props) => {
       </Table>
       <div className="w-full border-t border-[var(--card-border-secondary)] px-6 py-4">
         <PaginationButton
-          route="/grants?section=contributors&page="
+          route="/grants?contributors_page="
           maxPage={Math.ceil(contributionCount / 15)}
           page={page}
         />

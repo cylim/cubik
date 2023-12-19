@@ -94,7 +94,7 @@ interface Props {
 }
 
 export const ProjectTable = async ({ eventId, searchParams }: Props) => {
-  const page = handlePageSkip(searchParams.page);
+  const page = handlePageSkip(searchParams.project_page);
   const projectCount = await getProjectCount(eventId);
   const projects = await getProjects(eventId, page === 1 ? 0 : (page - 1) * 15);
 
@@ -213,7 +213,7 @@ export const ProjectTable = async ({ eventId, searchParams }: Props) => {
       <div className="w-full border-t border-[var(--card-border-secondary)] px-6 py-4">
         <PaginationButton
           maxPage={Math.ceil(projectCount / 15)}
-          route="/grants?section=projects&page="
+          route="/grants?project_page="
           page={page}
         />
       </div>

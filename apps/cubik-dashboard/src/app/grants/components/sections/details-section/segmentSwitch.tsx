@@ -12,16 +12,38 @@ export const SegmentSwitch = () => {
   return (
     <div className="flex flex-row gap-4">
       <SegmentContainer size="sm">
-        <SegmentItems isActive={false} onClick={() => {}}>
+        <SegmentItems
+          isActive={searchParams.get('time') === '1W'}
+          onClick={() => {
+            router.push(`${pathname}?time=1W`, {
+              scroll: false,
+            });
+          }}
+        >
           1W
         </SegmentItems>
-        <SegmentItems isActive={true} onClick={() => {}}>
+        <SegmentItems
+          isActive={searchParams.get('time') === '2W'}
+          onClick={() => {
+            router.push(`${pathname}?time=2W`, { scroll: false });
+          }}
+        >
           2W
         </SegmentItems>
-        <SegmentItems isActive={false} onClick={() => {}}>
+        <SegmentItems
+          isActive={searchParams.get('time') === '1M'}
+          onClick={() => {
+            router.push(`${pathname}?time=1M`, { scroll: false });
+          }}
+        >
           1M
         </SegmentItems>
-        <SegmentItems isActive={false} onClick={() => {}}>
+        <SegmentItems
+          isActive={searchParams.get('time') === '2M'}
+          onClick={() => {
+            router.push(`${pathname}?time=2M`, { scroll: false });
+          }}
+        >
           2M
         </SegmentItems>
       </SegmentContainer>

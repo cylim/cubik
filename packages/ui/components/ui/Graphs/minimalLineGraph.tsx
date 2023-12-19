@@ -20,6 +20,7 @@ const MinimalLineGraph: React.FC<MinimalLineGraphProps> = ({
 }) => {
   const fontColor = theme === 'dark' ? 'white' : 'black';
   const surfaceColor = theme === 'dark' ? '#333333' : '#ffffff';
+  console.log(surfaceColor, fontColor, '--font-color');
   const data = {
     series: chartData,
     options: {

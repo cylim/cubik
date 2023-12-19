@@ -45,7 +45,6 @@ export const HandleConnect = () => {
           return;
         }
         if (publicKey && connected && !user) {
-          handleRevalidation(pathname || '/');
           return setOpen(true);
         }
       } catch (error) {

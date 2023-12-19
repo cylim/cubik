@@ -23,6 +23,7 @@ export const Metrics = () => {
   });
 
   const roundMatchingPool = 30;
+  console.log(theme, '--theme');
   return (
     <>
       <MetricsItem

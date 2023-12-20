@@ -15,6 +15,8 @@
     "@cubik/common": "workspace:*",
     "@cubik/config": "workspace:*",
     "@cubik/database": "workspace:*",
+    "@faker-js/faker": "^8.3.1",
+    "@solana/web3.js": "^1.87.6",
     "axios": "^1.6.2",
     "dotenv": "^16.3.1",
     "dotenv-cli": "latest",

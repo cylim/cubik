@@ -3,7 +3,6 @@ import { DetailsSection } from '@/app/grants/components/sections/details-section
 
 import { Background, Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
 
-import { MultisigSection } from './sections/multisig-section/Multisigs';
 import { RegistrationsSection } from './sections/registration-section/Registrations';
 
 interface Props {
@@ -30,9 +29,7 @@ export const TabsSection = ({ searchParams }: Props) => {
           <TabPanel value={1}>
             <RegistrationsSection />
           </TabPanel>
-          <TabPanel value={2}>
-            <MultisigSection />
-          </TabPanel>
+          <TabPanel value={2}>Multi</TabPanel>
           <TabPanel value={3}>Change your password here.</TabPanel>
           <TabPanel value={4}>Change your password here.</TabPanel>
         </TabPanels>

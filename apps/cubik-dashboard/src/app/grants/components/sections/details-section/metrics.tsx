@@ -3,6 +3,7 @@
 import React from 'react';
 import { getMetrics } from '@/app/grants/components/sections/details-section/helpers/getMetrics';
 import { AccessStore } from '@/context/scope';
+import useMetrics from '@/hooks/contributions/useMetrics';
 import { useQuery } from '@tanstack/react-query';
 
 import {
@@ -16,14 +17,11 @@ export const Metrics = () => {
   const { scope } = AccessStore();
   const { theme } = useTheme();
 
-  const metrics = useQuery({
-    queryKey: ['metrics', scope?.event_id],
-    queryFn: ({ queryKey }) => getMetrics(queryKey[1] || ''),
-    enabled: !!scope,
+  const metrics = useMetrics({
+    scope: scope?.event_id || null,
   });
 
   const roundMatchingPool = 30;
-  console.log(theme, '--theme');
   return (
     <>
       <MetricsItem

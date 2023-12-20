@@ -2,6 +2,7 @@
 
 import { Dispatch, SetStateAction, useRef } from 'react';
 import { usePathname } from 'next/navigation';
+import { AccessStore } from '@/context/scope';
 import { useUser } from '@/context/user';
 import { handleRevalidation } from '@/utils/helpers/revalidate';
 import { verifyUser } from '@/utils/helpers/verifyUser';
@@ -15,8 +16,8 @@ interface Props {
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
 export const VerifyModal = ({ open, setOpen }: Props) => {
-  const cancelButtonRef = useRef(null);
   const { signMessage, publicKey } = useWallet();
+  const { setAccessScope } = AccessStore();
   const { setUser } = useUser();
   const pathname = usePathname();
   const verifyMutation = useMutation({
@@ -36,6 +37,7 @@ export const VerifyModal = ({ open, setOpen }: Props) => {
           profilePicture: data.user.profilePicture,
           username: data.user.username,
         });
+        setAccessScope(data.user.accessScope[0], 'ADMIN');
         handleRevalidation(pathname || '/');
         return;
       }

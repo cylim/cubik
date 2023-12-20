@@ -3,7 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { apiInstance, ApiResponseType } from '@cubik/database/api';
 
 type Data = {
-  scope: string | null;
+  scope: string;
+  enabled?: boolean;
 };
 interface Metrics {
   contributions: number;
@@ -19,18 +20,18 @@ const queryFn = async ({ scope }: Data) => {
     `/api/contributions/metrics?scope=${scope}`,
   );
   const responseData = response.data as ResponseType;
-
+  console.log('first', responseData.result);
   if (!responseData.success) {
     throw new Error(responseData.message);
   }
   return responseData.result as Metrics;
 };
 
-function useMetrics({ scope }: Data) {
+function useMetrics({ scope, enabled }: Data) {
   return useQuery({
     queryKey: ['metrics', { scope }],
     queryFn: () => queryFn({ scope }),
-    enabled: !!scope,
+    enabled,
   });
 }
 

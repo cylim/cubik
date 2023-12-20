@@ -5,7 +5,10 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { SegmentContainer, SegmentItems } from '@cubik/ui';
 
-export const SegmentSwitch = () => {
+interface Props {
+  urlKey: string;
+}
+export const SegmentSwitch = ({ urlKey }: Props) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
@@ -24,10 +27,10 @@ export const SegmentSwitch = () => {
       <SegmentContainer size="sm">
         <SegmentItems
           isActive={
-            !searchParams.get('time') ? true : searchParams.get('time') === '1W'
+            !searchParams.get(urlKey) ? true : searchParams.get(urlKey) === '1W'
           }
           onClick={() => {
-            router.push(`${path}time=1W`, {
+            router.push(`${path}${urlKey}=1W`, {
               scroll: false,
             });
           }}
@@ -35,25 +38,25 @@ export const SegmentSwitch = () => {
           1W
         </SegmentItems>
         <SegmentItems
-          isActive={searchParams.get('time') === '2W'}
+          isActive={searchParams.get(urlKey) === '2W'}
           onClick={() => {
-            router.push(`${path}time=2W`, { scroll: false });
+            router.push(`${path}${urlKey}=2W`, { scroll: false });
           }}
         >
           2W
         </SegmentItems>
         <SegmentItems
-          isActive={searchParams.get('time') === '1M'}
+          isActive={searchParams.get(urlKey) === '1M'}
           onClick={() => {
-            router.push(`${path}time=1M`, { scroll: false });
+            router.push(`${path}${urlKey}=1M`, { scroll: false });
           }}
         >
           1M
         </SegmentItems>
         <SegmentItems
-          isActive={searchParams.get('time') === '2M'}
+          isActive={searchParams.get(urlKey) === '2M'}
           onClick={() => {
-            router.push(`${path}time=2M`, { scroll: false });
+            router.push(`${path}${urlKey}=2M`, { scroll: false });
           }}
         >
           2M

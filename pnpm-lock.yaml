@@ -1174,6 +1174,12 @@ importers:
       '@cubik/database':
         specifier: workspace:*
         version: link:../database
+      '@faker-js/faker':
+        specifier: ^8.3.1
+        version: 8.3.1
+      '@solana/web3.js':
+        specifier: ^1.87.6
+        version: 1.87.6
       axios:
         specifier: ^1.6.2
         version: 1.6.2
@@ -4778,6 +4784,11 @@ packages:
       '@ethereumjs/rlp': 4.0.1
       ethereum-cryptography: 2.1.2
       micro-ftch: 0.3.1
+    dev: false
+
+  /@faker-js/faker@8.3.1:
+    resolution: {integrity: sha512-FdgpFxY6V6rLZE9mmIBb9hM0xpfvQOSNOLnzolzKwsE1DH+gC7lEKV1p1IbR0lAYyvYd5a4u3qWJzowUkw1bIw==}
+    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0, npm: '>=6.14.13'}
     dev: false
 
   /@floating-ui/core@1.5.2:

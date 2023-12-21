@@ -5,11 +5,16 @@ import '@cubik/presets/styles/darkColors.styles.css';
 import '@cubik/presets/styles/component.style.css';
 
 import type { Metadata, Viewport } from 'next';
+import dynamic from 'next/dynamic';
 import { Inter } from 'next/font/google';
 import { Header } from '@/components/Headers';
 import { AxiomWebVitals } from 'next-axiom';
 
-import { Provider } from './provider';
+import { Provider } from '../providers/provider';
+
+const CookiesProvider = dynamic(() =>
+  import('next-client-cookies/server').then((e) => e.CookiesProvider),
+);
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,7 +25,7 @@ const APP_DESCRIPTION =
   'Control center for CUBIK, a PWA app for managing your projects.';
 
 export const viewport: Viewport = {
-  themeColor: '#141414',
+  themeColor: '#fff',
 };
 
 export const metadata: Metadata = {
@@ -61,15 +66,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: JSX.Element }) {
   return (
-    <html className="light" lang="en">
+    <html className="dark" lang="en">
       <body className={`bg-[var(--body-bg)] ${inter.className}`}>
-        <Provider>
-          <>
-            <AxiomWebVitals />
-            <Header />
-            {children}
-          </>
-        </Provider>
+        <CookiesProvider>
+          <Provider>
+            <>
+              <AxiomWebVitals />
+              <Header />
+              {children}
+            </>
+          </Provider>
+        </CookiesProvider>
       </body>
     </html>
   );

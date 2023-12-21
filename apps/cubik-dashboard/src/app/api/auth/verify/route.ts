@@ -45,53 +45,57 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
-    const user = await prisma.adminAccess.findMany({
+    const user = await prisma.user.findFirst({
       where: {
-        user: {
-          mainWallet: publicKey,
-          isActive: true,
-          isArchive: false,
-        },
+        mainWallet: publicKey,
         isActive: true,
+        isArchive: false,
       },
       select: {
-        user: true,
-        eventId: true,
-        Event: {
+        id: true,
+        username: true,
+        profilePicture: true,
+        profileNft: true,
+        adminAccess: {
           select: {
-            name: true,
-            type: true,
+            eventId: true,
+            event: {
+              select: {
+                name: true,
+                type: true,
+              },
+            },
           },
         },
       },
     });
-    if (user.length > 0) {
+    if (user) {
       const accessScope: AccessScope[] = [];
 
-      user.forEach((e) =>
+      user?.adminAccess.forEach((e) =>
         accessScope.push({
           event_id: e.eventId as string,
-          event_name: e.Event?.name as string,
-          event_type: e.Event?.type || 'ROUND',
+          event_name: e.event?.name as string,
+          event_type: e.event?.type || 'ROUND',
         }),
       );
 
       const session = await createToken({
         mainWallet: publicKey,
-        id: user[0].user.id,
-        profilePicture: user[0].user.profilePicture as string,
-        username: user[0].user.username as string,
-        profileNft: user[0].user.profileNft as any,
+        id: user.id,
+        profilePicture: user.profilePicture as string,
+        username: user.username as string,
+        profileNft: user.profileNft as any,
         accessScope: accessScope,
         accessType: 'ADMIN',
       });
 
       const userSessionPayload: AuthPayload = {
         mainWallet: publicKey,
-        id: user[0].user.id,
-        profilePicture: user[0].user.profilePicture as string,
-        username: user[0].user.username as string,
-        profileNft: user[0].user.profileNft as any,
+        id: user.id,
+        profilePicture: user.profilePicture as string,
+        username: user.username as string,
+        profileNft: user.profileNft as any,
         accessScope: accessScope,
         accessType: 'ADMIN',
       };
@@ -103,7 +107,7 @@ export const POST = async (req: NextRequest) => {
       });
 
       response.cookies.set('authToken', session as string, {
-        expires: new Date(Date.now() + 3600000),
+        expires: new Date(Date.now() + 3600000 * 4),
         secure: true,
         httpOnly: true,
         sameSite: 'strict',
@@ -113,7 +117,7 @@ export const POST = async (req: NextRequest) => {
       return response;
     } else {
       return NextResponse.json({
-        error: "User Doesn't have access",
+        error: 'Not a User',
       });
     }
   } catch (error) {

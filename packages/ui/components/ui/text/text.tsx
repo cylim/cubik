@@ -4,12 +4,14 @@ import { ClassValue } from 'clsx';
 
 import { cn } from '../../../lib/utils';
 
-const headingVariant = cva('', {
+const headingVariant = cva('antialiased', {
   variants: {
     color: {
       primary: 'text-[var(--color-fg-primary-depth)]',
       secondary: 'text-[var(--color-fg-primary-base)]',
       tertiary: 'text-[var(--color-fg-primary-subdued)]',
+      positive: 'text-[var(--color-fg-positive-emphasis)]',
+      negative: 'text-[var(--color-fg-negative-emphasis)]',
       inherit: '',
     },
   },

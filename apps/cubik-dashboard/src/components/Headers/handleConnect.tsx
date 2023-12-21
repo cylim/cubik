@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { handleAccessOnServer } from '@/components/Headers/handleAccessOnServer';
 import { AccessStore } from '@/context/scope';
 import { useUser } from '@/context/user';
+import { handleRevalidation } from '@/utils/helpers/revalidate';
 import { Button } from '@/utils/ui';
 import { useWallet } from '@solana/wallet-adapter-react';
-import { useWalletModal } from '@solana/wallet-adapter-react-ui';
 
 import { AuthPayload } from '@cubik/common-types/src/admin';
+import { useUnifiedWalletContext } from '@cubik/wallet-connect';
 
 import { VerifyModal } from '../modals/verifyModal';
 import { UserInteraction } from './userInteraction';
@@ -15,12 +18,13 @@ interface AuthDecodeResponse {
   error: null | string;
 }
 export const HandleConnect = () => {
-  const { setVisible } = useWalletModal();
+  const { setShowModal } = useUnifiedWalletContext();
   const { publicKey, connected, disconnect } = useWallet();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const { user, setUser } = useUser();
   const { setAccessScope } = AccessStore();
+  const pathname = usePathname();
   useEffect(() => {
     const fetchUser = async () => {
       setIsLoading(true);
@@ -28,10 +32,14 @@ export const HandleConnect = () => {
         const userResponse = await fetch('/api/auth/decode');
         const userRes =
           (await userResponse.json()) as unknown as AuthDecodeResponse;
-
         if (userRes.data) {
-          setAccessScope(userRes.data.accessScope[0], user?.accessType);
-          return setUser(userRes.data);
+          if (userRes.data.accessScope.length > 0) {
+            handleAccessOnServer(userRes.data.accessScope[0].event_id);
+            setAccessScope(userRes.data.accessScope[0], user?.accessType);
+          }
+          setUser(userRes.data);
+          handleRevalidation(pathname || '/');
+          return;
         }
         if (publicKey && connected && !user) {
           return setOpen(true);
@@ -39,6 +47,7 @@ export const HandleConnect = () => {
       } catch (error) {
         setUser(null);
         setIsLoading(false);
+        handleRevalidation(pathname || '/');
         console.log(error);
         return error;
       }
@@ -48,7 +57,7 @@ export const HandleConnect = () => {
 
   if (!connected && !publicKey && !user) {
     return (
-      <Button variant="primary" onClick={() => setVisible(true)}>
+      <Button variant="primary" onClick={() => setShowModal(true)}>
         Login
       </Button>
     );

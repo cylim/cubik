@@ -13,6 +13,7 @@ import {
   UnifiedWalletProvider,
   WalletAdapterWithMutableSupportedTransactionVersions,
 } from '@cubik/wallet-connect';
+import { useIsClient } from '@cubik/wallet-connect/hooks/helperHooks';
 
 export const MWA_NOT_FOUND_ERROR = 'MWA_NOT_FOUND_ERROR';
 
@@ -93,6 +94,10 @@ export const WalletProvider = ({ children }: { children: any }) => {
       }),
       [wallets],
     );
+  const isClient = useIsClient();
+  if (!isClient) {
+    return children;
+  }
 
   return <UnifiedWalletProvider {...params}>{children}</UnifiedWalletProvider>;
 };

@@ -5,6 +5,8 @@
 
 import { Token } from '@cubik/common-types/src/token';
 
+export * from './getToken';
+
 export const TokenList: Token[] = [
   {
     address: 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
@@ -17,6 +19,19 @@ export const TokenList: Token[] = [
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'usd-coin',
+    },
+  },
+  {
+    address: 'So11111111111111111111111111111111111111111',
+    chainId: 101,
+    decimals: 9,
+    name: 'SOL',
+    symbol: 'SOL',
+    logoURI:
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/8f98c577-f117-4b8e-99ef-dd9283dc1c00/public',
+    tags: ['old-registry'],
+    extensions: {
+      coingeckoId: 'wrapped-solana',
     },
   },
   {

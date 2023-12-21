@@ -53,13 +53,14 @@ const ListOfWallets: React.FC<{
               {isSmallDevice ? (
                 <WalletIcon wallet={adapter} width={48} height={48} />
               ) : (
-                <WalletIcon wallet={adapter} width={60} height={30} />
+                <WalletIcon wallet={adapter} />
               )}
             </div>
           );
         }),
     [handleConnectClick, list.others],
   );
+
   const hasNoWallets = useMemo(() => {
     return list.highlightedBy === 'TopWallet' ? true : false;
   }, [list]);
@@ -84,7 +85,8 @@ const ListOfWallets: React.FC<{
           justifyContent: 'flex-start',
           alignItems: 'center',
           overflowY: 'scroll',
-          paddingTop: '24px',
+          paddingTop: '8px',
+          paddingBottom: '8px',
         }}
       >
         {list.highlight.map((adapter, idx) => {
@@ -95,15 +97,14 @@ const ListOfWallets: React.FC<{
               onClick={(event) => handleConnectClick(event, adapter)}
             >
               {isSmallDevice ? (
-                <WalletIcon wallet={adapter} width={48} height={48} />
+                <WalletIcon wallet={adapter} />
               ) : (
-                <WalletIcon wallet={adapter} width={60} height={30} />
+                <WalletIcon wallet={adapter} />
               )}
             </div>
           );
         })}
         {showMore && renderWalletList}
-
         {walletlistExplanation && list.others.length === 0 ? (
           <div className="text-xs flex justify-center items-center w-full font-semibold mt-4 pointer-events-auto -mb-2 text-white/80 underline cursor-pointer">
             <a
@@ -115,7 +116,7 @@ const ListOfWallets: React.FC<{
             </a>
           </div>
         ) : null}
-        {list.others.length > 0 && (
+        {list.others.length > 0 && !showMore && (
           <>
             <div
               style={{
@@ -127,6 +128,7 @@ const ListOfWallets: React.FC<{
                 flexDirection: 'column',
                 gap: '8px',
               }}
+              className="pointer-events-auto cursor-pointer"
               onClick={() => setShowMore(true)}
             >
               <AvatarGroup
@@ -140,10 +142,10 @@ const ListOfWallets: React.FC<{
                   })}
                 shape="square"
                 variant="squared-horizontal"
-                size="sm"
+                size="xs"
                 maxCount={3}
               />
-              <Text className="b2 md:b3-light" color="primary">
+              <Text className="b4 md:b4-light" color="primary">
                 More
               </Text>
             </div>
@@ -153,9 +155,9 @@ const ListOfWallets: React.FC<{
       {showMore && (
         <div
           onClick={() => setShowMore(false)}
-          className="text-xs flex justify-center items-center w-full font-semibold mt-4 pointer-events-auto -mb-2 text-white underline cursor-pointer"
+          className="flex justify-center items-center w-full my-4 pointer-events-auto cursor-pointer"
         >
-          <Text className="b2 md:b3-light" color="primary">
+          <Text className="b3 mb-2" color="primary">
             View Less
           </Text>
         </div>
@@ -218,53 +220,53 @@ const sortByPrecedence =
 
 const UnifiedWalletModalFooter: React.FC = () => {
   return (
-    <div className="flex flex-col px-6 py-4 gap-4">
-      <div className="flex gap-2 item-start space-x-3">
-        <div className="min-w-[20px]">
+    <div className="flex flex-col px-6 py-2 gap-4">
+      <div className="flex gap-[0px] item-start space-x-3">
+        <div className="min-w-[18px] py-[2px]">
           <Icon
             name="eyeClose"
             strokeWidth={1.5}
             className="min-w-[18px]"
             stroke="var(--color-fg-primary-subdued)"
             fill="none"
-            width={20}
-            height={20}
+            width={18}
+            height={18}
           />
         </div>
-        <span className="text-[14px] md:text-[16px] font-light  text-[var(--color-fg-primary-subdued)]">
+        <Text className="l2-light md:l2-light" color="tertiary">
           View only permissions. We will never do anything without your
           approval.
-        </span>
+        </Text>
       </div>
-      <div className="flex gap-2 item-start space-x-3">
-        <div className="min-w-[20px]">
+      <div className="flex gap-[0px] item-start space-x-3">
+        <div className="min-w-[18px] py-[2px]">
           <Icon
             name="shieldCheck"
             strokeWidth={1.5}
             stroke="var(--color-fg-primary-subdued)"
             fill="none"
-            width={20}
-            height={20}
+            width={18}
+            height={18}
           />
         </div>
-        <span className="text-[14px] md:text-[16px] font-light text-[var(--color-fg-primary-subdued)]">
+        <Text className="l2-light md:l2-light" color="tertiary">
           Open Source and Audited Smart Contracts
-        </span>
+        </Text>
       </div>
-      <div className="flex gap-2 item-start space-x-3">
-        <div className="min-w-[20px]">
+      <div className="flex gap-[0px] item-start space-x-3">
+        <div className="min-w-[18px] py-[2px]">
           <Icon
             name="userSecurity"
             strokeWidth={1.5}
             stroke="var(--color-fg-primary-subdued)"
             fill="none"
-            width={20}
-            height={20}
+            width={18}
+            height={18}
           />
         </div>
-        <span className="text-[14px] md:text-[16px] font-light  text-[var(--color-fg-primary-subdued)]">
+        <Text className="l2-light md:l2-light" color="tertiary">
           Trusted by 1,568 Users
-        </span>
+        </Text>
       </div>
     </div>
   );
@@ -384,7 +386,7 @@ const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = ({
   }, [wallets, previouslyConnected]);
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col">
       <ListOfWallets
         list={list}
         onToggle={onToggle}
@@ -401,9 +403,9 @@ const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = ({
             }}
           />
           <UnifiedWalletModalFooter />
+          <div className="h-48px" />
         </div>
       )}
-      <div className="h-48px" />
     </div>
   );
 };

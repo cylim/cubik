@@ -1,33 +1,35 @@
-'use client';
-
 import React from 'react';
+import { DetailsSection } from '@/app/grants/components/sections/details-section';
 
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
+import { Background, Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
 
-import { MultisigSection } from './sections/multisig-section/Multisigs';
 import { RegistrationsSection } from './sections/registration-section/Registrations';
 
-export const TabsSection = () => {
+interface Props {
+  searchParams: { [key in string]: string };
+}
+export const TabsSection = ({ searchParams }: Props) => {
   return (
-    <div className="mx-auto w-full  text-white">
+    <div className="mx-auto w-full">
       <Tabs size="sm" defaultValue={0}>
-        <TabList className="w-full  overflow-x-auto whitespace-nowrap bg-neutral-800">
-          <div className="mx-auto flex w-full  max-w-7xl justify-start gap-4">
+        <div className="overflow-scroll bg-[var(--body-surface)]">
+          <TabList className="mx-auto max-w-7xl px-4 md:px-8">
             <Tab value={0}>Details</Tab>
             <Tab value={1}>Registrations</Tab>
             <Tab value={2}>Multi</Tab>
             <Tab value={3}>Analytics</Tab>
             <Tab value={4}>Settings</Tab>
-          </div>
-        </TabList>
-        <TabPanels className="mx-auto w-full max-w-7xl">
-          <TabPanel value={0}>Make changes to your account here.</TabPanel>
+          </TabList>
+        </div>
+        <Background />
+        <TabPanels className="mx-auto w-full max-w-7xl px-4 md:px-8">
+          <TabPanel value={0}>
+            <DetailsSection searchParams={searchParams} />
+          </TabPanel>
           <TabPanel value={1}>
             <RegistrationsSection />
           </TabPanel>
-          <TabPanel value={2}>
-            <MultisigSection />
-          </TabPanel>
+          <TabPanel value={2}>Multi</TabPanel>
           <TabPanel value={3}>Change your password here.</TabPanel>
           <TabPanel value={4}>Change your password here.</TabPanel>
         </TabPanels>

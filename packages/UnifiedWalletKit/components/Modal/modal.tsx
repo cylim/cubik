@@ -40,11 +40,11 @@ const WalletModal = ({ showModal, setShowModal }: any) => {
       </DrawerPortal>
     </Drawer>
   ) : (
-    <Modal dialogSize="md" open={showModal} onClose={() => setShowModal(false)}>
+    <Modal dialogSize="sm" open={showModal} onClose={() => setShowModal(false)}>
       <ModalHeader
         heading={showHeader ? 'Connect Wallet' : ''}
         background={showHeader}
-        size={'lg'}
+        size={'md'}
         onClose={() => setShowModal(false)}
       />
       <UnifiedWalletModal

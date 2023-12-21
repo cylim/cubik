@@ -1,7 +1,4 @@
 import React, { ReactNode, useCallback } from 'react';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { SolanaMobileWalletAdapterWalletName } from '@solana-mobile/wallet-adapter-mobile';
 
 import { Button } from '@cubik/ui';
 
@@ -26,11 +23,9 @@ export const UnifiedWalletButton: React.FC<{
 
   const content = (
     <>
-      {connecting && <Button>Connecting...</Button>}
-      {/* Desktop */}
       {!connecting && (
-        <Button variant="primary" size="lg">
-          Connect Wallet
+        <Button variant="primary" size="lg" isLoading={connecting}>
+          {connecting ? 'Connecting' : 'Connect Wallet'}
         </Button>
       )}
     </>
@@ -38,12 +33,7 @@ export const UnifiedWalletButton: React.FC<{
 
   const handleClick = useCallback(async () => {
     try {
-      if (wallet?.adapter?.name === SolanaMobileWalletAdapterWalletName) {
-        await connect();
-        return;
-      } else {
-        setShowModal(true);
-      }
+      setShowModal(true);
     } catch (error) {
       if (error instanceof Error && error.message === MWA_NOT_FOUND_ERROR) {
         setShowModal(true);

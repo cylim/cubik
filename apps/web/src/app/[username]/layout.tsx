@@ -31,16 +31,12 @@ const Profile = async ({
 
   return (
     <div>
-      <div>
-        <div className="w-full bg-[var(--body-surface)]">
-          <ProfileCard
-            avatar={profile.profilePicture ?? ''}
-            title={username}
-            description="Something Something"
-          />
-        </div>
-        {children}
-      </div>
+      <ProfileCard
+        avatar={profile.profilePicture ?? ''}
+        title={username}
+        description="dhruv.sol"
+      />
+      {children}
     </div>
   );
 };

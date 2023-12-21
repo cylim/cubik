@@ -95,7 +95,7 @@ const Alert: React.FC<AlertProps> = ({
   return (
     <div
       className={cn(
-        'flex gap-2 p-2',
+        'flex gap-2 px-3',
         className,
         alertVariants(
           type === 'inline' || type === 'border'

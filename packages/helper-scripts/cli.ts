@@ -1,9 +1,15 @@
-import { createComponentNames } from './src/color/generateCSS';
-
-// import { generateSemantic } from './src/color/generateCSS';
-
-// import { convertToCSSVariables } from './src/color/primitive';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import {
+  createComponentNames,
+  generateSemantic,
+} from './src/color/generateCSS';
+import { convertToCSSVariables } from './src/color/primitive';
+import { moveDataDevDB } from './src/data-move/move-dev-db';
+import { replaceSvgWithBackup } from './src/svgDetect';
 
 // generateSemantic();
-createComponentNames();
+// createComponentNames();
+// replaceSvgWithBackup();
 // convertToCSSVariables();
+
+moveDataDevDB();

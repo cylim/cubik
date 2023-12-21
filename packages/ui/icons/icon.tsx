@@ -19,7 +19,7 @@ export const Icon = ({
   height = 24,
   width = 24,
   strokeWidth = 2,
-  fill = '#fff',
+  fill = 'transparent',
   stroke = '#CCCCCC',
   className,
 }: Props) => {

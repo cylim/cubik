@@ -1,127 +1,84 @@
-'use client';
-
-import * as React from 'react';
-import * as SegmentPrimitive from '@radix-ui/react-tabs';
+import React, { createContext, useContext } from 'react';
+import { cva } from 'class-variance-authority';
 
 import { cn } from '../../../lib/utils';
+import { Text } from '../../ui/text/text';
 
-const Segment = SegmentPrimitive.Root;
-
-const SegmentSizing = {
-  sm: {
-    trigger: 'px-[12px] py-[8px]',
-    content: '',
-    list: 'p-[4px] gap-[2px] w-[491px]',
-  },
-  md: {
-    trigger: 'px-[12px] py-[4px] h-[36px]',
-    content: '',
-    list: 'p-[6px] gap-[4px] w-[555px]',
-  },
-  lg: {
-    trigger: 'px-[16px] py-[4px] h-[36px] ',
-    content: '',
-    list: 'p-[8px] gap-[8px] w-[652px]',
-  },
-  xl: {
-    trigger: 'px-[16px] py-[8px] h-[36px]',
-    content: '',
-    list: 'p-[8px] gap-[8px] w-[710px]',
-  },
-  '2xl': {
-    trigger: 'px-[16px] py-[8px] h-[36px]',
-    content: '',
-    list: 'p-[8px] gap-[8px] w-[775px]',
-  },
-};
-
-interface SegmentContextType {
-  size: keyof typeof SegmentSizing;
+interface SegmentContainerProps {
+  children: React.ReactNode;
+  size: 'sm' | 'md' | 'lg';
 }
-const SegmentContext = React.createContext<SegmentContextType>({
-  size: 'lg',
+interface SegmentItemProps {
+  children: React.ReactNode;
+  onClick: () => void;
+  isActive: boolean;
+}
+
+const SizeContext = createContext<'sm' | 'md' | 'lg'>('md');
+
+const segmentTextVariant = cva('', {
+  variants: {
+    size: {
+      sm: 'l3',
+      md: 'l2',
+      lg: 'l1',
+    },
+  },
+  defaultVariants: {
+    size: 'md',
+  },
+});
+const segmentContainerVariant = cva('', {
+  variants: {
+    size: {
+      sm: 'h-[36px]',
+      md: 'h-[40px]',
+      lg: 'h-[44px]',
+    },
+  },
+  defaultVariants: {
+    size: 'md',
+  },
 });
 
-interface Props {
-  size: SegmentContextType['size'];
-  children: React.ReactNode | React.JSX.Element;
-}
-const SegmentContainer = ({ children, size }: Props) => {
+export const SegmentContainer = ({ children, size }: SegmentContainerProps) => {
   return (
-    <SegmentContext.Provider value={{ size }}>
-      {children}
-    </SegmentContext.Provider>
+    <SizeContext.Provider value={size}>
+      <div
+        className={cn(
+          segmentContainerVariant({ size }),
+          'bg-[var(--segment-control-surface-inactive)] w-full p-1 gap-1 flex justify-center items-center rounded-[8px]',
+        )}
+      >
+        {children}
+      </div>
+    </SizeContext.Provider>
   );
 };
 
-const SegmentPosition = {
-  end: 'justify-end',
-  start: 'justify-start',
-};
-type SegmentListProps = React.ComponentPropsWithoutRef<
-  typeof SegmentPrimitive.List
-> & {
-  position?: keyof typeof SegmentPosition;
-};
-const SegmentList = React.forwardRef<
-  React.ElementRef<typeof SegmentPrimitive.List>,
-  SegmentListProps
->(({ className, position = 'start', ...props }, ref) => {
-  const context = React.useContext(SegmentContext);
+export const SegmentItem = ({
+  children,
+  onClick,
+  isActive,
+}: SegmentItemProps) => {
+  const size = useContext(SizeContext);
+
   return (
-    <div className={cn('flex', SegmentPosition[position])}>
-      <SegmentPrimitive.List
-        ref={ref}
-        className={cn(
-          'inline-flex h-12  items-center justify-evenly bg-[var(--tab-surface-inactive)] rounded-full',
-          className,
-          SegmentSizing[context.size].list,
-        )}
-        {...props}
-      />
+    <div
+      onClick={onClick}
+      className={cn(
+        'px-6 w-full h-full flex items-center justify-center gap-2 cursor-pointer text-center rounded-[6px] ',
+        isActive
+          ? 'bg-[var(--segment-control-surface-active)] shadow-md'
+          : 'bg-[var(--segment-control-surface-inactive)]',
+      )}
+    >
+      <Text
+        className={cn(segmentTextVariant({ size }))}
+        color={isActive ? 'primary' : 'tertiary'}
+      >
+        {children}
+      </Text>
     </div>
   );
-});
-SegmentList.displayName = SegmentPrimitive.List.displayName;
-
-const SegmentTrigger = React.forwardRef<
-  React.ElementRef<typeof SegmentPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof SegmentPrimitive.Trigger>
->(({ className, ...props }, ref) => {
-  const context = React.useContext(SegmentContext);
-  return (
-    <SegmentPrimitive.Trigger
-      ref={ref}
-      className={cn(
-        SegmentSizing[context.size].trigger,
-        'inline-flex items-center w-full justify-center whitespace-nowrap text-sm font-medium transition-all  data-[state=active]:bg-[var(--tab-surface-active)] text-[var(--tab-fg-inactive)] data-[state=active]:text-[var(--tab-fg-active)] rounded-full ',
-        className,
-      )}
-      {...props}
-    />
-  );
-});
-SegmentTrigger.displayName = SegmentPrimitive.Trigger.displayName;
-
-const SegmentContent = React.forwardRef<
-  React.ElementRef<typeof SegmentPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof SegmentPrimitive.Content>
->(({ className, ...props }, ref) => {
-  const context = React.useContext(SegmentContext);
-  return (
-    <SegmentPrimitive.Content
-      ref={ref}
-      className={cn('mt-2', className, SegmentSizing[context.size].content)}
-      {...props}
-    />
-  );
-});
-SegmentContent.displayName = SegmentPrimitive.Content.displayName;
-
-export {
-  Segment,
-  SegmentList,
-  SegmentTrigger,
-  SegmentContent,
-  SegmentContainer,
 };

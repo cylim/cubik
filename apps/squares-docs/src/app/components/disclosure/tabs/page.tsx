@@ -22,7 +22,7 @@ const page = () => {
       <div className="">
         <CodeComponent codeString='import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@cubik/ui";' />
         <div className="mt-8">
-          <Tabs defaultValue={2} size="xxs" className="">
+          <Tabs defaultValue={2} size="sm" className="">
             <TabList>
               <Tab value={0}>
                 <div className="p-2">TabItem1</div>
@@ -49,7 +49,7 @@ const page = () => {
             </TabPanels>
           </Tabs>
 
-          <Tabs defaultValue={2} size="xs">
+          <Tabs defaultValue={2} size="sm">
             <TabList>
               <Tab value={0}>
                 <div className="p-2">TabItem1</div>

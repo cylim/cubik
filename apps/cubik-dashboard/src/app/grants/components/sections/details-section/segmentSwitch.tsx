@@ -3,7 +3,7 @@
 import React from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import { SegmentContainer, SegmentItems } from '@cubik/ui';
+import { SegmentContainer, SegmentItem } from '@cubik/ui';
 
 interface Props {
   urlKey: string;
@@ -25,7 +25,7 @@ export const SegmentSwitch = ({ urlKey }: Props) => {
   return (
     <div className="flex flex-row gap-4">
       <SegmentContainer size="sm">
-        <SegmentItems
+        <SegmentItem
           isActive={
             !searchParams.get(urlKey) ? true : searchParams.get(urlKey) === '1W'
           }
@@ -36,31 +36,31 @@ export const SegmentSwitch = ({ urlKey }: Props) => {
           }}
         >
           1W
-        </SegmentItems>
-        <SegmentItems
+        </SegmentItem>
+        <SegmentItem
           isActive={searchParams.get(urlKey) === '2W'}
           onClick={() => {
             router.push(`${path}${urlKey}=2W`, { scroll: false });
           }}
         >
           2W
-        </SegmentItems>
-        <SegmentItems
+        </SegmentItem>
+        <SegmentItem
           isActive={searchParams.get(urlKey) === '1M'}
           onClick={() => {
             router.push(`${path}${urlKey}=1M`, { scroll: false });
           }}
         >
           1M
-        </SegmentItems>
-        <SegmentItems
+        </SegmentItem>
+        <SegmentItem
           isActive={searchParams.get(urlKey) === '2M'}
           onClick={() => {
             router.push(`${path}${urlKey}=2M`, { scroll: false });
           }}
         >
           2M
-        </SegmentItems>
+        </SegmentItem>
       </SegmentContainer>
     </div>
   );

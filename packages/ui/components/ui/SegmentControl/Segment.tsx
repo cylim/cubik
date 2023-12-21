@@ -8,7 +8,7 @@ interface SegmentContainerProps {
   children: React.ReactNode;
   size: 'sm' | 'md' | 'lg';
 }
-interface SegmentItemsProps {
+interface SegmentItemProps {
   children: React.ReactNode;
   onClick: () => void;
   isActive: boolean;
@@ -56,11 +56,11 @@ export const SegmentContainer = ({ children, size }: SegmentContainerProps) => {
   );
 };
 
-export const SegmentItems = ({
+export const SegmentItem = ({
   children,
   onClick,
   isActive,
-}: SegmentItemsProps) => {
+}: SegmentItemProps) => {
   const size = useContext(SizeContext);
 
   return (

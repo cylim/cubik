@@ -8,10 +8,34 @@ interface Props {
   open: boolean;
   subText?: string;
   text: 'Accepted' | 'Pending' | 'Rejected';
-  // onOpen: () => void;
-  //   onClose: () => void;
+  toggle?: () => void;
+  onClickSendEmail?: () => void;
+  onClickEditTemplate?: () => void;
 }
-export const RegistrationsCard = ({ open, text, subText }: Props) => {
+/**
+ * @name RegistrationsCard
+ * @description Registration Card for the dashboard.
+ *
+ * @component
+ *
+ * @param {Object} props - Component props.
+ * @param {boolean} props.open - Indicates whether the card is open.
+ * @param {string} [props.subText] - Optional subtext for the card.
+ * @param {('Accepted' | 'Pending' | 'Rejected')} props.text - The registration status.
+ * @param {() => void} [props.toggle] - Function to toggle the card.
+ * @param {() => void} [props.onClickSendEmail] - Function to handle sending email.
+ * @param {() => void} [props.onClickEditTemplate] - Function to handle editing templates.
+ *
+ * @returns {React.ReactNode} A React component representing the Registration Card.
+ */
+export const RegistrationsCard = ({
+  open,
+  text,
+  subText,
+  toggle,
+  onClickEditTemplate,
+  onClickSendEmail,
+}: Props): React.ReactNode => {
   return (
     <>
       <div className="min-w-[250px] w-full bg-[var(--card-surface-primary)] px-6 py-3 rounded-lg">
@@ -40,7 +64,7 @@ export const RegistrationsCard = ({ open, text, subText }: Props) => {
             </div>
           </div>
 
-          <Button variant={'outline'}>
+          <Button onClick={toggle} variant={'outline'}>
             {open ? <Icon name="chevronUp" /> : <Icon name="chevronDown" />}
           </Button>
         </div>
@@ -56,6 +80,7 @@ export const RegistrationsCard = ({ open, text, subText }: Props) => {
               <Button
                 className="w-full"
                 variant={'outline'}
+                onClick={onClickSendEmail}
                 rightIconName="menu2Bars"
               >
                 Send Email
@@ -63,6 +88,7 @@ export const RegistrationsCard = ({ open, text, subText }: Props) => {
               <Button
                 variant={'primary'}
                 className="w-full"
+                onClick={onClickEditTemplate}
                 rightIconName="piggyBank"
               >
                 Edit Template

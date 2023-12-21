@@ -1,12 +1,14 @@
 import React from 'react';
+import { RegistrationEmailCards } from '@/app/grants/components/sections/registration-section/RegistrationEmailCards';
+import { RegistrationTableHeader } from '@/app/grants/components/sections/registration-section/RegistrationTableHeader';
 
-import { Button, RegistrationsCard, SubHead } from '@cubik/ui';
+import { Button, SubHead } from '@cubik/ui';
 
 export const RegistrationsSection = () => {
   const segments = [
-    { color: 'bg-surface-orange-500', width: 10 },
-    { color: 'bg-surface-blue-400', width: 10 },
-    { color: 'bg-surface-red-600', width: 10 },
+    { color: 'bg-[var(--color-fg-positive-base)]', width: 10 },
+    { color: 'bg-[var(--color-bg-negative-base)]', width: 10 },
+    { color: 'bg-[var(--color-blue-400)]', width: 10 },
   ];
   return (
     <div>
@@ -22,23 +24,19 @@ export const RegistrationsSection = () => {
           </Button>
         </div>
       </div>
-      <div className="flex flex-wrap items-start justify-center gap-7 md:flex-nowrap">
-        <RegistrationsCard
-          subText="All the projects which are accepted into the have been sent a custom email."
-          open={true}
-          text="Accepted"
-        />
-        <RegistrationsCard
-          subText="All the projects which are accepted into the have been sent a custom email."
-          open={false}
-          text="Rejected"
-        />
-        <RegistrationsCard
-          subText="All the projects which are accepted into the have been sent a custom email."
-          open={false}
-          text="Pending"
-        />
+      <div className="p-4">
+        <div className="flex h-6 w-full overflow-hidden rounded-lg bg-[var(--color-surface-tertiary)]">
+          {segments.map((segment, index) => (
+            <div
+              key={index}
+              className={`h-full ${segment.color}`}
+              style={{ width: `${segment.width}%` }}
+            ></div>
+          ))}
+        </div>
       </div>
+      <RegistrationEmailCards />
+      <RegistrationTableHeader />
     </div>
   );
 };

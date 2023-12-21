@@ -2,6 +2,7 @@
 
 import { Dispatch, SetStateAction, useRef } from 'react';
 import { usePathname } from 'next/navigation';
+import { handleAccessOnServer } from '@/components/Headers/handleAccessOnServer';
 import { AccessStore } from '@/context/scope';
 import { useUser } from '@/context/user';
 import { handleRevalidation } from '@/utils/helpers/revalidate';
@@ -37,6 +38,7 @@ export const VerifyModal = ({ open, setOpen }: Props) => {
           profilePicture: data.user.profilePicture,
           username: data.user.username,
         });
+        handleAccessOnServer(data.user.accessScope[0].event_id);
         setAccessScope(data.user.accessScope[0], 'ADMIN');
         handleRevalidation(pathname || '/');
         return;

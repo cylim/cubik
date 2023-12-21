@@ -18,6 +18,7 @@ export const GET = async (req: NextRequest) => {
 
     // checks current client scope
     if (scopeSelected?.value !== scope) {
+      console.log('this-3', scopeSelected?.value, scope);
       return handleApiAuthError();
     }
 
@@ -30,6 +31,7 @@ export const GET = async (req: NextRequest) => {
     if (
       !user?.accessScope.find((accessScope) => accessScope.event_id === scope)
     ) {
+      console.log('this-1');
       return handleApiAuthError();
     }
 

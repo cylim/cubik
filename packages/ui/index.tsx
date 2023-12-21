@@ -51,4 +51,5 @@ export * from './components/ui/Graphs';
 export * from './components/ui/verifyModal';
 export * from './components/ui/Switch';
 export * from './components/ui/ProjectTimeline';
+export * from './components/ui/GrantsRoundCard';
 export * from './components/ui/RegistrationCard';

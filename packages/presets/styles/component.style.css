@@ -215,7 +215,7 @@
     --form-input-placeholder-error: var(--color-placeholder-primary);
     --form-input-placeholder-focused: var(--color-placeholder-primary);
     --form-input-placeholder-hovered: var(--color-placeholder-primary);
-    --form-input-placholder-default: var(--color-placeholder-primary);
+    --form-input-placeholder-default: var(--color-placeholder-primary);
     --form-label-input-count: var(--color-fg-primary-subdued);
     --form-label-icon: var(--color-fg-primary-subdued);
     --form-label-required: var(--color-fg-negative-base);

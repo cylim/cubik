@@ -158,6 +158,7 @@ const Alert: React.FC<AlertProps> = ({
             strokeWidth={1.5}
             height={20}
             width={20}
+            className="cursor-pointer"
           />
         </div>
       )}

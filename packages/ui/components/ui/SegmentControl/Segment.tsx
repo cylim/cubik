@@ -16,7 +16,7 @@ interface SegmentItemProps {
 
 const SizeContext = createContext<'sm' | 'md' | 'lg'>('md');
 
-const segmentTextVariant = cva('', {
+const segmentTextVariant = cva('whitespace-nowrap', {
   variants: {
     size: {
       sm: 'l3',

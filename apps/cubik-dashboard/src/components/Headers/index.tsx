@@ -15,7 +15,7 @@ export const Header = () => {
   const backgroundColor =
     pathname === 'grants' //todo: change the bg of navbar based on route
       ? 'bg-[var(--color-surface-primary-depth)]'
-      : 'bg-[var(--color-surface-primary-depth)]';
+      : '';
 
   return (
     <>
@@ -25,12 +25,7 @@ export const Header = () => {
           <div className="flex justify-start gap-10">
             <div className="flex items-center justify-center gap-2">
               <Logo size="sm" />
-              <Tag
-                border={true}
-                size="desktop"
-                color={'yellow'}
-                variant="solid"
-              >
+              <Tag color={'yellow'} variant="solid">
                 <TagLabel>Admin</TagLabel>
               </Tag>
             </div>

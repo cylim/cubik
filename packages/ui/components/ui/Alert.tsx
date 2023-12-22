@@ -48,7 +48,7 @@ const alertVariants = cva('', {
     titleColor: {
       purple: 'text-[var(--alert-loading-title)]',
       green: 'text-[var(--alert-success-title)]',
-      blue: 'text-[var(--alert-info-title)]',
+      blue: '!text-[var(--alert-info-title)]',
       yellow: 'text-[var(--alert-warning-title)]',
       red: 'text-[var(--alert-error-title)]',
     },
@@ -73,7 +73,7 @@ const alertVariants = cva('', {
 });
 
 interface AlertProps extends VariantProps<typeof alertVariants> {
-  iconName: keyof typeof iconLibrary;
+  iconName?: keyof typeof iconLibrary;
   title: string;
   content?: string;
   button?: string;
@@ -91,6 +91,7 @@ const Alert: React.FC<AlertProps> = ({
   className,
   type,
   buttonClick,
+  closeIcon = false,
 }) => {
   return (
     <div
@@ -104,13 +105,16 @@ const Alert: React.FC<AlertProps> = ({
         ),
       )}
     >
-      <Icon
-        name={iconName}
-        stroke={cn(alertVariants({ color }))}
-        fill={cn(alertVariants({ fill: color }))}
-        strokeWidth={1}
-        className="flex items-center"
-      />
+      {iconName && (
+        <Icon
+          name={iconName}
+          stroke={cn(alertVariants({ color }))}
+          fill={cn(alertVariants({ fill: color }))}
+          strokeWidth={1}
+          className="flex items-center"
+        />
+      )}
+
       <div
         className={cn('items-center', alertVariants({ contentSpacing: type }))}
       >
@@ -131,7 +135,7 @@ const Alert: React.FC<AlertProps> = ({
         <Button
           variant="link"
           className={cn(
-            'border-0 underline underline-offset-4 text-sm font-semibold',
+            'border-0 underline underline-offset-4 decoration-0 text-sm font-semibold',
             alertVariants({ titleColor: color }),
           )}
           onClick={() => buttonClick}
@@ -139,13 +143,15 @@ const Alert: React.FC<AlertProps> = ({
           {button}
         </Button>
       </div>
-      <Icon
-        name="cross"
-        stroke="#999999"
-        strokeWidth={1.5}
-        height={20}
-        width={20}
-      />
+      {closeIcon && (
+        <Icon
+          name="cross"
+          stroke="#999999"
+          strokeWidth={1.5}
+          height={20}
+          width={20}
+        />
+      )}
     </div>
   );
 };

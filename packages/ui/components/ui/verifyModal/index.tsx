@@ -28,12 +28,7 @@ export const VerifyModal = ({
           <Text className="h5" color={'primary'}>
             Wallet Connected
           </Text>
-          <Tag
-            size="desktop"
-            border={false}
-            color={'subtle-orange'}
-            variant="subtle"
-          >
+          <Tag border={false} color={'orange'} variant="subtle">
             <TagLabel>{formatAddress(address)}</TagLabel>
           </Tag>
         </div>

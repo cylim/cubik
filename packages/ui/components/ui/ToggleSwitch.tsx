@@ -36,7 +36,7 @@ const thumbVariants = cva(
   },
 );
 
-const spacingVariants = cva('flex items-start gap-4', {
+const spacingVariants = cva('flex items-start', {
   variants: {
     variant: {
       default: '',

@@ -2,7 +2,12 @@ import fs from 'fs';
 import { faker } from '@faker-js/faker';
 import { Keypair } from '@solana/web3.js';
 
-import { TokenList } from '@cubik/common';
+import {
+  Background_Backup,
+  generateUserBackupImage,
+  Project_Backup,
+  TokenList,
+} from '@cubik/common';
 import {
   prisma,
   ProjectEventStatus,
@@ -17,7 +22,7 @@ function generateFakeUser(): Partial<User> {
   return {
     email: email,
     username: faker.internet.userName(),
-    profilePicture: faker.image.avatar(),
+    profilePicture: generateUserBackupImage(),
     mainWallet: acc.publicKey.toString(),
     profileNft: {},
     tx: faker.finance.ethereumAddress(),
@@ -85,10 +90,13 @@ async function seedFakeProjects() {
     const user = users[generated];
     const randomStatus = Math.floor(Math.random() * status.length);
     try {
-      await prisma.project.create({
+      const project = await prisma.project.create({
         data: {
           name: name,
-          logo: faker.image.avatarGitHub(),
+          logo: Project_Backup,
+          slug:
+            name.toLowerCase().split(' ').join('-') +
+            faker.number.int().toString(),
           shortDescription: faker.company.catchPhraseDescriptor(),
           longDescription: faker.company.catchPhrase(),
           email: faker.internet.email(),
@@ -96,16 +104,33 @@ async function seedFakeProjects() {
           industry: faker.company.buzzPhrase(),
           status: status[randomStatus],
           createdAt: faker.date.past(),
-          owner: {
-            connect: {
-              id: user.id,
-              username: user.username,
-              mainWallet: user.mainWallet,
-            },
+          ownerPublickey: user.mainWallet,
+          githubLink: faker.internet.url(),
+          twitterHandle: faker.internet.url(),
+          telegramLink: faker.internet.url(),
+          discordLink: faker.internet.url(),
+          projectLink: faker.internet.url(),
+          slides: {
+            slide: [
+              Background_Backup,
+              Background_Backup,
+              Background_Backup,
+              Background_Backup,
+            ],
           },
         },
       });
       console.log(`Generated project: ${name}`);
+      for (let i = 0; i < 3; i++) {
+        const randomuser = users[Math.floor(Math.random() * users.length)];
+        await prisma.team.create({
+          data: {
+            userId: randomuser.id,
+            projectId: project.id,
+          },
+        });
+        console.log(`Generated team member: ${randomuser.username}`);
+      }
       generated++;
     } catch (e) {
       console.log(`Failed to create project: ${name}`, e);
@@ -113,8 +138,44 @@ async function seedFakeProjects() {
   }
 }
 
+async function seedFakeComments() {
+  const users = await prisma.user.findMany({
+    select: {
+      id: true,
+      mainWallet: true,
+    },
+    where: {
+      isActive: true,
+    },
+  });
+
+  const projects = await prisma.project.findMany({
+    select: {
+      id: true,
+    },
+    where: {
+      status: ProjectVerifyStatus.VERIFIED,
+    },
+  });
+
+  for (const project of projects) {
+    for (const user of users) {
+      const comment = await prisma.comments.create({
+        data: {
+          projectId: project.id,
+          userId: user.id,
+          comment: faker.lorem.paragraph(),
+          createdAt: faker.date.past(),
+          reactions: {},
+        },
+      });
+      console.log(`Generated comment: ${comment.id}`);
+    }
+  }
+}
+
 async function seedFakeEvents() {
-  const names = ['OPOS', 'DREAMHACK', 'GRYZZLYHACK'];
+  const names = ['OPOS', 'DREAMHACK', 'GRYZZLYHACK', 'SOMEHACK', 'CUBIKTHON'];
   const users = await prisma.user.findMany({
     select: {
       id: true,
@@ -130,8 +191,10 @@ async function seedFakeEvents() {
     const event = await prisma.event.create({
       data: {
         name: name,
-        description: description,
+        shortDescription: description,
         type: 'ROUND',
+        description:
+          faker.company.catchPhrase() + faker.company.catchPhraseAdjective(),
         userId: users[i].id,
         slug: name.toLowerCase(),
         tx: users[i].mainWallet,
@@ -154,41 +217,24 @@ async function seedFakeJoinEvents() {
       status: true,
     },
   });
+  const status = Object.values(ProjectEventStatus);
   for (const event of events) {
     for (const project of projects) {
+      const randomStatus = Math.floor(Math.random() * status.length);
       try {
         const date = faker.date.past();
         if (project.status === 'VERIFIED') {
-          const projectJoinEvent = await prisma.projectJoinEvent.create({
+          await prisma.projectJoinEvent.create({
             data: {
-              event: {
-                connect: {
-                  id: event.id,
-                },
-              },
+              eventId: event.id,
               tx: faker.finance.ethereumAddress(),
               type: 'ROUND',
-              project: {
-                connect: {
-                  id: project.id,
-                },
-              },
+              projectId: project.id,
               createdAt: date,
+              projectEventStatus: status[randomStatus],
             },
           });
-          await prisma.project.update({
-            data: {
-              projectJoinEvent: {
-                connect: {
-                  id: projectJoinEvent.id,
-                },
-              },
-              createdAt: date,
-            },
-            where: {
-              id: project.id,
-            },
-          });
+
           console.log(`Created fake join event: ${event.id} and ${project.id}`);
         }
       } catch (e) {
@@ -205,6 +251,9 @@ async function seedFakeContributions() {
       name: true,
       projectJoinEvent: true,
     },
+    where: {
+      status: ProjectVerifyStatus.VERIFIED,
+    },
   });
   const users = await prisma.user.findMany({
     select: {
@@ -220,35 +269,30 @@ async function seedFakeContributions() {
       const amt = Math.floor(Math.random() * 1000);
       for (const projectJoinEvent of project.projectJoinEvent) {
         if (
-          projectJoinEvent.projectEventStatus === ProjectEventStatus.APPROVED
+          projectJoinEvent.projectEventStatus !== ProjectEventStatus.APPROVED
         ) {
-          try {
-            await prisma.contribution.create({
-              data: {
-                project: {
-                  connect: {
-                    id: project.id,
-                  },
-                },
-                user: {
-                  connect: {
-                    id: user.id,
-                  },
-                },
-                token: token.name,
-                totalAmount: amt,
-                totalUsdAmount: amt * 10,
-                tx: user.mainWallet,
-                split: 0,
-                createdAt: faker.date.past(),
-              },
-            });
-            console.log(
-              `Created fake contribution on ${project.name} by ${user.username}`,
-            );
-          } catch (e) {
-            console.log(`Failed to create contribution: ${project.id}`);
-          }
+          return;
+        }
+        try {
+          await prisma.contribution.create({
+            data: {
+              projectId: project.id,
+              projectJoinEventId: projectJoinEvent.id,
+              token: token.address,
+              totalAmount: amt,
+              totalUsdAmount: amt * 10,
+              tx: faker.string.alphanumeric(24),
+              split: 0,
+              userId: user.id,
+              createdAt: faker.date.past(),
+              eventId: projectJoinEvent.eventId,
+            },
+          });
+          console.log(
+            `Created fake contribution on ${project.name} by ${user.username}`,
+          );
+        } catch (e) {
+          console.log(`Failed to create contribution: ${project.id}`);
         }
       }
     }
@@ -258,6 +302,7 @@ async function seedFakeContributions() {
 export {
   seedFakeUsers,
   seedFakeProjects,
+  seedFakeComments,
   seedFakeContributions,
   seedFakeEvents,
   seedFakeJoinEvents,

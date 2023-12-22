@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
 
 import { Icon } from '../../icons/icon';
@@ -46,11 +46,11 @@ const alertVariants = cva('', {
       red: 'var(--alert-error-icon-stroke)',
     },
     titleColor: {
-      purple: 'text-[var(--alert-loading-title)]',
-      green: 'text-[var(--alert-success-title)]',
+      purple: '!text-[var(--alert-loading-title)]',
+      green: '!text-[var(--alert-success-title)]',
       blue: '!text-[var(--alert-info-title)]',
-      yellow: 'text-[var(--alert-warning-title)]',
-      red: 'text-[var(--alert-error-title)]',
+      yellow: '!text-[var(--alert-warning-title)]',
+      red: '!text-[var(--alert-error-title)]',
     },
     textColor: {
       purple: 'text-[var(--alert-loading-text)]',
@@ -93,10 +93,17 @@ const Alert: React.FC<AlertProps> = ({
   buttonClick,
   closeIcon = false,
 }) => {
-  return (
+  const [showAlert, setShowAlert] = useState(true);
+
+  const handleClose = () => {
+    setShowAlert(false);
+  };
+
+  return showAlert ? (
     <div
       className={cn(
-        'flex gap-2 px-3',
+        'flex gap-2 px-2',
+        type === 'border' ? 'py-2' : '',
         className,
         alertVariants(
           type === 'inline' || type === 'border'
@@ -133,9 +140,9 @@ const Alert: React.FC<AlertProps> = ({
         </div>
 
         <Button
-          variant="link"
+          variant="outline"
           className={cn(
-            'border-0 underline underline-offset-4 decoration-0 text-sm font-semibold',
+            'border-0 text-sm font-semibold !px-0',
             alertVariants({ titleColor: color }),
           )}
           onClick={() => buttonClick}
@@ -144,16 +151,18 @@ const Alert: React.FC<AlertProps> = ({
         </Button>
       </div>
       {closeIcon && (
-        <Icon
-          name="cross"
-          stroke="#999999"
-          strokeWidth={1.5}
-          height={20}
-          width={20}
-        />
+        <div onClick={handleClose}>
+          <Icon
+            name="cross"
+            stroke="#999999"
+            strokeWidth={1.5}
+            height={20}
+            width={20}
+          />
+        </div>
       )}
     </div>
-  );
+  ) : null;
 };
 
 export { Alert };

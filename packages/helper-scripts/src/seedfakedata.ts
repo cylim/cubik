@@ -271,7 +271,7 @@ async function seedFakeContributions() {
         if (
           projectJoinEvent.projectEventStatus !== ProjectEventStatus.APPROVED
         ) {
-          return;
+          break;
         }
         try {
           await prisma.contribution.create({

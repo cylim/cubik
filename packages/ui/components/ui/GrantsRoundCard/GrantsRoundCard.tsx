@@ -79,10 +79,9 @@ const GrantsRoundCard = ({
               type="text"
               fill={'blue'}
               color="blue"
-              title="Grant Application Under Review"
-              content="You will receive an update before the grant round starts"
+              content="Grant Application Under Review. You will receive an update before the grant round starts"
               closeIcon={false}
-              button="Contact Team"
+              // button="Contact Team"
               className=""
             />
           </div>

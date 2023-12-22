@@ -65,7 +65,7 @@ export const UserInteraction = () => {
             />
           </div>
           <MenuItem leftIcon="externalLink" text="Open Website" />
-          <MenuItem leftIcon="moon" text={theme}>
+          <MenuItem leftIcon="moon" text={'dark'}>
             <Switch onChange={toggleTheme} size="sm" />
           </MenuItem>
           <MenuItem

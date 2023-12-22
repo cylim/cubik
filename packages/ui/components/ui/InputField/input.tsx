@@ -100,7 +100,7 @@ export const InputFieldContainer = ({
           'border-[var(--form-input-border-focused)] bg-[var(--form-input-surface-focused)] text-[var(--form-input-fg-focused)]',
         isDisabled &&
           'border-[var(--form-input-border-disabled)] bg-[var(--form-input-surface-disabled)',
-        'bg-[var(--form-input-surface-default)] hover:text-[var(--form-input-fg-hovered)] border-2  hover:border-[var(--form-input-border-hovered)] hover:bg-[var(--form-input-surface-hovered)',
+        'bg-[var(--form-input-surface-default)] hover:text-[var(--form-input-fg-hovered)] border  hover:border-[var(--form-input-border-hovered)] hover:bg-[var(--form-input-surface-hovered)',
       )}
     >
       {childrenWithProps}

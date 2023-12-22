@@ -56,14 +56,25 @@ const MenuItem = ({
   onClick,
   isLoading,
 }: MenuItemProps) => {
+  const itemProps: {
+    onClick?: () => void;
+    className: string;
+    onSelect?: (event: Event) => void; // Define onSelect property
+  } = {
+    onClick: isLoading ? () => {} : onClick,
+    className: cn(
+      isLoading ? 'cursor-not-allowed' : 'cursor-pointer',
+      children
+        ? ''
+        : 'hover:bg-[var(--menu-list-item-surface-hovered)] hover:rounded-lg hover:text-[var(--menu-list-item-fg-hovered)] hover:stroke-[var(--menu-list-item-hovered)]',
+      'relative p-2 mx-2 text-[var(--menu-list-item-fg-default)] stroke-[var(--menu-list-item-icon)] focus-visible:outline-none',
+    ),
+  };
+  if (children) {
+    itemProps.onSelect = (e) => e.preventDefault();
+  }
   return (
-    <DropdownMenu.Item
-      onClick={isLoading ? () => {} : onClick}
-      className={cn(
-        isLoading ? 'cursor-not-allowed' : 'cursor-pointer',
-        'relative p-2 mx-2 hover:bg-[var(--menu-list-item-surface-hovered)] hover:rounded-lg text-[var(--menu-list-item-fg-default)] hover:text-[var(--menu-list-item-fg-hovered)] hover:stroke-[var(--menu-list-item-hovered)] stroke-[var(--menu-list-item-icon)] focus-visible:outline-none',
-      )}
-    >
+    <DropdownMenu.Item {...itemProps}>
       <div className="flex justify-between">
         <div className="flex gap-[10px] items-center ">
           {leftIcon && (

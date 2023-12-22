@@ -19,7 +19,7 @@ export const getEventsInfo = async (
       },
       select: {
         matchedPool: true,
-        projectEventJoin: {
+        projectJoinEvent: {
           where: {
             isArchive: false,
             isActive: true,
@@ -40,7 +40,7 @@ export const getEventsInfo = async (
     });
     return {
       matchedPool: eventData?.matchedPool,
-      participants: eventData?.projectEventJoin?.length,
+      participants: eventData?.projectJoinEvent?.length,
       contributors: eventData?.contribution?.length,
       contributions: eventData?.contribution?.reduce(
         (total, event) => total + (event.totalUsdAmount || 0),

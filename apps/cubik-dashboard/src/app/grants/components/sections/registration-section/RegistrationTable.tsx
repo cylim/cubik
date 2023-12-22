@@ -6,7 +6,9 @@ import { ProjectEventStatus } from '@cubik/database';
 import dayjs from '@cubik/dayjs';
 import {
   AvatarLabelGroup,
+  EmptyState,
   Icon,
+  PaginationButton,
   Table,
   TableBody,
   TableCell,
@@ -60,48 +62,94 @@ const getProjectRegistration = async (
   }
 };
 
+const getProjectRegistrationCount = async (status: ProjectEventStatus) => {
+  try {
+    const eventScope = cookies().get('access-scope');
+
+    if (!eventScope?.value) return 0;
+
+    return await prisma.projectJoinEvent.count({
+      where: {
+        eventId: eventScope.value,
+        projectEventStatus: status,
+      },
+    });
+  } catch (error) {
+    return 0;
+  }
+};
+
 interface Props {
   searchParams: { [key in string]: string };
 }
+const getStatus = (status: string) => {
+  if (status.toLowerCase() === 'pending') {
+    return ProjectEventStatus.PENDING;
+  }
+  if (status.toLowerCase() === 'approved') {
+    return ProjectEventStatus.APPROVED;
+  }
+  if (status.toLowerCase() === 'rejected') {
+    return ProjectEventStatus.REJECTED;
+  }
 
+  return ProjectEventStatus.APPROVED;
+};
 export const RegistrationTable = async ({ searchParams }: Props) => {
-  const page = handlePageSkip(searchParams.page);
+  const page = handlePageSkip(searchParams.registration_page);
+
+  const projectCount = await getProjectRegistrationCount(
+    getStatus(searchParams['section']),
+  );
   const projects = await getProjectRegistration(
-    (searchParams['section'] as ProjectEventStatus) || 'APPROVED',
+    getStatus(searchParams['section']),
     page === 1 ? 0 : (page - 1) * 15,
   );
+
+  if (projects.length === 0) {
+    return (
+      <EmptyState
+        description="Looks like there are no project applications to see here. Please try again after some time."
+        title="No Applications to see here!"
+        icon="file"
+        iconColor="var(--empty-state-icon-orange-stroke)"
+        bgColor="bg-[var(--empty-state-icon-orange-fill)]"
+      />
+    );
+  }
+
   return (
-    <Table className="">
-      <TableHeader
-        style={{
-          borderColor: 'var(--card-border-secondary)',
-        }}
-        className="border-b"
-      >
-        <TableRow className="">
-          <TableHead className="w-10"></TableHead>
-          <TableHead>
-            <Text color={'secondary'}>Projects</Text>
-          </TableHead>
-          <TableHead>
-            <Text color={'secondary'}>Project Link</Text>
-          </TableHead>
-          <TableHead>
-            <Text color={'secondary'}>Creator</Text>
-          </TableHead>
-          <TableHead>
-            <Text color={'secondary'}>Time</Text>
-          </TableHead>
-          <TableHead>
-            <Text color={'secondary'}>Status</Text>
-          </TableHead>
-          <TableHead></TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        <Suspense fallback={<>Loading....</>}>
-          {projects.length > 0 ? (
-            projects.map((project, index) => {
+    <div className="bg-[var(--card-bg-primary)] py-4">
+      <Table className="">
+        <TableHeader
+          style={{
+            borderColor: 'var(--card-border-secondary)',
+          }}
+          className="border-b"
+        >
+          <TableRow className="">
+            <TableHead className="w-10"></TableHead>
+            <TableHead>
+              <Text color={'secondary'}>Projects</Text>
+            </TableHead>
+            <TableHead>
+              <Text color={'secondary'}>Project Link</Text>
+            </TableHead>
+            <TableHead>
+              <Text color={'secondary'}>Creator</Text>
+            </TableHead>
+            <TableHead>
+              <Text color={'secondary'}>Time</Text>
+            </TableHead>
+            <TableHead>
+              <Text color={'secondary'}>Status</Text>
+            </TableHead>
+            <TableHead></TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          <Suspense fallback={<>Loading....</>}>
+            {projects.map((project, index) => {
               return (
                 <TableRow
                   key={project.project.name}
@@ -163,12 +211,17 @@ export const RegistrationTable = async ({ searchParams }: Props) => {
                   </TableCell>
                 </TableRow>
               );
-            })
-          ) : (
-            <></>
-          )}
-        </Suspense>
-      </TableBody>
-    </Table>
+            })}
+          </Suspense>
+        </TableBody>
+      </Table>
+      <div className="w-full border-t border-[var(--card-border-secondary)] px-6 py-4">
+        <PaginationButton
+          maxPage={Math.ceil(projectCount / 15)}
+          route="/grants?registration_page="
+          page={page}
+        />
+      </div>
+    </div>
   );
 };

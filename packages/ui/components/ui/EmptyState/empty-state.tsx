@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { Icon } from '../../../icons/icon';
+import { Icon, IconName } from '../../../icons/icon';
+import { cn } from '../../../lib/utils';
 import { Text } from '../text/text';
 
 export const EmptyState = ({
@@ -9,18 +10,16 @@ export const EmptyState = ({
   icon,
   children,
   border,
+  iconColor,
+  bgColor,
 }: {
   title: string;
   description: string;
-  icon:
-    | 'cloudError'
-    | 'alertInfoCircle'
-    | 'alertTriangle'
-    | 'danger'
-    | 'lock'
-    | 'key';
   children?: React.ReactNode;
   border?: boolean;
+  iconColor?: string;
+  bgColor?: string;
+  icon: IconName;
 }) => {
   return (
     <div
@@ -29,12 +28,17 @@ export const EmptyState = ({
       }`}
     >
       <div className="item-center mx-auto flex max-w-[280px] flex-col items-center justify-center gap-4 text-center md:max-w-[360px] md:gap-6">
-        <div className="flex w-fit items-center justify-center rounded-full bg-[var(--color-surface-negative-transparent)] p-3 md:p-6">
+        <div
+          className={cn(
+            'flex w-fit items-center justify-center rounded-full p-3 md:p-6',
+            bgColor || 'bg-[var(--color-surface-negative-transparent)]',
+          )}
+        >
           <div>
             <Icon
               name={icon}
               fill="none"
-              stroke="var(--color-fg-negative-base)"
+              stroke={iconColor || 'var(--color-fg-negative-base)'}
               width={32}
               height={32}
               strokeWidth={2}

@@ -25,17 +25,20 @@ export const SegmentSwitch = ({ urlKey }: Props) => {
   return (
     <div className="flex flex-row gap-4">
       <SegmentContainer size="sm">
+
         <SegmentItem
           isActive={
             !searchParams.get(urlKey) ? true : searchParams.get(urlKey) === '1W'
           }
           onClick={() => {
             router.push(`${path}${urlKey}=1W`, {
+
               scroll: false,
             });
           }}
         >
           1W
+
         </SegmentItem>
         <SegmentItem
           isActive={searchParams.get(urlKey) === '2W'}
@@ -57,6 +60,7 @@ export const SegmentSwitch = ({ urlKey }: Props) => {
           isActive={searchParams.get(urlKey) === '2M'}
           onClick={() => {
             router.push(`${path}${urlKey}=2M`, { scroll: false });
+
           }}
         >
           2M

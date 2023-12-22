@@ -27,33 +27,25 @@ const SwitchPage = () => {
           </div>
           <div className="mt-8 flex flex-col gap-10">
             <ToggleSwitch size={'sm'}>
-              <InputLabel fontSize={'sm'} isRequired={true}>
-                hello world
-              </InputLabel>
+              <InputLabel isRequired={true}>hello world</InputLabel>
             </ToggleSwitch>
 
             <ToggleSwitch size={'md'}>
-              <InputLabel fontSize={'md'} isRequired={true}>
-                Label Text
-              </InputLabel>
+              <InputLabel isRequired={true}>Label Text</InputLabel>
               <HelperText variant={'default'} fontSize={'md'}>
                 Helper text
               </HelperText>
             </ToggleSwitch>
 
             <ToggleSwitch size={'sm'} variant={'extended'}>
-              <InputLabel fontSize={'sm'} isRequired={true}>
-                Label Text
-              </InputLabel>
+              <InputLabel isRequired={true}>Label Text</InputLabel>
               <HelperText variant={'default'} fontSize={'sm'}>
                 Helper text
               </HelperText>
             </ToggleSwitch>
 
             <ToggleSwitch size={'md'} variant={'extended'}>
-              <InputLabel fontSize={'md'} isRequired={true}>
-                Label Text
-              </InputLabel>
+              <InputLabel isRequired={true}>Label Text</InputLabel>
               <HelperText variant={'default'} fontSize={'md'}>
                 Helper text
               </HelperText>

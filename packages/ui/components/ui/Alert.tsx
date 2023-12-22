@@ -4,7 +4,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { Icon } from '../../icons/icon';
 import { iconLibrary } from '../../icons/iconLibrary';
 import { cn } from '../../lib/utils';
-import { Button } from './Button/button';
+// import { Button } from './Button/button';
 import { Text } from './text/text';
 
 const alertVariants = cva('', {
@@ -74,10 +74,9 @@ const alertVariants = cva('', {
 
 interface AlertProps extends VariantProps<typeof alertVariants> {
   iconName?: keyof typeof iconLibrary;
-  title: string;
   content?: string;
-  button?: string;
-  buttonClick?: string;
+  // button?: string;
+  // buttonClick?: string;
   closeIcon: boolean;
   className?: string;
 }
@@ -85,12 +84,11 @@ interface AlertProps extends VariantProps<typeof alertVariants> {
 const Alert: React.FC<AlertProps> = ({
   iconName,
   color,
-  title,
   content,
-  button,
+  // button,
   className,
   type,
-  buttonClick,
+  // buttonClick,
   closeIcon = false,
 }) => {
   const [showAlert, setShowAlert] = useState(true);
@@ -102,8 +100,7 @@ const Alert: React.FC<AlertProps> = ({
   return showAlert ? (
     <div
       className={cn(
-        'flex gap-2 px-2',
-        type === 'border' ? 'py-2' : '',
+        'flex gap-2 p-2',
         className,
         alertVariants(
           type === 'inline' || type === 'border'
@@ -112,26 +109,22 @@ const Alert: React.FC<AlertProps> = ({
         ),
       )}
     >
-      {iconName && (
-        <Icon
-          name={iconName}
-          stroke={cn(alertVariants({ color }))}
-          fill={cn(alertVariants({ fill: color }))}
-          strokeWidth={1}
-          className="flex items-center"
-        />
-      )}
+      <div className="flex items-start pt-[2px]">
+        {iconName && (
+          <Icon
+            name={iconName}
+            height={20}
+            width={20}
+            stroke={cn(alertVariants({ color }))}
+            strokeWidth={1}
+          />
+        )}
+      </div>
 
       <div
         className={cn('items-center', alertVariants({ contentSpacing: type }))}
       >
         <div className={cn('gap-1 flex', alertVariants({ textSpacing: type }))}>
-          <Text
-            className={cn('l2-heavy', alertVariants({ titleColor: color }))}
-          >
-            {title}
-          </Text>
-
           <Text
             className={cn('l2-light', alertVariants({ titleColor: color }))}
           >
@@ -139,7 +132,7 @@ const Alert: React.FC<AlertProps> = ({
           </Text>
         </div>
 
-        <Button
+        {/* <Button
           variant="outline"
           className={cn(
             'border-0 text-sm font-semibold !px-0',
@@ -148,7 +141,7 @@ const Alert: React.FC<AlertProps> = ({
           onClick={() => buttonClick}
         >
           {button}
-        </Button>
+        </Button> */}
       </div>
       {closeIcon && (
         <div onClick={handleClose}>

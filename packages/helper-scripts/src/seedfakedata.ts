@@ -299,6 +299,15 @@ async function seedFakeContributions() {
   }
 }
 
+async function seedDB() {
+  await seedFakeUsers();
+  await seedFakeProjects();
+  await seedFakeComments();
+  await seedFakeEvents();
+  await seedFakeJoinEvents();
+  await seedFakeContributions();
+}
+
 export {
   seedFakeUsers,
   seedFakeProjects,
@@ -306,4 +315,5 @@ export {
   seedFakeContributions,
   seedFakeEvents,
   seedFakeJoinEvents,
+  seedDB,
 };

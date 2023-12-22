@@ -5,14 +5,7 @@ import {
 } from './src/color/generateCSS';
 import { convertToCSSVariables } from './src/color/primitive';
 // import { moveDataDevDB } from './src/data-move/move-dev-db';
-import {
-  seedFakeComments,
-  seedFakeContributions,
-  seedFakeEvents,
-  seedFakeJoinEvents,
-  seedFakeProjects,
-  seedFakeUsers,
-} from './src/seedfakedata';
+import { seedDB } from './src/seedfakedata';
 import { replaceSvgWithBackup } from './src/svgDetect';
 
 // generateSemantic();
@@ -21,9 +14,4 @@ import { replaceSvgWithBackup } from './src/svgDetect';
 // convertToCSSVariables();
 // moveDataDevDB();
 
-seedFakeUsers();
-seedFakeProjects();
-seedFakeComments();
-seedFakeEvents();
-seedFakeJoinEvents();
-seedFakeContributions();
+seedDB();

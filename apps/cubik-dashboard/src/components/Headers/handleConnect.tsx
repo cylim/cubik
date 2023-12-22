@@ -34,10 +34,7 @@ export const HandleConnect = () => {
           (await userResponse.json()) as unknown as AuthDecodeResponse;
         if (userRes.data) {
           if (userRes.data.accessScope.length > 0) {
-            const cookieIsSet = handleAccessOnServer(
-              userRes.data.accessScope[0].event_id,
-            );
-            if (!cookieIsSet) return;
+            handleAccessOnServer(userRes.data.accessScope[0].event_id);
             setAccessScope(userRes.data.accessScope[0], user?.accessType);
           }
           setUser(userRes.data);
@@ -45,7 +42,6 @@ export const HandleConnect = () => {
           return;
         }
         if (publicKey && connected && !user) {
-          handleRevalidation(pathname || '/');
           return setOpen(true);
         }
       } catch (error) {

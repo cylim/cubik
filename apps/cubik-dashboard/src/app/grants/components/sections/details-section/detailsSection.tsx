@@ -21,13 +21,13 @@ export const DetailsSection = ({ searchParams }: Props) => {
       </div>
       <div className="inline-flex w-full flex-col gap-12">
         <SubHead heading="Projects">
-          <SegmentSwitch />
+          <SegmentSwitch urlKey="project_time" />
         </SubHead>
         <ProjectSegment searchParams={searchParams} />
       </div>
       <div className="inline-flex w-full flex-col gap-12">
         <SubHead heading="Contributors">
-          <SegmentSwitch />
+          <SegmentSwitch urlKey="contribution_time" />
         </SubHead>
         <ContributionSegment searchParams={searchParams} />
       </div>

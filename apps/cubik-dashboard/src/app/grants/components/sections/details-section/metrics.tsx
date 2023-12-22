@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { getMetrics } from '@/app/grants/components/sections/details-section/helpers/getMetrics';
 import { AccessStore } from '@/context/scope';
-import { useQuery } from '@tanstack/react-query';
+import { useUser } from '@/context/user';
+import useMetrics from '@/hooks/contributions/useMetrics';
 
 import {
   MetricsItem,
@@ -14,12 +14,12 @@ import {
 
 export const Metrics = () => {
   const { scope } = AccessStore();
+  const { user } = useUser();
   const { theme } = useTheme();
-
-  const metrics = useQuery({
-    queryKey: ['metrics', scope?.event_id],
-    queryFn: ({ queryKey }) => getMetrics(queryKey[1] || ''),
-    enabled: !!scope,
+  console.log('scope', scope);
+  const metrics = useMetrics({
+    scope: scope?.event_id || '',
+    enabled: scope?.event_id ? true : false,
   });
 
   const roundMatchingPool = 30;

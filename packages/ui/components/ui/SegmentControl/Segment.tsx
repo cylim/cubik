@@ -8,7 +8,7 @@ interface SegmentContainerProps {
   children: React.ReactNode;
   size: 'sm' | 'md' | 'lg';
 }
-interface SegmentItemsProps {
+interface SegmentItemProps {
   children: React.ReactNode;
   onClick: () => void;
   isActive: boolean;
@@ -16,7 +16,7 @@ interface SegmentItemsProps {
 
 const SizeContext = createContext<'sm' | 'md' | 'lg'>('md');
 
-const segmentTextVariant = cva('', {
+const segmentTextVariant = cva('whitespace-nowrap', {
   variants: {
     size: {
       sm: 'l3',
@@ -56,11 +56,11 @@ export const SegmentContainer = ({ children, size }: SegmentContainerProps) => {
   );
 };
 
-export const SegmentItems = ({
+export const SegmentItem = ({
   children,
   onClick,
   isActive,
-}: SegmentItemsProps) => {
+}: SegmentItemProps) => {
   const size = useContext(SizeContext);
 
   return (

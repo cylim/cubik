@@ -4,7 +4,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
 
 const textareaVariants = cva(
-  'flex h-40 w-[30.5rem] px-3 py-4 shrink-0 rounded-lg border placeholder:text-base',
+  'flex h-[140px] md:h-40 w-full px-3 py-4 shrink-0 rounded-lg border placeholder:text-base',
   {
     variants: {
       size: {
@@ -13,15 +13,9 @@ const textareaVariants = cva(
       },
       state: {
         default:
-          'bg-[var(--form-input-surface-default)] border-[var(--form-input-border-default)] placeholder:text-[var(--form-input-placeholder-default)]',
-        focused:
-          'bg-[var(--form-input-surface-focused)] border-[var(--form-input-border-focused)] placeholder:text-[var(--form-input-placeholder-focused)]',
+          'bg-[var(--form-input-surface-default)] border border-[var(--form-input-border-default)] placeholder:text-[var(--form-input-placeholder-default)] focus-visible:ring-1 focus-visible:ring-[var(--form-input-border-focused)] focus-visible:ring-offset-0 focus-visible:outline-none focus:border-none focus-visible:border-none hover:border hover:border-[var(--form-input-border-hovered)] disabled:bg-[var(--form-input-surface-disabled)] disabled:border disabled:border-[var(--form-input-border-disabled)] disabled:placeholder:text-[var(--form-input-placeholder-disabled)] ',
         error:
           'bg-[var(--form-input-surface-error)] border-[var(--form-input-border-error)] placeholder:text-[var(--form-input-placeholder-error)]',
-        hovered:
-          'bg-[var(--form-input-surface-hovered)] border-[var(--form-input-border-hovered)] placeholder:text-[var(--form-input-placeholder-hovered)]',
-        disabled:
-          'bg-[var(--form-input-surface-disabled)] border-[var(--form-input-border-disabled)] placeholder:text-[var(--form-input-placeholder-disabled)]',
       },
     },
     defaultVariants: {

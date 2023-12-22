@@ -33,25 +33,7 @@ const TextAreaPage = () => {
           />
           <Textarea
             size="md"
-            state="hovered"
-            resizable
-            placeholder="Placeholder"
-          />
-          <Textarea
-            size="md"
-            state="focused"
-            resizable
-            placeholder="Placeholder"
-          />
-          <Textarea
-            size="md"
             state="error"
-            resizable
-            placeholder="Placeholder"
-          />
-          <Textarea
-            size="md"
-            state="disabled"
             resizable
             placeholder="Placeholder"
           />

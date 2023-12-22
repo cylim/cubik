@@ -27,9 +27,7 @@ const AlertPage = () => {
             type="inline"
             iconName="spinner"
             color="purple"
-            title="Alert Title"
             content="alert content"
-            button="button"
             closeIcon
             className="w-[26.75rem]"
           />
@@ -37,9 +35,7 @@ const AlertPage = () => {
             type={'border'}
             iconName="doubleTick"
             color="green"
-            title="Alert Title"
             content="alert content"
-            button="button"
             closeIcon
             className="w-[26.75rem]"
           />
@@ -47,9 +43,7 @@ const AlertPage = () => {
             type="text"
             iconName="alertInfoCircle"
             color="blue"
-            title="Alert Title"
             content="alert content"
-            button="button"
             closeIcon
             className="w-[26.75rem]"
           />
@@ -57,9 +51,7 @@ const AlertPage = () => {
             type={'border'}
             iconName="infoTriangle"
             color="yellow"
-            title="Alert Title"
-            content="alert content"
-            button="button"
+            content="You have Grant Manger Role. You can view all the grant details and manage the grant round."
             closeIcon
             className="w-[26.75rem]"
           />
@@ -67,9 +59,7 @@ const AlertPage = () => {
             type={'border'}
             iconName="danger"
             color="red"
-            title="Alert Title"
-            content="alert content"
-            button="button"
+            content="You have Grant Manger Role. You can view all the grant details and manage the grant round."
             closeIcon
             className="w-[26.75rem]"
           />

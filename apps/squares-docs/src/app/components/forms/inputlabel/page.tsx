@@ -25,22 +25,12 @@ const InputLabelPage = () => {
           <CodeComponent codeString='import { InputLabel } from "@cubik/ui"' />
         </div>
         <div className="flex flex-col gap-10">
+          <InputLabel counterValue={0} maxCounterValue={100} isRequired={true}>
+            hello world
+          </InputLabel>
+          <InputLabel isRequired={true}>hello world</InputLabel>
+          <InputLabel isRequired={false}>hello world</InputLabel>
           <InputLabel
-            fontSize={'md'}
-            counterValue={0}
-            maxCounterValue={100}
-            isRequired={true}
-          >
-            hello world
-          </InputLabel>
-          <InputLabel fontSize={'md'} isRequired={true}>
-            hello world
-          </InputLabel>
-          <InputLabel fontSize={'md'} isRequired={false}>
-            hello world
-          </InputLabel>
-          <InputLabel
-            fontSize={'md'}
             icon={
               <svg
                 width="14"
@@ -62,7 +52,6 @@ const InputLabelPage = () => {
             hello world
           </InputLabel>
           <InputLabel
-            fontSize={'sm'}
             icon={
               <svg
                 width="14"
@@ -83,20 +72,11 @@ const InputLabelPage = () => {
           >
             hello world
           </InputLabel>
-          <InputLabel
-            fontSize={'sm'}
-            counterValue={0}
-            maxCounterValue={100}
-            isRequired={true}
-          >
+          <InputLabel counterValue={0} maxCounterValue={100} isRequired={true}>
             hello world
           </InputLabel>
-          <InputLabel fontSize={'sm'} isRequired={true}>
-            hello world
-          </InputLabel>
-          <InputLabel fontSize={'sm'} isRequired={false}>
-            hello world
-          </InputLabel>
+          <InputLabel isRequired={true}>hello world</InputLabel>
+          <InputLabel isRequired={false}>hello world</InputLabel>
         </div>
       </PageHOC>
     </>

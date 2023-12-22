@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
 
 import { Icon } from '../../icons/icon';
 import { iconLibrary } from '../../icons/iconLibrary';
 import { cn } from '../../lib/utils';
-import { Button } from './Button/button';
+// import { Button } from './Button/button';
 import { Text } from './text/text';
 
 const alertVariants = cva('', {
@@ -46,11 +46,11 @@ const alertVariants = cva('', {
       red: 'var(--alert-error-icon-stroke)',
     },
     titleColor: {
-      purple: 'text-[var(--alert-loading-title)]',
-      green: 'text-[var(--alert-success-title)]',
-      blue: 'text-[var(--alert-info-title)]',
-      yellow: 'text-[var(--alert-warning-title)]',
-      red: 'text-[var(--alert-error-title)]',
+      purple: '!text-[var(--alert-loading-title)]',
+      green: '!text-[var(--alert-success-title)]',
+      blue: '!text-[var(--alert-info-title)]',
+      yellow: '!text-[var(--alert-warning-title)]',
+      red: '!text-[var(--alert-error-title)]',
     },
     textColor: {
       purple: 'text-[var(--alert-loading-text)]',
@@ -73,11 +73,10 @@ const alertVariants = cva('', {
 });
 
 interface AlertProps extends VariantProps<typeof alertVariants> {
-  iconName: keyof typeof iconLibrary;
-  title: string;
+  iconName?: keyof typeof iconLibrary;
   content?: string;
-  button?: string;
-  buttonClick?: string;
+  // button?: string;
+  // buttonClick?: string;
   closeIcon: boolean;
   className?: string;
 }
@@ -85,17 +84,23 @@ interface AlertProps extends VariantProps<typeof alertVariants> {
 const Alert: React.FC<AlertProps> = ({
   iconName,
   color,
-  title,
   content,
-  button,
+  // button,
   className,
   type,
-  buttonClick,
+  // buttonClick,
+  closeIcon = false,
 }) => {
-  return (
+  const [showAlert, setShowAlert] = useState(true);
+
+  const handleClose = () => {
+    setShowAlert(false);
+  };
+
+  return showAlert ? (
     <div
       className={cn(
-        'flex gap-2 px-3',
+        'flex gap-2 p-2',
         className,
         alertVariants(
           type === 'inline' || type === 'border'
@@ -104,23 +109,22 @@ const Alert: React.FC<AlertProps> = ({
         ),
       )}
     >
-      <Icon
-        name={iconName}
-        stroke={cn(alertVariants({ color }))}
-        fill={cn(alertVariants({ fill: color }))}
-        strokeWidth={1}
-        className="flex items-center"
-      />
+      <div className="flex items-start pt-[2px]">
+        {iconName && (
+          <Icon
+            name={iconName}
+            height={20}
+            width={20}
+            stroke={cn(alertVariants({ color }))}
+            strokeWidth={1}
+          />
+        )}
+      </div>
+
       <div
         className={cn('items-center', alertVariants({ contentSpacing: type }))}
       >
         <div className={cn('gap-1 flex', alertVariants({ textSpacing: type }))}>
-          <Text
-            className={cn('l2-heavy', alertVariants({ titleColor: color }))}
-          >
-            {title}
-          </Text>
-
           <Text
             className={cn('l2-light', alertVariants({ titleColor: color }))}
           >
@@ -128,26 +132,31 @@ const Alert: React.FC<AlertProps> = ({
           </Text>
         </div>
 
-        <Button
-          variant="link"
+        {/* <Button
+          variant="outline"
           className={cn(
-            'border-0 underline underline-offset-4 text-sm font-semibold',
+            'border-0 text-sm font-semibold !px-0',
             alertVariants({ titleColor: color }),
           )}
           onClick={() => buttonClick}
         >
           {button}
-        </Button>
+        </Button> */}
       </div>
-      <Icon
-        name="cross"
-        stroke="#999999"
-        strokeWidth={1.5}
-        height={20}
-        width={20}
-      />
+      {closeIcon && (
+        <div onClick={handleClose}>
+          <Icon
+            name="cross"
+            stroke="#999999"
+            strokeWidth={1.5}
+            height={20}
+            width={20}
+            className="cursor-pointer"
+          />
+        </div>
+      )}
     </div>
-  );
+  ) : null;
 };
 
 export { Alert };

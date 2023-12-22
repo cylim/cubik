@@ -33,7 +33,7 @@ export const Modal = ({
           <Dialog.Content
             className={cn(
               DialogSize[dialogSize],
-              'text-white data-[state=open]:animate-contentShow fixed top-[20%] left-[50%] max-h-[85vh] w-full translate-x-[-50%] translate-y-[0%] rounded-[12px] bg-[var(--color-bg-primary-base)] shadow-md focus:outline-none',
+              'text-white data-[state=open]:animate-contentShow fixed top-[46%] left-[50%] max-h-[85vh] w-full translate-x-[-50%] translate-y-[-50%] rounded-[12px] bg-[var(--color-bg-primary-base)] shadow-md focus:outline-none',
             )}
           >
             <Dialog.Content className="z-50 relative">

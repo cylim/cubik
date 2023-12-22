@@ -27,7 +27,7 @@ export const TabsSection = ({ searchParams }: Props) => {
             <DetailsSection searchParams={searchParams} />
           </TabPanel>
           <TabPanel value={1}>
-            <RegistrationsSection />
+            <RegistrationsSection searchParams={searchParams} />
           </TabPanel>
           <TabPanel value={2}>Multi</TabPanel>
           <TabPanel value={3}>Change your password here.</TabPanel>

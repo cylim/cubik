@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { revalidatePath } from 'next/cache';
-import { AccessStore } from '@/context/scope';
-import { useUser } from '@/context/user';
+import { AccessStore } from '@/hooks/store/scope';
+import { useUser } from '@/hooks/store/user';
 import { handleLogout } from '@/utils/auth';
 import { handleRevalidation } from '@/utils/helpers/revalidate';
 import { useMutation } from '@tanstack/react-query';

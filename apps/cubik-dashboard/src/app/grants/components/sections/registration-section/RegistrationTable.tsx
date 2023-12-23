@@ -83,6 +83,9 @@ interface Props {
   searchParams: { [key in string]: string };
 }
 const getStatus = (status: string) => {
+  if (!status) {
+    return ProjectEventStatus.APPROVED;
+  }
   if (status.toLowerCase() === 'pending') {
     return ProjectEventStatus.PENDING;
   }
@@ -216,11 +219,13 @@ export const RegistrationTable = async ({ searchParams }: Props) => {
         </TableBody>
       </Table>
       <div className="w-full border-t border-[var(--card-border-secondary)] px-6 py-4">
-        <PaginationButton
-          maxPage={Math.ceil(projectCount / 15)}
-          route="/grants?registration_page="
-          page={page}
-        />
+        {projectCount > 15 && (
+          <PaginationButton
+            maxPage={Math.ceil(projectCount / 15)}
+            route="/grants?registration_page="
+            page={page}
+          />
+        )}
       </div>
     </div>
   );

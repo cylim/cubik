@@ -31,7 +31,7 @@ const MenuList = ({ children, align = 'end' }: MenuListProps) => {
   return (
     <DropdownMenu.Portal>
       <DropdownMenu.Content
-        className="pb-2 min-w-[220px] shadow-xl border border-[var(--menu-list-item-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] flex flex-col gap-2"
+        className="py-2 min-w-[220px] shadow-xl border border-[var(--menu-list-item-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] flex flex-col gap-2"
         sideOffset={10}
         align={align}
       >

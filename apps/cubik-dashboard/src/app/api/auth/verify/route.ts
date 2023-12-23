@@ -1,5 +1,6 @@
 import { headers } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
+import { DEFAULT_COOKIE_OPTIONS } from '@/constants/cookies';
 import { env } from '@/env.mjs';
 import { utils, web3 } from '@coral-xyz/anchor';
 
@@ -106,13 +107,11 @@ export const POST = async (req: NextRequest) => {
         error: null,
       });
 
-      response.cookies.set('authToken', session as string, {
-        expires: new Date(Date.now() + 3600000 * 4),
-        secure: true,
-        httpOnly: true,
-        sameSite: 'strict',
-        path: '/',
-      });
+      response.cookies.set(
+        'authToken',
+        session as string,
+        DEFAULT_COOKIE_OPTIONS,
+      );
 
       return response;
     } else {

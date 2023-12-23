@@ -3,8 +3,8 @@
 import { Dispatch, SetStateAction, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { handleAccessOnServer } from '@/components/Headers/handleAccessOnServer';
-import { AccessStore } from '@/context/scope';
-import { useUser } from '@/context/user';
+import { AccessStore } from '@/hooks/store/scope';
+import { useUser } from '@/hooks/store/user';
 import { handleRevalidation } from '@/utils/helpers/revalidate';
 import { verifyUser } from '@/utils/helpers/verifyUser';
 import { useWallet } from '@solana/wallet-adapter-react';

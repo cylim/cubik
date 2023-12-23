@@ -1,6 +1,7 @@
 'use server';
 
 import { cookies } from 'next/headers';
+import { DEFAULT_COOKIE_OPTIONS } from '@/constants/cookies';
 
 export const handleAccessOnServer = (eventId: string) => {
   try {
@@ -14,13 +15,7 @@ export const handleAccessOnServer = (eventId: string) => {
     if (cookiesStore.get('access-scope')) {
       cookiesStore.delete('access-scope');
     }
-    cookiesStore.set('access-scope', eventId, {
-      expires: new Date(Date.now() + 3600000),
-      secure: true,
-      httpOnly: true,
-      sameSite: 'strict',
-      path: '/',
-    });
+    cookiesStore.set('access-scope', eventId, DEFAULT_COOKIE_OPTIONS);
     return true;
   } catch (error) {
     console.log(error);

@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { AccessStore } from '@/context/scope';
-import { useUser } from '@/context/user';
 import useMetrics from '@/hooks/contributions/useMetrics';
+import { AccessStore } from '@/hooks/store/scope';
+import { useUser } from '@/hooks/store/user';
 
 import {
   MetricsItem,

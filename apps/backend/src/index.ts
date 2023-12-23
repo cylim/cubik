@@ -8,11 +8,12 @@ import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import morganBody from 'morgan-body';
-import { scheduleJob } from 'node-schedule';
+// import { scheduleJob } from 'node-schedule';
 import { metadataRouter } from 'routes/metadata.router';
 import { squadsRouter } from 'routes/squads.router';
 import { TokenRouter } from 'routes/token.router';
-import { syncCommunity } from 'service/community-sync/syncCommunity';
+
+// import { syncCommunity } from 'service/community-sync/syncCommunity';
 
 import logger from './middleware/logger';
 
@@ -55,7 +56,7 @@ const main = async () => {
         'info',
         `Adding Sync Community Cron Job, cron interval ${process.env.CRON_INTERVAL}`,
       );
-      scheduleJob(process.env.CRON_INTERVAL!, syncCommunity);
+      // scheduleJob(process.env.CRON_INTERVAL!, syncCommunity);
     }
     logger.log('info', `Server is running on Port:${PORT}`);
     // await syncCommunity();

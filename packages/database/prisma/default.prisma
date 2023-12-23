@@ -156,12 +156,13 @@ model Event {
   logo             String?            @default("")
   matchedPool      Float              @default(0)
   userId           String
-  type             EventType
+  type             EventType  
+  currentStatus    EventStatusType  @default(REGISTRATION)
   description      String             @db.Text
   shortDescription String             @default("") @db.VarChar(2000)
   tx               String             @db.VarChar(500)
   isArchive        Boolean            @default(false)
-  isPaused       Boolean            @default(false)
+  isPaused         Boolean            @default(false)
   eventStatus      EventStatus[]
   user             User               @relation(fields: [userId], references: [id])
   sponsor          Sponsor[]

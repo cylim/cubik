@@ -19,11 +19,6 @@ export default async function Home() {
   const cookieStore = cookies();
   const token = cookieStore.get('authToken');
   const user = token && (await IsUserLoginServer(token.value));
-  console.log('token', token);
-  console.log('user', user);
-  //if user -> access scope>0 render the list of events
-  //user -> access scope =0 no access state
-  // user is null, but pk is defined -> no linked wallet
 
   if (!token || !user) {
     return (
@@ -33,10 +28,7 @@ export default async function Home() {
       </PageLayout>
     );
   }
-  {
-    console.log('list of events', user.accessScope);
-  }
-  //fetch rest of data through event id
+
   return (
     <PageLayout>
       <div className="absolute left-[-100px] top-0 w-full">
@@ -59,19 +51,6 @@ export default async function Home() {
           grantManager={true}
           roundStartDate={new Date('2021-10-20T00:00:00.000Z')}
           roundEndDate={new Date('2021-10-20T00:00:00.000Z')}
-        >
-          <GrantRoundCardHeader grantName="Alpha Grants Round" isLive />
-          <GrantRoundCardFooter
-            matchingPool={'50K'}
-            participants={'300'}
-            contributions={'10'}
-            //contributors={'100'}
-          />
-        </GrantsRoundCard>
-        <GrantsRoundCard
-          grantManager={true}
-          roundStartDate={new Date('2024-01-20T00:00:00.000Z')}
-          roundEndDate={new Date('2024-01-20T00:00:00.000Z')}
         >
           <GrantRoundCardHeader grantName="Alpha Grants Round" isLive />
           <GrantRoundCardFooter

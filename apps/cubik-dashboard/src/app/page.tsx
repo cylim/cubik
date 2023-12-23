@@ -2,13 +2,10 @@ import { cookies } from 'next/headers';
 import { GrantsSegmentControlSwitch } from '@/app/homeSegment';
 import PageLayout from '@/components/Layouts/PageLayout';
 import { ConnectWalletSection } from '@/components/wallet/ConnectWalletSection';
-import { getEventsInfo } from '@/utils/helpers/getEventsInfo';
 import { IsUserLoginServer } from '@/utils/helpers/isUserLogin';
 
 import {
-  Alert,
   Background,
-  Button,
   GrantRoundCardFooter,
   GrantRoundCardHeader,
   GrantsRoundCard,
@@ -62,7 +59,10 @@ export default async function Home() {
       </PageLayout>
     );
   }
-
+  {
+    console.log('list of events', user.accessScope);
+  }
+  //fetch rest of data through event id
   return (
     <PageLayout>
       <div className="absolute left-[-100px] top-0 w-full">
@@ -104,4 +104,13 @@ export default async function Home() {
       </div>
     </PageLayout>
   );
+}
+
+{
+  /* <div key={event.event_id}>
+<GrantsRoundCard>
+  <GrantRoundCardHeader grantName={event.event_name} />
+  <GrantRoundCardFooter matchingPool="$50K" />
+</GrantsRoundCard>
+</div> */
 }

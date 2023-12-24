@@ -7,17 +7,17 @@ import { AccessStore } from '@/hooks/store/scope';
 import { useUser } from '@/hooks/store/user';
 import { handleRevalidation } from '@/utils/helpers/revalidate';
 import { verifyUser } from '@/utils/helpers/verifyUser';
-import { useWallet } from '@solana/wallet-adapter-react';
 import { useMutation } from '@tanstack/react-query';
 
 import { VerifyModal as VerificationModal } from '@cubik/ui';
+import { useCubikWallet } from '@cubik/wallet';
 
 interface Props {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
 export const VerifyModal = ({ open, setOpen }: Props) => {
-  const { signMessage, publicKey } = useWallet();
+  const { signMessage, publicKey } = useCubikWallet();
   const { setAccessScope } = AccessStore();
   const { setUser } = useUser();
   const pathname = usePathname();

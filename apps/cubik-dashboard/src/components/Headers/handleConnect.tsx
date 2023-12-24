@@ -5,10 +5,9 @@ import { AccessStore } from '@/hooks/store/scope';
 import { useUser } from '@/hooks/store/user';
 import { handleRevalidation } from '@/utils/helpers/revalidate';
 import { Button } from '@/utils/ui';
-import { useWallet } from '@solana/wallet-adapter-react';
 
 import { AuthPayload } from '@cubik/common-types/src/admin';
-import { useCubikWalletContext } from '@cubik/wallet';
+import { useCubikWallet, useCubikWalletContext } from '@cubik/wallet';
 
 import { VerifyModal } from '../modals/verifyModal';
 import { UserInteraction } from './userInteraction';
@@ -19,7 +18,7 @@ interface AuthDecodeResponse {
 }
 export const HandleConnect = () => {
   const { setShowModal } = useCubikWalletContext();
-  const { publicKey, connected, disconnect } = useWallet();
+  const { publicKey, connected, disconnect } = useCubikWallet();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const { user, setUser } = useUser();

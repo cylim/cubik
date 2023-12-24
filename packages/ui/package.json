@@ -23,7 +23,6 @@
     "@cubik/common": "workspace:*",
     "@cubik/config": "workspace:*",
     "@cubik/dayjs": "workspace:*",
-    "@cubik/wallet-connect": "workspace:*",
     "@headlessui/react": "^1.7.17",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-dialog": "^1.0.5",

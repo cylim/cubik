@@ -19,11 +19,11 @@ import {
   Switch,
   useTheme,
 } from '@cubik/ui';
-import { useUnifiedWallet } from '@cubik/wallet-connect';
+import { useCubikWallet } from '@cubik/wallet';
 
 export const UserInteraction = () => {
   const { user, setUser } = useUser();
-  const { disconnect } = useUnifiedWallet();
+  const { disconnect } = useCubikWallet();
   const { setAccessScope } = AccessStore();
   const { theme, toggleTheme } = useTheme();
   const logoutMutation = useMutation({

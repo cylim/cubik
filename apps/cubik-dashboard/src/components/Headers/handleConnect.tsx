@@ -8,7 +8,7 @@ import { Button } from '@/utils/ui';
 import { useWallet } from '@solana/wallet-adapter-react';
 
 import { AuthPayload } from '@cubik/common-types/src/admin';
-import { useUnifiedWalletContext } from '@cubik/wallet-connect';
+import { useCubikWalletContext } from '@cubik/wallet';
 
 import { VerifyModal } from '../modals/verifyModal';
 import { UserInteraction } from './userInteraction';
@@ -18,7 +18,7 @@ interface AuthDecodeResponse {
   error: null | string;
 }
 export const HandleConnect = () => {
-  const { setShowModal } = useUnifiedWalletContext();
+  const { setShowModal } = useCubikWalletContext();
   const { publicKey, connected, disconnect } = useWallet();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);

@@ -12,6 +12,8 @@ import {
 import { useMediaQuery } from '@cubik/ui/hooks';
 import { cn } from '@cubik/ui/lib/utils';
 
+import { CubikWalletModal } from './listWallet';
+
 // import UnifiedWalletModal from '@cubik/wallet-connect/components/Modal/modal';
 
 type ModalState = 'wallet-connect' | 'verify' | 'user-create';
@@ -24,7 +26,10 @@ export const UserModal = ({ onClose }: Props) => {
   return (
     <>
       {modalState === 'wallet-connect' && (
-        <ModalHeader onClose={onClose} heading="Connect Wallet" size="sm" />
+        <>
+          <ModalHeader onClose={onClose} heading="Connect Wallet" size="sm" />
+          <CubikWalletModal onClose={onClose} setShowHeader={() => {}} />
+        </>
       )}
     </>
   );

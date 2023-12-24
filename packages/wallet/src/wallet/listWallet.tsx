@@ -8,15 +8,12 @@ import {
 import { useToggle } from 'react-use';
 
 import { AvatarGroup, Icon, Text } from '@cubik/ui';
+import { useMediaQuery } from '@cubik/ui/hooks';
 
-import {
-  useUnifiedWallet,
-  useUnifiedWalletContext,
-} from '../../contexts/UnifiedWalletContext';
-import { usePreviouslyConnected } from '../../contexts/WalletConnectionProvider/previouslyConnectedProvider';
-import { useMediaQuery } from '../../hooks/helperHooks';
+import { useCubikWallet, useCubikWalletContext } from './CubikContext';
 import { OnboardingFlow } from './Onboarding';
-import { WalletIcon, WalletListItem } from './WalletListItem';
+import { usePreviouslyConnected } from './prevConnected';
+import { WalletIcon } from './WalletListItem';
 
 const ListOfWallets: React.FC<{
   list: {
@@ -31,8 +28,7 @@ const ListOfWallets: React.FC<{
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 }> = ({ list, onToggle, isOpen, setShowHeader }) => {
   const [showMore, setShowMore] = useState<boolean>(false);
-  const { handleConnectClick, walletlistExplanation } =
-    useUnifiedWalletContext();
+  const { handleConnectClick, walletlistExplanation } = useCubikWalletContext();
   const [showOnboarding, setShowOnboarding] = useState(false);
   const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
   // remaining wallet list which opens when button is clicked
@@ -190,7 +186,7 @@ const TOP_WALLETS: WalletName[] = [
   'Coinbase Wallet' as WalletName<'Coinbase Wallet'>,
 ];
 
-interface IUnifiedWalletModal {
+interface ICubikWalletModal {
   onClose: () => void;
   setShowHeader: (show: boolean) => void;
 }
@@ -215,7 +211,7 @@ const sortByPrecedence =
     return 0;
   };
 
-const UnifiedWalletModalFooter: React.FC = () => {
+const CubikWalletModalFooter: React.FC = () => {
   return (
     <div className="flex flex-col px-6 py-2 gap-4">
       <div className="flex gap-[0px] item-start space-x-3">
@@ -268,11 +264,9 @@ const UnifiedWalletModalFooter: React.FC = () => {
     </div>
   );
 };
-const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = ({
-  setShowHeader,
-}) => {
-  const { wallets } = useUnifiedWallet();
-  const { walletPrecedence } = useUnifiedWalletContext();
+const CubikWalletModal: React.FC<ICubikWalletModal> = ({ setShowHeader }) => {
+  const { wallets } = useCubikWallet();
+  const { walletPrecedence } = useCubikWalletContext();
   const [isOpen, onToggle] = useToggle(false);
   const previouslyConnected = usePreviouslyConnected();
 
@@ -399,7 +393,7 @@ const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = ({
               background: 'var(--color-border-primary-base)',
             }}
           />
-          <UnifiedWalletModalFooter />
+          <CubikWalletModalFooter />
           <div className="h-48px" />
         </div>
       )}
@@ -407,4 +401,4 @@ const UnifiedWalletModal: React.FC<IUnifiedWalletModal> = ({
   );
 };
 
-export default UnifiedWalletModal;
+export { CubikWalletModal };

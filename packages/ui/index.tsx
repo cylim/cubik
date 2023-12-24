@@ -53,3 +53,4 @@ export * from './components/ui/Switch';
 export * from './components/ui/ProjectTimeline';
 export * from './components/ui/GrantsRoundCard';
 export * from './components/ui/RegistrationCard';
+export * from './components/user';

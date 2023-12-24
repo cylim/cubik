@@ -1382,6 +1382,9 @@ importers:
       '@cubik/dayjs':
         specifier: workspace:*
         version: link:../dayjs
+      '@cubik/wallet-connect':
+        specifier: workspace:*
+        version: link:../UnifiedWalletKit
       '@headlessui/react':
         specifier: ^1.7.17
         version: 1.7.17(react-dom@18.2.0)(react@18.2.0)
@@ -1472,6 +1475,9 @@ importers:
       react-use:
         specifier: ^17.4.0
         version: 17.4.2(react-dom@18.2.0)(react@18.2.0)
+      sonner:
+        specifier: ^1.2.3
+        version: 1.2.4(react-dom@18.2.0)(react@18.2.0)
       tailwind-merge:
         specifier: ^1.14.0
         version: 1.14.0

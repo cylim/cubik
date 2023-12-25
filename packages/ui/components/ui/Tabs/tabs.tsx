@@ -178,19 +178,19 @@ const TabList: React.FC<TabListProps> = ({ children, className }) => {
         position: 'absolute',
         bottom: 0,
         borderRadius: '4px',
-        transform: 'translateY(1px) translate3d(0, 0, 0)', // Trigger hardware acceleration
-        WebkitTransform: 'translateY(1px) translate3d(0, 0, 0)', // Webkit prefix for Safari
-        transition: `left 200ms cubic-bezier(0, 0, 0.2, 1), 
-                   width 200ms cubic-bezier(0, 0, 0.2, 1),
-                   opacity 200ms ease-in-out`,
-        WebkitTransition: `left 200ms cubic-bezier(0, 0, 0.2, 1), 
-                         width 200ms cubic-bezier(0, 0, 0.2, 1),
-                         opacity 200ms ease-in-out`, // Webkit prefix for Safari
+        WebkitTransform: `translateY(1px) translate3d(0, 0, 0)`, // For Safari
+        transform: 'translateY(1px) translate3d(0, 0, 0)',
+        WebkitTransition: `-webkit-transform 400ms cubic-bezier(0, 0, 0.2, 1), 
+                           width 400ms cubic-bezier(0, 0, 0.2, 1),
+                           opacity 400ms ease-in-out`, // For Safari
+        transition: `transform 400ms cubic-bezier(0, 0, 0.2, 1), 
+                     width 400ms cubic-bezier(0, 0, 0.2, 1),
+                     opacity 400ms ease-in-out`,
       }
     : {
         opacity: 0,
+        WebkitTransform: 'translate3d(0, 0, 0)', // For Safari
         transform: 'translate3d(0, 0, 0)',
-        WebkitTransform: 'translate3d(0, 0, 0)',
       };
 
   return (

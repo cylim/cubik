@@ -15,7 +15,9 @@ export function useTabMeasurements(
   );
 
   useLayoutEffect(() => {
-    if (!tabListContainerRef) return;
+    if (!tabListContainerRef) {
+      return;
+    }
 
     const updateMeasurements = () => {
       const containerRect = tabListContainerRef.getBoundingClientRect();
@@ -35,7 +37,9 @@ export function useTabMeasurements(
 
     const observer = new ResizeObserver(updateMeasurements);
     tabRefs.forEach((ref) => {
-      if (ref) observer.observe(ref);
+      if (ref) {
+        observer.observe(ref);
+      }
     });
 
     return () => {

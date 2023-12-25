@@ -24,35 +24,35 @@ export const HandleConnect = () => {
   const { user, setUser } = useUser();
   const { setAccessScope } = AccessStore();
   const pathname = usePathname();
-  useEffect(() => {
-    const fetchUser = async () => {
-      setIsLoading(true);
-      try {
-        const userResponse = await fetch('/api/auth/decode');
-        const userRes =
-          (await userResponse.json()) as unknown as AuthDecodeResponse;
-        if (userRes.data) {
-          if (userRes.data.accessScope.length > 0) {
-            handleAccessOnServer(userRes.data.accessScope[0].event_id);
-            setAccessScope(userRes.data.accessScope[0], user?.accessType);
-          }
-          setUser(userRes.data);
-          handleRevalidation(pathname || '/');
-          return;
-        }
-        if (publicKey && connected && !user) {
-          return setOpen(true);
-        }
-      } catch (error) {
-        setUser(null);
-        setIsLoading(false);
-        handleRevalidation(pathname || '/');
-        console.log(error);
-        return error;
-      }
-    };
-    fetchUser();
-  }, [publicKey, connected]);
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     setIsLoading(true);
+  //     try {
+  //       const userResponse = await fetch('/api/auth/decode');
+  //       const userRes =
+  //         (await userResponse.json()) as unknown as AuthDecodeResponse;
+  //       if (userRes.data) {
+  //         if (userRes.data.accessScope.length > 0) {
+  //           handleAccessOnServer(userRes.data.accessScope[0].event_id);
+  //           setAccessScope(userRes.data.accessScope[0], user?.accessType);
+  //         }
+  //         setUser(userRes.data);
+  //         handleRevalidation(pathname || '/');
+  //         return;
+  //       }
+  //       if (publicKey && connected && !user) {
+  //         return setOpen(true);
+  //       }
+  //     } catch (error) {
+  //       setUser(null);
+  //       setIsLoading(false);
+  //       handleRevalidation(pathname || '/');
+  //       console.log(error);
+  //       return error;
+  //     }
+  //   };
+  //   fetchUser();
+  // }, [publicKey, connected]);
 
   if (!connected && !publicKey && !user) {
     return (

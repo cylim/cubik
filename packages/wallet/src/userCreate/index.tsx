@@ -1,5 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+'use client';
+
 import React from 'react';
 
+import '../globals.css';
+
+import { useCubikWallet } from '../wallet';
 import { CreateUsername } from './createUsername';
 import { EmailOtp } from './emailOtp';
 import { ProfileCreated } from './profileCreated';
@@ -13,6 +19,7 @@ export type UserCreateSteps =
 export const UserCreate = () => {
   const [userCreateState, setUserCreateState] =
     React.useState<UserCreateSteps>('create-username');
+  const { publicKey, connected, disconnect } = useCubikWallet();
 
   if (userCreateState === 'verify-email') {
     return (

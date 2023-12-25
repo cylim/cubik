@@ -22,6 +22,7 @@ import {
 import * as AllWalletAdapters from '@solana/wallet-adapter-wallets';
 import { PublicKey } from '@solana/web3.js';
 import { usePrevious } from 'react-use';
+import { toast } from 'sonner';
 
 import {
   CubikWalletContext,
@@ -117,7 +118,7 @@ const CubikWalletContextProvider = ({
       event.preventDefault();
 
       try {
-        setShowModal(false);
+        // setShowModal(false);
 
         // Connecting
         config.notificationCallback?.onConnecting({
@@ -143,21 +144,11 @@ const CubikWalletContextProvider = ({
         if (adapter.readyState === WalletReadyState.NotDetected) {
           throw WalletReadyState.NotDetected;
         }
+        // alert('Wallet Connected');
       } catch (error) {
         console.log(error);
 
-        // Not Installed
-        config.notificationCallback?.onNotInstalled({
-          publicKey: '',
-          shortAddress: '',
-          walletName: adapter.name,
-          metadata: {
-            name: adapter.name,
-            url: adapter.url,
-            icon: adapter.icon,
-            supportedTransactionVersions: adapter.supportedTransactionVersions,
-          },
-        });
+        toast.error('Wallet not installed');
       }
     },
     [select, connect, wallet?.adapter.name],

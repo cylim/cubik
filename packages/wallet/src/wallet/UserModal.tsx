@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import {
   Drawer,
@@ -12,25 +12,46 @@ import {
 import { useMediaQuery } from '@cubik/ui/hooks';
 import { cn } from '@cubik/ui/lib/utils';
 
+import { VerifyWallet } from '../authentication';
+import { UserCreate } from '../userCreate';
+import { useCubikWallet } from './CubikContext';
 import { CubikWalletModal } from './listWallet';
-
-// import UnifiedWalletModal from '@cubik/wallet-connect/components/Modal/modal';
 
 type ModalState = 'wallet-connect' | 'verify' | 'user-create';
 interface Props {
   onClose: () => void;
 }
 export const UserModal = ({ onClose }: Props) => {
-  const [modalState, setModalState] =
-    React.useState<ModalState>('wallet-connect');
+  const [modalState, setModalState] = React.useState<ModalState>('user-create');
+  const { connected, publicKey, disconnect } = useCubikWallet();
+  useEffect(() => {
+    const handleWalletConnect = async () => {
+      if (publicKey && connected) {
+        setModalState('verify');
+      }
+    };
+    handleWalletConnect();
+  }, [publicKey, connected]);
   return (
     <>
       {modalState === 'wallet-connect' && (
         <>
-          <ModalHeader onClose={onClose} heading="Connect Wallet" size="sm" />
+          <ModalHeader onClose={onClose} heading="Connect Wallet" size="md" />
           <CubikWalletModal onClose={onClose} setShowHeader={() => {}} />
         </>
       )}
+      {modalState === 'verify' && (
+        <VerifyWallet
+          address={publicKey?.toBase58() || ''}
+          handleVerify={() => {}}
+          isLoading={false}
+          onClose={() => {
+            disconnect();
+            setModalState('wallet-connect');
+          }}
+        />
+      )}
+      {modalState === 'user-create' && <UserCreate />}
     </>
   );
 };
@@ -52,7 +73,7 @@ const WalletModal = ({ showModal, setShowModal }: any) => {
       </DrawerPortal>
     </Drawer>
   ) : (
-    <Modal dialogSize="sm" open={showModal} onClose={() => setShowModal(false)}>
+    <Modal dialogSize="md" open={showModal} onClose={() => setShowModal(false)}>
       <UserModal onClose={() => setShowModal(false)} />
     </Modal>
   );

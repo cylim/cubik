@@ -68,12 +68,11 @@ const WalletModal = ({ showModal, setShowModal }: any) => {
           <DrawerBody>
             <UserModal onClose={() => setShowModal(false)} />
           </DrawerBody>
-          {/* <DrawerFooter></DrawerFooter> */}
         </DrawerContent>
       </DrawerPortal>
     </Drawer>
   ) : (
-    <Modal dialogSize="md" open={showModal} onClose={() => setShowModal(false)}>
+    <Modal dialogSize="sm" open={showModal} onClose={() => setShowModal(false)}>
       <UserModal onClose={() => setShowModal(false)} />
     </Modal>
   );

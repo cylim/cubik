@@ -5,6 +5,14 @@ import React from 'react';
 
 import '../globals.css';
 
+import { useForm } from 'react-hook-form';
+
+import {
+  generateDefaultUserName,
+  generateUserBackupImage,
+} from '@cubik/common';
+import { UserType } from '@cubik/database';
+
 import { useCubikWallet } from '../wallet';
 import { CreateUsername } from './createUsername';
 import { EmailOtp } from './emailOtp';
@@ -16,14 +24,32 @@ export type UserCreateSteps =
   | 'verify-email'
   | 'email-otp'
   | 'profile-created';
+
+export type UserCreateForm = {
+  username: string;
+  email: string;
+  avatar: string;
+  nft?: string;
+  userType: UserType;
+};
 export const UserCreate = () => {
   const [userCreateState, setUserCreateState] =
-    React.useState<UserCreateSteps>('create-username');
+    React.useState<UserCreateSteps>('profile-created');
+
   const { publicKey, connected, disconnect } = useCubikWallet();
+  const userInfoForm = useForm<UserCreateForm>({
+    defaultValues: {
+      avatar: generateUserBackupImage(),
+      email: '',
+      username: generateDefaultUserName(publicKey),
+      userType: UserType.Contributor,
+    },
+  });
 
   if (userCreateState === 'verify-email') {
     return (
       <VerifyEmail
+        userForm={userInfoForm}
         setUserCreateState={setUserCreateState}
         userCreateState={userCreateState}
       />
@@ -32,6 +58,7 @@ export const UserCreate = () => {
   if (userCreateState === 'email-otp') {
     return (
       <EmailOtp
+        userForm={userInfoForm}
         setUserCreateState={setUserCreateState}
         userCreateState={userCreateState}
       />
@@ -40,6 +67,7 @@ export const UserCreate = () => {
   if (userCreateState === 'profile-created') {
     return (
       <ProfileCreated
+        userForm={userInfoForm}
         setUserCreateState={setUserCreateState}
         userCreateState={userCreateState}
       />
@@ -48,6 +76,7 @@ export const UserCreate = () => {
 
   return (
     <CreateUsername
+      userForm={userInfoForm}
       setUserCreateState={setUserCreateState}
       userCreateState={userCreateState}
     />

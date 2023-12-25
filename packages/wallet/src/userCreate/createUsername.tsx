@@ -1,12 +1,14 @@
 import React from 'react';
+import { UseFormReturn } from 'react-hook-form';
 
 import { Button, Text } from '@cubik/ui';
 
-import { UserCreateSteps } from './index';
+import { UserCreateForm, UserCreateSteps } from './index';
 
 interface Props {
   userCreateState: UserCreateSteps;
   setUserCreateState: React.Dispatch<React.SetStateAction<UserCreateSteps>>;
+  userForm: UseFormReturn<UserCreateForm, any, undefined>;
 }
 export const CreateUsername = ({}: Props) => {
   return (
@@ -33,7 +35,7 @@ export const CreateUsername = ({}: Props) => {
             variant={'primary'}
             size={'md'}
             className="w-full"
-            rightIconName="chevronRight"
+            rightIconName="arrowRight"
           >
             Lets go
           </Button>

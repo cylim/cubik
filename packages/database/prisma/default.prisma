@@ -14,12 +14,15 @@ model User {
   id               String             @id @default(uuid()) @map("_id")
   username         String             @unique
   mainWallet       String             @unique
-  email            String?
+  email            String? 
   profileNft       Json
+  type            UserType @default(Contributor)
   profilePicture   String             @db.VarChar(500)
   tx               String             @db.VarChar(500)
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
+  isEmailConfirmed Boolean            @default(false)
+  isRecivingUpdate   Boolean            @default(false)
   isActive         Boolean            @default(true)
   isArchive        Boolean            @default(false)
   comments         Comments[]
@@ -326,6 +329,11 @@ model AdminAccess {
 enum EventType {
   ROUND
   HACKATHON
+}
+enum UserType {
+  Contributor 
+  ProjectOwner
+  Sponsor
 }
 
 enum SponsorShipTier {

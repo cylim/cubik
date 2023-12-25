@@ -67,7 +67,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: JSX.Element }) {
   return (
-    <html className="dark" lang="en">
+    <html className="light" lang="en">
       <body className={`bg-[var(--body-bg)] ${inter.className}`}>
         <CookiesProvider>
           <Provider>

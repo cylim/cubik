@@ -1515,6 +1515,9 @@ importers:
       '@cubik/config':
         specifier: workspace:*
         version: link:../config
+      '@cubik/database':
+        specifier: workspace:*
+        version: link:../database
       '@cubik/ui':
         specifier: workspace:*
         version: link:../ui

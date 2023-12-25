@@ -150,16 +150,13 @@ const TabList: React.FC<TabListProps> = ({ children, className }) => {
     );
   }
   const { selectedTab } = context;
-  console.log('selected tab', selectedTab);
   const tabListStyles = cn(tabListVariants({ size }));
   const tabsRef = useRef<(HTMLElement | null)[]>([]);
-  const [, setForceUpdate] = useState(false);
   const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
     // This will run after the component mounts and measurements are set
     if (!initialized) {
-      setForceUpdate(true);
       setInitialized(true);
     }
   }, [initialized]);

@@ -51,7 +51,9 @@ const page = () => {
           </Tabs>
 
           <div className="container mx-auto p-4">
-            <CodeView code={`<Tabs defaultValue={2} size="sm" className="">
+            <CodeView
+              code={`
+        <Tabs defaultValue={2} size="sm" className="">
              <TabList>
                <Tab value={0}>
                  <div className="p-2">TabItem1</div>

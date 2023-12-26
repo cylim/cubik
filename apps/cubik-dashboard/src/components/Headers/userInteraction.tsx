@@ -5,9 +5,9 @@ import { revalidatePath } from 'next/cache';
 import { AccessStore } from '@/hooks/store/scope';
 import { useUser } from '@/hooks/store/user';
 import { handleLogout } from '@/utils/auth';
-import { handleRevalidation } from '@/utils/helpers/revalidate';
 import { useMutation } from '@tanstack/react-query';
 
+import { handleRevalidation } from '@cubik/common/helper';
 import {
   Avatar,
   AvatarLabelGroup,
@@ -31,7 +31,7 @@ export const UserInteraction = () => {
       await handleLogout();
       await disconnect();
       setUser(null);
-      setAccessScope(null, undefined);
+      setAccessScope(null);
       handleRevalidation('/');
     },
   });

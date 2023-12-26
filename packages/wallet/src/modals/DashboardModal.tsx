@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { utils } from '@coral-xyz/anchor';
+import { toast } from 'sonner';
 
 import { createMessage } from '@cubik/auth';
 import { AccessScope } from '@cubik/common-types/src/admin';
+import { handleAccessOnServer, handleRevalidation } from '@cubik/common/helper';
 import { logApi } from '@cubik/logger/src/';
 import {
   Drawer,
@@ -18,8 +21,8 @@ import { cn } from '@cubik/ui/lib/utils';
 
 import { VerifyWallet } from '../authentication';
 import { generateMessage } from '../authentication/generateMessage';
-import { UserCreate } from '../userCreate';
-import { useCubikWallet } from '../wallet/CubikContext';
+import { loginAdmin } from '../helpers/loginAdmin';
+import { useCubikWallet, useCubikWalletContext } from '../wallet/CubikContext';
 import { CubikWalletModal } from '../wallet/listWallet';
 
 type ModalState = 'wallet-connect' | 'verify';
@@ -28,11 +31,13 @@ interface Props {
   setAccessScope: (accessScope: AccessScope | null) => void;
   setUser: (user: any) => void;
 }
-export const DashboardModal = ({ onClose }: Props) => {
+export const DashboardModal = ({ onClose, setAccessScope, setUser }: Props) => {
   const [modalState, setModalState] =
     React.useState<ModalState>('wallet-connect');
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const pathname = usePathname();
   const { connected, publicKey, disconnect, signMessage } = useCubikWallet();
+  const { setShowModal } = useCubikWalletContext();
   useEffect(() => {
     const handleWalletConnect = async () => {
       if (publicKey && connected) {
@@ -56,10 +61,20 @@ export const DashboardModal = ({ onClose }: Props) => {
       }
       const sigBuffer = await signMessage(msg);
       const signature = utils.bytes.bs58.encode(sigBuffer);
-      // toast.info(JSON.stringify(user));
+      const user = await loginAdmin(publicKey.toBase58(), signature, nonce);
+      if (user.accessScope.length === 0) {
+        toast.info('You do not have access to any event');
+      } else {
+        setAccessScope(user.accessScope[0]);
+        handleAccessOnServer(user.accessScope[0].event_id);
+      }
+      setUser(user);
+      setShowModal(false);
+      handleRevalidation(pathname || '/');
+      toast.success('Successfully logged in');
     } catch (e) {
       const error = e as Error;
-      // toast.error(error.message);
+      toast.error(error.message);
       logApi({
         message: error.message,
         source: 'UserModal',

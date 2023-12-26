@@ -24,6 +24,9 @@ import { PublicKey } from '@solana/web3.js';
 import { usePrevious } from 'react-use';
 import { toast } from 'sonner';
 
+import { AccessScope } from '@cubik/common-types/src/admin';
+
+import { CreateUserWallet, VerifyUserWallet } from '../modals';
 import {
   CubikWalletContext,
   CubikWalletValueContext,
@@ -45,6 +48,17 @@ export type IWalletProps = Omit<
   | 'signAllTransactions'
   | 'signMessage'
 >;
+
+type WalletAppType =
+  | {
+      type: 'admin';
+      setAccessScope: (accessScope: AccessScope | null) => void;
+      setUser: (user: any) => void;
+    }
+  | {
+      type: 'user';
+      setUser: (user: any) => void;
+    };
 
 const CubikWalletValueProvider = ({
   children,
@@ -87,8 +101,10 @@ export const metadata = {
 const CubikWalletContextProvider = ({
   config,
   children,
+  type,
 }: {
   config: ICubikWalletConfig;
+  type: WalletAppType;
 } & PropsWithChildren) => {
   const { publicKey, wallet, select, connect } = useCubikWallet();
   const previousPublicKey = usePrevious<PublicKey | null>(publicKey);
@@ -188,7 +204,6 @@ const CubikWalletContextProvider = ({
       return;
     }
   }, [wallet, publicKey, previousWallet]);
-
   return (
     <CubikWalletContext.Provider
       value={{
@@ -199,12 +214,33 @@ const CubikWalletContextProvider = ({
         walletlistExplanation: config.walletlistExplanation,
       }}
     >
+      {type.type === 'admin' && (
+        <VerifyUserWallet
+          setShowModal={setShowModal}
+          setAccessScope={type.setAccessScope}
+          setUser={type.setUser}
+          showModal={showModal}
+        />
+      )}
+      {type.type === 'user' && (
+        <CreateUserWallet
+          setShowModal={setShowModal}
+          setUser={type.setUser}
+          showModal={showModal}
+        />
+      )}
       {children}
     </CubikWalletContext.Provider>
   );
 };
 
-const CubikWalletProvider = ({ children }: { children: React.ReactNode }) => {
+const CubikWalletProvider = ({
+  children,
+  type,
+}: {
+  children: React.ReactNode;
+  type: WalletAppType;
+}) => {
   const wallets = useMemo(() => {
     if (typeof window === 'undefined') {
       return [];
@@ -271,7 +307,7 @@ const CubikWalletProvider = ({ children }: { children: React.ReactNode }) => {
     <>
       <WalletConnectionProvider wallets={wallets} config={params.config as any}>
         <CubikWalletValueProvider>
-          <CubikWalletContextProvider config={params.config as any}>
+          <CubikWalletContextProvider type={type} config={params.config as any}>
             {children}
           </CubikWalletContextProvider>
         </CubikWalletValueProvider>

@@ -15,19 +15,17 @@ const CubikWalletProvider = dynamic(
 );
 
 export const WalletProvider = ({ children }: { children: any }) => {
-  const { showModal, setShowModal } = useCubikWalletContext();
   const { setAccessScope } = AccessStore();
   const { setUser } = useUser();
-  console.log('wallet provider', showModal);
 
   return (
-    <CubikWalletProvider>
-      <VerifyUserWallet
-        setUser={setUser}
-        setAccessScope={setAccessScope}
-        showModal={showModal}
-        setShowModal={setShowModal}
-      />
+    <CubikWalletProvider
+      type={{
+        type: 'admin',
+        setAccessScope,
+        setUser,
+      }}
+    >
       {children}
     </CubikWalletProvider>
   );

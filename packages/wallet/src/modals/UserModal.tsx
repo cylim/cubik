@@ -18,7 +18,6 @@ import { cn } from '@cubik/ui/lib/utils';
 import { VerifyWallet } from '../authentication';
 import { generateMessage } from '../authentication/generateMessage';
 import { UserCreate } from '../userCreate';
-import { LoginUser } from '../userCreate/login';
 import { useCubikWallet } from '../wallet/CubikContext';
 import { CubikWalletModal } from '../wallet/listWallet';
 
@@ -54,7 +53,7 @@ export const UserModal = ({ onClose }: Props) => {
       }
       const sigBuffer = await signMessage(msg);
       const signature = utils.bytes.bs58.encode(sigBuffer);
-      const user = await LoginUser(publicKey?.toBase58(), signature, nonce);
+      // const user = await LoginUser(publicKey?.toBase58(), signature, nonce);
       // toast.info(JSON.stringify(user));
     } catch (e) {
       const error = e as Error;

@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
-import { handleAccessOnServer } from '@/components/Headers/handleAccessOnServer';
+import React, { useState } from 'react';
 import { AccessStore } from '@/hooks/store/scope';
 import { useUser } from '@/hooks/store/user';
-import { handleRevalidation } from '@/utils/helpers/revalidate';
 import { Button } from '@/utils/ui';
 
 import { AuthPayload } from '@cubik/common-types/src/admin';

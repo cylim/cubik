@@ -11,10 +11,12 @@ export interface CodeViewProps extends React.HTMLAttributes<HTMLDivElement> {
 const CodeView = React.forwardRef<HTMLDivElement, CodeViewProps>(
     ({ className, code, ...props }, ref) => {
         const [visible, setVisible] = useState(false);
+        const [rotate, setRotate] = useState(false);
         const clickHandler = (event: React.MouseEvent) => {
             event.stopPropagation();
             event.preventDefault();
             setVisible(!visible);
+            setRotate(!rotate);
         };
 
         const copyHandler = (event: React.MouseEvent) => {
@@ -46,6 +48,7 @@ const CodeView = React.forwardRef<HTMLDivElement, CodeViewProps>(
                                 <span
                                     style={{
                                         transition: 'all 0.2s ease',
+                                        transform: rotate ? 'rotate(90deg)' : 'rotate(0deg)', // Rotate the icon based on rotate state
                                     }}
                                     className="mr-2 inline-flex h-4 w-4 items-center"
                                 >

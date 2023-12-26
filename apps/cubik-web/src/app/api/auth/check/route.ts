@@ -7,6 +7,8 @@ import { decodeToken } from '@cubik/auth';
 import type { AuthCheckReturn } from '@cubik/common-types';
 import { prisma } from '@cubik/database';
 
+import '@cubik/common';
+
 export const POST = async (req: NextRequest) => {
   try {
     const { wallet } = await req.json();
@@ -25,13 +27,16 @@ export const POST = async (req: NextRequest) => {
           mainWallet: wallet as string,
         },
       });
+      console.log(user);
       // no user then add a user
       if (!user) {
-        await prisma.user.create({
-          data: {
-            mainWallet: wallet as string,
-          },
-        });
+        // await prisma.user.create({
+        //   data: {
+        //     mainWallet: wallet as string,
+        //     profilePicture: generateUserBackupImage(),
+        //     username: '',
+        //   },
+        // });
         returnData = {
           data: {
             type: 'NEW_WALLET',

@@ -1,6 +1,7 @@
 import type { NextRequest } from 'next/server';
 import { Logger } from 'next-axiom';
 import { LogLevel } from 'next-axiom/dist/logger';
+import { v4 as uuidV4 } from 'uuid';
 
 import { AuthPayload } from '@cubik/common-types';
 import { AuthPayload as AdminAuthPayload } from '@cubik/common-types/src/admin';
@@ -36,7 +37,6 @@ export const logError = (
 };
 export const logApi = (
   {
-    logId,
     level = 'info',
     error = null,
     body,
@@ -46,7 +46,6 @@ export const logApi = (
     statusCode = null,
     source,
   }: {
-    logId: `${string}-${string}-${string}-${string}-${string}`;
     level?: 'info' | 'error' | 'debug';
     error?: string | null | unknown;
     body?: object;
@@ -58,6 +57,7 @@ export const logApi = (
   },
   data?: object,
 ) => {
+  const logId = uuidV4();
   let reqData: object | null = null;
   const logger = createLogger(source ?? 'default');
   if (req?.nextUrl) {

@@ -20,7 +20,7 @@ export const EventHeader = () => {
   const { scope, setAccessScope } = AccessStore();
   const { user } = useUser();
   const handleScopeChange = (scope: AccessScope) => {
-    setAccessScope(scope, 'ADMIN');
+    setAccessScope(scope);
     updateScope(scope);
   };
   return (

@@ -4,11 +4,11 @@ import { z } from 'zod';
 export const env = createEnv({
   server: {
     EDGE_CONFIG: z.string().min(1),
-    SECRET_ADMIN: z.string().min(1),
+    SECRET: z.string().min(1),
   },
   client: {},
   runtimeEnv: {
-    SECRET_ADMIN: process.env.SECRET_ADMIN,
+    SECRET: process.env.SECRET,
     EDGE_CONFIG: process.env.EDGE_CONFIG,
   },
 });

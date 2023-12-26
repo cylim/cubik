@@ -5,4 +5,4 @@ export * from './tokens';
 export * from './jupiter';
 export * from './discord';
 export * from './formatters';
-export * from './backup-images';
+export * from './backup';

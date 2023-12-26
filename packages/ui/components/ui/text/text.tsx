@@ -26,7 +26,7 @@ interface TextProps extends VariantProps<typeof headingVariant> {
   className?: ClassValue;
 }
 
-const Text: React.FC<TextProps> = ({ children, color, className }) => {
+const Text = ({ children, color, className }: TextProps) => {
   return <p className={cn(className, headingVariant({ color }))}>{children}</p>;
 };
 

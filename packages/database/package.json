@@ -3,15 +3,13 @@
   "main": "./index.ts",
   "types": "./index.ts",
   "scripts": {
-    "db:gen": "prisma generate --schema prisma/default.prisma",
-    "db:push": "dotenv -e ../../.env -- npx prisma db push --skip-generate --schema prisma/default.prisma",
-    "db:pull": "dotenv -e ../../.env -- npx prisma db pull --skip-generate --schema prisma/default.prisma",
+    "db:gen": "prisma generate",
+    "db:push": "dotenv -e ../../.env -- npx prisma db push --skip-generate",
+    "db:pull": "dotenv -e ../../.env -- npx prisma db pull --skip-generate",
     "dev": "dotenv -e ../../.env -- npx prisma studio --port 5556"
   },
   "dependencies": {
     "@cubik/config": "workspace:*",
-    "@planetscale/database": "^1.11.0",
-    "@prisma/adapter-planetscale": "^5.6.0",
     "@prisma/client": "^5.6.0",
     "axios": "^1.6.2",
     "dotenv": "^16.3.1",

@@ -35,13 +35,13 @@ export interface AvatarGroupProps
   maxCount?: number;
 }
 
-export const AvatarGroup: React.FC<AvatarGroupProps> = ({
+export const AvatarGroup = ({
   avatars,
   shape,
   size,
   variant = 'circular',
   maxCount = 3,
-}) => {
+}: AvatarGroupProps) => {
   const overflowCount = avatars?.length > 3 ? true : false;
   // calculate the height of the container
 

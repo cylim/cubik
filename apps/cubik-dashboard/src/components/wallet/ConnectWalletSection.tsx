@@ -3,10 +3,10 @@
 import React from 'react';
 
 import { Button, EmptyState, SubHead } from '@cubik/ui';
-import { useUnifiedWalletContext } from '@cubik/wallet-connect';
+import { useCubikWalletContext } from '@cubik/wallet';
 
 export const ConnectWalletSection = () => {
-  const { setShowModal, showModal } = useUnifiedWalletContext();
+  const { setShowModal, showModal } = useCubikWalletContext();
   return (
     <EmptyState
       title={'Connect Wallet to Get In'}

@@ -19,12 +19,12 @@ export const Provider = ({ children }: Props) => {
 
   return (
     <ThemeProvider>
-      <WalletProvider>
-        <QueryClientProvider client={client}>
+      <QueryClientProvider client={client}>
+        <WalletProvider>
           {children}
           {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-        </QueryClientProvider>
-      </WalletProvider>
+        </WalletProvider>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 };

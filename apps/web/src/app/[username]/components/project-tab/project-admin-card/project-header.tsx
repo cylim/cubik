@@ -45,7 +45,12 @@ const ProjectHeader = ({
         </Button>
         <Menu>
           <MenuButton>
-            <Button leftIconName="threeDots" variant={'secondary'} size="xl" />
+            <Button
+              leftIconName="threeDots"
+              variant={'secondary'}
+              size="xl"
+              className="h-[48px] w-[48px]"
+            />
           </MenuButton>
           <MenuList>
             <MenuItem text="Apply For Grant" leftIcon="cube" />

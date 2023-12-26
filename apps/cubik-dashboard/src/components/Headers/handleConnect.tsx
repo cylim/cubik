@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { AccessStore } from '@/hooks/store/scope';
 import { useUser } from '@/hooks/store/user';
 import { Button, Spinner } from '@/utils/ui';
 

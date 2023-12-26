@@ -105,12 +105,3 @@ export default async function Home() {
     </PageLayout>
   );
 }
-
-{
-  /* <div key={event.event_id}>
-<GrantsRoundCard>
-  <GrantRoundCardHeader grantName={event.event_name} />
-  <GrantRoundCardFooter matchingPool="$50K" />
-</GrantsRoundCard>
-</div> */
-}

@@ -8,16 +8,13 @@ import {
 import { useToggle } from 'react-use';
 
 import { AvatarGroup, Icon, Text } from '@cubik/ui';
-import { cn } from '@cubik/ui/lib/utils';
 
 import {
   useUnifiedWallet,
   useUnifiedWalletContext,
 } from '../../contexts/UnifiedWalletContext';
-import HardcodedWalletStandardAdapter from '../../contexts/WalletConnectionProvider/HardcodedWalletStandardAdapter';
 import { usePreviouslyConnected } from '../../contexts/WalletConnectionProvider/previouslyConnectedProvider';
 import { useMediaQuery } from '../../hooks/helperHooks';
-import { HARDCODED_WALLET_STANDARDS } from '../../misc/constants';
 import { OnboardingFlow } from './Onboarding';
 import { WalletIcon, WalletListItem } from './WalletListItem';
 

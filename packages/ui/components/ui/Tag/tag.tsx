@@ -169,7 +169,7 @@ const tagLabelVariants = cva('l2', {
   },
 });
 
-const TagLabel: React.FC<TagLabelProps> = ({ children }) => {
+const TagLabel = ({ children }: TagLabelProps) => {
   const { color, variant } = useContext(TagContext);
 
   return (
@@ -395,7 +395,7 @@ const tagVariants = cva('h-[24px] md:h-[28px]', {
   },
 });
 
-const Tag: React.FC<TagProps> = ({ children, color, variant, border }) => {
+const Tag = ({ children, color, variant, border }: TagProps) => {
   const childrenWithProps = React.Children.map(children, (child) => {
     // Checking if the child is a valid element before cloning it to prevent errors
     if (React.isValidElement(child)) {

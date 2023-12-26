@@ -1,9 +1,10 @@
-import type { User } from '@/types/auth';
 import { create } from 'zustand';
 
+import { AdminUser } from '@cubik/common-types/src/admin';
+
 interface UserState {
-  user: User | null;
-  setUser: (user: User | null) => void;
+  user: AdminUser | null;
+  setUser: (user: AdminUser | null) => void;
 }
 
 export const useUser = create<UserState>()((set) => ({

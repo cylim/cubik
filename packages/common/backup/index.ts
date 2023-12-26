@@ -1,3 +1,5 @@
+import { PublicKey } from '@solana/web3.js';
+
 export const Project_Backup =
   'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/0b413369-9282-4406-e65f-a9198aa82800/public';
 
@@ -16,4 +18,15 @@ export const User_Backup_List = [
 export const generateUserBackupImage = () => {
   const randomIndex = Math.floor(Math.random() * User_Backup_List.length);
   return User_Backup_List[randomIndex];
+};
+const getRandomChar = () => {
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  return characters.charAt(Math.floor(Math.random() * characters.length));
+};
+export const generateDefaultUserName = (pubkey: PublicKey | null): string => {
+  if (!pubkey)
+    return `user-${getRandomChar()}${getRandomChar()}${getRandomChar()}${getRandomChar()}`;
+  const address = pubkey.toBase58();
+  return `${address.slice(0, 8)}${getRandomChar()}${getRandomChar()}`;
 };

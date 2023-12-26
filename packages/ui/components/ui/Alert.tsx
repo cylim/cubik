@@ -81,7 +81,7 @@ interface AlertProps extends VariantProps<typeof alertVariants> {
   className?: string;
 }
 
-const Alert: React.FC<AlertProps> = ({
+const Alert = ({
   iconName,
   color,
   content,
@@ -90,7 +90,7 @@ const Alert: React.FC<AlertProps> = ({
   type,
   // buttonClick,
   closeIcon = false,
-}) => {
+}: AlertProps) => {
   const [showAlert, setShowAlert] = useState(true);
 
   const handleClose = () => {

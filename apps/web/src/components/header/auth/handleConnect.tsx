@@ -102,6 +102,7 @@ export const WalletConnect = () => {
   }, [publicKey]);
 
   const [isLoadingVerify, setIsLoadingVerify] = useState<boolean>(false);
+
   const handleVerify = async () => {
     setIsLoadingVerify(true);
     if (modalStatus === 'EXISTING_USER') {

@@ -390,7 +390,7 @@ const CubikWalletModal: React.FC<ICubikWalletModal> = ({ setShowHeader }) => {
           <div
             style={{
               height: '1px',
-              background: 'var(--color-border-primary-base)',
+              background: 'var(--color-border-primary-subdued)',
             }}
           />
           <CubikWalletModalFooter />

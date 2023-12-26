@@ -37,7 +37,7 @@ function ThemeProvider({ children }: ThemeProviderProps) {
       // if (!storedTheme) {
       //   cookies.set('theme', 'dark');
       // }
-      return (storedTheme ?? 'dark') as Theme;
+      return (storedTheme ?? 'light') as Theme;
     }
     return 'dark';
   });

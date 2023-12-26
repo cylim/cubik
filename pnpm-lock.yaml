@@ -1205,6 +1205,9 @@ importers:
       '@cubik/common-types':
         specifier: workspace:*
         version: link:../common-types
+      '@types/uuid':
+        specifier: ^9.0.7
+        version: 9.0.7
       next:
         specifier: ^14.0.4
         version: 14.0.4(@babel/core@7.23.5)(react-dom@18.2.0)(react@18.2.0)
@@ -1217,6 +1220,9 @@ importers:
       posthog-node:
         specifier: ^3.2.1
         version: 3.2.1
+      uuid:
+        specifier: ^9.0.1
+        version: 9.0.1
 
   packages/notifications:
     dependencies:
@@ -1506,6 +1512,12 @@ importers:
 
   packages/wallet:
     dependencies:
+      '@coral-xyz/anchor':
+        specifier: ^0.27.0
+        version: 0.27.0
+      '@cubik/auth':
+        specifier: workspace:*
+        version: link:../auth
       '@cubik/common':
         specifier: workspace:*
         version: link:../common
@@ -1518,6 +1530,9 @@ importers:
       '@cubik/database':
         specifier: workspace:*
         version: link:../database
+      '@cubik/logger':
+        specifier: workspace:*
+        version: link:../logger
       '@cubik/ui':
         specifier: workspace:*
         version: link:../ui
@@ -1533,6 +1548,9 @@ importers:
       '@solana/web3.js':
         specifier: ^1.87.6
         version: 1.87.6
+      '@tanstack/react-query':
+        specifier: ^4.36.1
+        version: 4.36.1(react-dom@18.2.0)(react-native@0.73.0)(react@18.2.0)
       next:
         specifier: ^14.0.4
         version: 14.0.4(@babel/core@7.23.5)(react-dom@18.2.0)(react@18.2.0)

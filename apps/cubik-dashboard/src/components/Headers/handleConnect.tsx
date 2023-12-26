@@ -9,7 +9,6 @@ import { Button } from '@/utils/ui';
 import { AuthPayload } from '@cubik/common-types/src/admin';
 import { useCubikWallet, useCubikWalletContext } from '@cubik/wallet';
 
-import { VerifyModal } from '../modals/verifyModal';
 import { UserInteraction } from './userInteraction';
 
 interface AuthDecodeResponse {
@@ -17,13 +16,12 @@ interface AuthDecodeResponse {
   error: null | string;
 }
 export const HandleConnect = () => {
-  const { setShowModal } = useCubikWalletContext();
+  const { setShowModal, showModal } = useCubikWalletContext();
   const { publicKey, connected, disconnect } = useCubikWallet();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [open, setOpen] = useState<boolean>(false);
   const { user, setUser } = useUser();
   const { setAccessScope } = AccessStore();
-  const pathname = usePathname();
+
   // useEffect(() => {
   //   const fetchUser = async () => {
   //     setIsLoading(true);
@@ -56,7 +54,12 @@ export const HandleConnect = () => {
 
   if (!connected && !publicKey && !user) {
     return (
-      <Button variant="primary" onClick={() => setShowModal(true)}>
+      <Button
+        variant="primary"
+        onClick={() => {
+          setShowModal(true);
+        }}
+      >
         Login
       </Button>
     );
@@ -64,7 +67,6 @@ export const HandleConnect = () => {
   if (connected && publicKey && !user && isLoading) {
     return (
       <>
-        <VerifyModal setOpen={setOpen} open={open} />
         <div role="status" onClick={disconnect}>
           <svg
             aria-hidden="true"

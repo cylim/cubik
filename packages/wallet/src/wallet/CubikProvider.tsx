@@ -32,7 +32,6 @@ import {
 } from './CubikContext';
 import { HARDCODED_WALLET_STANDARDS } from './HardCodedWallet';
 import { WalletAdapterWithMutableSupportedTransactionVersions } from './supportedTxVersion';
-import WalletModal from './UserModal';
 import WalletConnectionProvider, {
   ICubikWalletConfig,
 } from './WalletConnectionProvider';
@@ -200,7 +199,6 @@ const CubikWalletContextProvider = ({
         walletlistExplanation: config.walletlistExplanation,
       }}
     >
-      <WalletModal showModal={showModal} setShowModal={setShowModal} />
       {children}
     </CubikWalletContext.Provider>
   );

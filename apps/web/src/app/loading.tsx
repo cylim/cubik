@@ -1,5 +1,5 @@
 import React from 'react';
-import ProjectHeader from '@/components/explorer/ProjectHeader';
+import ProjectHeader from '@/components/explorer/ExplorerHeader';
 
 import { CircularSkeleton, Skeleton, SubHead, TextSkeleton } from '@cubik/ui';
 

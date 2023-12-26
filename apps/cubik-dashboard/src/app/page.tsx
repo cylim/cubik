@@ -86,7 +86,7 @@ export default async function Home() {
             <GrantsRoundCard
               path="/grants"
               key={event?.id}
-              grantManager={true}
+              //grantManager={true}
               roundStartDate={new Date('2021-10-20T00:00:00.000Z')}
               roundEndDate={new Date('2021-10-20T00:00:00.000Z')}
             >

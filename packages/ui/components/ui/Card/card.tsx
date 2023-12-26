@@ -71,6 +71,7 @@ const cardFooterVariants = cva('', {
 // Card Wrapper Component
 interface CardProps {
   children: ReactNode;
+  className?: string;
   size: 'sm' | 'md' | 'lg';
 }
 

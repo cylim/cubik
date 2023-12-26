@@ -2,9 +2,9 @@ import React from 'react';
 
 import { SubHead, Text } from '@cubik/ui';
 
-const ProjectHeader = () => {
+const ProjectSectionHeader = () => {
   return (
-    <div className="flex w-full flex-col gap-6 lg:px-20">
+    <>
       <SubHead heading="Projects" />
       {/* Projects Filters */}
       <div className="no-scrollbar flex max-w-[100vw] flex-row flex-nowrap items-center  justify-start gap-2 overflow-x-scroll">
@@ -26,8 +26,15 @@ const ProjectHeader = () => {
           );
         })}
       </div>
+    </>
+  );
+};
+const CollectionSectionHeader = () => {
+  return (
+    <div className="flex w-full flex-col gap-6">
+      <SubHead heading="Collections" />
     </div>
   );
 };
 
-export default ProjectHeader;
+export { ProjectSectionHeader, CollectionSectionHeader };

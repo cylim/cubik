@@ -14,7 +14,7 @@ interface GrantsRoundCardProps {
   children: React.ReactNode;
   roundStartDate: Date;
   roundEndDate: Date;
-  grantManager?: boolean;
+  projectJoinRoundStatus?: any;
   path: string;
 }
 
@@ -36,7 +36,7 @@ const RoundCardContext = React.createContext<RoundCardContextType>({
 
 const GrantsRoundCard = ({
   children,
-  grantManager,
+  projectJoinRoundStatus,
   roundStartDate,
   roundEndDate,
   path,
@@ -68,7 +68,7 @@ const GrantsRoundCard = ({
 
   return (
     <RoundCardContext.Provider value={{ eventStatus, eventTime }}>
-      {!grantManager ? (
+      {!projectJoinRoundStatus ? (
         <Link
           href={path}
           prefetch

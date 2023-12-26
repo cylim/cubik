@@ -1,14 +1,8 @@
-import { env } from '@/env.mjs';
+import { cookies } from 'next/headers';
 
 export const handleLogout = async () => {
   try {
-    await fetch('/api/auth/logout', {
-      method: 'POST',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    cookies().delete('authToken');
     return 'success';
   } catch (error) {
     console.log(error);

@@ -5,9 +5,8 @@ import { utils, web3 } from '@coral-xyz/anchor';
 
 import { createToken, verifyMessage } from '@cubik/auth';
 import { AuthPayload } from '@cubik/common-types';
+import { DEFAULT_COOKIE_OPTIONS } from '@cubik/common/constants';
 import { prisma } from '@cubik/database';
-
-import { DEFAULT_COOKIE_OPTIONS } from '../constants';
 
 export const LoginUser = async (pubKey: string, sig: string, nonce: string) => {
   const hash = nonce + process.env.SECRET?.slice(0, 10);
@@ -23,7 +22,7 @@ export const LoginUser = async (pubKey: string, sig: string, nonce: string) => {
     },
   });
   if (!user) {
-    throw new Error('User not found');
+    return null;
   }
   const payload: AuthPayload = {
     ip: '',

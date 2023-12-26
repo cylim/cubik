@@ -8,8 +8,8 @@ import type { Metadata, Viewport } from 'next';
 import dynamic from 'next/dynamic';
 import { Inter } from 'next/font/google';
 import TopNavbar from '@/components/header/navigation';
-import BottomNav from '@/components/mobile-bottom-nav';
 import { Provider } from '@/providers/provider';
+import { Toaster } from 'sonner';
 
 import { cn } from '@cubik/ui/lib/utils';
 
@@ -78,6 +78,7 @@ export default function RootLayout({
             <main className="relative z-[0]">
               <TopNavbar />
               {children}
+              <Toaster />
               {/* <BottomNav name={'home'} /> */}
             </main>
           </Provider>

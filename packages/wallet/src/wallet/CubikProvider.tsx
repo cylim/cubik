@@ -14,18 +14,14 @@ import {
   WalletName,
   WalletReadyState,
 } from '@solana/wallet-adapter-base';
-import {
-  useWallet,
-  Wallet,
-  WalletContextState,
-} from '@solana/wallet-adapter-react';
+import { useWallet, WalletContextState } from '@solana/wallet-adapter-react';
 import * as AllWalletAdapters from '@solana/wallet-adapter-wallets';
-import { PublicKey } from '@solana/web3.js';
-import { usePrevious } from 'react-use';
 import { toast } from 'sonner';
 
-import { AccessScope } from '@cubik/common-types/src/admin';
+import { AccessScope, AdminUser } from '@cubik/common-types/src/admin';
+import { handleAccessOnServer } from '@cubik/common/helper';
 
+import { autoLoadAdmin } from '../helpers/autoLoadAdmin';
 import { CreateUserWallet, VerifyUserWallet } from '../modals';
 import {
   CubikWalletContext,
@@ -53,11 +49,13 @@ type WalletAppType =
   | {
       type: 'admin';
       setAccessScope: (accessScope: AccessScope | null) => void;
-      setUser: (user: any) => void;
+      setUser: (user: AdminUser) => void;
+      user: AdminUser | null;
     }
   | {
       type: 'user';
       setUser: (user: any) => void;
+      // user: any;
     };
 
 const CubikWalletValueProvider = ({
@@ -106,9 +104,7 @@ const CubikWalletContextProvider = ({
   config: ICubikWalletConfig;
   type: WalletAppType;
 } & PropsWithChildren) => {
-  const { publicKey, wallet, select, connect } = useCubikWallet();
-  const previousPublicKey = usePrevious<PublicKey | null>(publicKey);
-  const previousWallet = usePrevious<Wallet | null>(wallet);
+  const { wallet, publicKey, select, connect, connected } = useCubikWallet();
   // console.log('wallet from unified wallet context provider ', wallet);
   // Weird quirks for autoConnect to require select and connect
   const [nonAutoConnectAttempt, setNonAutoConnectAttempt] = useState(false);
@@ -133,21 +129,6 @@ const CubikWalletContextProvider = ({
       event.preventDefault();
 
       try {
-        // setShowModal(false);
-
-        // Connecting
-        config.notificationCallback?.onConnecting({
-          publicKey: '',
-          shortAddress: '',
-          walletName: adapter.name,
-          metadata: {
-            name: adapter.name,
-            url: adapter.url,
-            icon: adapter.icon,
-            supportedTransactionVersions: adapter.supportedTransactionVersions,
-          },
-        });
-
         // Might throw WalletReadyState.WalletNotReady
         select(adapter.name);
 
@@ -159,7 +140,7 @@ const CubikWalletContextProvider = ({
         if (adapter.readyState === WalletReadyState.NotDetected) {
           throw WalletReadyState.NotDetected;
         }
-        // alert('Wallet Connected');
+        toast.success('Wallet connected');
       } catch (error) {
         console.log(error);
 
@@ -170,40 +151,27 @@ const CubikWalletContextProvider = ({
   );
 
   useEffect(() => {
-    // Disconnected
-    if (previousWallet && !wallet) {
-      config.notificationCallback?.onDisconnect({
-        publicKey: previousPublicKey?.toString() || '',
-        shortAddress: shortenAddress(previousPublicKey?.toString() || ''),
-        walletName: previousWallet?.adapter.name || '',
-        metadata: {
-          name: previousWallet?.adapter.name,
-          url: previousWallet?.adapter.url,
-          icon: previousWallet?.adapter.icon,
-          supportedTransactionVersions:
-            previousWallet?.adapter.supportedTransactionVersions,
-        },
-      });
-      return;
-    }
+    const fetchUser = async () => {
+      if (type.type !== 'admin' || type.user) {
+        console.log(publicKey?.toBase58());
+        return;
+      }
 
-    // Connected
-    if (publicKey && wallet) {
-      config.notificationCallback?.onConnect({
-        publicKey: publicKey.toString(),
-        shortAddress: shortenAddress(publicKey.toString()),
-        walletName: wallet.adapter.name,
-        metadata: {
-          name: wallet.adapter.name,
-          url: wallet.adapter.url,
-          icon: wallet.adapter.icon,
-          supportedTransactionVersions:
-            wallet.adapter.supportedTransactionVersions,
-        },
-      });
-      return;
-    }
-  }, [wallet, publicKey, previousWallet]);
+      const user = await autoLoadAdmin();
+      if (!user) {
+        return;
+      }
+      if (user.accessScope.length === 0) {
+        toast.info('You do not have access to any event');
+      } else {
+        type.setAccessScope(user.accessScope[0]);
+        handleAccessOnServer(user.accessScope[0].event_id);
+      }
+      type.setUser(user);
+      toast.success('Successfully logged in');
+    };
+    fetchUser();
+  }, [connected]);
   return (
     <CubikWalletContext.Provider
       value={{
@@ -303,6 +271,7 @@ const CubikWalletProvider = ({
     }),
     [wallets],
   );
+
   return (
     <>
       <WalletConnectionProvider wallets={wallets} config={params.config as any}>

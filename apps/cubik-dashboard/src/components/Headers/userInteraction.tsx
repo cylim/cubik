@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { revalidatePath } from 'next/cache';
 import { AccessStore } from '@/hooks/store/scope';
 import { useUser } from '@/hooks/store/user';
 import { handleLogout } from '@/utils/auth';
@@ -25,7 +24,7 @@ export const UserInteraction = () => {
   const { user, setUser } = useUser();
   const { disconnect } = useCubikWallet();
   const { setAccessScope } = AccessStore();
-  const { theme, toggleTheme } = useTheme();
+  const { toggleTheme } = useTheme();
   const logoutMutation = useMutation({
     mutationFn: async () => {
       await handleLogout();

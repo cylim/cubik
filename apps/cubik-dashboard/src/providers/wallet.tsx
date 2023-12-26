@@ -16,7 +16,7 @@ const CubikWalletProvider = dynamic(
 
 export const WalletProvider = ({ children }: { children: any }) => {
   const { setAccessScope } = AccessStore();
-  const { setUser } = useUser();
+  const { setUser, user } = useUser();
 
   return (
     <CubikWalletProvider
@@ -24,6 +24,7 @@ export const WalletProvider = ({ children }: { children: any }) => {
         type: 'admin',
         setAccessScope,
         setUser,
+        user,
       }}
     >
       {children}

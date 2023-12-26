@@ -21,3 +21,11 @@ export interface AuthAdminVerifyReturn {
   data: boolean;
   user: AuthPayload;
 }
+
+export interface AdminUser {
+  id: string;
+  username: string;
+  profilePicture: string;
+  mainWallet: string;
+  accessScope: AccessScope[];
+}

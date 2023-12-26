@@ -1,7 +1,8 @@
 import { notFound } from 'next/navigation';
 
 import { prisma } from '@cubik/database';
-import { ProfileCard } from '@cubik/ui';
+
+import ProfileHeader from './components/profileheader';
 
 const getProfile = async (username: string) => {
   return await prisma.user.findUnique({
@@ -31,10 +32,10 @@ const Profile = async ({
 
   return (
     <div>
-      <ProfileCard
-        avatar={profile.profilePicture ?? ''}
-        title={username}
-        description="dhruv.sol"
+      <ProfileHeader
+        profilePicture={profile.profilePicture ?? ''}
+        username={username}
+        address={profile.mainWallet}
       />
       {children}
     </div>

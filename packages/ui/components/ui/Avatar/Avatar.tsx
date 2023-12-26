@@ -9,7 +9,7 @@ import { cn, handleMediaQuery } from '../../../lib/utils';
 const avatarVariants = cva('', {
   variants: {
     variant: {
-      square: 'rounded-lg',
+      square: '',
       circle: 'rounded-full',
     },
     size: {
@@ -21,6 +21,38 @@ const avatarVariants = cva('', {
       '2xl': 'w-[64px] h-[64px] md:w-[80px] md:h-[80px] ',
     },
   },
+  compoundVariants: [
+    {
+      variant: 'square',
+      size: 'xs',
+      class: 'rounded-sm',
+    },
+    {
+      variant: 'square',
+      size: 'sm',
+      class: 'rounded-md',
+    },
+    {
+      variant: 'square',
+      size: 'md',
+      class: 'rounded-md',
+    },
+    {
+      variant: 'square',
+      size: 'lg',
+      class: 'rounded-lg',
+    },
+    {
+      variant: 'square',
+      size: 'xl',
+      class: 'rounded-lg',
+    },
+    {
+      variant: 'square',
+      size: '2xl',
+      class: 'rounded-lg',
+    },
+  ],
   defaultVariants: {
     variant: 'circle',
     size: 'md',

@@ -62,6 +62,48 @@ const MenuListPage = () => {
             </MenuList>
           </Menu>
         </div>
+        <div className="flex flex-row gap-2">
+          <Button variant={'secondary'} size="xl" className="hidden md:flex">
+            View Details
+          </Button>
+          <Menu>
+            <MenuButton>
+              <Button
+                leftIconName="threeDots"
+                variant={'secondary'}
+                size="xl"
+                className="h-[48px] w-[48px]"
+              />
+            </MenuButton>
+            <MenuList>
+              <MenuItem text="Apply For Grant" leftIcon="cube" />
+              <MenuItem text="Project Settings" leftIcon="settings" />
+              <MenuDivider />
+              <MenuItem text="View Vault" leftIcon="bank" />
+              <SubMenu>
+                <SubMenuButton leftIcon="share">Share Project</SubMenuButton>
+                <SubMenuList>
+                  <MenuItem text="Download"></MenuItem>
+                  <MenuItem text="Create a Copy"></MenuItem>
+                  <MenuItem text="Mark as Draft"></MenuItem>
+                  <MenuItem text="Delete"></MenuItem>
+                </SubMenuList>
+              </SubMenu>
+              <SubMenu>
+                <SubMenuButton leftIcon="compass">
+                  View On Explorer
+                </SubMenuButton>
+                <SubMenuList>
+                  <MenuItem text="Solana Explorer" leftIcon="solanaExplorer" />
+                  <MenuItem text="Solana FM" leftIcon="solanaFM" />
+                  <MenuItem text="Solscan" leftIcon="solscan" />
+                  <MenuItem text="xRay" leftIcon="xRay" />
+                </SubMenuList>
+              </SubMenu>
+              <MenuItem text="Download Data" leftIcon="download" />
+            </MenuList>
+          </Menu>
+        </div>
       </PageHOC>
     </>
   );

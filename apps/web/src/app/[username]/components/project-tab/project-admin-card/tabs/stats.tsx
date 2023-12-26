@@ -1,237 +1,137 @@
 import React from 'react';
 import TabLayout from '@/components/common/tabs/TabLayout';
+import TreasuryInfoCard from '@/components/explorer/TreasuryInfoCard';
 
 import {
   Button,
+  Divider,
   EmptyState,
-  LineChart,
-  MinimalColumnGraph,
-  MinimalLineGraph,
+  LineGraph,
   SubHead,
+  Text,
 } from '@cubik/ui';
 
+import { StatsSwitch } from './statsSwitch';
+
 const ProjectAdminStatsTab = () => {
+  const theme = 'light';
+  const showEmptyState = false;
+  const ChartData = [
+    {
+      name: 'Series 1',
+      type: 'area',
+      color: '#1199FF',
+      data: [
+        [1680307200000, 172],
+        [1680393600000, 47],
+        [1680480000000, 117],
+        [1680566400000, 192],
+        [1680652800000, 323],
+        [1680739200000, 251],
+        [1680825600000, 195],
+        [1680912000000, 359],
+        [1680998400000, 9],
+        [1681084800000, 211],
+        [1681171200000, 277],
+        [1681257600000, 242],
+        [1681344000000, 292],
+        [1681430400000, 87],
+        [1681516800000, 70],
+      ],
+    },
+    {
+      name: 'Series 3',
+      type: 'area',
+      color: '#F4D03F',
+      data: [
+        [1680307200000, 9],
+        [1680393600000, 148],
+        [1680480000000, 115],
+        [1680566400000, 197],
+        [1680652800000, 79],
+        [1680739200000, 175],
+        [1680825600000, 192],
+        [1680912000000, 82],
+        [1680998400000, 99],
+        [1681084800000, 177],
+        [1681171200000, 29],
+        [1681257600000, 147],
+        [1681344000000, 147],
+        [1681430400000, 142],
+        [1681516800000, 167],
+      ],
+    },
+  ];
+
   return (
     <TabLayout>
       <SubHead heading={'Project Stats'}>
         <Button leftIconName="threeDots" variant={'secondary'} size="md" />
       </SubHead>
-      <MinimalLineGraph
-        chartData={[
-          {
-            name: 'Est Match',
-            data: [
-              [1701388800000, 24],
-              [1701475200000, 42],
-              [1701561600000, 15],
-              [1701648000000, 35],
-              [1701734400000, 77],
-              [1701820800000, 77],
-              [1701907200000, 41],
-              [1701993600000, 37],
-              [1702080000000, 36],
-              [1702166400000, 85],
-              [1702252800000, 83],
-              [1702339200000, 19],
-              [1702425600000, 100],
-            ],
-          },
-        ]}
-        xAxis={{
-          // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-          title: {
-            text: 'datetime',
-          },
-        }}
+      <div className="flex justify-between p-6">
+        <TreasuryInfoCard
+          header="Outstanding Balance"
+          headerIconName="infoCircle"
+          tooltipText="Outstanding Balance is the amount of balance that is outstanding
+          for this project."
+          value="$456.8"
+        />
+        <Divider orientation="vertical" className=" !h-auto" />
+        <TreasuryInfoCard
+          header="Current Treasury Balance"
+          headerIconName="infoCircle"
+          value="$4,621.5"
+        />
+        <Divider orientation="vertical" className=" !h-auto" />
+        <TreasuryInfoCard
+          header="Previous Withdrawals"
+          headerIconName="infoCircle"
+          value="$30,987.8"
+        />
+        <Divider orientation="vertical" className=" !h-auto" />
+        <TreasuryInfoCard
+          header="Threshold"
+          headerIconName="infoCircle"
+          value="2/2"
+        />
+      </div>
+      <div className="flex flex-row items-center justify-between ">
+        <div className="flex flex-row items-center justify-between gap-5">
+          {ChartData.map((item, key) => {
+            return (
+              <div
+                className="flex flex-row items-center justify-start gap-2"
+                key={key}
+              >
+                <div
+                  className={`h-3 w-3 rounded-lg`}
+                  style={{
+                    backgroundColor: item.color,
+                  }}
+                ></div>
+                <Text className="l1" color="primary">
+                  {item.name}
+                </Text>
+              </div>
+            );
+          })}
+        </div>
+        <StatsSwitch />
+      </div>
+      <LineGraph
+        theme={theme}
+        color={['#1199FF', '#F4D03F', '#F43F5E']}
+        chartData={ChartData}
       />
-      {/* <LineChart
-        chartData={[
-          {
-            name: 'Est Match',
-            data: [
-              [1701388800000, 24],
-              [1701475200000, 42],
-              [1701561600000, 15],
-              [1701648000000, 35],
-              [1701734400000, 77],
-              [1701820800000, 77],
-              [1701907200000, 41],
-              [1701993600000, 37],
-              [1702080000000, 36],
-              [1702166400000, 85],
-              [1702252800000, 83],
-              [1702339200000, 19],
-              [1702425600000, 100],
-              [1702512000000, 44],
-              [1702598400000, 21],
-              [1702684800000, 10],
-              [1702771200000, 45],
-              [1702857600000, 95],
-              [1702944000000, 79],
-              [1703030400000, 83],
-              [1703116800000, 73],
-              [1703203200000, 98],
-              [1703289600000, 91],
-              [1703376000000, 73],
-              [1703462400000, 44],
-              [1703548800000, 95],
-              [1703635200000, 76],
-              [1703721600000, 59],
-              [1703808000000, 82],
-              [1703894400000, 17],
-              [1703980800000, 27],
-            ],
-          },
-          {
-            name: 'Contribution',
-            data: [
-              [1701388800000, 24],
-              [1701475200000, 42],
-              [1701561600000, 15],
-              [1701648000000, 35],
-              [1701734400000, 77],
-              [1701820800000, 77],
-              [1701907200000, 41],
-              [1701993600000, 37],
-              [1702080000000, 36],
-              [1702166400000, 85],
-              [1702252800000, 83],
-              [1702339200000, 19],
-              [1702425600000, 100],
-              [1702512000000, 44],
-              [1702598400000, 21],
-              [1702684800000, 10],
-              [1702771200000, 45],
-              [1702857600000, 95],
-              [1702944000000, 79],
-              [1703030400000, 83],
-              [1703116800000, 73],
-              [1703203200000, 98],
-              [1703289600000, 91],
-              [1703376000000, 73],
-              [1703462400000, 44],
-              [1703548800000, 95],
-              [1703635200000, 76],
-              [1703721600000, 59],
-              [1703808000000, 82],
-              [1703894400000, 17],
-              [1703980800000, 27],
-            ],
-          },
-          //   {
-          //     name: 'Contributions',
-          //     data: [28, 29, 33, 36, 32, 32, 33],
-          //   },
-          //   {
-          //     name: 'Contributors',
-          //     data: [12, 11, 14, 18, 17, 13, 13],
-          //   },
-        ]}
-        xAxis={{
-          // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-          title: {
-            text: 'datetime',
-          },
-        }}
-      />
-      <MinimalColumnGraph
-        chartData={[
-          {
-            name: 'Est Match',
-            data: [
-              [1701388800000, 24],
-              [1701475200000, 42],
-              [1701561600000, 15],
-              [1701648000000, 35],
-              [1701734400000, 77],
-              [1701820800000, 77],
-              [1701907200000, 41],
-              [1701993600000, 37],
-              [1702080000000, 36],
-              [1702166400000, 85],
-              [1702252800000, 83],
-              [1702339200000, 19],
-              [1702425600000, 100],
-              [1702512000000, 44],
-              [1702598400000, 21],
-              [1702684800000, 10],
-              [1702771200000, 45],
-              [1702857600000, 95],
-              [1702944000000, 79],
-              [1703030400000, 83],
-              [1703116800000, 73],
-              [1703203200000, 98],
-              [1703289600000, 91],
-              [1703376000000, 73],
-              [1703462400000, 44],
-              [1703548800000, 95],
-              [1703635200000, 76],
-              [1703721600000, 59],
-              [1703808000000, 82],
-              [1703894400000, 17],
-              [1703980800000, 27],
-            ],
-          },
-          {
-            name: 'Contribution',
-            data: [
-              [1701388800000, 24],
-              [1701475200000, 42],
-              [1701561600000, 15],
-              [1701648000000, 35],
-              [1701734400000, 77],
-              [1701820800000, 77],
-              [1701907200000, 41],
-              [1701993600000, 37],
-              [1702080000000, 36],
-              [1702166400000, 85],
-              [1702252800000, 83],
-              [1702339200000, 19],
-              [1702425600000, 100],
-              [1702512000000, 44],
-              [1702598400000, 21],
-              [1702684800000, 10],
-              [1702771200000, 45],
-              [1702857600000, 95],
-              [1702944000000, 79],
-              [1703030400000, 83],
-              [1703116800000, 73],
-              [1703203200000, 98],
-              [1703289600000, 91],
-              [1703376000000, 73],
-              [1703462400000, 44],
-              [1703548800000, 95],
-              [1703635200000, 76],
-              [1703721600000, 59],
-              [1703808000000, 82],
-              [1703894400000, 17],
-              [1703980800000, 27],
-            ],
-          },
-          //   {
-          //     name: 'Contributions',
-          //     data: [28, 29, 33, 36, 32, 32, 33],
-          //   },
-          //   {
-          //     name: 'Contributors',
-          //     data: [12, 11, 14, 18, 17, 13, 13],
-          //   },
-        ]}
-        xAxis={{
-          // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-          title: {
-            text: 'datetime',
-          },
-        }}
-      /> */}
-
-      <EmptyState
-        title={'No Grants Round Found'}
-        description={
-          'You havent applied for any grants round for the project. Apply for a grant to get started.'
-        }
-        icon={'cloudError'}
-      />
+      {showEmptyState && (
+        <EmptyState
+          title={'No Grants Round Found'}
+          description={
+            'You havent applied for any grants round for the project. Apply for a grant to get started.'
+          }
+          icon={'cloudError'}
+        />
+      )}
     </TabLayout>
   );
 };

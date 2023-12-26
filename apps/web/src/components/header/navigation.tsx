@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'next/navigation';
 
 import { Navbar } from '@cubik/ui';
 

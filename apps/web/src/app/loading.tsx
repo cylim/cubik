@@ -1,5 +1,4 @@
 import React from 'react';
-import ProjectHeader from '@/components/explorer/ExplorerHeader';
 
 import { CircularSkeleton, Skeleton, SubHead, TextSkeleton } from '@cubik/ui';
 
@@ -31,7 +30,7 @@ const HomeLoading = () => {
   return (
     <div className="flex min-h-screen w-full flex-col items-center lg:flex-row lg:items-start 2xl:mx-auto 2xl:max-w-7xl">
       <div className="flex h-full w-full flex-col gap-8 px-4 py-8 lg:w-2/3">
-        <ProjectHeader />
+        {/* <ProjectHeader /> */}
         <div className="flex flex-col gap-6 lg:px-14">
           {Array.from({ length: 5 }).map((_, index) => (
             <ProjectCardSkeleton key={index} size={'xl'} shape={'square'} />

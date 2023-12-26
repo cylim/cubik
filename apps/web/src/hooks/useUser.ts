@@ -1,15 +1,10 @@
 import { create } from 'zustand';
 
-export interface User {
-  id: string;
-  username: string;
-  profilePicture: string;
-  mainWallet: string;
-}
+import { UserAuth } from '@cubik/common-types';
 
 interface UserState {
-  user: User | null;
-  setUser: (userData: User | null) => void;
+  user: UserAuth | null;
+  setUser: (userData: UserAuth | null) => void;
   logout: () => void;
 }
 

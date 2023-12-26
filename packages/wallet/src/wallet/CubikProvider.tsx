@@ -18,6 +18,7 @@ import { useWallet, WalletContextState } from '@solana/wallet-adapter-react';
 import * as AllWalletAdapters from '@solana/wallet-adapter-wallets';
 import { toast } from 'sonner';
 
+import { UserAuth } from '@cubik/common-types';
 import { AccessScope, AdminUser } from '@cubik/common-types/src/admin';
 import { handleAccessOnServer } from '@cubik/common/helper';
 
@@ -54,7 +55,8 @@ type WalletAppType =
     }
   | {
       type: 'user';
-      setUser: (user: any) => void;
+      setUser: (user: UserAuth | null) => void;
+      user: UserAuth | null;
       // user: any;
     };
 

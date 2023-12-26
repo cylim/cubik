@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { utils } from '@coral-xyz/anchor';
+import { toast } from 'sonner';
 
 import { createMessage } from '@cubik/auth';
+import { UserAuth } from '@cubik/common-types';
+import { handleRevalidation } from '@cubik/common/helper';
 import { logApi } from '@cubik/logger/src/';
 import {
   Drawer,
@@ -17,17 +21,21 @@ import { cn } from '@cubik/ui/lib/utils';
 
 import { VerifyWallet } from '../authentication';
 import { generateMessage } from '../authentication/generateMessage';
+import { LoginUser } from '../helpers/login';
 import { UserCreate } from '../userCreate';
-import { useCubikWallet } from '../wallet/CubikContext';
+import { useCubikWallet, useCubikWalletContext } from '../wallet/CubikContext';
 import { CubikWalletModal } from '../wallet/listWallet';
 
 type ModalState = 'wallet-connect' | 'verify' | 'user-create';
 interface Props {
   onClose: () => void;
+  setUser: (user: UserAuth) => void;
 }
-export const UserModal = ({ onClose }: Props) => {
+export const UserModal = ({ onClose, setUser }: Props) => {
   const [modalState, setModalState] =
     React.useState<ModalState>('wallet-connect');
+  const { setShowModal } = useCubikWalletContext();
+  const pathname = usePathname();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { connected, publicKey, disconnect, signMessage } = useCubikWallet();
   useEffect(() => {
@@ -53,8 +61,21 @@ export const UserModal = ({ onClose }: Props) => {
       }
       const sigBuffer = await signMessage(msg);
       const signature = utils.bytes.bs58.encode(sigBuffer);
-      // const user = await LoginUser(publicKey?.toBase58(), signature, nonce);
-      // toast.info(JSON.stringify(user));
+
+      const user = await LoginUser(publicKey?.toBase58(), signature, nonce);
+      if (!user) {
+        setModalState('user-create');
+      } else {
+        setUser({
+          id: user.id,
+          mainWallet: user.mainWallet,
+          profilePicture: user.profilePicture,
+          username: user.username,
+        });
+        setShowModal(false);
+        handleRevalidation(pathname || '/');
+        toast.success('Successfully logged in');
+      }
     } catch (e) {
       const error = e as Error;
       // toast.error(error.message);
@@ -94,7 +115,15 @@ export const UserModal = ({ onClose }: Props) => {
   );
 };
 
-export const CreateUserWallet = ({ showModal, setShowModal }: any) => {
+export const CreateUserWallet = ({
+  showModal,
+  setShowModal,
+  setUser,
+}: {
+  showModal: boolean;
+  setShowModal: (show: boolean) => void;
+  setUser: (user: UserAuth) => void;
+}) => {
   const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
   const { disconnect } = useCubikWallet();
   const onClose = () => {
@@ -107,14 +136,14 @@ export const CreateUserWallet = ({ showModal, setShowModal }: any) => {
         <DrawerOverlay className={cn(!isSmallDevice ? 'hidden' : '')} />
         <DrawerContent className={cn(!isSmallDevice ? 'hidden' : 'h-max')}>
           <DrawerBody>
-            <UserModal onClose={onClose} />
+            <UserModal setUser={setUser} onClose={onClose} />
           </DrawerBody>
         </DrawerContent>
       </DrawerPortal>
     </Drawer>
   ) : (
     <Modal dialogSize="sm" open={showModal} onClose={onClose}>
-      <UserModal onClose={onClose} />
+      <UserModal setUser={setUser} onClose={onClose} />
     </Modal>
   );
 };

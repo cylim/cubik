@@ -13,7 +13,7 @@
     "@cubik/helper-scripts": "workspace:*",
     "@cubik/presets": "workspace:*",
     "@cubik/ui": "workspace:*",
-    "@cubik/wallet-connect": "workspace:*",
+    "@cubik/wallet": "workspace:*",
     "@ducanh2912/next-pwa": "^9.7.2",
     "@solana/wallet-adapter-base": "^0.9.23",
     "@solana/wallet-adapter-react": "^0.15.35",

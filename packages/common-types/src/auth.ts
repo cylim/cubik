@@ -46,3 +46,10 @@ export interface AuthTokenCheckReturn {
   data: string | null;
   error: string | null;
 }
+
+export interface UserAuth {
+  id: string;
+  username: string;
+  profilePicture: string;
+  mainWallet: string;
+}

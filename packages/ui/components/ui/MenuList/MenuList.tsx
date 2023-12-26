@@ -31,7 +31,7 @@ const MenuList = ({ children, align = 'end' }: MenuListProps) => {
   return (
     <DropdownMenu.Portal>
       <DropdownMenu.Content
-        className="py-2 min-w-[220px] shadow-xl border border-[var(--menu-list-item-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] flex flex-col gap-2"
+        className="py-2 min-w-[220px] shadow-lg border border-[var(--menu-list-item-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] flex flex-col gap-2"
         sideOffset={10}
         align={align}
       >
@@ -161,7 +161,7 @@ const SubMenuList = ({ children }: SubMenuListProps) => {
 
 const MenuDivider = () => {
   return (
-    <DropdownMenu.Separator className="border border-[var(--color-border-primary-subdued)] my-2" />
+    <DropdownMenu.Separator className="border-t-[1px] border-[var(--color-border-primary-subdued)]" />
   );
 };
 

@@ -6,6 +6,7 @@ import CodeComponent from '@/app/home-page-components/code-component';
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
 
 import PageHOC from '../../../home-page-components/components/pageHOC';
+import CodeView from '@/app/home-page-components/code-view';
 
 const page = () => {
   return (
@@ -48,6 +49,36 @@ const page = () => {
               </TabPanel>
             </TabPanels>
           </Tabs>
+
+          <div className="container mx-auto p-4">
+            <CodeView code={`<Tabs defaultValue={2} size="sm" className="">
+             <TabList>
+               <Tab value={0}>
+                 <div className="p-2">TabItem1</div>
+               </Tab>
+               <Tab value={1}>
+                 {' '}
+                 <div className="p-2">TabItem2</div>
+               </Tab>
+               <Tab value={2}>
+                 {' '}
+                 <div className="p-2">Tabitem3</div>
+               </Tab>
+             </TabList>
+             <TabPanels>
+               <TabPanel value={0}>
+                 <p>one!</p>
+               </TabPanel>
+               <TabPanel value={1}>
+                 <p>two!</p>
+               </TabPanel>
+               <TabPanel value={2}>
+                 <p>three!</p>
+               </TabPanel>
+             </TabPanels>
+           </Tabs>
+            `} />
+          </div>
 
           <Tabs defaultValue={2} size="sm">
             <TabList>

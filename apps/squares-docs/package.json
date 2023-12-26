@@ -15,6 +15,7 @@
     "@cubik/ui": "workspace:*",
     "@cubik/wallet-connect": "workspace:*",
     "@ducanh2912/next-pwa": "^9.7.2",
+    "@geist-ui/icons": "^1.0.2",
     "@solana/wallet-adapter-base": "^0.9.23",
     "@solana/wallet-adapter-react": "^0.15.35",
     "@solana/wallet-adapter-wallets": "^0.19.23",

@@ -3,9 +3,11 @@
 // @todo: make this work or uninstll it - import SwipeableViews from 'react-swipeable-views';
 import React from 'react';
 
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
+import { Button, Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
 
 import '@cubik/wallet';
+
+import { useCubikWalletContext } from '@cubik/wallet';
 
 import CodeComponent from '../../home-page-components/code-component';
 import PageHOC from '../../home-page-components/components/pageHOC';
@@ -43,6 +45,7 @@ const WalletConnectPage = () => {
   const handleChangeIndex = (index: number) => {
     setValue(index);
   };
+  const { setShowModal } = useCubikWalletContext();
   return (
     <PageHOC
       pages={[
@@ -78,7 +81,9 @@ const WalletConnectPage = () => {
                 <div>
                   <CodeComponent codeString='import { Tag } from "@cubik/ui' />
                 </div>
-                <div className="mt-10">{/* <UnifiedWalletButton /> */}</div>
+                <div className="mt-10">
+                  <Button onClick={() => setShowModal(true)}>Login</Button>
+                </div>
               </div>
             </TabPanel>
             <TabPanel value={1}>Content for Tab 2</TabPanel>

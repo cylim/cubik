@@ -1,6 +1,6 @@
 'use client';
 
-export const MWA_NOT_FOUND_ERROR = 'MWA_NOT_FOUND_ERROR';
+import { CubikWalletProvider } from '@cubik/wallet';
 
 export const metadata = {
   name: 'UnifiedWallet',
@@ -12,5 +12,16 @@ export const metadata = {
 };
 
 export const WalletProvider = ({ children }: { children: any }) => {
-  return children;
+  return (
+    <CubikWalletProvider
+      type={{
+        type: 'admin',
+        setUser: () => {},
+        setAccessScope: () => {},
+        user: null,
+      }}
+    >
+      {children}
+    </CubikWalletProvider>
+  );
 };

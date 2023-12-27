@@ -10,7 +10,7 @@ interface Props {
   setUserCreateState: React.Dispatch<React.SetStateAction<UserCreateSteps>>;
   userForm: UseFormReturn<UserCreateForm, any, undefined>;
 }
-export const VerifyEmail = ({}: Props) => {
+export const VerifyEmail = ({ setUserCreateState }: Props) => {
   return (
     <>
       <div
@@ -39,7 +39,12 @@ export const VerifyEmail = ({}: Props) => {
           >
             Confirm Email
           </Button>
-          <Button variant={'link'} size={'md'} className="w-full">
+          <Button
+            onClick={() => setUserCreateState('email-otp')}
+            variant={'link'}
+            size={'md'}
+            className="w-full"
+          >
             Skip for now
           </Button>
         </div>

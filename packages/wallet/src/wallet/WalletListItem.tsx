@@ -11,7 +11,7 @@ import React, {
 //import Image from 'next/image';
 import { Adapter } from '@solana/wallet-adapter-base';
 
-import { Avatar, Text } from '@cubik/ui';
+import { Avatar, Spinner, Text } from '@cubik/ui';
 import { useMediaQuery } from '@cubik/ui/hooks';
 
 import UnknownIconSVG from '../icons/UnknownIconSVG';
@@ -49,15 +49,13 @@ export const WalletIcon: FC<WalletIconProps> = ({
           className="w-fit flex flex-col items-center justify-center gap-2"
           style={{ minWidth: width, minHeight: height }}
         >
-          <Avatar alt={wallet.name} src={wallet.icon} size="md" />
-          {/* <Image
-            className={`border border-blue-400 rounded-[8px] min-h-[${height}px]`}
-            width={width}
-            height={height}
-            src={wallet.icon}
-            alt={`${wallet.name} icon`}
-            onError={onError}
-          /> */}
+          {wallet.connecting ? (
+            <div className="w-12 h-12 flex justify-center items-center">
+              <Spinner color="black" />
+            </div>
+          ) : (
+            <Avatar alt={wallet.name} src={wallet.icon} size="md" />
+          )}
           <Text className="b4 md:b4-light" color="primary">
             {wallet.name}
           </Text>

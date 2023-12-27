@@ -60,7 +60,7 @@ const avatarVariants = cva('', {
 });
 
 const iconVariants = cva(
-  'absolute block h-3 w-3 z-200 rounded-full bg-[var(--avatar-status)] border border-[var(--avatar-status)]',
+  'absolute block z-200 rounded-full  bg-[var(--avatar-status)] border border-[var(--avatar-status)]',
   {
     variants: {
       variant: {
@@ -71,10 +71,14 @@ const iconVariants = cva(
         xs: 'w-[0.375rem] h-[0.375rem]',
         sm: 'w-2 h-2',
         md: 'w-[0.625rem] h-[0.625rem]',
-        lg: 'w-[0.875rem] h-[0.875rem]',
+        lg: 'w-[1rem] h-[1rem]',
         xl: 'w-4 h-4',
         '2xl': 'w-5 h-5',
       },
+    },
+    defaultVariants: {
+      size: 'sm',
+      variant: 'circle',
     },
   },
 );

@@ -75,12 +75,14 @@ export default function RootLayout({
       >
         <CookiesProvider>
           <Provider>
-            <main className="relative z-[0]">
-              <TopNavbar />
-              {children}
+            <>
+              <main className="relative z-[0]">
+                <TopNavbar />
+                {children}
+                {/* <BottomNav name={'home'} /> */}
+              </main>
               <Toaster />
-              {/* <BottomNav name={'home'} /> */}
-            </main>
+            </>
           </Provider>
         </CookiesProvider>
       </body>

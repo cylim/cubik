@@ -1,8 +1,6 @@
 import React, { ReactNode } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 
-//import { motion } from 'framer-motion';
-
 import { cn } from '../../../lib/utils';
 
 export const DialogSize = {

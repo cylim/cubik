@@ -10,17 +10,20 @@ interface Props {
   setUserCreateState: React.Dispatch<React.SetStateAction<UserCreateSteps>>;
   userForm: UseFormReturn<UserCreateForm, any, undefined>;
 }
-export const EmailOtp = ({ userForm }: Props) => {
+export const EmailOtp = ({ userForm, setUserCreateState }: Props) => {
   return (
     <>
       <div
-        className="flex flex-col gap-8"
+        className="flex flex-col gap-8 pointer-events-auto"
         style={{
           padding: '32px',
         }}
       >
         <div className="flex flex-col gap-3">
-          <div className="stroke-[var(--modal-header-cancel-icon)]">
+          <div
+            onClick={() => setUserCreateState('verify-email')}
+            className="stroke-[var(--modal-header-cancel-icon)] cursor-pointer"
+          >
             <Icon name="arrowLeft" />
           </div>
           <Text color={'primary'} className="h4">

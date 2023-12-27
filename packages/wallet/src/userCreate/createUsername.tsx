@@ -1,13 +1,14 @@
 'use client';
 
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { UseFormReturn } from 'react-hook-form';
+import { toast } from 'sonner';
 
 import {
   Avatar,
   Button,
   Checkbox,
+  HelperText,
   InputField,
   InputFieldContainer,
   InputLabel,
@@ -23,14 +24,23 @@ interface Props {
   userForm: UseFormReturn<UserCreateForm, any, undefined>;
 }
 export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
-  const [isAvailable, setIsAvailable] = useState<boolean>(false);
   useEffect(() => {
     const search = async () => {
       if (userForm.watch('username').length < 3) {
         return;
       }
       const res = await searchUsername(userForm.watch('username'));
-      setIsAvailable(res.usernameAvailable);
+      userForm.clearErrors('username');
+      if (userForm.watch('username').length > 32) {
+        userForm.setError('username', {
+          message: 'Username must be less than 32 characters',
+        });
+      }
+      if (res.usernameAvailable === false) {
+        userForm.setError('username', {
+          message: 'Username is not available',
+        });
+      }
     };
     search();
   }, [userForm.watch('username')]);
@@ -65,13 +75,22 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
             <InputLabel id="username" isRequired>
               Choose a name
             </InputLabel>
-            <InputFieldContainer isError={!isAvailable} variant="sm">
+            <InputFieldContainer
+              isError={userForm.formState.errors.username ? true : false}
+              variant="sm"
+            >
               <InputField
+                placeholder="Enter your username"
                 onChange={(e) => {
                   userForm.setValue('username', e.currentTarget.value);
                 }}
               />
             </InputFieldContainer>
+            {userForm.formState.errors.username && (
+              <HelperText variant={'error'} fontSize={'md'}>
+                {userForm.formState.errors.username.message}
+              </HelperText>
+            )}
           </div>
         </div>
         <div className="flex gap-2 flex-col">
@@ -121,6 +140,12 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
             size={'md'}
             className="w-full"
             rightIconName="arrowRight"
+            onClick={() => {
+              if (userForm.formState.errors.username) {
+                return toast.error(userForm.formState.errors.username.message);
+              }
+              setUserCreateState('verify-email');
+            }}
           >
             Lets go
           </Button>

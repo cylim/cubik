@@ -147,7 +147,7 @@ const VerticalTabPanels: React.FC<TabPanelsProps> = ({
 const VerticalTabPanel: React.FC<TabPanelProps> = ({ children, value }) => (
   <RadixTabs.Content
     value={value}
-    className="grow p-5 bg-[#E0E0E0] outline-none w-full h-full"
+    className="grow p-5 bg-[var(--modal-body-surface)] outline-none w-full h-full"
   >
     {children}
   </RadixTabs.Content>

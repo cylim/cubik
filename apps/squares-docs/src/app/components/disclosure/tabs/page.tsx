@@ -9,6 +9,7 @@ import {
   TabPanel,
   TabPanels,
   Tabs,
+  Text,
   VerticalTab,
   VerticalTabList,
   VerticalTabPanel,
@@ -49,13 +50,19 @@ const page = () => {
             </VerticalTabList>
             <VerticalTabPanels className="">
               <VerticalTabPanel value={'one'}>
-                <p>one!</p>
+                <Text className="l2" color={'primary'}>
+                  one!
+                </Text>
               </VerticalTabPanel>
               <VerticalTabPanel value={'two'}>
-                <p>two!</p>
+                <Text className="l2" color={'primary'}>
+                  two!
+                </Text>
               </VerticalTabPanel>
               <VerticalTabPanel value={'three'}>
-                <p>three!</p>
+                <Text className="l2" color={'primary'}>
+                  three!
+                </Text>
               </VerticalTabPanel>
             </VerticalTabPanels>
           </VerticalTabs>

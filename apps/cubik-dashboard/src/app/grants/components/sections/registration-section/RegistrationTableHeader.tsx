@@ -18,27 +18,19 @@ export const RegistrationTableHeader = () => {
           <SegmentContainer size="md">
             <SegmentItem
               isActive={section ? section === 'pending' : true}
-              onClick={() =>
-                router.push(`${pathname}?section=pending`, {
-                  scroll: false,
-                })
-              }
+              href={`${pathname}?section=pending`}
             >
               Pending
             </SegmentItem>
             <SegmentItem
               isActive={section === 'rejected'}
-              onClick={() =>
-                router.push(`${pathname}?section=rejected`, { scroll: false })
-              }
+              href={`${pathname}?section=rejected`}
             >
               Rejected
             </SegmentItem>
             <SegmentItem
               isActive={section === 'accepted'}
-              onClick={() =>
-                router.push(`${pathname}?section=accepted`, { scroll: false })
-              }
+              href={`${pathname}?section=accepted`}
             >
               Accepted
             </SegmentItem>

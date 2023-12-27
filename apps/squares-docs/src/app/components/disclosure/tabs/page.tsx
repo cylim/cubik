@@ -3,7 +3,19 @@
 import React from 'react';
 import CodeComponent from '@/app/home-page-components/code-component';
 
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
+import {
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  Text,
+  VerticalTab,
+  VerticalTabList,
+  VerticalTabPanel,
+  VerticalTabPanels,
+  VerticalTabs,
+} from '@cubik/ui';
 
 import PageHOC from '../../../home-page-components/components/pageHOC';
 
@@ -21,7 +33,40 @@ const page = () => {
     >
       <div className="">
         <CodeComponent codeString='import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@cubik/ui";' />
-        <div className="mt-8">
+        <div className="mt-12">
+          <VerticalTabs defaultValue={'one'} size="sm" className="">
+            <VerticalTabList>
+              <VerticalTab value={'one'} leftIconName="search">
+                TabItem1
+              </VerticalTab>
+              <VerticalTab value={'two'} leftIconName="search">
+                {' '}
+                TabItem2
+              </VerticalTab>
+              <VerticalTab value={'three'} leftIconName="search">
+                {' '}
+                Tabitem3
+              </VerticalTab>
+            </VerticalTabList>
+            <VerticalTabPanels className="">
+              <VerticalTabPanel value={'one'}>
+                <Text className="l2" color={'primary'}>
+                  one!
+                </Text>
+              </VerticalTabPanel>
+              <VerticalTabPanel value={'two'}>
+                <Text className="l2" color={'primary'}>
+                  two!
+                </Text>
+              </VerticalTabPanel>
+              <VerticalTabPanel value={'three'}>
+                <Text className="l2" color={'primary'}>
+                  three!
+                </Text>
+              </VerticalTabPanel>
+            </VerticalTabPanels>
+          </VerticalTabs>
+
           <Tabs defaultValue={2} size="sm" className="">
             <TabList>
               <Tab value={0}>

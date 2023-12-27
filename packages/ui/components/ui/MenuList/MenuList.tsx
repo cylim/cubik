@@ -1,5 +1,6 @@
 import React from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { cva, VariantProps } from 'class-variance-authority';
 
 import { Icon } from '../../../icons/icon';
 import { iconLibrary } from '../../../icons/iconLibrary';
@@ -31,7 +32,7 @@ const MenuList = ({ children, align = 'end' }: MenuListProps) => {
   return (
     <DropdownMenu.Portal>
       <DropdownMenu.Content
-        className="py-2 min-w-[220px] shadow-xl border border-[var(--menu-list-item-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] flex flex-col gap-2"
+        className="py-2 min-w-[220px] shadow-lg border border-[var(--menu-list-item-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] flex flex-col gap-2"
         sideOffset={10}
         align={align}
       >
@@ -41,7 +42,21 @@ const MenuList = ({ children, align = 'end' }: MenuListProps) => {
   );
 };
 
-interface MenuItemProps {
+const MenuItemVariants = cva('relative p-2 mx-2   focus-visible:outline-none', {
+  variants: {
+    variant: {
+      primary:
+        'text-[var(--menu-list-item-fg-default)] stroke-[var(--menu-list-item-icon)] hover:bg-[var(--menu-list-item-surface-hovered)] hover:rounded-lg hover:text-[var(--menu-list-item-fg-hovered)] hover:stroke-[var(--menu-list-item-hovered)]',
+      negative:
+        'text-[var(--color-bg-negative-base)] stroke-[var(--color-bg-negative-base)] hover:bg-[var(--color-surface-negative-transparent)] hover:rounded-lg hover:text-[var(--color-bg-negative-base)] hover:stroke-[var(--color-bg-negative-base)]',
+    },
+  },
+  defaultVariants: {
+    variant: 'primary',
+  },
+});
+
+interface MenuItemProps extends VariantProps<typeof MenuItemVariants> {
   children?: React.ReactNode;
   text: string;
   leftIcon?: keyof typeof iconLibrary;
@@ -55,6 +70,7 @@ const MenuItem = ({
   leftIcon,
   onClick,
   isLoading,
+  variant = 'primary',
 }: MenuItemProps) => {
   const itemProps: {
     onClick?: () => void;
@@ -64,10 +80,8 @@ const MenuItem = ({
     onClick: isLoading ? () => {} : onClick,
     className: cn(
       isLoading ? 'cursor-not-allowed' : 'cursor-pointer',
-      children
-        ? ''
-        : 'hover:bg-[var(--menu-list-item-surface-hovered)] hover:rounded-lg hover:text-[var(--menu-list-item-fg-hovered)] hover:stroke-[var(--menu-list-item-hovered)]',
-      'relative p-2 mx-2 text-[var(--menu-list-item-fg-default)] stroke-[var(--menu-list-item-icon)] focus-visible:outline-none',
+      children ? '' : MenuItemVariants({ variant }),
+      '',
     ),
   };
   if (children) {
@@ -161,7 +175,7 @@ const SubMenuList = ({ children }: SubMenuListProps) => {
 
 const MenuDivider = () => {
   return (
-    <DropdownMenu.Separator className="border border-[var(--color-border-primary-subdued)] my-2" />
+    <DropdownMenu.Separator className="border-t-[1px] border-[var(--color-border-primary-subdued)]" />
   );
 };
 

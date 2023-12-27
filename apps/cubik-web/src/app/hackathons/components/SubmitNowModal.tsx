@@ -142,7 +142,14 @@ export const SubmitNowModal = ({
     setStep(1); // proceed to the second step instead of opening the modal
   };
 
-  const Tile: React.FC<{
+  const Tile = ({
+    tileIndex,
+    logo,
+    joinRoundStatus,
+    isHackathon = false,
+    name,
+    isSelectAble = true,
+  }: {
     isSelectAble: boolean;
     tileIndex: string;
     joinRoundStatus?: ProjectJoinRoundStatus | undefined;
@@ -150,13 +157,6 @@ export const SubmitNowModal = ({
     name: string;
     logo: string;
     status: ProjectVerifyStatus;
-  }> = ({
-    tileIndex,
-    logo,
-    joinRoundStatus,
-    isHackathon = false,
-    name,
-    isSelectAble = true,
   }) => {
     const isSelected = selectedProjectId === tileIndex;
 

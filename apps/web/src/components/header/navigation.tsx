@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import { useUser } from '@/hooks/useUser';
 
 import { Navbar } from '@cubik/ui';
@@ -12,6 +12,7 @@ import NavbarButton from './navbar-button';
 const TopNavbar = () => {
   const { setUser } = useUser();
   const { publicKey, connected } = useCubikWallet();
+  const pathname = usePathname();
   // useEffect(() => {
   //   const checkAuth = async () => {
   //     try {
@@ -41,8 +42,8 @@ const TopNavbar = () => {
   //   checkAuth();
   // }, [connected, publicKey]);
   return (
-    <div className="sticky top-0 z-[1] w-screen">
-      <Navbar>
+    <div className="top-0 z-[1] w-screen">
+      <Navbar pathname={pathname}>
         <NavbarButton />
       </Navbar>
     </div>

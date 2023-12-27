@@ -14,6 +14,7 @@
     "@cubik/common-types": "workspace:*",
     "@cubik/common": "workspace:*",
     "@cubik/config": "workspace:*",
+    "@cubik/logger": "workspace:*",
     "@cubik/database": "workspace:*",
     "@cubik/dayjs": "workspace:*",
     "@cubik/presets": "workspace:*",

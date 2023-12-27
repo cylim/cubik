@@ -34,7 +34,7 @@ const ProjectHeader = ({
         className="w-full"
       >
         <div className="flex flex-col gap-1">
-          <Text className="h4" color="primary">
+          <Text className="h5-light" color="primary">
             {project?.name}
           </Text>
           {isLiveInRound ? (
@@ -46,7 +46,7 @@ const ProjectHeader = ({
             </div>
           ) : (
             <Text className="l1-light" color="info">
-              random.xyz
+              {project.shortDescription}
             </Text>
           )}
         </div>

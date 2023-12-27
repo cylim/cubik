@@ -97,10 +97,14 @@ const MenuListPage = () => {
                   <MenuItem text="Solana Explorer" leftIcon="solanaExplorer" />
                   <MenuItem text="Solana FM" leftIcon="solanaFM" />
                   <MenuItem text="Solscan" leftIcon="solscan" />
-                  <MenuItem text="xRay" leftIcon="xRay" />
+                  <MenuItem text="xRay" leftIcon="xRay" variant={'negative'} />
                 </SubMenuList>
               </SubMenu>
-              <MenuItem text="Download Data" leftIcon="download" />
+              <MenuItem
+                text="logout"
+                variant={'negative'}
+                leftIcon="logoutRight"
+              />
             </MenuList>
           </Menu>
         </div>

@@ -1,18 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import CodeComponent from '@/app/home-page-components/code-component';
 
 import { SegmentContainer, SegmentItem, Text } from '@cubik/ui';
 import PageHOC from '../../../home-page-components/components/pageHOC';
 
 const page = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleItemClick = (index: number) => {
-    setActiveIndex(index);
-  };
 
   return (
     <PageHOC

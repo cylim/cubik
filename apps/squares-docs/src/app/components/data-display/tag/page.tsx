@@ -26,22 +26,22 @@ const Tags = () => {
         <div className="mt-10">
           <Tag color="green" variant="solid" border={false}>
             <TagIcon iconName={'plus'} />
-            <TagAvatar
+            {/* <TagAvatar
               src="https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg"
               alt="avatar image"
-            />
-            <TagLabel>Hello World</TagLabel>
-            <TagRightIcon iconName={'cross'} />
+            /> */}
+            <TagLabel>Label</TagLabel>
+            {/* <TagRightIcon iconName={'cross'} /> */}
           </Tag>
         </div>
 
         <div className="mt-10">
           <Tag color="green" variant="solid" border={false}>
             <TagIcon iconName={'plus'} />
-            <TagAvatar
+            {/* <TagAvatar
               src="https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg"
               alt="avatar image"
-            />
+            /> */}
             <TagLabel>Hello World</TagLabel>
             <TagRightIcon iconName={'cross'} />
           </Tag>
@@ -50,10 +50,10 @@ const Tags = () => {
         <div className="mt-10">
           <Tag color="default" variant="solid" border={false}>
             <TagIcon iconName={'plus'} />
-            <TagAvatar
+            {/* <TagAvatar
               src="https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg"
               alt="avatar image"
-            />
+            /> */}
             <TagLabel>Hello World</TagLabel>
             <TagRightIcon iconName={'cross'} />
           </Tag>

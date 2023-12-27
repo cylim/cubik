@@ -8,8 +8,8 @@ import type { Metadata, Viewport } from 'next';
 import dynamic from 'next/dynamic';
 import { Inter } from 'next/font/google';
 import TopNavbar from '@/components/header/navigation';
-import BottomNav from '@/components/mobile-bottom-nav';
 import { Provider } from '@/providers/provider';
+import { Toaster } from 'sonner';
 
 import { cn } from '@cubik/ui/lib/utils';
 
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#ffffff', // #272727
+  themeColor: '#1A1A1A', // #272727
 };
 
 const inter = Inter({ subsets: ['latin'] });
@@ -69,17 +69,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className="light" lang="en">
+    <html className="dark" lang="en">
       <body
         className={cn(inter.className, 'bg-[var(--color-bg-primary-depth)]')}
       >
         <CookiesProvider>
           <Provider>
-            <main className="relative z-[0]">
-              <TopNavbar />
-              {children}
-              {/* <BottomNav name={'home'} /> */}
-            </main>
+            <>
+              <main className="relative z-[0]">
+                <TopNavbar />
+                {children}
+                {/* <BottomNav name={'home'} /> */}
+              </main>
+              <Toaster />
+            </>
           </Provider>
         </CookiesProvider>
       </body>

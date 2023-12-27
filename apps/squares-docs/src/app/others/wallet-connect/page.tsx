@@ -4,7 +4,8 @@
 import React from 'react';
 
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
-import { UnifiedWalletButton } from '@cubik/wallet-connect';
+
+import '@cubik/wallet';
 
 import CodeComponent from '../../home-page-components/code-component';
 import PageHOC from '../../home-page-components/components/pageHOC';
@@ -77,9 +78,7 @@ const WalletConnectPage = () => {
                 <div>
                   <CodeComponent codeString='import { Tag } from "@cubik/ui' />
                 </div>
-                <div className="mt-10">
-                  <UnifiedWalletButton />
-                </div>
+                <div className="mt-10">{/* <UnifiedWalletButton /> */}</div>
               </div>
             </TabPanel>
             <TabPanel value={1}>Content for Tab 2</TabPanel>

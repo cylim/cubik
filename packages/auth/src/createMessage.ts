@@ -1,5 +1,3 @@
-import { utils } from '@coral-xyz/anchor';
-
 export const createMessage = (hash: string) => {
   try {
     const message = `🔶 Welcome to Cubik! 🔶\n

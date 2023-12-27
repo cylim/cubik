@@ -2,13 +2,12 @@
 
 import React from 'react';
 
-import { UnifiedWalletButton, useWallet } from '@cubik/wallet-connect';
+import { useCubikWallet } from '@cubik/wallet';
 
-import { WalletConnect } from './auth/handleConnect';
-import AuthenticatedUserNavMenu from './nav-menu';
+import { WalletConnect } from './handleConnect';
 
 const NavbarButton = () => {
-  const { wallet, connected } = useWallet();
+  const { wallet, connected } = useCubikWallet();
 
   return (
     // <>{connected ? <AuthenticatedUserNavMenu /> : <UnifiedWalletButton />}</>

@@ -9,7 +9,7 @@ import { cn, handleMediaQuery } from '../../../lib/utils';
 const avatarVariants = cva('', {
   variants: {
     variant: {
-      square: 'rounded-lg',
+      square: '',
       circle: 'rounded-full',
     },
     size: {
@@ -21,6 +21,38 @@ const avatarVariants = cva('', {
       '2xl': 'w-[64px] h-[64px] md:w-[80px] md:h-[80px] ',
     },
   },
+  compoundVariants: [
+    {
+      variant: 'square',
+      size: 'xs',
+      class: 'rounded-sm',
+    },
+    {
+      variant: 'square',
+      size: 'sm',
+      class: 'rounded-md',
+    },
+    {
+      variant: 'square',
+      size: 'md',
+      class: 'rounded-md',
+    },
+    {
+      variant: 'square',
+      size: 'lg',
+      class: 'rounded-lg',
+    },
+    {
+      variant: 'square',
+      size: 'xl',
+      class: 'rounded-lg',
+    },
+    {
+      variant: 'square',
+      size: '2xl',
+      class: 'rounded-lg',
+    },
+  ],
   defaultVariants: {
     variant: 'circle',
     size: 'md',
@@ -28,7 +60,7 @@ const avatarVariants = cva('', {
 });
 
 const iconVariants = cva(
-  'absolute block h-3 w-3 z-200 rounded-full bg-[var(--avatar-status)] border border-[var(--avatar-status)]',
+  'absolute block z-200 rounded-full  bg-[var(--avatar-status)] border border-[var(--avatar-status)]',
   {
     variants: {
       variant: {
@@ -39,10 +71,14 @@ const iconVariants = cva(
         xs: 'w-[0.375rem] h-[0.375rem]',
         sm: 'w-2 h-2',
         md: 'w-[0.625rem] h-[0.625rem]',
-        lg: 'w-[0.875rem] h-[0.875rem]',
+        lg: 'w-[1rem] h-[1rem]',
         xl: 'w-4 h-4',
         '2xl': 'w-5 h-5',
       },
+    },
+    defaultVariants: {
+      size: 'sm',
+      variant: 'circle',
     },
   },
 );

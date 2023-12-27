@@ -2,13 +2,11 @@ import { JwtPayload } from 'jsonwebtoken';
 
 import { EventType } from '@cubik/database';
 
-export type AccessType = 'GOD' | 'ADMIN';
 export type AuthPayload = {
   id: string;
   username: string;
   profilePicture: string;
   mainWallet: string;
-  accessType?: AccessType;
   accessScope: AccessScope[];
 } & JwtPayload;
 
@@ -22,4 +20,12 @@ export interface AuthAdminVerifyReturn {
   error: string | null;
   data: boolean;
   user: AuthPayload;
+}
+
+export interface AdminUser {
+  id: string;
+  username: string;
+  profilePicture: string;
+  mainWallet: string;
+  accessScope: AccessScope[];
 }

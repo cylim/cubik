@@ -5,6 +5,7 @@ import ProjectAdminStatsTab from '@/app/[username]/components/project-tab/projec
 import ProjectAdminTreasuryTab from '@/app/[username]/components/project-tab/project-admin-card/tabs/treasury';
 
 import {
+  Alert,
   AvatarLabelGroup,
   Card,
   CardBody,
@@ -37,7 +38,6 @@ const ProjectAdminCardBody = () => {
           <Tab value={4}>Integrations</Tab>
         </TabList>
       </div>
-      <Divider />
       <TabPanels>
         <TabPanel value={0}>
           <ProjectAdminGrantsTab />
@@ -55,18 +55,43 @@ const ProjectAdminCardBody = () => {
   );
 };
 
+const ProjectVerificationWrapper = ({
+  children,
+  projectVerificationStatus,
+}: any) => {
+  if (projectVerificationStatus) {
+    return (
+      <div className="flex flex-col gap-2 rounded-2xl bg-[var(--color-surface-innovative-transparent)] p-2">
+        <div className="rounded-lg">{children}</div>
+        <Alert
+          type="text"
+          fill={'purple'}
+          color="purple"
+          content="Your Project Is Under review, you will be notified once it is verified"
+          closeIcon={false}
+          // button="Contact Team"
+          className=""
+        />
+      </div>
+    );
+  } else return children;
+};
+
 const ProjectAdminCard = ({ project }: { project: ProjectProps }) => {
+  const projectIsVerified = true;
   return (
-    <Card size="md">
-      <CardHeader>
-        <ProjectHeader project={project} isAdmin={true} />
-      </CardHeader>
-      <CardBody>
-        <ProjectAdminCardBody />
-      </CardBody>
-      {/* <CardBody>World</CardBody> */}
-      {/* <CardFooter>this is me</CardFooter> */}
-    </Card>
+    <ProjectVerificationWrapper projectVerificationStatus={projectIsVerified}>
+      <Card size="md">
+        <CardHeader>
+          <ProjectHeader project={project} isAdmin={true} />
+        </CardHeader>
+        <CardBody>
+          <ProjectAdminCardBody />
+        </CardBody>
+        {/* <CardBody>World</CardBody> */}
+        {/* <CardFooter>this is me</CardFooter> */}
+      </Card>
+    </ProjectVerificationWrapper>
   );
 };
 

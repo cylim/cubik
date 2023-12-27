@@ -291,31 +291,6 @@ const Page = () => {
                   },
                 ]}
               />
-              <AvatarGroup
-                size="3xl"
-                avatars={[
-                  {
-                    src: 'https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg',
-                    alt: 'sample image',
-                  },
-                  {
-                    src: 'https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg',
-                    alt: 'sample image',
-                  },
-                  {
-                    src: 'https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg',
-                    alt: 'sample image',
-                  },
-                  {
-                    src: 'https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg',
-                    alt: 'sample image',
-                  },
-                  {
-                    src: 'https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg',
-                    alt: 'sample image',
-                  },
-                ]}
-              />
             </div>
             <div className="flex flex-col gap-3">
               <AvatarGroup
@@ -451,32 +426,6 @@ const Page = () => {
               <AvatarGroup
                 shape="square"
                 size="2xl"
-                avatars={[
-                  {
-                    src: 'https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg',
-                    alt: 'sample image',
-                  },
-                  {
-                    src: 'https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg',
-                    alt: 'sample image',
-                  },
-                  {
-                    src: 'https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg',
-                    alt: 'sample image',
-                  },
-                  {
-                    src: 'https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg',
-                    alt: 'sample image',
-                  },
-                  {
-                    src: 'https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg',
-                    alt: 'sample image',
-                  },
-                ]}
-              />
-              <AvatarGroup
-                shape="square"
-                size="3xl"
                 avatars={[
                   {
                     src: 'https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg',
@@ -641,33 +590,6 @@ const Page = () => {
               <AvatarGroup
                 shape="square"
                 size="2xl"
-                variant="squared-horizontal"
-                avatars={[
-                  {
-                    src: 'https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg',
-                    alt: 'sample image',
-                  },
-                  {
-                    src: 'https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg',
-                    alt: 'sample image',
-                  },
-                  {
-                    src: 'https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg',
-                    alt: 'sample image',
-                  },
-                  {
-                    src: 'https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg',
-                    alt: 'sample image',
-                  },
-                  {
-                    src: 'https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg',
-                    alt: 'sample image',
-                  },
-                ]}
-              />
-              <AvatarGroup
-                shape="square"
-                size="3xl"
                 variant="squared-horizontal"
                 avatars={[
                   {

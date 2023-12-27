@@ -28,10 +28,21 @@ const navbarVariants = cva('', {
 
 interface NavbarProps extends VariantProps<typeof navbarVariants> {}
 
-export const Navbar = ({ children }: { children: ReactNode }) => {
+export const Navbar = ({
+  pathname,
+  children,
+}: {
+  pathname?: string;
+  children: ReactNode;
+}) => {
+  const background =
+    pathname === '/'
+      ? 'from-[var(--bg-primary-base)]'
+      : 'bg-[var(--body-surface)]';
+
   return (
-    <div className="py-2 md:py-4 bg-[var(--body-surface)] w-full top-0 bg-">
-      <div className="container mx-auto max-w-[1320px] px-6 h-full">
+    <div className={`py-3 md:py-4 w-full bg-gradient-to-b top-0 ${background}`}>
+      <div className="container mx-auto max-w-7xl px-6 h-full">
         <div className="flex justify-between items-center h-full">
           <Logo variant="text" />
           {/* <ul className="hidden md:flex gap-x-6 text-white">

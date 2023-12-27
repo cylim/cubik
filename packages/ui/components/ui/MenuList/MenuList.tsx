@@ -31,7 +31,7 @@ const MenuList = ({ children, align = 'end' }: MenuListProps) => {
   return (
     <DropdownMenu.Portal>
       <DropdownMenu.Content
-        className="pb-2 min-w-[220px] shadow-xl border border-[var(--menu-list-item-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] flex flex-col gap-2"
+        className="py-2 min-w-[220px] shadow-lg border border-[var(--menu-list-item-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] flex flex-col gap-2"
         sideOffset={10}
         align={align}
       >
@@ -114,7 +114,7 @@ interface SubMenuButtonProps {
 
 const SubMenuButton = ({ children, leftIcon }: SubMenuButtonProps) => {
   return (
-    <DropdownMenu.SubTrigger className="relative cursor-pointer hover:bg-[var(--menu-list-item-surface-hovered)] text-[var(--menu-list-item-fg-default)] hover:text-[var(--menu-list-item-fg-hovered)] hover:rounded-lg hover:stroke-[var(--menu-list-item-hovered)] stroke-[var(--menu-list-item-icon)] focus-visible:outline-none p-2 py-2">
+    <DropdownMenu.SubTrigger className="relative cursor-pointer hover:bg-[var(--menu-list-item-surface-hovered)] text-[var(--menu-list-item-fg-default)] hover:text-[var(--menu-list-item-fg-hovered)] hover:rounded-lg hover:stroke-[var(--menu-list-item-hovered)] stroke-[var(--menu-list-item-icon)] focus-visible:outline-none p-2 py-2 mx-2">
       <div className="flex justify-between items-center ">
         <div className="flex gap-[10px] items-center ">
           {leftIcon && (
@@ -137,7 +137,7 @@ const SubMenuList = ({ children }: SubMenuListProps) => {
   return (
     <DropdownMenu.Portal>
       <DropdownMenu.SubContent
-        className="min-w-[220px] border border-[var(--menu-list-item-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] p-2"
+        className="py-2 min-w-[220px] shadow-xl border border-[var(--menu-list-item-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] flex flex-col gap-2"
         sideOffset={20}
       >
         {children}
@@ -146,9 +146,22 @@ const SubMenuList = ({ children }: SubMenuListProps) => {
   );
 };
 
+// const SubMenuList = ({ children }: SubMenuListProps) => {
+//   return (
+//     <DropdownMenu.Portal>
+//       <DropdownMenu.SubContent
+//         className="min-w-[220px] border border-[var(--menu-list-item-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] p-2 mx-2"
+//         sideOffset={20}
+//       >
+//         {children}
+//       </DropdownMenu.SubContent>
+//     </DropdownMenu.Portal>
+//   );
+// };
+
 const MenuDivider = () => {
   return (
-    <DropdownMenu.Separator className="border border-[var(--color-border-primary-subdued)] -mx-2 my-2" />
+    <DropdownMenu.Separator className="border-t-[1px] border-[var(--color-border-primary-subdued)]" />
   );
 };
 

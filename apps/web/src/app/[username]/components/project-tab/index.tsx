@@ -35,32 +35,55 @@ export const ProjectTab = async ({ username }: Props) => {
 
   if (!token) {
     return (
-      <TabLayout>
-        <SubHead heading="Projects">
-          <Button rightIconName="plus" variant={'primary'}>
-            Create Project
-          </Button>
-        </SubHead>
-        <>
-          {projects ? (
-            <div className="flex w-full flex-col justify-center gap-[16px] md:gap-[24px]">
-              {projects.map((value, index) => (
-                <ProjectAdminCard project={value} key={index} />
-              ))}
-            </div>
-          ) : (
-            <></>
-          )}
-        </>
-        {/* <AdminProjectEmptyState /> */}
-      </TabLayout>
+      <>no token</>
+      // <TabLayout>
+      //   <SubHead heading="Projects">
+      //     <Button rightIconName="plus" variant={'primary'}>
+      //       Create Project
+      //     </Button>
+      //   </SubHead>
+      //   <>
+      //     {projects ? (
+      //       <div className="flex w-full flex-col justify-center gap-[16px] md:gap-[24px]">
+      //         {projects.map((value, index) => (
+      //           <ProjectAdminCard project={value} key={index} />
+      //         ))}
+      //       </div>
+      //     ) : (
+      //       <></>
+      //     )}
+      //   </>
+      //   {/* <AdminProjectEmptyState /> */}
+      // </TabLayout>
     );
   }
 
   const user = await IsUserLoginServer(token.value);
-
-  if (user?.username === username) {
-    return <>Admin view</>;
+  console.log(user?.username, username);
+  if (user?.username.toLocaleLowerCase() === username.toLocaleLowerCase()) {
+    return (
+      <>
+        <TabLayout>
+          <SubHead heading="Projects">
+            <Button rightIconName="plus" variant={'primary'}>
+              Create Project
+            </Button>
+          </SubHead>
+          <>
+            {projects ? (
+              <div className="flex w-full flex-col justify-center gap-[16px] md:gap-[24px]">
+                {projects.slice(0, 1).map((value, index) => (
+                  <ProjectAdminCard project={value} key={index} />
+                ))}
+              </div>
+            ) : (
+              <></>
+            )}
+          </>
+          {/* <AdminProjectEmptyState /> */}
+        </TabLayout>
+      </>
+    );
   }
 
   return <TabLayout>Hello world</TabLayout>;

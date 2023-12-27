@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
+import Link from 'next/link';
 
+import { nFormatter } from '@cubik/common/formatters';
 import dayjs from '@cubik/dayjs';
 
 import { Icon } from '../../../icons/icon';
@@ -12,8 +14,8 @@ interface GrantsRoundCardProps {
   children: React.ReactNode;
   roundStartDate: Date;
   roundEndDate: Date;
-  grantManager?: boolean;
-  onClick?: () => void;
+  projectJoinRoundStatus?: any;
+  path: string;
 }
 
 enum EVENT_STATUS {
@@ -34,10 +36,10 @@ const RoundCardContext = React.createContext<RoundCardContextType>({
 
 const GrantsRoundCard = ({
   children,
-  grantManager,
+  projectJoinRoundStatus,
   roundStartDate,
   roundEndDate,
-  onClick,
+  path,
 }: GrantsRoundCardProps) => {
   const now = dayjs();
   console.log('round start date', dayjs(roundStartDate));
@@ -66,9 +68,10 @@ const GrantsRoundCard = ({
 
   return (
     <RoundCardContext.Provider value={{ eventStatus, eventTime }}>
-      {!grantManager ? (
-        <div
-          onClick={onClick}
+      {!projectJoinRoundStatus ? (
+        <Link
+          href={path}
+          prefetch
           className="cursor-pointer	p-1 bg-[var(--color-surface-info-transparent)] rounded-2xl flex flex-col gap-3"
         >
           <div className="px-6 py-4 rounded-xl bg-[var(--round-card-surface)] flex flex-col gap-3">
@@ -85,14 +88,15 @@ const GrantsRoundCard = ({
               className=""
             />
           </div>
-        </div>
+        </Link>
       ) : (
-        <div
-          onClick={onClick}
+        <Link
+          href={path}
+          prefetch
           className="cursor-pointer	px-6 border border-[var(--round-card-border)] hover:border-[var(--color-border-primary-base)] py-4 rounded-xl bg-[var(--round-card-surface)] transition-all	flex flex-col gap-3"
         >
           {children}
-        </div>
+        </Link>
       )}
     </RoundCardContext.Provider>
   );
@@ -127,9 +131,9 @@ const GrantRoundCardHeader = ({ grantName }: GrantsRoundCardHeaderProps) => {
 };
 
 interface GrantsRoundCardFooterProps {
-  matchingPool?: string;
-  participants?: string;
-  contributions?: string;
+  matchingPool?: number;
+  participants?: number;
+  contributions?: number;
 }
 
 const GrantRoundCardFooter = ({
@@ -137,8 +141,7 @@ const GrantRoundCardFooter = ({
   participants,
   contributions,
 }: GrantsRoundCardFooterProps) => {
-  const { eventStatus } = useContext(RoundCardContext);
-  console.log('event status - ', eventStatus);
+  // const { eventStatus } = useContext(RoundCardContext);
   return (
     <div className="flex items-center justify-between py-1">
       <div className="flex items-center w-full ">
@@ -154,7 +157,7 @@ const GrantRoundCardFooter = ({
             </div>
             <div className="flex items-center gap-1">
               <Text className="l2" color="primary">
-                50K
+                {nFormatter(matchingPool)}
               </Text>
               <Text className="l2" color={'secondary'}>
                 Pool
@@ -178,7 +181,7 @@ const GrantRoundCardFooter = ({
               </div>
               <div className="flex items-center gap-1">
                 <Text className="l2" color="primary">
-                  300
+                  {nFormatter(participants)}
                 </Text>
                 <Text className="l2" color={'secondary'}>
                   Participants
@@ -203,7 +206,7 @@ const GrantRoundCardFooter = ({
               </div>
               <div className="flex items-center gap-1">
                 <Text className="l2" color="primary">
-                  300
+                  {nFormatter(contributions)}
                 </Text>
                 <Text className="l2" color={'secondary'}>
                   Contributed

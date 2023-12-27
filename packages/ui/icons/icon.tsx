@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 import { iconLibrary } from './iconLibrary';
 
-type IconName = keyof typeof iconLibrary;
+export type IconName = keyof typeof iconLibrary;
 
 type Props = {
   name: IconName;

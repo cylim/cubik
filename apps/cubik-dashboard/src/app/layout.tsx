@@ -9,6 +9,7 @@ import dynamic from 'next/dynamic';
 import { Inter } from 'next/font/google';
 import { Header } from '@/components/Headers';
 import { AxiomWebVitals } from 'next-axiom';
+import { Toaster } from 'sonner';
 
 import { Provider } from '../providers/provider';
 
@@ -66,7 +67,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: JSX.Element }) {
   return (
-    <html className="dark" lang="en">
+    <html className="light" lang="en">
       <body className={`bg-[var(--body-bg)] ${inter.className}`}>
         <CookiesProvider>
           <Provider>
@@ -74,6 +75,7 @@ export default function RootLayout({ children }: { children: JSX.Element }) {
               <AxiomWebVitals />
               <Header />
               {children}
+              <Toaster />
             </>
           </Provider>
         </CookiesProvider>

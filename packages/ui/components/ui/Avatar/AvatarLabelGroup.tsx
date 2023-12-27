@@ -9,12 +9,12 @@ import TitleWithIcon from './TitleWithIcon';
 
 interface AvatarLabelProps {
   avatarSrc: string | AvatarProps[];
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
   shape?: 'square' | 'circle';
-  title: string;
+  title?: string;
   subtitle?: string;
   description?: string;
   longDescription?: string;
-  size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
   avatarShape?: 'circle' | 'square';
   className?: string;
   children?: React.ReactNode;
@@ -104,24 +104,35 @@ const AvatarLabelGroup: React.FC<AvatarLabelProps> = ({
         {typeof avatarSrc === 'string' ? (
           <Avatar src={avatarSrc} alt="sample" size={size} variant={shape} />
         ) : (
-          <AvatarGroup avatars={avatarSrc} size={size} />
+          <AvatarGroup
+            variant={'squared-horizontal'}
+            shape="square"
+            avatars={avatarSrc}
+            size={size}
+          />
         )}
       </div>
       {/* Text Container */}
       <div className={cn(gapVariants({ size }), '')}>
-        <div className="flex items-center">
-          <TitleWithIcon text={title} size={size} />
-          {subtitle && (
-            <span className={cn(subTitleVariants({ size }))}>{subtitle}</span>
-          )}
-        </div>
-        {description && !children && (
-          <Text
-            color="secondary"
-            className={cn(descriptionVariants({ size }), 'break-all')}
-          >
-            {description}
-          </Text>
+        {!children && title && description && (
+          <>
+            <div className="flex items-center">
+              <TitleWithIcon text={title} size={size} />
+              {subtitle && (
+                <span className={cn(subTitleVariants({ size }))}>
+                  {subtitle}
+                </span>
+              )}
+            </div>
+            {description && (
+              <Text
+                color="secondary"
+                className={cn(descriptionVariants({ size }), 'break-all')}
+              >
+                {description}
+              </Text>
+            )}
+          </>
         )}
         {children}
       </div>

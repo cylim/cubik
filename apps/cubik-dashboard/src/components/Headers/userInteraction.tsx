@@ -1,13 +1,12 @@
 'use client';
 
 import React from 'react';
-import { revalidatePath } from 'next/cache';
-import { AccessStore } from '@/context/scope';
-import { useUser } from '@/context/user';
+import { AccessStore } from '@/hooks/store/scope';
+import { useUser } from '@/hooks/store/user';
 import { handleLogout } from '@/utils/auth';
-import { handleRevalidation } from '@/utils/helpers/revalidate';
 import { useMutation } from '@tanstack/react-query';
 
+import { handleRevalidation } from '@cubik/common/helper';
 import {
   Avatar,
   AvatarLabelGroup,
@@ -19,19 +18,19 @@ import {
   Switch,
   useTheme,
 } from '@cubik/ui';
-import { useUnifiedWallet } from '@cubik/wallet-connect';
+import { useCubikWallet } from '@cubik/wallet';
 
 export const UserInteraction = () => {
   const { user, setUser } = useUser();
-  const { disconnect } = useUnifiedWallet();
+  const { disconnect } = useCubikWallet();
   const { setAccessScope } = AccessStore();
-  const { theme, toggleTheme } = useTheme();
+  const { toggleTheme } = useTheme();
   const logoutMutation = useMutation({
     mutationFn: async () => {
       await handleLogout();
       await disconnect();
       setUser(null);
-      setAccessScope(null, undefined);
+      setAccessScope(null);
       handleRevalidation('/');
     },
   });

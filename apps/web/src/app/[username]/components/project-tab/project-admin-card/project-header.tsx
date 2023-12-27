@@ -23,20 +23,32 @@ const ProjectHeader = ({
   project: ProjectProps;
   isAdmin: boolean;
 }) => {
+  const isLiveInRound = false;
   return isAdmin ? (
     <div className="flex flex-row items-center justify-between gap-4">
       <AvatarLabelGroup
         avatarSrc={project?.logo}
         title={project?.name}
-        description={project?.shortDescription}
+        //  description={project?.shortDescription}
         size={'xl'}
         className="w-full"
       >
-        <div className="flex flex-row items-center gap-2">
-          <PingIcon />
-          <Text className="l2" color="positive">
-            Live in round
+        <div className="flex flex-col gap-1">
+          <Text className="h5-light" color="primary">
+            {project?.name}
           </Text>
+          {isLiveInRound ? (
+            <div className="flex flex-row items-center gap-3">
+              <PingIcon />
+              <Text className="l1" color="positive">
+                Live in round
+              </Text>
+            </div>
+          ) : (
+            <Text className="l1-light" color="info">
+              {project.shortDescription}
+            </Text>
+          )}
         </div>
       </AvatarLabelGroup>
       <div className="flex flex-row gap-2">
@@ -45,7 +57,12 @@ const ProjectHeader = ({
         </Button>
         <Menu>
           <MenuButton>
-            <Button leftIconName="threeDots" variant={'secondary'} size="xl" />
+            <Button
+              leftIconName="threeDots"
+              variant={'secondary'}
+              size="xl"
+              className="h-[48px] w-[48px]"
+            />
           </MenuButton>
           <MenuList>
             <MenuItem text="Apply For Grant" leftIcon="cube" />

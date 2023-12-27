@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation';
 
 import { Logo, Tag, TagLabel, Text } from '@cubik/ui';
 
-import { VerifyModal } from '../modals/verifyModal';
 import { HandleConnect } from './handleConnect';
 
 export const Header = () => {
@@ -19,7 +18,6 @@ export const Header = () => {
 
   return (
     <>
-      <VerifyModal open={open} setOpen={setOpen} />
       <div className={`w-full ${backgroundColor}`}>
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between p-4 md:px-8">
           <div className="flex justify-start gap-10">

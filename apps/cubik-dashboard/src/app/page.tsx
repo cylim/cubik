@@ -2,28 +2,54 @@ import { cookies } from 'next/headers';
 import { GrantsSegmentControlSwitch } from '@/app/homeSegment';
 import PageLayout from '@/components/Layouts/PageLayout';
 import { ConnectWalletSection } from '@/components/wallet/ConnectWalletSection';
-import { getEventsInfo } from '@/utils/helpers/getEventsInfo';
 import { IsUserLoginServer } from '@/utils/helpers/isUserLogin';
 
 import {
-  Alert,
   Background,
-  Button,
   GrantRoundCardFooter,
   GrantRoundCardHeader,
   GrantsRoundCard,
   SubHead,
 } from '@cubik/ui';
 
+const getUserGrants = async () => {
+  try {
+    const token = cookies().get('authToken');
+    const user = token && (await IsUserLoginServer(token.value));
+    if (!token || !user) {
+      return [];
+    }
+
+    return await Promise.all(
+      user.accessScope.map(async (scope) => {
+        return await prisma.event.findFirst({
+          where: {
+            id: scope.event_id,
+          },
+          select: {
+            id: true,
+            name: true,
+            matchedPool: true,
+            _count: {
+              select: {
+                contribution: true,
+                projectJoinEvent: true,
+              },
+            },
+          },
+        });
+      }),
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export default async function Home() {
   const cookieStore = cookies();
   const token = cookieStore.get('authToken');
   const user = token && (await IsUserLoginServer(token.value));
-  console.log('token', token);
-  console.log('user', user);
-  //if user -> access scope>0 render the list of events
-  //user -> access scope =0 no access state
-  // user is null, but pk is defined -> no linked wallet
+  const userGrants = await getUserGrants();
 
   if (!token || !user) {
     return (
@@ -55,42 +81,27 @@ export default async function Home() {
         closeIcon
       /> */}
       <div className="flex flex-col gap-4">
-        <GrantsRoundCard
-          grantManager={true}
-          roundStartDate={new Date('2021-10-20T00:00:00.000Z')}
-          roundEndDate={new Date('2021-10-20T00:00:00.000Z')}
-        >
-          <GrantRoundCardHeader grantName="Alpha Grants Round" isLive />
-          <GrantRoundCardFooter
-            matchingPool={'50K'}
-            participants={'300'}
-            contributions={'10'}
-            //contributors={'100'}
-          />
-        </GrantsRoundCard>
-        <GrantsRoundCard
-          grantManager={true}
-          roundStartDate={new Date('2024-01-20T00:00:00.000Z')}
-          roundEndDate={new Date('2024-01-20T00:00:00.000Z')}
-        >
-          <GrantRoundCardHeader grantName="Alpha Grants Round" isLive />
-          <GrantRoundCardFooter
-            matchingPool={'50K'}
-            participants={'300'}
-            contributions={'10'}
-            //contributors={'100'}
-          />
-        </GrantsRoundCard>
+        {userGrants && userGrants?.length > 0 ? (
+          userGrants.map((event) => (
+            <GrantsRoundCard
+              path="/grants"
+              key={event?.id}
+              //grantManager={true}
+              roundStartDate={new Date('2021-10-20T00:00:00.000Z')}
+              roundEndDate={new Date('2021-10-20T00:00:00.000Z')}
+            >
+              <GrantRoundCardHeader grantName={event?.name || 'Default'} />
+              <GrantRoundCardFooter
+                matchingPool={event?.matchedPool || 0}
+                participants={event?._count.projectJoinEvent || 0}
+                contributions={event?._count.contribution || 0}
+              />
+            </GrantsRoundCard>
+          ))
+        ) : (
+          <></>
+        )}
       </div>
     </PageLayout>
   );
-}
-
-{
-  /* <div key={event.event_id}>
-<GrantsRoundCard>
-  <GrantRoundCardHeader grantName={event.event_name} />
-  <GrantRoundCardFooter matchingPool="$50K" />
-</GrantsRoundCard>
-</div> */
 }

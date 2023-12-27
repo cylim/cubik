@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import { useUser } from '@/app/context/user';
 import { Container, Flex, HStack } from '@/utils/chakra';
+import { useWallet } from '@solana/wallet-adapter-react';
 
 import Logo from '../../common/logo';
 import { WalletConnect } from './auth/handleConnect';
@@ -10,6 +11,7 @@ import Links from './links';
 
 const Header = () => {
   const { setUser } = useUser();
+  const { publicKey, connected } = useWallet();
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -37,7 +39,7 @@ const Header = () => {
       }
     };
     checkAuth();
-  }, []);
+  }, [publicKey, connected]);
   return (
     <>
       <div

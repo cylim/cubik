@@ -13,10 +13,11 @@ interface Props
     HTMLDivElement
   > {
   logo: string;
-  name: string;
-  description: string;
-  Button?: ReactNode;
   href: string;
+  name?: string;
+  description?: string;
+  Button?: ReactNode;
+  children?: ReactNode;
 }
 interface ButtonProps
   extends React.DetailedHTMLProps<
@@ -60,10 +61,10 @@ export const ProjectCard = (props: Props) => {
         <AvatarLabelGroup
           avatarSrc={props.logo ?? '/logo.svg'} // updated backup image
           size={'xl'}
-          title={props.name}
           avatarShape="square"
-          description={props.description}
-        />
+        >
+          {props.children}
+        </AvatarLabelGroup>
       </div>
       {/* </Link> */}
     </>

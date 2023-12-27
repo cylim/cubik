@@ -1,10 +1,14 @@
 import React from 'react';
 import { RegistrationEmailCards } from '@/app/grants/components/sections/registration-section/RegistrationEmailCards';
+import { RegistrationTable } from '@/app/grants/components/sections/registration-section/RegistrationTable';
 import { RegistrationTableHeader } from '@/app/grants/components/sections/registration-section/RegistrationTableHeader';
 
 import { Button, SubHead } from '@cubik/ui';
 
-export const RegistrationsSection = () => {
+interface Props {
+  searchParams: { [key in string]: string };
+}
+export const RegistrationsSection = ({ searchParams }: Props) => {
   const segments = [
     { color: 'bg-[var(--color-fg-positive-base)]', width: 10 },
     { color: 'bg-[var(--color-bg-negative-base)]', width: 10 },
@@ -37,6 +41,7 @@ export const RegistrationsSection = () => {
       </div>
       <RegistrationEmailCards />
       <RegistrationTableHeader />
+      <RegistrationTable searchParams={searchParams} />
     </div>
   );
 };

@@ -2695,7 +2695,7 @@ export const TokenList: Token[] = [
     name: 'Kreechures Floor Index',
     symbol: 'KREECHURE',
     logoURI:
-      'https://dl.airtable.com/.attachmentThumbnails/1204ecf0b475bf46a0e65391c3b5e947/fefec436',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/7b7adff2-4b56-41bb-1fc8-adc2b9d5fa00/public',
     tags: ['old-registry'],
   },
   {
@@ -5344,7 +5344,7 @@ export const TokenList: Token[] = [
     name: 'Portals Ivory Index',
     symbol: 'IVRY',
     logoURI:
-      'https://dl.airtable.com/.attachmentThumbnails/102af36cc30fec0b05ebb45406f20971/126d0320',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/7b7adff2-4b56-41bb-1fc8-adc2b9d5fa00/public',
     tags: ['old-registry'],
   },
   {
@@ -5631,7 +5631,7 @@ export const TokenList: Token[] = [
     name: 'Skullbot Biker Gang Floor Index',
     symbol: 'BOTS',
     logoURI:
-      'https://dl.airtable.com/.attachmentThumbnails/85c63ffb5a6bb05e08daa667fecb7c84/6949eab5',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/7b7adff2-4b56-41bb-1fc8-adc2b9d5fa00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6044,7 +6044,7 @@ export const TokenList: Token[] = [
     name: 'aSOL Aggregate Solana Stake Pool',
     symbol: 'aSOL',
     logoURI:
-      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/e5c42363-0ce2-4330-99b6-5414e7412000/public',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/7b7adff2-4b56-41bb-1fc8-adc2b9d5fa00/public',
     tags: ['old-registry'],
   },
   {
@@ -6366,7 +6366,7 @@ export const TokenList: Token[] = [
     name: 'Gamify Club',
     symbol: 'GMFC',
     logoURI:
-      'https://pbs.twimg.com/profile_images/1444964749897175046/wdz26CzM_400x400.jpg',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/7b7adff2-4b56-41bb-1fc8-adc2b9d5fa00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {
@@ -6494,7 +6494,7 @@ export const TokenList: Token[] = [
     name: 'Staked MEAN',
     symbol: 'sMEAN',
     logoURI:
-      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/08c4ba82-8a9a-480f-4953-2455352c9400/public',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/7b7adff2-4b56-41bb-1fc8-adc2b9d5fa00/public',
     tags: ['old-registry', 'solana-fm'],
   },
   {

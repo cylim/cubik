@@ -26,7 +26,7 @@ const CheckboxPage = () => {
             <CodeComponent codeString='import { InputField } from "@cubik/ui"' />
           </div>
           <div className="mt-8 flex flex-col gap-10">
-            <Checkbox state={'default'} indetermined={false} />
+            {/* <Checkbox state={'default'} indetermined={false} />
             <Checkbox state={'hovered'} indetermined={false} />
             <Checkbox state={'focused'} indetermined={false} />
             <Checkbox state={'disabled'} indetermined={false} />
@@ -39,7 +39,7 @@ const CheckboxPage = () => {
             <Checkbox size="sm" state={'default'} indetermined={true} />
             <Checkbox size="sm" state={'hovered'} indetermined={true} />
             <Checkbox size="sm" state={'focused'} indetermined={true} />
-            <Checkbox size="sm" state={'disabled'} indetermined={true} />
+            <Checkbox size="sm" state={'disabled'} indetermined={true} /> */}
           </div>
         </div>
       </PageHOC>

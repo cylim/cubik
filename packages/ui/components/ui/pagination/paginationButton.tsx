@@ -46,7 +46,56 @@ interface PaginationProps {
 }
 export const PaginationButton = ({ page, maxPage, route }: PaginationProps) => {
   const router = useRouter();
-  const pages = Array.from(Array(maxPage));
+  const pages = Array.from({ length: maxPage }, (_, i) => i + 1);
+
+  const renderPages = () => {
+    if (maxPage <= 6) {
+      return pages.map(renderPageButton);
+    }
+
+    let startPages = [1, 2, 3];
+    let endPages = [maxPage - 2, maxPage - 1, maxPage];
+
+    if (page > 3 && page < maxPage - 2) {
+      startPages = [1, 2];
+      endPages = [maxPage - 1, maxPage];
+    }
+
+    const middlePages =
+      page > 3 && page < maxPage - 2 ? [page - 1, page, page + 1] : [];
+    return (
+      <>
+        {startPages.map(renderPageButton)}
+        {page > 4 && (
+          <PaginationCounterButton variant={'outline'} size={'md'}>
+            ...
+          </PaginationCounterButton>
+        )}
+        {middlePages.map(renderPageButton)}
+        {page < maxPage - 3 && (
+          <PaginationCounterButton variant={'outline'} size={'md'}>
+            ...
+          </PaginationCounterButton>
+        )}
+        {endPages.map(renderPageButton)}
+      </>
+    );
+  };
+
+  const renderPageButton = (pageNumber: number) => (
+    <PaginationCounterButton
+      key={pageNumber}
+      variant={page === pageNumber ? 'secondary' : 'outline'}
+      size={'md'}
+      onClick={() => {
+        router.push(`${route}${pageNumber}`, {
+          scroll: false,
+        });
+      }}
+    >
+      {pageNumber}
+    </PaginationCounterButton>
+  );
 
   return (
     <div className="flex h-14 w-full items-center justify-between px-1">
@@ -56,77 +105,11 @@ export const PaginationButton = ({ page, maxPage, route }: PaginationProps) => {
             scroll: false,
           });
         }}
-        disabled={page === 1 ? true : false}
+        disabled={page === 1}
       />
-      {pages.length > 6 ? (
-        <div className="flex gap-2">
-          <div className="flex gap-2">
-            {pages.slice(0, 3).map((e, index) => {
-              return (
-                <PaginationCounterButton
-                  key={index}
-                  onClick={() => {
-                    router.push(`${route}${index + 1}`, {
-                      scroll: false,
-                    });
-                  }}
-                  variant={page === index + 1 ? 'secondary' : 'outline'}
-                  size={'md'}
-                >
-                  {index + 1}
-                </PaginationCounterButton>
-              );
-            })}
-          </div>
-          <PaginationCounterButton variant={'outline'} size={'md'}>
-            ...
-          </PaginationCounterButton>
-          <div className="flex gap-2">
-            {pages.slice(-3).map((e, index) => {
-              return (
-                <PaginationCounterButton
-                  key={index}
-                  variant={
-                    page === pages.length - (3 - index - 1)
-                      ? 'secondary'
-                      : 'outline'
-                  }
-                  size={'md'}
-                  onClick={() => {
-                    router.push(`${route}${pages.length - (3 - index - 1)}`, {
-                      scroll: false,
-                    });
-                  }}
-                >
-                  {pages.length - (3 - index - 1)}
-                </PaginationCounterButton>
-              );
-            })}
-          </div>
-        </div>
-      ) : (
-        <div className="flex gap-2">
-          {pages.map((e, index) => {
-            return (
-              <PaginationCounterButton
-                key={index}
-                variant={page === index + 1 ? 'secondary' : 'outline'}
-                size={'md'}
-                onClick={() => {
-                  router.push(`${route}${index + 1}`, {
-                    scroll: false,
-                  });
-                }}
-              >
-                {index + 1}
-              </PaginationCounterButton>
-            );
-          })}
-        </div>
-      )}
-
+      <div className="flex gap-2">{renderPages()}</div>
       <NextButton
-        disabled={maxPage < page + 1 ? true : false}
+        disabled={page >= maxPage}
         onClick={() => {
           router.push(`${route}${page + 1}`, {
             scroll: false,

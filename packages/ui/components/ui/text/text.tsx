@@ -12,6 +12,7 @@ const headingVariant = cva('antialiased', {
       tertiary: 'text-[var(--color-fg-primary-subdued)]',
       positive: 'text-[var(--color-fg-positive-emphasis)]',
       negative: 'text-[var(--color-fg-negative-emphasis)]',
+      info: 'text-[var(--color-fg-info-base)]',
       inherit: '',
     },
   },
@@ -25,7 +26,7 @@ interface TextProps extends VariantProps<typeof headingVariant> {
   className?: ClassValue;
 }
 
-const Text: React.FC<TextProps> = ({ children, color, className }) => {
+const Text = ({ children, color, className }: TextProps) => {
   return <p className={cn(className, headingVariant({ color }))}>{children}</p>;
 };
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { cva, VariantProps } from 'class-variance-authority';
 
 import { Icon } from '../../../icons/icon';
 import { iconLibrary } from '../../../icons/iconLibrary';
@@ -41,7 +42,21 @@ const MenuList = ({ children, align = 'end' }: MenuListProps) => {
   );
 };
 
-interface MenuItemProps {
+const MenuItemVariants = cva('relative p-2 mx-2   focus-visible:outline-none', {
+  variants: {
+    variant: {
+      primary:
+        'text-[var(--menu-list-item-fg-default)] stroke-[var(--menu-list-item-icon)] hover:bg-[var(--menu-list-item-surface-hovered)] hover:rounded-lg hover:text-[var(--menu-list-item-fg-hovered)] hover:stroke-[var(--menu-list-item-hovered)]',
+      negative:
+        'text-[var(--color-bg-negative-base)] stroke-[var(--color-bg-negative-base)] hover:bg-[var(--color-surface-negative-transparent)] hover:rounded-lg hover:text-[var(--color-bg-negative-base)] hover:stroke-[var(--color-bg-negative-base)]',
+    },
+  },
+  defaultVariants: {
+    variant: 'primary',
+  },
+});
+
+interface MenuItemProps extends VariantProps<typeof MenuItemVariants> {
   children?: React.ReactNode;
   text: string;
   leftIcon?: keyof typeof iconLibrary;
@@ -55,6 +70,7 @@ const MenuItem = ({
   leftIcon,
   onClick,
   isLoading,
+  variant = 'primary',
 }: MenuItemProps) => {
   const itemProps: {
     onClick?: () => void;
@@ -64,10 +80,8 @@ const MenuItem = ({
     onClick: isLoading ? () => {} : onClick,
     className: cn(
       isLoading ? 'cursor-not-allowed' : 'cursor-pointer',
-      children
-        ? ''
-        : 'hover:bg-[var(--menu-list-item-surface-hovered)] hover:rounded-lg hover:text-[var(--menu-list-item-fg-hovered)] hover:stroke-[var(--menu-list-item-hovered)]',
-      'relative p-2 mx-2 text-[var(--menu-list-item-fg-default)] stroke-[var(--menu-list-item-icon)] focus-visible:outline-none',
+      children ? '' : MenuItemVariants({ variant }),
+      '',
     ),
   };
   if (children) {

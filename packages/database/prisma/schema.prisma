@@ -16,6 +16,7 @@ model User {
   mainWallet       String             @unique
   email            String? 
   profileNft       Json
+  isMigrated       Boolean            @default(false)
   type            UserType @default(Contributor)
   profilePicture   String             @db.VarChar(500)
   tx               String             @db.VarChar(500)
@@ -122,6 +123,8 @@ model Project {
   shortDescription  String              @db.VarChar(2000)
   logo              String              @db.VarChar(1000)
   ownerPublickey    String
+  isMigrated        Boolean            @default(false)
+  isDraft           Boolean            @default(false)
   tx                String              @default("")
   longDescription   String              @db.Text
   industry          Json              

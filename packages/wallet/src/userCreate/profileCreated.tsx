@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react';
-import Confetti from 'react-confetti';
+// import Confetti from 'react-confetti';
 import { UseFormReturn } from 'react-hook-form';
 
 import { Avatar, Button, Icon, IconName, Text } from '@cubik/ui';
@@ -47,13 +47,13 @@ const Card = ({ type }: { type: keyof typeof ProfileCards }) => {
   const { bg, border, color, icon, title } = ProfileCards[type];
   return (
     <>
-      {/* @ts-expect-error */}
+      {/* @ts-ignore
       <Confetti
         className="w-full h-52"
         width={200}
         height={200}
         tweenDuration={100}
-      />
+      /> */}
       <div
         style={{
           background: bg,

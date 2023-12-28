@@ -1,7 +1,13 @@
 'use client';
 
-import { CubikWalletProvider } from '@cubik/wallet';
+import dynamic from 'next/dynamic';
 
+const CubikWalletProvider = dynamic(
+  () => import('@cubik/wallet').then((e) => e.CubikWalletProvider),
+  {
+    ssr: false,
+  },
+);
 export const metadata = {
   name: 'UnifiedWallet',
   description: 'UnifiedWallet',

@@ -70,7 +70,7 @@ export const EmailOtp = ({ userForm, setUserCreateState }: Props) => {
             Please enter the 6 digit code we sent to {userForm.watch('email')}
           </Text>
         </div>
-        {/* @ts-expect-error */}
+        {/* @ts-ignore */}
         <PinInput
           length={6}
           initialValue=""

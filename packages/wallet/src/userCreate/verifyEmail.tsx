@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { UseFormReturn } from 'react-hook-form';
+import { toast } from 'sonner';
 
+import { logApi } from '@cubik/logger/src/axiom';
 import {
   Button,
   Checkbox,
@@ -11,6 +13,8 @@ import {
   Text,
 } from '@cubik/ui';
 
+import { sendEmail } from '../helpers/sendEmail';
+import { useCubikWallet } from '../wallet';
 import { UserCreateForm, UserCreateSteps } from './index';
 
 interface Props {
@@ -19,6 +23,31 @@ interface Props {
   userForm: UseFormReturn<UserCreateForm, any, undefined>;
 }
 export const VerifyEmail = ({ setUserCreateState, userForm }: Props) => {
+  const { publicKey } = useCubikWallet();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const onSendEmail = async () => {
+    try {
+      setIsLoading(true);
+      const email = userForm.getValues('email');
+      const username = userForm.getValues('username');
+      const res = await sendEmail(email, username, publicKey?.toBase58() || '');
+      if (res) {
+        setUserCreateState('email-otp');
+      }
+      return 'Success';
+    } catch (e) {
+      const error = e as Error;
+      toast.error(error.message);
+      logApi({
+        message: error.message,
+        body: error,
+        source: 'VerifyEmail.tsx',
+        level: 'error',
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <>
       <div
@@ -71,6 +100,8 @@ export const VerifyEmail = ({ setUserCreateState, userForm }: Props) => {
             size={'md'}
             className="w-full"
             // rightIconName=""
+            onClick={onSendEmail}
+            isLoading={isLoading}
           >
             Confirm Email
           </Button>

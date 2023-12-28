@@ -42,8 +42,9 @@ export const GET = async (req: NextRequest) => {
   } catch (error) {
     logApi({
       error,
-      message: 'Internal server error - Failed to create organization!',
+      message: 'Internal server error - Failed search name',
       req: req as any,
+      source: 'apps/web/src/app/api/user/searchUsername/route.ts',
       statusCode: 500,
     });
     return handleApiRouteError(error);

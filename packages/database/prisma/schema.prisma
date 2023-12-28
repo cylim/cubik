@@ -404,6 +404,7 @@ enum ActivityType {
   CONTRIBUTION_TO_PROJECT
   CONTRIBUTION_TO_USER
   GENERIC
+  OTP_VERIFIED
 }
 
 enum NotificationType {

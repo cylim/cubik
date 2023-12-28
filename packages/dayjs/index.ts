@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import duration from 'dayjs/plugin/duration';
 import isBetween from 'dayjs/plugin/isBetween';
 import isToday from 'dayjs/plugin/isToday';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
@@ -20,6 +21,7 @@ dayjs.extend(toArray);
 dayjs.extend(utc);
 dayjs.extend(minmax);
 dayjs.extend(updateLocale);
+dayjs.extend(duration);
 dayjs.updateLocale('en', {
   months: [
     'January',

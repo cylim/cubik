@@ -13,6 +13,7 @@ const ModalTitleVariants = cva('text-[var(--avatar-label-title)]', {
       sm: 'b4-heavy',
       md: 'h6',
       lg: 'h5',
+      xl: 'h5',
     },
   },
   defaultVariants: {
@@ -28,6 +29,7 @@ const ModalTitleContainerVariants = cva(
         sm: 'h-[32px] md:h-[40px] px-[16px]',
         md: 'h-[44px] md:h-[48px] px-[16px] md:px-[24px]',
         lg: 'h-[48px] md:h-[64px] px-[24px]',
+        xl: 'h-[48px] md:h-[64px] px-[24px]',
       },
     },
     defaultVariants: {

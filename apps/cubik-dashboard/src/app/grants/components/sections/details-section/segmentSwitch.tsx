@@ -29,35 +29,25 @@ export const SegmentSwitch = ({ urlKey }: Props) => {
           isActive={
             !searchParams.get(urlKey) ? true : searchParams.get(urlKey) === '1W'
           }
-          onClick={() => {
-            router.push(`${path}${urlKey}=1W`, {
-              scroll: false,
-            });
-          }}
+          href={`${path}${urlKey}=1W`}
         >
           1W
         </SegmentItem>
         <SegmentItem
           isActive={searchParams.get(urlKey) === '2W'}
-          onClick={() => {
-            router.push(`${path}${urlKey}=2W`, { scroll: false });
-          }}
+          href={`${path}${urlKey}=2W`}
         >
           2W
         </SegmentItem>
         <SegmentItem
           isActive={searchParams.get(urlKey) === '1M'}
-          onClick={() => {
-            router.push(`${path}${urlKey}=1M`, { scroll: false });
-          }}
+          href={`${path}${urlKey}=1M`}
         >
           1M
         </SegmentItem>
         <SegmentItem
           isActive={searchParams.get(urlKey) === '2M'}
-          onClick={() => {
-            router.push(`${path}${urlKey}=2M`, { scroll: false });
-          }}
+          href={`${path}${urlKey}=2M`}
         >
           2M
         </SegmentItem>

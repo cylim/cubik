@@ -9,21 +9,20 @@ datasource db {
   relationMode = "prisma"
 }
 
-
 model User {
   id               String             @id @default(uuid()) @map("_id")
   username         String             @unique
   mainWallet       String             @unique
-  email            String? 
+  email            String?
   profileNft       Json
   isMigrated       Boolean            @default(false)
-  type            UserType @default(Contributor)
+  type             UserType           @default(Contributor)
   profilePicture   String             @db.VarChar(500)
   tx               String             @db.VarChar(500)
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   isEmailConfirmed Boolean            @default(false)
-  isRecivingUpdate   Boolean            @default(false)
+  isRecivingUpdate Boolean            @default(false)
   isActive         Boolean            @default(true)
   isArchive        Boolean            @default(false)
   comments         Comments[]
@@ -85,16 +84,16 @@ model Activity {
 }
 
 model Notification {
-  id     String           @id @default(uuid()) @map("_id")
-  userId String
-  type   NotificationType
-  isRead Boolean          @default(false)
-  user   User             @relation(fields: [userId], references: [id])
-  data   Json
-  isActive  Boolean  @default(true)
-  isArchive Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String           @id @default(uuid()) @map("_id")
+  userId    String
+  type      NotificationType
+  isRead    Boolean          @default(false)
+  user      User             @relation(fields: [userId], references: [id])
+  data      Json
+  isActive  Boolean          @default(true)
+  isArchive Boolean          @default(false)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
 
   @@index([userId])
 }
@@ -113,8 +112,6 @@ model Proof {
   @@index([userId])
 }
 
-
-
 model Project {
   id                String              @id @default(uuid()) @map("_id")
   name              String
@@ -123,11 +120,11 @@ model Project {
   shortDescription  String              @db.VarChar(2000)
   logo              String              @db.VarChar(1000)
   ownerPublickey    String
-  isMigrated        Boolean            @default(false)
-  isDraft           Boolean            @default(false)
+  isMigrated        Boolean             @default(false)
+  isDraft           Boolean             @default(false)
   tx                String              @default("")
   longDescription   String              @db.Text
-  industry          Json?              
+  industry          Json?
   projectLink       String              @default("")
   twitterHandle     String              @default("")
   githubLink        String              @default("")
@@ -162,8 +159,8 @@ model Event {
   logo             String?            @default("")
   matchedPool      Float              @default(0)
   userId           String
-  type             EventType  
-  currentStatus    EventStatusType  @default(REGISTRATION)
+  type             EventType
+  currentStatus    EventStatusType    @default(REGISTRATION)
   description      String             @db.Text
   shortDescription String             @default("") @db.VarChar(2000)
   tx               String             @db.VarChar(500)
@@ -205,8 +202,8 @@ model ProjectJoinEvent {
   contribution          Contribution[]
   isActive              Boolean            @default(true)
   isArchive             Boolean            @default(false)
-  createdAt         DateTime            @default(now())
-  updatedAt         DateTime            @updatedAt
+  createdAt             DateTime           @default(now())
+  updatedAt             DateTime           @updatedAt
 
   @@index([eventId])
   @@index([projectId])
@@ -333,8 +330,9 @@ enum EventType {
   ROUND
   HACKATHON
 }
+
 enum UserType {
-  Contributor 
+  Contributor
   ProjectOwner
   Sponsor
 }

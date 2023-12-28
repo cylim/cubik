@@ -1,7 +1,13 @@
 'use client';
 
-export const MWA_NOT_FOUND_ERROR = 'MWA_NOT_FOUND_ERROR';
+import dynamic from 'next/dynamic';
 
+const CubikWalletProvider = dynamic(
+  () => import('@cubik/wallet').then((e) => e.CubikWalletProvider),
+  {
+    ssr: false,
+  },
+);
 export const metadata = {
   name: 'UnifiedWallet',
   description: 'UnifiedWallet',
@@ -12,5 +18,16 @@ export const metadata = {
 };
 
 export const WalletProvider = ({ children }: { children: any }) => {
-  return children;
+  return (
+    <CubikWalletProvider
+      type={{
+        type: 'admin',
+        setUser: () => {},
+        setAccessScope: () => {},
+        user: null,
+      }}
+    >
+      {children}
+    </CubikWalletProvider>
+  );
 };

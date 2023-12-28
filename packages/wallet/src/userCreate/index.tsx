@@ -31,10 +31,11 @@ export type UserCreateForm = {
   avatar: string;
   nft?: string;
   userType: UserType;
+  isReceiveEmails: boolean;
 };
 export const UserCreate = () => {
   const [userCreateState, setUserCreateState] =
-    React.useState<UserCreateSteps>('profile-created');
+    React.useState<UserCreateSteps>('create-username');
 
   const { publicKey, connected, disconnect } = useCubikWallet();
   const userInfoForm = useForm<UserCreateForm>({
@@ -43,6 +44,7 @@ export const UserCreate = () => {
       email: '',
       username: generateDefaultUserName(publicKey),
       userType: UserType.Contributor,
+      isReceiveEmails: true,
     },
   });
 

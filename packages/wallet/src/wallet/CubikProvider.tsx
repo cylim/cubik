@@ -23,6 +23,7 @@ import { AccessScope, AdminUser } from '@cubik/common-types/src/admin';
 import { handleAccessOnServer } from '@cubik/common/helper';
 
 import { autoLoadAdmin } from '../helpers/autoLoadAdmin';
+import { autoLoadUser } from '../helpers/autoLoadUser';
 import { CreateUserWallet, VerifyUserWallet } from '../modals';
 import {
   CubikWalletContext,
@@ -168,6 +169,22 @@ const CubikWalletContextProvider = ({
       } else {
         type.setAccessScope(user.accessScope[0]);
         handleAccessOnServer(user.accessScope[0].event_id);
+      }
+      type.setUser(user);
+      toast.success('Successfully logged in');
+    };
+    fetchUser();
+  }, [connected]);
+  useEffect(() => {
+    const fetchUser = async () => {
+      if (type.type !== 'user' || type.user) {
+        console.log(publicKey?.toBase58());
+        return;
+      }
+
+      const user = await autoLoadUser();
+      if (!user) {
+        return null;
       }
       type.setUser(user);
       toast.success('Successfully logged in');

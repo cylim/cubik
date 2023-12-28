@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Resend } from 'resend';
+import { CreateEmailResponse } from 'resend/build/src/emails/interfaces';
 
 import { ActivityType } from '@cubik/database';
+import { logApi } from '@cubik/logger/src';
 
 import { CreateNewProject } from '../templates/create-new-project';
 import { Generic } from '../templates/generic';
+import { OTPTemplate } from '../templates/otp-verification';
 import { ProjectBannedInRound } from '../templates/project-ban-in-round';
 import { ProjectContribution } from '../templates/project-contribution';
 import { ProjectJoinRound } from '../templates/project-join-round';
@@ -41,7 +44,7 @@ export async function sendEmail(
   to: string | string[],
   notificationType: ActivityType,
   props: EmailProps,
-) {
+): Promise<CreateEmailResponse | null> {
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -114,10 +117,28 @@ export async function sendEmail(
           react: Generic(props.data),
           ...emailPayload,
         });
+      case ActivityType.OTP_VERIFIED:
+        return await resend.emails.send({
+          react: OTPTemplate(props.data),
+          ...emailPayload,
+        });
       default:
         throw new Error('Invalid notification type');
     }
-  } catch (error) {
-    return error;
+  } catch (e) {
+    const error = e as Error;
+    logApi({
+      message: error.message,
+      error: error,
+      statusCode: 500,
+      body: {
+        to,
+        notificationType,
+        props,
+      },
+      level: 'error',
+      source: 'sendEmail',
+    });
+    return null;
   }
 }

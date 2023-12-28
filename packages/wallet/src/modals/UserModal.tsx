@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { utils } from '@coral-xyz/anchor';
@@ -13,8 +15,9 @@ import {
   DrawerContent,
   DrawerOverlay,
   DrawerPortal,
+  Icon,
   Modal,
-  ModalHeader,
+  Text,
 } from '@cubik/ui';
 import { useMediaQuery } from '@cubik/ui/hooks';
 import { cn } from '@cubik/ui/lib/utils';
@@ -95,7 +98,22 @@ export const UserModal = ({ onClose, setUser }: Props) => {
     <>
       {modalState === 'wallet-connect' && (
         <>
-          <ModalHeader onClose={onClose} heading="Connect Wallet" size="md" />
+          <div className="flex justify-between items-center h-[44px] md:h-[48px] px-[16px] md:px-[24px]">
+            <Text
+              color={'primary'}
+              className="text-[var(--avatar-label-title)] h6"
+            >
+              Connect Wallet
+            </Text>
+            <button className="pointer-events-auto" onClick={onClose}>
+              <Icon
+                name="cross"
+                width={20}
+                stroke="var(--modal-header-cancel-icon)"
+                height={20}
+              />
+            </button>
+          </div>
           <CubikWalletModal onClose={onClose} setShowHeader={() => {}} />
         </>
       )}

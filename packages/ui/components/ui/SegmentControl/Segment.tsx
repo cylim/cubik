@@ -89,6 +89,7 @@ export const SegmentItem = ({
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
     <Link
+      scroll={false}
       href={href}
       className={cn(
         'px-6 w-full h-full flex items-center justify-center gap-2 cursor-pointer text-center rounded-[6px]',

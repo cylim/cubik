@@ -10,11 +10,11 @@ export const env = createEnv({
     EDGE_CONFIG: z.string().min(1),
     REDIS_URL: z.string().min(1),
     RESEND_API_KEY: z.string().min(1),
+    HELIUS_API_KEY: z.string().min(1),
   },
   client: {
     NEXT_PUBLIC_RPC_MAINNET_URL: z.string().min(1),
     NEXT_PUBLIC_RPC_DEVNET_URL: z.string().min(1),
-    NEXT_PUBLIC_HELIUS_API_KEY: z.string().min(1),
     NEXT_PUBLIC_SUPABASE_URL: z.string().min(1),
     NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1),
     NEXT_PUBLIC_SOLANA_NETWORK: z.string().min(1),
@@ -25,6 +25,7 @@ export const env = createEnv({
   runtimeEnv: {
     SECRET: process.env.SECRET,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
+    HELIUS_API_KEY: process.env.HELIUS_API_KEY,
     REDIS_URL: process.env.REDIS_URL,
     UPLOADTHING_SECRET: process.env.UPLOADTHING_SECRET,
     UPLOADTHING_APP_ID: process.env.UPLOADTHING_APP_ID,
@@ -33,7 +34,6 @@ export const env = createEnv({
     EDGE_CONFIG: process.env.EDGE_CONFIG,
     NEXT_PUBLIC_RPC_MAINNET_URL: process.env.NEXT_PUBLIC_RPC_MAINNET_URL,
     NEXT_PUBLIC_RPC_DEVNET_URL: process.env.NEXT_PUBLIC_RPC_DEVNET_URL,
-    NEXT_PUBLIC_HELIUS_API_KEY: process.env.NEXT_PUBLIC_HELIUS_API_KEY,
     NEXT_PUBLIC_MIXPANEL: process.env.NEXT_PUBLIC_MIXPANEL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,

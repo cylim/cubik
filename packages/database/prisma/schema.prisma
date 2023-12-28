@@ -127,7 +127,7 @@ model Project {
   isDraft           Boolean            @default(false)
   tx                String              @default("")
   longDescription   String              @db.Text
-  industry          Json              
+  industry          Json?              
   projectLink       String              @default("")
   twitterHandle     String              @default("")
   githubLink        String              @default("")

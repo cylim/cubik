@@ -54,3 +54,4 @@ export * from './components/ui/GrantsRoundCard';
 export * from './components/ui/RegistrationCard';
 export * from './components/ui/CollectionCard';
 export * from './components/ui/CopyToClipboard';
+export * from './components/ui/Carousel';

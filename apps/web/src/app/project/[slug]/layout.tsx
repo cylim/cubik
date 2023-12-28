@@ -2,6 +2,8 @@ import React from 'react';
 import type { Metadata, ResolvingMetadata } from 'next';
 import { utils } from '@coral-xyz/anchor';
 
+import ProjectDetailsPageHeader from './components/projectDetailsPageHeader';
+
 interface OgProps {
   params: { slug: string };
   searchParams: Record<string, string | string[] | undefined>;
@@ -71,7 +73,7 @@ const fetchProject = async (slug: string) => {
   try {
     const project = await prisma.project.findFirst({
       where: {
-        isActive: true,
+        //   isActive: true,
         isArchive: false,
         slug: slug,
       },
@@ -102,8 +104,18 @@ const fetchProject = async (slug: string) => {
   }
 };
 
-const ProjectLayout = ({ children, params }: Props) => {
-  return <div>ProjectLayout</div>;
+const ProjectLayout = async ({ children, params }: Props) => {
+  const project = await fetchProject(params.slug);
+  console.log('project here - ', project);
+
+  return (
+    <div className="w-full">
+      <div className="bg-[var(--body-surface)]">
+        <ProjectDetailsPageHeader project={project[0]} />
+      </div>
+      <div className="relative">{children}</div>
+    </div>
+  );
 };
 
 export default ProjectLayout;

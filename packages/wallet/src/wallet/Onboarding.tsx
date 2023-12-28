@@ -107,7 +107,7 @@ export const OnboardingFlow = () => {
             </Text>
           </div>
         </div>
-        <div className="flex justify-center gap-3 items-center flex-col w-full pb-12">
+        <div className="flex justify-center gap-2 items-center flex-col w-full">
           <Button
             onClick={() => setState('Get Wallet')}
             variant={'secondary'}
@@ -120,6 +120,7 @@ export const OnboardingFlow = () => {
             Learn More
           </Button>
         </div>
+        <div />
       </div>
     );
   }

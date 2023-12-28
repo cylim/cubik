@@ -70,7 +70,10 @@ const DrawerPortal = ({ children }: DrawerPortalProps) => {
 
 const DrawerOverlay = ({ className }: { className?: ClassValue }) => (
   <Dialog.Drawer.Overlay
-    className={cn('fixed inset-0 bg-black/75', className)}
+    className={cn(
+      'fixed inset-0 bg-gradient-to-b from-white/10 dark:from-[#27272710] to-black/10 dark:to-[#27272705] backdrop-blur-[4px]',
+      className,
+    )}
   />
 );
 
@@ -78,9 +81,10 @@ const DrawerContent = ({ children, className }: DrawerContentProps) => (
   <Dialog.Drawer.Content
     className={cn(
       className,
-      'fixed max-h-[90%] mt-24 bottom-0 left-0 right-0 rounded-t-[12px] overflow-hidden w-screen bg-[var(--color-surface-primary)]',
+      'fixed max-h-[90%] pt-2 focus:outline-none bottom-0 left-0 right-0 rounded-t-[12px] overflow-hidden w-screen bg-[var(--color-surface-primary)]',
     )}
   >
+    <div className="mx-auto w-12 h-[3px] flex-shrink-0 rounded-full bg-[var(--color-surface-primary-transparent)] mb-8" />
     {children}
   </Dialog.Drawer.Content>
 );

@@ -74,7 +74,7 @@ const ListOfWallets: React.FC<{
       <div
         style={{
           display: 'flex',
-          flexWrap: isSmallDevice ? 'nowrap' : 'wrap',
+          flexWrap: isSmallDevice ? (showMore ? 'wrap' : 'nowrap') : 'wrap',
           justifyContent: 'flex-start',
           alignItems: 'center',
           overflowY: 'scroll',

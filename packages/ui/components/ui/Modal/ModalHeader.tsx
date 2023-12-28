@@ -11,17 +11,17 @@ const ModalTitleVariants = cva('text-[var(--avatar-label-title)]', {
   variants: {
     size: {
       sm: 'b4-heavy',
-      md: 'h6',
-      lg: 'h5',
+      md: 'h4 md:h6',
+      lg: 'h4 md:h5',
     },
   },
   defaultVariants: {
     size: 'lg',
   },
 });
-
+// this will always be hidden on mobile because we are not showing cross icon on mobile
 const ModalTitleContainerVariants = cva(
-  'pointer-events-auto flex justify-between items-center',
+  'pointer-events-auto hidden md:flex justify-between items-center',
   {
     variants: {
       size: {

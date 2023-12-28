@@ -50,15 +50,7 @@ export const WalletIcon: FC<WalletIconProps> = ({
           style={{ minWidth: width, minHeight: height }}
         >
           <Avatar alt={wallet.name} src={wallet.icon} size="md" />
-          {/* <Image
-            className={`border border-blue-400 rounded-[8px] min-h-[${height}px]`}
-            width={width}
-            height={height}
-            src={wallet.icon}
-            alt={`${wallet.name} icon`}
-            onError={onError}
-          /> */}
-          <Text className="b4 md:b4-light" color="primary">
+          <Text className="b4 md:b4-light line-clamp-1" color="primary">
             {wallet.name}
           </Text>
         </div>

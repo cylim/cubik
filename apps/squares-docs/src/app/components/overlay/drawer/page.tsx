@@ -4,7 +4,16 @@ import React, { useState } from 'react';
 import CodeComponent from '@/app/home-page-components/code-component';
 import PageHOC from '@/app/home-page-components/components/pageHOC';
 
-import { Drawer } from '@cubik/ui';
+import {
+  Button,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerOverlay,
+  DrawerPortal,
+} from '@cubik/ui';
+import { cn } from '@cubik/ui/lib/utils';
+import { UserModal } from '@cubik/wallet';
 
 const Page = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -22,14 +31,17 @@ const Page = () => {
           <div className="overflow-hidden rounded-[8px] border border-[var(--color-border-primary)] bg-[var(--white)] px-6 py-4">
             <CodeComponent codeString='import { Drawer } from "@cubik/ui"' />
           </div>
-          <button onClick={() => setOpen(true)}>Test Button</button>
-          {/* <Drawer
-            drawerSize="md"
-            onClose={() => setOpen(false)}
-            open={open}
-          >
-            <div className="h-80 w-full bg-red-400"></div>
-          </Drawer> */}
+          <Button onClick={() => setOpen(true)}>Test Button</Button>
+          <Drawer open={open} onOpenChange={setOpen}>
+            <DrawerPortal>
+              <DrawerOverlay />
+              <DrawerContent className={cn('h-max')}>
+                <DrawerBody>
+                  <div className="min-h-[80vh]"> hello world </div>
+                </DrawerBody>
+              </DrawerContent>
+            </DrawerPortal>
+          </Drawer>
         </div>
       </PageHOC>
     </>

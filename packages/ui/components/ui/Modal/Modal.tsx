@@ -30,12 +30,12 @@ export const Modal = ({
         <Dialog.Portal>
           <Dialog.Overlay
             onClick={onClose}
-            className="bg-[#E8E8E8]/5 dark:bg-black/10 backdrop-blur-[5px] data-[state=open]:animate-overlayShow fixed inset-0"
+            className="bg-black/08 backdrop-blur-[5px] data-[state=open]:animate-overlayShow fixed inset-0"
           />
           <Dialog.Content
             className={cn(
               DialogSize[dialogSize],
-              'text-white data-[state=open]:animate-contentShow fixed top-[46%] left-[50%] max-h-[85vh] w-full translate-x-[-50%] translate-y-[-50%] rounded-[12px] bg-[var(--color-bg-primary-base)] shadow-[none] focus:outline-none',
+              'text-white data-[state=open]:animate-contentShow fixed top-[400px] left-[50%] max-h-[85vh] w-full translate-x-[-50%] translate-y-[-50%] rounded-[12px] bg-[var(--color-bg-primary-base)] shadow-[none] focus:outline-none',
             )}
           >
             <Dialog.Content className="z-50 relative">

@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import {
   CollectionSectionHeader,
@@ -11,6 +12,7 @@ import {
   Avatar,
   AvatarGroup,
   Background,
+  Button,
   CircularSkeleton,
   CollectionCard,
   Icon,
@@ -89,87 +91,127 @@ export default async function Home() {
   return (
     <>
       {/* Body Container*/}
-      <div className="flex min-h-screen w-full max-w-7xl flex-col items-center gap-10 md:mx-auto lg:flex-row lg:items-start">
+      <div className="flex min-h-screen w-full flex-col items-center gap-10 md:mx-auto lg:flex-col lg:items-start">
         <div className="absolute left-0 top-0 w-full">
           <Background />
         </div>
-
-        <div className="flex h-full w-full flex-col gap-8 px-4 py-8 md:px-6 lg:w-2/3">
-          <ProjectSectionHeader />
-          {/* Projects */}
-          <div className="flex flex-col gap-6 md:gap-10">
-            {projects.map((project) => {
-              return (
-                <ProjectCard
-                  href={'/project'}
-                  //Button={<SaveButton />}
-                  description={project.shortDescription}
-                  name={project.name}
-                  logo={project.logo}
-                  key={project.id}
-                >
-                  <div className="flex flex-col gap-2">
-                    <Text className="h4 md:h5 line-clamp-1 " color={'primary'}>
-                      {project.name}
-                    </Text>
-                    <Text
-                      className="b3-light md:b4-light line-clamp-2 "
-                      color="secondary"
-                    >
-                      {project.shortDescription}
-                    </Text>
-                    {isGrantRoundActive && (
-                      <div className="flex flex-row items-center justify-start gap-4">
-                        <div className="flex flex-row gap-2">
-                          <AvatarGroup
-                            shape="circle"
-                            avatars={[
-                              { src: project.logo, alt: project.name },
-                              { src: project.logo, alt: project.name },
-                              { src: project.logo, alt: project.name },
-                            ]}
-                            size={'xs'}
-                          />
-                          <Text className="b3-light md:b4-light">
-                            333 Contributors
-                          </Text>{' '}
-                        </div>
-                        <div className="h-1 w-1 rounded-full bg-[var(--color-fg-primary-subdued)]" />
-                        <Text className="b3-light md:b4-light">
-                          132 Matched
-                        </Text>
-                      </div>
-                    )}
-                  </div>
-                </ProjectCard>
-              );
-            })}
+        <div className="w-full py-10 dark:bg-[var(--body-surface)]">
+          <div className="mx-auto flex w-full max-w-7xl flex-row items-center justify-between px-0 md:px-6">
+            <div className="md:px-0- flex flex-col gap-8 p-2 py-5 md:w-[880px] md:py-12">
+              <div className="flex flex-col gap-4">
+                <Text className="h3" color="primary">
+                  Support public goods on Solana
+                </Text>
+                <Text className="b3 w-[80%]" color="secondary">
+                  Cubik Is where leading Solana initiatives are born, validated
+                  and funded.{' '}
+                </Text>
+              </div>
+              <div className="flex flex-row gap-4">
+                <Button size="lg" className="!px-4" variant={'primary'}>
+                  Get Started
+                </Button>
+                <Button size="lg" variant={'secondary'}>
+                  Submit a Project
+                </Button>
+              </div>
+            </div>
+            <div className="relative w-full">
+              <Image
+                className="width-[800px] absolute bottom-0 right-0 h-auto translate-x-[-10%] translate-y-[50%] scale-125"
+                src={
+                  'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/58581356-0efd-42e4-8a04-8477953fdc00/public'
+                }
+                alt={'hero image cubik'}
+                width={1400}
+                height={1400}
+              />
+            </div>
           </div>
         </div>
-
-        <div className="flex h-full w-full flex-1 flex-col gap-8 px-4 py-8 lg:w-2/3">
-          <InputFieldContainer variant={'md'}>
-            <InputLeftElement withBorder={false}>
-              <Icon name="search" />
-            </InputLeftElement>
-            <InputField placeholder="Search" />
-          </InputFieldContainer>
-          <CollectionSectionHeader />
-          <div className="flex flex-col gap-6">
-            {projects.slice(0, 3).map((project) => {
-              return (
-                <CollectionCard
-                  href={'/project'}
-                  //Button={<SaveButton />}
-                  description={project.shortDescription}
-                  name={project.name}
-                  logo={project.logo}
-                  key={project.id}
-                />
-              );
-            })}
+        <div className="flex min-h-screen w-full max-w-7xl flex-col items-center gap-10 md:mx-auto lg:flex-row lg:items-start">
+          <div className="flex h-full w-full flex-col gap-8 px-4 py-8 md:px-6 lg:w-2/3">
+            <ProjectSectionHeader />
+            {/* Projects */}
+            <div className="flex flex-col gap-4 md:gap-8">
+              {projects.map((project) => {
+                return (
+                  <ProjectCard
+                    href={
+                      '/project/' +
+                      project.name.split(' ')[0].toLocaleLowerCase()
+                    }
+                    //Button={<SaveButton />}
+                    description={project.shortDescription}
+                    name={project.name}
+                    logo={project.logo}
+                    key={project.id}
+                  >
+                    <div className="flex flex-col gap-2">
+                      <Text
+                        className="h4 md:h5 line-clamp-1 "
+                        color={'primary'}
+                      >
+                        {project.name}
+                      </Text>
+                      <Text
+                        className="b3-light md:b4-light line-clamp-2 "
+                        color="secondary"
+                      >
+                        {project.shortDescription}
+                      </Text>
+                      {isGrantRoundActive && (
+                        <div className="flex flex-row items-center justify-start gap-4">
+                          <div className="flex flex-row gap-2">
+                            <AvatarGroup
+                              shape="circle"
+                              avatars={[
+                                { src: project.logo, alt: project.name },
+                                { src: project.logo, alt: project.name },
+                                { src: project.logo, alt: project.name },
+                              ]}
+                              size={'xs'}
+                            />
+                            <Text className="b3-light md:b4-light">
+                              333 Contributors
+                            </Text>{' '}
+                          </div>
+                          <div className="h-1 w-1 rounded-full bg-[var(--color-fg-primary-subdued)]" />
+                          <Text className="b3-light md:b4-light">
+                            132 Matched
+                          </Text>
+                        </div>
+                      )}
+                    </div>
+                  </ProjectCard>
+                );
+              })}
+            </div>
           </div>
-          {/* Collection */}
+          <div className="flex h-full w-full flex-1 flex-col gap-8 px-4 py-8 lg:w-2/3">
+            <InputFieldContainer variant={'md'}>
+              <InputLeftElement withBorder={false}>
+                <Icon name="search" />
+              </InputLeftElement>
+              <InputField placeholder="Search" />
+            </InputFieldContainer>
+            <CollectionSectionHeader />
+            <div className="flex flex-col gap-6">
+              {projects.slice(0, 3).map((project) => {
+                return (
+                  <CollectionCard
+                    href={'/project'}
+                    //Button={<SaveButton />}
+                    description={project.shortDescription}
+                    name={project.name}
+                    logo={project.logo}
+                    key={project.id}
+                  />
+                );
+              })}
+            </div>
+            {/* Collection */}
+          </div>
         </div>
       </div>
     </>

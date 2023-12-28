@@ -21,6 +21,7 @@ export const metadata: Metadata = {
     ],
   },
 };
+
 const Details = ({ params: { username } }: Props) => {
   return (
     <>

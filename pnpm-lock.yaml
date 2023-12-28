@@ -276,7 +276,7 @@ importers:
         version: 13.5.6(eslint@8.55.0)(typescript@5.3.3)
       eslint-plugin-tailwindcss:
         specifier: ^3.13.0
-        version: 3.13.0(tailwindcss@3.3.6)
+        version: 3.13.0(tailwindcss@3.4.0)
       jose:
         specifier: ^4.15.4
         version: 4.15.4
@@ -306,7 +306,7 @@ importers:
         version: 1.14.0
       tailwindcss-animate:
         specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.3.6)
+        version: 1.0.7(tailwindcss@3.4.0)
       zod:
         specifier: ^3.22.4
         version: 3.22.4
@@ -333,8 +333,8 @@ importers:
         specifier: ^8.4.31
         version: 8.4.32
       tailwindcss:
-        specifier: ^3.3.5
-        version: 3.3.6
+        specifier: ^3.4.0
+        version: 3.4.0
       typescript:
         specifier: ^5.3.2
         version: 5.3.3
@@ -604,8 +604,8 @@ importers:
         specifier: ^0.2.8
         version: 0.2.8(@ianvs/prettier-plugin-sort-imports@4.1.1)(prettier@3.1.0)
       tailwindcss:
-        specifier: ^3.3.5
-        version: 3.3.6
+        specifier: ^3.4.0
+        version: 3.4.0
       typescript:
         specifier: 4.9.5
         version: 4.9.5
@@ -707,8 +707,8 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0(@types/react-dom@18.2.17)(@types/react@18.2.42)(react-dom@18.2.0)(react@18.2.0)(zustand@4.4.7)
       tailwindcss:
-        specifier: ^3.3.5
-        version: 3.3.6
+        specifier: ^3.4.0
+        version: 3.4.0
       typescript:
         specifier: ^5.3.2
         version: 5.3.3
@@ -822,8 +822,8 @@ importers:
         specifier: ^8
         version: 8.4.32
       tailwindcss:
-        specifier: ^3.3.0
-        version: 3.3.6
+        specifier: ^3.4.0
+        version: 3.4.0
       typescript:
         specifier: ^5
         version: 5.3.3
@@ -953,11 +953,11 @@ importers:
         specifier: ^0.5.7
         version: 0.5.9(@ianvs/prettier-plugin-sort-imports@4.1.1)(@trivago/prettier-plugin-sort-imports@4.3.0)(prettier@3.1.0)
       tailwindcss:
-        specifier: ^3.3.5
-        version: 3.3.6
+        specifier: ^3.4.0
+        version: 3.4.0
       tailwindcss-animate:
         specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.3.6)
+        version: 1.0.7(tailwindcss@3.4.0)
     devDependencies:
       '@types/node':
         specifier: ^20.9.5
@@ -1150,7 +1150,7 @@ importers:
         version: 10.0.0(eslint@8.55.0)
       eslint-plugin-tailwindcss:
         specifier: ^3.13.0
-        version: 3.13.0(tailwindcss@3.3.6)
+        version: 3.13.0(tailwindcss@3.4.0)
       eslint-plugin-testing-library:
         specifier: ^6.2.0
         version: 6.2.0(eslint@8.55.0)(typescript@5.3.3)
@@ -1167,8 +1167,8 @@ importers:
         specifier: ^0.5.7
         version: 0.5.9(@ianvs/prettier-plugin-sort-imports@4.1.1)(@trivago/prettier-plugin-sort-imports@4.3.0)(prettier@3.1.0)
       tailwindcss:
-        specifier: ^3.3.5
-        version: 3.3.6
+        specifier: ^3.4.0
+        version: 3.4.0
       typescript:
         specifier: ^5.3.2
         version: 5.3.3
@@ -1285,6 +1285,9 @@ importers:
       decimal.js:
         specifier: ^10.4.3
         version: 10.4.3
+      embla-carousel-react:
+        specifier: 8.0.0-rc17
+        version: 8.0.0-rc17(react@18.2.0)
       framer-motion:
         specifier: ^10.16.5
         version: 10.16.15(react-dom@18.2.0)(react@18.2.0)
@@ -1320,7 +1323,7 @@ importers:
         version: 1.14.0
       tailwindcss-animate:
         specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.3.6)
+        version: 1.0.7(tailwindcss@3.4.0)
       tsup:
         specifier: ^7.2.0
         version: 7.2.0(postcss@8.4.32)(typescript@4.9.5)
@@ -1347,8 +1350,8 @@ importers:
         specifier: ^8.4.31
         version: 8.4.32
       tailwindcss:
-        specifier: ^3.3.5
-        version: 3.3.6
+        specifier: ^3.4.0
+        version: 3.4.0
       typescript:
         specifier: ^4.9.5
         version: 4.9.5
@@ -14240,6 +14243,28 @@ packages:
       minimalistic-crypto-utils: 1.0.1
     dev: false
 
+  /embla-carousel-react@8.0.0-rc17(react@18.2.0):
+    resolution: {integrity: sha512-x4aFprwFB+PQO9EsHHZsrDxARb0uYNBYn9mr5oDFdBdPez4M8G1r5yidWbUcT9pNUc8AQXC9sGzlfauBfBxVOw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.1 || ^18.0.0
+    dependencies:
+      embla-carousel: 8.0.0-rc17
+      embla-carousel-reactive-utils: 8.0.0-rc17(embla-carousel@8.0.0-rc17)
+      react: 18.2.0
+    dev: false
+
+  /embla-carousel-reactive-utils@8.0.0-rc17(embla-carousel@8.0.0-rc17):
+    resolution: {integrity: sha512-eluEOK/u5HdjYaTLC4bUG3iTCnyX7RsYix3il0aH4ZECOKa5fS+pVK2vrM17Mgw6C5Hyjcr3r3lfJtGerVzVsQ==}
+    peerDependencies:
+      embla-carousel: 8.0.0-rc17
+    dependencies:
+      embla-carousel: 8.0.0-rc17
+    dev: false
+
+  /embla-carousel@8.0.0-rc17:
+    resolution: {integrity: sha512-evF49b88VOitvqFtlvhvKVSu96Y8A+QSFdhok87Bfm8R7OYuk95FT+o8+M1GQLi/EhGDUlT193HTVAR0Wt2neQ==}
+    dev: false
+
   /emittery@0.13.1:
     resolution: {integrity: sha512-DeWwawk6r5yR9jFgnDKYt4sLS0LmHJJi3ZOnb5/JdbYwj3nW+FxQnHIjhBKz8YLC7oRNPVM9NQ47I3CVx34eqQ==}
     engines: {node: '>=12'}
@@ -14905,7 +14930,7 @@ packages:
       eslint: 8.55.0
     dev: false
 
-  /eslint-plugin-tailwindcss@3.13.0(tailwindcss@3.3.6):
+  /eslint-plugin-tailwindcss@3.13.0(tailwindcss@3.4.0):
     resolution: {integrity: sha512-Fcep4KDRLWaK3KmkQbdyKHG0P4GdXFmXdDaweTIPcgOP60OOuWFbh1++dufRT28Q4zpKTKaHwTsXPJ4O/EjU2Q==}
     engines: {node: '>=12.13.0'}
     peerDependencies:
@@ -14913,7 +14938,7 @@ packages:
     dependencies:
       fast-glob: 3.3.2
       postcss: 8.4.32
-      tailwindcss: 3.3.6
+      tailwindcss: 3.4.0
     dev: false
 
   /eslint-plugin-testing-library@6.2.0(eslint@8.55.0)(typescript@5.3.3):
@@ -23110,43 +23135,13 @@ packages:
     resolution: {integrity: sha512-3mFKyCo/MBcgyOTlrY8T7odzZFx+w+qKSMAmdFzRvqBfLlSigU6TZnlFHK0lkMwj9Bj8OYU+9yW9lmGuS0QEnQ==}
     dev: false
 
-  /tailwindcss-animate@1.0.7(tailwindcss@3.3.6):
+  /tailwindcss-animate@1.0.7(tailwindcss@3.4.0):
     resolution: {integrity: sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
     dependencies:
-      tailwindcss: 3.3.6
+      tailwindcss: 3.4.0
     dev: false
-
-  /tailwindcss@3.3.6:
-    resolution: {integrity: sha512-AKjF7qbbLvLaPieoKeTjG1+FyNZT6KaJMJPFeQyLfIp7l82ggH1fbHJSsYIvnbTFQOlkh+gBYpyby5GT1LIdLw==}
-    engines: {node: '>=14.0.0'}
-    hasBin: true
-    dependencies:
-      '@alloc/quick-lru': 5.2.0
-      arg: 5.0.2
-      chokidar: 3.5.3
-      didyoumean: 1.2.2
-      dlv: 1.1.3
-      fast-glob: 3.3.2
-      glob-parent: 6.0.2
-      is-glob: 4.0.3
-      jiti: 1.21.0
-      lilconfig: 2.1.0
-      micromatch: 4.0.5
-      normalize-path: 3.0.0
-      object-hash: 3.0.0
-      picocolors: 1.0.0
-      postcss: 8.4.32
-      postcss-import: 15.1.0(postcss@8.4.32)
-      postcss-js: 4.0.1(postcss@8.4.32)
-      postcss-load-config: 4.0.2(postcss@8.4.32)
-      postcss-nested: 6.0.1(postcss@8.4.32)
-      postcss-selector-parser: 6.0.13
-      resolve: 1.22.8
-      sucrase: 3.34.0
-    transitivePeerDependencies:
-      - ts-node
 
   /tailwindcss@3.4.0:
     resolution: {integrity: sha512-VigzymniH77knD1dryXbyxR+ePHihHociZbXnLZHUyzf2MMs2ZVqlUrZ3FvpXP8pno9JzmILt1sZPD19M3IxtA==}
@@ -23177,7 +23172,6 @@ packages:
       sucrase: 3.34.0
     transitivePeerDependencies:
       - ts-node
-    dev: true
 
   /tapable@2.2.1:
     resolution: {integrity: sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==}

@@ -33,8 +33,7 @@ interface Props {
   setUser: (user: UserAuth) => void;
 }
 export const UserModal = ({ onClose, setUser }: Props) => {
-  const [modalState, setModalState] =
-    React.useState<ModalState>('wallet-connect');
+  const [modalState, setModalState] = React.useState<ModalState>('user-create');
   const { setShowModal } = useCubikWalletContext();
   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState<boolean>(false);

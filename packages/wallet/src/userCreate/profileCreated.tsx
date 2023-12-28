@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react';
+import Confetti from 'react-confetti';
 import { UseFormReturn } from 'react-hook-form';
 
 import { Avatar, Button, Icon, IconName, Text } from '@cubik/ui';
@@ -45,6 +47,13 @@ const Card = ({ type }: { type: keyof typeof ProfileCards }) => {
   const { bg, border, color, icon, title } = ProfileCards[type];
   return (
     <>
+      {/* @ts-expect-error */}
+      <Confetti
+        className="w-full h-52"
+        width={200}
+        height={200}
+        tweenDuration={100}
+      />
       <div
         style={{
           background: bg,
@@ -99,8 +108,24 @@ export const ProfileCreated = ({ userForm }: Props) => {
           </Text>
         </div>
         <div className="flex gap-3 justify-center items-center w-full">
-          <Card type="sponsor" />
-          <Card type="trustScore" />
+          {userForm.watch('userType') === 'ProjectOwner' && (
+            <>
+              <Card type="createProject" />
+              <Card type="explore" />
+            </>
+          )}
+          {userForm.watch('userType') === 'Contributor' && (
+            <>
+              <Card type="explore" />
+              <Card type="trustScore" />
+            </>
+          )}
+          {userForm.watch('userType') === 'Sponsor' && (
+            <>
+              <Card type="sponsor" />
+              <Card type="explore" />
+            </>
+          )}
         </div>
         <Button variant={'link'} size={'xl'}>
           Decide Later

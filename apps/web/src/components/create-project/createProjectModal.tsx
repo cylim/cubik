@@ -46,13 +46,13 @@ export const CreateProjectModal = ({ onClose, open }: Props) => {
   return (
     <Modal dialogSize="2xl" onClose={onClose} open={open}>
       <div className="pointer-events-auto flex min-h-[90vh] w-full justify-start overflow-hidden rounded-2xl bg-[var(--modal-body-surface)]">
-        <div className="w-[60%]  bg-[var(--card-bg-primary)] px-14">
+        <div className="w-[55%]  bg-[var(--card-bg-primary)] px-14">
           <div className="py-8">
             <Text className="h5 text-[var(--modal-header-heading)]">
               New Project
             </Text>
           </div>
-          <div className="py-11">
+          <div className="px-14 py-11">
             {step === 1 && (
               <Step1 setStep={setStep} projectForm={createProjectForm} />
             )}
@@ -67,7 +67,7 @@ export const CreateProjectModal = ({ onClose, open }: Props) => {
             )}
           </div>
         </div>
-        <div className="w-[40%] px-14 py-8 ">
+        <div className="w-[45%] px-14 py-8 ">
           <div className="flex w-full justify-end">
             <div className="cursor-pointer" onClick={onClose}>
               <Icon name="cross" />

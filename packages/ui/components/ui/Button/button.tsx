@@ -120,7 +120,7 @@ const Button = ({
           {leftIconName && (
             <Icon
               name={leftIconName}
-              stroke="#000"
+              stroke="inherit"
               height={16}
               width={16}
               className={cn(
@@ -137,7 +137,7 @@ const Button = ({
           {rightIconName && (
             <Icon
               name={rightIconName}
-              stroke="#000"
+              stroke="inherit"
               height={16}
               width={16}
               className={buttonVariants({ variant })}

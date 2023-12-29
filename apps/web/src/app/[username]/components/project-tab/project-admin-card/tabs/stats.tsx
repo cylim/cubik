@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TabLayout from '@/components/common/tabs/TabLayout';
 import TreasuryInfoCard from '@/components/explorer/TreasuryInfoCard';
 
@@ -63,6 +63,50 @@ const ProjectAdminStatsTab = () => {
     },
   ];
 
+  const [activeRange, setActiveRange] = useState('one_year');
+
+  const handleRangeChange = (newRange: React.SetStateAction<string>) => {
+    setActiveRange(newRange);
+    // onRangeChange(newRange);
+    const now = new Date().getTime();
+    console.log(newRange, now);
+    switch (newRange) {
+      case 'one_week':
+        ApexCharts.exec(
+          'project-chart',
+          'zoomX',
+          now - 7 * 24 * 60 * 60 * 1000, // 7 days ago
+          now
+        )
+        break;
+      case 'two_weeks':
+        ApexCharts.exec(
+          'project-chart',
+          'zoomX',
+          now - 14 * 24 * 60 * 60 * 1000, // 14 days ago
+          now
+        )
+        break;
+      case 'one_month':
+        ApexCharts.exec(
+          'project-chart',
+          'zoomX',
+          now - 30 * 24 * 60 * 60 * 1000, // 30 days ago
+          now
+        )
+        break;
+      case 'two_months':
+        ApexCharts.exec(
+          'project-chart',
+          'zoomX',
+          now - 60 * 24 * 60 * 60 * 1000, // 60 days ago
+          now
+        )
+        break;
+      default:
+    }
+  };
+
   return (
     <TabLayout>
       <SubHead heading={'Project Stats'}>
@@ -116,9 +160,13 @@ const ProjectAdminStatsTab = () => {
             );
           })}
         </div>
-        <StatsSwitch />
+        <StatsSwitch activeRange={activeRange} onRangeChange={handleRangeChange} />
       </div>
       <LineGraph
+        options={{
+          selection: activeRange,
+        }}
+        chart_id='project-chart'
         theme={theme}
         color={['#1199FF', '#F4D03F', '#F43F5E']}
         chartData={ChartData}

@@ -10,6 +10,8 @@ type LineGraphProps = {
   color: string[];
   theme?: 'light' | 'dark';
   annotations?: any;
+  options?: any;
+  chart_id: string;
 };
 
 const LineGraph: React.FC<LineGraphProps> = ({
@@ -17,6 +19,8 @@ const LineGraph: React.FC<LineGraphProps> = ({
   color,
   theme,
   annotations,
+  options,
+  chart_id,
 }) => {
   const textColorPrimary = theme === 'dark' ? 'white' : 'black';
   const textColorSecondary = theme === 'dark' ? 'white' : 'black';
@@ -187,6 +191,7 @@ const LineGraph: React.FC<LineGraphProps> = ({
           enabled: false,
           custom: undefined,
         },
+        ...options,
       },
       tooltip: {
         shared: true,
@@ -252,6 +257,7 @@ const LineGraph: React.FC<LineGraphProps> = ({
   return (
     <div className="w-full overflow-visible flex align-bottom items-end">
       <Chart
+        id={chart_id}
         options={data.options as any}
         series={data.series}
         type={'area'}

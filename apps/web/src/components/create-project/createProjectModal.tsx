@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Step1 } from '@/components/create-project/step1';
 import { Step2 } from '@/components/create-project/step2';
 import { Step3 } from '@/components/create-project/step3';
 import { Step4 } from '@/components/create-project/step4';
+import { useUploadThing } from '@/utils/uploadthing';
+import axios, { AxiosResponse } from 'axios';
 import { useForm } from 'react-hook-form';
 
 import { Project_Backup } from '@cubik/common';
+import { Prisma, Project } from '@cubik/database';
+import { ApiResponseType } from '@cubik/database/api';
 import {
   Avatar,
   Icon,
@@ -22,6 +26,38 @@ interface Props {
   open: boolean;
   onClose: () => void;
 }
+
+type ProjectData = Prisma.ProjectGetPayload<{
+  select: {
+    id: true;
+    name: true;
+    discordLink: true;
+    githubLink: true;
+    email: true;
+    shortDescription: true;
+    logo: true;
+    longDescription: true;
+    slides: true;
+    projectLink: true;
+    industry: true;
+    status: true;
+    telegramLink: true;
+    isOpenSource: true;
+    twitterHandle: true;
+    team: {
+      select: {
+        id: true;
+        user: {
+          select: {
+            id: true;
+            username: true;
+            profilePicture: true;
+          };
+        };
+      };
+    };
+  };
+}>;
 export interface ProjectFormData {
   name: string;
   tagline: string;
@@ -38,22 +74,89 @@ export interface ProjectFormData {
 }
 export const CreateProjectModal = ({ onClose, open }: Props) => {
   const [step, setStep] = useState<number>(1);
+  const [loadedProject, setLoadedProject] = useState<ProjectData | null>(null);
+
+  // const defaultValues: ProjectFormData = useMemo(() => {
+  //   return {
+  //     name: loadedProject ? loadedProject.name : '',
+  //     tagline: loadedProject ? loadedProject.shortDescription : '',
+  //     email: loadedProject ? loadedProject.email : '',
+  //     category: [],
+  //     logo: loadedProject ? loadedProject.logo : Project_Backup,
+  //     description: loadedProject ? loadedProject.longDescription : '',
+  //     slides:
+  //       loadedProject && (loadedProject.slides as any).slide
+  //         ? (loadedProject.slides as any).slide
+  //         : [],
+  //     team: [],
+  //     github: loadedProject ? loadedProject.githubLink : '',
+  //     website: loadedProject ? loadedProject.projectLink : '',
+  //     twitter: loadedProject ? loadedProject.twitterHandle : '',
+  //     isOpenSource: false,
+  //   };
+  // }, [loadedProject]);
+
   const createProjectForm = useForm<ProjectFormData>({
     defaultValues: {
-      name: '',
-      tagline: '',
-      email: '',
       category: [],
+      isOpenSource: false,
       logo: Project_Backup,
       description: '',
-      slides: [],
-      team: [],
+      email: '',
       github: '',
-      website: '',
+      name: '',
+      slides: [],
+      tagline: '',
+      team: [],
       twitter: '',
-      isOpenSource: false,
+      website: '',
     },
   });
+
+  useEffect(() => {
+    const loadProjectData = async () => {
+      try {
+        // if the modal is not open or the project is already loaded, return to avoid loop of fetch calls
+        if (!open || loadedProject) return;
+
+        const projectId = localStorage.getItem('latest-draft-project');
+        if (!projectId) {
+          return onClose();
+        }
+
+        const data = (await axios.get(
+          `/api/project/loadProject?project=${projectId}`,
+        )) as AxiosResponse<ApiResponseType, any>;
+
+        const projectData = data.data.result as ProjectData;
+
+        // manually set the values because react-hook-form is default values are not updating
+        createProjectForm.setValue('name', projectData.name);
+        createProjectForm.setValue('tagline', projectData.shortDescription);
+        createProjectForm.setValue('email', projectData.email);
+        createProjectForm.setValue('logo', projectData.logo);
+        createProjectForm.setValue('description', projectData.longDescription);
+        createProjectForm.setValue(
+          'slides',
+          (projectData.slides as any).slide || [],
+        );
+        createProjectForm.setValue('github', projectData.githubLink);
+        createProjectForm.setValue('website', projectData.projectLink);
+        createProjectForm.setValue('twitter', projectData.twitterHandle);
+        createProjectForm.setValue(
+          'isOpenSource',
+          projectData.isOpenSource || false,
+        );
+
+        setLoadedProject(projectData);
+      } catch (error) {
+        console.log(error);
+        return;
+      }
+    };
+    loadProjectData();
+  }, [open, loadedProject]);
+
   return (
     <Modal dialogSize="xl" onClose={onClose} open={open}>
       <div className="pointer-events-auto flex min-h-[90vh] w-full justify-start overflow-hidden rounded-2xl bg-[var(--modal-body-surface)]">
@@ -114,11 +217,9 @@ export const CreateProjectModal = ({ onClose, open }: Props) => {
                   <TabPanels className="mx-auto w-full max-w-7xl px-4 md:px-8">
                     <TabPanel value={0}>
                       <div className="h-96" />
-                      <div className="h-20" />
                     </TabPanel>
                     <TabPanel value={1}>
                       <div className="h-96" />
-                      <div className="h-20" />
                     </TabPanel>
                   </TabPanels>
                 </Tabs>

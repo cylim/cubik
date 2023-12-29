@@ -8,7 +8,7 @@ interface Props {
   projectForm: UseFormReturn<ProjectFormData, any, undefined>;
   setStep: React.Dispatch<React.SetStateAction<number>>;
 }
-export const Step3 = ({ setStep }: Props) => {
+export const Step3 = ({ setStep, projectForm }: Props) => {
   return (
     <>
       <div>
@@ -48,7 +48,16 @@ export const Step3 = ({ setStep }: Props) => {
         </div>
 
         <div className="mb-14 flex items-center justify-start gap-3">
-          <Checkbox />
+          <Checkbox
+            checked={projectForm.watch('isOpenSource')}
+            onCheckedChange={(e) => {
+              if (e) {
+                projectForm.setValue('isOpenSource', true);
+              } else {
+                projectForm.setValue('isOpenSource', false);
+              }
+            }}
+          />
           <Text className="l1" color={'primary'}>
             The Project is Open Source
           </Text>

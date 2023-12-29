@@ -1,3 +1,4 @@
+import { v4 as uuidV4 } from 'uuid';
 import { create } from 'zustand';
 
 interface CreateProjectState {
@@ -8,6 +9,10 @@ interface CreateProjectState {
 
 export const useCreateProject = create<CreateProjectState>()((set) => ({
   onOpen: () => {
+    const id = localStorage.getItem('latest-draft-project');
+    if (!id) {
+      localStorage.setItem('latest-draft-project', uuidV4());
+    }
     return set({
       open: true,
     });

@@ -10,6 +10,7 @@ export const GET = async (req: NextRequest) => {
   try {
     const searchParams = req.nextUrl.searchParams;
     const project = searchParams.get('project');
+    const isDraft = searchParams.get('draft');
     logApi({
       req: req as any,
       message: 'Project loaded',
@@ -34,7 +35,7 @@ export const GET = async (req: NextRequest) => {
       where: {
         id: project,
         ownerPublickey: user.mainWallet,
-        isDraft: true,
+        isDraft: isDraft ? true : false,
       },
       select: {
         id: true,

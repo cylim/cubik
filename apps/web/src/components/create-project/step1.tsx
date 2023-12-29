@@ -33,7 +33,7 @@ export const Step1 = ({ setStep }: Props) => {
           tags.
         </Text>
 
-        <div className="flex w-full items-center justify-between">
+        <div className="mt-14 flex w-full items-center justify-between">
           <Button
             disabled
             leftIconName="chevronLeft"

@@ -22,7 +22,7 @@ export const Step4 = ({ setStep }: Props) => {
           Add Detailed description about the project
         </Text>
 
-        <div className="flex w-full items-center justify-between">
+        <div className="mt-14 flex w-full items-center justify-between">
           <Button
             onClick={() => setStep(3)}
             leftIconName="chevronLeft"

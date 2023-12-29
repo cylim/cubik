@@ -53,7 +53,7 @@ export const Step3 = ({ setStep }: Props) => {
             The Project is Open Source
           </Text>
         </div>
-        <div className="flex w-full items-center justify-between">
+        <div className="mt-14 flex w-full items-center justify-between">
           <Button
             onClick={() => setStep(2)}
             leftIconName="chevronLeft"

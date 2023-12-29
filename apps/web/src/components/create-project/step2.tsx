@@ -21,7 +21,7 @@ export const Step2 = ({ setStep }: Props) => {
         <Text className="b4-light" color={'secondary'}>
           lets make your project look nice
         </Text>
-        <div className="flex w-full items-center justify-between">
+        <div className="mt-14 flex w-full items-center justify-between">
           <Button
             onClick={() => setStep(1)}
             leftIconName="chevronLeft"

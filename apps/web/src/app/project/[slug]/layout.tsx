@@ -2,6 +2,8 @@ import React from 'react';
 import type { Metadata, ResolvingMetadata } from 'next';
 import { utils } from '@coral-xyz/anchor';
 
+import { prisma } from '@cubik/database';
+
 import ProjectDetailsPageHeader from './components/projectDetailsPageHeader';
 
 interface OgProps {

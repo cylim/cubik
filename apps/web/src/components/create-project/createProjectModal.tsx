@@ -169,7 +169,7 @@ export const CreateProjectModal = ({ onClose, open }: Props) => {
             </div>
           </div>
           <div className="absolute bottom-0 left-0 ml-24 w-full">
-            <div className="min-h-48 flex w-full flex-col gap-8 rounded-t-xl border-[0.66px] border-[var(--color-border-primary-base)] bg-[var(--card-bg-primary)] pl-14 pt-14">
+            <div className="flex min-h-48 w-full flex-col gap-8 rounded-t-xl border-[0.66px] border-[var(--color-border-primary-base)] bg-[var(--card-bg-primary)] pl-14 pt-14">
               <Avatar
                 size={'xl'}
                 variant={'square'}

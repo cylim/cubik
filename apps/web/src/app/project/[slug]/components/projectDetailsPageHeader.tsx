@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Event } from '@cubik/database';
 import {
   Avatar,
   Button,
@@ -16,7 +16,8 @@ type ProjectPropsType = {
   shortDescription: string;
   logo: string;
   projectLink: string;
-  events: [];
+  slides: string[]
+  events: Partial<Event>[];
 };
 
 const ProjectDetailsPageHeader = ({
@@ -82,7 +83,9 @@ const ProjectDetailsPageHeader = ({
               </div>
             </MenuButton>
             <MenuList>
-              <MenuItem key={'hello'} text={'hello'} />
+              {project?.events.map((event, idx) => {
+                return <MenuItem key={idx} text={event.name!} />
+              })}
             </MenuList>
           </Menu>
         </div>

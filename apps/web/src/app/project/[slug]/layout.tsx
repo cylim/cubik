@@ -1,8 +1,9 @@
 import React from 'react';
 import type { Metadata, ResolvingMetadata } from 'next';
 import { utils } from '@coral-xyz/anchor';
-
+import { prisma } from '@cubik/database';
 import ProjectDetailsPageHeader from './components/projectDetailsPageHeader';
+import { Slides } from '@/types/project';
 
 interface OgProps {
   params: { slug: string };
@@ -37,9 +38,8 @@ export async function generateMetadata(
     Buffer.from(project?.shortDescription ?? 'default'),
   )}&logo=${utils.bytes.base64.encode(
     Buffer.from(project?.logo ?? 'default'),
-  )}&contributors=${contributors}&comments=${
-    project?._count.comments
-  }&eventName=${eventName}`;
+  )}&contributors=${contributors}&comments=${project?._count.comments
+    }&eventName=${eventName}`;
 
   const previousImages = (await parent)?.openGraph?.images ?? [];
 
@@ -73,7 +73,7 @@ const fetchProject = async (slug: string) => {
   try {
     const project = await prisma.project.findFirst({
       where: {
-        //   isActive: true,
+        // isActive: true,
         isArchive: false,
         slug: slug,
       },
@@ -83,19 +83,66 @@ const fetchProject = async (slug: string) => {
         shortDescription: true,
         logo: true,
         projectLink: true,
+        slides: true
+        // mutliSigAddress: true,
       },
     });
     if (!project) {
       return [null, null];
     }
+    const projectJoinEvent = await prisma.projectJoinEvent.findMany({
+      where: {
+        projectId: project.id,
+      },
+      select: {
+        eventId: true,
+        event: {
+          select: {
+            name: true,
+            id: true,
+          }
+        }
+      }
+    });
+    console.log('project - ', project);
 
+    console.log('projectJoinEvent - ', projectJoinEvent);
+    const events = await Promise.all(
+      projectJoinEvent.map(async (e) => {
+        console.log('e - ', e);
+        return await prisma.event.findUnique({
+          where: {
+            id: e.eventId,
+          },
+          select: {
+            name: true,
+            id: true,
+          },
+        });
+      })
+    );
+
+    // const rounds: ProjectPageEventType[] = project.projectJoinRound.map(
+    //   (round) => {
+    //     return {
+    //       eventId: round.roundId,
+    //       eventType: 'round',
+    //       name: round.round.name,
+    //       joinId: round.id,
+    //       startTime: round.round.startTime,
+    //       endTime: round.round.endTime,
+    //     };
+    //   },
+    // );
     const layoutData = {
-      id: project?.id,
+      // id: project?.id,
       name: project?.name,
       shortDescription: project?.shortDescription,
       logo: project?.logo,
       projectLink: project?.projectLink,
-      events: [],
+      // mutliSigAddress: project?.mutliSigAddress,
+      events: events,
+      slides: project.slides as unknown as Slides
     };
     return [layoutData, null];
   } catch (error) {
@@ -111,7 +158,9 @@ const ProjectLayout = async ({ children, params }: Props) => {
   return (
     <div className="w-full">
       <div className="bg-[var(--body-surface)]">
-        <ProjectDetailsPageHeader project={project[0]} />
+        <ProjectDetailsPageHeader
+          // @ts-ignore
+          project={project[0]!} />
       </div>
       <div className="relative">{children}</div>
     </div>

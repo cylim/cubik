@@ -212,10 +212,7 @@ export const iconLibrary = {
       'M21 13.907A7.948 7.948 0 0 1 10.093 3 9.112 9.112 0 1 0 21 13.907Z',
     ],
   },
-  Cross: {
-    viewBox: '0 0 24 24',
-    paths: ['m6 18 6-6m0 0 6-6m-6 6L6 6m6 6 6 6'],
-  },
+
   //do not change this
   spinner: {
     viewBox: '0 0 24 24',

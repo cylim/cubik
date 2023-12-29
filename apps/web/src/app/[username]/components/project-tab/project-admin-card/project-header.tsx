@@ -45,8 +45,8 @@ const ProjectHeader = ({
               </Text>
             </div>
           ) : (
-            <Text className="l1-light" color="info">
-              {project.shortDescription}
+            <Text className="l1-light" color="secondary">
+              {'superteam.earn'}
             </Text>
           )}
         </div>

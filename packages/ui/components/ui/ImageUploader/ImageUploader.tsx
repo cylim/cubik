@@ -7,11 +7,11 @@ import { Text } from '../../ui/text/text';
 interface Props {
   useUploadThing: any;
 }
-export const ImageUploader = ({ useUploadThing }: Props) => {
-  const [loadingState, setLoadingState] = useState<
-    'Idle' | 'Success' | 'Error' | 'Uploading'
-  >('Error');
-  const [progress, setProgress] = useState<number>(0);
+export const ImageUploader = ({}: Props) => {
+  const [loadingState] = useState<'Idle' | 'Success' | 'Error' | 'Uploading'>(
+    'Error',
+  );
+  // const [progress, setProgress] = useState<number>(0);
   const [, setDragging] = useState(false);
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -43,17 +43,17 @@ export const ImageUploader = ({ useUploadThing }: Props) => {
     // Add your logic to handle the file
   };
 
-  const { startUpload } = useUploadThing('imageUploader', {
-    onClientUploadComplete: () => {
-      setLoadingState('Success');
-    },
-    onUploadError: (error: Error) => {
-      setLoadingState('Error');
-    },
-    onUploadProgress: (progress: number) => {
-      //   setLoadingState('Uploading');
-    },
-  });
+  // const { startUpload } = useUploadThing('imageUploader', {
+  //   onClientUploadComplete: () => {
+  //     setLoadingState('Success');
+  //   },
+  //   onUploadError: (error: Error) => {
+  //     setLoadingState('Error');
+  //   },
+  //   onUploadProgress: (progress: number) => {
+  //     //   setLoadingState('Uploading');
+  //   },
+  // });
 
   return (
     <div

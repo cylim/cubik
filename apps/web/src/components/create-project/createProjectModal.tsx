@@ -125,7 +125,7 @@ export const CreateProjectModal = ({ onClose, open }: Props) => {
         }
 
         const data = (await axios.get(
-          `/api/project/loadProject?project=${projectId}`,
+          `/api/project/loadProject?project=${projectId}&draft=true`,
         )) as AxiosResponse<ApiResponseType, any>;
 
         const projectData = data.data.result as ProjectData;

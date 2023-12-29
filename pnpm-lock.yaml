@@ -766,9 +766,6 @@ importers:
       '@tanstack/react-query-devtools':
         specifier: ^5.14.0
         version: 5.14.0(@tanstack/react-query@4.36.1)(react@18.2.0)
-      '@types/uuid':
-        specifier: ^9.0.7
-        version: 9.0.7
       '@uploadthing/react':
         specifier: ^5.7.0
         version: 5.7.0(next@14.0.0)(react@18.2.0)(uploadthing@5.7.4)
@@ -799,18 +796,12 @@ importers:
       react-dom:
         specifier: ^18
         version: 18.2.0(react@18.2.0)
-      react-hook-form:
-        specifier: ^7.48.2
-        version: 7.48.2(react@18.2.0)
       sonner:
         specifier: ^1.2.3
         version: 1.2.4(react-dom@18.2.0)(react@18.2.0)
       uploadthing:
         specifier: ^5.7.4
         version: 5.7.4
-      uuid:
-        specifier: ^9.0.1
-        version: 9.0.1
       zod:
         specifier: ^3.22.4
         version: 3.22.4
@@ -1294,9 +1285,6 @@ importers:
       '@uidotdev/usehooks':
         specifier: ^2.4.1
         version: 2.4.1(react-dom@18.2.0)(react@18.2.0)
-      '@uploadthing/react':
-        specifier: ^5.7.0
-        version: 5.7.0(next@14.0.0)(react@18.2.0)(uploadthing@5.7.4)
       bn.js:
         specifier: ^5.2.1
         version: 5.2.1
@@ -1348,9 +1336,6 @@ importers:
       tsup:
         specifier: ^7.2.0
         version: 7.2.0(postcss@8.4.32)(typescript@4.9.5)
-      uploadthing:
-        specifier: ^5.7.4
-        version: 5.7.4
       vaul:
         specifier: ^0.7.9
         version: 0.7.9(@types/react-dom@18.2.18)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)

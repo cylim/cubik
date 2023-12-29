@@ -1,6 +1,5 @@
 import React from 'react';
 import { cookies } from 'next/headers';
-import { CreateProjectButton } from '@/app/[username]/components/project-tab/createProjectButton';
 import ProjectAdminCard from '@/app/[username]/components/project-tab/project-admin-card';
 import TabLayout from '@/components/common/tabs/TabLayout';
 import { IsUserLoginServer } from '@/utils/auth/isUserLoginServer';
@@ -66,7 +65,9 @@ export const ProjectTab = async ({ username }: Props) => {
       <>
         <TabLayout>
           <SubHead heading="Projects">
-            <CreateProjectButton />
+            <Button rightIconName="plus" variant={'primary'}>
+              Create Project
+            </Button>
           </SubHead>
           <>
             {projects ? (

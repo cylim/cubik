@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useCreateProject } from '@/hooks/useCreateProject';
+import { useRouter } from 'next/navigation';
 import { useUser } from '@/hooks/useUser';
 import { handleLogout } from '@/utils/auth/logout';
 
@@ -34,7 +34,6 @@ const UserNavbarMenu = ({
   disconnect: () => any;
 }) => {
   const { toggleTheme } = useTheme();
-  const { onOpen } = useCreateProject();
   return (
     <Menu>
       <MenuButton>
@@ -67,7 +66,7 @@ const UserNavbarMenu = ({
           <MenuItem text="Profile" leftIcon="user" onClick={() => {}} />
         </Link>
         <MenuItem text="Settings" leftIcon="settings" />
-        <MenuItem onClick={onOpen} text="New Project" leftIcon="plus" />
+        <MenuItem text="New Project" leftIcon="plus" />
         <MenuDivider />
         <MenuItem text="Dark" leftIcon="moon">
           <Switch onChange={toggleTheme} size="sm" />

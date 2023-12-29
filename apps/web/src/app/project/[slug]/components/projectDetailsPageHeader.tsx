@@ -11,13 +11,15 @@ import {
   Text,
 } from '@cubik/ui';
 
-type ProjectPropsType = {
-  name: string;
-  shortDescription: string;
-  logo: string;
-  projectLink: string;
-  events: [];
-};
+type ProjectPropsType =
+  | {
+      name: string;
+      shortDescription: string;
+      logo: string;
+      projectLink: string;
+      events: [];
+    }
+  | any;
 
 const ProjectDetailsPageHeader = ({
   project,

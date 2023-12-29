@@ -24,19 +24,13 @@ export const GrantsSegmentControlSwitch = () => {
       <SegmentContainer size="sm">
         <SegmentItem
           isActive={true}
-          onClick={() => {
-            router.push(`${path}time=1W`, {
-              scroll: false,
-            });
-          }}
+          href={`${path}time=1W`}
         >
           All Events
         </SegmentItem>
         <SegmentItem
           isActive={false}
-          onClick={() => {
-            router.push(`${path}time=2W`, { scroll: false });
-          }}
+          href={`${path}time=2W`}
         >
           Grants
         </SegmentItem>

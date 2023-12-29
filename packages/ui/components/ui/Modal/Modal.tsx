@@ -7,6 +7,7 @@ export const DialogSize = {
   sm: 'max-w-[410px]',
   md: 'max-w-[500px]',
   lg: 'max-w-[600px]',
+  xl: '!w-[90vw] max-w-6xl',
 };
 
 interface Props {

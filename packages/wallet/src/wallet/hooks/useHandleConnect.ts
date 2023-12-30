@@ -1,18 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
-import {
-  Adapter,
-  WalletError,
-  WalletReadyState,
-} from '@solana/wallet-adapter-base';
+import { Adapter, WalletReadyState } from '@solana/wallet-adapter-base';
 import { toast } from 'sonner';
 
 import { useCubikWallet } from '../context/CubikContext';
 
 interface Props {
   autoConnect?: boolean;
-  setIsError: React.Dispatch<React.SetStateAction<WalletError | null>>;
+  // setIsError: React.Dispatch<React.SetStateAction<WalletError | null>>;
 }
-export const useHandleConnect = ({ autoConnect, setIsError }: Props) => {
+export const useHandleConnect = ({ autoConnect }: Props) => {
   const { wallet, select, connect } = useCubikWallet();
   const [nonAutoConnectAttempt, setNonAutoConnectAttempt] = useState(false);
   useEffect(() => {
@@ -49,12 +45,12 @@ export const useHandleConnect = ({ autoConnect, setIsError }: Props) => {
       } catch (e) {
         const error = e as Error;
         console.log(error, '-sss-');
-        setIsError({
-          error,
-          message: error.message,
-          name: error.name,
-          stack: error.stack,
-        });
+        // setIsError({
+        //   error,
+        //   message: error.message,
+        //   name: error.name,
+        //   stack: error.stack,
+        // });
         alert('Wallet not installed');
         toast.error('Wallet not installed');
       }

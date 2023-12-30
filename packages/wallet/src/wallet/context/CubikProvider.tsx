@@ -55,17 +55,18 @@ const CubikWalletContextProvider = ({
   config,
   children,
   type,
+  isWalletError,
 }: {
   config: ICubikWalletConfig;
   type: WalletAppType;
+  isWalletError: WalletError | null;
 } & PropsWithChildren) => {
   const [showModal, setShowModal] = useState(false);
   const { publicKey, connected } = useCubikWallet();
-  const [isError, setIsError] = useState<WalletError | null>(null);
+  // const [isError, setIsError] = useState<WalletError | null>(null);
 
   const handleConnectClick = useHandleConnect({
     autoConnect: config.autoConnect,
-    setIsError,
   });
 
   useEffect(() => {
@@ -106,7 +107,7 @@ const CubikWalletContextProvider = ({
       toast.success('Successfully logged in');
     };
     fetchUser();
-  }, [connected, isError]);
+  }, [connected]);
 
   return (
     <CubikWalletContext.Provider
@@ -116,10 +117,7 @@ const CubikWalletContextProvider = ({
         showModal,
         setShowModal,
         walletlistExplanation: config.walletlistExplanation,
-        error: isError,
-        setError: (e) => {
-          setIsError(e);
-        },
+        error: isWalletError,
       }}
     >
       <ModalUIProvider>
@@ -176,15 +174,20 @@ const CubikWalletProvider = ({
     }),
     [wallets],
   );
-
+  const [isWalletError, setIsWalletError] = useState<WalletError | null>(null);
   return (
     <>
       <SolanaWalletConnectionProvider
         wallets={wallets}
+        setIsWalletError={setIsWalletError}
         config={params.config as any}
       >
         <CubikWalletValueProvider>
-          <CubikWalletContextProvider type={type} config={params.config as any}>
+          <CubikWalletContextProvider
+            isWalletError={isWalletError}
+            type={type}
+            config={params.config as any}
+          >
             {children}
           </CubikWalletContextProvider>
         </CubikWalletValueProvider>

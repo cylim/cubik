@@ -30,7 +30,6 @@ export interface ICubikWalletContext {
   setShowModal: (showModal: boolean) => void;
   walletlistExplanation: ICubikWalletConfig['walletlistExplanation'];
   error: WalletError | null;
-  setError: (error: WalletError | null) => void;
 }
 
 export const CubikWalletContext = createContext<ICubikWalletContext>({
@@ -43,7 +42,6 @@ export const CubikWalletContext = createContext<ICubikWalletContext>({
   setShowModal: (showModal: boolean) => {},
   walletlistExplanation: undefined,
   error: null,
-  setError: (error: Error | null) => {},
 });
 
 // Internal context for handling wallet state

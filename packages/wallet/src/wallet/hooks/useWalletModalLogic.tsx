@@ -11,7 +11,7 @@ import { Wallet } from '@solana/wallet-adapter-react';
 import { useMediaQuery } from '@cubik/ui/hooks';
 
 import { useCubikWallet, useCubikWalletContext } from '../context/CubikContext';
-import { WalletIcon } from './WalletListItem';
+import { WalletIcon } from '../WalletList/WalletListItem';
 
 const PRIORITISE: {
   [value in WalletReadyState]: number;

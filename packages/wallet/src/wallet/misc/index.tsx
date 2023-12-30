@@ -8,7 +8,6 @@ import {
 import { WalletProvider } from '@solana/wallet-adapter-react';
 import { Cluster } from '@solana/web3.js';
 
-import { useCubikWalletContext } from '../context/CubikContext';
 import { IHardcodedWalletStandardAdapter } from './HardcodedWalletStandardAdapter';
 
 const noop = (error: WalletError, adapter?: Adapter) => {
@@ -58,13 +57,12 @@ const SolanaWalletConnectionProvider: FC<
   PropsWithChildren & {
     wallets: Adapter[];
     config: ICubikWalletConfig;
+    setIsWalletError: React.Dispatch<React.SetStateAction<WalletError | null>>;
   }
-> = ({ wallets: passedWallets, config, children }) => {
+> = ({ wallets: passedWallets, config, children, setIsWalletError }) => {
   const wallets = useMemo(() => {
     return [...passedWallets];
   }, []);
-
-  const { setError } = useCubikWalletContext();
 
   return (
     //  WalletProvider is responsible for handling wallet connections and events (connect, disconnect, error)
@@ -72,7 +70,7 @@ const SolanaWalletConnectionProvider: FC<
       wallets={wallets}
       autoConnect={config.autoConnect}
       onError={(err, adapter) => {
-        setError(err);
+        setIsWalletError(err);
         noop(err, adapter);
       }}
     >

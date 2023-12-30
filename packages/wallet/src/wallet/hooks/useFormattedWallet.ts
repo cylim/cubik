@@ -3,7 +3,6 @@ import {
   BaseSignerWalletAdapter,
   WalletAdapterNetwork,
 } from '@solana/wallet-adapter-base';
-import { Wallet } from '@solana/wallet-adapter-react';
 import * as AllWalletAdapters from '@solana/wallet-adapter-wallets';
 
 import { WalletAdapterWithMutableSupportedTransactionVersions } from '../misc/supportedTxVersion';

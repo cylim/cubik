@@ -1,17 +1,32 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
+import { WalletAdapter } from '@solana/wallet-adapter-base';
 
 import { Avatar, Button, Text } from '@cubik/ui';
+
+import { useCubikWallet } from '../context/CubikContext';
 
 const WalletConnectStatus = ({
   icon,
   name,
   status,
+  adapter,
 }: {
   icon: string;
   name: string;
   status: 'connecting' | 'failed' | 'connected' | null;
+  adapter: WalletAdapter;
 }) => {
+  const {} = useCubikWallet();
+
+  const onRetry = async () => {
+    try {
+      await adapter.connect();
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
   return (
     <div className="p-6">
       <div
@@ -44,10 +59,11 @@ const WalletConnectStatus = ({
             <Button
               className="w-full"
               size={'md'}
-              //  onClick={onClose}
               variant={'secondary'}
+              isLoading={adapter.connecting}
+              onClick={onRetry}
             >
-              Retry
+              Retry {status}
             </Button>
           </div>
         ) : (

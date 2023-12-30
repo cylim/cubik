@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 
 import { Avatar, Button, Text } from '@cubik/ui';

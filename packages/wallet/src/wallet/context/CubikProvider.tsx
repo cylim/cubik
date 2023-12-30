@@ -1,20 +1,8 @@
 'use client';
 
-import React, {
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
-import {
-  Adapter,
-  BaseSignerWalletAdapter,
-  WalletAdapterNetwork,
-  WalletName,
-  WalletReadyState,
-} from '@solana/wallet-adapter-base';
-import { useWallet, WalletContextState } from '@solana/wallet-adapter-react';
+import React, { PropsWithChildren, useEffect, useMemo, useState } from 'react';
+import { WalletError, WalletName } from '@solana/wallet-adapter-base';
+import { WalletContextState } from '@solana/wallet-adapter-react';
 import { toast } from 'sonner';
 
 import { UserAuth } from '@cubik/common-types';
@@ -32,10 +20,8 @@ import { HARDCODED_WALLET_STANDARDS } from '../misc/HardCodedWallet';
 import SolanaWalletConnectionProvider, {
   ICubikWalletConfig,
 } from '../misc/index';
-import { WalletAdapterWithMutableSupportedTransactionVersions } from '../misc/supportedTxVersion';
 import {
   CubikWalletContext,
-  CubikWalletValueContext,
   useCubikWallet,
   useCubikWalletContext,
 } from './CubikContext';
@@ -74,11 +60,12 @@ const CubikWalletContextProvider = ({
   type: WalletAppType;
 } & PropsWithChildren) => {
   const [showModal, setShowModal] = useState(false);
-  const { wallet, publicKey, select, connect, connected } = useCubikWallet();
-  const [nonAutoConnectAttempt, setNonAutoConnectAttempt] = useState(false);
+  const { publicKey, connected } = useCubikWallet();
+  const [isError, setIsError] = useState<WalletError | null>(null);
 
   const handleConnectClick = useHandleConnect({
     autoConnect: config.autoConnect,
+    setIsError,
   });
 
   useEffect(() => {
@@ -119,7 +106,7 @@ const CubikWalletContextProvider = ({
       toast.success('Successfully logged in');
     };
     fetchUser();
-  }, [connected]);
+  }, [connected, isError]);
 
   return (
     <CubikWalletContext.Provider
@@ -129,6 +116,10 @@ const CubikWalletContextProvider = ({
         showModal,
         setShowModal,
         walletlistExplanation: config.walletlistExplanation,
+        error: isError,
+        setError: (e) => {
+          setIsError(e);
+        },
       }}
     >
       <ModalUIProvider>

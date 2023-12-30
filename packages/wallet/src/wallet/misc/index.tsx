@@ -8,8 +8,8 @@ import {
 import { WalletProvider } from '@solana/wallet-adapter-react';
 import { Cluster } from '@solana/web3.js';
 
+import { useCubikWalletContext } from '../context/CubikContext';
 import { IHardcodedWalletStandardAdapter } from './HardcodedWalletStandardAdapter';
-import { PreviouslyConnectedProvider } from './previouslyConnectedProvider';
 
 const noop = (error: WalletError, adapter?: Adapter) => {
   console.log({ error, adapter });
@@ -64,14 +64,19 @@ const SolanaWalletConnectionProvider: FC<
     return [...passedWallets];
   }, []);
 
+  const { setError } = useCubikWalletContext();
+
   return (
     //  WalletProvider is responsible for handling wallet connections and events (connect, disconnect, error)
     <WalletProvider
       wallets={wallets}
       autoConnect={config.autoConnect}
-      onError={noop}
+      onError={(err, adapter) => {
+        setError(err);
+        noop(err, adapter);
+      }}
     >
-      <PreviouslyConnectedProvider>{children}</PreviouslyConnectedProvider>
+      {children}
     </WalletProvider>
   );
 };

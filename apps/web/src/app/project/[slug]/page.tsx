@@ -4,8 +4,10 @@ import { ProjectTab } from '@/app/[username]/components/project-tab';
 import { Background, Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
 
 import { ProjectContributorsTab, ProjectDetailsTab } from './components/tabs';
+import { getContributions } from '@/app/project/[slug]/actions';
 
-const ProjectPage = ({ params }: { params: { slug: string } }) => {
+const ProjectPage = async ({ params }: { params: { slug: string } }) => {
+  const contributors = await getContributions({ slug: params.slug })
   return (
     <div className="flex min-h-screen w-full flex-col items-center gap-10 md:mx-auto lg:flex-col lg:items-start">
       <div className="absolute left-0 top-[-150px] w-full">
@@ -31,7 +33,7 @@ const ProjectPage = ({ params }: { params: { slug: string } }) => {
               <ProjectDetailsTab slug={params.slug} />
             </TabPanel>
             <TabPanel value={1}>
-              <ProjectContributorsTab />
+              <ProjectContributorsTab contributors={contributors} slug={params.slug} />
             </TabPanel>
             <TabPanel value={2}>
               <></>

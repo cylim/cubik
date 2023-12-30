@@ -16,7 +16,7 @@ import Link from 'next/link';
 import { cookies } from 'next/headers';
 import { IsUserLoginServer } from '@/utils/auth/isUserLoginServer';
 import CommentSection from '@/app/project/[slug]/components/comments/comment-section';
-import { getComments } from '@/app/project/[slug]/components/comments/actions';
+import { getComments } from '@/app/project/[slug]/actions';
 
 const fetchProjectDetails = async (slug: string) => {
   try {

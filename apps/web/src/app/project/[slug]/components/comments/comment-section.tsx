@@ -1,5 +1,5 @@
 "use client";
-import { getComments, makeComment } from "@/app/project/[slug]/components/comments/actions";
+import { getComments, makeComment } from "@/app/project/[slug]/actions";
 import { Text, AvatarLabelGroup, Button, InputContainer, InputField, InputFieldContainer, InputRightElement } from "@cubik/ui"
 import { formatDistanceToNow } from "date-fns"
 import { useCallback, useEffect, useState } from "react";

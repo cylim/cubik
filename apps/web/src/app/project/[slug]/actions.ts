@@ -57,4 +57,47 @@ const getComments = async ({
     });
 }
 
-export { makeComment, getComments }
+const getContributions = async ({
+    slug,
+    isArchive = false,
+    page = 1,
+    limit = 10
+}: {
+    slug: string
+    isArchive?: boolean
+    page?: number
+    limit?: number
+}) => {
+    const skip = (page - 1) * limit
+
+    return await prisma.contribution.findMany({
+        where: {
+            project: {
+                slug: slug
+            },
+            isArchive: isArchive
+        },
+        skip: skip,
+        take: limit,
+        select: {
+            id: true,
+            user: {
+                select: {
+                    id: true,
+                    username: true,
+                    mainWallet: true,
+                    profilePicture: true,
+                }
+            },
+            totalUsdAmount: true,
+            totalAmount: true,
+            createdAt: true,
+            token: true,
+        },
+        orderBy: {
+            createdAt: 'desc'
+        }
+    });
+}
+
+export { makeComment, getComments, getContributions }

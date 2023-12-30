@@ -38,6 +38,12 @@ const config = {
       },
       {
         protocol: 'https',
+        hostname: 'utfs.io',
+        port: '',
+        pathname: '*/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'res.cloudinary.com', // remove this later
         port: '',
         pathname: '*/**',

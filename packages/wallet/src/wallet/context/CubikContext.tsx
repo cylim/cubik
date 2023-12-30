@@ -14,7 +14,7 @@ import type {
   VersionedTransaction,
 } from '@solana/web3.js';
 
-import { ICubikWalletConfig } from './WalletConnectionProvider';
+import { ICubikWalletConfig } from '../misc/index';
 
 export const MWA_NOT_FOUND_ERROR = 'MWA_NOT_FOUND_ERROR';
 export type IUnifiedTheme = 'light' | 'dark' | 'jupiter';
@@ -41,6 +41,11 @@ export const CubikWalletContext = createContext<ICubikWalletContext>({
   walletlistExplanation: undefined,
 });
 
+// Internal context for handling wallet state
+export const useCubikWalletContext = (): ICubikWalletContext => {
+  return useContext(CubikWalletContext);
+};
+
 // Copied from @solana/wallet-adapter-react
 function constructMissingProviderErrorMessage(
   action: string,
@@ -56,7 +61,7 @@ function constructMissingProviderErrorMessage(
   );
 }
 
-export const UNIFIED_WALLET_VALUE_DEFAULT_CONTEXT = {
+export const CUBIK_WALLET_VALUE_DEFAULT_CONTEXT = {
   autoConnect: false,
   connecting: false,
   connected: false,
@@ -106,16 +111,10 @@ export const UNIFIED_WALLET_VALUE_DEFAULT_CONTEXT = {
   },
 } as WalletContextState;
 
-// creates a context to share the wallets state and functions thought the application
+// Internal context for handling wallet functions
 export const CubikWalletValueContext = createContext<WalletContextState>(
-  UNIFIED_WALLET_VALUE_DEFAULT_CONTEXT,
+  CUBIK_WALLET_VALUE_DEFAULT_CONTEXT,
 );
-
-// Interal context for use within the library
-export const useCubikWalletContext = (): ICubikWalletContext => {
-  return useContext(CubikWalletContext);
-};
-
 export const useCubikWallet = (): WalletContextState => {
   return useContext(CubikWalletValueContext);
 };

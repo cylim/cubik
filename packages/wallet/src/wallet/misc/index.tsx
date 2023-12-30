@@ -57,7 +57,7 @@ export interface ICubikWalletMetadata {
   additionalInfo?: string;
 }
 
-const WalletConnectionProvider: FC<
+const SolanaWalletConnectionProvider: FC<
   PropsWithChildren & {
     wallets: Adapter[];
     config: ICubikWalletConfig;
@@ -79,4 +79,4 @@ const WalletConnectionProvider: FC<
   );
 };
 
-export default WalletConnectionProvider;
+export default SolanaWalletConnectionProvider;

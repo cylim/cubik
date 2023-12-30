@@ -13,6 +13,7 @@
     "@cubik/auth": "workspace:*",
     "@cubik/common": "workspace:*",
     "@cubik/common-types": "workspace:*",
+    "@cubik/common": "workspace:*",
     "@cubik/config": "workspace:*",
     "@cubik/database": "workspace:*",
     "@cubik/dayjs": "workspace:*",

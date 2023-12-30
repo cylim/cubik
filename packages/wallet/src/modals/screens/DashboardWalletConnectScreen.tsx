@@ -21,29 +21,37 @@ import {
 import { useMediaQuery } from '@cubik/ui/hooks';
 import { cn } from '@cubik/ui/lib/utils';
 
-import { VerifyWallet } from '../authentication';
-import { generateMessage } from '../authentication/generateMessage';
-import { loginAdmin } from '../helpers/loginAdmin';
-import { useCubikWallet, useCubikWalletContext } from '../wallet/CubikContext';
-import { CubikWalletModal } from '../wallet/listWallet';
+import { VerifyWallet } from '../../authentication';
+import { generateSession } from '../../authentication/generateSession';
+import { loginAdmin } from '../../helpers/loginAdmin';
+import { useUserModalUIContext } from '../../wallet';
+import {
+  useCubikWallet,
+  useCubikWalletContext,
+} from '../../wallet/context/CubikContext';
+import { CubikWalletModal } from '../../wallet/WalletList/listWallet';
 
-type ModalState = 'wallet-connect' | 'verify';
 interface Props {
   onClose: () => void;
   setAccessScope: (accessScope: AccessScope | null) => void;
   setUser: (user: any) => void;
 }
-export const DashboardModal = ({ onClose, setAccessScope, setUser }: Props) => {
-  const [modalState, setModalState] =
-    React.useState<ModalState>('wallet-connect');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+export const DashboardWalletConnectScreen = ({
+  onClose,
+  setAccessScope,
+  setUser,
+}: Props) => {
+  const { modalState, setModalState, isWalletLoading, setIsWalletLoading } =
+    useUserModalUIContext();
+
   const pathname = usePathname();
   const { connected, publicKey, disconnect, signMessage } = useCubikWallet();
   const { setShowModal } = useCubikWalletContext();
+
   useEffect(() => {
     const handleWalletConnect = async () => {
       if (publicKey && connected) {
-        setModalState('verify');
+        setModalState('wallet-verify');
       }
     };
     handleWalletConnect();
@@ -51,12 +59,12 @@ export const DashboardModal = ({ onClose, setAccessScope, setUser }: Props) => {
 
   const handleVerifyWallet = async () => {
     try {
-      setIsLoading(true);
+      setIsWalletLoading(true);
       if (!signMessage || !publicKey) {
         throw new Error('Sign message is undefined');
       }
       const nonce = Math.random().toString(36).substring(2, 15);
-      const message = await generateMessage(nonce);
+      const message = await generateSession(nonce);
       const msg = createMessage(message);
       if (!msg) {
         throw new Error('Message is undefined');
@@ -85,7 +93,7 @@ export const DashboardModal = ({ onClose, setAccessScope, setUser }: Props) => {
         statusCode: 500,
       });
     } finally {
-      setIsLoading(false);
+      setIsWalletLoading(false);
     }
   };
 
@@ -97,11 +105,11 @@ export const DashboardModal = ({ onClose, setAccessScope, setUser }: Props) => {
           <CubikWalletModal onClose={onClose} setShowHeader={() => {}} />
         </>
       )}
-      {modalState === 'verify' && (
+      {modalState === 'wallet-verify' && (
         <VerifyWallet
           address={publicKey?.toBase58() || ''}
           handleVerify={handleVerifyWallet}
-          isLoading={isLoading}
+          isLoading={isWalletLoading}
           onClose={() => {
             disconnect();
             setModalState('wallet-connect');
@@ -109,48 +117,5 @@ export const DashboardModal = ({ onClose, setAccessScope, setUser }: Props) => {
         />
       )}
     </>
-  );
-};
-
-export const VerifyUserWallet = ({
-  showModal,
-  setShowModal,
-  setAccessScope,
-  setUser,
-}: {
-  showModal: boolean;
-  setShowModal: (show: boolean) => void;
-  setAccessScope: (accessScope: AccessScope | null) => void;
-  setUser: (user: any) => void;
-}) => {
-  const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
-  const { disconnect } = useCubikWallet();
-  const onClose = () => {
-    disconnect();
-    setShowModal(false);
-  };
-  return isSmallDevice ? (
-    <Drawer open={showModal} onOpenChange={setShowModal}>
-      <DrawerPortal>
-        <DrawerOverlay className={cn(!isSmallDevice ? 'hidden' : '')} />
-        <DrawerContent className={cn(!isSmallDevice ? 'hidden' : 'h-max')}>
-          <DrawerBody>
-            <DashboardModal
-              setAccessScope={setAccessScope}
-              setUser={setUser}
-              onClose={onClose}
-            />
-          </DrawerBody>
-        </DrawerContent>
-      </DrawerPortal>
-    </Drawer>
-  ) : (
-    <Modal dialogSize="sm" open={showModal} onClose={onClose}>
-      <DashboardModal
-        setAccessScope={setAccessScope}
-        setUser={setUser}
-        onClose={onClose}
-      />
-    </Modal>
   );
 };

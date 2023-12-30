@@ -84,7 +84,7 @@ const DrawerContent = ({ children, className }: DrawerContentProps) => (
       'fixed max-h-[90%] pt-2 focus:outline-none bottom-0 left-0 right-0 rounded-t-[12px] overflow-hidden w-screen bg-[var(--color-surface-primary)]',
     )}
   >
-    <div className="mx-auto w-12 h-[3px] flex-shrink-0 rounded-full bg-[var(--color-surface-primary-transparent)] mb-8" />
+    <div className="mx-auto w-12 h-[3px] flex-shrink-0 rounded-full bg-[var(--color-surface-primary-transparent)] mb-2" />
     {children}
   </Dialog.Drawer.Content>
 );

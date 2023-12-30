@@ -13,7 +13,8 @@ import {
   DrawerPortal,
 } from '@cubik/ui';
 import { cn } from '@cubik/ui/lib/utils';
-import { UserModal } from '@cubik/wallet';
+
+//import { UserModal } from '@cubik/wallet';
 
 const Page = () => {
   const [open, setOpen] = useState<boolean>(false);

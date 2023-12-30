@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 import { Button, Text } from '@cubik/ui';
 
-import ExternalIcon from '../icons/ExternalIcon';
+import ExternalIcon from '../../icons/ExternalIcon';
 // import ExternalIcon from '../icons/ExternalIcon';
-import { HARDCODED_WALLET_STANDARDS } from './HardCodedWallet';
+import { HARDCODED_WALLET_STANDARDS } from '../misc/HardCodedWallet';
 
 export const OnboardingIntro: React.FC<{
   flow: IOnboardingFlow;

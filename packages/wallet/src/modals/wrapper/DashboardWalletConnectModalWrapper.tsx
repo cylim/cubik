@@ -1,6 +1,5 @@
 import { useMediaQuery } from '@uidotdev/usehooks';
 
-import { UserAuth } from '@cubik/common-types';
 import { AccessScope } from '@cubik/common-types/src/admin';
 import {
   Drawer,

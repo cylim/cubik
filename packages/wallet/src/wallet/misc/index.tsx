@@ -8,7 +8,6 @@ import {
 import { WalletProvider } from '@solana/wallet-adapter-react';
 import { Cluster } from '@solana/web3.js';
 
-import { IUnifiedTheme } from '../CubikContext';
 import { IHardcodedWalletStandardAdapter } from './HardcodedWalletStandardAdapter';
 import { PreviouslyConnectedProvider } from './previouslyConnectedProvider';
 
@@ -45,8 +44,6 @@ export interface ICubikWalletConfig {
   walletlistExplanation?: {
     href: string;
   };
-  // Default to light
-  theme?: IUnifiedTheme;
 }
 
 export interface ICubikWalletMetadata {

@@ -1,16 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useMemo, useState } from 'react';
 import {
   Adapter,
   WalletName,
   WalletReadyState,
 } from '@solana/wallet-adapter-base';
-import { useToggle } from 'react-use';
+import { Wallet } from '@solana/wallet-adapter-react';
 
 import { useMediaQuery } from '@cubik/ui/hooks';
 
-import { useCubikWallet, useCubikWalletContext } from '../CubikContext';
-import { usePreviouslyConnected } from '../prevConnected';
-import { WalletIcon } from '../WalletListItem';
+import { useCubikWallet, useCubikWalletContext } from '../context/CubikContext';
+import { WalletIcon } from './WalletListItem';
 
 const PRIORITISE: {
   [value in WalletReadyState]: number;
@@ -59,10 +60,9 @@ export const useWalletModalLogic = () => {
   const { wallets } = useCubikWallet();
   const { walletPrecedence } = useCubikWalletContext();
   const { handleConnectClick, walletlistExplanation } = useCubikWalletContext();
-  const previouslyConnected = usePreviouslyConnected();
   const [showMore, setShowMore] = useState<boolean>(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
-  const [connectingWallet, setConnectingWallet] = useState<null | {}>(null);
+  const [connectingWallet, setConnectingWallet] = useState<Wallet | null>(null);
   const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
 
   const list: {
@@ -81,13 +81,6 @@ export const useWalletModalLogic = () => {
       (acc, wallet) => {
         const adapterName = wallet.adapter.name;
 
-        // Previously connected takes highest
-        const previouslyConnectedIndex =
-          previouslyConnected.indexOf(adapterName);
-        if (previouslyConnectedIndex >= 0) {
-          acc.previouslyConnected[previouslyConnectedIndex] = wallet.adapter;
-          return acc;
-        }
         // Then Installed
         if (wallet.readyState === WalletReadyState.Installed) {
           acc.installed.push(wallet.adapter);
@@ -169,7 +162,7 @@ export const useWalletModalLogic = () => {
       .sort((a, b) => PRIORITISE[a.readyState] - PRIORITISE[b.readyState])
       .sort(sortByPrecedence(walletPrecedence || []));
     return { highlightedBy: 'TopWallet', highlight: top3, others };
-  }, [wallets, previouslyConnected]);
+  }, [wallets]);
 
   const renderWalletList = useMemo(
     () =>
@@ -204,10 +197,8 @@ export const useWalletModalLogic = () => {
     list.highlight.forEach((wallet) => {
       if (wallet.connecting)
         setConnectingWallet({
-          icon: wallet.icon,
-          pubKey: wallet.publicKey,
-          name: wallet.name,
-          state: wallet.readyState,
+          adapter: wallet,
+          readyState: wallet.readyState,
         });
     });
   }, [hasNoWallets, list.highlight]);

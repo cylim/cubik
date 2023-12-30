@@ -5,9 +5,9 @@ import React from 'react';
 
 import { AvatarGroup, Divider, Text } from '@cubik/ui';
 
-import { OnboardingFlow } from '../Onboarding';
-import { WalletIcon } from '../WalletListItem';
+import { OnboardingFlow } from './Onboarding';
 import { useWalletModalLogic } from './useWalletModalLogic';
+import { WalletIcon } from './WalletListItem';
 import WalletConnectStatus from './walletModalConnecting';
 import { CubikWalletModalFooter } from './walletModalFooter';
 
@@ -35,8 +35,8 @@ const CubikWalletModal: React.FC<ICubikWalletModal> = ({ setShowHeader }) => {
   if (connectingWallet) {
     return (
       <WalletConnectStatus
-        icon={connectingWallet.icon}
-        name={connectingWallet.name}
+        icon={connectingWallet.adapter.icon}
+        name={connectingWallet.adapter.name}
         status={'connecting'}
       />
     );

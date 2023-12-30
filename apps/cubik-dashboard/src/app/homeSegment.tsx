@@ -22,16 +22,10 @@ export const GrantsSegmentControlSwitch = () => {
   return (
     <div className="flex flex-row gap-4">
       <SegmentContainer size="sm">
-        <SegmentItem
-          isActive={true}
-          href={`${path}time=1W`}
-        >
+        <SegmentItem isActive={true} href={`${path}time=1W`}>
           All Events
         </SegmentItem>
-        <SegmentItem
-          isActive={false}
-          href={`${path}time=2W`}
-        >
+        <SegmentItem isActive={false} href={`${path}time=2W`}>
           Grants
         </SegmentItem>
       </SegmentContainer>

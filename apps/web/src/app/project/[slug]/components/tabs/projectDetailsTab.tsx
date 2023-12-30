@@ -9,10 +9,14 @@ import {
   CarouselItem,
   Divider,
   Icon,
-  Text,
+  Text
 } from '@cubik/ui';
 import { ProjectSocials, Slides } from '@/types/project';
 import Link from 'next/link';
+import { cookies } from 'next/headers';
+import { IsUserLoginServer } from '@/utils/auth/isUserLoginServer';
+import CommentSection from '@/app/project/[slug]/components/comments/comment-section';
+import { getComments } from '@/app/project/[slug]/components/comments/actions';
 
 const fetchProjectDetails = async (slug: string) => {
   try {
@@ -198,6 +202,17 @@ export const ProjectDetailsTab = async ({ slug }: { slug: string }) => {
   if (!fetchProjectDetails) {
     return 'Loading...';
   }
+  const cookieStore = cookies();
+  const token = cookieStore.get('authToken');
+  const user = token && (await IsUserLoginServer(token.value));
+  console.log('user - ', user);
+
+  const comments = await getComments({
+    // @ts-ignore
+    projectId: fetchedProjectDetails[0].id
+  });
+
+  console.log('comments - ', comments);
 
   console.log('fetchedProjectDetails - ', fetchedProjectDetails[0]);
 
@@ -205,9 +220,25 @@ export const ProjectDetailsTab = async ({ slug }: { slug: string }) => {
     <TabLayout>
       <div>
         <div className="flex flex-col gap-6 md:flex-row md:gap-20">
-          <ImagesCarousel
-            // @ts-ignore
-            slides={fetchedProjectDetails[0].slides} />
+          <div className='flex flex-col'>
+            <ImagesCarousel
+              // @ts-ignore
+              slides={fetchedProjectDetails[0].slides} />
+            <div>
+              <Text color="primary" className="bold text-lg">About {
+                // @ts-ignore
+                fetchedProjectDetails[0].name}
+              </Text>
+              <Text color="primary" className="p-2">{
+                // @ts-ignore
+                fetchedProjectDetails[0].longDescription}
+              </Text>
+            </div>
+            <CommentSection user={user!} comments={comments} projectId={
+              // @ts-ignore
+              fetchedProjectDetails[0].id
+            } />
+          </div>
           <InteractionSidebar socials={{
             // @ts-ignore
             github: fetchedProjectDetails[0].githubLink,

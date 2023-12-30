@@ -119,7 +119,7 @@ const AvatarLabelGroup: React.FC<AvatarLabelProps> = ({
             <div className="flex items-center">
               <TitleWithIcon text={title} size={size} />
               {subtitle && (
-                <span className={cn(subTitleVariants({ size }))}>
+                <span className={cn(subTitleVariants({ size }), 'ml-1')}>
                   {subtitle}
                 </span>
               )}

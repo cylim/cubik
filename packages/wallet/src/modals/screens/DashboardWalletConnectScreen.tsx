@@ -72,6 +72,8 @@ export const DashboardWalletConnectScreen = ({
       }
       setUser(user);
       setShowModal(false);
+      setSelectedAdapter(null);
+      setIsWalletError(null);
       handleRevalidation(pathname || '/');
       toast.success('Successfully logged in');
     } catch (e) {

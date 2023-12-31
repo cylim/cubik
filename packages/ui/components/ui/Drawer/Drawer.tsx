@@ -100,7 +100,9 @@ const DrawerHeader = ({ children, ...props }: DrawerHeaderProps) => (
 );
 
 const DrawerBody = ({ children, ...props }: DrawerBodyProps) => (
-  <div {...props}>{children}</div>
+  <div className="min-h-[45vh]" {...props}>
+    {children}
+  </div>
 );
 
 const DrawerFooter = ({ children, ...props }: DrawerFooterProps) => (

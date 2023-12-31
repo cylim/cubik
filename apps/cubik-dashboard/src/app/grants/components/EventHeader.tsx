@@ -48,9 +48,11 @@ export const EventHeader = () => {
           </Menu>
           <ProjectTimelineCard
             subElement={
-              <Text className="l2" color={'tertiary'}>
-                Round ends in 5 Days
-              </Text>
+              <>
+                <Text className="l2" color={'tertiary'}>
+                  Round ends in 5 Days
+                </Text>
+              </>
             }
             date={new Date()}
             type="Voting"

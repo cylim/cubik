@@ -71,7 +71,10 @@ export const WebWalletConnectScreen = ({ onClose, setUser }: Props) => {
           profilePicture: user.profilePicture,
           username: user.username,
         });
+        setModalState('wallet-connect');
         setShowModal(false);
+        setSelectedAdapter(null);
+        setIsWalletError(null);
         handleRevalidation(pathname || '/');
         toast.success('Successfully logged in');
       }

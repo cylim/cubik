@@ -13,7 +13,6 @@ const WalletConnectStatus = ({
   name,
   status,
   adapter,
-  error,
 }: {
   icon: string;
   name: string;
@@ -34,13 +33,22 @@ const WalletConnectStatus = ({
       toast.success('Wallet Connected');
     } catch (e) {
       const error = e as Error;
-      console.log(error);
-      setIsWalletError({
-        error,
-        message: error.message,
-        name: error.name,
-      });
-      return null;
+      if (error.message) {
+        console.log(error);
+        setIsWalletError({
+          error,
+          message: error.message,
+          name: error.name,
+        });
+        return null;
+      } else {
+        const newError = new Error('User rejected the request');
+        setIsWalletError({
+          error: newError,
+          message: 'User rejected the request',
+          name: 'Error',
+        });
+      }
     } finally {
       setLoading(false);
     }
@@ -64,7 +72,6 @@ const WalletConnectStatus = ({
             : 'Connected Succesfully'}
         </Text>
       </div>
-      {error}
       <div className="flex flex-col justify-start gap-4 mt-4  text-base font-normal">
         <Text className="l2-light" color={'secondary'}>
           {status === 'connecting'

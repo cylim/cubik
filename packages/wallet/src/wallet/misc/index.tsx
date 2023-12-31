@@ -77,8 +77,8 @@ const SolanaWalletConnectionProvider: FC<
           const newError = new Error('Solflare Error');
           setIsWalletError({
             error: newError,
-            message: err.message,
-            name: err.name,
+            message: newError.message,
+            name: newError.name,
           });
         }
         noop(err, adapter);

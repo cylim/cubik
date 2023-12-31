@@ -6,7 +6,7 @@ import { SegmentContainer, SegmentItem } from '@cubik/ui';
 
 export const StatsSwitch = () => {
   return (
-    <div className="w-fit">
+    <div className="w-full md:w-fit">
       <SegmentContainer size="sm">
         <SegmentItem isActive={true} onClick={() => {}}>
           1W

@@ -22,8 +22,8 @@ const bgVariants = cva('transition ease-in-out delay-250', {
         'bg-[var(--button-success-surface-default)] hover:bg-[var(--button-success-surface-hovered)] !text-[var(--button-success-text-default)] hover:!text-[var(--button-success-text-hovered)] !stroke-[var(--button-success-text-default)] hover:!stroke-[var(--button-success-text-hovered)] focus:border-2 focus:border-[var(--button-success-border-focused)] focus:!text-[var(--button-success-text-focused)] disabled:bg-[var(--button-success-surface-disabled)] disabled:!text-[var(--button-success-text-disabled)] disabled:!stroke-[var(--button-success-text-disabled)] disabled:cursor-not-allowed focus-visible:ring-[var(--button-success-border-focused)] focus-visible:ring-offset-[var(--color-fg-success-base)] focus-visible:ring-offset-2 focus-visible:outline-none focus:border-none focus-outline:border-none focus-visible:ring-1 focus-visible:ring-[var(--button-success-border-focused)] focus-visible:ring-offset-[var(--button-success-offset)] focus-visible:ring-offset-1 focus-visible:outline-none focus:border-none focus-visible:border-none',
     },
     size: {
-      xl: 'h-[44px] md:h-[48px]',
-      lg: 'h-[40px] md:h-[44px]',
+      xl: 'h-[46px] md:h-[48px]',
+      lg: 'h-[44px] md:h-[44px]',
       md: 'h-[36px] md:h-[40px]',
       sm: 'h-[32px] md:h-[36px]',
     },
@@ -69,10 +69,10 @@ const iconVariants = cva('', {
 const buttonTextVariants = cva('', {
   variants: {
     size: {
-      xl: 'l2-heavy md:l2-heavy',
-      lg: 'l2-heavy md:l2-heavy',
-      md: 'l2-heavy md:l2-heavy',
-      sm: 'l2-heavy md:l2-heavy',
+      xl: 'b2 md:l2-heavy',
+      lg: 'b2 md:l2-heavy',
+      md: 'l1 md:l2-heavy',
+      sm: 'l1 md:l2-heavy',
     },
   },
   defaultVariants: {
@@ -108,7 +108,7 @@ const Button = ({
       disabled={isLoading}
       className={cn(
         bgVariants({ variant, size }),
-        `rounded-md whitespace-nowrap flex items-center justify-center  pointer-events-auto w-[fit-content]  gap-[6px] ${
+        `rounded-lg whitespace-nowrap flex items-center justify-center  pointer-events-auto w-[fit-content]  gap-[6px] ${
           !children ? 'px-[10px] md:px-[12px]' : 'px-[14px] md:px-[16px]'
         }`,
         className,

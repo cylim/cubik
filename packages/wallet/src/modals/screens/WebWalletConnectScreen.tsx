@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { utils } from '@coral-xyz/anchor';
 import { toast } from 'sonner';
@@ -9,42 +9,38 @@ import { createMessage } from '@cubik/auth';
 import { UserAuth } from '@cubik/common-types';
 import { handleRevalidation } from '@cubik/common/helper';
 import { logApi } from '@cubik/logger/src/';
+import { Icon, Text } from '@cubik/ui';
+
+import { VerifyWallet } from '../../authentication';
+import { generateSession } from '../../authentication/generateSession';
+import { LoginUser } from '../../helpers/login';
+import { UserCreate } from '../../userCreate';
 import {
-  Drawer,
-  DrawerBody,
-  DrawerContent,
-  DrawerOverlay,
-  DrawerPortal,
-  Icon,
-  Modal,
-  Text,
-} from '@cubik/ui';
-import { useMediaQuery } from '@cubik/ui/hooks';
-import { cn } from '@cubik/ui/lib/utils';
+  useCubikWallet,
+  useCubikWalletContext,
+  useUserModalUIContext,
+} from '../../wallet';
+import { CubikWalletModal } from '../../wallet/WalletList/listWallet';
 
-import { VerifyWallet } from '../authentication';
-import { generateMessage } from '../authentication/generateMessage';
-import { LoginUser } from '../helpers/login';
-import { UserCreate } from '../userCreate';
-import { useCubikWallet, useCubikWalletContext } from '../wallet/CubikContext';
-import { CubikWalletModal } from '../wallet/listWallet';
-
-type ModalState = 'wallet-connect' | 'verify' | 'user-create';
 interface Props {
   onClose: () => void;
   setUser: (user: UserAuth) => void;
 }
-export const UserModal = ({ onClose, setUser }: Props) => {
-  const [modalState, setModalState] =
-    React.useState<ModalState>('wallet-connect');
-  const { setShowModal } = useCubikWalletContext();
+export const WebWalletConnectScreen = ({ onClose, setUser }: Props) => {
+  const { modalState, setModalState, isWalletLoading, setIsWalletLoading } =
+    useUserModalUIContext();
+
+  const { setShowModal, setSelectedAdapter, setIsWalletError } =
+    useCubikWalletContext();
   const pathname = usePathname();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { connected, publicKey, disconnect, signMessage } = useCubikWallet();
+  const { connected, connecting, publicKey, select, disconnect, signMessage } =
+    useCubikWallet();
   useEffect(() => {
     const handleWalletConnect = async () => {
       if (publicKey && connected) {
-        setModalState('verify');
+        setModalState('wallet-verify');
+      } else if (connecting) {
+        setModalState('connecting');
       }
     };
     handleWalletConnect();
@@ -52,12 +48,12 @@ export const UserModal = ({ onClose, setUser }: Props) => {
 
   const handleVerifyWallet = async () => {
     try {
-      setIsLoading(true);
+      setIsWalletLoading(true);
       if (!signMessage || !publicKey) {
         throw new Error('Sign message is undefined');
       }
       const nonce = Math.random().toString(36).substring(2, 15);
-      const message = await generateMessage(nonce);
+      const message = await generateSession(nonce);
       const msg = createMessage(message);
       if (!msg) {
         throw new Error('Message is undefined');
@@ -75,7 +71,10 @@ export const UserModal = ({ onClose, setUser }: Props) => {
           profilePicture: user.profilePicture,
           username: user.username,
         });
+        setModalState('wallet-connect');
         setShowModal(false);
+        setSelectedAdapter(null);
+        setIsWalletError(null);
         handleRevalidation(pathname || '/');
         toast.success('Successfully logged in');
       }
@@ -90,15 +89,15 @@ export const UserModal = ({ onClose, setUser }: Props) => {
         statusCode: 500,
       });
     } finally {
-      setIsLoading(false);
+      setIsWalletLoading(false);
     }
   };
 
-  return (
-    <>
-      {modalState === 'wallet-connect' && (
+  switch (modalState) {
+    case 'wallet-connect':
+      return (
         <>
-          <div className="flex justify-between items-center h-[44px] md:h-[48px] px-[16px] md:px-[24px]">
+          <div className="hidden md:flex justify-between items-center h-[44px] md:h-[48px] px-[16px] md:px-[24px]">
             <Text
               color={'primary'}
               className="text-[var(--avatar-label-title)] h6"
@@ -116,52 +115,32 @@ export const UserModal = ({ onClose, setUser }: Props) => {
           </div>
           <CubikWalletModal onClose={onClose} setShowHeader={() => {}} />
         </>
-      )}
-      {modalState === 'verify' && (
+      );
+
+    case 'wallet-verify':
+      return (
         <VerifyWallet
           address={publicKey?.toBase58() || ''}
           handleVerify={handleVerifyWallet}
-          isLoading={isLoading}
+          isLoading={isWalletLoading}
           onClose={() => {
             disconnect();
+            select(null);
+            setSelectedAdapter(null);
+            setIsWalletError(null);
             setModalState('wallet-connect');
           }}
         />
-      )}
-      {modalState === 'user-create' && <UserCreate />}
-    </>
-  );
-};
+      );
 
-export const CreateUserWallet = ({
-  showModal,
-  setShowModal,
-  setUser,
-}: {
-  showModal: boolean;
-  setShowModal: (show: boolean) => void;
-  setUser: (user: UserAuth) => void;
-}) => {
-  const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
-  const { disconnect } = useCubikWallet();
-  const onClose = () => {
-    disconnect();
-    setShowModal(false);
-  };
-  return isSmallDevice ? (
-    <Drawer open={showModal} onOpenChange={setShowModal}>
-      <DrawerPortal>
-        <DrawerOverlay className={cn(!isSmallDevice ? 'hidden' : '')} />
-        <DrawerContent className={cn(!isSmallDevice ? 'hidden' : 'h-max')}>
-          <DrawerBody>
-            <UserModal setUser={setUser} onClose={onClose} />
-          </DrawerBody>
-        </DrawerContent>
-      </DrawerPortal>
-    </Drawer>
-  ) : (
-    <Modal dialogSize="sm" open={showModal} onClose={onClose}>
-      <UserModal setUser={setUser} onClose={onClose} />
-    </Modal>
-  );
+    case 'user-create':
+      return <UserCreate />;
+
+    default:
+      return (
+        <Text className="h3" color="primary">
+          wallet state not defined
+        </Text>
+      );
+  }
 };

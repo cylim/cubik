@@ -35,13 +35,18 @@ export const Navbar = ({
   pathname?: string;
   children: ReactNode;
 }) => {
-  const background =
-    pathname === '/'
-      ? 'from-[var(--bg-primary-base)]'
-      : 'bg-[var(--body-surface)]';
+  let background = true;
+  if (pathname === '/') background = false;
 
   return (
-    <div className={`py-3 md:py-4 w-full bg-gradient-to-b top-0 ${background}`}>
+    <div
+      className={`py-3 md:py-4 w-full top-0 ${
+        background
+          ? 'bg-[var(--body-surface)]'
+          : 'bg-gradient-to-b from-[var(--body-surface)] dark:from-[var(--body-surface)] dark:to-[var(--body-surface)]'
+      }`}
+    >
+      {background}
       <div className="container mx-auto max-w-7xl px-6 h-full">
         <div className="flex justify-between items-center h-full">
           <Logo variant="text" />

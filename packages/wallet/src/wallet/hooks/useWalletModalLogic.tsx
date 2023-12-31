@@ -62,7 +62,6 @@ export const useWalletModalLogic = () => {
   const { handleConnectClick, walletlistExplanation } = useCubikWalletContext();
   const [showMore, setShowMore] = useState<boolean>(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
-  const [connectingWallet, setConnectingWallet] = useState<Wallet | null>(null);
   const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
 
   const list: {
@@ -190,24 +189,10 @@ export const useWalletModalLogic = () => {
     return list.highlightedBy === 'TopWallet' ? true : false;
   }, [list]);
 
-  useEffect(() => {
-    if (hasNoWallets) {
-      setShowOnboarding(true);
-    }
-    list.highlight.forEach((wallet) => {
-      if (wallet.connecting)
-        setConnectingWallet({
-          adapter: wallet,
-          readyState: wallet.readyState,
-        });
-    });
-  }, [hasNoWallets, list.highlight]);
-
   return {
     list,
     showMore,
     showOnboarding,
-    connectingWallet,
     isSmallDevice,
     setShowMore,
     handleConnectClick,

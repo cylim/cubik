@@ -1,14 +1,15 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Adapter, WalletReadyState } from '@solana/wallet-adapter-base';
+import { Wallet } from '@solana/wallet-adapter-react';
 import { toast } from 'sonner';
 
 import { useCubikWallet } from '../context/CubikContext';
 
 interface Props {
   autoConnect?: boolean;
-  // setIsError: React.Dispatch<React.SetStateAction<WalletError | null>>;
+  setSelectWallet: React.Dispatch<React.SetStateAction<Wallet | null>>;
 }
-export const useHandleConnect = ({ autoConnect }: Props) => {
+export const useHandleConnect = ({ autoConnect, setSelectWallet }: Props) => {
   const { wallet, select, connect } = useCubikWallet();
   const [nonAutoConnectAttempt, setNonAutoConnectAttempt] = useState(false);
   useEffect(() => {
@@ -34,6 +35,10 @@ export const useHandleConnect = ({ autoConnect }: Props) => {
       try {
         // Might throw WalletReadyState.WalletNotReady
         select(adapter.name);
+        setSelectWallet({
+          adapter,
+          readyState: adapter.readyState,
+        });
         // Weird quirks for autoConnect to require select and connect
         if (!autoConnect) {
           setNonAutoConnectAttempt(true);

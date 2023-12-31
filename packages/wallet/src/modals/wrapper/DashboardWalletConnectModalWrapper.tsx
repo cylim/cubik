@@ -11,7 +11,11 @@ import {
 } from '@cubik/ui';
 import { cn } from '@cubik/ui/lib/utils';
 
-import { useCubikWallet } from '../../wallet';
+import {
+  useCubikWallet,
+  useCubikWalletContext,
+  useUserModalUIContext,
+} from '../../wallet';
 import { DashboardWalletConnectScreen } from '../screens/DashboardWalletConnectScreen';
 
 export const DashboardUserWallet = ({
@@ -27,13 +31,30 @@ export const DashboardUserWallet = ({
 }) => {
   const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
   const { disconnect } = useCubikWallet();
+  const { setModalState } = useUserModalUIContext();
+  const { setSelectedAdapter, setIsWalletError } = useCubikWalletContext();
   const onClose = () => {
     disconnect();
+    setSelectedAdapter(null);
+    setIsWalletError(null);
     setShowModal(false);
   };
 
   return isSmallDevice ? (
-    <Drawer open={showModal} onOpenChange={setShowModal}>
+    <Drawer
+      open={showModal}
+      onOpenChange={(e) => {
+        if (e === true) {
+          setShowModal(e);
+        } else {
+          setIsWalletError(null);
+          onClose();
+          setModalState('wallet-connect');
+          setSelectedAdapter(null);
+          setShowModal(false);
+        }
+      }}
+    >
       <DrawerPortal>
         <DrawerOverlay className={cn(!isSmallDevice ? 'hidden' : '')} />
         <DrawerContent className={cn(!isSmallDevice ? 'hidden' : 'h-max')}>

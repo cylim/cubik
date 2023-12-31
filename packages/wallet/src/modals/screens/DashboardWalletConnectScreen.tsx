@@ -35,8 +35,10 @@ export const DashboardWalletConnectScreen = ({
     useUserModalUIContext();
 
   const pathname = usePathname();
-  const { connected, publicKey, disconnect, signMessage } = useCubikWallet();
-  const { setShowModal } = useCubikWalletContext();
+  const { connected, publicKey, disconnect, signMessage, select } =
+    useCubikWallet();
+  const { setShowModal, setIsWalletError, setSelectedAdapter } =
+    useCubikWalletContext();
 
   useEffect(() => {
     const handleWalletConnect = async () => {
@@ -70,6 +72,8 @@ export const DashboardWalletConnectScreen = ({
       }
       setUser(user);
       setShowModal(false);
+      setSelectedAdapter(null);
+      setIsWalletError(null);
       handleRevalidation(pathname || '/');
       toast.success('Successfully logged in');
     } catch (e) {
@@ -102,6 +106,9 @@ export const DashboardWalletConnectScreen = ({
           isLoading={isWalletLoading}
           onClose={() => {
             disconnect();
+            select(null);
+            setSelectedAdapter(null);
+            setIsWalletError(null);
             setModalState('wallet-connect');
           }}
         />

@@ -70,7 +70,17 @@ const SolanaWalletConnectionProvider: FC<
       wallets={wallets}
       autoConnect={config.autoConnect}
       onError={(err, adapter) => {
-        setIsWalletError(err);
+        // Solflare throws an error undefined error when the user rejects the connection
+        if (adapter?.name.toLowerCase() !== 'solflare') {
+          setIsWalletError(err);
+        } else {
+          const newError = new Error('Solflare Error');
+          setIsWalletError({
+            error: newError,
+            message: newError.message,
+            name: newError.name,
+          });
+        }
         noop(err, adapter);
       }}
     >

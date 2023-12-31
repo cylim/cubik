@@ -1,8 +1,8 @@
 'use client';
 
-import React, { PropsWithChildren, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { WalletError, WalletName } from '@solana/wallet-adapter-base';
-import { WalletContextState } from '@solana/wallet-adapter-react';
+import { Wallet, WalletContextState } from '@solana/wallet-adapter-react';
 import { toast } from 'sonner';
 
 import { UserAuth } from '@cubik/common-types';
@@ -51,22 +51,27 @@ type WalletAppType =
       // user: any;
     };
 
+interface Props {
+  config: ICubikWalletConfig;
+  type: WalletAppType;
+  isWalletError: WalletError | null;
+  children: React.ReactNode;
+  setIsWalletError: React.Dispatch<React.SetStateAction<WalletError | null>>;
+}
 const CubikWalletContextProvider = ({
   config,
   children,
   type,
   isWalletError,
-}: {
-  config: ICubikWalletConfig;
-  type: WalletAppType;
-  isWalletError: WalletError | null;
-} & PropsWithChildren) => {
+  setIsWalletError,
+}: Props) => {
   const [showModal, setShowModal] = useState(false);
   const { publicKey, connected } = useCubikWallet();
   // const [isError, setIsError] = useState<WalletError | null>(null);
-
+  const [selectedAdapter, setSelectedAdapter] = useState<Wallet | null>(null);
   const handleConnectClick = useHandleConnect({
     autoConnect: config.autoConnect,
+    setSelectWallet: setSelectedAdapter,
   });
 
   useEffect(() => {
@@ -118,6 +123,9 @@ const CubikWalletContextProvider = ({
         setShowModal,
         walletlistExplanation: config.walletlistExplanation,
         error: isWalletError,
+        selectedAdapter: selectedAdapter,
+        setSelectedAdapter: setSelectedAdapter,
+        setIsWalletError,
       }}
     >
       <ModalUIProvider>
@@ -184,6 +192,7 @@ const CubikWalletProvider = ({
       >
         <CubikWalletValueProvider>
           <CubikWalletContextProvider
+            setIsWalletError={setIsWalletError}
             isWalletError={isWalletError}
             type={type}
             config={params.config as any}

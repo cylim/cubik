@@ -8,7 +8,7 @@ import type {
   WalletError,
   WalletName,
 } from '@solana/wallet-adapter-base';
-import type { WalletContextState } from '@solana/wallet-adapter-react';
+import type { Wallet, WalletContextState } from '@solana/wallet-adapter-react';
 import type {
   Connection,
   Transaction,
@@ -30,6 +30,9 @@ export interface ICubikWalletContext {
   setShowModal: (showModal: boolean) => void;
   walletlistExplanation: ICubikWalletConfig['walletlistExplanation'];
   error: WalletError | null;
+  setSelectedAdapter: React.Dispatch<React.SetStateAction<Wallet | null>>;
+  selectedAdapter: Wallet | null;
+  setIsWalletError: React.Dispatch<React.SetStateAction<WalletError | null>>;
 }
 
 export const CubikWalletContext = createContext<ICubikWalletContext>({
@@ -42,6 +45,9 @@ export const CubikWalletContext = createContext<ICubikWalletContext>({
   setShowModal: (showModal: boolean) => {},
   walletlistExplanation: undefined,
   error: null,
+  setIsWalletError: () => {},
+  selectedAdapter: null,
+  setSelectedAdapter: () => {},
 });
 
 // Internal context for handling wallet state

@@ -30,9 +30,10 @@ export const WebWalletConnectScreen = ({ onClose, setUser }: Props) => {
   const { modalState, setModalState, isWalletLoading, setIsWalletLoading } =
     useUserModalUIContext();
 
-  const { setShowModal } = useCubikWalletContext();
+  const { setShowModal, setSelectedAdapter, setIsWalletError } =
+    useCubikWalletContext();
   const pathname = usePathname();
-  const { connected, connecting, publicKey, disconnect, signMessage } =
+  const { connected, connecting, publicKey, select, disconnect, signMessage } =
     useCubikWallet();
   useEffect(() => {
     const handleWalletConnect = async () => {
@@ -121,6 +122,9 @@ export const WebWalletConnectScreen = ({ onClose, setUser }: Props) => {
           isLoading={isWalletLoading}
           onClose={() => {
             disconnect();
+            select(null);
+            setSelectedAdapter(null);
+            setIsWalletError(null);
             setModalState('wallet-connect');
           }}
         />

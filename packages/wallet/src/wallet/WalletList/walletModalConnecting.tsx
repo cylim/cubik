@@ -1,30 +1,48 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import { useState } from 'react';
 import { WalletAdapter } from '@solana/wallet-adapter-base';
+import { toast } from 'sonner';
 
 import { Avatar, Button, Text } from '@cubik/ui';
 
-import { useCubikWallet } from '../context/CubikContext';
+import { useCubikWallet, useCubikWalletContext } from '../context/CubikContext';
+import { useUserModalUIContext } from '../context/WalletUIContext';
 
 const WalletConnectStatus = ({
   icon,
   name,
   status,
   adapter,
+  error,
 }: {
   icon: string;
   name: string;
   status: 'connecting' | 'failed' | 'connected' | null;
   adapter: WalletAdapter;
+  error?: string;
 }) => {
-  const {} = useCubikWallet();
-
+  const { select } = useCubikWallet();
+  const [loading, setLoading] = useState(false);
+  const { setIsWalletError } = useCubikWalletContext();
+  const { setModalState } = useUserModalUIContext();
   const onRetry = async () => {
     try {
+      setLoading(true);
+      select(adapter.name);
       await adapter.connect();
-    } catch (error) {
+      setModalState('wallet-verify');
+      toast.success('Wallet Connected');
+    } catch (e) {
+      const error = e as Error;
       console.log(error);
+      setIsWalletError({
+        error,
+        message: error.message,
+        name: error.name,
+      });
       return null;
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -46,6 +64,7 @@ const WalletConnectStatus = ({
             : 'Connected Succesfully'}
         </Text>
       </div>
+      {error}
       <div className="flex flex-col justify-start gap-4 mt-4  text-base font-normal">
         <Text className="l2-light" color={'secondary'}>
           {status === 'connecting'
@@ -60,14 +79,23 @@ const WalletConnectStatus = ({
               className="w-full"
               size={'md'}
               variant={'secondary'}
-              isLoading={adapter.connecting}
+              isLoading={loading}
               onClick={onRetry}
             >
-              Retry {status}
+              Retry
             </Button>
           </div>
         ) : (
-          ''
+          <div className="pointer-events-auto flex items-center justify-center gap-5">
+            <Button
+              className="w-full"
+              size={'md'}
+              variant={'secondary'}
+              isLoading={true}
+            >
+              Retry
+            </Button>
+          </div>
         )}
       </div>
     </div>

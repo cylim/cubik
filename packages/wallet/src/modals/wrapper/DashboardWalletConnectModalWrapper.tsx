@@ -11,7 +11,7 @@ import {
 } from '@cubik/ui';
 import { cn } from '@cubik/ui/lib/utils';
 
-import { useCubikWallet } from '../../wallet';
+import { useCubikWallet, useCubikWalletContext } from '../../wallet';
 import { DashboardWalletConnectScreen } from '../screens/DashboardWalletConnectScreen';
 
 export const DashboardUserWallet = ({
@@ -27,8 +27,11 @@ export const DashboardUserWallet = ({
 }) => {
   const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
   const { disconnect } = useCubikWallet();
+  const { setSelectedAdapter, setIsWalletError } = useCubikWalletContext();
   const onClose = () => {
     disconnect();
+    setSelectedAdapter(null);
+    setIsWalletError(null);
     setShowModal(false);
   };
 

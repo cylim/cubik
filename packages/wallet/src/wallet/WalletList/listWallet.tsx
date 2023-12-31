@@ -5,7 +5,7 @@ import React from 'react';
 
 import { AvatarGroup, Divider, Text } from '@cubik/ui';
 
-import { useCubikWalletContext } from '../context/CubikContext';
+import { useCubikWallet, useCubikWalletContext } from '../context/CubikContext';
 import { useWalletModalLogic } from '../hooks/useWalletModalLogic';
 import { OnboardingFlow } from './Onboarding';
 import { WalletIcon } from './WalletListItem';
@@ -22,26 +22,27 @@ const CubikWalletModal: React.FC<ICubikWalletModal> = ({ setShowHeader }) => {
     list,
     showMore,
     showOnboarding,
-    connectingWallet,
     isSmallDevice,
     setShowMore,
     handleConnectClick,
     renderWalletList,
   } = useWalletModalLogic();
 
-  const { error } = useCubikWalletContext();
+  const { error, selectedAdapter } = useCubikWalletContext();
 
   if (showOnboarding) {
     setShowHeader(false);
     return <OnboardingFlow />;
   }
-  if (connectingWallet) {
+
+  if (selectedAdapter) {
     return (
       <WalletConnectStatus
-        icon={connectingWallet.adapter.icon}
-        name={connectingWallet.adapter.name}
+        error={error?.message}
+        icon={selectedAdapter?.adapter.icon}
+        name={selectedAdapter.adapter.name}
         status={error?.message ? 'failed' : 'connecting'}
-        adapter={connectingWallet.adapter}
+        adapter={selectedAdapter.adapter}
       />
     );
   }
@@ -86,7 +87,7 @@ const CubikWalletModal: React.FC<ICubikWalletModal> = ({ setShowHeader }) => {
                   flexDirection: 'column',
                   gap: '8px',
                 }}
-                className="pointer-events-auto cursor-pointer border border-red-500"
+                className="pointer-events-auto cursor-pointer"
                 onClick={() => setShowMore(true)}
               >
                 <AvatarGroup

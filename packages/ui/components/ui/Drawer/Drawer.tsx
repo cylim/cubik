@@ -13,7 +13,7 @@ interface WithoutFadeFromProps {
   fadeFromIndex?: never;
 }
 
-type DrawerProps = {
+export type DrawerProps = {
   activeSnapPoint?: number | string | null;
   setActiveSnapPoint?: (snapPoint: number | string | null) => void;
   children?: React.ReactNode;
@@ -49,6 +49,7 @@ interface DrawerHeaderProps {
 }
 interface DrawerBodyProps {
   children: React.ReactNode;
+  className?: string;
 }
 interface DrawerFooterProps {
   children: React.ReactNode;

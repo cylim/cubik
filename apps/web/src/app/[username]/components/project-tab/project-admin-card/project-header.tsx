@@ -1,9 +1,19 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import { ProjectProps } from '@/app/[username]/components/project-tab/project-admin-card';
 
 import {
   AvatarLabelGroup,
   Button,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerMenu,
+  DrawerMenuItem,
+  DrawerMenuList,
+  DrawerOverlay,
+  DrawerPortal,
   Menu,
   MenuButton,
   MenuDivider,
@@ -15,6 +25,7 @@ import {
   SubMenuList,
   Text,
 } from '@cubik/ui';
+import { useMediaQuery } from '@cubik/ui/hooks';
 
 const ProjectHeader = ({
   project,
@@ -24,6 +35,17 @@ const ProjectHeader = ({
   isAdmin: boolean;
 }) => {
   const isLiveInRound = false;
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
+  useEffect(() => {
+    // Close the drawer when resizing from mobile to desktop
+    if (!isMobile && isDrawerOpen) {
+      console.log('button clicked for menu', isDrawerOpen);
+      setIsDrawerOpen(false);
+    }
+  }, [isMobile, isDrawerOpen]);
+
   return isAdmin ? (
     <div className="flex flex-row items-center justify-between gap-4">
       <AvatarLabelGroup
@@ -55,41 +77,76 @@ const ProjectHeader = ({
         <Button variant={'secondary'} size="xl" className="hidden md:flex">
           View Details
         </Button>
-        <Menu>
-          <MenuButton>
+        {isMobile ? (
+          <>
+            {' '}
             <Button
               leftIconName="threeDots"
+              onClick={() => {
+                setIsDrawerOpen(true);
+              }}
               variant={'secondary'}
               size="xl"
               className="h-[48px] w-[48px]"
             />
-          </MenuButton>
-          <MenuList>
-            <MenuItem text="Apply For Grant" leftIcon="cube" />
-            <MenuItem text="Project Settings" leftIcon="settings" />
-            <MenuDivider />
-            <MenuItem text="View Vault" leftIcon="bank" />
-            <SubMenu>
-              <SubMenuButton leftIcon="share">Share Project</SubMenuButton>
-              <SubMenuList>
-                <MenuItem text="Download"></MenuItem>
-                <MenuItem text="Create a Copy"></MenuItem>
-                <MenuItem text="Mark as Draft"></MenuItem>
-                <MenuItem text="Delete"></MenuItem>
-              </SubMenuList>
-            </SubMenu>
-            <SubMenu>
-              <SubMenuButton leftIcon="compass">View On Explorer</SubMenuButton>
-              <SubMenuList>
-                <MenuItem text="Solana Explorer" leftIcon="solanaExplorer" />
-                <MenuItem text="Solana FM" leftIcon="solanaFM" />
-                <MenuItem text="Solscan" leftIcon="solscan" />
-                <MenuItem text="xRay" leftIcon="xRay" />
-              </SubMenuList>
-            </SubMenu>
-            <MenuItem text="Download Data" leftIcon="download" />
-          </MenuList>
-        </Menu>
+            {/* <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+              <DrawerPortal>
+                <DrawerOverlay />
+                <DrawerContent>
+                  <DrawerBody>
+                    <div className="min-h-[80vh]"> hello world </div>
+                  </DrawerBody>
+                </DrawerContent>
+              </DrawerPortal>
+            </Drawer> */}
+            <DrawerMenu open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+              <DrawerMenuList>
+                <DrawerMenuItem text="Apply For Grant" leftIcon="cube" />
+                <DrawerMenuItem text="Project Settings" leftIcon="settings" />
+                <DrawerMenuItem text="View Vault" leftIcon="bank" />
+                <DrawerMenuItem text="Share Project" leftIcon="share" />
+              </DrawerMenuList>
+            </DrawerMenu>
+          </>
+        ) : (
+          <Menu>
+            <MenuButton>
+              <Button
+                leftIconName="threeDots"
+                variant={'secondary'}
+                size="xl"
+                className="h-[48px] w-[48px]"
+              />
+            </MenuButton>
+            <MenuList>
+              <MenuItem text="Apply For Grant" leftIcon="cube" />
+              <MenuItem text="Project Settings" leftIcon="settings" />
+              <MenuDivider />
+              <MenuItem text="View Vault" leftIcon="bank" />
+              <SubMenu>
+                <SubMenuButton leftIcon="share">Share Project</SubMenuButton>
+                <SubMenuList>
+                  <MenuItem text="Download"></MenuItem>
+                  <MenuItem text="Create a Copy"></MenuItem>
+                  <MenuItem text="Mark as Draft"></MenuItem>
+                  <MenuItem text="Delete"></MenuItem>
+                </SubMenuList>
+              </SubMenu>
+              <SubMenu>
+                <SubMenuButton leftIcon="compass">
+                  View On Explorer
+                </SubMenuButton>
+                <SubMenuList>
+                  <MenuItem text="Solana Explorer" leftIcon="solanaExplorer" />
+                  <MenuItem text="Solana FM" leftIcon="solanaFM" />
+                  <MenuItem text="Solscan" leftIcon="solscan" />
+                  <MenuItem text="xRay" leftIcon="xRay" />
+                </SubMenuList>
+              </SubMenu>
+              <MenuItem text="Download Data" leftIcon="download" />
+            </MenuList>
+          </Menu>
+        )}
       </div>
     </div>
   ) : (

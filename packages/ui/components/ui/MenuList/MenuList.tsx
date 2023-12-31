@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactEventHandler } from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { cva, VariantProps } from 'class-variance-authority';
 
@@ -62,7 +62,7 @@ const MenuList = ({ children, align = 'end' }: MenuListProps) => {
     </DropdownMenu.Portal>
   );
 };
-const DrawerMenuList = ({ children, align = 'end' }: MenuListProps) => {
+const DrawerMenuList = ({ children }: MenuListProps) => {
   return (
     <DrawerPortal>
       <DrawerOverlay />
@@ -156,7 +156,7 @@ const DrawerMenuItem = ({
   const itemProps: {
     onClick?: () => void;
     className: string;
-    onSelect?: (event: Event) => void; // Define onSelect property
+    onSelect?: ReactEventHandler<HTMLButtonElement> | undefined;
   } = {
     onClick: isLoading ? () => {} : onClick,
     className: cn(
@@ -169,7 +169,11 @@ const DrawerMenuItem = ({
     itemProps.onSelect = (e) => e.preventDefault();
   }
   return (
-    <button {...itemProps}>
+    <button
+      onClick={itemProps.onClick}
+      className={itemProps.className}
+      onSelect={itemProps.onSelect}
+    >
       {' '}
       <div className="flex justify-between">
         <div className="flex gap-[10px] items-center ">
@@ -200,9 +204,6 @@ interface SubMenuProps {
 }
 
 const SubMenu = ({ children }: SubMenuProps) => {
-  return <DropdownMenu.Sub>{children}</DropdownMenu.Sub>;
-};
-const DrawerSubMenu = ({ children }: SubMenuProps) => {
   return <DropdownMenu.Sub>{children}</DropdownMenu.Sub>;
 };
 

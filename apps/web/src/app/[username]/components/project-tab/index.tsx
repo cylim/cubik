@@ -71,7 +71,7 @@ export const ProjectTab = async ({ username }: Props) => {
           <>
             {projects ? (
               <div className="flex w-full flex-col justify-center gap-[16px] md:gap-[24px]">
-                {projects.slice(0, 1).map((value, index) => (
+                {projects.map((value, index) => (
                   <ProjectAdminCard project={value} key={index} />
                 ))}
               </div>

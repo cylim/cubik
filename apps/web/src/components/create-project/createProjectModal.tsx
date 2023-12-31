@@ -1,14 +1,13 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Step1 } from '@/components/create-project/step1';
 import { Step2 } from '@/components/create-project/step2';
 import { Step3 } from '@/components/create-project/step3';
 import { Step4 } from '@/components/create-project/step4';
-import { useUploadThing } from '@/utils/uploadthing';
 import axios, { AxiosResponse } from 'axios';
 import { useForm } from 'react-hook-form';
 
 import { Project_Backup } from '@cubik/common';
-import { Prisma, Project } from '@cubik/database';
+import { Prisma } from '@cubik/database';
 import { ApiResponseType } from '@cubik/database/api';
 import {
   Avatar,
@@ -71,30 +70,11 @@ export interface ProjectFormData {
   website: string;
   twitter: string;
   isOpenSource: boolean;
+  progress: number;
 }
 export const CreateProjectModal = ({ onClose, open }: Props) => {
   const [step, setStep] = useState<number>(1);
   const [loadedProject, setLoadedProject] = useState<ProjectData | null>(null);
-
-  // const defaultValues: ProjectFormData = useMemo(() => {
-  //   return {
-  //     name: loadedProject ? loadedProject.name : '',
-  //     tagline: loadedProject ? loadedProject.shortDescription : '',
-  //     email: loadedProject ? loadedProject.email : '',
-  //     category: [],
-  //     logo: loadedProject ? loadedProject.logo : Project_Backup,
-  //     description: loadedProject ? loadedProject.longDescription : '',
-  //     slides:
-  //       loadedProject && (loadedProject.slides as any).slide
-  //         ? (loadedProject.slides as any).slide
-  //         : [],
-  //     team: [],
-  //     github: loadedProject ? loadedProject.githubLink : '',
-  //     website: loadedProject ? loadedProject.projectLink : '',
-  //     twitter: loadedProject ? loadedProject.twitterHandle : '',
-  //     isOpenSource: false,
-  //   };
-  // }, [loadedProject]);
 
   const createProjectForm = useForm<ProjectFormData>({
     defaultValues: {
@@ -110,6 +90,7 @@ export const CreateProjectModal = ({ onClose, open }: Props) => {
       team: [],
       twitter: '',
       website: '',
+      progress: 0,
     },
   });
 
@@ -188,7 +169,7 @@ export const CreateProjectModal = ({ onClose, open }: Props) => {
             </div>
           </div>
           <div className="absolute bottom-0 left-0 ml-24 w-full">
-            <div className="min-h-48 flex w-full flex-col gap-8 rounded-t-xl border-[0.66px] border-[var(--color-border-primary-base)] bg-[var(--card-bg-primary)] pl-14 pt-14">
+            <div className="flex min-h-48 w-full flex-col gap-8 rounded-t-xl border-[0.66px] border-[var(--color-border-primary-base)] bg-[var(--card-bg-primary)] pl-14 pt-14">
               <Avatar
                 size={'xl'}
                 variant={'square'}

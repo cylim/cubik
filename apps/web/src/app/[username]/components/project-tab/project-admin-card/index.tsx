@@ -59,7 +59,7 @@ const ProjectVerificationWrapper = ({
   children,
   projectVerificationStatus,
 }: any) => {
-  if (projectVerificationStatus) {
+  if (!projectVerificationStatus) {
     return (
       <div className="flex flex-col gap-2 rounded-2xl bg-[var(--color-surface-innovative-transparent)] p-2">
         <div className="rounded-lg">{children}</div>

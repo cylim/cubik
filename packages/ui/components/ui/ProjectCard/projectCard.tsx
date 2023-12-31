@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-// import Link from 'next/link';
+//import Link from 'next/link';
 
 import { Icon } from '../../../icons/icon';
 import { cn } from '../../../lib/utils';
@@ -54,7 +54,7 @@ export const ProjectCard = (props: Props) => {
       <div
         className={cn(
           props.className,
-          'p-[4px] flex justify-between items-center',
+          'p-[12px] flex animate-in rounded-xl bg-gradient-to-bl hover:from-[var(--color-surface-primary-base)] hover:to-transparent justify-between items-center',
         )}
         {...props}
       >

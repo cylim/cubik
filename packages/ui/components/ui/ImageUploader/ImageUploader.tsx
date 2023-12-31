@@ -2,17 +2,25 @@ import React, { useState } from 'react';
 
 import { Icon } from '../../../icons/icon';
 import { cn } from '../../../lib/utils';
+import { Avatar } from '../../ui/Avatar/Avatar';
 import { Text } from '../../ui/text/text';
 
 interface Props {
-  useUploadThing: any;
+  startUpload: (files: File[], input?: undefined) => any;
+  isUploading: boolean;
+  errorMessage: string | undefined;
+  logo: string;
+  progress: number;
 }
-export const ImageUploader = ({}: Props) => {
-  const [loadingState] = useState<'Idle' | 'Success' | 'Error' | 'Uploading'>(
-    'Error',
-  );
-  // const [progress, setProgress] = useState<number>(0);
-  const [, setDragging] = useState(false);
+export const ImageUploader = ({
+  startUpload,
+  isUploading,
+  errorMessage,
+  logo,
+  progress,
+}: Props) => {
+  const [drag, setDragging] = useState(false);
+  const [file, setFile] = useState<File[]>([]);
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -29,53 +37,84 @@ export const ImageUploader = ({}: Props) => {
     setDragging(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       processFile(e.dataTransfer.files[0]);
+      setFile([e.dataTransfer.files[0]]);
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       processFile(e.target.files[0]);
+      setFile([e.target.files[0]]);
     }
   };
 
   const processFile = (file: File) => {
-    alert(file.name);
-    // Add your logic to handle the file
+    startUpload([file]);
   };
-
-  // const { startUpload } = useUploadThing('imageUploader', {
-  //   onClientUploadComplete: () => {
-  //     setLoadingState('Success');
-  //   },
-  //   onUploadError: (error: Error) => {
-  //     setLoadingState('Error');
-  //   },
-  //   onUploadProgress: (progress: number) => {
-  //     //   setLoadingState('Uploading');
-  //   },
-  // });
 
   return (
     <div
-      className={`border border-[var(--form-uploader-border-default)] flex justify-start gap-3 p-3 rounded-xl w-full`}
+      className={cn(
+        `border border-[var(--form-uploader-border-default)] flex justify-start gap-3 p-3 rounded-xl w-full`,
+        drag && 'border-[var(--form-uploader-border-hover)]',
+      )}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
-      {loadingState !== 'Success' ? (
+      {/* Success */}
+      {file.length !== 0 && !isUploading && !errorMessage && (
+        <div className={cn('w-max rounded flex')}>
+          <Avatar size={'lg'} src={logo} alt="name" />
+        </div>
+      )}
+      {/* Uploading state */}
+      {isUploading && (
         <div
           className={cn(
             'p-4 w-max rounded flex',
-            loadingState === 'Idle' && 'bg-[var(--form-uploader-bg-default)]',
-            loadingState === 'Error' && 'bg-[var(--form-uploader-img-error)]',
+            'bg-[var(--form-uploader-img-uploading)]',
           )}
         >
-          <Icon name="cross" />
+          <Icon
+            name={'spinner'}
+            className="stroke-[var(--form-uploader-icon-uploading)] animate-spin"
+            height={18}
+            width={18}
+          />
         </div>
-      ) : (
-        <div className={cn('p-4 w-max rounded flex')}>{/* Avatar */}</div>
       )}
-      {loadingState === 'Idle' && (
+      {/* Default state */}
+      {file.length === 0 && !errorMessage && !isUploading && (
+        <div
+          className={cn(
+            'p-4 w-max rounded flex',
+            'bg-[var(--form-uploader-img-default)]',
+          )}
+        >
+          <Icon
+            name={'upload'}
+            className="stroke-[var(--form-uploader-icon-default)]"
+          />
+        </div>
+      )}
+      {/* Error State */}
+      {errorMessage && (
+        <div
+          className={cn(
+            'p-4 w-max rounded flex',
+            'bg-[var(--form-uploader-img-error)]',
+          )}
+        >
+          <Icon
+            name={'upload'}
+            className="stroke-[var(--form-uploader-icon-error)]"
+          />
+        </div>
+      )}
+
+      {/* Default  */}
+      {file.length === 0 && !errorMessage && !isUploading && (
         <div className="flex justify-center flex-col gap-3">
           <Text className="l2" color={'primary'}>
             Drop, Paste here or{' '}
@@ -94,7 +133,9 @@ export const ImageUploader = ({}: Props) => {
           </Text>
         </div>
       )}
-      {loadingState === 'Success' && (
+
+      {/* Sucess state */}
+      {file.length > 0 && !errorMessage && !isUploading && (
         <div className="flex justify-center flex-col gap-3">
           <Text className="l2 flex gap-1" color={'primary'}>
             <label className="text-[--form-uploader-text-success]">
@@ -111,11 +152,12 @@ export const ImageUploader = ({}: Props) => {
             </label>
           </Text>
           <Text className="l3-light text-[var(--form-helper-default)]">
-            profilepicture.jpg
+            {file[0].name}
           </Text>
         </div>
       )}
-      {loadingState === 'Error' && (
+      {/* Error state */}
+      {errorMessage && (
         <div className="flex justify-center flex-col gap-3">
           <Text className="l2 flex gap-1" color={'primary'}>
             <label className="text-[--form-uploader-text-error]">
@@ -134,6 +176,24 @@ export const ImageUploader = ({}: Props) => {
           <Text className="l3-light text-[var(--form-helper-default)]">
             Recommended size: 240*250 | JPG, PNG, GIF. Max size: 2MB
           </Text>
+        </div>
+      )}
+      {/* Uploading state */}
+      {isUploading && (
+        <div className="flex justify-center flex-col gap-3 w-full">
+          <Text className="l2 flex gap-1" color={'primary'}>
+            <label className="text-[var(--form-uploader-text-uploading)] line-clamp-1">
+              Uploading {file[0].name}
+            </label>
+          </Text>
+          <div className="bg-[var(--form-uploader-img-uploading)] h-3 w-full rounded-lg overflow-hidden">
+            <div
+              style={{
+                width: `${progress}%`,
+              }}
+              className="bg-[var(--form-uploader-icon-uploading)] h-3"
+            />
+          </div>
         </div>
       )}
     </div>

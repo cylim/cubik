@@ -58,7 +58,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#1A1A1A', // #272727
+  themeColor: '#272727',
 };
 
 const inter = Inter({ subsets: ['latin'] });

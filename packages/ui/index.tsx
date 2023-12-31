@@ -53,5 +53,6 @@ export * from './components/ui/RegistrationCard';
 export * from './components/ui/Tabs/verticalTabs';
 export * from './components/ui/CollectionCard';
 export * from './components/ui/CopyToClipboard';
+export * from './components/ui/Carousel';
 export * from './components/ui/CheckBox';
 export * from './components/ui/ImageUploader';

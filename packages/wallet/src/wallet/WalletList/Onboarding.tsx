@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 import { Button, Text } from '@cubik/ui';
 
-import ExternalIcon from '../icons/ExternalIcon';
+import ExternalIcon from '../../icons/ExternalIcon';
 // import ExternalIcon from '../icons/ExternalIcon';
-import { HARDCODED_WALLET_STANDARDS } from './HardCodedWallet';
+import { HARDCODED_WALLET_STANDARDS } from '../misc/HardCodedWallet';
 
 export const OnboardingIntro: React.FC<{
   flow: IOnboardingFlow;
@@ -107,7 +107,7 @@ export const OnboardingFlow = () => {
             </Text>
           </div>
         </div>
-        <div className="flex justify-center gap-3 items-center flex-col w-full pb-12">
+        <div className="flex justify-center gap-2 items-center flex-col w-full">
           <Button
             onClick={() => setState('Get Wallet')}
             variant={'secondary'}
@@ -120,6 +120,7 @@ export const OnboardingFlow = () => {
             Learn More
           </Button>
         </div>
+        <div />
       </div>
     );
   }

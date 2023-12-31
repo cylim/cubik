@@ -2,6 +2,7 @@ import { ProjectFormData } from '@/components/create-project';
 import { useUploadThing } from '@/utils/uploadthing';
 import React from 'React';
 import { UseFormReturn } from 'react-hook-form';
+import { toast } from 'sonner';
 
 import { Button, ImageUploader, Text } from '@cubik/ui';
 
@@ -9,7 +10,40 @@ interface Props {
   projectForm: UseFormReturn<ProjectFormData, any, undefined>;
   setStep: React.Dispatch<React.SetStateAction<number>>;
 }
-export const Step2 = ({ setStep }: Props) => {
+const Step = ({ setStep, projectForm }: Props) => {
+  const { startUpload, isUploading, permittedFileInfo } = useUploadThing(
+    'imageUploader',
+    {
+      onUploadProgress: (progressEvent) => {
+        // setProgress(progressEvent);
+        projectForm.setValue('progress', progressEvent);
+      },
+      onUploadError: (error) => {
+        projectForm.setError('logo', {
+          type: 'manual',
+          message: error.message,
+        });
+        toast.error(`Upload Error: ${error.message}`);
+      },
+      onUploadBegin: (file) => {
+        //   setLoadingState('Uploading');
+        //   toast.info(`Upload Begin: ${file}`);
+      },
+      onClientUploadComplete: (file) => {
+        if (file) {
+          console.log(file);
+          projectForm.setValue('logo', file[0].url);
+        } else {
+          projectForm.setError('logo', {
+            type: 'manual',
+            message: "Couldn't upload file",
+          });
+          toast.error(`Upload Error: ${file}`);
+        }
+      },
+    },
+  );
+
   return (
     <>
       <div className="flex flex-col gap-14">
@@ -28,7 +62,13 @@ export const Step2 = ({ setStep }: Props) => {
           <Text color={'primary'} className="l2">
             Thumbnail
           </Text>
-          <ImageUploader useUploadThing={useUploadThing} />
+          <ImageUploader
+            progress={projectForm.watch('progress') || 0}
+            logo={projectForm.watch('logo')}
+            errorMessage={projectForm.formState.errors.logo?.message}
+            isUploading={isUploading}
+            startUpload={startUpload}
+          />
         </div>
         <div className=" flex w-full items-center justify-between">
           <Button
@@ -52,3 +92,5 @@ export const Step2 = ({ setStep }: Props) => {
     </>
   );
 };
+
+export { Step as Step2 };

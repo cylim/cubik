@@ -4,6 +4,7 @@ import TabLayout from '@/components/common/tabs/TabLayout';
 import Link from 'next/link';
 import { ProjectSocials, Slides } from '@/types/project';
 import { formatDistanceToNow } from 'date-fns';
+import { cookies } from 'next/headers';
 
 import {
   Carousel,
@@ -286,7 +287,7 @@ const InteractionSidebar = ({
 
 export const ProjectDetailsTab = async ({ slug }: { slug: string }) => {
   const fetchedProjectDetails = await fetchProjectDetails(slug);
-  const project = fetchProjectDetails;
+  // const project = fetchProjectDetails;
   if (!fetchProjectDetails) {
     return 'Loading...';
   }

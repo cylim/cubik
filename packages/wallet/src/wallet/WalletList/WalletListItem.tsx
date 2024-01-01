@@ -14,7 +14,7 @@ import { Adapter } from '@solana/wallet-adapter-base';
 import { Avatar, Spinner, Text } from '@cubik/ui';
 import { useMediaQuery } from '@cubik/ui/hooks';
 
-import UnknownIconSVG from '../icons/UnknownIconSVG';
+import UnknownIconSVG from '../../icons/UnknownIconSVG';
 
 export interface WalletIconProps
   extends DetailedHTMLProps<
@@ -40,26 +40,23 @@ export const WalletIcon: FC<WalletIconProps> = ({
     return (
       <div
         style={{
-          width: 'clamp(84px,10vw,102px)',
-          height: 'clamp(108px,10vw,100px)',
+          width: 'clamp(80px,10vw,102px)',
+          height: 'clamp(94px,10vw,100px)',
+          minWidth: width,
+          minHeight: height,
         }}
-        className="flex items-center justify-center gap-2 px-[16px] py-[12px]"
+        className="flex items-center justify-center gap-2 px-[12px] w-fit flex-col py-[4px] md:px-[16px] md:py-[12px]"
       >
-        <div
-          className="w-fit flex flex-col items-center justify-center gap-2"
-          style={{ minWidth: width, minHeight: height }}
-        >
-          {wallet.connecting ? (
-            <div className="w-12 h-12 flex justify-center items-center">
-              <Spinner color="black" />
-            </div>
-          ) : (
-            <Avatar alt={wallet.name} src={wallet.icon} size="md" />
-          )}
-          <Text className="b4 md:b4-light" color="primary">
-            {wallet.name}
-          </Text>
-        </div>
+        {wallet.connecting ? (
+          <div className="w-12 h-12 flex justify-center items-center">
+            <Spinner color="black" />
+          </div>
+        ) : (
+          <Avatar alt={wallet.name} src={wallet.icon} size="md" />
+        )}
+        <Text className="b4 md:b4-light line-clamp-1" color="primary">
+          {wallet.name}
+        </Text>
       </div>
     );
   } else {

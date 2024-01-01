@@ -1,5 +1,4 @@
 import React from 'react';
-import { ProjectTab } from '@/app/[username]/components/project-tab';
 
 import { Background, Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
 

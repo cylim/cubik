@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { ReactEventHandler } from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { cva, VariantProps } from 'class-variance-authority';
 
 import { Icon } from '../../../icons/icon';
 import { iconLibrary } from '../../../icons/iconLibrary';
 import { cn } from '../../../lib/utils';
+import {
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerOverlay,
+  DrawerPortal,
+  DrawerProps,
+} from '../Drawer/Drawer';
 import { Text } from '../text/text';
 
 interface MenuProps {
@@ -13,6 +21,19 @@ interface MenuProps {
 
 const Menu = ({ children }: MenuProps) => {
   return <DropdownMenu.Root>{children}</DropdownMenu.Root>;
+};
+
+const DrawerMenu = ({
+  open,
+  children,
+  onOpenChange,
+  ...props
+}: DrawerProps) => {
+  return (
+    <Drawer open={open} onOpenChange={onOpenChange} {...props}>
+      {children}
+    </Drawer>
+  );
 };
 
 interface MenuButtonProps {
@@ -39,6 +60,18 @@ const MenuList = ({ children, align = 'end' }: MenuListProps) => {
         {children}
       </DropdownMenu.Content>
     </DropdownMenu.Portal>
+  );
+};
+const DrawerMenuList = ({ children }: MenuListProps) => {
+  return (
+    <DrawerPortal>
+      <DrawerOverlay />
+      <DrawerContent>
+        <DrawerBody className="py-2 pb-8 min-w-[220px] min-h-[20vh] shadow-lg rounded-xl will-change-[opacity,transform] flex flex-col gap-2">
+          {children}
+        </DrawerBody>
+      </DrawerContent>
+    </DrawerPortal>
   );
 };
 
@@ -94,7 +127,7 @@ const MenuItem = ({
           {leftIcon && (
             <Icon name={leftIcon} stroke="inherit" height={20} width={20} />
           )}
-          <Text className="l2-light" color={'inherit'}>
+          <Text className="b1 md:l2-light-light" color={'inherit'}>
             {text}
           </Text>
           {isLoading && (
@@ -110,6 +143,59 @@ const MenuItem = ({
         {children}
       </div>
     </DropdownMenu.Item>
+  );
+};
+const DrawerMenuItem = ({
+  children,
+  text,
+  leftIcon,
+  onClick,
+  isLoading,
+  variant = 'primary',
+}: MenuItemProps) => {
+  const itemProps: {
+    onClick?: () => void;
+    className: string;
+    onSelect?: ReactEventHandler<HTMLButtonElement> | undefined;
+  } = {
+    onClick: isLoading ? () => {} : onClick,
+    className: cn(
+      isLoading ? 'cursor-not-allowed' : 'cursor-pointer',
+      children ? '' : MenuItemVariants({ variant }),
+      '',
+    ),
+  };
+  if (children) {
+    itemProps.onSelect = (e) => e.preventDefault();
+  }
+  return (
+    <button
+      onClick={itemProps.onClick}
+      className={itemProps.className}
+      onSelect={itemProps.onSelect}
+    >
+      {' '}
+      <div className="flex justify-between">
+        <div className="flex gap-[10px] items-center ">
+          {leftIcon && (
+            <Icon name={leftIcon} stroke="inherit" height={20} width={20} />
+          )}
+          <Text className="b2 md:l2-light" color={'inherit'}>
+            {text}
+          </Text>
+          {isLoading && (
+            <Icon
+              name={'spinner'}
+              stroke="inherit"
+              height={18}
+              width={18}
+              className={cn('animate-spin')}
+            />
+          )}
+        </div>
+        {children}
+      </div>
+    </button>
   );
 };
 
@@ -134,7 +220,7 @@ const SubMenuButton = ({ children, leftIcon }: SubMenuButtonProps) => {
           {leftIcon && (
             <Icon name={leftIcon} stroke="inherit" height={20} width={20} />
           )}
-          <Text className="l2 ">{children}</Text>
+          <Text className="l1 md:l2-light">{children}</Text>
         </div>
 
         <Icon name="chevronRight" height={20} width={20} stroke="inherit" />
@@ -185,9 +271,12 @@ interface SubMenuListProps {
 
 export {
   MenuList,
+  DrawerMenuList,
   MenuButton,
   Menu,
+  DrawerMenu,
   MenuItem,
+  DrawerMenuItem,
   SubMenu,
   SubMenuButton,
   SubMenuList,

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Event } from '@cubik/database';
 import {
   Avatar,
   Button,
@@ -11,14 +10,15 @@ import {
   Text,
 } from '@cubik/ui';
 
-type ProjectPropsType = {
-  name: string;
-  shortDescription: string;
-  logo: string;
-  projectLink: string;
-  slides: string[]
-  events: Partial<Event>[];
-};
+type ProjectPropsType =
+  | {
+    name: string;
+    shortDescription: string;
+    logo: string;
+    projectLink: string;
+    events: [];
+  }
+  | any;
 
 const ProjectDetailsPageHeader = ({
   project,
@@ -83,9 +83,14 @@ const ProjectDetailsPageHeader = ({
               </div>
             </MenuButton>
             <MenuList>
-              {project?.events.map((event, idx) => {
-                return <MenuItem key={idx} text={event.name!} />
-              })}
+              {project?.events.map(
+                (
+                  event: { name: string },
+                  idx: React.Key | null | undefined,
+                ) => {
+                  return <MenuItem key={idx} text={event.name!} />;
+                },
+              )}
             </MenuList>
           </Menu>
         </div>

@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, FC } from "react";
 import { useInView } from 'react-intersection-observer'
 import TabLayout from '@/components/common/tabs/TabLayout';
 import { AvatarLabelGroup, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@cubik/ui';
@@ -25,7 +25,7 @@ interface Props {
   slug: string;
 }
 
-export const ProjectContributorsTab: React.FC<Props> = ({ contributors: initialContribs, slug }) => {
+export const ProjectContributorsTab: FC<Props> = ({ contributors: initialContribs, slug }) => {
   console.log('contributors - ', initialContribs);
   const [contributors, setContributors] = useState(initialContribs);
   const [page, setPage] = useState(1);

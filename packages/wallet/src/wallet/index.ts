@@ -1,2 +1,3 @@
-export * from './CubikContext';
-export * from './CubikProvider';
+export * from './context/CubikContext';
+export * from './context/CubikProvider';
+export * from './context/WalletUIContext';

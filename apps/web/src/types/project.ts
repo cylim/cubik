@@ -1,10 +1,10 @@
 
 export interface Slides {
-    slide: string[];
+  slide: string[];
 }
 
 export interface ProjectSocials {
-    github: string;
-    discord: string;
-    telegram: string;
+  github: string;
+  discord: string;
+  telegram: string;
 }

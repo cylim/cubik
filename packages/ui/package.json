@@ -11,8 +11,8 @@
   },
   "devDependencies": {
     "@types/node": "^17.0.45",
-    "@types/react": "^18.2.45",
-    "@types/react-dom": "^18.2.18",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
     "autoprefixer": "^10.4.16",
     "eslint": "^7.32.0",
     "postcss": "^8.4.31",
@@ -42,6 +42,7 @@
     "@types/bn.js": "^5.1.5",
     "@types/decimal.js": "^7.4.0",
     "@uidotdev/usehooks": "^2.4.1",
+    "@uploadthing/react": "^5.7.0",
     "bn.js": "^5.2.1",
     "class-variance-authority": "^0.6.1",
     "clsx": "^1.2.1",
@@ -60,6 +61,7 @@
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
     "tsup": "^7.2.0",
+    "uploadthing": "^5.7.4",
     "vaul": "^0.7.9"
   }
 }

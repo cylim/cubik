@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import Link from 'next/link';
 
 // import Link from 'next/link';
 
@@ -51,23 +50,23 @@ export const SaveButton = (props: ButtonProps) => {
 export const ProjectCard = (props: Props) => {
   return (
     <>
-      <Link href={props.href}>
-        <div
-          className={cn(
-            props.className,
-            'p-[12px] flex animate-in rounded-xl bg-gradient-to-bl hover:from-[var(--color-surface-primary-base)] hover:to-transparent justify-between items-center',
-          )}
-          {...props}
+      {/* <Link href={props.href}> */}
+      <div
+        className={cn(
+          props.className,
+          'p-[12px] flex animate-in rounded-xl bg-gradient-to-bl hover:from-[var(--color-surface-primary-base)] hover:to-transparent justify-between items-center',
+        )}
+        {...props}
+      >
+        <AvatarLabelGroup
+          avatarSrc={props.logo ?? '/logo.svg'} // updated backup image
+          size={'xl'}
+          avatarShape="square"
         >
-          <AvatarLabelGroup
-            avatarSrc={props.logo ?? '/logo.svg'} // updated backup image
-            size={'xl'}
-            avatarShape="square"
-          >
-            {props.children}
-          </AvatarLabelGroup>
-        </div>
-      </Link>
+          {props.children}
+        </AvatarLabelGroup>
+      </div>
+      {/* </Link> */}
     </>
   );
 };

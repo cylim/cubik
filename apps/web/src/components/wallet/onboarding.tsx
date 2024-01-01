@@ -4,6 +4,7 @@ import { Button, Text } from '@cubik/ui';
 
 export type IOnboardingFlow = 'Onboarding' | 'Get Wallet' | 'Copy Wallet';
 
+// todo: @dhruv are we using this anywhere
 export const OnboardingFlow = () => {
   const [state, setState] = useState<IOnboardingFlow>('Onboarding');
   if (state === 'Onboarding') {
@@ -45,7 +46,7 @@ export const OnboardingFlow = () => {
             size="lg"
             className="pointer-events-auto w-full"
           >
-            Get a Wallet
+            isko khin use kr rha hain kya
           </Button>
           <Button variant={'link'} size={'lg'}>
             Learn More
@@ -80,8 +81,8 @@ export const OnboardingFlow = () => {
               className="b2-light md:b3-light text-center"
               color="secondary"
             >
-              Open any wallet app and navigate to the in app browser of the
-              wallet. Paste the copied url and you should be good to go.
+              isko khin use kr rha hain kya and navigate to the in app browser
+              of the wallet. Paste the copied url and you should be good to go.
             </Text>
           </div>
         </div>
@@ -90,7 +91,7 @@ export const OnboardingFlow = () => {
             Link copied
           </Button>
           <Button variant={'link'} size={'lg'} className="w-full">
-            Get a Wallet
+            isko khin use kr rha hain kya
           </Button>
         </div>
       </div>

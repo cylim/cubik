@@ -27,7 +27,7 @@ export const ProfileTabs = ({ username }: Props) => {
         <TabPanels>
           <TabPanel value={0}> </TabPanel>
           <TabPanel value={1}>
-            <ProjectTab username={username} />
+            <ProjectTab username={username} />{' '}
           </TabPanel>
           <TabPanel value={2}> </TabPanel>
           <TabPanel value={3}> </TabPanel>

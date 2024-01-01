@@ -19,16 +19,17 @@ const TreasuryInfoCard = ({
 }: BalanceInfoProps) => {
   return (
     <div className="flex flex-col gap-1 p-4">
-      <div className="flex items-center gap-1 text-[var(--color-fg-primary-base)]">
-        <Text className="l2">{header}</Text>
+      <div className="flex items-center gap-1 text-[var(--color-fg-primary-subdued)]">
+        <Text className="l1 md:l2">{header}</Text>
         <Tooltip>
           <TooltipTrigger>
             {headerIconName && (
               <Icon
                 name={headerIconName}
-                height={12}
-                width={12}
+                height={16}
+                width={16}
                 stroke="var(--color-fg-primary-subdued)"
+                strokeWidth={1.2}
                 className=" hidden hover:stroke-[var(--color-bg-info)] md:block"
               />
             )}

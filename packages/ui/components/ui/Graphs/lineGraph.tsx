@@ -19,10 +19,10 @@ const LineGraph: React.FC<LineGraphProps> = ({
   annotations,
 }) => {
   const textColorPrimary = theme === 'dark' ? 'white' : 'black';
-  const textColorSecondary = theme === 'dark' ? 'white' : 'black';
+  const textColorSecondary = theme === 'dark' ? '#999999' : '#666666';
   const surfaceColor = theme === 'dark' ? '#333333' : '#ffffff';
   const gridColor = theme === 'dark' ? '#333333' : '#E0E0E0';
-  const crosshairBorderColor = theme === 'dark' ? '#333333' : '#1A1A1A';
+  const crosshairBorderColor = theme === 'dark' ? '#7E7E7E' : '#1A1A1A';
   const data = {
     series: chartData,
     options: {
@@ -37,6 +37,9 @@ const LineGraph: React.FC<LineGraphProps> = ({
         sparkline: {
           enabled: true,
         },
+        dataLabels: {
+          enable: true,
+        },
       },
       stroke: {
         show: [false, true],
@@ -50,7 +53,7 @@ const LineGraph: React.FC<LineGraphProps> = ({
         show: true,
         borderColor: gridColor,
         strokeDashArray: 8,
-        position: 'back',
+        position: 'front',
         xaxis: {
           lines: {
             show: true,
@@ -113,7 +116,7 @@ const LineGraph: React.FC<LineGraphProps> = ({
         show: false,
       },
       axisTicks: {
-        show: false,
+        show: true,
       },
       yaxis: {
         lines: {
@@ -221,7 +224,7 @@ const LineGraph: React.FC<LineGraphProps> = ({
                       ${w.globals.seriesNames[index]}
                     </div>
                     <span
-                      style="font-size: 18px; color: ${textColorPrimary}; font-weight: bold;"
+                      style="font-size: 18px; color: ${textColorPrimary}; font-weight: 600;"
                     >
                       ${item}
                     </span>
@@ -250,12 +253,12 @@ const LineGraph: React.FC<LineGraphProps> = ({
     },
   };
   return (
-    <div className="w-full overflow-visible flex align-bottom items-end">
+    <div className="w-full overflow-visible align-bottom min-h-[300px]">
       <Chart
         options={data.options as any}
         series={data.series}
         type={'area'}
-        width={1200}
+        width={'100%'}
         height={300}
       />
     </div>

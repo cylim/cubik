@@ -8,9 +8,7 @@ import {
 import { WalletProvider } from '@solana/wallet-adapter-react';
 import { Cluster } from '@solana/web3.js';
 
-import { IUnifiedTheme } from '../CubikContext';
 import { IHardcodedWalletStandardAdapter } from './HardcodedWalletStandardAdapter';
-import { PreviouslyConnectedProvider } from './previouslyConnectedProvider';
 
 const noop = (error: WalletError, adapter?: Adapter) => {
   console.log({ error, adapter });
@@ -45,8 +43,6 @@ export interface ICubikWalletConfig {
   walletlistExplanation?: {
     href: string;
   };
-  // Default to light
-  theme?: IUnifiedTheme;
 }
 
 export interface ICubikWalletMetadata {
@@ -57,12 +53,13 @@ export interface ICubikWalletMetadata {
   additionalInfo?: string;
 }
 
-const WalletConnectionProvider: FC<
+const SolanaWalletConnectionProvider: FC<
   PropsWithChildren & {
     wallets: Adapter[];
     config: ICubikWalletConfig;
+    setIsWalletError: React.Dispatch<React.SetStateAction<WalletError | null>>;
   }
-> = ({ wallets: passedWallets, config, children }) => {
+> = ({ wallets: passedWallets, config, children, setIsWalletError }) => {
   const wallets = useMemo(() => {
     return [...passedWallets];
   }, []);
@@ -72,11 +69,24 @@ const WalletConnectionProvider: FC<
     <WalletProvider
       wallets={wallets}
       autoConnect={config.autoConnect}
-      onError={noop}
+      onError={(err, adapter) => {
+        // Solflare throws an error undefined error when the user rejects the connection
+        if (adapter?.name.toLowerCase() !== 'solflare') {
+          setIsWalletError(err);
+        } else {
+          const newError = new Error('Solflare Error');
+          setIsWalletError({
+            error: newError,
+            message: newError.message,
+            name: newError.name,
+          });
+        }
+        noop(err, adapter);
+      }}
     >
-      <PreviouslyConnectedProvider>{children}</PreviouslyConnectedProvider>
+      {children}
     </WalletProvider>
   );
 };
 
-export default WalletConnectionProvider;
+export default SolanaWalletConnectionProvider;

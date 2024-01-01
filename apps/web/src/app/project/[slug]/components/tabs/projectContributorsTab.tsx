@@ -8,6 +8,14 @@ import { TokenList } from '@cubik/common';
 import { formatDistanceToNow } from 'date-fns';
 import { getContributions } from "@/app/project/[slug]/actions";
 
+function isUrlFromDomain(url: string, domain: string): boolean {
+  // Create a regular expression pattern to match the domain
+  const domainPattern = new RegExp(`^https?://${domain.replace('.', '\\.')}`, 'i');
+
+  // Test if the URL matches the domain pattern
+  return domainPattern.test(url);
+}
+
 interface Props {
   contributors: {
     id: string;
@@ -56,7 +64,7 @@ export const ProjectContributorsTab: FC<Props> = ({ contributors: initialContrib
             Contributors
           </Text>
           <div className="flex flex-col gap-4">
-            <Table className='max-w-md'>
+            <Table>
               <TableHeader>
                 <TableRow className='text-white'>
                   <TableHead>User</TableHead>
@@ -67,35 +75,34 @@ export const ProjectContributorsTab: FC<Props> = ({ contributors: initialContrib
               <TableBody>
                 {contributors.map((contribution, idx) => {
                   const token = TokenList.find((token) => token.address === contribution.token);
-                  if (token?.logoURI.startsWith('https://imagedelivery.net')) {
-                    return (
-                      <TableRow key={idx}>
-                        <TableCell>
-                          <AvatarLabelGroup
-                            avatarSrc={contribution.user.profilePicture}
-                            shape="circle"
-                            title={`@${contribution.user.username}`}
-                            size="sm"
-                            description={contribution.user.mainWallet.slice(0, 6) + '...' + contribution.user.mainWallet.slice(-4)}
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <AvatarLabelGroup
-                            avatarSrc='https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/81d956af-6d69-4346-3ef3-feb755f92a00/public'
-                            shape="circle"
-                            title={`${contribution.totalAmount} ${token?.name}`}
-                            size="sm"
-                            description={`$${contribution.totalUsdAmount}`}
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <Text color='primary' className='h-8'>
-                            {formatDistanceToNow(contribution.createdAt)} ago
-                          </Text>
-                        </TableCell>
-                      </TableRow>
-                    )
-                  }
+                  const isImageDelivery = isUrlFromDomain(token!.logoURI, 'imagedelivery.net');
+                  return (
+                    <TableRow key={idx}>
+                      <TableCell>
+                        <AvatarLabelGroup
+                          avatarSrc={contribution.user.profilePicture}
+                          shape="circle"
+                          title={`@${contribution.user.username}`}
+                          size="sm"
+                          description={contribution.user.mainWallet.slice(0, 6) + '...' + contribution.user.mainWallet.slice(-4)}
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <AvatarLabelGroup
+                          avatarSrc={isImageDelivery ? token!.logoURI : "https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/81d956af-6d69-4346-3ef3-feb755f92a00/public"}
+                          shape="circle"
+                          title={`${contribution.totalAmount} ${token?.name}`}
+                          size="sm"
+                          description={`$${contribution.totalUsdAmount}`}
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Text color='primary' className='h-8'>
+                          {formatDistanceToNow(contribution.createdAt)} ago
+                        </Text>
+                      </TableCell>
+                    </TableRow>
+                  )
                 })}
                 <div
                   ref={ref}

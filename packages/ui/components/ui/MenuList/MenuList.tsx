@@ -42,7 +42,7 @@ const MenuList = ({ children, align = 'end' }: MenuListProps) => {
   );
 };
 
-const MenuItemVariants = cva('relative p-2 mx-2   focus-visible:outline-none', {
+const MenuItemVariants = cva('relative p-2 mx-2 focus-visible:outline-none', {
   variants: {
     variant: {
       primary:

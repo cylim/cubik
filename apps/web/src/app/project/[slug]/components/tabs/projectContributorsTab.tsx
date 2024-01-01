@@ -1,12 +1,16 @@
 "use client";
-import { useCallback, useEffect, useState, FC } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useInView } from 'react-intersection-observer'
 import TabLayout from '@/components/common/tabs/TabLayout';
 import { AvatarLabelGroup, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@cubik/ui';
 import { Text } from '@cubik/ui';
 import { TokenList } from '@cubik/common';
 import { formatDistanceToNow } from 'date-fns';
-import { getContributions } from "@/app/project/[slug]/actions";
+import { getContributions, getTopEarner } from "@/app/project/[slug]/actions";
+import { useProjectEventStore } from "@/app/project/[slug]/store";
+import { useQuery } from "@tanstack/react-query";
+import React from "react";
+
 
 function isUrlFromDomain(url: string, domain: string): boolean {
   // Create a regular expression pattern to match the domain
@@ -16,46 +20,70 @@ function isUrlFromDomain(url: string, domain: string): boolean {
   return domainPattern.test(url);
 }
 
-interface Props {
-  contributors: {
+type Contributors = {
+  id: string;
+  token: string;
+  totalAmount: number;
+  totalUsdAmount: number;
+  createdAt: Date;
+  user: {
     id: string;
-    createdAt: Date;
-    user: {
-      id: string;
-      username: string;
-      mainWallet: string;
-      profilePicture: string;
-    };
-    token: string;
-    totalAmount: number;
-    totalUsdAmount: number;
-  }[];
+    username: string;
+    mainWallet: string;
+    profilePicture: string;
+  }
+}[]
+
+interface Props {
+  // contributors: Contributors;
   slug: string;
 }
 
-export const ProjectContributorsTab: FC<Props> = ({ contributors: initialContribs, slug }) => {
-  console.log('contributors - ', initialContribs);
-  const [contributors, setContributors] = useState(initialContribs);
+export const ProjectContributorsTab = ({ slug }: Props) => {
   const [page, setPage] = useState(1);
   const [ref, inView] = useInView();
-
+  const { event } = useProjectEventStore();
+  const [lastPage, setLastPage] = useState<number>();
+  const initialContribs = useQuery({
+    queryKey: ["contribs", slug, event?.eventId, 1, 10], queryFn: async ({ queryKey }) => {
+      const [_key, slug, eventId, page, limit] = queryKey;
+      console.log(event, page, limit);
+      const c = await getContributions(slug as string, eventId as string, page as number, limit as number);
+      console.log('c - ', c);
+      setContributors(c.data);
+      setLastPage(c.totalPages);
+      return c;
+    }, refetchOnWindowFocus: false,
+  })
+  const topContributorsQuery = useQuery({
+    queryKey: ["topContribs", slug, event?.eventId, 1, 10], queryFn: async ({ queryKey }) => {
+      const [_key, slug, eventId, page, limit] = queryKey;
+      console.log(event, page, limit);
+      const c = await getTopEarner(slug as string, eventId as string);
+      console.log('c - ', c);
+      return c;
+    }, refetchOnWindowFocus: false,
+  });
+  console.log('contributors - ', initialContribs.data);
+  const [contributors, setContributors] = useState<Contributors>();
+  console.log('contributors - ', contributors);
   const loadMoreContributors = useCallback(async () => {
     const next = page + 1
-    const cntribs = await getContributions({ slug, page: next })
-    if (cntribs?.length) {
+    const cntribs = await getContributions(slug, event!.eventId, next, 10)
+    if (cntribs.data?.length) {
       setPage(next)
       setContributors((prev) => [
         ...(prev?.length ? prev : []),
-        ...cntribs
+        ...cntribs.data,
       ])
     }
-  }, [page, slug])
+  }, [event, page, slug])
 
   useEffect(() => {
-    if (inView) {
+    if (inView && page < lastPage!) {
       loadMoreContributors()
     }
-  }, [inView, loadMoreContributors])
+  }, [inView, lastPage, loadMoreContributors, page])
   return (
     <TabLayout>
       <div>
@@ -63,7 +91,7 @@ export const ProjectContributorsTab: FC<Props> = ({ contributors: initialContrib
           <Text className="h6" color="primary">
             Contributors
           </Text>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-row gap-4">
             <Table>
               <TableHeader>
                 <TableRow className='text-white'>
@@ -73,7 +101,7 @@ export const ProjectContributorsTab: FC<Props> = ({ contributors: initialContrib
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {contributors.map((contribution, idx) => {
+                {initialContribs.isSuccess && contributors?.map((contribution, idx) => {
                   const token = TokenList.find((token) => token.address === contribution.token);
                   const isImageDelivery = isUrlFromDomain(token!.logoURI, 'imagedelivery.net');
                   return (
@@ -128,6 +156,34 @@ export const ProjectContributorsTab: FC<Props> = ({ contributors: initialContrib
                 </div>
               </TableBody>
             </Table>
+            <div className="flex max-w-md flex-col">
+              <Text color='primary'>Top Contributors</Text>
+              <Table>
+                <TableBody>
+                  {topContributorsQuery.isSuccess ? topContributorsQuery.data?.map((contribution, idx) => {
+                    return (
+                      <TableRow key={idx}>
+                        <TableCell className="text-white">{idx + 1}</TableCell>
+                        <TableCell>
+                          <AvatarLabelGroup
+                            avatarSrc={contribution.user!.profilePicture}
+                            shape="circle"
+                            title={`@${contribution.user!.username}`}
+                            size="sm"
+                            description={contribution.user!.mainWallet.slice(0, 6) + '...' + contribution.user!.mainWallet.slice(-4)}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <Text color='primary' className='h-8'>
+                            ${contribution.totalUsdAmount}
+                          </Text>
+                        </TableCell>
+                      </TableRow>
+                    )
+                  }) : <Text color="primary">Loading</Text>}
+                </TableBody>
+              </Table>
+            </div>
           </div>
         </div>
       </div>

@@ -117,6 +117,14 @@ const fetchProject = async (slug: string) => {
           select: {
             name: true,
             id: true,
+            type: true,
+            projectJoinEvent: {
+              select: {
+                id: true,
+              }, where: {
+                projectId: project.id
+              }
+            }
           },
         });
       })

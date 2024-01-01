@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import {
   Avatar,
@@ -9,22 +10,43 @@ import {
   MenuList,
   Text,
 } from '@cubik/ui';
+import { EventType } from '@cubik/database';
+import { useProjectEventStore } from '@/app/project/[slug]/store';
+import { toast } from 'sonner';
 
-type ProjectPropsType =
-  | {
-    name: string;
-    shortDescription: string;
-    logo: string;
-    projectLink: string;
-    events: [];
-  }
-  | any;
+interface EventSegment {
+  id: string;
+  name: string;
+  projectJoinEvent: {
+    id: string;
+  }[];
+  type: EventType
+}
+interface ProjectPropsType {
+  name: string;
+  shortDescription: string;
+  logo: string;
+  projectLink: string;
+  events: EventSegment[];
+}
 
 const ProjectDetailsPageHeader = ({
   project,
 }: {
-  project: ProjectPropsType;
+  project: ProjectPropsType | any;
 }) => {
+  console.log(project);
+  const { event, setEvent } = useProjectEventStore();
+
+  React.useEffect(() => {
+    setEvent({
+      eventId: project.events[0].id,
+      name: project.events[0].name,
+      type: project.events[0].type,
+      joinId: project.events[0].projectJoinEvent[0].id,
+    });
+  }, [project.events, setEvent]);
+
   return (
     <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-4 md:gap-10 md:py-12">
       {/* this will convert into a breadcrumb component and will not show when this is a modal */}
@@ -83,14 +105,23 @@ const ProjectDetailsPageHeader = ({
               </div>
             </MenuButton>
             <MenuList>
-              {project?.events.map(
-                (
-                  event: { name: string },
-                  idx: React.Key | null | undefined,
-                ) => {
-                  return <MenuItem key={idx} text={event.name!} />;
-                },
-              )}
+              {project?.events.map((event: EventSegment, idx: number) => {
+                return (
+                  <MenuItem
+                    key={idx}
+                    text={event.name!}
+                    onClick={() => {
+                      setEvent({
+                        eventId: event.id,
+                        name: event.name,
+                        type: event.type,
+                        joinId: event.projectJoinEvent[0].id,
+                      });
+                      toast.info(`Switched to ${event.name}`)
+                    }}
+                  />
+                )
+              })}
             </MenuList>
           </Menu>
         </div>

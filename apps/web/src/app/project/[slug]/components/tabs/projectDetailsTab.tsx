@@ -287,8 +287,8 @@ const InteractionSidebar = ({
 
 export const ProjectDetailsTab = async ({ slug }: { slug: string }) => {
   const fetchedProjectDetails = await fetchProjectDetails(slug);
-  // const project = fetchProjectDetails;
-  if (!fetchProjectDetails) {
+  const project = fetchedProjectDetails[0];
+  if (!project) {
     return 'Loading...';
   }
   const cookieStore = cookies();
@@ -303,7 +303,7 @@ export const ProjectDetailsTab = async ({ slug }: { slug: string }) => {
 
   console.log('comments - ', comments);
 
-  console.log('fetchedProjectDetails - ', fetchedProjectDetails[0]);
+  console.log('fetchedProjectDetails - ', project);
 
   return (
     <TabLayout>
@@ -312,41 +312,41 @@ export const ProjectDetailsTab = async ({ slug }: { slug: string }) => {
           <div className='flex flex-col'>
             <ImagesCarousel
               // @ts-ignore
-              slides={fetchedProjectDetails[0].slides} />
+              slides={project.slides} />
             <div>
               <Text color="primary" className="bold text-lg">About {
                 // @ts-ignore
-                fetchedProjectDetails[0].name}
+                project.name}
               </Text>
               <Text color="primary" className="p-2">{
                 // @ts-ignore
-                fetchedProjectDetails[0].longDescription}
+                project.longDescription}
               </Text>
             </div>
             <CommentSection user={user!} comments={comments} projectId={
               // @ts-ignore
-              fetchedProjectDetails[0].id
+              project.id
             } />
           </div>
           <InteractionSidebar socials={{
             // @ts-ignore
-            github: fetchedProjectDetails[0].githubLink,
+            github: project.githubLink,
             // @ts-ignore
-            telegram: fetchedProjectDetails[0].telegramLink,
+            telegram: project.telegramLink,
             // @ts-ignore
-            discord: fetchedProjectDetails[0].discordLink,
+            discord: project.discordLink,
           }}
             industry={
               // @ts-ignore
-              fetchedProjectDetails[0].industry
+              project.industry
             }
             createdAt={
               // @ts-ignore
-              fetchedProjectDetails[0].createdAt
+              project.createdAt
             }
             updatedAt={
               // @ts-ignore
-              fetchedProjectDetails[0].updatedAt
+              project.updatedAt
             }
           />
         </div >

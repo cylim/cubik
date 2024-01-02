@@ -3,11 +3,11 @@ import { Step1 } from '@/components/create-project/step1';
 import { Step2 } from '@/components/create-project/step2';
 import { Step3 } from '@/components/create-project/step3';
 import { Step4 } from '@/components/create-project/step4';
+import { ProjectData, ProjectFormData } from '@/types/project';
 import axios, { AxiosResponse } from 'axios';
 import { useForm } from 'react-hook-form';
 
 import { Project_Backup } from '@cubik/common';
-import { Prisma } from '@cubik/database';
 import { ApiResponseType } from '@cubik/database/api';
 import {
   Avatar,
@@ -26,52 +26,6 @@ interface Props {
   onClose: () => void;
 }
 
-type ProjectData = Prisma.ProjectGetPayload<{
-  select: {
-    id: true;
-    name: true;
-    discordLink: true;
-    githubLink: true;
-    email: true;
-    shortDescription: true;
-    logo: true;
-    longDescription: true;
-    slides: true;
-    projectLink: true;
-    industry: true;
-    status: true;
-    telegramLink: true;
-    isOpenSource: true;
-    twitterHandle: true;
-    team: {
-      select: {
-        id: true;
-        user: {
-          select: {
-            id: true;
-            username: true;
-            profilePicture: true;
-          };
-        };
-      };
-    };
-  };
-}>;
-export interface ProjectFormData {
-  name: string;
-  tagline: string;
-  email: string;
-  category: string[];
-  logo: string;
-  description: string;
-  slides: string[];
-  team: string[];
-  github: string;
-  website: string;
-  twitter: string;
-  isOpenSource: boolean;
-  progress: number;
-}
 export const CreateProjectModal = ({ onClose, open }: Props) => {
   const [step, setStep] = useState<number>(1);
   const [loadedProject, setLoadedProject] = useState<ProjectData | null>(null);

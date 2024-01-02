@@ -24,6 +24,7 @@ export type ProjectProps = {
   slug: string | null;
   shortDescription: string;
   logo: string;
+  id: string;
 };
 
 const ProjectAdminCardBody = () => {

@@ -24,6 +24,7 @@ const getProjects = async (username: string) => {
       logo: true,
       shortDescription: true,
       slug: true,
+      id: true,
     },
   });
 };
@@ -32,7 +33,6 @@ export const ProjectTab = async ({ username }: Props) => {
   const cookieStore = cookies();
   const token = cookieStore.get('authToken');
   const projects = await getProjects(username);
-  console.log(projects);
 
   if (!token) {
     return (
@@ -60,7 +60,6 @@ export const ProjectTab = async ({ username }: Props) => {
   }
 
   const user = await IsUserLoginServer(token.value);
-  console.log(user?.username, username);
   if (user?.username.toLocaleLowerCase() === username.toLocaleLowerCase()) {
     return (
       <>
@@ -71,8 +70,8 @@ export const ProjectTab = async ({ username }: Props) => {
           <>
             {projects ? (
               <div className="flex w-full flex-col justify-center gap-[16px] md:gap-[24px]">
-                {projects.map((value, index) => (
-                  <ProjectAdminCard project={value} key={index} />
+                {projects.map((value) => (
+                  <ProjectAdminCard project={value} key={value.id} />
                 ))}
               </div>
             ) : (

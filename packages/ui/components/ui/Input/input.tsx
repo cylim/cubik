@@ -12,7 +12,7 @@ interface Props extends React.HTMLProps<HTMLInputElement> {
 export const InputContainer = (props: Props) => {
   return (
     <>
-      <div className="flex justify-center w-full flex-col items-start gap-1">
+      <div className="flex justify-center w-full flex-col items-start gap-3">
         {props.children}
       </div>
     </>

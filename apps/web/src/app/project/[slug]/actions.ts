@@ -235,5 +235,25 @@ const getTopEarner = async (project_slug: string, event_id: string) => {
     });
 };
 
+const getTeam = async (project_slug: string) => {
+    return await prisma.team.findMany({
+        where: {
+            project: {
+                slug: project_slug
+            }
+        },
+        select: {
+            user: {
+                select: {
+                    id: true,
+                    username: true,
+                    profilePicture: true,
+                }
+            }
+        }
+    });
 
-export { makeComment, getComments, getContributions, getTopEarner }
+}
+
+
+export { makeComment, getComments, getContributions, getTopEarner, getTeam }

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Background, Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
 
-import { ProjectContributorsTab, ProjectDetailsTab } from './components/tabs';
+import { ProjectContributorsTab, ProjectDetailsTab, ProjectTeamTab } from './components/tabs';
 
 const ProjectPage = async ({ params }: { params: { slug: string } }) => {
   // const contributors = await getContributions(event, 1, 10);
@@ -34,7 +34,7 @@ const ProjectPage = async ({ params }: { params: { slug: string } }) => {
               <ProjectContributorsTab slug={params.slug} />
             </TabPanel>
             <TabPanel value={2}>
-              <></>
+              <ProjectTeamTab slug={params.slug} />
             </TabPanel>
             <TabPanel value={3}>
               <></>

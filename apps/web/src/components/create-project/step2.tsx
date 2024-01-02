@@ -1,4 +1,5 @@
 import { ProjectFormData } from '@/components/create-project';
+import { MultiImageUploader } from '@/components/create-project/image-uploder/multiImageUploader';
 import { useUploadThing } from '@/utils/uploadthing';
 import React from 'React';
 import { UseFormReturn } from 'react-hook-form';
@@ -9,14 +10,23 @@ import { Button, ImageUploader, Text } from '@cubik/ui';
 interface Props {
   projectForm: UseFormReturn<ProjectFormData, any, undefined>;
   setStep: React.Dispatch<React.SetStateAction<number>>;
+  progress: number;
+  setProgress: React.Dispatch<React.SetStateAction<number>>;
+  multiImageUploaderProgress: number;
+  setMultiImageUploaderProgress: React.Dispatch<React.SetStateAction<number>>;
 }
-const Step = ({ setStep, projectForm }: Props) => {
+export const Step2 = ({
+  setStep,
+  projectForm,
+  progress,
+  setProgress,
+}: Props) => {
   const { startUpload, isUploading, permittedFileInfo } = useUploadThing(
     'imageUploader',
     {
       onUploadProgress: (progressEvent) => {
         // setProgress(progressEvent);
-        projectForm.setValue('progress', progressEvent);
+        setProgress(progressEvent);
       },
       onUploadError: (error) => {
         projectForm.setError('logo', {
@@ -59,17 +69,30 @@ const Step = ({ setStep, projectForm }: Props) => {
           </Text>
         </div>
         <div className="flex flex-col gap-4">
-          <Text color={'primary'} className="l2">
+          <Text color={'primary'} className="l1">
             Thumbnail
           </Text>
           <ImageUploader
-            progress={projectForm.watch('progress') || 0}
+            progress={progress || 0}
             logo={projectForm.watch('logo')}
             errorMessage={projectForm.formState.errors.logo?.message}
             isUploading={isUploading}
             startUpload={startUpload}
           />
         </div>
+        <div className="flex flex-col gap-4">
+          <Text color={'primary'} className="l1">
+            Gallery
+          </Text>
+          <MultiImageUploader
+          // progress={projectForm.watch('progress') || 0}
+          // logo={projectForm.watch('logo')}
+          // errorMessage={projectForm.formState.errors.logo?.message}
+          // isUploading={isUploading}
+          // startUpload={startUpload}
+          />
+        </div>
+
         <div className=" flex w-full items-center justify-between">
           <Button
             onClick={() => setStep(1)}
@@ -92,5 +115,3 @@ const Step = ({ setStep, projectForm }: Props) => {
     </>
   );
 };
-
-export { Step as Step2 };

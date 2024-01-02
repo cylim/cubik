@@ -1,3 +1,5 @@
+import { Option, Options } from '@cubik/ui';
+
 const tags = [
   {
     label: 'AI',
@@ -360,4 +362,4 @@ const tags = [
 tags.sort((a, b) => a.label.localeCompare(b.label));
 
 // return tags by sorting them in alphabetical order
-export const Industries = tags;
+export const Industries: Option[] = tags;

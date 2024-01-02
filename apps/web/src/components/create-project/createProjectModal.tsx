@@ -57,7 +57,7 @@ type ProjectData = Prisma.ProjectGetPayload<{
     };
   };
 }>;
-interface OptionsType {
+interface Option {
   label: string;
   value: string;
 }
@@ -65,7 +65,7 @@ export interface ProjectFormData {
   name: string;
   tagline: string;
   email: string;
-  category: OptionsType[];
+  category: Option[];
   logo: string;
   description: string;
   slides: string[];

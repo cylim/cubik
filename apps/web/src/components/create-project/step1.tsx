@@ -9,7 +9,7 @@ import {
   InputField,
   InputFieldContainer,
   InputLabel,
-  MultiSelect,
+  SearchSelect,
   Text,
 } from '@cubik/ui';
 
@@ -110,14 +110,15 @@ export const Step1 = ({ setStep, projectForm }: Props) => {
           </div>
           <div className="flex flex-col gap-3">
             <InputLabel>Categories</InputLabel>
-            <MultiSelect
+            <SearchSelect
+              placeholder="Search Category here"
+              isMulti={true}
               onChange={(e) => {
                 if (!e) return;
-                alert(JSON.stringify(projectForm.watch('category')));
-                projectForm.setValue('category', e);
+                projectForm.setValue('category', e as any);
               }}
-              value={projectForm.watch('category')}
-              options={Industries}
+              value={projectForm.watch('category') as any}
+              options={Industries as any}
             />
           </div>
         </div>

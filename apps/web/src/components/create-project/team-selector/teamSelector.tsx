@@ -5,7 +5,13 @@ import { UseFormReturn } from 'react-hook-form';
 import { v4 as uuidV4 } from 'uuid';
 
 import { ApiResponseType } from '@cubik/database/api';
-import { Icon, InputField, InputFieldContainer, Text } from '@cubik/ui';
+import {
+  Icon,
+  InputField,
+  InputFieldContainer,
+  SearchSelect,
+  Text,
+} from '@cubik/ui';
 
 interface Props {
   projectForm: UseFormReturn<ProjectFormData, any, undefined>;
@@ -38,12 +44,20 @@ const TeamSelectorInput = ({ id, onInputRemove }: TeamSelectorInputProps) => {
   //   return <div onClick={() => onInputRemove(id)}>Team {id}</div>;
 
   return (
-    <InputFieldContainer variant="md">
-      <InputField
-        placeholder="username"
-        onChange={(e) => setSearch(e.currentTarget.value)}
-      />
-    </InputFieldContainer>
+    <SearchSelect
+      placeholder="username"
+      isMulti={true}
+      onChange={(e) => {}}
+      value={[]}
+      onInputChange={(e) => {
+        setSearch(e);
+      }}
+      options={
+        searchResult.map((user) => {
+          return { label: user.username, value: user.id };
+        }) as any
+      }
+    />
   );
 };
 export const TeamSelector = ({ projectForm }: Props) => {

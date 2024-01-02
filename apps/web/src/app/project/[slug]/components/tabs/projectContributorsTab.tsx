@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useInView } from 'react-intersection-observer'
 import TabLayout from '@/components/common/tabs/TabLayout';
 import { AvatarLabelGroup, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@cubik/ui';
@@ -8,7 +8,7 @@ import { TokenList } from '@cubik/common';
 import { formatDistanceToNow } from 'date-fns';
 import { getContributions, getTopEarner } from "@/app/project/[slug]/actions";
 import { useProjectEventStore } from "@/app/project/[slug]/store";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import React from "react";
 
 
@@ -20,19 +20,19 @@ function isUrlFromDomain(url: string, domain: string): boolean {
   return domainPattern.test(url);
 }
 
-type Contributors = {
-  id: string;
-  token: string;
-  totalAmount: number;
-  totalUsdAmount: number;
-  createdAt: Date;
-  user: {
-    id: string;
-    username: string;
-    mainWallet: string;
-    profilePicture: string;
-  }
-}[]
+// type Contributors = {
+//   id: string;
+//   token: string;
+//   totalAmount: number;
+//   totalUsdAmount: number;
+//   createdAt: Date;
+//   user: {
+//     id: string;
+//     username: string;
+//     mainWallet: string;
+//     profilePicture: string;
+//   }
+// }[]
 
 interface Props {
   // contributors: Contributors;
@@ -44,17 +44,23 @@ export const ProjectContributorsTab = ({ slug }: Props) => {
   const [ref, inView] = useInView();
   const { event } = useProjectEventStore();
   const [lastPage, setLastPage] = useState<number>();
-  const initialContribs = useQuery({
-    queryKey: ["contribs", slug, event?.eventId, 1, 10], queryFn: async ({ queryKey }) => {
+  const contribsQuery = useInfiniteQuery({
+    queryKey: ["contribs", slug, event?.eventId, 1, 10], queryFn: async ({ queryKey, pageParam = 1 }) => {
       const [_key, slug, eventId, page, limit] = queryKey;
-      console.log(event, page, limit);
-      const c = await getContributions(slug as string, eventId as string, page as number, limit as number);
-      console.log('c - ', c);
-      setContributors(c.data);
-      setLastPage(c.totalPages);
+      // console.log(event, page, limit);
+      const c = await getContributions(slug as string, eventId as string, pageParam, limit as number);
+      setPage(pageParam);
+      if (page === 1) {
+        setLastPage(c.totalPages);
+      }
       return c;
-    }, refetchOnWindowFocus: false,
+    },
+    getNextPageParam: (_, pages) => pages.length + 1,
+    refetchOnWindowFocus: false,
   })
+
+  const _contribs = contribsQuery.data?.pages?.flatMap((page) => page.data)
+  console.log(page);
   const topContributorsQuery = useQuery({
     queryKey: ["topContribs", slug, event?.eventId, 1, 10], queryFn: async ({ queryKey }) => {
       const [_key, slug, eventId, page, limit] = queryKey;
@@ -64,26 +70,26 @@ export const ProjectContributorsTab = ({ slug }: Props) => {
       return c;
     }, refetchOnWindowFocus: false,
   });
-  console.log('contributors - ', initialContribs.data);
-  const [contributors, setContributors] = useState<Contributors>();
-  console.log('contributors - ', contributors);
-  const loadMoreContributors = useCallback(async () => {
-    const next = page + 1
-    const cntribs = await getContributions(slug, event!.eventId, next, 10)
-    if (cntribs.data?.length) {
-      setPage(next)
-      setContributors((prev) => [
-        ...(prev?.length ? prev : []),
-        ...cntribs.data,
-      ])
-    }
-  }, [event, page, slug])
+  console.log('contributors - ', contribsQuery.data);
+  // const [contributors, setContributors] = useState<Contributors>();
+  // console.log('contributors - ', contributors);
+  // const loadMoreContributors = useCallback(async () => {
+  //   const next = page + 1
+  //   const cntribs = await getContributions(slug, event!.eventId, next, 10)
+  //   if (cntribs.data?.length) {
+  //     setPage(next)
+  //     setContributors((prev) => [
+  //       ...(prev?.length ? prev : []),
+  //       ...cntribs.data,
+  //     ])
+  //   }
+  // }, [event, page, slug])
 
   useEffect(() => {
     if (inView && page < lastPage!) {
-      loadMoreContributors()
+      contribsQuery.fetchNextPage();
     }
-  }, [inView, lastPage, loadMoreContributors, page])
+  }, [contribsQuery, inView, lastPage, page])
   return (
     <TabLayout>
       <div>
@@ -101,7 +107,7 @@ export const ProjectContributorsTab = ({ slug }: Props) => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {initialContribs.isSuccess && contributors?.map((contribution, idx) => {
+                {contribsQuery.isSuccess && _contribs?.map((contribution, idx) => {
                   const token = TokenList.find((token) => token.address === contribution.token);
                   const isImageDelivery = isUrlFromDomain(token!.logoURI, 'imagedelivery.net');
                   return (
@@ -112,7 +118,7 @@ export const ProjectContributorsTab = ({ slug }: Props) => {
                           shape="circle"
                           title={`@${contribution.user.username}`}
                           size="sm"
-                          description={contribution.user.mainWallet.slice(0, 6) + '...' + contribution.user.mainWallet.slice(-4)}
+                        // description={contribution.user.mainWallet.slice(0, 6) + '...' + contribution.user.mainWallet.slice(-4)}
                         />
                       </TableCell>
                       <TableCell>
@@ -134,6 +140,7 @@ export const ProjectContributorsTab = ({ slug }: Props) => {
                 })}
                 <div
                   ref={ref}
+                  hidden={page === lastPage}
                   className='col-span-1 mt-16 flex items-center justify-center sm:col-span-2 md:col-span-3 lg:col-span-4'
                 >
                   <svg

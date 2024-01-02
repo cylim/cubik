@@ -1,8 +1,9 @@
 "use client";
 import { getComments, makeComment } from "@/app/project/[slug]/actions";
 import { Text, AvatarLabelGroup, Button, InputContainer, InputField, InputFieldContainer, InputRightElement } from "@cubik/ui"
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { formatDistanceToNow } from "date-fns"
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useInView } from 'react-intersection-observer'
 
 export interface Props {
@@ -12,57 +13,52 @@ export interface Props {
         profilePicture: string;
         id: string;
     };
-    comments: {
-        user: {
-            profilePicture: string;
-            username: string;
-        };
-        comment: string;
-        id: string;
-        createdAt: Date;
-    }[]
 }
 
-const CommentSection: React.FC<Props> = ({ comments, user, projectId }) => {
-    const [commentState, setCommentState] = useState<typeof comments>(comments);
-    console.log('comments - ', comments);
+const CommentSection: React.FC<Props> = ({ user, projectId }) => {
     const [cmt, setCmt] = useState('');
-    const [page, setPage] = useState(1);
+    // const [page, setPage] = useState(1);
     const [ref, inView] = useInView();
     const [loadingState, setLoadingState] = useState(false);
     console.log('cmt - ', cmt);
+    const cmtQuery = useInfiniteQuery({
+        queryKey: ['comments', { projectId, page: 1 }],
+        queryFn: async ({ pageParam = 1 }) => await getComments({ projectId, page: pageParam }),
+        getNextPageParam: (_, pages) => pages.length + 1,
+    })
 
-    const loadMoreComments = useCallback(async () => {
-        const next = page + 1
-        const cmts = await getComments({ projectId, page: next })
-        if (cmts?.length) {
-            setPage(next)
-            setCommentState((prev) => [
-                ...(prev?.length ? prev : []),
-                ...cmts
-            ])
-        }
-    }, [page, projectId])
+    console.log('cmtQuery - ', cmtQuery);
+
+    // const loadMoreComments = useCallback(async () => {
+    //     const next = page + 1
+    //     const cmts = await getComments({ projectId, page: next })
+    //     if (cmts?.length) {
+    //         setPage(next)
+    //         setCommentState((prev) => [
+    //             ...(prev?.length ? prev : []),
+    //             ...cmts
+    //         ])
+    //     }
+    // }, [page, projectId])
 
     useEffect(() => {
-        if (inView) {
-            loadMoreComments()
+        if (inView && cmtQuery.hasNextPage) {
+            cmtQuery.fetchNextPage();
         }
-    }, [inView, loadMoreComments])
+    }, [cmtQuery, inView])
+
+    const _cmts = cmtQuery.data?.pages?.flatMap((page) => page)
 
     const onSubmit = async () => {
         const comment = cmt.trim();
-        setCmt(comment);
+        setCmt('');
         setLoadingState(true);
         const res = await makeComment(comment, user.id, projectId);
         console.log('comment - ', res);
+        cmtQuery.refetch();
         setLoadingState(false);
     }
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            onSubmit();
-        }
-    })
+
     return (
         <div>
             <Text color="primary" className="bold text-lg">Comments</Text>
@@ -82,7 +78,7 @@ const CommentSection: React.FC<Props> = ({ comments, user, projectId }) => {
                 </InputFieldContainer>
             </InputContainer>
             <div className='m-2 flex flex-col gap-4'>
-                {commentState.map((comment, idx) => {
+                {_cmts?.map((comment, idx) => {
                     return <AvatarLabelGroup key={idx}
                         avatarSrc={comment.user.profilePicture}
                         shape="circle"
@@ -94,6 +90,7 @@ const CommentSection: React.FC<Props> = ({ comments, user, projectId }) => {
                 })}
                 <div
                     ref={ref}
+                    hidden={!cmtQuery.hasNextPage}
                     className='col-span-1 mt-16 flex items-center justify-center sm:col-span-2 md:col-span-3 lg:col-span-4'
                 >
                     <svg

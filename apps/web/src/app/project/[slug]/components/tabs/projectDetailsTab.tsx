@@ -15,7 +15,6 @@ import {
   Text,
 } from '@cubik/ui';
 import { IsUserLoginServer } from '@/utils/auth/isUserLoginServer';
-import { getComments } from '@/app/project/[slug]/actions';
 import CommentSection from '@/app/project/[slug]/components/comments/comment-section';
 
 const fetchProjectDetails = async (slug: string) => {
@@ -295,14 +294,6 @@ export const ProjectDetailsTab = async ({ slug }: { slug: string }) => {
   const token = cookieStore.get('authToken');
   const user = token && (await IsUserLoginServer(token.value));
   console.log('user - ', user);
-
-  const comments = await getComments({
-    // @ts-ignore
-    projectId: fetchedProjectDetails[0].id
-  });
-
-  console.log('comments - ', comments);
-
   console.log('fetchedProjectDetails - ', project);
 
   return (
@@ -323,7 +314,7 @@ export const ProjectDetailsTab = async ({ slug }: { slug: string }) => {
                 project.longDescription}
               </Text>
             </div>
-            <CommentSection user={user!} comments={comments} projectId={
+            <CommentSection user={user!} projectId={
               // @ts-ignore
               project.id
             } />

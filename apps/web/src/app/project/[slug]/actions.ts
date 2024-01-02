@@ -1,7 +1,13 @@
 'use server'
 
-import { revalidatePath } from "next/cache";
-
+/**
+ * Creates a comment for a project.
+ * @param comment - The content of the comment.
+ * @param userId - The ID of the user creating the comment.
+ * @param projectId - The ID of the project the comment belongs to.
+ * @returns The created comment.
+ * @throws Error if the user is not logged in.
+ */
 const makeComment = async (comment: string, userId: string, projectId: string) => {
     if (!userId) {
         throw new Error('User not logged in');
@@ -16,13 +22,24 @@ const makeComment = async (comment: string, userId: string, projectId: string) =
             // @ts-ignore
             projectId: projectId,
             reactions: {}
+        },
+        select: {
+            project: true
         }
-    })
-    revalidatePath("/")
+    });
     console.log('cmt - ', cmt);
     return cmt;
 }
 
+/**
+ * Retrieves comments for a project.
+ * 
+ * @param {Object} options - The options for retrieving comments.
+ * @param {string} options.projectId - The ID of the project.
+ * @param {number} [options.page=1] - The page number of the comments.
+ * @param {number} [options.limit=10] - The maximum number of comments to retrieve per page.
+ * @returns {Promise<Comment[]>} - A promise that resolves to an array of comments.
+ */
 const getComments = async ({
     projectId,
     page = 1,
@@ -100,6 +117,15 @@ const unused_get_contribs = async ({
     });
 }
 
+/**
+ * Retrieves contributions for a specific project and event.
+ * 
+ * @param project_slug - The slug of the project.
+ * @param event_id - The ID of the event.
+ * @param page - The page number of the results.
+ * @param limit - The maximum number of contributions per page.
+ * @returns An object containing the contributions data, total count, and total number of pages.
+ */
 const getContributions = async (
     project_slug: string,
     event_id: string,
@@ -152,6 +178,13 @@ const getContributions = async (
     return { data, count, totalPages: total }
 };
 
+/**
+ * Retrieves the top earners for a given project and event.
+ * 
+ * @param project_slug - The slug of the project.
+ * @param event_id - The ID of the event.
+ * @returns An array of top earners, sorted by the total USD amount earned.
+ */
 const getTopEarner = async (project_slug: string, event_id: string) => {
     const res = await prisma.contribution.findMany({
         where: {

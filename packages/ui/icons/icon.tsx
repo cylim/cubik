@@ -13,6 +13,7 @@ type Props = {
   fill?: string;
   stroke?: string;
   className?: string;
+  onClick?: () => void;
 };
 export const Icon = ({
   name,
@@ -22,6 +23,7 @@ export const Icon = ({
   fill = 'transparent',
   stroke = '#CCCCCC',
   className,
+  onClick,
 }: Props) => {
   const renderedPaths = iconLibrary[name]?.paths.map(
     (path: string, index: number) => <path key={index} d={path}></path>,
@@ -40,6 +42,7 @@ export const Icon = ({
       strokeLinejoin="round"
       width={width}
       height={height}
+      onClick={onClick}
     >
       {renderedPaths}
     </svg>

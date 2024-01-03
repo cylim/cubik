@@ -14,13 +14,16 @@ import { EventType } from '@cubik/database';
 import { useProjectEventStore } from '@/app/project/[slug]/store';
 import { toast } from 'sonner';
 
-interface EventSegment {
-  id: string;
-  name: string;
-  projectJoinEvent: {
+type EventSegment = {
+  event: {
     id: string;
-  }[];
-  type: EventType
+    type: EventType;
+    name: string;
+    projectJoinEvent: {
+      id: string;
+    }[];
+  };
+  eventId: string;
 }
 interface ProjectPropsType {
   name: string;
@@ -35,17 +38,18 @@ const ProjectDetailsPageHeader = ({
 }: {
   project: ProjectPropsType | any;
 }) => {
-  console.log(project);
+  // console.log(project.events[0].event.id);
   const { event, setEvent } = useProjectEventStore();
 
   React.useEffect(() => {
     if (!event) {
       setEvent({
-        eventId: project.events[0].id,
-        name: project.events[0].name,
-        type: project.events[0].type,
-        joinId: project.events[0].projectJoinEvent[0].id,
+        eventId: project.events[0].eventId,
+        name: project.events[0].event.name,
+        type: project.events[0].event.type,
+        joinId: project.events[0].event.id,
       });
+      toast.info(`Switched to ${project.events[0].event.name}`)
     }
   }, [event, project.events, setEvent]);
 
@@ -111,15 +115,15 @@ const ProjectDetailsPageHeader = ({
                 return (
                   <MenuItem
                     key={idx}
-                    text={event.name!}
+                    text={event.event.name!}
                     onClick={() => {
                       setEvent({
-                        eventId: event.id,
-                        name: event.name,
-                        type: event.type,
-                        joinId: event.projectJoinEvent[0].id,
+                        eventId: event.eventId,
+                        name: event.event.name,
+                        type: event.event.type,
+                        joinId: event.event.projectJoinEvent[0].id,
                       });
-                      toast.info(`Switched to ${event.name}`)
+                      toast.info(`Switched to ${event.event.name}`)
                     }}
                   />
                 )

@@ -46,13 +46,17 @@ export const Step3 = ({ setStep, projectForm }: Props) => {
           </div>
           <div className="flex w-full flex-col gap-3">
             <div className="flex items-center justify-between">
-              <Text>Github</Text>
+              <Text className="l1" color={'primary'}>
+                Github
+              </Text>
               <Button leftIconName="github" className="w-[228px]">
                 Connect Github
               </Button>
             </div>
             <div className="flex items-center justify-between">
-              <Text>X.com</Text>
+              <Text className="l1" color={'primary'}>
+                X.com
+              </Text>
               <Button leftIconName="twitter" className="w-[228px]">
                 Connect X.com
               </Button>

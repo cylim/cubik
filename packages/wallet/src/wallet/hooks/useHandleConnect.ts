@@ -13,7 +13,7 @@ export const useHandleConnect = ({ autoConnect, setSelectWallet }: Props) => {
   const { wallet, select, connect } = useCubikWallet();
   const [nonAutoConnectAttempt, setNonAutoConnectAttempt] = useState(false);
   useEffect(() => {
-    if (nonAutoConnectAttempt && !autoConnect && wallet?.adapter.name) {
+    if (wallet?.adapter.name) {
       try {
         connect();
       } catch (error) {

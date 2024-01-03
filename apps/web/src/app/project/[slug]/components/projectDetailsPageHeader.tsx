@@ -39,13 +39,15 @@ const ProjectDetailsPageHeader = ({
   const { event, setEvent } = useProjectEventStore();
 
   React.useEffect(() => {
-    setEvent({
-      eventId: project.events[0].id,
-      name: project.events[0].name,
-      type: project.events[0].type,
-      joinId: project.events[0].projectJoinEvent[0].id,
-    });
-  }, [project.events, setEvent]);
+    if (!event) {
+      setEvent({
+        eventId: project.events[0].id,
+        name: project.events[0].name,
+        type: project.events[0].type,
+        joinId: project.events[0].projectJoinEvent[0].id,
+      });
+    }
+  }, [event, project.events, setEvent]);
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-4 md:gap-10 md:py-12">

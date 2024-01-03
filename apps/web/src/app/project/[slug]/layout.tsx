@@ -100,23 +100,6 @@ const fetchProject = async (slug: string) => {
           select: {
             name: true,
             id: true,
-          }
-        }
-      }
-    });
-    console.log('project - ', project);
-
-    console.log('projectJoinEvent - ', projectJoinEvent);
-    const events = await Promise.all(
-      projectJoinEvent.map(async (e) => {
-        console.log('e - ', e);
-        return await prisma.event.findUnique({
-          where: {
-            id: e.eventId,
-          },
-          select: {
-            name: true,
-            id: true,
             type: true,
             projectJoinEvent: {
               select: {
@@ -125,10 +108,13 @@ const fetchProject = async (slug: string) => {
                 projectId: project.id
               }
             }
-          },
-        });
-      })
-    );
+          }
+        }
+      }
+    });
+    console.log('project - ', project);
+
+    console.log('projectJoinEvent - ', projectJoinEvent);
 
     // const rounds: ProjectPageEventType[] = project.projectJoinRound.map(
     //   (round) => {
@@ -149,7 +135,7 @@ const fetchProject = async (slug: string) => {
       logo: project?.logo,
       projectLink: project?.projectLink,
       // mutliSigAddress: project?.mutliSigAddress,
-      events: events,
+      events: projectJoinEvent,
       slides: project.slides as unknown as Slides
     };
     return [layoutData, null];

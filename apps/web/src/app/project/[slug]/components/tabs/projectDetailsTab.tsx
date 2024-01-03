@@ -46,7 +46,7 @@ const fetchProjectDetails = async (slug: string) => {
       return null;
     }
 
-    const layoutData = {
+    return {
       id: project?.id,
       name: project?.name,
       shortDescription: project?.shortDescription,
@@ -63,8 +63,6 @@ const fetchProjectDetails = async (slug: string) => {
       createdAt: project?.createdAt,
       updatedAt: project?.updatedAt,
     };
-
-    return layoutData;
   } catch (error) {
     console.log(error);
     return null;
@@ -111,7 +109,7 @@ const InteractionSidebar = ({
   updatedAt,
 }: {
   socials: ProjectSocials;
-  industry: { label: string; value: string }[];
+  industry: string[];
   createdAt: Date;
   updatedAt: Date;
 }) => {
@@ -136,7 +134,7 @@ const InteractionSidebar = ({
                 className="w-fit rounded-lg bg-[var(--body-surface)] px-4 py-3"
               >
                 <Text className="l1 md:l2" color={'primary'}>
-                  {tag.label}
+                  {tag}
                 </Text>
               </div>
             );
@@ -305,7 +303,7 @@ export const ProjectDetailsTab = async ({ slug }: { slug: string }) => {
                 About {project.name}
               </Text>
               <Text color="primary" className="p-2">
-                {project.name}
+                {project.longDescription}
               </Text>
             </div>
             <CommentSection user={user!} projectId={project.id} />
@@ -317,7 +315,7 @@ export const ProjectDetailsTab = async ({ slug }: { slug: string }) => {
               discord: project.discordLink,
             }}
             industry={
-              project.industry as unknown as { label: string; value: string }[]
+              project.industry as string[]
             }
             createdAt={project.createdAt}
             updatedAt={project.updatedAt}

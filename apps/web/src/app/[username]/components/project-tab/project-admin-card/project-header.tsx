@@ -16,6 +16,7 @@ import {
   DrawerOverlay,
   DrawerPortal,
   HelperText,
+  Icon,
   InputLabel,
   Menu,
   MenuButton,
@@ -167,6 +168,12 @@ const ProjectHeader = ({
       </div>
       <Modal dialogSize="xl" onClose={() => setOpen(false)} open={open}>
         <div className="h-[60vh] w-full ">
+          <Icon
+            name="cross"
+            className="pointer-events-auto absolute right-8 top-3 cursor-pointer"
+            onClick={() => setOpen(false)}
+          />
+
           <VerticalTabs defaultValue={'general'} size="sm" className="">
             <VerticalTabList>
               <>

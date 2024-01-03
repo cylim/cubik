@@ -1,7 +1,6 @@
 import { ProjectFormData } from '@/components/create-project';
 import { MultiImageUploader } from '@/components/create-project/image-uploder/multiImageUploader';
 import { useUploadThing } from '@/utils/uploadthing';
-import React from 'React';
 import { UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
 

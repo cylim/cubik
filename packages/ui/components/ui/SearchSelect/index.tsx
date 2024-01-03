@@ -9,6 +9,7 @@ export type { Options } from 'react-select';
 export interface Option {
   label: string;
   value: string;
+  disabled?: boolean;
 }
 interface Props {
   options: Options<Option>[];
@@ -46,7 +47,7 @@ export const SearchSelect = ({
       }}
       value={value}
       placeholder={placeholder}
-      className="text-[var(--form-input-fg-default)] bg-[var(--form-input-surface-default)] placeholder:text-[var(--form-input-border-default)]  hover:outline-[var(--form-input-border-hovered)] hover:bg-[var(--form-input-surface-hovered)"
+      className="text-[var(--form-input-fg-default)] w-full bg-[var(--form-input-surface-default)] placeholder:text-[var(--form-input-border-default)]  hover:outline-[var(--form-input-border-hovered)] hover:bg-[var(--form-input-surface-hovered)"
       options={options}
     />
   );

@@ -1,6 +1,5 @@
 import { ProjectFormData } from '@/components/create-project';
 import { TeamSelector } from '@/components/create-project/team-selector/teamSelector';
-
 import { UseFormReturn } from 'react-hook-form';
 
 import { Button, Checkbox, Icon, Text } from '@cubik/ui';
@@ -46,13 +45,17 @@ export const Step3 = ({ setStep, projectForm }: Props) => {
           </div>
           <div className="flex w-full flex-col gap-3">
             <div className="flex items-center justify-between">
-              <Text>Github</Text>
+              <Text className="l1" color={'primary'}>
+                Github
+              </Text>
               <Button leftIconName="github" className="w-[228px]">
                 Connect Github
               </Button>
             </div>
             <div className="flex items-center justify-between">
-              <Text>X.com</Text>
+              <Text className="l1" color={'primary'}>
+                X.com
+              </Text>
               <Button leftIconName="twitter" className="w-[228px]">
                 Connect X.com
               </Button>

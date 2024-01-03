@@ -57,9 +57,10 @@ type ProjectData = Prisma.ProjectGetPayload<{
     };
   };
 }>;
-interface Option {
-  label: string;
-  value: string;
+export interface Option {
+  label?: string;
+  value?: string;
+  inputId: string;
 }
 export interface ProjectFormData {
   name: string;
@@ -69,12 +70,11 @@ export interface ProjectFormData {
   logo: string;
   description: string;
   slides: string[];
-  team: string[];
+  team: Option[];
   github: string;
   website: string;
   twitter: string;
   isOpenSource: boolean;
-  progress: number;
 }
 export const CreateProjectModal = ({ onClose, open }: Props) => {
   const [step, setStep] = useState<number>(1);
@@ -97,7 +97,6 @@ export const CreateProjectModal = ({ onClose, open }: Props) => {
       team: [],
       twitter: '',
       website: '',
-      progress: 0,
     },
   });
 

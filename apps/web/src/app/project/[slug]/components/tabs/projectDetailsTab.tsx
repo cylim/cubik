@@ -3,7 +3,6 @@ import Image from 'next/image';
 import TabLayout from '@/components/common/tabs/TabLayout';
 import Link from 'next/link';
 import { ProjectSocials, Slides } from '@/types/project';
-import { formatDistanceToNow } from 'date-fns';
 import { cookies } from 'next/headers';
 
 import {
@@ -16,6 +15,7 @@ import {
 } from '@cubik/ui';
 import { IsUserLoginServer } from '@/utils/auth/isUserLoginServer';
 import CommentSection from '@/app/project/[slug]/components/comments/comment-section';
+import dayjs from '@cubik/dayjs';
 
 const fetchProjectDetails = async (slug: string) => {
   try {
@@ -115,8 +115,6 @@ const InteractionSidebar = ({
   updatedAt: Date;
 }) => {
   console.log(industry);
-  const lastModified = formatDistanceToNow(updatedAt);
-
   return (
     <div className="flex w-full flex-col gap-6 md:gap-8">
       {/* <div className="flex flex-col gap-4 md:gap-6">
@@ -274,7 +272,7 @@ const InteractionSidebar = ({
       <Divider />
       <div className="flex flex-col gap-2">
         <Text className="l2-light" color="tertiary">
-          {`Last Modified: ${lastModified} ago`}
+          {`Last Modified: ${dayjs(updatedAt).fromNow()}`}
         </Text>
         <Text className="l2-light" color="tertiary">
           Created: {createdAt.toLocaleDateString()}

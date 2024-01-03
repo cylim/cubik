@@ -56,19 +56,24 @@ const CommentSection = ({ user, projectId }: Props) => {
     const _cmts = cmtQuery.data?.pages?.flatMap((page) => page)
 
     const onSubmit = async () => {
+        const commentInputBox = document.getElementById('comment-inputbox') as HTMLInputElement;
         try {
             const comment = commentBoxState.trim();
             setCommentBoxState('');
             setLoadingState(true);
+            commentInputBox.value = '';
             const res = await makeComment(comment, projectId);
             if (res) {
                 toast.success("Comment posted successfully.");
                 cmtQuery.refetch();
                 setLoadingState(false)
-            };
-            toast.error("Something went wrong.");
+            } else {
+                toast.error("Something went wrong.");
+            }
         } catch (error: Error | any) {
-            toast.error(error);
+            toast.error(error.message);
+            setLoadingState(false);
+            commentInputBox.value = '';
         }
     }
 
@@ -78,7 +83,7 @@ const CommentSection = ({ user, projectId }: Props) => {
             <InputContainer inputvariant='md'>
                 <InputFieldContainer isDisabled={false} variant="md">
                     <InputField
-                        id="comment"
+                        id="comment-inputbox"
                         name="comment"
                         placeholder="What do you want to share"
                         type="text"

@@ -1,5 +1,4 @@
 import { ProjectFormData } from '@/components/create-project';
-import React from 'React';
 import { UseFormReturn } from 'react-hook-form';
 
 import { Button, Text } from '@cubik/ui';

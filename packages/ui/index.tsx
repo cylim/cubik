@@ -56,3 +56,4 @@ export * from './components/ui/CopyToClipboard';
 export * from './components/ui/Carousel';
 export * from './components/ui/CheckBox';
 export * from './components/ui/ImageUploader';
+export * from './components/ui/SearchSelect';

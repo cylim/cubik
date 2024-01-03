@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Step1 } from '@/components/create-project/step1';
 import { Step2 } from '@/components/create-project/step2';
 import { Step3 } from '@/components/create-project/step3';
@@ -29,6 +29,9 @@ interface Props {
 export const CreateProjectModal = ({ onClose, open }: Props) => {
   const [step, setStep] = useState<number>(1);
   const [loadedProject, setLoadedProject] = useState<ProjectData | null>(null);
+  const [progress, setProgress] = useState<number>(0);
+  const [multiImageUploaderProgress, setMultiImageUploaderProgress] =
+    useState<number>(0);
 
   const createProjectForm = useForm<ProjectFormData>({
     defaultValues: {
@@ -44,7 +47,6 @@ export const CreateProjectModal = ({ onClose, open }: Props) => {
       team: [],
       twitter: '',
       website: '',
-      progress: 0,
     },
   });
 
@@ -94,19 +96,26 @@ export const CreateProjectModal = ({ onClose, open }: Props) => {
 
   return (
     <Modal dialogSize="xl" onClose={onClose} open={open}>
-      <div className="pointer-events-auto flex min-h-[90vh] w-full justify-start overflow-hidden rounded-2xl bg-[var(--modal-body-surface)]">
-        <div className="w-[55%]  bg-[var(--card-bg-primary)] px-14">
-          <div className="py-8">
+      <div className="pointer-events-auto flex h-[90vh] w-full justify-start overflow-hidden rounded-2xl bg-[var(--modal-body-surface)]">
+        <div className="w-full overflow-y-auto bg-[var(--card-bg-primary)] px-7 md:w-[55%]  md:px-14">
+          <div className="py-4 md:py-8 ">
             <Text className="h5 text-[var(--modal-header-heading)]">
               New Project
             </Text>
           </div>
-          <div className="px-7 py-11">
+          <div className="px-4 py-5 md:px-7 md:py-11">
             {step === 1 && (
               <Step1 setStep={setStep} projectForm={createProjectForm} />
             )}
             {step === 2 && (
-              <Step2 setStep={setStep} projectForm={createProjectForm} />
+              <Step2
+                setStep={setStep}
+                projectForm={createProjectForm}
+                progress={progress}
+                setProgress={setProgress}
+                multiImageUploaderProgress={multiImageUploaderProgress}
+                setMultiImageUploaderProgress={setMultiImageUploaderProgress}
+              />
             )}
             {step === 3 && (
               <Step3 setStep={setStep} projectForm={createProjectForm} />
@@ -116,7 +125,7 @@ export const CreateProjectModal = ({ onClose, open }: Props) => {
             )}
           </div>
         </div>
-        <div className="relative w-[45%] px-14 py-8 ">
+        <div className="relative hidden w-[45%] px-14 py-8 md:block ">
           <div className="flex w-full justify-end">
             <div className="cursor-pointer" onClick={onClose}>
               <Icon name="cross" />

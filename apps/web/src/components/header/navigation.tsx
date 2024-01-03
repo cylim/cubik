@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { usePathname } from 'next/navigation';
 import { CreateProjectModal } from '@/components/create-project';
 import { useCreateProject } from '@/hooks/useCreateProject';

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Step1 } from '@/components/create-project/step1';
 import { Step2 } from '@/components/create-project/step2';
 import { Step3 } from '@/components/create-project/step3';

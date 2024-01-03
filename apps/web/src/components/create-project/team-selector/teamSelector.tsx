@@ -5,13 +5,7 @@ import { UseFormReturn } from 'react-hook-form';
 import { v4 as uuidV4 } from 'uuid';
 
 import { ApiResponseType } from '@cubik/database/api';
-import {
-  Icon,
-  InputField,
-  InputFieldContainer,
-  SearchSelect,
-  Text,
-} from '@cubik/ui';
+import { Icon, SearchSelect, Text } from '@cubik/ui';
 
 interface Props {
   projectForm: UseFormReturn<ProjectFormData, any, undefined>;
@@ -51,7 +45,6 @@ const TeamSelectorInput = ({
         `/api/project/searchTeammate?username=${search}`,
       )) as AxiosResponse<ApiResponseType, any>;
       const data = res.data.result as SearchResults[];
-
       setSearchResult(data);
     };
     handleSearch();

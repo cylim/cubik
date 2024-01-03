@@ -1,6 +1,6 @@
 import { ProjectFormData } from '@/components/create-project';
 import { Industries } from '@/constants/industry';
-import React, { useState } from 'React';
+import { useState } from 'React';
 import { UseFormReturn } from 'react-hook-form';
 
 import {

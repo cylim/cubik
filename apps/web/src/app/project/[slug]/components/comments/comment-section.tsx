@@ -25,8 +25,9 @@ const CommentSection = ({ user, projectId }: Props) => {
     console.log('cmt - ', commentBoxState);
     const cmtQuery = useInfiniteQuery({
         queryKey: ['comments', { projectId, page: 1 }],
-        queryFn: async ({ pageParam = 1 }) => await getComments({ projectId, page: pageParam }),
+        queryFn: ({ pageParam = 1 }) => getComments({ projectId, page: pageParam }),
         getNextPageParam: (_, pages) => pages.length + 1,
+        initialPageParam: 1,
     })
 
     console.log('cmtQuery - ', cmtQuery);
@@ -101,7 +102,7 @@ const CommentSection = ({ user, projectId }: Props) => {
                         shape="circle"
                         title={`@${comment.user.username}`}
                         description={comment.comment}
-                        subtitle={` ${dayjs(comment.createdAt).fromNow()} ago`}
+                        subtitle={` ${dayjs(comment.createdAt).fromNow()}`}
                         size="sm"
                     />
                 })}

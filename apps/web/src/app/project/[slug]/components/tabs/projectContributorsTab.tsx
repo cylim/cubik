@@ -58,6 +58,7 @@ export const ProjectContributorsTab = ({ slug }: Props) => {
     },
     getNextPageParam: (_, pages) => pages.length + 1,
     refetchOnWindowFocus: false,
+    initialPageParam: 1,
   })
 
   const _contribs = contribsQuery.data?.pages?.flatMap((page) => page.data)

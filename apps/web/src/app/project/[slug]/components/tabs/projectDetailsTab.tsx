@@ -1,10 +1,13 @@
 import React from 'react';
-import Image from 'next/image';
-import TabLayout from '@/components/common/tabs/TabLayout';
-import Link from 'next/link';
-import { ProjectSocials, Slides } from '@/types/project';
 import { cookies } from 'next/headers';
+import Image from 'next/image';
+import Link from 'next/link';
+import CommentSection from '@/app/project/[slug]/components/comments/comment-section';
+import TabLayout from '@/components/common/tabs/TabLayout';
+import { ProjectSocials, Slides } from '@/types/project';
+import { IsUserLoginServer } from '@/utils/auth/isUserLoginServer';
 
+import dayjs from '@cubik/dayjs';
 import {
   Carousel,
   CarouselContent,
@@ -13,9 +16,6 @@ import {
   Icon,
   Text,
 } from '@cubik/ui';
-import { IsUserLoginServer } from '@/utils/auth/isUserLoginServer';
-import CommentSection from '@/app/project/[slug]/components/comments/comment-section';
-import dayjs from '@cubik/dayjs';
 
 const fetchProjectDetails = async (slug: string) => {
   try {
@@ -43,7 +43,7 @@ const fetchProjectDetails = async (slug: string) => {
       },
     });
     if (!project) {
-      return [null, null];
+      return null;
     }
 
     const layoutData = {
@@ -63,10 +63,11 @@ const fetchProjectDetails = async (slug: string) => {
       createdAt: project?.createdAt,
       updatedAt: project?.updatedAt,
     };
-    return [layoutData, null];
+
+    return layoutData;
   } catch (error) {
     console.log(error);
-    return [null, error as Error];
+    return null;
   }
 };
 
@@ -110,7 +111,7 @@ const InteractionSidebar = ({
   updatedAt,
 }: {
   socials: ProjectSocials;
-  industry: string[];
+  industry: { label: string; value: string }[];
   createdAt: Date;
   updatedAt: Date;
 }) => {
@@ -135,13 +136,13 @@ const InteractionSidebar = ({
                 className="w-fit rounded-lg bg-[var(--body-surface)] px-4 py-3"
               >
                 <Text className="l1 md:l2" color={'primary'}>
-                  {tag}
+                  {tag.label}
                 </Text>
               </div>
             );
           })}
-        </div >
-      </div >
+        </div>
+      </div>
       <div className="flex flex-col gap-4 md:gap-6">
         <Text className="h5" color={'primary'}>
           Social
@@ -268,7 +269,7 @@ const InteractionSidebar = ({
             </Link>
           )}
         </div>
-      </div >
+      </div>
       <Divider />
       <div className="flex flex-col gap-2">
         <Text className="l2-light" color="tertiary">
@@ -278,13 +279,12 @@ const InteractionSidebar = ({
           Created: {createdAt.toLocaleDateString()}
         </Text>
       </div>
-    </div >
+    </div>
   );
 };
 
 export const ProjectDetailsTab = async ({ slug }: { slug: string }) => {
-  const fetchedProjectDetails = await fetchProjectDetails(slug);
-  const project = fetchedProjectDetails[0];
+  const project = await fetchProjectDetails(slug);
   if (!project) {
     return 'Loading...';
   }
@@ -298,48 +298,32 @@ export const ProjectDetailsTab = async ({ slug }: { slug: string }) => {
     <TabLayout>
       <div>
         <div className="flex flex-col gap-6 md:flex-row md:gap-20">
-          <div className='flex flex-col'>
-            <ImagesCarousel
-              // @ts-ignore
-              slides={project.slides} />
+          <div className="flex flex-col">
+            <ImagesCarousel slides={project.slides} />
             <div>
-              <Text color="primary" className="bold text-lg">About {
-                // @ts-ignore
-                project.name}
+              <Text color="primary" className="bold text-lg">
+                About {project.name}
               </Text>
-              <Text color="primary" className="p-2">{
-                // @ts-ignore
-                project.longDescription}
+              <Text color="primary" className="p-2">
+                {project.name}
               </Text>
             </div>
-            <CommentSection user={user!} projectId={
-              // @ts-ignore
-              project.id
-            } />
+            <CommentSection user={user!} projectId={project.id} />
           </div>
-          <InteractionSidebar socials={{
-            // @ts-ignore
-            github: project.githubLink,
-            // @ts-ignore
-            telegram: project.telegramLink,
-            // @ts-ignore
-            discord: project.discordLink,
-          }}
+          <InteractionSidebar
+            socials={{
+              github: project.githubLink,
+              telegram: project.telegramLink,
+              discord: project.discordLink,
+            }}
             industry={
-              // @ts-ignore
-              project.industry
+              project.industry as unknown as { label: string; value: string }[]
             }
-            createdAt={
-              // @ts-ignore
-              project.createdAt
-            }
-            updatedAt={
-              // @ts-ignore
-              project.updatedAt
-            }
+            createdAt={project.createdAt}
+            updatedAt={project.updatedAt}
           />
-        </div >
-      </div >
-    </TabLayout >
+        </div>
+      </div>
+    </TabLayout>
   );
 };

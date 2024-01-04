@@ -7,6 +7,7 @@ type Params = {
     page: number;
     limit: number;
     projectStatus?: ProjectVerifyStatus;
+    searchIndustry?: string;
 }
 
 export interface Result {
@@ -29,10 +30,17 @@ type ResponseType = ApiResponseType & {
     result: Result;
 };
 
-const queryFn = async ({ page, limit, projectStatus }: Params) => {
-    const response = await apiInstance.get(
-        `/api/projects?page=${page}&limit=${limit}&projectStatus=${projectStatus}`
-    )
+const queryFn = async ({ page, limit, projectStatus, searchIndustry }: Params) => {
+    const requestUrl = new URL('/api/projects', window.origin);
+    requestUrl.searchParams.set('page', page.toString());
+    requestUrl.searchParams.set('limit', limit.toString());
+    if (projectStatus) {
+        requestUrl.searchParams.set('projectStatus', projectStatus);
+    }
+    if (searchIndustry) {
+        requestUrl.searchParams.set('industry', searchIndustry);
+    }
+    const response = await apiInstance.get(requestUrl.toString());
     const responseData = response.data as ResponseType;
     if (!responseData.success) {
         toast.error(responseData.message);
@@ -41,10 +49,16 @@ const queryFn = async ({ page, limit, projectStatus }: Params) => {
     return responseData.result as Result;
 }
 
-const useProjects = ({ page, limit, projectStatus }: Params) => {
+/**
+ * Custom hook for fetching projects.
+ *
+ * @param {Params} params - page number, limit, project status, and search industry.
+ * @returns {QueryResult} - The result of the query.
+ */
+const useProjects = ({ page, limit, projectStatus, searchIndustry }: Params) => {
     return useInfiniteQuery({
-        queryKey: ['projects', { page, limit, projectStatus }],
-        queryFn: () => queryFn({ page, limit, projectStatus }),
+        queryKey: ['projects', { page, limit, projectStatus, searchIndustry }],
+        queryFn: () => queryFn({ page, limit, projectStatus, searchIndustry }),
         getNextPageParam: (lastPage, pages) => {
             if (lastPage.totalPages === pages.length) {
                 return undefined;

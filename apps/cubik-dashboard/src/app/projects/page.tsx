@@ -1,9 +1,30 @@
 "use client";
 import useProjects from "@/hooks/projects/useProjects";
 import { ProjectVerifyStatus } from "@cubik/database";
-import { ProjectCard, SegmentContainer, SegmentItem, Text } from "@cubik/ui";
+import { PaginationButton, ProjectCard, SegmentContainer, SegmentItem, Text } from "@cubik/ui";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+
+const toastMessages: Record<ProjectVerifyStatus, string> = {
+    [ProjectVerifyStatus.REVIEW]: 'Showing pending projects',
+    [ProjectVerifyStatus.VERIFIED]: 'Showing accepted projects',
+    [ProjectVerifyStatus.FAILED]: 'Showing rejected projects',
+};
+
+const sectionNames: Record<ProjectVerifyStatus, string> = {
+    [ProjectVerifyStatus.REVIEW]: 'Pending',
+    [ProjectVerifyStatus.VERIFIED]: 'Accepted',
+    [ProjectVerifyStatus.FAILED]: 'Rejected',
+};
+
+interface Props {
+    searchParams: {
+        status: ProjectVerifyStatus;
+        page: number;
+    };
+}
+
 
 function isUrlFromDomain(url: string, domain: string): boolean {
     // Create a regular expression pattern to match the domain
@@ -13,15 +34,18 @@ function isUrlFromDomain(url: string, domain: string): boolean {
     return domainPattern.test(url);
 }
 
-const ProjectPage = () => {
-    const [selectedStatus, setSelectedStatus] = useState<ProjectVerifyStatus>(ProjectVerifyStatus.REVIEW);
+const ProjectPage = ({ searchParams }: Props) => {
+    const [selectedStatus, setSelectedStatus] = useState<ProjectVerifyStatus>(searchParams.status || ProjectVerifyStatus.REVIEW);
     const projects = useProjects({
-        page: 1,
+        page: searchParams.page || 1,
         limit: 10,
         projectStatus: selectedStatus,
     });
 
+    const router = useRouter();
+
     console.log(selectedStatus);
+    console.log(searchParams);
 
     const _projects = projects.data?.pages.flatMap((page) => page.projects);
     const states = Object.values(ProjectVerifyStatus);
@@ -40,11 +64,12 @@ const ProjectPage = () => {
                                     console.log(state);
                                     setSelectedStatus(state);
                                     projects.refetch();
-                                    toast.success(`Showing ${state} projects`);
+                                    router.push(`/projects?status=${state}`, { scroll: false });
+                                    toast.success(toastMessages[state]);
                                 }}
                                 isActive={state === selectedStatus}
                             >
-                                <Text className="w-full">{state}</Text>
+                                <Text className="w-full">{sectionNames[state]}</Text>
                             </SegmentItem>
                         )
                     })}
@@ -82,6 +107,15 @@ const ProjectPage = () => {
                         );
                     })}
                 </div>
+                {projects.isSuccess && (
+                    <div className="w-full border-t border-[var(--card-border-secondary)] px-6 py-4">
+                        <PaginationButton
+                            maxPage={Math.ceil(projects.data.pages[0].totalPages / 15)}
+                            route={`/projects?status=${selectedStatus}&page=`}
+                            page={searchParams.page || 1}
+                        />
+                    </div>
+                )}
             </div>
         </div>
     )

@@ -26,13 +26,20 @@ export const GET = async (req: NextRequest) => {
         //     return handleApiAuthError();
         // }
 
-        console.log(page, limit, skip)
-
         const tx = await prisma.$transaction([
             prisma.project.findMany({
                 skip: Number(skip),
                 take: Number(limit),
                 ...(projectStatus && { where: { status: projectStatus as ProjectVerifyStatus } }),
+                ...(searchParams.get('industry') && {
+                    where: {
+                        industry: {
+                            string_contains: searchParams.get('industry')!,
+                            array_contains: searchParams.get('industry')!,
+                        }
+
+                    }
+                }),
                 select: {
                     id: true,
                     name: true,

@@ -1,7 +1,7 @@
 "use client";
 import useProjects from "@/hooks/projects/useProjects";
 import { ProjectVerifyStatus } from "@cubik/database";
-import { PaginationButton, ProjectCard, SegmentContainer, SegmentItem, Text } from "@cubik/ui";
+import { InputContainer, InputField, InputFieldContainer, PaginationButton, ProjectCard, SegmentContainer, SegmentItem, Text } from "@cubik/ui";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -36,10 +36,12 @@ function isUrlFromDomain(url: string, domain: string): boolean {
 
 const ProjectPage = ({ searchParams }: Props) => {
     const [selectedStatus, setSelectedStatus] = useState<ProjectVerifyStatus>(searchParams.status || ProjectVerifyStatus.REVIEW);
+    const [searchBoxState, setSearchBoxState] = useState<string>("");
     const projects = useProjects({
         page: searchParams.page || 1,
         limit: 10,
         projectStatus: selectedStatus,
+        ...(searchBoxState !== "" && { search: searchBoxState })
     });
 
     const router = useRouter();
@@ -55,25 +57,41 @@ const ProjectPage = ({ searchParams }: Props) => {
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between p-4 md:px-8">
             <div>
                 <Text color="primary" className="h3 pb-5">All Projects</Text>
-                <SegmentContainer size="sm">
-                    {states.map((state) => {
-                        return (
-                            <SegmentItem
-                                key={state}
-                                onClick={() => {
-                                    console.log(state);
-                                    setSelectedStatus(state);
-                                    projects.refetch();
-                                    router.push(`/projects?status=${state}`, { scroll: false });
-                                    toast.success(toastMessages[state]);
-                                }}
-                                isActive={state === selectedStatus}
-                            >
-                                <Text className="w-full">{sectionNames[state]}</Text>
-                            </SegmentItem>
-                        )
-                    })}
-                </SegmentContainer>
+                <div className="flex w-full flex-row justify-between gap-x-14">
+                    <SegmentContainer size="sm">
+                        {states.map((state) => {
+                            return (
+                                <SegmentItem
+                                    key={state}
+                                    onClick={() => {
+                                        console.log(state);
+                                        setSelectedStatus(state);
+                                        projects.refetch();
+                                        router.push(`/projects?status=${state}`, { scroll: false });
+                                        toast.success(toastMessages[state]);
+                                    }}
+                                    isActive={state === selectedStatus}
+                                >
+                                    <Text className="w-full">{sectionNames[state]}</Text>
+                                </SegmentItem>
+                            )
+                        })}
+                    </SegmentContainer>
+                    <div>
+                        <InputContainer inputvariant='sm'>
+                            <InputFieldContainer isDisabled={false} variant="md">
+                                <InputField
+                                    id="search-box"
+                                    name="search-box"
+                                    placeholder="Search"
+                                    type="text"
+                                    value={searchBoxState}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchBoxState(e.target.value)}
+                                />
+                            </InputFieldContainer>
+                        </InputContainer>
+                    </div>
+                </div>
                 <div className="flex flex-col gap-4 md:gap-8">
                     {projects.isSuccess && _projects?.map((project) => {
                         const isImageDelivery = isUrlFromDomain(project.logo, 'imagedelivery.net');

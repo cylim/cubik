@@ -54,6 +54,17 @@ export const GET = async (req: NextRequest) => {
                     slug: true,
                     status: true,
                     industry: true,
+                    createdAt: true,
+                    projectLink: true,
+                    email: true,
+                    owner: {
+                        select: {
+                            id: true,
+                            username: true,
+                            profilePicture: true,
+                            mainWallet: true,
+                        }
+                    },
                 },
                 orderBy: {
                     createdAt: 'desc',

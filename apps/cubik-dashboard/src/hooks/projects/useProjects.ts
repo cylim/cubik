@@ -24,7 +24,16 @@ export interface Project {
     logo: string;
     industry: string[];
     slug: string;
+    createdAt: Date;
     status: ProjectVerifyStatus;
+    projectLink: string;
+    email: string;
+    owner: {
+        id: string;
+        username: string;
+        profilePicture: string;
+        mainWallet: string;
+    };
 }
 
 type ResponseType = ApiResponseType & {

@@ -1,10 +1,13 @@
 import React from 'react';
+import { cookies } from 'next/headers';
 import Image from 'next/image';
 import Link from 'next/link';
+import CommentSection from '@/app/project/[slug]/components/comments/comment-section';
 import TabLayout from '@/components/common/tabs/TabLayout';
 import { ProjectSocials, Slides } from '@/types/project';
-import { formatDistanceToNow } from 'date-fns';
+import { IsUserLoginServer } from '@/utils/auth/isUserLoginServer';
 
+import dayjs from '@cubik/dayjs';
 import {
   Carousel,
   CarouselContent,
@@ -40,10 +43,10 @@ const fetchProjectDetails = async (slug: string) => {
       },
     });
     if (!project) {
-      return [null, null];
+      return null;
     }
 
-    const layoutData = {
+    return {
       id: project?.id,
       name: project?.name,
       shortDescription: project?.shortDescription,
@@ -60,10 +63,9 @@ const fetchProjectDetails = async (slug: string) => {
       createdAt: project?.createdAt,
       updatedAt: project?.updatedAt,
     };
-    return [layoutData, null];
   } catch (error) {
     console.log(error);
-    return [null, error as Error];
+    return null;
   }
 };
 
@@ -112,8 +114,6 @@ const InteractionSidebar = ({
   updatedAt: Date;
 }) => {
   console.log(industry);
-  const lastModified = formatDistanceToNow(updatedAt);
-
   return (
     <div className="flex w-full flex-col gap-6 md:gap-8">
       {/* <div className="flex flex-col gap-4 md:gap-6">
@@ -271,7 +271,7 @@ const InteractionSidebar = ({
       <Divider />
       <div className="flex flex-col gap-2">
         <Text className="l2-light" color="tertiary">
-          {`Last Modified: ${lastModified} ago`}
+          {`Last Modified: ${dayjs(updatedAt).fromNow()}`}
         </Text>
         <Text className="l2-light" color="tertiary">
           Created: {createdAt.toLocaleDateString()}
@@ -282,43 +282,43 @@ const InteractionSidebar = ({
 };
 
 export const ProjectDetailsTab = async ({ slug }: { slug: string }) => {
-  const fetchedProjectDetails = await fetchProjectDetails(slug);
-  const project = fetchProjectDetails;
-  if (!fetchProjectDetails) {
+  const project = await fetchProjectDetails(slug);
+  if (!project) {
     return 'Loading...';
   }
-
-  console.log('fetchedProjectDetails - ', fetchedProjectDetails[0]);
+  const cookieStore = cookies();
+  const token = cookieStore.get('authToken');
+  const user = token && (await IsUserLoginServer(token.value));
+  console.log('user - ', user);
+  console.log('fetchedProjectDetails - ', project);
 
   return (
     <TabLayout>
       <div>
         <div className="flex flex-col gap-6 md:flex-row md:gap-20">
-          <ImagesCarousel
-            // @ts-ignore
-            slides={fetchedProjectDetails[0]?.slides}
-          />
+          <div className="flex flex-col">
+            <ImagesCarousel slides={project.slides} />
+            <div>
+              <Text color="primary" className="bold text-lg">
+                About {project.name}
+              </Text>
+              <Text color="primary" className="p-2">
+                {project.longDescription}
+              </Text>
+            </div>
+            <CommentSection user={user!} projectId={project.id} />
+          </div>
           <InteractionSidebar
             socials={{
-              // @ts-ignore
-              github: fetchedProjectDetails[0].githubLink,
-              // @ts-ignore
-              telegram: fetchedProjectDetails[0].telegramLink,
-              // @ts-ignore
-              discord: fetchedProjectDetails[0].discordLink,
+              github: project.githubLink,
+              telegram: project.telegramLink,
+              discord: project.discordLink,
             }}
             industry={
-              // @ts-ignore
-              fetchedProjectDetails[0].industry
+              project.industry as string[]
             }
-            createdAt={
-              // @ts-ignore
-              fetchedProjectDetails[0].createdAt
-            }
-            updatedAt={
-              // @ts-ignore
-              fetchedProjectDetails[0].updatedAt
-            }
+            createdAt={project.createdAt}
+            updatedAt={project.updatedAt}
           />
         </div>
       </div>

@@ -1,9 +1,8 @@
 import React from 'react';
 import type { Metadata, ResolvingMetadata } from 'next';
 import { utils } from '@coral-xyz/anchor';
-
+import { Slides } from '@/types/project';
 import { prisma } from '@cubik/database';
-
 import ProjectDetailsPageHeader from './components/projectDetailsPageHeader';
 
 interface OgProps {
@@ -39,9 +38,8 @@ export async function generateMetadata(
     Buffer.from(project?.shortDescription ?? 'default'),
   )}&logo=${utils.bytes.base64.encode(
     Buffer.from(project?.logo ?? 'default'),
-  )}&contributors=${contributors}&comments=${
-    project?._count.comments
-  }&eventName=${eventName}`;
+  )}&contributors=${contributors}&comments=${project?._count.comments
+    }&eventName=${eventName}`;
 
   const previousImages = (await parent)?.openGraph?.images ?? [];
 
@@ -85,19 +83,60 @@ const fetchProject = async (slug: string) => {
         shortDescription: true,
         logo: true,
         projectLink: true,
+        slides: true
+        // mutliSigAddress: true,
       },
     });
     if (!project) {
       return [null, null];
     }
+    const projectJoinEvent = await prisma.projectJoinEvent.findMany({
+      where: {
+        projectId: project.id,
+      },
+      select: {
+        eventId: true,
+        event: {
+          select: {
+            name: true,
+            id: true,
+            type: true,
+            projectJoinEvent: {
+              select: {
+                id: true,
+              }, where: {
+                projectId: project.id
+              }
+            }
+          }
+        }
+      }
+    });
+    console.log('project - ', project);
 
+    console.log('projectJoinEvent - ', projectJoinEvent);
+
+    // const rounds: ProjectPageEventType[] = project.projectJoinRound.map(
+    //   (round) => {
+    //     return {
+    //       eventId: round.roundId,
+    //       eventType: 'round',
+    //       name: round.round.name,
+    //       joinId: round.id,
+    //       startTime: round.round.startTime,
+    //       endTime: round.round.endTime,
+    //     };
+    //   },
+    // );
     const layoutData = {
-      id: project?.id,
+      // id: project?.id,
       name: project?.name,
       shortDescription: project?.shortDescription,
       logo: project?.logo,
       projectLink: project?.projectLink,
-      events: [],
+      // mutliSigAddress: project?.mutliSigAddress,
+      events: projectJoinEvent,
+      slides: project.slides as unknown as Slides
     };
     return [layoutData, null];
   } catch (error) {

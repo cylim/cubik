@@ -14,7 +14,6 @@ interface AvatarLabelProps {
   title?: string;
   subtitle?: string;
   description?: string;
-  longDescription?: string;
   avatarShape?: 'circle' | 'square';
   className?: string;
   children?: React.ReactNode;
@@ -114,12 +113,12 @@ const AvatarLabelGroup: React.FC<AvatarLabelProps> = ({
       </div>
       {/* Text Container */}
       <div className={cn(gapVariants({ size }), '')}>
-        {!children && title && description && (
+        {!children && title && (
           <>
             <div className="flex items-center">
               <TitleWithIcon text={title} size={size} />
               {subtitle && (
-                <span className={cn(subTitleVariants({ size }))}>
+                <span className={cn(subTitleVariants({ size }), 'ml-1')}>
                   {subtitle}
                 </span>
               )}

@@ -212,7 +212,6 @@ export default async function Home() {
             </div>
             {/* Collection */}
           </div>
-          {/* Collection */}
         </div>
       </div>
     </>

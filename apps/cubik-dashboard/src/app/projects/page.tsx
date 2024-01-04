@@ -1,7 +1,8 @@
 "use client";
 import useProjects from "@/hooks/projects/useProjects";
 import { ProjectVerifyStatus } from "@cubik/database";
-import { InputContainer, InputField, InputFieldContainer, PaginationButton, ProjectCard, SegmentContainer, SegmentItem, Text } from "@cubik/ui";
+import dayjs from "@cubik/dayjs";
+import { AvatarLabelGroup, InputContainer, InputField, InputFieldContainer, PaginationButton, ProjectCard, SegmentContainer, SegmentItem, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Text } from "@cubik/ui";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -93,37 +94,53 @@ const ProjectPage = ({ searchParams }: Props) => {
                     </div>
                 </div>
                 <div className="flex flex-col gap-4 md:gap-8">
-                    {projects.isSuccess && _projects?.map((project) => {
-                        const isImageDelivery = isUrlFromDomain(project.logo, 'imagedelivery.net');
-                        return (
-                            <ProjectCard
-                                href={
-                                    '/project/' +
-                                    project.slug
-                                }
-                                //Button={<SaveButton />}
-                                description={project.shortDescription}
-                                name={project.name}
-                                logo={isImageDelivery ? project.logo : "https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/81d956af-6d69-4346-3ef3-feb755f92a00/public"}
-                                key={project.id}
-                            >
-                                <div className="flex flex-col gap-2">
-                                    <Text
-                                        className="h4 md:h5 line-clamp-1 "
-                                        color={'primary'}
-                                    >
-                                        {project.name}
-                                    </Text>
-                                    <Text
-                                        className="b3-light md:b4-light line-clamp-2 "
-                                        color="secondary"
-                                    >
-                                        {project.shortDescription}
-                                    </Text>
-                                </div>
-                            </ProjectCard>
-                        );
-                    })}
+                    <Table>
+                        <TableHeader>
+                            <TableHead>
+                                <Text>Projects</Text>
+                            </TableHead>
+                            <TableHead>
+                                <Text>Project Link</Text>
+                            </TableHead>
+                            <TableHead>
+                                <Text>Creator</Text>
+                            </TableHead>
+                            <TableHead>
+                                <Text>Time</Text>
+                            </TableHead>
+                        </TableHeader>
+                        <TableBody>
+                            {projects.isSuccess && _projects?.map((project) => {
+                                const isImageDelivery = isUrlFromDomain(project.logo, 'imagedelivery.net');
+                                return (
+                                    <TableRow key={project.id}>
+                                        <TableCell>
+                                            <AvatarLabelGroup
+                                                size="sm"
+                                                description={project.email}
+                                                title={project.name}
+                                                avatarSrc={isImageDelivery ? project.logo : "https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/81d956af-6d69-4346-3ef3-feb755f92a00/public"} />
+                                        </TableCell>
+                                        <TableCell>
+                                            <a href={project.projectLink}>{project.projectLink}</a>
+                                        </TableCell>
+                                        <TableCell>
+                                            <AvatarLabelGroup
+                                                size="sm"
+                                                title={`@${project.owner.username}`}
+                                                description={project.owner.mainWallet.slice(0, 6) + '...' + project.owner.mainWallet.slice(-4)}
+                                                avatarSrc={isImageDelivery ? project.owner.profilePicture : "https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/81d956af-6d69-4346-3ef3-feb755f92a00/public"}
+                                            />
+                                        </TableCell>
+                                        <TableCell>
+                                            <Text>{dayjs(project.createdAt).fromNow()}</Text>
+                                        </TableCell>
+                                    </TableRow>
+                                );
+                            })}
+                        </TableBody>
+                    </Table>
+
                 </div>
                 {projects.isSuccess && (
                     <div className="w-full border-t border-[var(--card-border-secondary)] px-6 py-4">

@@ -43,12 +43,12 @@ export const Step4 = ({ setStep, projectForm }: Props) => {
                   setPreview(true);
                 }}
               >
-                Preview {JSON.stringify(preview)}
+                Preview
               </SegmentItem>
             </SegmentContainer>
           </div>
           {preview ? (
-            <PreviewEditor content="" />
+            <PreviewEditor content={projectForm.watch('description')} />
           ) : (
             <DescriptionEditor
               content={projectForm.watch('description')}

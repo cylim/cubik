@@ -8,7 +8,7 @@ import { logApi } from '@cubik/logger/src';
 
 export const GET = async (req: NextRequest) => {
   try {
-    const searchParams = req.nextUrl.searchParams;
+    const { searchParams } = req.nextUrl;
     const project = searchParams.get('project');
     const isDraft = searchParams.get('draft');
     logApi({

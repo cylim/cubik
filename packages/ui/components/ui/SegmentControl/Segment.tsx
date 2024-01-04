@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext } from 'react';
 import Link from 'next/link';
 import { cva } from 'class-variance-authority';
 
@@ -44,8 +44,6 @@ const segmentContainerVariant = cva('', {
 });
 
 export const SegmentContainer = ({ children, size }: SegmentContainerProps) => {
-  const [activeItem, setActiveItem] = useState(0);
-
   return (
     <SizeContext.Provider value={size}>
       <div
@@ -54,15 +52,7 @@ export const SegmentContainer = ({ children, size }: SegmentContainerProps) => {
           'bg-[var(--segment-control-surface-inactive)] w-full p-1 gap-1 flex justify-center items-center rounded-[8px]',
         )}
       >
-        {React.Children.map(children, (child, index) => {
-          // Clone the child and pass down isActive and onClick props
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          return React.cloneElement(child, {
-            isActive: index === activeItem,
-            onClick: () => setActiveItem(index),
-          });
-        })}
+        {children}
       </div>
     </SizeContext.Provider>
   );
@@ -86,8 +76,6 @@ export const SegmentItem = ({
   );
 
   return href ? (
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
     <Link
       scroll={false}
       href={href}

@@ -8,6 +8,7 @@ type Params = {
     limit: number;
     projectStatus?: ProjectVerifyStatus;
     searchIndustry?: string;
+    search?: string;
 }
 
 export interface Result {
@@ -30,7 +31,7 @@ type ResponseType = ApiResponseType & {
     result: Result;
 };
 
-const queryFn = async ({ page, limit, projectStatus, searchIndustry }: Params) => {
+const queryFn = async ({ page, limit, projectStatus, searchIndustry, search }: Params) => {
     const requestUrl = new URL('/api/projects', window.origin);
     requestUrl.searchParams.set('page', page.toString());
     requestUrl.searchParams.set('limit', limit.toString());
@@ -39,6 +40,9 @@ const queryFn = async ({ page, limit, projectStatus, searchIndustry }: Params) =
     }
     if (searchIndustry) {
         requestUrl.searchParams.set('industry', searchIndustry);
+    }
+    if (search) {
+        requestUrl.searchParams.set('search', search);
     }
     const response = await apiInstance.get(requestUrl.toString());
     const responseData = response.data as ResponseType;
@@ -55,10 +59,10 @@ const queryFn = async ({ page, limit, projectStatus, searchIndustry }: Params) =
  * @param {Params} params - page number, limit, project status, and search industry.
  * @returns {QueryResult} - The result of the query.
  */
-const useProjects = ({ page, limit, projectStatus, searchIndustry }: Params) => {
+const useProjects = ({ page, limit, projectStatus, searchIndustry, search }: Params) => {
     return useInfiniteQuery({
-        queryKey: ['projects', { page, limit, projectStatus, searchIndustry }],
-        queryFn: () => queryFn({ page, limit, projectStatus, searchIndustry }),
+        queryKey: ['projects', { page, limit, projectStatus, searchIndustry, search }],
+        queryFn: () => queryFn({ page, limit, projectStatus, searchIndustry, search }),
         getNextPageParam: (lastPage, pages) => {
             if (lastPage.totalPages === pages.length) {
                 return undefined;

@@ -94,7 +94,7 @@ export const InputFieldContainer = ({
         variant === 'md' ? 'h-[40px]' : 'h-[36px]',
         'flex rounded-[8px] w-full px-1',
         isError
-          ? 'border-[var(--form-input-border-error)] bg-[var(--form-input-surface-error)] text-[var(--form-input-fg-error)]'
+          ? 'border border-[var(--form-input-border-error)] bg-[var(--form-input-surface-error)] text-[var(--form-input-fg-error)]'
           : 'border-[var(--form-input-border-default)]',
         isFocused &&
           'border-[var(--form-input-border-focused)] bg-[var(--form-input-surface-focused)] text-[var(--form-input-fg-focused)]',

@@ -1,21 +1,16 @@
 import React, { useState } from 'react';
-import { ProjectFormData } from '@/types/project';
+import ProjectDetailsForm from '@/app/[username]/components/project-tab/project-admin-card/ProjectDetailsForm';
+import ProjectLinks from '@/app/[username]/components/project-tab/project-admin-card/ProjectLinks';
+import { IProjectData } from '@/types/project';
 import { utils } from '@coral-xyz/anchor';
+import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
+import { z } from 'zod';
 
 import { createProjectEditMessage } from '@cubik/auth';
-import {
-  Button,
-  Icon,
-  InputField,
-  InputFieldContainer,
-  InputLabel,
-  InputLeftElement,
-  Text,
-  Textarea,
-} from '@cubik/ui';
+import { Button, Text } from '@cubik/ui';
 import { useCubikWallet } from '@cubik/wallet';
 import { generateSession } from '@cubik/wallet/src/authentication/generateSession';
 import { EditProjectDetails } from '@cubik/wallet/src/helpers/editProjectDetails';
@@ -25,13 +20,46 @@ const EditProjectModalContent = ({ projectId }: { projectId: string }) => {
   console.log('signMessage', signMessage, publicKey, connected);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [progress, setProgress] = useState<number>(0);
 
-  const editProjectForm = useForm<ProjectFormData>({
+  const editProjectForm = useForm<IProjectData>({
     defaultValues: async () =>
       (await axios.get(`/api/project/loadProject?project=${projectId}`)).data
         .result,
-  });
+    resolver: zodResolver(
+      z.object({
+        logo: z.custom<File[]>(),
+        name: z
+          .string()
+          .min(1, {
+            message: "Project name can't be empty",
+          })
+          .max(36, {
+            message: 'Must be at most 36 characters',
+          }),
+        email: z.string().email({ message: "Email can't be empty" }),
+        shortDescription: z
+          .string()
+          .min(1, { message: "Tagline can't be empty" })
+          .max(80, {
+            message: 'Tagline can not be more than 80 characters',
+          }),
+        twitterHandle: z
+          .string()
+          .min(1, { message: "Twitter handle can't be empty" }),
 
+        projectLink: z
+          .string()
+          .min(1, { message: "Project link can't be empty" }),
+        githubLink: z
+          .string()
+          .min(1, { message: "Github link can't be empty" }),
+        telegramLink: z.string(),
+        discordLink: z.string(),
+      }),
+    ),
+  });
+  console.log(Boolean(editProjectForm.formState.errors.name));
   const submitProjectData = async (data: { name: string }) => {
     try {
       console.log(data);
@@ -88,176 +116,14 @@ const EditProjectModalContent = ({ projectId }: { projectId: string }) => {
             </div>
           </div>
 
-          <div className="mt-11 flex flex-col gap-8">
-            <div className="w-full">
-              <InputLabel id="email" isRequired>
-                Project Name
-              </InputLabel>
-
-              <InputFieldContainer variant="sm">
-                <InputField
-                  name="name"
-                  placeholder="name of project"
-                  onChange={(e) => {
-                    editProjectForm.setValue('name', e.currentTarget.value);
-                  }}
-                  defaultValue={editProjectForm.formState.defaultValues?.name}
-                />
-              </InputFieldContainer>
-            </div>
-
-            <div className="w-full">
-              <InputLabel id="email" isRequired>
-                Contact Email
-              </InputLabel>
-
-              <InputFieldContainer variant="sm">
-                <InputField
-                  name="email"
-                  placeholder="email"
-                  onChange={(e) => {
-                    // editProjectForm.setValue('name', e.currentTarget.value);
-                  }}
-                  // defaultValue={editProjectForm.formState.defaultValues?.name}
-                />
-              </InputFieldContainer>
-            </div>
-
-            <div className="w-full">
-              <InputLabel id="email">Tagline</InputLabel>
-              <Textarea
-                size="md"
-                state="default"
-                resizable
-                placeholder="Placeholder"
-              />
-
-              {/* <InputFieldContainer variant="sm">
-                <InputField
-                  name="email"
-                  placeholder="email"
-                  onChange={(e) => {
-                    editProjectForm.setValue('name', e.currentTarget.value);
-                  }}
-                  defaultValue={editProjectForm.formState.defaultValues?.name}
-                />
-              </InputFieldContainer> */}
-            </div>
-
-            {/* rest of the code here */}
-          </div>
+          <ProjectDetailsForm
+            editProjectForm={editProjectForm}
+            progress={progress}
+            setProgress={setProgress}
+          />
         </div>
 
-        <div className=" flex flex-col gap-8">
-          <Text className="h5" color={'primary'}>
-            Links and Socials
-          </Text>
-          <div className="w-full">
-            <InputLabel id="email" isRequired>
-              Project URL
-            </InputLabel>
-
-            <InputFieldContainer variant="sm">
-              <InputField
-                name="projectURL"
-                placeholder="https://unified.jup.ag"
-                onChange={(e) => {
-                  // editProjectForm.setValue('name', e.currentTarget.value);
-                }}
-                // defaultValue={editProjectForm.formState.defaultValues?.name}
-              />
-            </InputFieldContainer>
-          </div>
-
-          <div className="w-full">
-            <InputLabel id="email" isRequired>
-              Socials
-            </InputLabel>
-
-            <div className="flex flex-col gap-2">
-              <InputFieldContainer variant="sm">
-                <InputLeftElement withBorder={true}>
-                  <Icon name="X" />
-                </InputLeftElement>
-                <InputField
-                  name="projectURL"
-                  placeholder="https://unified.jup.ag"
-                  onChange={(e) => {
-                    // editProjectForm.setValue('name', e.currentTarget.value);
-                  }}
-                  // defaultValue={editProjectForm.formState.defaultValues?.name}
-                />
-              </InputFieldContainer>
-
-              <InputFieldContainer variant="sm">
-                <InputLeftElement withBorder={true}>
-                  <Icon name="github" />
-                </InputLeftElement>
-                <InputField
-                  name="projectURL"
-                  placeholder="https://unified.jup.ag"
-                  onChange={(e) => {
-                    // editProjectForm.setValue('name', e.currentTarget.value);
-                  }}
-                  // defaultValue={editProjectForm.formState.defaultValues?.name}
-                />
-              </InputFieldContainer>
-
-              <InputFieldContainer variant="sm">
-                <InputLeftElement withBorder={true}>
-                  <Icon name="discord" />
-                </InputLeftElement>
-                <InputField
-                  name="projectURL"
-                  placeholder="https://unified.jup.ag"
-                  onChange={(e) => {
-                    // editProjectForm.setValue('name', e.currentTarget.value);
-                  }}
-                  // defaultValue={editProjectForm.formState.defaultValues?.name}
-                />
-              </InputFieldContainer>
-              <InputFieldContainer variant="sm">
-                <InputLeftElement withBorder={true}>
-                  <Icon name="telegram" />
-                </InputLeftElement>
-                <InputField
-                  name="projectURL"
-                  placeholder="https://unified.jup.ag"
-                  onChange={(e) => {
-                    // editProjectForm.setValue('name', e.currentTarget.value);
-                  }}
-                  // defaultValue={editProjectForm.formState.defaultValues?.name}
-                />
-              </InputFieldContainer>
-              <InputFieldContainer variant="sm">
-                <InputLeftElement withBorder={true}>
-                  <Icon name="youtube" />
-                </InputLeftElement>
-                <InputField
-                  name="projectURL"
-                  placeholder="https://unified.jup.ag"
-                  onChange={(e) => {
-                    // editProjectForm.setValue('name', e.currentTarget.value);
-                  }}
-                  // defaultValue={editProjectForm.formState.defaultValues?.name}
-                />
-              </InputFieldContainer>
-              <InputFieldContainer variant="sm">
-                <InputLeftElement withBorder={true}>
-                  <Icon name="linkSlant" />
-                </InputLeftElement>
-                <InputField
-                  name="projectURL"
-                  placeholder="https://unified.jup.ag"
-                  onChange={(e) => {
-                    // editProjectForm.setValue('name', e.currentTarget.value);
-                  }}
-                  // defaultValue={editProjectForm.formState.defaultValues?.name}
-                />
-              </InputFieldContainer>
-            </div>
-          </div>
-        </div>
+        <ProjectLinks editProjectForm={editProjectForm} />
       </form>
     </div>
   );

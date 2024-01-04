@@ -6,8 +6,8 @@ import { ProjectVerifyStatus, prisma } from "@cubik/database";
 export const GET = async (req: NextRequest) => {
     try {
         const { searchParams } = req.nextUrl;
-        const page = searchParams.get('page') as unknown as number ?? 1;
-        const limit = searchParams.get('limit') as unknown as number ?? 10;
+        const page = searchParams.get('page') as unknown as number || 1;
+        const limit = searchParams.get('limit') as unknown as number || 10;
         // const scope = searchParams.get('scope');
         const authToken = cookies().get('authToken');
         // const scopeSelected = cookies().get('access-scope');
@@ -34,11 +34,17 @@ export const GET = async (req: NextRequest) => {
                 ...(searchParams.get('industry') && {
                     where: {
                         industry: {
-                            string_contains: searchParams.get('industry')!,
                             array_contains: searchParams.get('industry')!,
                         }
 
                     }
+                }),
+                ...(searchParams.get('search') && {
+                    where: {
+                        name: {
+                            search: searchParams.get('search')!,
+                        }
+                    },
                 }),
                 select: {
                     id: true,
@@ -53,7 +59,24 @@ export const GET = async (req: NextRequest) => {
                     createdAt: 'desc',
                 }
             }),
-            prisma.project.count()
+            prisma.project.count({
+                ...(projectStatus && { where: { status: projectStatus as ProjectVerifyStatus } }),
+                ...(searchParams.get('industry') && {
+                    where: {
+                        industry: {
+                            array_contains: searchParams.get('industry')!,
+                        }
+
+                    }
+                }),
+                ...(searchParams.get('search') && {
+                    where: {
+                        name: {
+                            search: searchParams.get('search')!,
+                        }
+                    },
+                }),
+            })
         ]);
 
         const totalPages = Math.ceil(tx[1] / limit);

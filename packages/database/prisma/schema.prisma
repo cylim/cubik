@@ -132,7 +132,7 @@ model Project {
   telegramLink      String              @default("")
   projectUserCount  Int                 @default(0)
   status            ProjectVerifyStatus @default(REVIEW)
-  isOpenSource      Boolean?             @default(false)
+  isOpenSource      Boolean?            @default(false)
   failedReason      String?             @default("")
   mutliSigAddress   String?             @default("")
   multiSigAddressV3 String?             @default("")
@@ -150,6 +150,7 @@ model Project {
   projectJoinEvent  ProjectJoinEvent[]
 
   @@index([ownerPublickey])
+  @@fulltext([name])
 }
 
 model Event {

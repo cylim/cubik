@@ -164,11 +164,12 @@ export const DescriptionEditor = ({ content, onUpdate }: Props) => {
           <Icon name="linkSlant" />
         </div>
       </div>
-      <div className="overflow-y-scroll max-h-[20rem] selection:text-white">
+      <div className="overflow-y-scroll max-h-[20rem] selection:text-">
         <EditorContent
           style={{
             height: '20rem',
             overflowY: 'scroll',
+            color: 'var(--form-input-fg-default)',
           }}
           className="grid min-h-[160px] w-full rounded-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white"
           editor={editor}

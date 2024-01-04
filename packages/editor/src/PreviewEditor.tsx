@@ -13,7 +13,7 @@ export const PreviewEditor = ({ content }: Props) => {
       style={{
         height: '20rem',
       }}
-      className="bg-[var(--form-input-surface-default)] ProseMirror  rounded-lg border border-[var(--form-input-border-default)]"
+      className="bg-[var(--form-input-surface-default)] ProseMirror text-[var(--form-input-fg-default)] rounded-lg border border-[var(--form-input-border-default)]"
     >
       <div dangerouslySetInnerHTML={{ __html: safeContent }} />
     </div>

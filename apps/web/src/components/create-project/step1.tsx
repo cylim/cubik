@@ -1,6 +1,5 @@
 import { ProjectFormData } from '@/components/create-project';
 import { Industries } from '@/constants/industry';
-
 import { useState } from 'React';
 import { UseFormReturn } from 'react-hook-form';
 
@@ -37,7 +36,7 @@ export const Step1 = ({ setStep, projectForm }: Props) => {
           <div className="flex flex-col gap-4">
             <InputContainer>
               <InputLabel
-                maxCounterValue={16}
+                maxCounterValue={32}
                 counterValue={projectForm.watch('name').length || 0}
                 isRequired
               >

@@ -127,7 +127,7 @@ const MenuItem = ({
           {leftIcon && (
             <Icon name={leftIcon} stroke="inherit" height={20} width={20} />
           )}
-          <Text className="b1 md:l2-light-light" color={'inherit'}>
+          <Text className="b1 md:l2-light" color={'inherit'}>
             {text}
           </Text>
           {isLoading && (

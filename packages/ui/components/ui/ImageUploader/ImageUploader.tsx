@@ -19,6 +19,7 @@ export const ImageUploader = ({
   logo,
   progress,
 }: Props) => {
+  console.log('logo', logo);
   const [drag, setDragging] = useState(false);
   const [file, setFile] = useState<File[]>([]);
 
@@ -63,7 +64,7 @@ export const ImageUploader = ({
       onDrop={handleDrop}
     >
       {/* Success */}
-      {file.length !== 0 && !isUploading && !errorMessage && (
+      {(file.length !== 0 || logo) && !isUploading && !errorMessage && (
         <div className={cn('w-max rounded flex')}>
           <Avatar size={'lg'} src={logo} alt="name" />
         </div>
@@ -85,7 +86,7 @@ export const ImageUploader = ({
         </div>
       )}
       {/* Default state */}
-      {file.length === 0 && !errorMessage && !isUploading && (
+      {file.length === 0 && !logo && !errorMessage && !isUploading && (
         <div
           className={cn(
             'p-4 w-max rounded flex',

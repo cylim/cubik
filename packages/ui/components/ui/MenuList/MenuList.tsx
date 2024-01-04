@@ -113,7 +113,7 @@ const MenuItem = ({
     onClick: isLoading ? () => {} : onClick,
     className: cn(
       isLoading ? 'cursor-not-allowed' : 'cursor-pointer',
-      children ? '' : MenuItemVariants({ variant }),
+      MenuItemVariants({ variant }),
       '',
     ),
   };

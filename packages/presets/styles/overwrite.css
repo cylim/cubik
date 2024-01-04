@@ -14,3 +14,96 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.ProseMirror {
+  padding:0.1rem;
+}
+.ProseMirror:focus {
+  outline: none;
+}
+
+.ProseMirror::-moz-focus-inner {
+  border: none;
+  outline: none !important;
+}
+
+
+/* Styles for Headings */
+.ProseMirror h1 {
+  font-size: 2em;
+  color: var(--form-input-fg-default);
+}
+
+.ProseMirror h2 {
+  font-size: 1.5em;
+ color: var(--form-input-fg-default);
+}
+
+/* Styles for Ordered Lists */
+.ProseMirror ol {
+  padding-left: 20px; /* Adjust as needed */
+}
+
+.ProseMirror ol li {
+  margin: 0; /* Removes default margin */
+  display: list-item; /* Ensures proper display */
+  list-style-type: decimal; /* Numbers for list items */
+  list-style-position: inside; /* Aligns numbers with text */
+}
+
+/* Styles for Bullet Lists */
+.ProseMirror ul {
+  padding-left: 20px; /* Adjust as needed */
+}
+
+.ProseMirror ul li {
+  margin: 0; /* Removes default margin */
+  display: list-item; /* Ensures proper display */
+  list-style-type: disc; /* Bullets for list items */
+  list-style-position: inside; /* Aligns bullets with text */
+}
+/* Style for Underlined Text */
+.ProseMirror u {
+  text-decoration: underline;
+}
+/* Styles for Ordered and Bullet Lists */
+.ProseMirror ol,
+.ProseMirror ul {
+  padding-left: 30px; /* Adjust padding to ensure enough space for markers */
+}
+
+.ProseMirror li {
+  display: flex;
+  align-items: flex-start; /* Aligns the marker and the text at the top */
+  padding: 0;
+  margin: 0;
+  list-style-position: outside; /* Positions markers outside the content flow */
+}
+
+/* Ensure text in list items starts on the same line as the marker */
+.ProseMirror li p {
+  margin: 0;
+  display: inline;
+}
+
+/* Style for Links */
+.ProseMirror a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+/* Style for Task List */
+.ProseMirror .task-list-item {
+  list-style: none;
+}
+
+.ProseMirror .task-list-item-checkbox {
+  margin-right: 0.5em;
+}
+
+
+
+/* Style for Color Extension (if applied to specific elements) */
+.ProseMirror .text-color {
+  /* Add your color styles here */
+}

@@ -26,6 +26,34 @@ export interface ProjectFormData {
   progress: number;
 }
 
+type User = {
+  id: string;
+  profilePicture: string;
+  username: string;
+};
+type Team = {
+  id: string;
+  user: User;
+};
+export interface IProjectData {
+  id: string;
+  name: string;
+  discordLink: string;
+  githubLink: string;
+  email: string;
+  shortDescription: string;
+  logo: string;
+  longDescription: string;
+  slides: string[];
+  projectLink: string;
+  industry: string;
+  status: string;
+  telegramLink: string;
+  isOpenSource: boolean;
+  twitterHandle: string;
+  team: Team[];
+}
+
 export type ProjectData = Prisma.ProjectGetPayload<{
   select: {
     id: true;

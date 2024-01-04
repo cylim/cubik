@@ -70,7 +70,7 @@ const UserNavbarMenu = ({
         <MenuItem onClick={onOpen} text="New Project" leftIcon="plus" />
         <MenuDivider />
         <MenuItem text="Dark" leftIcon="moon">
-          <Switch onChange={toggleTheme} size="sm" />
+          <Switch onChange={toggleTheme} size="sm" checked />
         </MenuItem>
 
         <MenuItem

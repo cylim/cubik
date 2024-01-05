@@ -79,9 +79,6 @@ export interface ProjectFormData {
 export const CreateProjectModal = ({ onClose, open }: Props) => {
   const [step, setStep] = useState<number>(1);
   const [loadedProject, setLoadedProject] = useState<ProjectData | null>(null);
-  const [progress, setProgress] = useState<number>(0);
-  const [multiImageUploaderProgress, setMultiImageUploaderProgress] =
-    useState<number>(0);
 
   const createProjectForm = useForm<ProjectFormData>({
     defaultValues: {
@@ -166,14 +163,7 @@ export const CreateProjectModal = ({ onClose, open }: Props) => {
               <Step1 setStep={setStep} projectForm={createProjectForm} />
             )}
             {step === 2 && (
-              <Step2
-                setStep={setStep}
-                projectForm={createProjectForm}
-                progress={progress}
-                setProgress={setProgress}
-                multiImageUploaderProgress={multiImageUploaderProgress}
-                setMultiImageUploaderProgress={setMultiImageUploaderProgress}
-              />
+              <Step2 setStep={setStep} projectForm={createProjectForm} />
             )}
             {step === 3 && (
               <Step3 setStep={setStep} projectForm={createProjectForm} />

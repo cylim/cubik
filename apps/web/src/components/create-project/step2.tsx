@@ -1,4 +1,5 @@
 import { ProjectFormData } from '@/components/create-project';
+import { LogoUploader } from '@/components/create-project/image-uploder/logoUploader';
 import { MultiImageUploader } from '@/components/create-project/image-uploder/multiImageUploader';
 import { useUploadThing } from '@/utils/uploadthing';
 import { UseFormReturn } from 'react-hook-form';
@@ -9,50 +10,8 @@ import { Button, ImageUploader, Text } from '@cubik/ui';
 interface Props {
   projectForm: UseFormReturn<ProjectFormData, any, undefined>;
   setStep: React.Dispatch<React.SetStateAction<number>>;
-  progress: number;
-  setProgress: React.Dispatch<React.SetStateAction<number>>;
-  multiImageUploaderProgress: number;
-  setMultiImageUploaderProgress: React.Dispatch<React.SetStateAction<number>>;
 }
-export const Step2 = ({
-  setStep,
-  projectForm,
-  progress,
-  setProgress,
-}: Props) => {
-  const { startUpload, isUploading, permittedFileInfo } = useUploadThing(
-    'imageUploader',
-    {
-      onUploadProgress: (progressEvent) => {
-        // setProgress(progressEvent);
-        setProgress(progressEvent);
-      },
-      onUploadError: (error) => {
-        projectForm.setError('logo', {
-          type: 'manual',
-          message: error.message,
-        });
-        toast.error(`Upload Error: ${error.message}`);
-      },
-      onUploadBegin: (file) => {
-        //   setLoadingState('Uploading');
-        //   toast.info(`Upload Begin: ${file}`);
-      },
-      onClientUploadComplete: (file) => {
-        if (file) {
-          console.log(file);
-          projectForm.setValue('logo', file[0].url);
-        } else {
-          projectForm.setError('logo', {
-            type: 'manual',
-            message: "Couldn't upload file",
-          });
-          toast.error(`Upload Error: ${file}`);
-        }
-      },
-    },
-  );
-
+export const Step2 = ({ setStep, projectForm }: Props) => {
   return (
     <>
       <div className="flex flex-col gap-14">
@@ -71,13 +30,7 @@ export const Step2 = ({
           <Text color={'primary'} className="l1">
             Thumbnail
           </Text>
-          <ImageUploader
-            progress={progress || 0}
-            logo={projectForm.watch('logo')}
-            errorMessage={projectForm.formState.errors.logo?.message}
-            isUploading={isUploading}
-            startUpload={startUpload}
-          />
+          <LogoUploader projectForm={projectForm} />
         </div>
         <div className="flex flex-col gap-4">
           <Text color={'primary'} className="l1">

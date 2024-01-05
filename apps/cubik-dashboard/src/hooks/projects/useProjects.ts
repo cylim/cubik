@@ -27,13 +27,25 @@ export interface Project {
     createdAt: Date;
     status: ProjectVerifyStatus;
     projectLink: string;
+    twitterHandle: string;
+    githubLink: string;
     email: string;
+    slides: string[];
+    longDescription: string;
     owner: {
         id: string;
         username: string;
         profilePicture: string;
         mainWallet: string;
     };
+    team: {
+        user: {
+            id: string;
+            username: string;
+            mainWallet: string;
+            profilePicture: string;
+        };
+    }[];
 }
 
 type ResponseType = ApiResponseType & {

@@ -57,6 +57,22 @@ export const GET = async (req: NextRequest) => {
                     createdAt: true,
                     projectLink: true,
                     email: true,
+                    slides: true,
+                    longDescription: true,
+                    team: {
+                        select: {
+                            user: {
+                                select: {
+                                    id: true,
+                                    username: true,
+                                    profilePicture: true,
+                                    mainWallet: true,
+                                }
+                            }
+                        }
+                    },
+                    twitterHandle: true,
+                    githubLink: true,
                     owner: {
                         select: {
                             id: true,
@@ -89,7 +105,7 @@ export const GET = async (req: NextRequest) => {
                 }),
             })
         ]);
-
+        // tx[0][0].team
         const totalPages = Math.ceil(tx[1] / limit);
 
         return NextResponse.json(successHandler({

@@ -1,9 +1,17 @@
 import { ProjectFormData } from '@/components/create-project';
 import { TeamSelector } from '@/components/create-project/team-selector/teamSelector';
-
 import { UseFormReturn } from 'react-hook-form';
 
-import { Button, Checkbox, Icon, Text } from '@cubik/ui';
+import {
+  Button,
+  Checkbox,
+  Icon,
+  InputContainer,
+  InputField,
+  InputFieldContainer,
+  InputLabel,
+  Text,
+} from '@cubik/ui';
 
 interface Props {
   projectForm: UseFormReturn<ProjectFormData, any, undefined>;
@@ -44,7 +52,7 @@ export const Step3 = ({ setStep, projectForm }: Props) => {
               twitter and github repository of the project
             </Text>
           </div>
-          <div className="flex w-full flex-col gap-3">
+          {/* <div className="flex w-full flex-col gap-3">
             <div className="flex items-center justify-between">
               <Text className="l1" color={'primary'}>
                 Github
@@ -61,6 +69,38 @@ export const Step3 = ({ setStep, projectForm }: Props) => {
                 Connect X.com
               </Button>
             </div>
+          </div> */}
+          <div className="flex w-full flex-col gap-3">
+            <InputContainer>
+              <InputLabel>Github</InputLabel>
+              <InputFieldContainer
+                isError={projectForm.formState.errors.github ? true : false}
+                variant="md"
+              >
+                <InputField
+                  onChange={(e) => {
+                    projectForm.setValue('github', e.currentTarget.value);
+                  }}
+                  value={projectForm.watch('github')}
+                  placeholder="https://github.com"
+                />
+              </InputFieldContainer>
+            </InputContainer>
+            <InputContainer>
+              <InputLabel>X.come</InputLabel>
+              <InputFieldContainer
+                isError={projectForm.formState.errors.twitter ? true : false}
+                variant="md"
+              >
+                <InputField
+                  onChange={(e) => {
+                    projectForm.setValue('twitter', e.currentTarget.value);
+                  }}
+                  value={projectForm.watch('twitter')}
+                  placeholder="https://x.com"
+                />
+              </InputFieldContainer>
+            </InputContainer>
           </div>
         </div>
 

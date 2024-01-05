@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { syncProject } from '@/components/create-project/helper/syncProject';
 import { Step1 } from '@/components/create-project/step1';
 import { Step2 } from '@/components/create-project/step2';
 import { Step3 } from '@/components/create-project/step3';
 import { Step4 } from '@/components/create-project/step4';
+import { useAutosave } from '@/hooks/useAutoSave';
 import axios, { AxiosResponse } from 'axios';
 import { useForm } from 'react-hook-form';
 
@@ -13,6 +15,7 @@ import {
   Avatar,
   Icon,
   Modal,
+  Spinner,
   Tab,
   TabList,
   TabPanel,
@@ -79,6 +82,9 @@ export interface ProjectFormData {
 export const CreateProjectModal = ({ onClose, open }: Props) => {
   const [step, setStep] = useState<number>(1);
   const [loadedProject, setLoadedProject] = useState<ProjectData | null>(null);
+  const [isLoadingProject, setIsLoadingProject] = useState<boolean>(false);
+  const lastUpdateRef = useRef<number>(Date.now());
+  const [formState, setFormState] = useState<any>(null);
 
   const createProjectForm = useForm<ProjectFormData>({
     defaultValues: {
@@ -97,11 +103,13 @@ export const CreateProjectModal = ({ onClose, open }: Props) => {
     },
   });
 
+  // this loads the project data from the database for first time
   useEffect(() => {
     const loadProjectData = async () => {
       try {
         // if the modal is not open or the project is already loaded, return to avoid loop of fetch calls
         if (!open || loadedProject) return;
+        setIsLoadingProject(true);
 
         const projectId = localStorage.getItem('latest-draft-project');
         if (!projectId) {
@@ -109,7 +117,7 @@ export const CreateProjectModal = ({ onClose, open }: Props) => {
         }
 
         const data = (await axios.get(
-          `/api/project/loadProject?project=${projectId}&draft=true`,
+          `/api/project/loadProject?project=${projectId}&draft=true&create=true`,
         )) as AxiosResponse<ApiResponseType, any>;
 
         const projectData = data.data.result as ProjectData;
@@ -120,10 +128,10 @@ export const CreateProjectModal = ({ onClose, open }: Props) => {
         createProjectForm.setValue('email', projectData.email);
         createProjectForm.setValue('logo', projectData.logo);
         createProjectForm.setValue('description', projectData.longDescription);
-        // createProjectForm.setValue(
-        //   'slides',
-        //   (projectData.slides as any).slide || [],
-        // );
+        createProjectForm.setValue(
+          'slides',
+          (projectData.slides as string[]) || [],
+        );
         createProjectForm.setValue('github', projectData.githubLink);
         createProjectForm.setValue('website', projectData.projectLink);
         createProjectForm.setValue('twitter', projectData.twitterHandle);
@@ -144,35 +152,65 @@ export const CreateProjectModal = ({ onClose, open }: Props) => {
       } catch (error) {
         console.log(error);
         return;
+      } finally {
+        setIsLoadingProject(false);
       }
     };
     loadProjectData();
   }, [open, loadedProject]);
+  useEffect(() => {
+    const subscription = createProjectForm.watch((value) => {
+      setFormState(value as any); // Update the state with the latest form value
+      lastUpdateRef.current = Date.now(); // Update the last update time
+    });
+    return () => subscription.unsubscribe(); // Cleanup
+  }, [createProjectForm.watch()]);
+
+  useAutosave(
+    async () => {
+      const projectId = localStorage.getItem('latest-draft-project');
+      if (!projectId) {
+        return onClose();
+      }
+      if (!loadedProject) return;
+      const syp = await syncProject(createProjectForm.getValues(), projectId);
+    },
+    15000,
+    [formState],
+    lastUpdateRef.current + 30000 > Date.now() ? true : false,
+  );
 
   return (
     <Modal dialogSize="xl" onClose={onClose} open={open}>
       <div className="pointer-events-auto flex h-[90vh] w-full justify-start overflow-hidden rounded-2xl bg-[var(--modal-body-surface)]">
-        <div className="w-full overflow-y-auto bg-[var(--card-bg-primary)] px-7 md:w-[55%]  md:px-14">
-          <div className="py-4 md:py-8 ">
-            <Text className="h5 text-[var(--modal-header-heading)]">
-              New Project
-            </Text>
+        {!isLoadingProject ? (
+          <div className="w-full overflow-y-auto bg-[var(--card-bg-primary)] px-7 md:w-[55%]  md:px-14">
+            <div className="py-4 md:py-8 ">
+              <Text className="h5 text-[var(--modal-header-heading)]">
+                New Project
+              </Text>
+            </div>
+            <div className="px-4 py-5 md:px-7 md:py-11">
+              {step === 1 && (
+                <Step1 setStep={setStep} projectForm={createProjectForm} />
+              )}
+              {step === 2 && (
+                <Step2 setStep={setStep} projectForm={createProjectForm} />
+              )}
+              {step === 3 && (
+                <Step3 setStep={setStep} projectForm={createProjectForm} />
+              )}
+              {step === 4 && (
+                <Step4 setStep={setStep} projectForm={createProjectForm} />
+              )}
+            </div>
           </div>
-          <div className="px-4 py-5 md:px-7 md:py-11">
-            {step === 1 && (
-              <Step1 setStep={setStep} projectForm={createProjectForm} />
-            )}
-            {step === 2 && (
-              <Step2 setStep={setStep} projectForm={createProjectForm} />
-            )}
-            {step === 3 && (
-              <Step3 setStep={setStep} projectForm={createProjectForm} />
-            )}
-            {step === 4 && (
-              <Step4 setStep={setStep} projectForm={createProjectForm} />
-            )}
+        ) : (
+          <div className="flex w-full items-center justify-center px-7 md:w-[55%] md:px-14">
+            <Spinner color="#000000" />
           </div>
-        </div>
+        )}
+
         <div className="relative hidden w-[45%] px-14 py-8 md:block ">
           <div className="flex w-full justify-end">
             <div className="cursor-pointer" onClick={onClose}>

@@ -2,6 +2,7 @@ import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
 import { decodeToken } from '@cubik/auth';
+import { Project_Backup } from '@cubik/common';
 import { prisma } from '@cubik/database';
 import { handleApiClientError, successHandler } from '@cubik/database/api';
 import { logApi } from '@cubik/logger/src';
@@ -11,6 +12,7 @@ export const GET = async (req: NextRequest) => {
     const { searchParams } = req.nextUrl;
     const project = searchParams.get('project');
     const isDraft = searchParams.get('draft');
+    const createMode = searchParams.get('create');
     logApi({
       req: req as any,
       message: 'Project loaded',
@@ -54,6 +56,9 @@ export const GET = async (req: NextRequest) => {
         telegramLink: true,
         twitterHandle: true,
         team: {
+          where: {
+            isArchive: false,
+          },
           select: {
             id: true,
             user: {
@@ -69,6 +74,29 @@ export const GET = async (req: NextRequest) => {
     });
 
     if (!projectData) {
+      const checkProject = await prisma.project.findFirst({
+        where: {
+          id: project,
+        },
+      });
+      if (!checkProject && !createMode) {
+        throw new Error('Project not found');
+      }
+
+      if (!checkProject && createMode) {
+        const p = await prisma.project.create({
+          data: {
+            id: project,
+            ownerPublickey: user.mainWallet,
+            isDraft: true,
+            logo: Project_Backup,
+            longDescription: 'Placeholder',
+            name: 'Untitled Project',
+            shortDescription: 'Placeholder',
+          },
+        });
+        return NextResponse.json(successHandler(p, 'Project base created'));
+      }
       throw new Error('Project not found');
     }
 

@@ -126,6 +126,7 @@ const Avatar = ({
         src={src}
         alt={alt}
         fill={true}
+        sizes="(max-width: 768px) 100vw, 33vw"
         style={{
           objectFit: 'cover',
           background: 'transparent',

@@ -123,10 +123,10 @@ export const CreateProjectModal = ({ onClose, open }: Props) => {
         createProjectForm.setValue('email', projectData.email);
         createProjectForm.setValue('logo', projectData.logo);
         createProjectForm.setValue('description', projectData.longDescription);
-        createProjectForm.setValue(
-          'slides',
-          (projectData.slides as any).slide || [],
-        );
+        // createProjectForm.setValue(
+        //   'slides',
+        //   (projectData.slides as any).slide || [],
+        // );
         createProjectForm.setValue('github', projectData.githubLink);
         createProjectForm.setValue('website', projectData.projectLink);
         createProjectForm.setValue('twitter', projectData.twitterHandle);
@@ -134,6 +134,14 @@ export const CreateProjectModal = ({ onClose, open }: Props) => {
           'isOpenSource',
           projectData.isOpenSource || false,
         );
+        const team: Option[] = projectData.team.map((e) => {
+          return {
+            inputId: e.user.id,
+            label: e.user.username,
+            value: e.user.id,
+          };
+        });
+        createProjectForm.setValue('team', team);
 
         setLoadedProject(projectData);
       } catch (error) {

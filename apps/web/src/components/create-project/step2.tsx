@@ -83,13 +83,7 @@ export const Step2 = ({
           <Text color={'primary'} className="l1">
             Gallery
           </Text>
-          <MultiImageUploader
-          // progress={projectForm.watch('progress') || 0}
-          // logo={projectForm.watch('logo')}
-          // errorMessage={projectForm.formState.errors.logo?.message}
-          // isUploading={isUploading}
-          // startUpload={startUpload}
-          />
+          <MultiImageUploader projectForm={projectForm} />
         </div>
 
         <div className=" flex w-full items-center justify-between">

@@ -1,8 +1,9 @@
 "use client";
+import { ProjectDrawer } from "@/app/projects/components/projectDrawer";
 import useProjects from "@/hooks/projects/useProjects";
 import { ProjectVerifyStatus } from "@cubik/database";
 import dayjs from "@cubik/dayjs";
-import { AvatarLabelGroup, InputContainer, InputField, InputFieldContainer, PaginationButton, ProjectCard, SegmentContainer, SegmentItem, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Text } from "@cubik/ui";
+import { AvatarLabelGroup, InputContainer, InputField, InputFieldContainer, PaginationButton, SegmentContainer, SegmentItem, Table, TableBody, TableCell, TableHead, TableHeader, TableRow, Text } from "@cubik/ui";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -44,8 +45,9 @@ const ProjectPage = ({ searchParams }: Props) => {
         projectStatus: selectedStatus,
         ...(searchBoxState !== "" && { search: searchBoxState })
     });
-
+    const [open, setOpen] = useState<boolean>(false);
     const router = useRouter();
+    const [projectIdx, setProjectIdx] = useState<string>("");
 
     console.log(selectedStatus);
     console.log(searchParams);
@@ -108,11 +110,13 @@ const ProjectPage = ({ searchParams }: Props) => {
                             <TableHead>
                                 <Text>Time</Text>
                             </TableHead>
+                            <TableHead></TableHead>
                         </TableHeader>
                         <TableBody>
                             {projects.isSuccess && _projects?.map((project) => {
                                 const isImageDelivery = isUrlFromDomain(project.logo, 'imagedelivery.net');
                                 return (
+
                                     <TableRow key={project.id}>
                                         <TableCell>
                                             <AvatarLabelGroup
@@ -135,6 +139,16 @@ const ProjectPage = ({ searchParams }: Props) => {
                                         <TableCell>
                                             <Text>{dayjs(project.createdAt).fromNow()}</Text>
                                         </TableCell>
+                                        <TableCell>
+                                            <div className="rounded-md border p-3" onClick={() => {
+                                                setProjectIdx(project.id);
+                                                setOpen(true);
+                                            }}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18" fill="none" viewBox="0 0 19 18">
+                                                    <path stroke="#4D4D4D" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.25 13.5a22.965 22.965 0 0 0 4.363-4.117.602.602 0 0 0 0-.766A22.964 22.964 0 0 0 7.25 4.5" />
+                                                </svg>
+                                            </div>
+                                        </TableCell>
                                     </TableRow>
                                 );
                             })}
@@ -152,6 +166,9 @@ const ProjectPage = ({ searchParams }: Props) => {
                     </div>
                 )}
             </div>
+            {(projects.isSuccess && _projects) && (
+                <ProjectDrawer isOpen={open} onOpenChange={setOpen} project={_projects.find(p => p.id === projectIdx)!} />
+            )}
         </div>
     )
 }

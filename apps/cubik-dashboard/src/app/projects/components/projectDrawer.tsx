@@ -32,7 +32,7 @@ export function ProjectDrawer({ project, ...props }: DrawerProps) {
                     </svg>
                 </div>
             </SheetTrigger>
-            <SheetContent className="overflow-x-scroll bg-white">
+            <SheetContent className="overflow-x-scroll bg-[#FAFAFA]">
                 <SheetHeader>
                     <div className="relative box-border flex w-full flex-col items-start justify-start px-6 pb-2 pt-0">
                         <Image width={516} height={151} className="relative h-[151px] max-w-full shrink-0 self-stretch overflow-hidden rounded-xl object-cover" alt="" src={project?.slides[0]} />
@@ -44,7 +44,14 @@ export function ProjectDrawer({ project, ...props }: DrawerProps) {
                 <div className="relative px-6">
                     <div className="flex flex-row gap-4">
                         <Text className="text-xl font-bold">{project?.name}</Text>
-                        <Tag color="red" variant="solid">{project?.status}</Tag>
+                        <Tag color="orange" variant="subtle">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
+                                <path stroke="#F47B3F" stroke-linecap="round" stroke-linejoin="round" d="M6 8.094 7.338 9.43a8.563 8.563 0 0 1 2.604-2.82L10 6.57M14.167 8c0-.86-.53-1.606-1.318-2.01.277-.836.12-1.744-.487-2.352-.608-.607-1.516-.764-2.352-.487C9.613 2.363 8.86 1.833 8 1.833c-.86 0-1.606.53-2.003 1.318-.843-.277-1.751-.12-2.359.487-.607.608-.758 1.516-.48 2.353C2.367 6.394 1.832 7.14 1.832 8c0 .86.536 1.606 1.324 2.01-.277.836-.126 1.744.481 2.352.608.607 1.516.758 2.353.487.403.788 1.149 1.318 2.01 1.318.86 0 1.612-.53 2.009-1.318.836.27 1.744.12 2.352-.487.608-.608.764-1.516.487-2.353.788-.403 1.318-1.149 1.318-2.009Z" />
+                            </svg>
+                            <Text className="px-2 text-sm text-[#F47B3F]">
+                                {project?.status}
+                            </Text>
+                        </Tag>
                     </div>
                     <Text className="text-sm font-semibold">{project?.shortDescription}</Text>
                     <div className="relative flex w-full flex-row items-end justify-start gap-[12px] py-3 text-left text-xs">
@@ -93,7 +100,7 @@ export function ProjectDrawer({ project, ...props }: DrawerProps) {
                                             return (
                                                 <div
                                                     key={idx}
-                                                    className="w-fit rounded-lg bg-[var(--body-primary)] px-4 py-3"
+                                                    className="w-fit rounded-lg bg-[#FFFFFF] px-4 py-3"
                                                 >
                                                     <Text className="l1 md:l2" color={'primary'}>
                                                         {tag}

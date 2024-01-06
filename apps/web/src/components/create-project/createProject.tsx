@@ -10,13 +10,13 @@ import { Step4 } from '@/components/create-project/step4';
 import { useAutosave } from '@/hooks/useAutoSave';
 import axios, { AxiosResponse } from 'axios';
 import { useForm } from 'react-hook-form';
+import { v4 as uuidV4 } from 'uuid';
 
 import { Project_Backup } from '@cubik/common';
 import { Prisma } from '@cubik/database';
 import { ApiResponseType } from '@cubik/database/api';
 import {
   Avatar,
-  Icon,
   Spinner,
   Tab,
   TabList,
@@ -132,21 +132,31 @@ export const CreateProject = ({ id }: Props) => {
         createProjectForm.setValue('github', projectData.githubLink);
         createProjectForm.setValue('website', projectData.projectLink);
         createProjectForm.setValue('twitter', projectData.twitterHandle);
+        const category = (projectData.industry as string[]).map((e) => {
+          return {
+            inputId: uuidV4(),
+            label: e,
+            value: e,
+          };
+        });
+        createProjectForm.setValue('category', category || []);
         createProjectForm.setValue(
           'isOpenSource',
           projectData.isOpenSource || false,
         );
-        const team: Option[] = projectData.team.map((e) => {
-          return {
-            inputId: e.user.id,
-            label: e.user.username,
-            value: e.user.id,
-          };
-        });
+        const team: Option[] =
+          projectData?.team.map((e) => {
+            return {
+              inputId: e.user.id,
+              label: e.user.username,
+              value: e.user.id,
+            };
+          }) || [];
         createProjectForm.setValue('team', team);
 
         setLoadedProject(projectData);
       } catch (error) {
+        console.log(error);
         localStorage.removeItem('latest-draft-project');
         router.push('/create/project');
         return;

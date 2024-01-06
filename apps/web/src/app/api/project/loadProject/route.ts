@@ -94,9 +94,36 @@ export const GET = async (req: NextRequest) => {
             longDescription: 'Placeholder',
             name: 'Untitled Project',
             shortDescription: 'Placeholder',
+            industry: [],
+            slides: [],
+          },
+          select: {
+            id: true,
+            name: true,
+            discordLink: true,
+            githubLink: true,
+            email: true,
+            shortDescription: true,
+            logo: true,
+            longDescription: true,
+            slides: true,
+            projectLink: true,
+            industry: true,
+            isOpenSource: true,
+            status: true,
+            telegramLink: true,
+            twitterHandle: true,
           },
         });
-        return NextResponse.json(successHandler(p, 'Project base created'));
+        return NextResponse.json(
+          successHandler(
+            {
+              ...p,
+              team: [],
+            },
+            'Project base created',
+          ),
+        );
       }
       throw new Error('Project not found');
     }

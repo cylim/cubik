@@ -69,13 +69,9 @@ const UserNavbarMenu = ({
           <MenuItem text="Profile" leftIcon="user" onClick={() => {}} />
         </Link>
         <MenuItem text="Settings" leftIcon="settings" />
-        <MenuItem
-          onClick={() => {
-            router.push('/create/project');
-          }}
-          text="New Project"
-          leftIcon="plus"
-        />
+        <Link href={'/create/project'}>
+          <MenuItem text="New Project" leftIcon="plus" />
+        </Link>
         <MenuDivider />
         <MenuItem text="Dark" leftIcon="moon">
           <Switch onChange={toggleTheme} size="sm" />

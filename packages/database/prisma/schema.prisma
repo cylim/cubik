@@ -247,6 +247,7 @@ model Team {
   userId    String
   projectId String?
   createdAt DateTime @default(now())
+  designation  Designation @default(Other)
   updatedAt DateTime @updatedAt
   isActive  Boolean  @default(true)
   isArchive Boolean  @default(false)
@@ -424,3 +425,15 @@ enum EventStatusType {
   ENDED
   VOTING
 }
+enum Designation {
+  CEO
+  CTO
+  COO
+  CMO
+  Developer
+  Designer
+  Growth 
+  Manger
+  Marketing
+  Other
+} 

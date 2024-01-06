@@ -1,7 +1,7 @@
 'use server';
 
 import { cookies } from 'next/headers';
-import { ProjectFormData } from '@/components/create-project';
+import { ProjectFormData } from '@/components/create-project/createProject';
 
 import { decodeToken } from '@cubik/auth';
 import { prisma } from '@cubik/database';

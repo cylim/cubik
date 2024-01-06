@@ -1,17 +1,16 @@
-import { ProjectFormData } from '@/components/create-project';
+import { ProjectFormData } from '@/components/create-project/createProject';
 import { LogoUploader } from '@/components/create-project/image-uploder/logoUploader';
 import { MultiImageUploader } from '@/components/create-project/image-uploder/multiImageUploader';
-import { useUploadThing } from '@/utils/uploadthing';
 import { UseFormReturn } from 'react-hook-form';
-import { toast } from 'sonner';
 
-import { Button, ImageUploader, Text } from '@cubik/ui';
+import { Button, Text } from '@cubik/ui';
 
 interface Props {
   projectForm: UseFormReturn<ProjectFormData, any, undefined>;
   setStep: React.Dispatch<React.SetStateAction<number>>;
+  forceSave: () => Promise<void>;
 }
-export const Step2 = ({ setStep, projectForm }: Props) => {
+export const Step2 = ({ setStep, projectForm, forceSave }: Props) => {
   return (
     <>
       <div className="flex flex-col gap-14">
@@ -41,7 +40,10 @@ export const Step2 = ({ setStep, projectForm }: Props) => {
 
         <div className=" flex w-full items-center justify-between">
           <Button
-            onClick={() => setStep(1)}
+            onClick={() => {
+              setStep(1);
+              forceSave();
+            }}
             leftIconName="chevronLeft"
             variant={'outline'}
             size={'md'}

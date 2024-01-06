@@ -2,12 +2,13 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { useCreateProject } from '@/hooks/useCreateProject';
+import { usePathname, useRouter } from 'next/navigation';
 import { useUser } from '@/hooks/useUser';
 import { handleLogout } from '@/utils/auth/logout';
 
 import { formatAddress } from '@cubik/common';
 import { UserAuth } from '@cubik/common-types';
+import { handleRevalidation } from '@cubik/common/helper';
 import {
   Avatar,
   AvatarLabelGroup,
@@ -34,7 +35,8 @@ const UserNavbarMenu = ({
   disconnect: () => any;
 }) => {
   const { toggleTheme } = useTheme();
-  const { onOpen } = useCreateProject();
+  const router = useRouter();
+  const pathname = usePathname();
   return (
     <Menu>
       <MenuButton>
@@ -67,7 +69,13 @@ const UserNavbarMenu = ({
           <MenuItem text="Profile" leftIcon="user" onClick={() => {}} />
         </Link>
         <MenuItem text="Settings" leftIcon="settings" />
-        <MenuItem onClick={onOpen} text="New Project" leftIcon="plus" />
+        <MenuItem
+          onClick={() => {
+            router.push('/create/project');
+          }}
+          text="New Project"
+          leftIcon="plus"
+        />
         <MenuDivider />
         <MenuItem text="Dark" leftIcon="moon">
           <Switch onChange={toggleTheme} size="sm" />
@@ -80,6 +88,7 @@ const UserNavbarMenu = ({
             setUser(null);
             await disconnect();
             await handleLogout();
+            handleRevalidation(pathname);
           }}
         />
       </MenuList>

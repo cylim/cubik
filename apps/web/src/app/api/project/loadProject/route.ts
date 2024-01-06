@@ -8,6 +8,11 @@ import { handleApiClientError, successHandler } from '@cubik/database/api';
 import { logApi } from '@cubik/logger/src';
 
 export const GET = async (req: NextRequest) => {
+  const authToken = cookies().get('authToken');
+
+  if (!authToken) {
+    throw new Error('Unauthorized request');
+  }
   try {
     const { searchParams } = req.nextUrl;
     const project = searchParams.get('project');
@@ -23,12 +28,8 @@ export const GET = async (req: NextRequest) => {
       throw new Error('No project specified');
     }
 
-    const authToken = cookies().get('authToken');
-
-    if (!authToken) {
-      throw new Error('Unauthorized request');
-    }
     const user = await decodeToken(authToken.value);
+
     if (!user) {
       throw new Error('Unauthorized request');
     }
@@ -109,6 +110,7 @@ export const GET = async (req: NextRequest) => {
       message: 'Failed to load project',
       source: 'apps/web/src/app/api/project/loadProject/route.ts',
       level: 'error',
+      user: await decodeToken(authToken.value),
     });
     return handleApiClientError('Failed to load draft project');
   }

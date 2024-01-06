@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ProjectFormData } from '@/components/create-project';
+import { ProjectFormData } from '@/components/create-project/createProject';
 import { UseFormReturn } from 'react-hook-form';
 
 import { DescriptionEditor, PreviewEditor } from '@cubik/editor';

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Option, ProjectFormData } from '@/components/create-project';
+import {
+  Option,
+  ProjectFormData,
+} from '@/components/create-project/createProject';
 import axios, { AxiosResponse } from 'axios';
 import { UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';

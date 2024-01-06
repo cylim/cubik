@@ -1,4 +1,4 @@
-import { ProjectFormData } from '@/components/create-project';
+import { ProjectFormData } from '@/components/create-project/createProject';
 import { TeamSelector } from '@/components/create-project/team-selector/teamSelector';
 import { UseFormReturn } from 'react-hook-form';
 
@@ -16,8 +16,10 @@ import {
 interface Props {
   projectForm: UseFormReturn<ProjectFormData, any, undefined>;
   setStep: React.Dispatch<React.SetStateAction<number>>;
+  forceSave: () => Promise<void>;
 }
-export const Step3 = ({ setStep, projectForm }: Props) => {
+
+export const Step3 = ({ setStep, projectForm, forceSave }: Props) => {
   return (
     <>
       <div className="flex flex-col gap-14">
@@ -121,7 +123,10 @@ export const Step3 = ({ setStep, projectForm }: Props) => {
         </div>
         <div className="flex w-full items-center justify-between">
           <Button
-            onClick={() => setStep(2)}
+            onClick={() => {
+              setStep(2);
+              forceSave();
+            }}
             leftIconName="chevronLeft"
             variant={'outline'}
             size={'md'}

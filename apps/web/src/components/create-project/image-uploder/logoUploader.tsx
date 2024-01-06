@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ProjectFormData } from '@/components/create-project';
+import { ProjectFormData } from '@/components/create-project/createProject';
 import { useUploadThing } from '@/utils/uploadthing';
 import { UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';

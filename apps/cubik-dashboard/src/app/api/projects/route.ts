@@ -30,20 +30,22 @@ export const GET = async (req: NextRequest) => {
             prisma.project.findMany({
                 skip: Number(skip),
                 take: Number(limit),
-                ...(projectStatus && { where: { status: projectStatus as ProjectVerifyStatus } }),
+                ...(projectStatus && { where: { status: projectStatus as ProjectVerifyStatus, isDraft: false } }),
                 ...(searchParams.get('industry') && {
                     where: {
                         industry: {
                             array_contains: searchParams.get('industry')!,
-                        }
-
+                        },
+                        isDraft: false,
                     }
                 }),
                 ...(searchParams.get('search') && {
                     where: {
                         name: {
                             search: searchParams.get('search')!,
-                        }
+                        },
+                        // isDraft: false,
+                        // ...(projectStatus && { status: projectStatus as ProjectVerifyStatus }),
                     },
                 }),
                 select: {
@@ -68,11 +70,12 @@ export const GET = async (req: NextRequest) => {
                                     profilePicture: true,
                                     mainWallet: true,
                                 }
-                            }
+                            },
                         }
                     },
                     twitterHandle: true,
                     githubLink: true,
+                    isDraft: true,
                     owner: {
                         select: {
                             id: true,
@@ -103,6 +106,9 @@ export const GET = async (req: NextRequest) => {
                         }
                     },
                 }),
+                where: {
+                    isDraft: false,
+                },
             })
         ]);
         // tx[0][0].team

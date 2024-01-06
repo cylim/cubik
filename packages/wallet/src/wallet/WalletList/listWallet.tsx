@@ -1,11 +1,12 @@
 'use client';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { AvatarGroup, Divider, Text } from '@cubik/ui';
+import { AvatarGroup, Divider, Icon, Text } from '@cubik/ui';
 
 import { useCubikWallet, useCubikWalletContext } from '../context/CubikContext';
+import { useUserModalUIContext } from '../context/WalletUIContext';
 import { useWalletModalLogic } from '../hooks/useWalletModalLogic';
 import { OnboardingFlow } from './Onboarding';
 import { WalletIcon } from './WalletListItem';
@@ -27,8 +28,16 @@ const CubikWalletModal: React.FC<ICubikWalletModal> = ({ setShowHeader }) => {
     handleConnectClick,
     renderWalletList,
   } = useWalletModalLogic();
-
+  const { modalState, setModalState, isWalletLoading, setIsWalletLoading } =
+    useUserModalUIContext();
+  console.log('2) Modal State: ', modalState);
   const { error, selectedAdapter } = useCubikWalletContext();
+
+  useEffect(() => {
+    if (error) {
+      setModalState('error-connecting');
+    }
+  }, [error, setModalState]);
 
   if (showOnboarding) {
     setShowHeader(false);
@@ -36,19 +45,24 @@ const CubikWalletModal: React.FC<ICubikWalletModal> = ({ setShowHeader }) => {
   }
 
   if (selectedAdapter) {
-    return (
-      <WalletConnectStatus
-        error={error?.message}
-        icon={selectedAdapter?.adapter.icon}
-        name={selectedAdapter.adapter.name}
-        status={error?.message ? 'failed' : 'connecting'}
-        adapter={selectedAdapter.adapter}
-      />
-    );
+    return <WalletConnectStatus adapter={selectedAdapter.adapter} />;
   }
 
   return (
     <div className="flex flex-col">
+      <div className="hidden md:flex justify-between items-center h-[44px] md:h-[48px] px-[16px] md:px-[24px]">
+        <Text color={'primary'} className="text-[var(--avatar-label-title)] h6">
+          Connect Wallet
+        </Text>
+        <button className="pointer-events-auto">
+          <Icon
+            name="cross"
+            width={20}
+            height={20}
+            color="var(--modal-header-cancel-icon)"
+          />
+        </button>
+      </div>
       <>
         <div
           style={{
@@ -64,7 +78,10 @@ const CubikWalletModal: React.FC<ICubikWalletModal> = ({ setShowHeader }) => {
               <div
                 className=" cursor-pointer pointer-events-auto"
                 key={idx}
-                onClick={(event) => handleConnectClick(event, adapter)}
+                onClick={(event) => {
+                  setModalState('connecting');
+                  handleConnectClick(event, adapter);
+                }}
               >
                 {isSmallDevice ? (
                   <WalletIcon wallet={adapter} />

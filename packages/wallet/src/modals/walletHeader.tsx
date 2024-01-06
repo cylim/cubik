@@ -15,7 +15,7 @@ const walletHeader = ({ onClose }: Props) => {
         <Icon
           name="cross"
           width={20}
-          stroke="var(--modal-header-cancel-icon)"
+          color="var(--modal-header-cancel-icon)"
           height={20}
         />
       </button>

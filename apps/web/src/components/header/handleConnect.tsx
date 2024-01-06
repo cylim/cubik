@@ -47,7 +47,7 @@ const UserNavbarMenu = ({
           />
           <Icon
             name="chevronDown"
-            stroke="var(--color-fg-primary-depth)"
+            color="var(--color-fg-primary-depth)"
             width={16}
             height={16}
           />
@@ -97,14 +97,14 @@ export const WalletConnect = () => {
   }
   if (connected && publicKey && !user) {
     return (
-      <>
+      <Button>
         <Spinner
           onClick={() => {
             disconnect();
             setShowModal(false);
           }}
         />
-      </>
+      </Button>
     );
   }
 

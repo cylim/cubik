@@ -19,6 +19,7 @@ interface ModalUIContext {
 export const userModalUIContext = createContext<ModalUIContext | null>(null);
 
 export const useUserModalUIContext = () => {
+  console.log('-------use wallet modal ui context is called-------');
   const context = useContext(userModalUIContext);
   if (!context) {
     throw new Error(

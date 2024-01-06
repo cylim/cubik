@@ -1,40 +1,63 @@
-/* eslint-disable prettier/prettier */
-import { useState } from 'react';
 import { WalletAdapter } from '@solana/wallet-adapter-base';
+import { AnimatePresence, motion } from 'framer-motion';
 import { toast } from 'sonner';
 
-import { Avatar, Button, Text } from '@cubik/ui';
+import { Button, Icon, Text } from '@cubik/ui';
 
 import { useCubikWallet, useCubikWalletContext } from '../context/CubikContext';
 import { useUserModalUIContext } from '../context/WalletUIContext';
 
-const WalletConnectStatus = ({
-  icon,
-  name,
-  status,
-  adapter,
-}: {
-  icon: string;
-  name: string;
-  status: 'connecting' | 'failed' | 'connected' | null;
-  adapter: WalletAdapter;
-  error?: string;
-}) => {
+const slides: React.ReactNode[] = [
+  <>
+    {' '}
+    <Text className="h3 md:h4" color={'primary'}>
+      Requesting Connection
+    </Text>
+    <Text
+      className="px-4 md:l2-light l1-light max-w-[330px]"
+      color={'secondary'}
+    >
+      Click on the connect wallet button in the wallet popup or open the wallet
+    </Text>
+  </>,
+  <>
+    {' '}
+    <Text className="h3 md:h4" color={'primary'}>
+      Connection Failed
+    </Text>
+    <Text
+      className="px-4 md:l2-light l1-light max-w-[330px]"
+      color={'secondary'}
+    >
+      You have rejected the connection request or it has failed due to some
+      reason. Please try again!
+    </Text>
+  </>,
+];
+
+const WalletConnectStatus = ({ adapter }: { adapter: WalletAdapter }) => {
   const { select } = useCubikWallet();
-  const [loading, setLoading] = useState(false);
   const { setIsWalletError } = useCubikWalletContext();
-  const { setModalState } = useUserModalUIContext();
+  const { modalState, setModalState } = useUserModalUIContext();
+
+  const isErrorConnecting = modalState === 'error-connecting';
+  const iconColor = isErrorConnecting
+    ? 'var(--color-fg-negative-base)'
+    : 'var(--color-fg-info-base)';
+  const iconName = isErrorConnecting
+    ? 'dangerSkullDuoSolid'
+    : 'walletPlusDuoSolid';
+
   const onRetry = async () => {
     try {
-      setLoading(true);
+      setModalState('connecting');
       select(adapter.name);
       await adapter.connect();
-      setModalState('wallet-verify');
       toast.success('Wallet Connected');
     } catch (e) {
       const error = e as Error;
+      setModalState('error-connecting');
       if (error.message) {
-        console.log(error);
         setIsWalletError({
           error,
           message: error.message,
@@ -43,67 +66,120 @@ const WalletConnectStatus = ({
         return null;
       } else {
         const newError = new Error('User rejected the request');
+        setModalState('error-connecting');
         setIsWalletError({
           error: newError,
           message: 'User rejected the request',
           name: 'Error',
         });
       }
-    } finally {
-      setLoading(false);
     }
   };
+  const onClickHandler = () => {
+    if (modalState === 'error-connecting') {
+      onRetry();
+    } else if (modalState === 'connecting') {
+      return;
+    }
+  };
+
+  const textFlipAnimation = {
+    initial: { y: 10, opacity: 0 },
+    animate: { y: 0, opacity: 1 },
+    exit: { y: -10, opacity: 0 },
+  };
+
+  const renderButton = (
+    text: string,
+    status: string, // status is used to differentiate the button text state
+  ) => (
+    <Button
+      className={'w-full'}
+      size={'lg'}
+      variant={'secondary'}
+      // isLoading={loading}
+      onClick={onClickHandler}
+    >
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={status}
+          variants={textFlipAnimation}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          transition={{ duration: 0.1 }}
+          style={{ display: 'inline-block' }} // Necessary to apply transform to inline elements like span
+        >
+          {text}
+        </motion.span>
+      </AnimatePresence>
+    </Button>
+  );
+
+  const iconBackgroundAnimation = {
+    initial: { opacity: 1 },
+    animate: {
+      opacity: 1,
+      backgroundColor: isErrorConnecting
+        ? 'var(--color-surface-negative-transparent)'
+        : 'var(--color-surface-info-transparent)',
+    },
+    exit: { opacity: 1 },
+  };
+
   return (
-    <div className="p-6">
-      <div
-        style={{
-          marginBottom: '1rem',
-          display: 'block',
-        }}
+    <div className="p-6 md:p-8 md:py-12 flex flex-col items-center justify-center gap-6 md:gap-8">
+      <AnimatePresence>
+        <motion.div
+          key={modalState}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={iconBackgroundAnimation}
+          className="mx-auto w-fit rounded-full p-4"
+        >
+          <Icon
+            name={iconName}
+            width={44}
+            height={44}
+            strokeWidth={3.5}
+            color={iconColor}
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{
+              duration: 1,
+              ease: 'easeInOut',
+              repeatDelay: 1,
+            }}
+          />
+        </motion.div>
+      </AnimatePresence>
+      <motion.div
+        key={modalState}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.95 }}
+        className="flex flex-col justify-center items-center text-center w-full max-w-[330px] gap-2"
       >
-        <Avatar size={'xl'} src={icon} alt={name} />
-      </div>
-      <div className="flex justify-start  items-center gap-3 ">
-        <Text className="h5" color={'primary'}>
-          {status === 'connecting'
-            ? 'Connecting Wallet...'
-            : status === 'failed'
-            ? 'You rejected the request'
-            : 'Connected Succesfully'}
-        </Text>
-      </div>
-      <div className="flex flex-col justify-start gap-4 mt-4  text-base font-normal">
-        <Text className="l2-light" color={'secondary'}>
-          {status === 'connecting'
-            ? 'Connecting Wallet...'
-            : status === 'failed'
-            ? 'You rejected the request'
-            : 'Connected Succesfully'}
-        </Text>
-        {status === 'failed' ? (
-          <div className="pointer-events-auto flex items-center justify-center gap-5">
-            <Button
-              className="w-full"
-              size={'md'}
-              variant={'secondary'}
-              isLoading={loading}
-              onClick={onRetry}
-            >
-              Retry
-            </Button>
-          </div>
-        ) : (
-          <div className="pointer-events-auto flex items-center justify-center gap-5">
-            <Button
-              className="w-full"
-              size={'md'}
-              variant={'secondary'}
-              isLoading={true}
-            >
-              Retry
-            </Button>
-          </div>
-        )}
+        {slides[isErrorConnecting ? 1 : 0]}
+      </motion.div>
+      <div className="w-full flex items-center gap-2 flex-col">
+        {isErrorConnecting
+          ? renderButton('Retry', 'error')
+          : renderButton('Connecting...', 'connecting')}
+        {/* <AnimatePresence>
+          {isErrorConnecting ? ( */}
+        <Button
+          onClick={() => setModalState('wallet-connect')}
+          size="md"
+          variant="link"
+        >
+          Connect another wallet
+        </Button>
+        {/* ) : (
+            ''
+          )}
+        </AnimatePresence> */}
       </div>
     </div>
   );

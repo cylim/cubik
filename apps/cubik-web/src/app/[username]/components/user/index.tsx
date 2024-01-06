@@ -80,9 +80,7 @@ const User = ({
                 size="sm"
                 copy={true}
               /> */}
-
             <WalletAddress walletAddress={mainWallet} size="sm" copy={true} />
-
             {/* </Skeleton> */}
           </Center>
         </VStack>

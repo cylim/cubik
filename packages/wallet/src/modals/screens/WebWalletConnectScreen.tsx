@@ -9,7 +9,7 @@ import { createMessage } from '@cubik/auth';
 import { UserAuth } from '@cubik/common-types';
 import { handleRevalidation } from '@cubik/common/helper';
 import { logApi } from '@cubik/logger/src/';
-import { Icon, Text } from '@cubik/ui';
+import { Text } from '@cubik/ui';
 
 import { VerifyWallet } from '../../authentication';
 import { generateSession } from '../../authentication/generateSession';
@@ -93,26 +93,13 @@ export const WebWalletConnectScreen = ({ onClose, setUser }: Props) => {
     }
   };
 
+  console.log('1) Modal Status - ', modalState);
   switch (modalState) {
     case 'wallet-connect':
+    case 'connecting':
+    case 'error-connecting':
       return (
         <>
-          <div className="hidden md:flex justify-between items-center h-[44px] md:h-[48px] px-[16px] md:px-[24px]">
-            <Text
-              color={'primary'}
-              className="text-[var(--avatar-label-title)] h6"
-            >
-              Connect Wallet
-            </Text>
-            <button className="pointer-events-auto" onClick={onClose}>
-              <Icon
-                name="cross"
-                width={20}
-                stroke="var(--modal-header-cancel-icon)"
-                height={20}
-              />
-            </button>
-          </div>
           <CubikWalletModal onClose={onClose} setShowHeader={() => {}} />
         </>
       );
@@ -139,7 +126,7 @@ export const WebWalletConnectScreen = ({ onClose, setUser }: Props) => {
     default:
       return (
         <Text className="h3" color="primary">
-          wallet state not defined
+          wallet state not defined - {modalState}
         </Text>
       );
   }

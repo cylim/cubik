@@ -18,39 +18,39 @@ const avatarVariants = cva('', {
       md: 'w-[32px] h-[32px] md:w-[44px] md:h-[44px] ',
       lg: 'w-[44px] h-[44px] md:w-[56px] md:h-[56px] ',
       xl: 'w-[56px] h-[56px] md:w-[72px] md:h-[72px] ',
-      '2xl': 'w-[64px] h-[64px] md:w-[80px] md:h-[80px] ',
+      '2xl': 'w-[64px] h-[64px] md:w-[84px] md:h-[84px] ',
     },
   },
   compoundVariants: [
     {
       variant: 'square',
       size: 'xs',
-      class: 'rounded-sm',
+      class: 'rounded-sm w-[16px] h-[16px] md:w-[24px] md:h-[24px]',
     },
     {
       variant: 'square',
       size: 'sm',
-      class: 'rounded-md',
+      class: 'rounded-md w-[24px] h-[24px] md:w-[32px] md:h-[32px]',
     },
     {
       variant: 'square',
       size: 'md',
-      class: 'rounded-md',
+      class: 'rounded-md w-[32px] h-[32px] md:w-[44px] md:h-[44px]',
     },
     {
       variant: 'square',
       size: 'lg',
-      class: 'rounded-lg',
+      class: 'rounded-lg w-[44px] h-[44px] md:w-[56px] md:h-[56px]',
     },
     {
       variant: 'square',
       size: 'xl',
-      class: 'rounded-lg',
+      class: 'rounded-lg w-[56px] h-[56px] md:w-[72px] md:h-[72px]',
     },
     {
       variant: 'square',
       size: '2xl',
-      class: 'rounded-lg',
+      class: 'rounded-lg w-[64px] h-[64px] md:w-[84px] md:h-[84px]',
     },
   ],
   defaultVariants: {

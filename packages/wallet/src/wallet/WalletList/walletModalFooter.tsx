@@ -12,10 +12,7 @@ const FooterComponent = ({
       <div className="min-w-[18px] py-[2px]">
         <Icon
           name={icon}
-          strokeWidth={2}
-          className="min-w-[18px]"
-          stroke="var(--color-fg-primary-subdued)"
-          fill="none"
+          color="var(--color-fg-primary-subdued)"
           width={18}
           height={18}
         />

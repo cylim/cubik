@@ -57,6 +57,7 @@ const sortByPrecedence =
   };
 
 export const useWalletModalLogic = () => {
+  console.log('------wallet modal logic hook called------');
   const { wallets } = useCubikWallet();
   const { walletPrecedence } = useCubikWalletContext();
   const { handleConnectClick, walletlistExplanation } = useCubikWalletContext();

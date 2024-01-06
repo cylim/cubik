@@ -4,6 +4,7 @@ import { Wallet } from '@solana/wallet-adapter-react';
 import { toast } from 'sonner';
 
 import { useCubikWallet } from '../context/CubikContext';
+import { useUserModalUIContext } from '../context/WalletUIContext';
 
 interface Props {
   autoConnect?: boolean;
@@ -31,7 +32,6 @@ export const useHandleConnect = ({ autoConnect, setSelectWallet }: Props) => {
       adapter: Adapter,
     ) => {
       event.preventDefault();
-
       try {
         // Might throw WalletReadyState.WalletNotReady
         select(adapter.name);

@@ -95,4 +95,14 @@ const ProjectAdminCard = ({ project }: { project: ProjectProps }) => {
   );
 };
 
-export default ProjectAdminCard;
+const ProjectProfileCard = ({ project }: { project: ProjectProps }) => {
+  return (
+    <Card size="md">
+      <CardHeader>
+        <ProjectHeader project={project} isAdmin={false} />
+      </CardHeader>
+    </Card>
+  );
+};
+
+export { ProjectAdminCard, ProjectProfileCard };

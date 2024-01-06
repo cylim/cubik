@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import Link from 'next/link';
 //import Link from 'next/link';
 import { cva, VariantProps } from 'class-variance-authority';
 
@@ -49,7 +50,9 @@ export const Navbar = ({
       {background}
       <div className="container mx-auto max-w-7xl px-6 h-full">
         <div className="flex justify-between items-center h-full">
-          <Logo variant="text" />
+          <Link href={'/'}>
+            <Logo variant="text" />
+          </Link>
           {/* <ul className="hidden md:flex gap-x-6 text-white">
             <li>
               <Link href="/about">

@@ -111,9 +111,11 @@ export default async function Home() {
                 <Button size="lg" className="!px-4" variant={'primary'}>
                   Get Started
                 </Button>
-                <Button size="lg" variant={'secondary'}>
-                  Submit a Project
-                </Button>
+                <Link href={'/create/project'}>
+                  <Button size="lg" variant={'secondary'}>
+                    Submit a Project
+                  </Button>
+                </Link>
               </div>
             </div>
             <div className="relative w-full">
@@ -212,7 +214,6 @@ export default async function Home() {
             </div>
             {/* Collection */}
           </div>
-          {/* Collection */}
         </div>
       </div>
     </>

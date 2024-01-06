@@ -675,7 +675,7 @@ const Page = () => {
               avatarSrc="https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg"
               shape="circle"
               title="Title"
-              longDescription="Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis."
+              // longDescription="Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis."
               subtitle="subtitle"
               size="xs"
             />
@@ -683,7 +683,7 @@ const Page = () => {
               avatarSrc="https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg"
               shape="circle"
               title="Title"
-              longDescription="Borem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
+              // longDescription="Borem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
               subtitle="subtitle"
               size="sm"
             />
@@ -691,7 +691,7 @@ const Page = () => {
               avatarSrc="https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg"
               shape="circle"
               title="Title"
-              longDescription="Borem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
+              // longDescription="Borem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
               subtitle="subtitle"
               size="md"
             />
@@ -699,7 +699,7 @@ const Page = () => {
               avatarSrc="https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg"
               shape="circle"
               title="Title"
-              longDescription="Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
+              // longDescription="Torem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
               subtitle="subtitle"
               size="lg"
             />
@@ -707,7 +707,7 @@ const Page = () => {
               avatarSrc="https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg"
               shape="circle"
               title="Title"
-              longDescription="Borem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
+              // longDescription="Borem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
               subtitle="subtitle"
               size="xl"
             />
@@ -715,7 +715,7 @@ const Page = () => {
               avatarSrc="https://pbs.twimg.com/profile_images/1694008102709055488/ESkPDhR-_400x400.jpg"
               shape="circle"
               title="Title"
-              longDescription="Borem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
+              // longDescription="Borem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos."
               subtitle="subtitle"
               size="2xl"
             />

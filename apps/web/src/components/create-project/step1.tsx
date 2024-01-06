@@ -1,8 +1,6 @@
-import { ProjectFormData } from '@/components/create-project';
+import { ProjectFormData } from '@/components/create-project/createProject';
 import { Industries } from '@/constants/industry';
-
 import { useState } from 'React';
-
 import { UseFormReturn } from 'react-hook-form';
 
 import {
@@ -18,8 +16,9 @@ import {
 interface Props {
   projectForm: UseFormReturn<ProjectFormData, any, undefined>;
   setStep: React.Dispatch<React.SetStateAction<number>>;
+  forceSave: () => Promise<void>;
 }
-export const Step1 = ({ setStep, projectForm }: Props) => {
+export const Step1 = ({ setStep, projectForm, forceSave }: Props) => {
   return (
     <>
       <div>
@@ -38,7 +37,7 @@ export const Step1 = ({ setStep, projectForm }: Props) => {
           <div className="flex flex-col gap-4">
             <InputContainer>
               <InputLabel
-                maxCounterValue={16}
+                maxCounterValue={32}
                 counterValue={projectForm.watch('name').length || 0}
                 isRequired
               >
@@ -135,7 +134,10 @@ export const Step1 = ({ setStep, projectForm }: Props) => {
             Previous
           </Button>
           <Button
-            onClick={() => setStep(2)}
+            onClick={() => {
+              setStep(2);
+              forceSave();
+            }}
             rightIconName="chevronRight"
             variant={'primary'}
             size={'md'}

@@ -1,11 +1,11 @@
 import React from 'react';
-import { ProjectTab } from '@/app/[username]/components/project-tab';
 
 import { Background, Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
 
-import { ProjectContributorsTab, ProjectDetailsTab } from './components/tabs';
+import { ProjectContributorsTab, ProjectDetailsTab, ProjectTeamTab } from './components/tabs';
 
-const ProjectPage = ({ params }: { params: { slug: string } }) => {
+const ProjectPage = async ({ params }: { params: { slug: string } }) => {
+  // const contributors = await getContributions(event, 1, 10);
   return (
     <div className="flex min-h-screen w-full flex-col items-center gap-10 md:mx-auto lg:flex-col lg:items-start">
       <div className="absolute left-0 top-[-150px] w-full">
@@ -31,10 +31,10 @@ const ProjectPage = ({ params }: { params: { slug: string } }) => {
               <ProjectDetailsTab slug={params.slug} />
             </TabPanel>
             <TabPanel value={1}>
-              <ProjectContributorsTab />
+              <ProjectContributorsTab slug={params.slug} />
             </TabPanel>
             <TabPanel value={2}>
-              <></>
+              <ProjectTeamTab slug={params.slug} />
             </TabPanel>
             <TabPanel value={3}>
               <></>

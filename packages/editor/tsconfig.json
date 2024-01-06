@@ -1,0 +1,8 @@
+{
+  "extends": "@cubik/config/tsconfig/react-library.json",
+  "compilerOptions": {
+    "jsx": "react",
+    "baseUrl": ".",
+    "resolveJsonModule": true
+  }
+}

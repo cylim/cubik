@@ -67,7 +67,7 @@ export const VerifyEmail = ({ setUserCreateState, userForm }: Props) => {
         </div>
         <div>
           <div className="w-full">
-            <InputLabel id="email" isRequired>
+            <InputLabel id="email" isRequired={true}>
               Email Address
             </InputLabel>
             <InputFieldContainer

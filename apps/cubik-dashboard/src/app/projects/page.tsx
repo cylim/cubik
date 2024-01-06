@@ -1,4 +1,5 @@
 "use client";
+import { ProjectCardSkeleton } from "@/app/projects/components/Skeleton";
 import { ProjectDrawer } from "@/app/projects/components/projectDrawer";
 import useProjects from "@/hooks/projects/useProjects";
 import { ProjectVerifyStatus } from "@cubik/database";
@@ -35,6 +36,7 @@ function isUrlFromDomain(url: string, domain: string): boolean {
     // Test if the URL matches the domain pattern
     return domainPattern.test(url);
 }
+
 
 const ProjectPage = ({ searchParams }: Props) => {
     const [selectedStatus, setSelectedStatus] = useState<ProjectVerifyStatus>(searchParams.status || ProjectVerifyStatus.REVIEW);
@@ -110,7 +112,7 @@ const ProjectPage = ({ searchParams }: Props) => {
                             <TableHead></TableHead>
                         </TableHeader>
                         <TableBody>
-                            {projects.isSuccess && _projects?.map((project) => {
+                            {projects.isSuccess ? _projects?.map((project) => {
                                 const isImageDelivery = isUrlFromDomain(project.logo, 'imagedelivery.net');
                                 return (
                                     <TableRow key={project.id}>
@@ -140,7 +142,15 @@ const ProjectPage = ({ searchParams }: Props) => {
                                         </TableCell>
                                     </TableRow>
                                 );
-                            })}
+                            }) : (
+                                <>
+                                    <ProjectCardSkeleton size="md" />
+                                    <ProjectCardSkeleton size="md" />
+                                    <ProjectCardSkeleton size="md" />
+                                    <ProjectCardSkeleton size="md" />
+                                    <ProjectCardSkeleton size="md" />
+                                </>
+                            )}
                         </TableBody>
                     </Table>
 

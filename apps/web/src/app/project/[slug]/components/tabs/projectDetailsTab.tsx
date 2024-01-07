@@ -52,7 +52,7 @@ const fetchProjectDetails = async (slug: string) => {
       shortDescription: project?.shortDescription,
       logo: project?.logo,
       projectLink: project?.projectLink,
-      slides: project?.slides as unknown as Slides,
+      slides: project?.slides as string[],
       longDescription: project?.longDescription,
       twitterHandle: project?.twitterHandle,
       githubLink: project?.githubLink,
@@ -69,7 +69,7 @@ const fetchProjectDetails = async (slug: string) => {
   }
 };
 
-const ImagesCarousel = ({ slides }: { slides: Slides }) => {
+const ImagesCarousel = ({ slides }: { slides: string[] }) => {
   console.log('slides - ', slides);
   return (
     <div className="flex w-full flex-col gap-4 md:min-w-[65%] ">
@@ -80,7 +80,7 @@ const ImagesCarousel = ({ slides }: { slides: Slides }) => {
         className="w-full"
       >
         <CarouselContent>
-          {slides?.slide.map((slide, index) => (
+          {slides.map((slide, index) => (
             <CarouselItem key={index} className=" pl-4 sm:basis-[70%]">
               <div className="h-fit w-full">
                 <Image

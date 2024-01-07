@@ -35,6 +35,7 @@ export const WebWalletConnectScreen = ({ onClose, setUser }: Props) => {
   const pathname = usePathname();
   const { connected, connecting, publicKey, select, disconnect, signMessage } =
     useCubikWallet();
+
   useEffect(() => {
     const handleWalletConnect = async () => {
       if (publicKey && connected) {

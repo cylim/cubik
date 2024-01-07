@@ -177,7 +177,7 @@ export const CreateProject = ({ id }: Props) => {
   useAutosave(
     async () => {
       if (!loadedProject) return;
-      const syp = await syncProject(createProjectForm.getValues(), id);
+      await syncProject(createProjectForm.getValues(), id);
     },
     15000,
     [formState],
@@ -185,7 +185,7 @@ export const CreateProject = ({ id }: Props) => {
   );
   const forceSave = async () => {
     if (!loadedProject) return;
-    const syp = await syncProject(createProjectForm.getValues(), id);
+    await syncProject(createProjectForm.getValues(), id);
   };
   return (
     <div className="pointer-events-auto mx-auto flex h-screen w-full max-w-screen-xl justify-start overflow-hidden bg-[var(--modal-body-surface)]">

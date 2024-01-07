@@ -5,7 +5,7 @@ export const getProjectPDA = (
   create_key: anchor.web3.PublicKey,
   counter: number,
 ): anchor.web3.PublicKey => {
-  return anchor.web3.PublicKey.createProgramAddressSync(
+  const [pda] = anchor.web3.PublicKey.findProgramAddressSync(
     [
       anchor.utils.bytes.utf8.encode('project'),
       create_key.toBuffer(),
@@ -13,4 +13,5 @@ export const getProjectPDA = (
     ],
     PROGRAM_ID,
   );
+  return pda;
 };

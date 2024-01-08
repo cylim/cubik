@@ -1,13 +1,15 @@
 // src/context/UserModalContext.tsx
 import React, { createContext, useContext, useState } from 'react';
 
-type ModalState =
-  | 'wallet-connect'
-  | 'wallet-verify'
-  | 'user-create'
-  | 'connecting'
-  | 'error-connecting'
-  | null;
+export enum MODAL_STATUS {
+  WALLET_CONNECT = 'wallet-connect',
+  WALLET_VERIFY = 'wallet-verify',
+  USER_CREATE = 'user-create',
+  CONNECTING = 'connecting',
+  ERROR_CONNECTING = 'error-connecting',
+}
+
+type ModalState = MODAL_STATUS | null;
 
 interface ModalUIContext {
   modalState: ModalState;
@@ -34,7 +36,9 @@ export const ModalUIProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [modalState, setModalState] = useState<ModalState>('wallet-connect');
+  const [modalState, setModalState] = useState<ModalState>(
+    MODAL_STATUS.WALLET_CONNECT,
+  );
   const [isWalletLoading, setIsWalletLoading] = useState<boolean>(false);
 
   return (

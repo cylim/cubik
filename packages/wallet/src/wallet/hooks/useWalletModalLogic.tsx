@@ -11,7 +11,7 @@ import { Wallet } from '@solana/wallet-adapter-react';
 import { useMediaQuery } from '@cubik/ui/hooks';
 
 import { useCubikWallet, useCubikWalletContext } from '../context/CubikContext';
-import { WalletIcon } from '../WalletList/WalletListItem';
+import { WalletIcon } from '../WalletList/WalletIcon';
 
 const PRIORITISE: {
   [value in WalletReadyState]: number;
@@ -60,7 +60,6 @@ export const useWalletModalLogic = () => {
   console.log('------wallet modal logic hook called------');
   const { wallets } = useCubikWallet();
   const { walletPrecedence } = useCubikWalletContext();
-  const { handleConnectClick, walletlistExplanation } = useCubikWalletContext();
   const [showMore, setShowMore] = useState<boolean>(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
@@ -113,6 +112,7 @@ export const useWalletModalLogic = () => {
       },
     );
 
+    console.log('1 - filtered adapters - ', filteredAdapters);
     if (filteredAdapters.previouslyConnected.length > 0) {
       const { previouslyConnected, installed, ...rest } = filteredAdapters;
 
@@ -131,11 +131,21 @@ export const useWalletModalLogic = () => {
           filteredAdapters.previouslyConnected.length,
         ),
       );
-      // others = others.filter(Boolean);
+
+      // remove all the wallet which are in highlight wallets from others wallet array
+      const highlightWalletNames = highlight.map((wallet) => wallet.name);
+      const othersWallets = others.filter(
+        (wallet) => !highlightWalletNames.includes(wallet.name),
+      );
+      console.log(
+        'other wallets and highlight wallets - ',
+        othersWallets,
+        highlight,
+      );
       return {
         highlightedBy: 'PreviouslyConnected',
         highlight,
-        others,
+        others: othersWallets,
       };
     }
 
@@ -157,34 +167,17 @@ export const useWalletModalLogic = () => {
     }
 
     const { top3, ...rest } = filteredAdapters;
+    console.log('tope 3', top3);
     const others = Object.values(rest)
       .flat()
+      .filter((wallet) => wallet.readyState !== WalletReadyState.NotDetected)
       .sort((a, b) => PRIORITISE[a.readyState] - PRIORITISE[b.readyState])
       .sort(sortByPrecedence(walletPrecedence || []));
-    return { highlightedBy: 'TopWallet', highlight: top3, others };
+
+    return { highlightedBy: 'TopWallet', highlight: top3, others: others };
   }, [wallets]);
 
-  const renderWalletList = useMemo(
-    () =>
-      list.others
-        .filter((e) => e.readyState !== 'NotDetected')
-        .map((adapter, index) => {
-          return (
-            <div
-              className="cursor-pointer border border-blue-500 pointer-events-auto"
-              key={index}
-              onClick={(event) => handleConnectClick(event, adapter)}
-            >
-              {isSmallDevice ? (
-                <WalletIcon wallet={adapter} width={48} height={48} />
-              ) : (
-                <WalletIcon wallet={adapter} />
-              )}
-            </div>
-          );
-        }),
-    [handleConnectClick, list.others],
-  );
+  console.log('list - ', list);
 
   const hasNoWallets = useMemo(() => {
     return list.highlightedBy === 'TopWallet' ? true : false;
@@ -196,7 +189,5 @@ export const useWalletModalLogic = () => {
     showOnboarding,
     isSmallDevice,
     setShowMore,
-    handleConnectClick,
-    renderWalletList,
   };
 };

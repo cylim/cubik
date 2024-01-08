@@ -17,48 +17,48 @@ type Props = {
   animate?: any;
   transition?: any;
 };
-
 export const Icon = ({
   name,
-  height = 24,
-  width = 24,
-  strokeWidth = 2,
-  color,
+  height,
+  width,
+  strokeWidth = 1.5, // default strokeWidth if not provided
+  color = 'currentColor', // default color if not provided
   className,
   initial,
   animate,
   transition,
 }: Props) => {
-  const renderedPaths = iconLibrary[name]?.paths.map(
-    (
-      value: { d: string; opacity?: number; fill?: boolean; stroke?: boolean },
-      index: number,
-    ) => (
-      <motion.path
-        key={index}
-        d={value.d}
-        fill={value.fill ? color : 'transparent'}
-        stroke={value.stroke ? color : 'transparent'}
-        opacity={value.opacity ? value.opacity : 1}
-        initial={initial}
-        animate={animate}
-        transition={transition}
-      />
-    ),
-  );
+  const icon = iconLibrary[name];
+  const viewBox = icon?.viewBox;
+
+  const renderedPaths = icon?.paths.map((value, index) => (
+    <motion.path
+      key={index}
+      d={value.d}
+      fill={value.fill ? color : 'none'} // default to 'none' if fill is not true
+      stroke={value.stroke ? color : 'none'} // default to 'none' if stroke is not true
+      opacity={value.opacity || 1}
+      initial={initial}
+      animate={animate}
+      transition={transition}
+    />
+  ));
 
   return (
     <motion.svg
-      viewBox={`0 0 ${height} ${width}`}
-      className={clsx(' text-white', className)}
-      strokeWidth={strokeWidth}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      clipRule={'evenodd'}
-      fillRule={'evenodd'}
-      fill="none"
       width={width}
       height={height}
+      // this is a temporary solution we have to find a permanent fix for the viewBox property of svg
+      viewBox={height && height >= 24 ? '' : viewBox}
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="xMidYMid meet"
+      className={clsx('text-white', className)}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      color={color}
+      strokeLinejoin="round"
+      clipRule="evenodd"
+      fillRule="evenodd"
     >
       {renderedPaths}
     </motion.svg>

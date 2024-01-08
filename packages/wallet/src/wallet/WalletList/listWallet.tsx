@@ -1,15 +1,16 @@
-'use client';
-
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { AvatarGroup, Divider, Icon, Text } from '@cubik/ui';
 
-import { useCubikWallet, useCubikWalletContext } from '../context/CubikContext';
-import { useUserModalUIContext } from '../context/WalletUIContext';
+import { useCubikWalletContext } from '../context/CubikContext';
+import {
+  MODAL_STATUS,
+  useUserModalUIContext,
+} from '../context/WalletUIContext';
 import { useWalletModalLogic } from '../hooks/useWalletModalLogic';
 import { OnboardingFlow } from './Onboarding';
-import { WalletIcon } from './WalletListItem';
+import { WalletIcon } from './WalletIcon';
 import WalletConnectStatus from './walletModalConnecting';
 import { CubikWalletModalFooter } from './walletModalFooter';
 
@@ -18,25 +19,19 @@ interface ICubikWalletModal {
   setShowHeader: (show: boolean) => void;
 }
 
-const CubikWalletModal: React.FC<ICubikWalletModal> = ({ setShowHeader }) => {
-  const {
-    list,
-    showMore,
-    showOnboarding,
-    isSmallDevice,
-    setShowMore,
-    handleConnectClick,
-    renderWalletList,
-  } = useWalletModalLogic();
-  const { modalState, setModalState, isWalletLoading, setIsWalletLoading } =
-    useUserModalUIContext();
-  console.log('2) Modal State: ', modalState);
-  const { error, selectedAdapter } = useCubikWalletContext();
+const CubikWalletModal: React.FC<ICubikWalletModal> = ({
+  onClose,
+  setShowHeader,
+}) => {
+  const { list, showMore, showOnboarding, isSmallDevice, setShowMore } =
+    useWalletModalLogic();
+  const { error, selectedAdapter, handleConnectClick } =
+    useCubikWalletContext();
+
+  const { setModalState } = useUserModalUIContext();
 
   useEffect(() => {
-    if (error) {
-      setModalState('error-connecting');
-    }
+    if (error) setModalState(MODAL_STATUS.ERROR_CONNECTING);
   }, [error, setModalState]);
 
   if (showOnboarding) {
@@ -48,105 +43,112 @@ const CubikWalletModal: React.FC<ICubikWalletModal> = ({ setShowHeader }) => {
     return <WalletConnectStatus adapter={selectedAdapter.adapter} />;
   }
 
-  return (
-    <div className="flex flex-col">
-      <div className="hidden md:flex justify-between items-center h-[44px] md:h-[48px] px-[16px] md:px-[24px]">
-        <Text color={'primary'} className="text-[var(--avatar-label-title)] h6">
-          Connect Wallet
-        </Text>
-        <button className="pointer-events-auto">
-          <Icon
-            name="cross"
-            width={20}
-            height={20}
-            color="var(--modal-header-cancel-icon)"
-          />
-        </button>
+  const renderWallets = (wallets: any[]) =>
+    wallets.map((adapter, idx) => (
+      <div
+        key={idx}
+        className="transform active:scale-105 cursor-pointer pointer-events-auto"
+        onClick={(event) => {
+          setModalState(MODAL_STATUS.CONNECTING);
+          handleConnectClick(event, adapter);
+        }}
+      >
+        <WalletIcon wallet={adapter} />
       </div>
-      <>
+    ));
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        layout
+        initial={{ opacity: 0, height: '90%' }}
+        animate={{ opacity: 1, height: 'auto' }}
+        exit={{ opacity: 0, height: '90%' }}
+        transition={{ type: 'spring', duration: 0.5 }}
+        style={{
+          overflow: 'hidden',
+        }}
+        className="flex flex-col"
+      >
+        {/* Modal header */}
+        <div className="hidden md:flex justify-between items-center h-[48px] px-[24px]">
+          <Text color="primary" className="text-[var(--avatar-label-title)] h6">
+            Connect Wallet
+          </Text>
+          <div onClick={onClose} className="pointer-events-auto">
+            <Icon
+              name="cross"
+              width={20}
+              height={20}
+              color="var(--modal-header-cancel-icon)"
+            />
+          </div>
+        </div>
+        {/* Modal body */}
         <div
+          className={`z-0 flex ${
+            isSmallDevice && showMore ? 'justify-center' : 'justify-start'
+          } items-center py-2`}
           style={{
-            display: 'flex',
-            flexWrap: isSmallDevice ? (showMore ? 'wrap' : 'nowrap') : 'wrap',
-            justifyContent: 'flex-start',
-            alignItems: 'center',
+            flexWrap: isSmallDevice && !showMore ? 'nowrap' : 'wrap',
+            maxHeight: '500px',
             overflowY: 'scroll',
           }}
         >
-          {list.highlight.map((adapter, idx) => {
-            return (
-              <div
-                className=" cursor-pointer pointer-events-auto"
-                key={idx}
-                onClick={(event) => {
-                  setModalState('connecting');
-                  handleConnectClick(event, adapter);
-                }}
-              >
-                {isSmallDevice ? (
-                  <WalletIcon wallet={adapter} />
-                ) : (
-                  <WalletIcon wallet={adapter} />
-                )}
-              </div>
-            );
-          })}
-          {showMore && renderWalletList}
-          {list.others.length > 0 && !showMore && (
-            <>
-              <div
-                style={{
-                  minWidth: 'clamp(84px,10vw,123px)',
-                  minHeight: 'clamp(108px,10vw,120px)',
-                  display: showMore ? 'hidden' : 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  flexDirection: 'column',
-                  gap: '8px',
-                }}
-                className="pointer-events-auto cursor-pointer"
-                onClick={() => setShowMore(true)}
-              >
-                <AvatarGroup
-                  avatars={list.others
-                    .filter((e) => e.readyState !== 'NotDetected')
-                    .map((e) => {
-                      return {
-                        src: e.icon,
-                        alt: e.name,
-                      };
-                    })}
-                  shape="square"
-                  variant="squared-horizontal"
-                  size="xs"
-                  maxCount={3}
-                />
-                <Text className="b4 md:b4-light" color="primary">
-                  More
-                </Text>
-              </div>
-            </>
-          )}
-        </div>
-        {showMore && (
+          {renderWallets(list.highlight)}
+          {showMore && renderWallets(list.others)}
           <div
-            onClick={() => setShowMore(false)}
-            className="flex justify-center items-center w-full my-4 pointer-events-auto cursor-pointer"
+            style={{
+              width: '102px',
+              height: '100px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'column',
+              gap: '8px',
+            }}
+            className="pointer-events-auto cursor-pointer"
+            onClick={() => setShowMore(true)}
           >
-            <Text className="b3 mb-2" color="primary">
-              View Less
+            <AvatarGroup
+              avatars={list.others
+                .filter((e) => e.readyState !== 'NotDetected')
+                .map((e) => ({ src: e.icon, alt: e.name }))}
+              shape="square"
+              variant="squared-horizontal"
+              size={isSmallDevice ? 'sm' : 'xs'}
+              maxCount={3}
+            />
+            <Text className="b4 md:b4-light" color="primary">
+              More
             </Text>
           </div>
-        )}
-      </>
-      {list.highlightedBy !== 'TopWallet' && (
-        <div className="flex flex-col gap-6">
-          <Divider />
-          <CubikWalletModalFooter />
-          <div className="h-48px" />
         </div>
-      )}
-    </div>
+        {/* Optional footer */}
+        {showMore ? (
+          <div className="z-1 flex flex-col gap-6">
+            <div
+              style={{
+                cursor: 'pointer',
+                height: '64px',
+              }}
+              className="flex items-center justify-center"
+              onClick={() => setShowMore(false)}
+            >
+              <Text className="b4 md:b4-light" color="primary">
+                Show less
+              </Text>
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-6">
+            <Divider />
+            <CubikWalletModalFooter />
+            <div />
+          </div>
+        )}
+      </motion.div>{' '}
+    </AnimatePresence>
   );
 };
 

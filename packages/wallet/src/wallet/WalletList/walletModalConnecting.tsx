@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { WalletAdapter } from '@solana/wallet-adapter-base';
 import { AnimatePresence, motion } from 'framer-motion';
 import { toast } from 'sonner';
@@ -5,7 +6,10 @@ import { toast } from 'sonner';
 import { Button, Icon, Text } from '@cubik/ui';
 
 import { useCubikWallet, useCubikWalletContext } from '../context/CubikContext';
-import { useUserModalUIContext } from '../context/WalletUIContext';
+import {
+  MODAL_STATUS,
+  useUserModalUIContext,
+} from '../context/WalletUIContext';
 
 const slides: React.ReactNode[] = [
   <>
@@ -40,23 +44,28 @@ const WalletConnectStatus = ({ adapter }: { adapter: WalletAdapter }) => {
   const { setIsWalletError } = useCubikWalletContext();
   const { modalState, setModalState } = useUserModalUIContext();
 
-  const isErrorConnecting = modalState === 'error-connecting';
-  const iconColor = isErrorConnecting
-    ? 'var(--color-fg-negative-base)'
-    : 'var(--color-fg-info-base)';
-  const iconName = isErrorConnecting
-    ? 'dangerSkullDuoSolid'
-    : 'walletPlusDuoSolid';
+  const iconColor =
+    modalState === MODAL_STATUS.ERROR_CONNECTING
+      ? 'var(--color-fg-negative-base)'
+      : 'var(--color-fg-info-base)';
+  const iconName =
+    modalState === MODAL_STATUS.ERROR_CONNECTING
+      ? 'dangerSkullDuoSolid'
+      : 'walletPlusDuoSolid';
+
+  useEffect(() => {
+    console.log('modal state changed', modalState);
+  }, [modalState]);
 
   const onRetry = async () => {
     try {
-      setModalState('connecting');
+      setModalState(MODAL_STATUS.CONNECTING);
       select(adapter.name);
       await adapter.connect();
       toast.success('Wallet Connected');
     } catch (e) {
       const error = e as Error;
-      setModalState('error-connecting');
+      setModalState(MODAL_STATUS.ERROR_CONNECTING);
       if (error.message) {
         setIsWalletError({
           error,
@@ -66,7 +75,7 @@ const WalletConnectStatus = ({ adapter }: { adapter: WalletAdapter }) => {
         return null;
       } else {
         const newError = new Error('User rejected the request');
-        setModalState('error-connecting');
+        setModalState(MODAL_STATUS.ERROR_CONNECTING);
         setIsWalletError({
           error: newError,
           message: 'User rejected the request',
@@ -76,9 +85,9 @@ const WalletConnectStatus = ({ adapter }: { adapter: WalletAdapter }) => {
     }
   };
   const onClickHandler = () => {
-    if (modalState === 'error-connecting') {
+    if (modalState === MODAL_STATUS.ERROR_CONNECTING) {
       onRetry();
-    } else if (modalState === 'connecting') {
+    } else if (modalState === MODAL_STATUS.CONNECTING) {
       return;
     }
   };
@@ -89,15 +98,12 @@ const WalletConnectStatus = ({ adapter }: { adapter: WalletAdapter }) => {
     exit: { y: -10, opacity: 0 },
   };
 
-  const renderButton = (
-    text: string,
-    status: string, // status is used to differentiate the button text state
-  ) => (
+  const renderButton = (text: string, status: string) => (
     <Button
-      className={'w-full'}
-      size={'lg'}
-      variant={'secondary'}
-      // isLoading={loading}
+      className="w-full"
+      size="xl"
+      variant="secondary"
+      isLoading={modalState === MODAL_STATUS.CONNECTING}
       onClick={onClickHandler}
     >
       <AnimatePresence mode="wait">
@@ -107,53 +113,57 @@ const WalletConnectStatus = ({ adapter }: { adapter: WalletAdapter }) => {
           initial="initial"
           animate="animate"
           exit="exit"
-          transition={{ duration: 0.1 }}
-          style={{ display: 'inline-block' }} // Necessary to apply transform to inline elements like span
+          transition={{ duration: 0.3, ease: 'easeInOut' }} // Smoother transition
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexDirection: 'row',
+            gap: '8px',
+          }}
         >
-          {text}
+          {modalState === MODAL_STATUS.ERROR_CONNECTING && (
+            <Icon
+              name="retry"
+              strokeWidth={3}
+              animate={{ rotate: 90 }} // Full rotation
+              transition={{ duration: 0.5, ease: 'linear' }} // Continuous rotation
+              initial={{ rotate: 90 }}
+              width={18}
+              height={18}
+              color="var(--color-fg-primary-depth)"
+            />
+          )}
+          <Text className="l1-heavy">{text}</Text>
         </motion.span>
       </AnimatePresence>
     </Button>
   );
 
-  const iconBackgroundAnimation = {
-    initial: { opacity: 1 },
-    animate: {
-      opacity: 1,
-      backgroundColor: isErrorConnecting
-        ? 'var(--color-surface-negative-transparent)'
-        : 'var(--color-surface-info-transparent)',
-    },
-    exit: { opacity: 1 },
-  };
-
   return (
     <div className="p-6 md:p-8 md:py-12 flex flex-col items-center justify-center gap-6 md:gap-8">
-      <AnimatePresence>
-        <motion.div
-          key={modalState}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          variants={iconBackgroundAnimation}
-          className="mx-auto w-fit rounded-full p-4"
-        >
-          <Icon
-            name={iconName}
-            width={44}
-            height={44}
-            strokeWidth={3.5}
-            color={iconColor}
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{
-              duration: 1,
-              ease: 'easeInOut',
-              repeatDelay: 1,
-            }}
-          />
-        </motion.div>
-      </AnimatePresence>
+      <div
+        className={`mx-auto w-fit rounded-full p-4 ${
+          modalState === MODAL_STATUS.ERROR_CONNECTING
+            ? 'bg-[var(--color-surface-negative-transparent)]'
+            : 'bg-[var(--color-surface-info-transparent)]'
+        }`}
+      >
+        <Icon
+          name={iconName}
+          width={44}
+          height={44}
+          strokeWidth={3.5}
+          color={iconColor}
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{
+            duration: 1,
+            ease: 'easeInOut',
+            repeatDelay: 1,
+          }}
+        />
+      </div>
       <motion.div
         key={modalState}
         initial={{ opacity: 0, scale: 0.95 }}
@@ -161,18 +171,18 @@ const WalletConnectStatus = ({ adapter }: { adapter: WalletAdapter }) => {
         exit={{ opacity: 0, scale: 0.95 }}
         className="flex flex-col justify-center items-center text-center w-full max-w-[330px] gap-2"
       >
-        {slides[isErrorConnecting ? 1 : 0]}
+        {slides[modalState === MODAL_STATUS.ERROR_CONNECTING ? 1 : 0]}
       </motion.div>
       <div className="w-full flex items-center gap-2 flex-col">
-        {isErrorConnecting
+        {modalState === MODAL_STATUS.ERROR_CONNECTING
           ? renderButton('Retry', 'error')
-          : renderButton('Connecting...', 'connecting')}
+          : renderButton('Connecting', 'connecting')}
         {/* <AnimatePresence>
           {isErrorConnecting ? ( */}
         <Button
-          onClick={() => setModalState('wallet-connect')}
+          onClick={() => setModalState(MODAL_STATUS.WALLET_CONNECT)}
           size="md"
-          variant="link"
+          variant="tertiary"
         >
           Connect another wallet
         </Button>

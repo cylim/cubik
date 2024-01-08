@@ -150,7 +150,6 @@ const TabList: React.FC<TabListProps> = ({ children, className }) => {
     );
   }
   const { selectedTab } = context;
-  console.log('selected tab', selectedTab);
   const tabListStyles = cn(tabListVariants({ size }));
   const tabsRef = useRef<(HTMLElement | null)[]>([]);
   const [, setForceUpdate] = useState(false);

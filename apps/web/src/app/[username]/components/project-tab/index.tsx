@@ -1,6 +1,6 @@
 import React from 'react';
 import { cookies } from 'next/headers';
-import { CreateProjectButton } from '@/app/[username]/components/project-tab/createProjectButton';
+import Link from 'next/link';
 import {
   ProjectAdminCard,
   ProjectProfileCard,
@@ -67,7 +67,11 @@ export const ProjectTab = async ({ username }: Props) => {
       {isOwnProfile ? (
         <>
           <SubHead heading="Projects">
-            <CreateProjectButton />
+            <Link href={'/create/project'}>
+              <Button rightIconName="plus" variant={'primary'}>
+                Create Project
+              </Button>
+            </Link>
           </SubHead>
           <div className="flex w-full flex-col justify-center gap-[16px] md:gap-[24px]">
             {renderProjects()}

@@ -17,7 +17,7 @@ const FooterComponent = ({
           height={18}
         />
       </div>
-      <Text className="l2-light md:l2-light" color="tertiary">
+      <Text className="l1-light md:l2-light" color="tertiary">
         {text}
       </Text>
     </div>

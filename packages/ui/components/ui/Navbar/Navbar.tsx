@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import Link from 'next/link';
 //import Link from 'next/link';
 import { cva, VariantProps } from 'class-variance-authority';
 
@@ -40,7 +41,7 @@ export const Navbar = ({
 
   return (
     <div
-      className={`py-3 md:py-4 w-full top-0 ${
+      className={`py-3 border-border-red-500 md:py-6 w-full top-0 ${
         background
           ? 'bg-[var(--body-surface)]'
           : 'bg-gradient-to-b from-[var(--body-surface)] dark:from-[var(--body-surface)] dark:to-[var(--body-surface)]'
@@ -49,7 +50,9 @@ export const Navbar = ({
       {background}
       <div className="container mx-auto max-w-7xl px-6 h-full">
         <div className="flex justify-between items-center h-full">
-          <Logo variant="text" />
+          <Link href={'/'}>
+            <Logo variant="text" />
+          </Link>
           {/* <ul className="hidden md:flex gap-x-6 text-white">
             <li>
               <Link href="/about">

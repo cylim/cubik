@@ -8,7 +8,7 @@ import { cn } from '../../../lib/utils';
 const modalContentVariants = cva('', {
   variants: {
     dialogSize: {
-      sm: 'w-[410px] left-[calc(50%-205px)] ',
+      sm: `w-[410px] left-[calc(50%-205px)]`,
       md: 'w-[500px] left-[calc(50%-250px)] ',
       lg: 'w-[600px] left-[calc(50%-300px)] ',
       xl: 'w-[1152px] left-[calc(50%-576px)] ',
@@ -33,14 +33,14 @@ const overlayAnimation = {
 };
 
 const contentAnimation = {
-  initial: { opacity: 0, y: -10 },
+  initial: { opacity: 0, y: -15 },
   animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: 10 },
+  exit: { opacity: 0, y: 15 },
 };
 
 const layoutTransition = {
   type: 'spring',
-  stiffness: 500,
+  stiffness: 300,
   damping: 30,
 };
 
@@ -78,7 +78,7 @@ export const Modal = ({
                   animate="animate"
                   exit="exit"
                   className={cn(
-                    `fixed top-[300px] m-auto max-h-[85vh] h-fit rounded-[12px] bg-[var(--color-bg-primary-base)] shadow-[none] focus:outline-none `,
+                    `fixed top-[15vh] m-auto max-h-[85vh] h-fit rounded-[12px] bg-[var(--color-bg-primary-base)] shadow-[none] focus:outline-none `,
                     modalContentVariants({ dialogSize }),
                   )}
                 >

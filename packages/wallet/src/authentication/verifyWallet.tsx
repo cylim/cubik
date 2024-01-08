@@ -1,17 +1,25 @@
 'use client';
 
+// there will be three states for the verifyModalCard
+// - Sign and verify
+// - signing
+// - error signing
+// - sign succesful
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { Button, Icon, Text } from '@cubik/ui';
 
-import { useCubikWalletContext } from '../wallet';
+import {
+  MODAL_STATUS,
+  useCubikWalletContext,
+  useUserModalUIContext,
+} from '../wallet';
 
 interface Props {
   onClose: () => void;
   isLoading: boolean;
   handleVerify: () => void;
-  address: string;
 }
 
 const slides: React.ReactNode[] = [
@@ -62,12 +70,8 @@ const textFlipAnimation = {
   exit: { y: -10, opacity: 0 },
 };
 
-export const VerifyWallet = ({
-  onClose,
-  isLoading,
-  handleVerify,
-  address,
-}: Props) => {
+export const VerifyWallet = ({ handleVerify, onClose, isLoading }: Props) => {
+  const { modalState } = useUserModalUIContext();
   const [verifyModalState, setVerifyModalState] = useState<
     'default' | 'loading' | 'error'
   >('default');
@@ -103,18 +107,19 @@ export const VerifyWallet = ({
     },
   }[verifyModalState];
 
-  const buttonTitle = {
-    default: 'Sign & Confirm',
-    loading: 'Signing...',
-    error: 'Retry',
-  }[verifyModalState];
-
   const onClickHandler = () => {
     if (verifyModalState !== 'loading') {
-      handleVerify();
       setVerifyModalState('loading');
+      handleVerify();
     }
   };
+
+  useEffect(() => {
+    console.log('modal state - ');
+    if (modalState === MODAL_STATUS.ERROR_CONNECTING) {
+      setVerifyModalState('error');
+    }
+  }, [modalState]);
 
   // Define renderButton inside the component to access verifyModalState.
   const renderButton = (text: string) => (
@@ -122,9 +127,11 @@ export const VerifyWallet = ({
       className={'w-full'}
       size={'lg'}
       variant={'secondary'}
+      isLoading={verifyModalState === 'loading'}
       onClick={onClickHandler}
+      leftIconName=""
     >
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         <motion.span
           key={text}
           variants={textFlipAnimation}
@@ -142,26 +149,17 @@ export const VerifyWallet = ({
 
   return (
     <div className="p-6 md:p-8 md:py-12 flex flex-col items-center justify-center gap-6 md:gap-8">
-      <div className="border border-red-500 flex items-center justify-center pt-[20rem] h-[500px]">
-        <AnimatePresence>
-          <motion.div
-            key={verifyModalState}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className={`absolute mx-auto w-fit rounded-full ${icon.bg} p-4`}
-          >
-            <Icon
-              name={icon.name}
-              width={44}
-              height={44}
-              strokeWidth={3.5}
-              color={icon.color}
-            />
-          </motion.div>
-        </AnimatePresence>
+      <div className="flex items-center justify-center pt-[20rem]">
+        <div className={`mx-auto w-fit rounded-full ${icon.bg} p-4`}>
+          <Icon
+            name={icon.name}
+            width={44}
+            height={44}
+            strokeWidth={3.5}
+            color={icon.color}
+          />
+        </div>
       </div>
-
       <motion.div
         key={verifyModalState}
         initial={{ opacity: 0, scale: 0.95 }}
@@ -174,14 +172,20 @@ export const VerifyWallet = ({
             verifyModalState === 'default'
               ? 0
               : verifyModalState === 'loading'
-              ? 1
-              : 2
+                ? 1
+                : 2
           ]
         }
       </motion.div>
       <div className="w-full flex items-center gap-2 flex-col">
-        {renderButton(buttonTitle)}
-        <Button onClick={onClose} size="md" variant="link">
+        {renderButton(
+          verifyModalState === 'default'
+            ? 'Sign & Confirm'
+            : verifyModalState === 'loading'
+              ? 'Loading'
+              : 'Retry',
+        )}
+        <Button onClick={onClose} size="md" variant="tertiary">
           Go Back
         </Button>
       </div>

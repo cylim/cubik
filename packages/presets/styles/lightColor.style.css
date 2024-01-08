@@ -150,7 +150,7 @@ html[class='light'],:root {
     --color-surface-negative-emphasis: var(--color-red-100);
     --color-surface-negative-base: var(--color-red-50);
     --color-surface-cool-transparent: var(--color-white-500-20);
-    --color-surface-cool-inverse: var(--color-white-800);
+    --color-surface-cool-inverse: var(--color-black-600);
     --color-surface-cool-muted: var(--color-white-200);
     --color-surface-cool-emphasis: var(--color-white-300);
     --color-surface-cool-base: var(--color-white);

@@ -16,6 +16,7 @@ import { generateSession } from '../../authentication/generateSession';
 import { LoginUser } from '../../helpers/login';
 import { UserCreate } from '../../userCreate';
 import {
+  MODAL_STATUS,
   useCubikWallet,
   useCubikWalletContext,
   useUserModalUIContext,
@@ -35,12 +36,13 @@ export const WebWalletConnectScreen = ({ onClose, setUser }: Props) => {
   const pathname = usePathname();
   const { connected, connecting, publicKey, select, disconnect, signMessage } =
     useCubikWallet();
+
   useEffect(() => {
     const handleWalletConnect = async () => {
       if (publicKey && connected) {
-        setModalState('wallet-verify');
+        setModalState(MODAL_STATUS.WALLET_VERIFY);
       } else if (connecting) {
-        setModalState('connecting');
+        setModalState(MODAL_STATUS.CONNECTING);
       }
     };
     handleWalletConnect();
@@ -63,7 +65,7 @@ export const WebWalletConnectScreen = ({ onClose, setUser }: Props) => {
 
       const user = await LoginUser(publicKey?.toBase58(), signature, nonce);
       if (!user) {
-        setModalState('user-create');
+        setModalState(MODAL_STATUS.USER_CREATE);
       } else {
         setUser({
           id: user.id,
@@ -71,7 +73,7 @@ export const WebWalletConnectScreen = ({ onClose, setUser }: Props) => {
           profilePicture: user.profilePicture,
           username: user.username,
         });
-        setModalState('wallet-connect');
+        setModalState(MODAL_STATUS.WALLET_CONNECT);
         setShowModal(false);
         setSelectedAdapter(null);
         setIsWalletError(null);
@@ -93,21 +95,19 @@ export const WebWalletConnectScreen = ({ onClose, setUser }: Props) => {
     }
   };
 
-  console.log('1) Modal Status - ', modalState);
   switch (modalState) {
-    case 'wallet-connect':
-    case 'connecting':
-    case 'error-connecting':
+    case MODAL_STATUS.WALLET_CONNECT:
+    case MODAL_STATUS.CONNECTING:
+    case MODAL_STATUS.ERROR_CONNECTING:
       return (
         <>
           <CubikWalletModal onClose={onClose} setShowHeader={() => {}} />
         </>
       );
 
-    case 'wallet-verify':
+    case MODAL_STATUS.WALLET_VERIFY:
       return (
         <VerifyWallet
-          address={publicKey?.toBase58() || ''}
           handleVerify={handleVerifyWallet}
           isLoading={isWalletLoading}
           onClose={() => {
@@ -115,12 +115,12 @@ export const WebWalletConnectScreen = ({ onClose, setUser }: Props) => {
             select(null);
             setSelectedAdapter(null);
             setIsWalletError(null);
-            setModalState('wallet-connect');
+            setModalState(MODAL_STATUS.WALLET_CONNECT);
           }}
         />
       );
 
-    case 'user-create':
+    case MODAL_STATUS.USER_CREATE:
       return <UserCreate />;
 
     default:

@@ -71,6 +71,7 @@ export const DashboardWalletConnectScreen = ({
         handleAccessOnServer(user.accessScope[0].event_id);
       }
       setUser(user);
+      setModalState('wallet-connect');
       setShowModal(false);
       setSelectedAdapter(null);
       setIsWalletError(null);

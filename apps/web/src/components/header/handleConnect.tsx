@@ -49,7 +49,7 @@ const UserNavbarMenu = ({
           />
           <Icon
             name="chevronDown"
-            stroke="var(--color-fg-primary-depth)"
+            color="var(--color-fg-primary-depth)"
             width={16}
             height={16}
           />
@@ -98,18 +98,18 @@ export const WalletConnect = () => {
   const { setUser, user } = useUser();
 
   if (!connected && !publicKey && !user) {
-    return <Button onClick={() => setShowModal(true)}>Connect Wallet</Button>;
-  }
-  if (connected && publicKey && !user) {
     return (
-      <>
-        <Spinner
-          onClick={() => {
-            disconnect();
-            setShowModal(false);
-          }}
-        />
-      </>
+      <Button size="lg" onClick={() => setShowModal(true)}>
+        Connect Wallet
+      </Button>
+    );
+  }
+
+  if ((connected && publicKey && !user) || showModal) {
+    return (
+      <Button isLoading LoadingText="Connecting Wallet" size="lg">
+        Connect Wallet
+      </Button>
     );
   }
 

@@ -41,7 +41,7 @@ export const Navbar = ({
 
   return (
     <div
-      className={`py-3 md:py-4 w-full top-0 ${
+      className={`py-3 border-border-red-500 md:py-6 w-full top-0 ${
         background
           ? 'bg-[var(--body-surface)]'
           : 'bg-gradient-to-b from-[var(--body-surface)] dark:from-[var(--body-surface)] dark:to-[var(--body-surface)]'

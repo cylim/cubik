@@ -1,4 +1,5 @@
 import { useMediaQuery } from '@uidotdev/usehooks';
+import { toast } from 'sonner';
 
 import { UserAuth } from '@cubik/common-types';
 import {
@@ -12,6 +13,7 @@ import {
 import { cn } from '@cubik/ui/lib/utils';
 
 import {
+  MODAL_STATUS,
   useCubikWallet,
   useCubikWalletContext,
   useUserModalUIContext,
@@ -29,7 +31,7 @@ export const WebWalletConnectModal = ({
   setUser: (user: UserAuth) => void;
 }) => {
   const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
-  const { disconnect } = useCubikWallet();
+  const { disconnect, connected } = useCubikWallet();
   const { setSelectedAdapter, setIsWalletError } = useCubikWalletContext();
   const { setModalState } = useUserModalUIContext();
   const onClose = () => {
@@ -47,7 +49,7 @@ export const WebWalletConnectModal = ({
         } else {
           setIsWalletError(null);
           onClose();
-          setModalState('wallet-connect');
+          setModalState(MODAL_STATUS.WALLET_CONNECT);
           setSelectedAdapter(null);
           setShowModal(false);
         }
@@ -63,7 +65,16 @@ export const WebWalletConnectModal = ({
       </DrawerPortal>
     </Drawer>
   ) : (
-    <Modal dialogSize="sm" open={showModal} onClose={onClose}>
+    <Modal
+      dialogSize="sm"
+      open={showModal}
+      onClose={() => {
+        if (!connected) {
+          toast.error('Wallet connection error, please try again');
+        }
+        onClose();
+      }}
+    >
       <WebWalletConnectScreen setUser={setUser} onClose={onClose} />
     </Modal>
   );

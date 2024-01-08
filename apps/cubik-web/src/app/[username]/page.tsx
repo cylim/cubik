@@ -9,6 +9,7 @@ import { UserProof } from './components/user/userProof';
 interface Props {
   params: { username: string };
 }
+
 export const metadata: Metadata = {
   title: 'User - Cubik',
   description: 'Browse user and support there projects',

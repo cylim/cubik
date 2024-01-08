@@ -44,6 +44,7 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
     };
     search();
   }, [userForm.watch('username')]);
+
   return (
     <>
       <div

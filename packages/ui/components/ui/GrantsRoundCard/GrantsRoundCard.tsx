@@ -1,74 +1,63 @@
 import React, { useContext } from 'react';
 import Link from 'next/link';
 
+import { EventStatus } from '@cubik/common-types';
 import { nFormatter } from '@cubik/common/formatters';
+import { calculateEventStatus } from '@cubik/common/helper/eventStatus';
+import {
+  EventStatus as EventStatusTable,
+  ProjectEventStatus,
+} from '@cubik/database';
 import dayjs from '@cubik/dayjs';
 
 import { Icon } from '../../../icons/icon';
 import { Alert } from '../Alert';
 import { Button } from '../Button/button';
-import { Tag, TagLabel, TagRightIcon } from '../Tag/tag';
+import { Tag, TagLabel } from '../Tag/tag';
 import { Text } from '../text/text';
+import { PingIcon } from './../PingIcon';
 
 interface GrantsRoundCardProps {
   children: React.ReactNode;
-  roundStartDate: Date;
-  roundEndDate: Date;
-  projectJoinRoundStatus?: any;
   path: string;
-}
-
-enum EVENT_STATUS {
-  NOT_STARTED = 'not_started',
-  STARTED = 'started',
-  ENDED = 'ended',
+  isPaused: boolean;
+  eventStatusTable: EventStatusTable[];
+  projectJoinRoundStatus?: ProjectEventStatus;
+  grantManager: boolean;
 }
 
 type RoundCardContextType = {
-  eventStatus: EVENT_STATUS;
-  eventTime?: string;
+  currentEventStatus: EventStatus;
+  eventStatusTable: EventStatusTable[];
+  grantManager: boolean;
+  isPaused: boolean;
 };
 
 const RoundCardContext = React.createContext<RoundCardContextType>({
-  eventStatus: EVENT_STATUS.NOT_STARTED,
-  eventTime: '',
+  currentEventStatus: 'BEFORE_REGISTRATION',
+  eventStatusTable: [],
+  grantManager: false,
+  isPaused: false,
 });
 
 const GrantsRoundCard = ({
   children,
-  projectJoinRoundStatus,
-  roundStartDate,
-  roundEndDate,
   path,
+  eventStatusTable,
+  grantManager,
+  isPaused,
 }: GrantsRoundCardProps) => {
-  const now = dayjs();
-  console.log('round start date', dayjs(roundStartDate));
-  const isRoundStarted = now.isAfter(dayjs(roundStartDate));
-  const isRoundEnded = now.isAfter(dayjs(roundEndDate));
-
-  const eventStatus = React.useMemo(() => {
-    if (isRoundStarted && !isRoundEnded) {
-      return EVENT_STATUS.STARTED;
-    } else if (isRoundEnded) {
-      return EVENT_STATUS.ENDED;
-    } else {
-      return EVENT_STATUS.NOT_STARTED;
-    }
-  }, [isRoundStarted, isRoundEnded]);
-
-  const eventTime = React.useMemo(() => {
-    if (isRoundStarted && !isRoundEnded) {
-      return dayjs(roundEndDate).fromNow();
-    } else if (isRoundEnded) {
-      return dayjs(roundEndDate).fromNow();
-    } else {
-      return dayjs(roundStartDate).fromNow();
-    }
-  }, []);
-
+  const currentStatus = calculateEventStatus(eventStatusTable);
   return (
-    <RoundCardContext.Provider value={{ eventStatus, eventTime }}>
-      {!projectJoinRoundStatus ? (
+    <RoundCardContext.Provider
+      value={{
+        currentEventStatus: currentStatus,
+        eventStatusTable: eventStatusTable,
+        grantManager: grantManager,
+        isPaused: isPaused,
+      }}
+    >
+      {!grantManager ? (
         <Link
           href={path}
           prefetch
@@ -104,28 +93,43 @@ const GrantsRoundCard = ({
 
 interface GrantsRoundCardHeaderProps {
   grantName: string;
-  isLive?: boolean;
 }
 
 const GrantRoundCardHeader = ({ grantName }: GrantsRoundCardHeaderProps) => {
-  const { eventStatus } = useContext(RoundCardContext);
+  const { currentEventStatus, isPaused } = useContext(RoundCardContext);
   return (
     <div className="flex items-center justify-between w-full">
       <div className="flex items-center justify-between gap-4">
-        <Text className="b2" color="primary">
-          {grantName}
-        </Text>
-        {eventStatus === EVENT_STATUS.NOT_STARTED && (
-          <Tag color="orange" variant="subtle">
-            <TagRightIcon iconName={'search'} />
-            <TagLabel>Registrations Live</TagLabel>
-          </Tag>
+        {isPaused ? (
+          <div className="flex justify-start items-center gap-4">
+            <Text className="b2" color="primary">
+              {grantName}
+            </Text>
+            <Tag color="red" variant="subtle" border={true}>
+              <TagLabel>Round Paused</TagLabel>
+            </Tag>
+          </div>
+        ) : (
+          <div className="flex justify-start items-center gap-4">
+            {currentEventStatus === 'VOTING' && <PingIcon />}
+            <Text className="b2" color="primary">
+              {grantName}
+            </Text>
+            {currentEventStatus === 'REGISTRATION' && (
+              <Tag color="orange" variant="subtle" border={true}>
+                {/* <TagRightIcon iconName={'search'} /> */}
+                <TagLabel>Registrations Live</TagLabel>
+              </Tag>
+            )}
+            {currentEventStatus === 'VOTING' && (
+              <Tag color="green" variant="subtle" border={true}>
+                <TagLabel>Voting Live</TagLabel>
+              </Tag>
+            )}
+          </div>
         )}
       </div>
       <Button leftIconName="chevronRight" variant={'outline'} className="" />
-      {/* <div className="border border-[var(--button-outline-border-default)] p-[11px] rounded-lg">
-        <Icon name="chevronRight" height={16} width={16} />
-      </div> */}
     </div>
   );
 };
@@ -141,7 +145,8 @@ const GrantRoundCardFooter = ({
   participants,
   contributions,
 }: GrantsRoundCardFooterProps) => {
-  // const { eventStatus } = useContext(RoundCardContext);
+  const { currentEventStatus, eventStatusTable, isPaused } =
+    useContext(RoundCardContext);
   return (
     <div className="flex items-center justify-between py-1">
       <div className="flex items-center w-full ">
@@ -150,7 +155,7 @@ const GrantRoundCardFooter = ({
             <div className="bg-[var(--color-surface-alert-transparent)] rounded-lg p-[6px]">
               <Icon
                 name="piggyBank"
-                // stroke="var(--color-bg-alert-base)"
+                color="var(--color-bg-alert-base)"
                 height={16}
                 width={16}
               />
@@ -174,7 +179,7 @@ const GrantRoundCardFooter = ({
               <div className="bg-[var(--color-surface-innovative-transparent)] rounded-lg p-[6px]">
                 <Icon
                   name="user3"
-                  // stroke="var(--color-bg-innovative-base)"
+                  color="var(--color-bg-innovative-base)"
                   height={16}
                   width={16}
                 />
@@ -199,7 +204,7 @@ const GrantRoundCardFooter = ({
               <div className="bg-[var(--color-surface-positive-transparent)] rounded-lg p-[6px]">
                 <Icon
                   name="donation"
-                  // stroke="var(--color-fg-success)"
+                  color="var(--color-fg-success)"
                   height={16}
                   width={16}
                 />
@@ -216,14 +221,65 @@ const GrantRoundCardFooter = ({
           </div>
         )}
       </div>
-      <div className="flex w-[max-content] gap-1">
-        <Text className="l2-light text-[var(--color-fg-primary-subdued)] w-[max-content]">
-          Round starts in
+      {isPaused ? (
+        <Text color={'negative'} className="l2-light whitespace-nowrap">
+          Round Paused
         </Text>
-        <Text className="l2-light text-[var(--color-fg-warning)] w-[max-content]">
-          3 Days
-        </Text>
-      </div>
+      ) : (
+        <div>
+          {currentEventStatus === 'BEFORE_REGISTRATION' && (
+            <div className="flex w-[max-content] gap-1">
+              <Text className="l2-light text-[var(--color-fg-primary-subdued)] w-[max-content]">
+                Registration Starts in
+              </Text>
+              <Text className="l2-light text-[var(--color-fg-warning)] w-[max-content]">
+                {dayjs(
+                  eventStatusTable?.find((e) => e.status === 'REGISTRATION')
+                    ?.startTime,
+                ).fromNow(true)}
+              </Text>
+            </div>
+          )}
+          {currentEventStatus === 'REGISTRATION' && (
+            <div className="flex w-[max-content] gap-1">
+              <Text className="l2-light text-[var(--color-fg-primary-subdued)] w-[max-content]">
+                Round Starts in
+              </Text>
+              <Text className="l2-light text-[var(--color-fg-warning)] w-[max-content]">
+                {dayjs(
+                  eventStatusTable?.find((e) => e.status === 'VOTING')
+                    ?.startTime,
+                ).fromNow(true)}
+              </Text>
+            </div>
+          )}
+          {currentEventStatus === 'VOTING' && (
+            <div className="flex w-[max-content] gap-1">
+              <Text className="l2-light text-[var(--color-fg-primary-subdued)] w-[max-content]">
+                Round ending in
+              </Text>
+              <Text className="l2-light text-[var(--color-bg-positive-emphasis)] w-[max-content]">
+                {dayjs(
+                  eventStatusTable?.find((e) => e.status === 'VOTING')
+                    ?.startTime,
+                ).fromNow(true)}
+              </Text>
+            </div>
+          )}
+          {currentEventStatus === 'ENDED' && (
+            <div className="flex w-[max-content] gap-1">
+              <Text className="l2-light text-[var(--color-fg-primary-subdued)] w-[max-content]">
+                Round ended:
+              </Text>
+              <Text className="l2-light text-[var(--color-fg-primary-subdued)] w-[max-content]">
+                {dayjs(
+                  eventStatusTable?.find((e) => e.status === 'VOTING')?.endTime,
+                ).format('MMMM D, YYYY')}
+              </Text>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

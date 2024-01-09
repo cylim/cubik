@@ -73,7 +73,7 @@ export const ProjectTab = async ({ username }: Props) => {
               </Button>
             </Link>
           </SubHead>
-          <div className="flex w-full flex-col justify-center gap-[16px] md:gap-[24px]">
+          <div className="flex min-h-[100vh] w-full flex-col justify-start gap-[16px] md:gap-[24px]">
             {renderProjects()}
           </div>
         </>

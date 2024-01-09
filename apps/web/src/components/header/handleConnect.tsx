@@ -79,6 +79,7 @@ const UserNavbarMenu = ({
 
         <MenuItem
           text="Logout"
+          variant={'negative'}
           leftIcon="logoutRight"
           onClick={async () => {
             setUser(null);

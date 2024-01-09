@@ -51,7 +51,7 @@ export const Icon = ({
       width={width}
       height={height}
       // this is a temporary solution we have to find a permanent fix for the viewBox property of svg
-      viewBox={height && height >= 24 ? '' : viewBox}
+      viewBox={viewBox}
       xmlns="http://www.w3.org/2000/svg"
       preserveAspectRatio="xMidYMid meet"
       className={clsx('text-white', className)}

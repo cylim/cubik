@@ -8,7 +8,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { ThemeProvider } from '@cubik/ui';
 
-require('@solana/wallet-adapter-react-ui/styles.css');
+// require('@solana/wallet-adapter-react-ui/styles.css');
 
 interface Props {
   children: React.JSX.Element;

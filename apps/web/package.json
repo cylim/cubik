@@ -18,7 +18,6 @@
     "@cubik/config": "workspace:*",
     "@cubik/database": "workspace:*",
     "@cubik/dayjs": "workspace:*",
-    "@cubik/editor": "workspace:*",
     "@cubik/logger": "workspace:*",
     "@cubik/presets": "workspace:*",
     "@cubik/ui": "workspace:*",

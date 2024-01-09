@@ -14,6 +14,7 @@ import {
   generateDefaultUserName,
   generateUserBackupImage,
 } from '@cubik/common';
+import { PROGRAM_ID } from '@cubik/common/constants';
 import { UserType } from '@cubik/database';
 
 import { connection, cubikInstance } from '../authentication/contract';
@@ -145,10 +146,12 @@ export const UserCreate = () => {
   }
 
   return (
-    <CreateUsername
-      userForm={userInfoForm}
-      setUserCreateState={setUserCreateState}
-      userCreateState={userCreateState}
-    />
+    <>
+      <CreateUsername
+        userForm={userInfoForm}
+        setUserCreateState={setUserCreateState}
+        userCreateState={userCreateState}
+      />
+    </>
   );
 };

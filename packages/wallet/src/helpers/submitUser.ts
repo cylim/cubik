@@ -1,7 +1,9 @@
 'use server';
 
 import { ProfileNftType } from '@cubik/common-types';
+import { PROGRAM_ID } from '@cubik/common/constants';
 import { UserType } from '@cubik/database';
+import { logApi } from '@cubik/logger/src';
 
 import { connection } from '../authentication/contract';
 
@@ -16,20 +18,30 @@ interface SubmitUserArgs {
 }
 export const submitUser = async (args: SubmitUserArgs) => {
   try {
-    await connection.getParsedTransaction(args.sig, {
+    const parseTx = await connection.getParsedTransaction(args.sig, {
       commitment: 'confirmed',
     });
 
-    // const parseProgramId =
-    //   parseTx?.transaction.message.instructions.reverse()[0];
+    const parseProgramId = parseTx?.transaction.message.instructions
+      .reverse()[0]
+      .programId.toBase58();
 
-    // console.log(
-    //   parseProgramId?.programId === new web3.PublicKey(PROGRAM_ID),
-    //   '---',
-    // );
-    // if (parseProgramId !== PROGRAM_ID) {
-    //   throw new Error('Invalid Transaction');
-    // }
+    logApi({
+      message: 'submitUser',
+      body: {
+        parseProgramId: parseProgramId,
+        PROGRAM_ID: PROGRAM_ID,
+        args: args,
+      },
+      level: 'info',
+      source: 'submitUser',
+    });
+
+    console.log(parseProgramId, PROGRAM_ID, parseProgramId === PROGRAM_ID);
+
+    if (parseProgramId !== PROGRAM_ID) {
+      throw new Error('Invalid Transaction');
+    }
 
     await prisma.user.create({
       data: {
@@ -54,6 +66,14 @@ export const submitUser = async (args: SubmitUserArgs) => {
     };
   } catch (e) {
     const error = e as Error;
+    logApi({
+      message: 'Error SubmitUser ',
+      body: {
+        args: args,
+      },
+      level: 'error',
+      source: 'Error submitUser',
+    });
     return {
       status: false,
       error: error.message,

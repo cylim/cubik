@@ -9,7 +9,6 @@ import { createMessage } from '@cubik/auth';
 import { AccessScope } from '@cubik/common-types/src/admin';
 import { handleAccessOnServer, handleRevalidation } from '@cubik/common/helper';
 import { logApi } from '@cubik/logger/src/';
-import { ModalHeader } from '@cubik/ui';
 
 import { VerifyWallet } from '../../authentication';
 import { generateSession } from '../../authentication/generateSession';
@@ -96,7 +95,6 @@ export const DashboardWalletConnectScreen = ({
     <>
       {modalState === 'wallet-connect' && (
         <>
-          <ModalHeader onClose={onClose} heading="Connect Wallet" size="md" />
           <CubikWalletModal onClose={onClose} setShowHeader={() => {}} />
         </>
       )}

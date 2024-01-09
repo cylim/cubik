@@ -41,7 +41,6 @@ function ThemeProvider({ children }: ThemeProviderProps) {
     }
     return 'dark';
   });
-  console.log('theme - ', theme);
   // Function to toggle the theme
   const toggleTheme = () => {
     setTheme((currentTheme) => {

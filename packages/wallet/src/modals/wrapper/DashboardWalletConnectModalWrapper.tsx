@@ -70,7 +70,7 @@ export const DashboardUserWallet = ({
       </DrawerPortal>
     </Drawer>
   ) : (
-    <Modal dialogSize="xl" open={showModal} onClose={onClose}>
+    <Modal dialogSize="sm" open={showModal} onClose={onClose}>
       <DashboardWalletConnectScreen
         setAccessScope={setAccessScope}
         setUser={setUser}

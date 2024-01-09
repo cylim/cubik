@@ -1,6 +1,8 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useMemo } from 'react';
 import Link from 'next/link';
 import { cva } from 'class-variance-authority';
+import { motion } from 'framer-motion';
+import { v4 as uuid_v4 } from 'uuid';
 
 import { cn } from '../../../lib/utils';
 import { Text } from '../../ui/text/text';
@@ -14,9 +16,13 @@ interface SegmentItemProps {
   onClick?: () => void;
   isActive?: boolean;
   href?: string;
+  className?: string;
 }
 
-const SizeContext = createContext<'sm' | 'md' | 'lg'>('md');
+const SizeContext = createContext<{ size: 'sm' | 'md' | 'lg'; id: string }>({
+  size: 'md',
+  id: 'segment',
+});
 
 const segmentTextVariant = cva('whitespace-nowrap', {
   variants: {
@@ -42,10 +48,23 @@ const segmentContainerVariant = cva('', {
     size: 'md',
   },
 });
+const segmentItemVariant = cva('', {
+  variants: {
+    size: {
+      sm: 'h-[28px]',
+      md: 'h-[32px]',
+      lg: 'h-[36px]',
+    },
+  },
+  defaultVariants: {
+    size: 'md',
+  },
+});
 
 export const SegmentContainer = ({ children, size }: SegmentContainerProps) => {
+  const id = useMemo(() => uuid_v4(), []);
   return (
-    <SizeContext.Provider value={size}>
+    <SizeContext.Provider value={{ size, id }}>
       <div
         className={cn(
           segmentContainerVariant({ size }),
@@ -63,9 +82,9 @@ export const SegmentItem = ({
   onClick,
   isActive,
   href,
+  className,
 }: SegmentItemProps) => {
-  const size = useContext(SizeContext);
-
+  const { size, id } = useContext(SizeContext);
   const content = (
     <Text
       className={cn(segmentTextVariant({ size }))}
@@ -80,25 +99,42 @@ export const SegmentItem = ({
       scroll={false}
       href={href}
       className={cn(
-        'px-6 w-full h-full flex items-center justify-center gap-2 cursor-pointer text-center rounded-[6px]',
-        isActive
-          ? 'bg-[var(--segment-control-surface-active)] shadow-md'
-          : 'bg-[var(--segment-control-surface-inactive)]',
+        'relative transition-all px-6 w-full h-full flex items-center justify-center gap-2 cursor-pointer text-center rounded-[6px]',
       )}
     >
-      {content}
+      {isActive && (
+        <motion.div
+          layoutId={id}
+          transition={{ type: 'spring', bounce: 0.1 }}
+          className={cn(
+            segmentItemVariant({ size }),
+            'bg-[var(--segment-control-surface-active)] shadow-md absolute inset-0 w-full rounded-[6px]',
+            className,
+          )}
+        />
+      )}
+      <span className="relative z-10">{content}</span>
     </Link>
   ) : (
-    <div
+    <motion.div
       onClick={onClick}
       className={cn(
-        'px-6 w-full h-full flex items-center justify-center gap-2 cursor-pointer text-center rounded-[6px]',
-        isActive
-          ? 'bg-[var(--segment-control-surface-active)] shadow-md'
-          : 'bg-[var(--segment-control-surface-inactive)]',
+        'relative transition-all px-6 w-full h-full flex items-center justify-center gap-2 cursor-pointer text-center rounded-[6px]',
       )}
     >
-      {content}
-    </div>
+      {' '}
+      {isActive && (
+        <motion.div
+          layoutId={id}
+          transition={{ type: 'spring', bounce: 0.1 }}
+          className={cn(
+            segmentItemVariant({ size }),
+            'bg-[var(--segment-control-surface-active)] shadow-md absolute inset-0 w-full rounded-[6px]',
+            className,
+          )}
+        />
+      )}
+      <span className="relative z-10">{content}</span>
+    </motion.div>
   );
 };

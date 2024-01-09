@@ -120,7 +120,7 @@ const Button = ({
     <button
       className={cn(
         bgVariants({ variant, size }),
-        `rounded-lg transform active:scale-95 whitespace-nowrap flex items-center justify-center  pointer-events-auto w-[fit-content]  gap-[6px] ${
+        `rounded-lg transform active:scale-95 transition-all whitespace-nowrap flex items-center justify-center  pointer-events-auto w-[fit-content]  gap-[6px] ${
           !children ? 'px-[10px] md:px-[12px]' : 'px-[14px] md:px-[16px]'
         }`,
         className,

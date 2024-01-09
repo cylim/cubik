@@ -3,6 +3,7 @@
 import React from 'react';
 import CodeComponent from '@/app/home-page-components/code-component';
 import PageHOC from '@/app/home-page-components/components/pageHOC';
+import DocsTabsHOC from '@/app/home-page-components/components/Tabs';
 import { useForm } from 'react-hook-form';
 
 import {
@@ -164,67 +165,70 @@ const InputPage = () => {
         },
       ]}
       heading={'Input'}
-      description=""
+      description="Input component is a component that is used to get user input in a text field."
     >
-      <div className="border-[var(--color-border-primary) overflow-hidden rounded-[8px] border bg-[var(--white)] px-6 py-4">
-        <CodeComponent
-          codeString='import {   HelperText,
-  InputContainer,
-  InputField,
-  InputFieldContainer,
-  InputLabel,
-  InputLeftElement,
-  InputRightElement, } from "@cubik/ui"'
-        />
-      </div>
-      <div className="flex flex-col gap-10">
-        <InputContainer>
-          <InputLabel maxCounterValue={100} counterValue={10} isRequired={true}>
-            Hello world
-          </InputLabel>
-          <InputFieldContainer isDisabled={false} variant="md">
-            <InputLeftElement withBorder={true}>https</InputLeftElement>
-            <InputField
-              id="aa"
-              name="aa"
-              placeholder="test@cubik.com"
-              type="text"
+      <DocsTabsHOC>
+        <div className="py-12">
+          <div className="flex min-h-[14rem] items-center justify-center gap-10 rounded-lg border bg-[var(--color-surface-primary-depth)]">
+            <InputContainer className="max-w-[30rem]">
+              <InputLabel
+                maxCounterValue={100}
+                counterValue={10}
+                isRequired={true}
+              >
+                Hello world
+              </InputLabel>
+              <InputFieldContainer isDisabled={false} variant="md">
+                <InputLeftElement withBorder={true}>https</InputLeftElement>
+                <InputField
+                  id="aa"
+                  name="aa"
+                  placeholder="test@cubik.com"
+                  type="text"
+                />
+                <InputRightElement>https</InputRightElement>
+              </InputFieldContainer>
+              <HelperText variant={'success'} fontSize={'md'}>
+                hello
+              </HelperText>
+            </InputContainer>
+            {/* <div className="border-[var(--color-border-primary) overflow-hidden rounded-[8px] border bg-[var(--white)] px-6 py-4">
+            <CodeComponent
+              codeString={` <InputContainer>
+           <InputLabel maxCounterValue={100} counterValue={10} isRequired={true}>
+             Hello world
+           </InputLabel>
+           <InputFieldContainer isDisabled={false} variant="md">
+             <InputLeftElement withBorder={true}>https</InputLeftElement>
+             <InputField
+               id="aa"
+               name="aa"
+               placeholder="test@cubik.com"
+               type="text"
+             />
+             <InputRightElement>https</InputRightElement>
+           </InputFieldContainer>
+           <HelperText variant={'success'} fontSize={'md'}>
+             hello
+           </HelperText>
+         </InputContainer>`}
             />
-            <InputRightElement>https</InputRightElement>
-          </InputFieldContainer>
-          <HelperText variant={'success'} fontSize={'md'}>
-            hello
-          </HelperText>
-        </InputContainer>
+          </div>
+          <div className="flex flex-col gap-10">
+            <FormSuccess />
+            <FormError />
+          </div>*/}
+          </div>
+        </div>
         <div className="border-[var(--color-border-primary) overflow-hidden rounded-[8px] border bg-[var(--white)] px-6 py-4">
-          <CodeComponent
-            codeString={` <InputContainer>
-          <InputLabel maxCounterValue={100} counterValue={10} isRequired={true}>
-            Hello world
-          </InputLabel>
-          <InputFieldContainer isDisabled={false} variant="md">
-            <InputLeftElement withBorder={true}>https</InputLeftElement>
-            <InputField
-              id="aa"
-              name="aa"
-              placeholder="test@cubik.com"
-              type="text"
-            />
-            <InputRightElement>https</InputRightElement>
-          </InputFieldContainer>
-          <HelperText variant={'success'} fontSize={'md'}>
-            hello
-          </HelperText>
-        </InputContainer>`}
-          />
+          <CodeComponent codeString='import {   HelperText, InputContainer, InputField, InputFieldContainer, InputLabel, InputLeftElement, InputRightElement } from "@cubik/ui"' />
         </div>
-        <div className="flex flex-col gap-10">
-          <FormSuccess />
-          <FormError />
-        </div>
-      </div>
+        <></>
+        <></>
+      </DocsTabsHOC>
     </PageHOC>
   );
 };
 
 export default InputPage;
+//

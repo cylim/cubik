@@ -89,7 +89,7 @@ const ProjectAdminStatsTab = () => {
         <TreasuryInfoCard
           header="Matched Grants Funds"
           headerIconName="infoCircle"
-          value="$30,987.8"
+          value={'$30,987.8'}
         />
         <Divider orientation="vertical" className="!h-auto" />
         <TreasuryInfoCard

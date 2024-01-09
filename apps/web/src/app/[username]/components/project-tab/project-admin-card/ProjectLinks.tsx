@@ -50,7 +50,12 @@ const ProjectLinks = ({ editProjectForm }: IEditProjectLinkProps) => {
             }
           >
             <InputLeftElement withBorder={true}>
-              <Icon name="X" height={16} width={16} />
+              <Icon
+                name="X"
+                height={16}
+                width={16}
+                className="stroke-[var(--form-input-fg-default)]"
+              />
             </InputLeftElement>
             <InputField
               name="twitterHandle"

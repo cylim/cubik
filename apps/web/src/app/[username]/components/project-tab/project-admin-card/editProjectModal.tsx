@@ -31,6 +31,8 @@ const EditProjectModal = ({ open, setOpen, project }: IEditProjectModal) => {
           name="cross"
           className="pointer-events-auto absolute right-8 top-3 cursor-pointer"
           onClick={() => setOpen(false)}
+          height={16}
+          width={16}
         />
 
         <VerticalTabs defaultValue={'general'} size="sm" className="">

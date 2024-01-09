@@ -53,14 +53,16 @@ export const MultiImageUploader = ({
   };
 
   const processFile = (file: File) => {
-    if (_file.length === 5) {
+    const newFileArray = [...images, file];
+
+    if (newFileArray.length > 5) {
       return toast.error('You can only upload 5 images');
     }
     startUpload([file]);
   };
 
   return (
-    <>
+    <div className="flex flex-col gap-4">
       {!isUploading ? (
         <div
           className={cn(
@@ -79,7 +81,9 @@ export const MultiImageUploader = ({
           >
             <Icon
               name={'upload'}
-              className="stroke-[var(--form-uploader-icon-default)]"
+              className="!stroke-[var(--form-uploader-icon-default)]"
+              height={18}
+              width={18}
             />
           </div>
           <div className="flex justify-center items-center flex-col gap-3">
@@ -134,45 +138,51 @@ export const MultiImageUploader = ({
           </div>
         </div>
       )}
-      <div className="flex justify-between gap-3 items-center overflow-x-scroll">
-        {new Array(5).fill(0).map((_, index) => {
-          if (images[index]) {
-            const img = images[index];
+      <div className="flex justify-between items-center overflow-x-scroll no-scrollbar">
+        {images &&
+          new Array(5).fill(0).map((_, index) => {
+            if (images[index]) {
+              const img = images[index];
+              return (
+                <div
+                  className="border border-[var(--form-uploader-border-default)] border-dashed rounded-lg p-4"
+                  key={index + '-image'}
+                >
+                  <div
+                    className="hover:opacity-50 cursor-pointer"
+                    onClick={() => onRemove(img)}
+                  >
+                    <Avatar
+                      size={'lg'}
+                      variant={'square'}
+                      src={images[index]}
+                      alt="random"
+                    />
+                  </div>
+                </div>
+              );
+            }
             return (
               <div
-                className="hover:opacity-50 cursor-pointer"
-                onClick={() => onRemove(img)}
                 key={index + '-image'}
+                className="border border-[var(--form-uploader-border-default)] border-dashed rounded-lg p-4"
               >
-                <Avatar
-                  size={'lg'}
-                  variant={'square'}
-                  src={images[index]}
-                  alt="random"
-                />
+                <div
+                  className={
+                    'p-6 w-max rounded flex bg-[var(--form-uploader-img-default)]'
+                  }
+                >
+                  <Icon
+                    name={'upload'}
+                    className="stroke-[var(--form-uploader-icon-default)]"
+                    height={18}
+                    width={18}
+                  />
+                </div>
               </div>
             );
-          }
-          return (
-            <div
-              key={index + '-image'}
-              className="border border-[var(--form-uploader-border-default)] border-dashed rounded-lg"
-            >
-              <div
-                className={cn(
-                  'p-5 w-max rounded flex',
-                  'bg-[var(--form-uploader-img-default)]',
-                )}
-              >
-                <Icon
-                  name={'upload'}
-                  className="stroke-[var(--form-uploader-icon-default)]"
-                />
-              </div>
-            </div>
-          );
-        })}
+          })}
       </div>
-    </>
+    </div>
   );
 };

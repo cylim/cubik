@@ -57,6 +57,7 @@ export const EditProjectDetails = async (
         logo: data.logo,
         projectLink: data.projectLink,
         telegramLink: data.telegramLink,
+        slides: data.slides,
       },
     });
     revalidatePath(`/${user?.username}`);

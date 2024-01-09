@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { EditProjectDetails } from '@/app/[username]/components/helper/editProjectDetails';
 import ProjectDetailsForm from '@/app/[username]/components/project-tab/project-admin-card/ProjectDetailsForm';
+import ProjectImages from '@/app/[username]/components/project-tab/project-admin-card/ProjectImages';
 import ProjectLinks from '@/app/[username]/components/project-tab/project-admin-card/ProjectLinks';
 import { IProjectData } from '@/types/project';
 import { utils } from '@coral-xyz/anchor';
@@ -76,7 +77,11 @@ const EditProjectModalContent = ({ projectId }: { projectId: string }) => {
         publicKey?.toBase58(),
         signature,
         nonce,
-        { ...editProjectForm.formState.defaultValues, ...data },
+        {
+          ...editProjectForm.formState.defaultValues,
+          ...data,
+          slides: editProjectForm.watch('slides'),
+        },
       );
       if (updatedProject) {
         toast.success('Successfully edited project details');
@@ -121,6 +126,7 @@ const EditProjectModalContent = ({ projectId }: { projectId: string }) => {
         </div>
 
         <ProjectLinks editProjectForm={editProjectForm} />
+        <ProjectImages editProjectForm={editProjectForm} />
       </form>
     </div>
   );

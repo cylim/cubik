@@ -162,7 +162,6 @@ model Event {
   matchedPool      Float              @default(0)
   userId           String
   type             EventType
-  currentStatus    EventStatusType    @default(REGISTRATION)
   description      String             @db.Text
   shortDescription String             @default("") @db.VarChar(2000)
   tx               String             @db.VarChar(500)
@@ -422,7 +421,6 @@ enum NotificationType {
 
 enum EventStatusType {
   REGISTRATION
-  ENDED
   VOTING
 }
 enum Designation {

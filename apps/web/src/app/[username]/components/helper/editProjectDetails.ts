@@ -1,8 +1,10 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
+import { IProjectData } from '@/types/project';
 import { utils, web3 } from '@coral-xyz/anchor';
-import { ProjectFormData } from '@types/project';
+import { toast } from 'sonner';
 
 import { decodeToken, verifyProjectEditMessage } from '@cubik/auth';
 
@@ -10,20 +12,23 @@ export const EditProjectDetails = async (
   pubKey: string,
   sig: string,
   nonce: string,
-  data: ProjectFormData,
+  data: IProjectData,
 ) => {
-  const adminToken = cookies().get('authToken');
+  try {
+    const adminToken = cookies().get('authToken');
+    if (!adminToken) {
+      throw new Error('Not authorized');
+    }
+    const user = await decodeToken(adminToken.value);
+    const isUserOwner = await prisma.project.findFirst({
+      where: {
+        ownerPublickey: user?.mainWallet,
+      },
+    });
+    if (!isUserOwner) {
+      throw new Error('Only owner can edit project');
+    }
 
-  if (!adminToken) {
-    return null;
-  }
-  const user = await decodeToken(adminToken.value);
-  const isUserOwner = await prisma.project.findFirst({
-    where: {
-      ownerPublickey: user?.mainWallet,
-    },
-  });
-  if (isUserOwner) {
     const hash = nonce + process.env.SECRET?.slice(0, 10);
     const check = utils.sha256.hash(hash);
 
@@ -54,6 +59,11 @@ export const EditProjectDetails = async (
         telegramLink: data.telegramLink,
       },
     });
+    revalidatePath(`/${user?.username}`);
     return true;
+  } catch (error) {
+    console.log(error);
+    toast.error('Error while updating project');
+    throw new Error('Error while updating project');
   }
 };

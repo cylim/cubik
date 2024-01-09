@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { EditProjectDetails } from '@/app/[username]/components/helper/editProjectDetails';
 import ProjectDetailsForm from '@/app/[username]/components/project-tab/project-admin-card/ProjectDetailsForm';
 import ProjectLinks from '@/app/[username]/components/project-tab/project-admin-card/ProjectLinks';
 import { IProjectData } from '@/types/project';
@@ -13,11 +14,9 @@ import { createProjectEditMessage } from '@cubik/auth';
 import { Button, Text } from '@cubik/ui';
 import { useCubikWallet } from '@cubik/wallet';
 import { generateSession } from '@cubik/wallet/src/authentication/generateSession';
-import { EditProjectDetails } from '@cubik/wallet/src/helpers/editProjectDetails';
 
 const EditProjectModalContent = ({ projectId }: { projectId: string }) => {
-  const { connected, publicKey, disconnect, signMessage } = useCubikWallet();
-  console.log('signMessage', signMessage, publicKey, connected);
+  const { publicKey, signMessage } = useCubikWallet();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
@@ -59,10 +58,8 @@ const EditProjectModalContent = ({ projectId }: { projectId: string }) => {
       }),
     ),
   });
-  console.log(Boolean(editProjectForm.formState.errors.name));
-  const submitProjectData = async (data: { name: string }) => {
+  const submitProjectData = async (data: IProjectData) => {
     try {
-      console.log(data);
       setIsLoading(true);
       if (!signMessage || !publicKey) {
         throw new Error('Sign message is undefined');
@@ -79,7 +76,7 @@ const EditProjectModalContent = ({ projectId }: { projectId: string }) => {
         publicKey?.toBase58(),
         signature,
         nonce,
-        data,
+        { ...editProjectForm.formState.defaultValues, ...data },
       );
       if (updatedProject) {
         toast.success('Successfully edited project details');

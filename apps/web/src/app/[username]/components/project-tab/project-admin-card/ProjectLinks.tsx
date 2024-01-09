@@ -45,7 +45,9 @@ const ProjectLinks = ({ editProjectForm }: IEditProjectLinkProps) => {
         <div className="flex flex-col gap-2">
           <InputFieldContainer
             variant="sm"
-            isError={Boolean(editProjectForm.formState.errors.twitterHandle)}
+            isError={
+              editProjectForm.formState.errors.twitterHandle ? true : false
+            }
           >
             <InputLeftElement withBorder={true}>
               <Icon name="X" height={16} width={16} />
@@ -72,7 +74,7 @@ const ProjectLinks = ({ editProjectForm }: IEditProjectLinkProps) => {
 
           <InputFieldContainer
             variant="sm"
-            isError={Boolean(editProjectForm.formState.errors.githubLink)}
+            isError={editProjectForm.formState.errors.githubLink ? true : false}
           >
             <InputLeftElement withBorder={true}>
               <Icon name="github" height={16} width={16} />
@@ -94,7 +96,9 @@ const ProjectLinks = ({ editProjectForm }: IEditProjectLinkProps) => {
 
           <InputFieldContainer
             variant="sm"
-            isError={Boolean(editProjectForm.formState.errors.discordLink)}
+            isError={
+              editProjectForm.formState.errors.discordLink ? true : false
+            }
           >
             <InputLeftElement withBorder={true}>
               <Icon name="discord" height={16} width={16} />
@@ -117,7 +121,9 @@ const ProjectLinks = ({ editProjectForm }: IEditProjectLinkProps) => {
           )}
           <InputFieldContainer
             variant="sm"
-            isError={Boolean(editProjectForm.formState.errors.telegramLink)}
+            isError={
+              editProjectForm.formState.errors.telegramLink ? true : false
+            }
           >
             <InputLeftElement withBorder={true}>
               <Icon name="telegram" height={16} width={16} />

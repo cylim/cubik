@@ -73,7 +73,7 @@ const ProjectDetailsForm = ({
 
         <InputFieldContainer
           variant="sm"
-          isError={Boolean(editProjectForm.formState.errors.name)}
+          isError={editProjectForm.formState.errors.name ? true : false}
         >
           <InputField
             name="name"
@@ -97,7 +97,7 @@ const ProjectDetailsForm = ({
         </InputLabel>
         <InputFieldContainer
           variant="sm"
-          isError={Boolean(editProjectForm.formState.errors.email)}
+          isError={editProjectForm.formState.errors.email ? true : false}
         >
           <InputField
             name="email"
@@ -129,7 +129,7 @@ const ProjectDetailsForm = ({
           onChange={(e) => {
             editProjectForm.setValue('shortDescription', e.currentTarget.value);
           }}
-          {...(Boolean(editProjectForm.formState.errors.shortDescription)
+          {...(editProjectForm.formState.errors.shortDescription
             ? { state: 'error' }
             : { state: 'default' })}
         />

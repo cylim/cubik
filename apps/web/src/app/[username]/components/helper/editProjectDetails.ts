@@ -7,6 +7,8 @@ import { utils, web3 } from '@coral-xyz/anchor';
 import { toast } from 'sonner';
 
 import { decodeToken, verifyProjectEditMessage } from '@cubik/auth';
+import { handleApiClientError } from '@cubik/database/api';
+import { logApi } from '@cubik/logger/src';
 
 export const EditProjectDetails = async (
   pubKey: string,
@@ -16,12 +18,24 @@ export const EditProjectDetails = async (
 ) => {
   try {
     const adminToken = cookies().get('authToken');
+    logApi({
+      body: {
+        pubKey,
+        sig,
+        nonce,
+        data,
+      },
+      message: 'edit project details',
+      source: process.cwd(),
+      level: 'info',
+    });
     if (!adminToken) {
       throw new Error('Not authorized');
     }
     const user = await decodeToken(adminToken.value);
     const isUserOwner = await prisma.project.findFirst({
       where: {
+        id: data.id,
         ownerPublickey: user?.mainWallet,
       },
     });
@@ -62,9 +76,23 @@ export const EditProjectDetails = async (
     });
     revalidatePath(`/${user?.username}`);
     return true;
-  } catch (error) {
-    console.log(error);
-    toast.error('Error while updating project');
-    throw new Error('Error while updating project');
+  } catch (e) {
+    const error = e as Error;
+    logApi({
+      body: {
+        pubKey,
+        sig,
+        nonce,
+        data,
+      },
+      error,
+      message: 'Error while updating project',
+      source: process.cwd(),
+      level: 'error',
+    });
+    return handleApiClientError('Error while updating project');
+    // console.log(error);
+    // toast.error('Error while updating project');
+    // throw new Error('Error while updating project');
   }
 };

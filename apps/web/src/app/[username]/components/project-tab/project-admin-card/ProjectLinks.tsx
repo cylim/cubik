@@ -54,7 +54,7 @@ const ProjectLinks = ({ editProjectForm }: IEditProjectLinkProps) => {
                 name="X"
                 height={16}
                 width={16}
-                className="stroke-[var(--form-input-fg-default)]"
+                color="var(--form-input-fg-default)"
               />
             </InputLeftElement>
             <InputField
@@ -82,7 +82,12 @@ const ProjectLinks = ({ editProjectForm }: IEditProjectLinkProps) => {
             isError={editProjectForm.formState.errors.githubLink ? true : false}
           >
             <InputLeftElement withBorder={true}>
-              <Icon name="github" height={16} width={16} />
+              <Icon
+                name="github"
+                height={16}
+                width={16}
+                color="var(--form-input-fg-default)"
+              />
             </InputLeftElement>
             <InputField
               name="githubLink"
@@ -106,7 +111,12 @@ const ProjectLinks = ({ editProjectForm }: IEditProjectLinkProps) => {
             }
           >
             <InputLeftElement withBorder={true}>
-              <Icon name="discord" height={16} width={16} />
+              <Icon
+                name="discord"
+                height={16}
+                width={16}
+                color="var(--form-input-fg-default)"
+              />
             </InputLeftElement>
             <InputField
               name="discordLink"
@@ -131,7 +141,12 @@ const ProjectLinks = ({ editProjectForm }: IEditProjectLinkProps) => {
             }
           >
             <InputLeftElement withBorder={true}>
-              <Icon name="telegram" height={16} width={16} />
+              <Icon
+                name="telegram"
+                height={16}
+                width={16}
+                color="var(--form-input-fg-default)"
+              />
             </InputLeftElement>
             <InputField
               name="telegramLink"

@@ -177,7 +177,7 @@ const MenuItem = ({
     onClick: isLoading
       ? () => {}
       : () => {
-          onClick;
+          onClick && onClick();
           controls.start('loading');
         },
     className: cn(

@@ -35,7 +35,6 @@ const UserNavbarMenu = ({
   disconnect: () => any;
 }) => {
   const { toggleTheme } = useTheme();
-  const router = useRouter();
   const pathname = usePathname();
   return (
     <Menu>
@@ -81,10 +80,10 @@ const UserNavbarMenu = ({
           text="Logout"
           variant={'negative'}
           leftIcon="logoutRight"
-          onClick={async () => {
+          onClick={() => {
             setUser(null);
-            await disconnect();
-            await handleLogout();
+            disconnect();
+            handleLogout();
             handleRevalidation(pathname);
           }}
         />
@@ -94,7 +93,7 @@ const UserNavbarMenu = ({
 };
 
 export const WalletConnect = () => {
-  const { connected, publicKey, disconnect, signMessage } = useCubikWallet();
+  const { connected, publicKey, disconnect } = useCubikWallet();
   const { showModal, setShowModal } = useCubikWalletContext();
   const { setUser, user } = useUser();
 

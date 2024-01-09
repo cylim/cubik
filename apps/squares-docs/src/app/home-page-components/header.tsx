@@ -36,8 +36,6 @@ export default function Header() {
                         strokeWidth={1}
                         width={18}
                         height={18}
-                        stroke="var(--color-fg-tertiary)"
-                        fill="transparent"
                       />
                     </div>
                     <input

@@ -132,7 +132,7 @@ model Project {
   telegramLink      String              @default("")
   projectUserCount  Int                 @default(0)
   status            ProjectVerifyStatus @default(REVIEW)
-  isOpenSource      Boolean?             @default(false)
+  isOpenSource      Boolean?            @default(false)
   failedReason      String?             @default("")
   mutliSigAddress   String?             @default("")
   multiSigAddressV3 String?             @default("")
@@ -150,6 +150,7 @@ model Project {
   projectJoinEvent  ProjectJoinEvent[]
 
   @@index([ownerPublickey])
+  @@fulltext([name])
 }
 
 model Event {
@@ -246,6 +247,7 @@ model Team {
   userId    String
   projectId String?
   createdAt DateTime @default(now())
+  designation  Designation @default(Other)
   updatedAt DateTime @updatedAt
   isActive  Boolean  @default(true)
   isArchive Boolean  @default(false)
@@ -423,3 +425,15 @@ enum EventStatusType {
   ENDED
   VOTING
 }
+enum Designation {
+  CEO
+  CTO
+  COO
+  CMO
+  Developer
+  Designer
+  Growth 
+  Manger
+  Marketing
+  Other
+} 

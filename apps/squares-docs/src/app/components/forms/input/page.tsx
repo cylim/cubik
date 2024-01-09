@@ -62,7 +62,7 @@ const FormSuccess = () => {
         </HelperText>
       </InputContainer>
       <InputContainer>
-        <InputLabel isRequired>Password</InputLabel>
+        <InputLabel isRequired={true}>Password</InputLabel>
         <InputFieldContainer isDisabled={false} variant="md">
           <InputField
             id="password"
@@ -110,7 +110,7 @@ const FormError = () => {
         className="flex flex-col gap-4"
       >
         <InputContainer>
-          <InputLabel isRequired>Email</InputLabel>
+          <InputLabel isRequired={true}>Email</InputLabel>
           <InputFieldContainer
             isError={errors.email ? true : false}
             isDisabled={false}
@@ -128,7 +128,7 @@ const FormError = () => {
           </HelperText>
         </InputContainer>
         <InputContainer>
-          <InputLabel isRequired>Password</InputLabel>
+          <InputLabel isRequired={true}>Password</InputLabel>
           <InputFieldContainer
             isError={errors.email ? true : false}
             isDisabled={false}
@@ -179,7 +179,7 @@ const InputPage = () => {
       </div>
       <div className="flex flex-col gap-10">
         <InputContainer>
-          <InputLabel maxCounterValue={100} counterValue={10} isRequired>
+          <InputLabel maxCounterValue={100} counterValue={10} isRequired={true}>
             Hello world
           </InputLabel>
           <InputFieldContainer isDisabled={false} variant="md">
@@ -199,7 +199,7 @@ const InputPage = () => {
         <div className="border-[var(--color-border-primary) overflow-hidden rounded-[8px] border bg-[var(--white)] px-6 py-4">
           <CodeComponent
             codeString={` <InputContainer>
-          <InputLabel maxCounterValue={100} counterValue={10} isRequired>
+          <InputLabel maxCounterValue={100} counterValue={10} isRequired={true}>
             Hello world
           </InputLabel>
           <InputFieldContainer isDisabled={false} variant="md">

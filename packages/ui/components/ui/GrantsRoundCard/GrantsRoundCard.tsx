@@ -150,7 +150,7 @@ const GrantRoundCardFooter = ({
             <div className="bg-[var(--color-surface-alert-transparent)] rounded-lg p-[6px]">
               <Icon
                 name="piggyBank"
-                stroke="var(--color-bg-alert-base)"
+                // stroke="var(--color-bg-alert-base)"
                 height={16}
                 width={16}
               />
@@ -174,7 +174,7 @@ const GrantRoundCardFooter = ({
               <div className="bg-[var(--color-surface-innovative-transparent)] rounded-lg p-[6px]">
                 <Icon
                   name="user3"
-                  stroke="var(--color-bg-innovative-base)"
+                  // stroke="var(--color-bg-innovative-base)"
                   height={16}
                   width={16}
                 />
@@ -199,7 +199,7 @@ const GrantRoundCardFooter = ({
               <div className="bg-[var(--color-surface-positive-transparent)] rounded-lg p-[6px]">
                 <Icon
                   name="donation"
-                  stroke="var(--color-fg-success)"
+                  // stroke="var(--color-fg-success)"
                   height={16}
                   width={16}
                 />

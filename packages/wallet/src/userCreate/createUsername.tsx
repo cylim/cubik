@@ -44,6 +44,7 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
     };
     search();
   }, [userForm.watch('username')]);
+
   return (
     <>
       <div
@@ -72,7 +73,7 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
             />
           </div>
           <div className="w-full">
-            <InputLabel id="username" isRequired>
+            <InputLabel id="username" isRequired={true}>
               Choose a name
             </InputLabel>
             <InputFieldContainer

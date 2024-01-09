@@ -1,4 +1,4 @@
-import { Prisma } from '@cubik/database';
+import { EventType, Prisma } from '@cubik/database';
 
 export interface Slides {
   slide: string[];
@@ -85,3 +85,9 @@ export type ProjectData = Prisma.ProjectGetPayload<{
     };
   };
 }>;
+export type ProjectPageEventType = {
+  eventId: string;
+  joinId: string;
+  type: EventType;
+  name: string;
+};

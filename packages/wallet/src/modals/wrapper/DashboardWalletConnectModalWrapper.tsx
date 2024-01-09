@@ -12,6 +12,7 @@ import {
 import { cn } from '@cubik/ui/lib/utils';
 
 import {
+  MODAL_STATUS,
   useCubikWallet,
   useCubikWalletContext,
   useUserModalUIContext,
@@ -49,7 +50,7 @@ export const DashboardUserWallet = ({
         } else {
           setIsWalletError(null);
           onClose();
-          setModalState('wallet-connect');
+          setModalState(MODAL_STATUS.WALLET_CONNECT);
           setSelectedAdapter(null);
           setShowModal(false);
         }

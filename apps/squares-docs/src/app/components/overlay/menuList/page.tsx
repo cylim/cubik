@@ -43,7 +43,7 @@ const MenuListPage = () => {
                   name="chevronLeft"
                   height={20}
                   width={20}
-                  stroke="inherit"
+                  color="inherit"
                 />
               </MenuItem>
               <MenuItem text="Create a Copy"></MenuItem>

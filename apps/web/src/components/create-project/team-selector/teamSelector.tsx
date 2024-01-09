@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Option, ProjectFormData } from '@/components/create-project';
+import {
+  Option,
+  ProjectFormData,
+} from '@/components/create-project/createProject';
 import axios, { AxiosResponse } from 'axios';
 import { UseFormReturn } from 'react-hook-form';
+import { toast } from 'sonner';
 import { v4 as uuidV4 } from 'uuid';
 
 import { ApiResponseType } from '@cubik/database/api';
@@ -98,7 +102,13 @@ export const TeamSelector = ({ projectForm }: Props) => {
 
   const setTeam = (team: { label: string; value: string }[], id: string) => {
     const currentTeam = projectForm.getValues('team');
-    console.log(currentTeam.length === 1, currentTeam[0].inputId === id);
+
+    // when same team member is selected twice
+    if (currentTeam.find((mem) => mem.value === team[0].value)) {
+      return toast.error('Member already added');
+    }
+
+    // when no team member is added yet
     if (currentTeam.length === 1 && currentTeam[0].inputId) {
       const teamValue = [
         {
@@ -109,6 +119,7 @@ export const TeamSelector = ({ projectForm }: Props) => {
       ];
       projectForm.setValue('team', teamValue);
     } else {
+      // when we have few team members already added
       const teamValue = currentTeam.filter((mem) => {
         if (mem.inputId !== id) {
           return mem;

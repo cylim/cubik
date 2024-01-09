@@ -35,7 +35,7 @@ const TitleWithIcon: React.FC<TitleWithIconProps> = ({ text, icon, size }) => {
   return (
     <div className={cn('flex items-center gap-2')}>
       <Text className={cn(titleVariants({ size }))}>{text}</Text>
-      {icon && <Icon name={icon} fill="#007BFF" stroke="#1F1F1F" />}
+      {icon && <Icon name={icon} />}
     </div>
   );
 };

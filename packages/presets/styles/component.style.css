@@ -354,6 +354,6 @@
     --button-primary-text-default: var(--color-fg-primary-inverse);
     --button-primary-surface-disabled: var(--color-surface-cool-inverse);
     --button-primary-surface-focused: var(--color-surface-primary-inverse);
-    --button-primary-surface-hovered: var(--color-surface-primary-inverse-hovered);
+    --button-primary-surface-hovered: var(--color-surface-cool-inverse);
     --button-primary-surface-default: var(--color-surface-primary-inverse);
 }

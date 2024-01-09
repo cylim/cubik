@@ -125,7 +125,7 @@ const MenuItem = ({
       <div className="flex justify-between">
         <div className="flex gap-[10px] items-center ">
           {leftIcon && (
-            <Icon name={leftIcon} stroke="inherit" height={20} width={20} />
+            <Icon name={leftIcon} color="inherit" height={20} width={20} />
           )}
           <Text className="b1 md:l2-light" color={'inherit'}>
             {text}
@@ -133,7 +133,7 @@ const MenuItem = ({
           {isLoading && (
             <Icon
               name={'spinner'}
-              stroke="inherit"
+              color="inherit"
               height={18}
               width={18}
               className={cn('animate-spin')}
@@ -178,7 +178,7 @@ const DrawerMenuItem = ({
       <div className="flex justify-between">
         <div className="flex gap-[10px] items-center ">
           {leftIcon && (
-            <Icon name={leftIcon} stroke="inherit" height={20} width={20} />
+            <Icon name={leftIcon} color="inherit" height={20} width={20} />
           )}
           <Text className="b2 md:l2-light" color={'inherit'}>
             {text}
@@ -186,7 +186,7 @@ const DrawerMenuItem = ({
           {isLoading && (
             <Icon
               name={'spinner'}
-              stroke="inherit"
+              color="inherit"
               height={18}
               width={18}
               className={cn('animate-spin')}
@@ -218,12 +218,12 @@ const SubMenuButton = ({ children, leftIcon }: SubMenuButtonProps) => {
       <div className="flex justify-between items-center ">
         <div className="flex gap-[10px] items-center ">
           {leftIcon && (
-            <Icon name={leftIcon} stroke="inherit" height={20} width={20} />
+            <Icon name={leftIcon} color="inherit" height={20} width={20} />
           )}
           <Text className="l1 md:l2-light">{children}</Text>
         </div>
 
-        <Icon name="chevronRight" height={20} width={20} stroke="inherit" />
+        <Icon name="chevronRight" height={20} width={20} color="inherit" />
       </div>
     </DropdownMenu.SubTrigger>
   );

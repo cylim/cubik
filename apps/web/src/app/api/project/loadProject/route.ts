@@ -2,15 +2,22 @@ import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
 import { decodeToken } from '@cubik/auth';
+import { Project_Backup } from '@cubik/common';
 import { prisma } from '@cubik/database';
 import { handleApiClientError, successHandler } from '@cubik/database/api';
 import { logApi } from '@cubik/logger/src';
 
 export const GET = async (req: NextRequest) => {
+  const authToken = cookies().get('authToken');
+
+  if (!authToken) {
+    throw new Error('Unauthorized request');
+  }
   try {
-    const searchParams = req.nextUrl.searchParams;
+    const { searchParams } = req.nextUrl;
     const project = searchParams.get('project');
     const isDraft = searchParams.get('draft');
+    const createMode = searchParams.get('create');
     logApi({
       req: req as any,
       message: 'Project loaded',
@@ -21,12 +28,8 @@ export const GET = async (req: NextRequest) => {
       throw new Error('No project specified');
     }
 
-    const authToken = cookies().get('authToken');
-
-    if (!authToken) {
-      throw new Error('Unauthorized request');
-    }
     const user = await decodeToken(authToken.value);
+
     if (!user) {
       throw new Error('Unauthorized request');
     }
@@ -54,6 +57,9 @@ export const GET = async (req: NextRequest) => {
         telegramLink: true,
         twitterHandle: true,
         team: {
+          where: {
+            isArchive: false,
+          },
           select: {
             id: true,
             user: {
@@ -69,6 +75,56 @@ export const GET = async (req: NextRequest) => {
     });
 
     if (!projectData) {
+      const checkProject = await prisma.project.findFirst({
+        where: {
+          id: project,
+        },
+      });
+      if (!checkProject && !createMode) {
+        throw new Error('Project not found');
+      }
+
+      if (!checkProject && createMode) {
+        const p = await prisma.project.create({
+          data: {
+            id: project,
+            ownerPublickey: user.mainWallet,
+            isDraft: true,
+            logo: Project_Backup,
+            longDescription: 'Placeholder',
+            name: 'Untitled Project',
+            shortDescription: 'Placeholder',
+            industry: [],
+            slides: [],
+          },
+          select: {
+            id: true,
+            name: true,
+            discordLink: true,
+            githubLink: true,
+            email: true,
+            shortDescription: true,
+            logo: true,
+            longDescription: true,
+            slides: true,
+            projectLink: true,
+            industry: true,
+            isOpenSource: true,
+            status: true,
+            telegramLink: true,
+            twitterHandle: true,
+          },
+        });
+        return NextResponse.json(
+          successHandler(
+            {
+              ...p,
+              team: [],
+            },
+            'Project base created',
+          ),
+        );
+      }
       throw new Error('Project not found');
     }
 
@@ -81,6 +137,7 @@ export const GET = async (req: NextRequest) => {
       message: 'Failed to load project',
       source: 'apps/web/src/app/api/project/loadProject/route.ts',
       level: 'error',
+      user: await decodeToken(authToken.value),
     });
     return handleApiClientError('Failed to load draft project');
   }

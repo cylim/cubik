@@ -64,7 +64,7 @@ export const ImageUploader = ({
       onDrop={handleDrop}
     >
       {/* Success */}
-      {(file.length !== 0 || logo) && !isUploading && !errorMessage && (
+      {logo && !isUploading && !errorMessage && (
         <div className={cn('w-max rounded flex')}>
           <Avatar size={'lg'} src={logo} alt="name" />
         </div>
@@ -86,7 +86,7 @@ export const ImageUploader = ({
         </div>
       )}
       {/* Default state */}
-      {file.length === 0 && !logo && !errorMessage && !isUploading && (
+      {!logo && !errorMessage && !isUploading && (
         <div
           className={cn(
             'p-4 w-max rounded flex',
@@ -115,7 +115,7 @@ export const ImageUploader = ({
       )}
 
       {/* Default  */}
-      {file.length === 0 && !errorMessage && !isUploading && (
+      {!logo && !errorMessage && !isUploading && (
         <div className="flex justify-center flex-col gap-3">
           <Text className="l2" color={'primary'}>
             Drop, Paste here or{' '}
@@ -136,7 +136,7 @@ export const ImageUploader = ({
       )}
 
       {/* Sucess state */}
-      {file.length > 0 && !errorMessage && !isUploading && (
+      {logo && !errorMessage && !isUploading && (
         <div className="flex justify-center flex-col gap-3">
           <Text className="l2 flex gap-1" color={'primary'}>
             <label className="text-[--form-uploader-text-success]">
@@ -153,7 +153,7 @@ export const ImageUploader = ({
             </label>
           </Text>
           <Text className="l3-light text-[var(--form-helper-default)]">
-            {file[0].name}
+            {file[0]?.name || `${logo.slice(0, 45)}......`}
           </Text>
         </div>
       )}

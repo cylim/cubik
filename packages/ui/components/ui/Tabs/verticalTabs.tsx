@@ -70,9 +70,7 @@ const VerticalTab = ({
       )}
     >
       <div className="flex gap-[10px] items-center ">
-        {leftIconName && (
-          <Icon name={leftIconName} stroke="inherit" height={20} width={20} />
-        )}
+        {leftIconName && <Icon name={leftIconName} height={20} width={20} />}
         {children}
       </div>
     </RadixTabs.Trigger>

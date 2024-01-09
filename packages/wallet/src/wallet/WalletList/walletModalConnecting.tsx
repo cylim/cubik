@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { WalletAdapter } from '@solana/wallet-adapter-base';
 import { AnimatePresence, motion } from 'framer-motion';
 import { toast } from 'sonner';
@@ -40,8 +39,8 @@ const slides: React.ReactNode[] = [
 ];
 
 const WalletConnectStatus = ({ adapter }: { adapter: WalletAdapter }) => {
-  const { select } = useCubikWallet();
-  const { setIsWalletError } = useCubikWalletContext();
+  const { select, disconnect } = useCubikWallet();
+  const { setIsWalletError, setSelectedAdapter } = useCubikWalletContext();
   const { modalState, setModalState } = useUserModalUIContext();
 
   const iconColor =
@@ -52,10 +51,6 @@ const WalletConnectStatus = ({ adapter }: { adapter: WalletAdapter }) => {
     modalState === MODAL_STATUS.ERROR_CONNECTING
       ? 'dangerSkullDuoSolid'
       : 'walletPlusDuoSolid';
-
-  useEffect(() => {
-    console.log('modal state changed', modalState);
-  }, [modalState]);
 
   const onRetry = async () => {
     try {
@@ -180,7 +175,12 @@ const WalletConnectStatus = ({ adapter }: { adapter: WalletAdapter }) => {
         {/* <AnimatePresence>
           {isErrorConnecting ? ( */}
         <Button
-          onClick={() => setModalState(MODAL_STATUS.WALLET_CONNECT)}
+          onClick={() => {
+            setIsWalletError(null);
+            disconnect();
+            setSelectedAdapter(null);
+            setModalState(MODAL_STATUS.WALLET_CONNECT);
+          }}
           size="md"
           variant="tertiary"
         >

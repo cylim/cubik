@@ -49,7 +49,7 @@ export const DashboardUserWallet = ({
         } else {
           setIsWalletError(null);
           onClose();
-          setModalState('wallet-connect');
+          setModalState('none');
           setSelectedAdapter(null);
           setShowModal(false);
         }

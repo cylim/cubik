@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 'use client';
 
 // there will be three states for the verifyModalCard
@@ -12,6 +13,7 @@ import { Button, Icon, Text } from '@cubik/ui';
 
 import {
   MODAL_STATUS,
+  useCubikWallet,
   useCubikWalletContext,
   useUserModalUIContext,
 } from '../wallet';
@@ -51,7 +53,6 @@ const slides: React.ReactNode[] = [
   </>,
   // error verifyModalState
   <>
-    {' '}
     <Text className="h3 md:h4" color={'primary'}>
       Connection Failed
     </Text>
@@ -70,8 +71,10 @@ const textFlipAnimation = {
   exit: { y: -10, opacity: 0 },
 };
 
-export const VerifyWallet = ({ handleVerify, onClose, isLoading }: Props) => {
-  const { modalState } = useUserModalUIContext();
+export const VerifyWallet = ({ handleVerify, isLoading }: Props) => {
+  const { modalState, setModalState } = useUserModalUIContext();
+  const { disconnect } = useCubikWallet();
+  const { setIsWalletError, setSelectedAdapter } = useCubikWalletContext();
   const [verifyModalState, setVerifyModalState] = useState<
     'default' | 'loading' | 'error'
   >('default');
@@ -172,8 +175,8 @@ export const VerifyWallet = ({ handleVerify, onClose, isLoading }: Props) => {
             verifyModalState === 'default'
               ? 0
               : verifyModalState === 'loading'
-                ? 1
-                : 2
+              ? 1
+              : 2
           ]
         }
       </motion.div>
@@ -182,10 +185,19 @@ export const VerifyWallet = ({ handleVerify, onClose, isLoading }: Props) => {
           verifyModalState === 'default'
             ? 'Sign & Confirm'
             : verifyModalState === 'loading'
-              ? 'Loading'
-              : 'Retry',
+            ? 'Loading'
+            : 'Retry',
         )}
-        <Button onClick={onClose} size="md" variant="tertiary">
+        <Button
+          onClick={() => {
+            disconnect();
+            setIsWalletError(null);
+            setSelectedAdapter(null);
+            setModalState(MODAL_STATUS.WALLET_CONNECT);
+          }}
+          size="md"
+          variant="tertiary"
+        >
           Go Back
         </Button>
       </div>

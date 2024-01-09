@@ -97,32 +97,34 @@ const CubikWalletModal: React.FC<ICubikWalletModal> = ({
         >
           {renderWallets(list.highlight)}
           {showMore && renderWallets(list.others)}
-          <div
-            style={{
-              width: '102px',
-              height: '100px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              flexDirection: 'column',
-              gap: '8px',
-            }}
-            className="pointer-events-auto cursor-pointer"
-            onClick={() => setShowMore(true)}
-          >
-            <AvatarGroup
-              avatars={list.others
-                .filter((e) => e.readyState !== 'NotDetected')
-                .map((e) => ({ src: e.icon, alt: e.name }))}
-              shape="square"
-              variant="squared-horizontal"
-              size={isSmallDevice ? 'sm' : 'xs'}
-              maxCount={3}
-            />
-            <Text className="b4 md:b4-light" color="primary">
-              More
-            </Text>
-          </div>
+          {!showMore && (
+            <div
+              style={{
+                width: '102px',
+                height: '100px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'column',
+                gap: '8px',
+              }}
+              className="pointer-events-auto cursor-pointer"
+              onClick={() => setShowMore(true)}
+            >
+              <AvatarGroup
+                avatars={list.others
+                  .filter((e) => e.readyState !== 'NotDetected')
+                  .map((e) => ({ src: e.icon, alt: e.name }))}
+                shape="square"
+                variant="squared-horizontal"
+                size={isSmallDevice ? 'sm' : 'xs'}
+                maxCount={3}
+              />
+              <Text className="b4 md:b4-light" color="primary">
+                More
+              </Text>
+            </div>
+          )}
         </div>
         {/* Optional footer */}
         {showMore ? (

@@ -6,12 +6,10 @@ import {
   WalletName,
   WalletReadyState,
 } from '@solana/wallet-adapter-base';
-import { Wallet } from '@solana/wallet-adapter-react';
 
 import { useMediaQuery } from '@cubik/ui/hooks';
 
 import { useCubikWallet, useCubikWalletContext } from '../context/CubikContext';
-import { WalletIcon } from '../WalletList/WalletIcon';
 
 const PRIORITISE: {
   [value in WalletReadyState]: number;
@@ -57,7 +55,7 @@ const sortByPrecedence =
   };
 
 export const useWalletModalLogic = () => {
-  console.log('------wallet modal logic hook called------');
+  // console.log('------wallet modal logic hook called------');
   const { wallets } = useCubikWallet();
   const { walletPrecedence } = useCubikWalletContext();
   const [showMore, setShowMore] = useState<boolean>(false);
@@ -112,51 +110,15 @@ export const useWalletModalLogic = () => {
       },
     );
 
-    console.log('1 - filtered adapters - ', filteredAdapters);
-    if (filteredAdapters.previouslyConnected.length > 0) {
-      const { previouslyConnected, installed, ...rest } = filteredAdapters;
-
-      const highlight = [
-        ...filteredAdapters.installed,
-        ...filteredAdapters.previouslyConnected.slice(0, 3),
-      ];
-      const others = Object.values(rest)
-        .flat()
-        .sort((a, b) => PRIORITISE[a.readyState] - PRIORITISE[b.readyState])
-        .sort(sortByPrecedence(walletPrecedence || []));
-
-      others.unshift(
-        ...filteredAdapters.previouslyConnected.slice(
-          3,
-          filteredAdapters.previouslyConnected.length,
-        ),
-      );
-
-      // remove all the wallet which are in highlight wallets from others wallet array
-      const highlightWalletNames = highlight.map((wallet) => wallet.name);
-      const othersWallets = others.filter(
-        (wallet) => !highlightWalletNames.includes(wallet.name),
-      );
-      console.log(
-        'other wallets and highlight wallets - ',
-        othersWallets,
-        highlight,
-      );
-      return {
-        highlightedBy: 'PreviouslyConnected',
-        highlight,
-        others: othersWallets,
-      };
-    }
-
     if (filteredAdapters.installed.length > 0) {
       const { installed, ...rest } = filteredAdapters;
       const highlight = filteredAdapters.installed;
       const others = Object.values(rest)
         .flat()
+        // .filter((wallet) => (installed.includes(wallet) ? false : true))
+        .filter((wallet) => wallet.readyState !== WalletReadyState.Unsupported)
         .sort((a, b) => PRIORITISE[a.readyState] - PRIORITISE[b.readyState])
         .sort(sortByPrecedence(walletPrecedence || []));
-      others.unshift(...filteredAdapters.installed);
 
       return { highlightedBy: 'Installed', highlight, others };
     }
@@ -176,12 +138,6 @@ export const useWalletModalLogic = () => {
 
     return { highlightedBy: 'TopWallet', highlight: top3, others: others };
   }, [wallets]);
-
-  console.log('list - ', list);
-
-  const hasNoWallets = useMemo(() => {
-    return list.highlightedBy === 'TopWallet' ? true : false;
-  }, [list]);
 
   return {
     list,

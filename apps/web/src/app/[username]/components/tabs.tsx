@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Background, Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
 
@@ -11,7 +11,6 @@ export const ProfileTabs = ({ username }: Props) => {
   return (
     <div className="flex min-h-screen w-full flex-col items-end lg:items-center">
       <Tabs
-        defaultValue={0}
         size="sm"
         className="md:overflow-x-inherit w-full overflow-y-hidden overflow-x-scroll"
       >

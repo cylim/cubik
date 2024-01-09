@@ -40,7 +40,7 @@ export default function OthersPage() {
         'Squares provides prebuilt components to help you build faster. Here is an overview of the component categories'
       }
     >
-      <div className="flex flex-row flex-wrap gap-8">others</div>
+      <div className="flex flex-row flex-wrap gap-8"></div>
     </PageHOC>
   );
 }

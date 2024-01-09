@@ -36,7 +36,7 @@ export const ProjectTab = async ({ username }: Props) => {
   const token = cookieStore.get('authToken');
   const projects = await getProjects(username);
   const isSignedIn = Boolean(token);
-  const user = isSignedIn ? await IsUserLoginServer(token.value) : null;
+  const user = isSignedIn ? await IsUserLoginServer(token?.value) : null;
   const isOwnProfile =
     isSignedIn &&
     user?.username.toLocaleLowerCase() === username.toLocaleLowerCase();
@@ -73,7 +73,7 @@ export const ProjectTab = async ({ username }: Props) => {
               </Button>
             </Link>
           </SubHead>
-          <div className="flex w-full flex-col justify-center gap-[16px] md:gap-[24px]">
+          <div className="flex min-h-[100vh] w-full flex-col justify-start gap-[16px] md:gap-[24px]">
             {renderProjects()}
           </div>
         </>

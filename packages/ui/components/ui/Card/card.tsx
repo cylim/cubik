@@ -1,5 +1,6 @@
 import React, { createContext, ReactNode, useContext } from 'react';
 import { cva } from 'class-variance-authority';
+import { motion } from 'framer-motion';
 
 import { cn } from '../../../lib/utils';
 
@@ -77,13 +78,24 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ children, size }) => {
   return (
-    <CardContext.Provider value={{ size }}>
-      <div
-        className={cn(cardVariants({ size }), 'bg-[var(--card-bg-primary)]')}
-      >
-        {children}
-      </div>
-    </CardContext.Provider>
+    <motion.div
+      initial={{
+        opacity: 0,
+      }}
+      animate={{
+        opacity: 1,
+      }}
+      //  transition={{ duration: 10 }}
+    >
+      <CardContext.Provider value={{ size }}>
+        <motion.div
+          layout
+          className={cn(cardVariants({ size }), 'bg-[var(--card-bg-primary)]')}
+        >
+          {children}
+        </motion.div>
+      </CardContext.Provider>
+    </motion.div>
   );
 };
 

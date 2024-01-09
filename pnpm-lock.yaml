@@ -451,8 +451,8 @@ importers:
         specifier: ^0.27.0
         version: 0.27.0
       '@cubik-so/sdk':
-        specifier: 0.3.2
-        version: 0.3.2
+        specifier: 0.3.4
+        version: 0.3.4
       '@cubik/auth':
         specifier: workspace:*
         version: link:../../packages/auth
@@ -1211,6 +1211,9 @@ importers:
       '@coral-xyz/anchor':
         specifier: ^0.27.0
         version: 0.27.0
+      '@cubik-so/sdk':
+        specifier: 0.3.4
+        version: 0.3.4
       '@cubik/auth':
         specifier: workspace:*
         version: link:../auth
@@ -3242,8 +3245,8 @@ packages:
       '@jridgewell/trace-mapping': 0.3.9
     dev: true
 
-  /@cubik-so/sdk@0.3.2:
-    resolution: {integrity: sha512-dIJYtu2FIWdgMSZjNNLJJad0Qxa3bqYrq8MBpLxLWpQEpVZ5A3hXpPMSdmjyODz6OjkpWj5s3K4Dek94U39rBg==}
+  /@cubik-so/sdk@0.3.4:
+    resolution: {integrity: sha512-hjpVZA26gxRLGmub4AOhgvGaAEzBGUUF5w9PA4dr/H6W7YHGm7FXeJf/RZOJl4xUEllail6KgBhW+h5OPWA6mw==}
     dependencies:
       '@coral-xyz/anchor': 0.29.0
       '@solana/web3.js': 1.87.6

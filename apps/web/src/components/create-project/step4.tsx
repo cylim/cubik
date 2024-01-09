@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ProjectFormData } from '@/components/create-project/createProject';
 import { useUser } from '@/hooks/useUser';
-import { getProjectPDA } from '@/utils/contracts';
+import { cubikInstance } from '@/utils/contracts';
 import {
   connection,
   PROGRAM_ID,
@@ -9,17 +9,12 @@ import {
   SEED_PREFIX,
   SQUADS_PROGRAM_ID,
 } from '@/utils/contracts/constant';
-import { BN, web3 } from '@coral-xyz/anchor';
-import {
-  createProject,
-  CreateProjectAccounts,
-  CreateProjectArgs,
-} from '@cubik-so/sdk';
+import { BN, Wallet, web3 } from '@coral-xyz/anchor';
 import { UseFormReturn } from 'react-hook-form';
 
 import { DescriptionEditor, PreviewEditor } from '@cubik/editor';
 import { Button, SegmentContainer, SegmentItem, Text } from '@cubik/ui';
-import { useCubikWallet } from '@cubik/wallet';
+import { useAnchorWallet, useCubikWallet } from '@cubik/wallet';
 
 interface Props {
   projectForm: UseFormReturn<ProjectFormData, any, undefined>;
@@ -27,21 +22,23 @@ interface Props {
 }
 export const Step4 = ({ setStep, projectForm }: Props) => {
   const { user } = useUser();
-  const { signTransaction } = useCubikWallet();
+  const anchorWallet = useAnchorWallet();
+  const csdk = cubikInstance(anchorWallet as Wallet);
   const [preview, setPreview] = useState<boolean>(false);
   const onSubmit = async () => {
     try {
-      if (!signTransaction) return;
-      console.log('hit');
+      if (anchorWallet === undefined && !user?.mainWallet) {
+        throw new Error('No wallet found');
+      }
       const counter = Math.floor(1000 + Math.random() * 9000);
       const createKey = web3.Keypair.generate();
-      const projectPDA = getProjectPDA(createKey.publicKey, counter);
+      const [projectPDA] = csdk.ix.project.getPDA(createKey.publicKey, counter);
 
-      const [pda] = web3.PublicKey.findProgramAddressSync(
+      const [multisigPDA] = web3.PublicKey.findProgramAddressSync(
         [SEED_PREFIX, SEED_MULTISIG, createKey.publicKey.toBytes()],
         PROGRAM_ID,
       );
-      const args: CreateProjectArgs = {
+      const args = {
         counter: new BN(counter),
         membersKeys: [
           web3.Keypair.generate().publicKey,
@@ -57,22 +54,22 @@ export const Step4 = ({ setStep, projectForm }: Props) => {
         threshold: 2,
         timeLock: 0,
       };
-      const accounts: CreateProjectAccounts = {
+      const accounts = {
         userAccount: new web3.PublicKey(user?.mainWallet || ''),
-        multisig: new web3.PublicKey(user?.mainWallet || ''),
         createKey: createKey.publicKey,
         projectAccount: projectPDA,
+        multisig: multisigPDA,
         owner: new web3.PublicKey(user?.mainWallet || ''),
         squadsProgram: SQUADS_PROGRAM_ID,
         systemProgram: web3.SystemProgram.programId,
       };
-      const tx = await createProject(PROGRAM_ID.toBase58(), args, accounts, []);
-
-      tx.partialSign(createKey);
+      const ix = await csdk.ix.project.create(args, accounts);
+      const tx = new web3.Transaction().add(ix);
       const { blockhash } = await connection.getLatestBlockhash();
       tx.recentBlockhash = blockhash;
       tx.feePayer = new web3.PublicKey(user?.mainWallet || '');
-      const signTx = await signTransaction(tx);
+      tx.partialSign(createKey);
+      const signTx = await anchorWallet?.signTransaction(tx);
       if (!signTx) return;
       const serialized_transaction = signTx.serialize();
       const sig = await connection.sendRawTransaction(serialized_transaction);

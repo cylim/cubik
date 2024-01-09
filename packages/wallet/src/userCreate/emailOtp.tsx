@@ -48,6 +48,7 @@ export const EmailOtp = ({ userForm, setUserCreateState }: Props) => {
       toast.error(error.message);
     }
   };
+
   return (
     <>
       <div

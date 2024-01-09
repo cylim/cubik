@@ -14,7 +14,7 @@ model User {
   username         String             @unique
   mainWallet       String             @unique
   email            String?
-  profileNft       Json
+  profileNft       Json?
   isMigrated       Boolean            @default(false)
   type             UserType           @default(Contributor)
   profilePicture   String             @db.VarChar(500)
@@ -22,7 +22,7 @@ model User {
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   isEmailConfirmed Boolean            @default(false)
-  isRecivingUpdate Boolean            @default(false)
+  isReceivingUpdate      Boolean            @default(true)
   isActive         Boolean            @default(true)
   isArchive        Boolean            @default(false)
   comments         Comments[]

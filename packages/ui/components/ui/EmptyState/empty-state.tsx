@@ -10,7 +10,6 @@ export const EmptyState = ({
   icon,
   children,
   border,
-  iconColor,
   bgColor,
 }: {
   title: string;
@@ -37,8 +36,7 @@ export const EmptyState = ({
           <div>
             <Icon
               name={icon}
-              fill="none"
-              stroke={iconColor || 'var(--color-fg-negative-base)'}
+              // stroke={iconColor || 'var(--color-fg-negative-base)'}
               width={32}
               height={32}
               strokeWidth={2}

@@ -5,14 +5,16 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { cn } from '../../../lib/utils';
 
+export const DialogSize = {
+  sm: `w-[410px] left-[calc(50%-205px)]`,
+  md: 'w-[500px] left-[calc(50%-250px)] ',
+  lg: 'w-[600px] left-[calc(50%-300px)] ',
+  xl: 'w-[1152px] left-[calc(50%-576px)] ',
+};
+
 const modalContentVariants = cva('', {
   variants: {
-    dialogSize: {
-      sm: `w-[410px] left-[calc(50%-205px)]`,
-      md: 'w-[500px] left-[calc(50%-250px)] ',
-      lg: 'w-[600px] left-[calc(50%-300px)] ',
-      xl: 'w-[1152px] left-[calc(50%-576px)] ',
-    },
+    dialogSize: DialogSize,
   },
   defaultVariants: {
     dialogSize: 'sm',

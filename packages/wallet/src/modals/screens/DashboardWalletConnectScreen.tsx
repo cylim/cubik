@@ -14,7 +14,7 @@ import { ModalHeader } from '@cubik/ui';
 import { VerifyWallet } from '../../authentication';
 import { generateSession } from '../../authentication/generateSession';
 import { loginAdmin } from '../../helpers/loginAdmin';
-import { useUserModalUIContext } from '../../wallet';
+import { MODAL_STATUS, useUserModalUIContext } from '../../wallet';
 import {
   useCubikWallet,
   useCubikWalletContext,
@@ -43,7 +43,7 @@ export const DashboardWalletConnectScreen = ({
   useEffect(() => {
     const handleWalletConnect = async () => {
       if (publicKey && connected) {
-        setModalState('wallet-verify');
+        setModalState(MODAL_STATUS.WALLET_VERIFY);
       }
     };
     handleWalletConnect();
@@ -71,7 +71,7 @@ export const DashboardWalletConnectScreen = ({
         handleAccessOnServer(user.accessScope[0].event_id);
       }
       setUser(user);
-      setModalState('wallet-connect');
+      setModalState(MODAL_STATUS.WALLET_CONNECT);
       setShowModal(false);
       setSelectedAdapter(null);
       setIsWalletError(null);
@@ -102,7 +102,6 @@ export const DashboardWalletConnectScreen = ({
       )}
       {modalState === 'wallet-verify' && (
         <VerifyWallet
-          address={publicKey?.toBase58() || ''}
           handleVerify={handleVerifyWallet}
           isLoading={isWalletLoading}
           onClose={() => {
@@ -110,7 +109,7 @@ export const DashboardWalletConnectScreen = ({
             select(null);
             setSelectedAdapter(null);
             setIsWalletError(null);
-            setModalState('wallet-connect');
+            setModalState(MODAL_STATUS.WALLET_CONNECT);
           }}
         />
       )}

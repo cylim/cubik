@@ -42,14 +42,7 @@ const CodeComponent = ({ codeString }: { codeString: string }) => {
       }}
       variant="outline"
     >
-      <Icon
-        name="copy"
-        strokeWidth={2}
-        width={20}
-        height={20}
-        stroke="var(--color-fg-primary)"
-        fill="transparent"
-      />
+      <Icon name="copy" strokeWidth={2} width={20} height={20} />
     </Button>
   );
 

@@ -1,10 +1,5 @@
 export type ExplorerType = 'round' | 'hackathon';
 
-enum event {
-  HACKATHON = 'hackathon',
-  ROUND = 'round',
-  MISC = 'misc',
-}
 export type HackathonEvent = {
   id: string;
   eventName: 'hackathon';

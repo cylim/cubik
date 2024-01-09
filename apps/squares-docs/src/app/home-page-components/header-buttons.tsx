@@ -16,23 +16,9 @@ const HeaderButtons = (props: Props) => {
     <div className="flex h-fit flex-row items-center justify-center gap-4">
       <button onClick={toggleTheme}>
         {theme === 'dark' ? (
-          <Icon
-            name="bulbOff"
-            strokeWidth={2}
-            width={24}
-            height={24}
-            stroke="var(--color-fg-primary)"
-            fill="transparent"
-          />
+          <Icon name="bulbOff" strokeWidth={2} width={24} height={24} />
         ) : (
-          <Icon
-            name="bulbOn"
-            strokeWidth={2}
-            width={24}
-            height={24}
-            stroke="var(--color-fg-primary)"
-            fill="transparent"
-          />
+          <Icon name="bulbOn" strokeWidth={2} width={24} height={24} />
         )}
       </button>
       <button
@@ -40,23 +26,9 @@ const HeaderButtons = (props: Props) => {
         onClick={() => props.setIsOpen(!props.isOpen)}
       >
         {props.isOpen ? (
-          <Icon
-            name="cross"
-            strokeWidth={2}
-            width={24}
-            height={24}
-            stroke="var(--color-fg-primary)"
-            fill="transparent"
-          />
+          <Icon name="cross" strokeWidth={2} width={24} height={24} />
         ) : (
-          <Icon
-            name="menu2Bars"
-            strokeWidth={2}
-            width={24}
-            height={24}
-            stroke="var(--color-fg-primary)"
-            fill="transparent"
-          />
+          <Icon name="menu2Bars" strokeWidth={2} width={24} height={24} />
         )}
       </button>
       {/* <Icon

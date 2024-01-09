@@ -20,16 +20,19 @@ const getUserGrants = async () => {
       return [];
     }
 
-    return await Promise.all(
-      user.accessScope.map(async (scope) => {
-        return await prisma.event.findFirst({
+    return await prisma.$transaction(
+      user.accessScope.map((scope) =>
+        prisma.event.findFirst({
           where: {
             id: scope.event_id,
+            isArchive: false,
           },
           select: {
             id: true,
             name: true,
             matchedPool: true,
+            isPaused: true,
+            eventStatus: true,
             _count: {
               select: {
                 contribution: true,
@@ -37,21 +40,19 @@ const getUserGrants = async () => {
               },
             },
           },
-        });
-      }),
+        }),
+      ),
     );
   } catch (error) {
     console.log(error);
+    return [];
   }
 };
 
 export default async function Home() {
   const cookieStore = cookies();
   const token = cookieStore.get('authToken');
-  const user = token && (await IsUserLoginServer(token.value));
-  const userGrants = await getUserGrants();
-
-  if (!token || !user) {
+  if (!token) {
     return (
       <PageLayout>
         <SubHead heading="Grants Rounds" className="!h5" />
@@ -59,10 +60,19 @@ export default async function Home() {
       </PageLayout>
     );
   }
-  {
-    console.log('list of events', user.accessScope);
+  const user = await IsUserLoginServer(token.value);
+  if (!user) {
+    return (
+      <PageLayout>
+        <SubHead heading="Grants Rounds" className="!h5" />
+        <ConnectWalletSection />
+      </PageLayout>
+    );
   }
-  //fetch rest of data through event id
+
+  const userGrants = await getUserGrants();
+
+  console.log(userGrants, 'user');
   return (
     <PageLayout>
       <div className="absolute left-[-100px] top-0 w-full">
@@ -85,10 +95,10 @@ export default async function Home() {
           userGrants.map((event) => (
             <GrantsRoundCard
               path="/grants"
+              isPaused={event?.isPaused || false}
               key={event?.id}
-              //grantManager={true}
-              roundStartDate={new Date('2021-10-20T00:00:00.000Z')}
-              roundEndDate={new Date('2021-10-20T00:00:00.000Z')}
+              eventStatusTable={event?.eventStatus || []}
+              grantManager={true}
             >
               <GrantRoundCardHeader grantName={event?.name || 'Default'} />
               <GrantRoundCardFooter

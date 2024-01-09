@@ -18,7 +18,6 @@ import { UserCreate } from '../../userCreate';
 import {
   MODAL_STATUS,
   useCubikWallet,
-  useCubikWalletContext,
   useUserModalUIContext,
 } from '../../wallet';
 import { CubikWalletModal } from '../../wallet/WalletList/listWallet';
@@ -31,11 +30,8 @@ export const WebWalletConnectScreen = ({ onClose, setUser }: Props) => {
   const { modalState, setModalState, isWalletLoading, setIsWalletLoading } =
     useUserModalUIContext();
 
-  const { setShowModal, setSelectedAdapter, setIsWalletError } =
-    useCubikWalletContext();
   const pathname = usePathname();
-  const { connected, connecting, publicKey, select, disconnect, signMessage } =
-    useCubikWallet();
+  const { connected, connecting, publicKey, signMessage } = useCubikWallet();
 
   useEffect(() => {
     const handleWalletConnect = async () => {
@@ -73,10 +69,7 @@ export const WebWalletConnectScreen = ({ onClose, setUser }: Props) => {
           profilePicture: user.profilePicture,
           username: user.username,
         });
-        setModalState(MODAL_STATUS.WALLET_CONNECT);
-        setShowModal(false);
-        setSelectedAdapter(null);
-        setIsWalletError(null);
+        onClose();
         handleRevalidation(pathname || '/');
         toast.success('Successfully logged in');
       }
@@ -110,13 +103,7 @@ export const WebWalletConnectScreen = ({ onClose, setUser }: Props) => {
         <VerifyWallet
           handleVerify={handleVerifyWallet}
           isLoading={isWalletLoading}
-          onClose={() => {
-            disconnect();
-            select(null);
-            setSelectedAdapter(null);
-            setIsWalletError(null);
-            setModalState(MODAL_STATUS.WALLET_CONNECT);
-          }}
+          onClose={onClose}
         />
       );
 

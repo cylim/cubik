@@ -9,9 +9,9 @@ export const EmptyState = ({
   title,
   description,
   icon,
+  iconColor,
   children,
   border,
-  iconColor,
   bgColor,
 }: {
   title: string;

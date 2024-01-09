@@ -2,7 +2,7 @@
 
 import { ProfileNftType } from '@cubik/common-types';
 import { PROGRAM_ID } from '@cubik/common/constants';
-import { UserType } from '@cubik/database';
+import { prisma, UserType } from '@cubik/database';
 import { logApi } from '@cubik/logger/src';
 
 import { connection } from '../authentication/contract';

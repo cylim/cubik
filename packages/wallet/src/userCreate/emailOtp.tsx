@@ -41,7 +41,7 @@ export const EmailOtp = ({ userForm, setUserCreateState }: Props) => {
     try {
       const res = await checkOTP(value, userForm.watch('email'));
       if (res) {
-        setUserCreateState('profile-created');
+        setUserCreateState('signTx');
       }
     } catch (e) {
       const error = e as Error;

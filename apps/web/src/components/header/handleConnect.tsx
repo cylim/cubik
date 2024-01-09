@@ -105,7 +105,7 @@ export const WalletConnect = () => {
     );
   }
 
-  if ((connected && publicKey && !user) || showModal) {
+  if (connected && publicKey && !user && showModal) {
     return (
       <Button isLoading LoadingText="Connecting Wallet" size="lg">
         Connect Wallet

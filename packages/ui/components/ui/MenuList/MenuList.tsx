@@ -136,7 +136,7 @@ const DrawerMenuList = ({ children }: MenuListProps) => {
   );
 };
 
-const MenuItemVariants = cva('relative p-2 mx-2   focus-visible:outline-none', {
+const MenuItemVariants = cva('relative p-2 mx-2 focus-visible:outline-none', {
   variants: {
     variant: {
       primary:
@@ -166,7 +166,6 @@ const MenuItem = ({
   onClick,
   isLoading,
   variant = 'primary',
-  className,
 }: MenuItemProps) => {
   const controls = useAnimationControls();
   const itemProps: {
@@ -182,8 +181,8 @@ const MenuItem = ({
         },
     className: cn(
       isLoading ? 'cursor-not-allowed' : 'cursor-pointer',
-      children ? '' : MenuItemVariants({ variant }),
-      className,
+      MenuItemVariants({ variant }),
+      '',
     ),
   };
   if (children) {

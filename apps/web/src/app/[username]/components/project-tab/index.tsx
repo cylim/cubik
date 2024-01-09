@@ -27,6 +27,7 @@ const getProjects = async (username: string) => {
       logo: true,
       shortDescription: true,
       slug: true,
+      id: true,
     },
   });
 };
@@ -35,10 +36,9 @@ export const ProjectTab = async ({ username }: Props) => {
   const cookieStore = cookies();
   const token = cookieStore.get('authToken');
   const projects = await getProjects(username);
-  const isSignedIn = Boolean(token);
-  const user = isSignedIn ? await IsUserLoginServer(token?.value) : null;
+  const user = token ? await IsUserLoginServer(token?.value || '') : null;
   const isOwnProfile =
-    isSignedIn &&
+    token &&
     user?.username.toLocaleLowerCase() === username.toLocaleLowerCase();
   const hasProjects = projects && projects.length > 0;
 

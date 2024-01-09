@@ -489,6 +489,9 @@ importers:
       '@ducanh2912/next-pwa':
         specifier: ^9.7.2
         version: 9.7.2(next@14.0.4)(webpack@5.89.0)
+      '@hookform/resolvers':
+        specifier: latest
+        version: 3.3.4(react-hook-form@7.48.2)
       '@prisma/nextjs-monorepo-workaround-plugin':
         specifier: ^5.6.0
         version: 5.7.0
@@ -4274,6 +4277,14 @@ packages:
       react: '>= 16'
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /@hookform/resolvers@3.3.4(react-hook-form@7.48.2):
+    resolution: {integrity: sha512-o5cgpGOuJYrd+iMKvkttOclgwRW86EsWJZZRC23prf0uU2i48Htq4PuT73AVb9ionFyZrwYEITuOFGF+BydEtQ==}
+    peerDependencies:
+      react-hook-form: ^7.0.0
+    dependencies:
+      react-hook-form: 7.48.2(react@18.2.0)
     dev: false
 
   /@humanwhocodes/config-array@0.11.13:

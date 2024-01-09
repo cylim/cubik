@@ -73,7 +73,7 @@ const UserNavbarMenu = ({
         </Link>
         <MenuDivider />
         <MenuItem text="Dark" leftIcon="moon">
-          <Switch onChange={toggleTheme} size="sm" />
+          <Switch onChange={toggleTheme} size="sm" checked />
         </MenuItem>
 
         <MenuItem

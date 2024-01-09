@@ -3,18 +3,14 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ProjectProps } from '@/app/[username]/components/project-tab/project-admin-card';
+import EditProjectModal from '@/app/[username]/components/project-tab/project-admin-card/editProjectModal';
 
 import {
   AvatarLabelGroup,
   Button,
-  Drawer,
-  DrawerBody,
-  DrawerContent,
   DrawerMenu,
   DrawerMenuItem,
   DrawerMenuList,
-  DrawerOverlay,
-  DrawerPortal,
   Icon,
   Menu,
   MenuButton,
@@ -49,6 +45,7 @@ const ProjectHeader = ({
       setIsDrawerOpen(false);
     }
   }, [isMobile, isDrawerOpen]);
+  const [open, setOpen] = useState<boolean>(false);
 
   return isAdmin ? (
     <div className="flex flex-row items-center justify-between gap-4">
@@ -133,7 +130,13 @@ const ProjectHeader = ({
               </div>
               <MenuDivider className={`${isVerified ? 'block' : 'hidden'}`} />
               <MenuItem text="Apply For Grant" leftIcon="cube" />
-              <MenuItem text="Project Settings" leftIcon="settings" />
+              <MenuItem
+                text="Project Settings"
+                leftIcon="settings"
+                onClick={() => {
+                  setOpen(true);
+                }}
+              />
               <MenuDivider />
               <MenuItem text="View Vault" leftIcon="bank" />
               <SubMenu>
@@ -170,6 +173,7 @@ const ProjectHeader = ({
           </Menu>
         )}
       </div>
+      <EditProjectModal open={open} setOpen={setOpen} project={project} />
     </div>
   ) : (
     <div className="flex flex-row items-center justify-between">

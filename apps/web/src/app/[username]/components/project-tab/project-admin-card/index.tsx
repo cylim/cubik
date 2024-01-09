@@ -24,6 +24,7 @@ export type ProjectProps = {
   slug: string | null;
   shortDescription: string;
   logo: string;
+  id: string;
 };
 
 const ProjectAdminCardBody = () => {
@@ -39,7 +40,7 @@ const ProjectAdminCardBody = () => {
 
   return (
     <Tabs defaultValue={0} size="sm" setActiveTab={setActiveTab}>
-      <div className="border-b h-50 border-b-[var(--card-border-secondary)] bg-[var(--card-surface-primary)] pt-[16px]">
+      <div className="h-50 border-b border-b-[var(--card-border-secondary)] bg-[var(--card-surface-primary)] pt-[16px]">
         <TabList className="mx-auto max-w-7xl px-[16px] md:px-[32px]">
           <Tab value={0}>Grants</Tab>
           <Tab value={1}>Stats</Tab>

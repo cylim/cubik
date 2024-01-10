@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProjectProps } from '@/app/[username]/components/project-tab/project-admin-card';
-import EditProjectModalContent from '@/app/[username]/components/project-tab/project-admin-card/editProjectModalContent';
+import EditProjectModalContent from '@/app/[username]/components/project-tab/project-admin-card/edit-project/editProjectModalContent';
 
 import {
   AvatarLabelGroup,

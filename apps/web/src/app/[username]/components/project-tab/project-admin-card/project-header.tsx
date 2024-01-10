@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ProjectProps } from '@/app/[username]/components/project-tab/project-admin-card';
-import EditProjectModal from '@/app/[username]/components/project-tab/project-admin-card/editProjectModal';
+import EditProjectModal from '@/app/[username]/components/project-tab/project-admin-card/edit-project/editProjectModal';
 
 import {
   AvatarLabelGroup,

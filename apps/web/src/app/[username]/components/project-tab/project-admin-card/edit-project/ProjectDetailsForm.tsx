@@ -67,7 +67,12 @@ const ProjectDetailsForm = ({
         startUpload={startUpload}
       />
       <div className="flex w-full flex-col gap-2">
-        <InputLabel id="name" isRequired>
+        <InputLabel
+          id="name"
+          maxCounterValue={32}
+          counterValue={editProjectForm.watch('name')?.length || 0}
+          isRequired
+        >
           Project Name
         </InputLabel>
 

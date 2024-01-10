@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { EditProjectDetails } from '@/app/[username]/components/helper/editProjectDetails';
-import ProjectDetailsForm from '@/app/[username]/components/project-tab/project-admin-card/ProjectDetailsForm';
-import ProjectImages from '@/app/[username]/components/project-tab/project-admin-card/ProjectImages';
-import ProjectLinks from '@/app/[username]/components/project-tab/project-admin-card/ProjectLinks';
+import ProjectDetailsForm from '@/app/[username]/components/project-tab/project-admin-card/edit-project/ProjectDetailsForm';
+import ProjectImages from '@/app/[username]/components/project-tab/project-admin-card/edit-project/ProjectImages';
+import ProjectLinks from '@/app/[username]/components/project-tab/project-admin-card/edit-project/ProjectLinks';
 import { IProjectData } from '@/types/project';
 import { utils } from '@coral-xyz/anchor';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -28,14 +28,14 @@ const EditProjectModalContent = ({ projectId }: { projectId: string }) => {
         .result,
     resolver: zodResolver(
       z.object({
-        logo: z.custom<File[]>(),
+        logo: z.custom<string[]>(),
         name: z
           .string()
           .min(1, {
             message: "Project name can't be empty",
           })
           .max(36, {
-            message: 'Must be at most 36 characters',
+            message: 'Must be at most 32 characters',
           }),
         email: z.string().email({ message: "Email can't be empty" }),
         shortDescription: z

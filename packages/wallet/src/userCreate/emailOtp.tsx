@@ -42,10 +42,13 @@ export const EmailOtp = ({ userForm, setUserCreateState }: Props) => {
       const res = await checkOTP(value, userForm.watch('email'));
       if (res) {
         setUserCreateState('signTx');
+        return true;
       }
+      return false;
     } catch (e) {
       const error = e as Error;
       toast.error(error.message);
+      return false;
     }
   };
 
@@ -97,11 +100,19 @@ export const EmailOtp = ({ userForm, setUserCreateState }: Props) => {
             pointerEvents: 'auto',
           }}
           onComplete={(value) => {
-            toast.promise(onComplete(value), {
-              loading: 'Verifying code...',
-              success: 'Code verified',
-              error: 'Code verification failed',
-            });
+            toast.promise(
+              async () => {
+                const res = await onComplete(value);
+                if (!res) {
+                  throw new Error('Code verification failed');
+                }
+              },
+              {
+                loading: 'Verifying code...',
+                success: 'Code verified',
+                error: 'Code verification failed',
+              },
+            );
           }}
           autoSelect={true}
           regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}

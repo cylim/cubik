@@ -19,6 +19,7 @@ export const ImageUploader = ({
   logo,
   progress,
 }: Props) => {
+  console.log('logo', logo);
   const [drag, setDragging] = useState(false);
   const [file, setFile] = useState<File[]>([]);
 

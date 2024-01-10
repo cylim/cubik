@@ -1,4 +1,5 @@
 import { useMediaQuery } from '@uidotdev/usehooks';
+import { toast } from 'sonner';
 
 import { UserAuth } from '@cubik/common-types';
 import {
@@ -12,6 +13,7 @@ import {
 import { cn } from '@cubik/ui/lib/utils';
 
 import {
+  MODAL_STATUS,
   useCubikWallet,
   useCubikWalletContext,
   useUserModalUIContext,
@@ -29,13 +31,14 @@ export const WebWalletConnectModal = ({
   setUser: (user: UserAuth) => void;
 }) => {
   const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)');
-  const { disconnect } = useCubikWallet();
+  const { disconnect, connected } = useCubikWallet();
   const { setSelectedAdapter, setIsWalletError } = useCubikWalletContext();
   const { setModalState } = useUserModalUIContext();
-  const onClose = () => {
-    disconnect();
-    setSelectedAdapter(null);
+
+  const _resetModal = () => {
     setIsWalletError(null);
+    setModalState(MODAL_STATUS.WALLET_CONNECT);
+    setSelectedAdapter(null);
     setShowModal(false);
   };
   return isSmallDevice ? (
@@ -45,11 +48,8 @@ export const WebWalletConnectModal = ({
         if (e === true) {
           setShowModal(e);
         } else {
-          setIsWalletError(null);
-          onClose();
-          setModalState('wallet-connect');
-          setSelectedAdapter(null);
-          setShowModal(false);
+          disconnect();
+          _resetModal();
         }
       }}
     >
@@ -57,14 +57,24 @@ export const WebWalletConnectModal = ({
         <DrawerOverlay className={cn(!isSmallDevice ? 'hidden' : '')} />
         <DrawerContent className={cn(!isSmallDevice ? 'hidden' : 'h-max')}>
           <DrawerBody>
-            <WebWalletConnectScreen setUser={setUser} onClose={onClose} />
+            <WebWalletConnectScreen setUser={setUser} onClose={_resetModal} />
           </DrawerBody>
         </DrawerContent>
       </DrawerPortal>
     </Drawer>
   ) : (
-    <Modal dialogSize="sm" open={showModal} onClose={onClose}>
-      <WebWalletConnectScreen setUser={setUser} onClose={onClose} />
+    <Modal
+      dialogSize="sm"
+      open={showModal}
+      onClose={() => {
+        if (!connected) {
+          toast.error('Wallet connection error, please try again');
+        }
+        disconnect();
+        _resetModal();
+      }}
+    >
+      <WebWalletConnectScreen setUser={setUser} onClose={_resetModal} />
     </Modal>
   );
 };

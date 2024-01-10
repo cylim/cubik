@@ -75,7 +75,7 @@ const Card = ({ type }: { type: keyof typeof ProfileCards }) => {
           }}
           className="flex justify-center items-center"
         >
-          <Icon stroke="inherit" name={icon as IconName} />
+          <Icon name={icon as IconName} />
         </div>
         <Text className={cn('l2', 'text-[var(--color-fg-innovative-base)]')}>
           {title}

@@ -35,7 +35,6 @@ const UserNavbarMenu = ({
   disconnect: () => any;
 }) => {
   const { toggleTheme } = useTheme();
-  const router = useRouter();
   const pathname = usePathname();
   return (
     <Menu>
@@ -49,7 +48,7 @@ const UserNavbarMenu = ({
           />
           <Icon
             name="chevronDown"
-            stroke="var(--color-fg-primary-depth)"
+            color="var(--color-fg-primary-depth)"
             width={16}
             height={16}
           />
@@ -74,16 +73,17 @@ const UserNavbarMenu = ({
         </Link>
         <MenuDivider />
         <MenuItem text="Dark" leftIcon="moon">
-          <Switch onChange={toggleTheme} size="sm" />
+          <Switch onChange={toggleTheme} size="sm" checked />
         </MenuItem>
 
         <MenuItem
           text="Logout"
+          variant={'negative'}
           leftIcon="logoutRight"
-          onClick={async () => {
+          onClick={() => {
             setUser(null);
-            await disconnect();
-            await handleLogout();
+            disconnect();
+            handleLogout();
             handleRevalidation(pathname);
           }}
         />
@@ -93,23 +93,23 @@ const UserNavbarMenu = ({
 };
 
 export const WalletConnect = () => {
-  const { connected, publicKey, disconnect, signMessage } = useCubikWallet();
+  const { connected, publicKey, disconnect } = useCubikWallet();
   const { showModal, setShowModal } = useCubikWalletContext();
   const { setUser, user } = useUser();
 
   if (!connected && !publicKey && !user) {
-    return <Button onClick={() => setShowModal(true)}>Connect Wallet</Button>;
-  }
-  if (connected && publicKey && !user) {
     return (
-      <>
-        <Spinner
-          onClick={() => {
-            disconnect();
-            setShowModal(false);
-          }}
-        />
-      </>
+      <Button size="lg" onClick={() => setShowModal(true)}>
+        Connect Wallet
+      </Button>
+    );
+  }
+
+  if (connected && publicKey && !user && showModal) {
+    return (
+      <Button isLoading LoadingText="Connecting Wallet" size="lg">
+        Connect Wallet
+      </Button>
     );
   }
 

@@ -41,13 +41,14 @@ export const EmailOtp = ({ userForm, setUserCreateState }: Props) => {
     try {
       const res = await checkOTP(value, userForm.watch('email'));
       if (res) {
-        setUserCreateState('profile-created');
+        setUserCreateState('signTx');
       }
     } catch (e) {
       const error = e as Error;
       toast.error(error.message);
     }
   };
+
   return (
     <>
       <div
@@ -61,7 +62,7 @@ export const EmailOtp = ({ userForm, setUserCreateState }: Props) => {
             onClick={() => setUserCreateState('verify-email')}
             className="stroke-[var(--modal-header-cancel-icon)] cursor-pointer"
           >
-            <Icon name="arrowLeft" />
+            <Icon className="w-6 h-6" name="arrowLeft" />
           </div>
           <Text color={'primary'} className="h4">
             Enter Code
@@ -70,7 +71,6 @@ export const EmailOtp = ({ userForm, setUserCreateState }: Props) => {
             Please enter the 6 digit code we sent to {userForm.watch('email')}
           </Text>
         </div>
-        {/* @ts-ignore */}
         <PinInput
           length={6}
           initialValue=""

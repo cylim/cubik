@@ -49,7 +49,7 @@ export const UserInteraction = () => {
               name="chevronDown"
               height={20}
               width={20}
-              stroke="var(--color-fg-primary-depth)"
+              // stroke="var(--color-fg-primary-depth)"
             />
           </div>
         </MenuButton>
@@ -65,7 +65,7 @@ export const UserInteraction = () => {
           </div>
           <MenuItem leftIcon="externalLink" text="Open Website" />
           <MenuItem leftIcon="moon" text={'dark'}>
-            <Switch onChange={toggleTheme} size="sm" />
+            <Switch onChange={toggleTheme} size="sm" checked />
           </MenuItem>
           <MenuItem
             isLoading={logoutMutation.isLoading}

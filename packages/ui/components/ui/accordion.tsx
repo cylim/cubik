@@ -40,13 +40,7 @@ const AccordionTrigger = React.forwardRef<
         {...props}
       >
         {children}
-        <Icon
-          name="chevronDown"
-          stroke="#fff"
-          fill="none"
-          height={16}
-          width={16}
-        />
+        <Icon name="chevronDown" height={16} width={16} />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   );

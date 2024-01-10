@@ -115,7 +115,7 @@ const Alert = ({
             name={iconName}
             height={20}
             width={20}
-            stroke={cn(alertVariants({ color }))}
+            // stroke={cn(alertVariants({ color }))}
             strokeWidth={1}
           />
         )}
@@ -147,7 +147,7 @@ const Alert = ({
         <div onClick={handleClose}>
           <Icon
             name="cross"
-            stroke="#999999"
+            // stroke="#999999"
             strokeWidth={1.5}
             height={20}
             width={20}

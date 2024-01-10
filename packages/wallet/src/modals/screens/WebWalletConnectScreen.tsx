@@ -9,15 +9,15 @@ import { createMessage } from '@cubik/auth';
 import { UserAuth } from '@cubik/common-types';
 import { handleRevalidation } from '@cubik/common/helper';
 import { logApi } from '@cubik/logger/src/';
-import { Icon, Text } from '@cubik/ui';
+import { Text } from '@cubik/ui';
 
 import { VerifyWallet } from '../../authentication';
 import { generateSession } from '../../authentication/generateSession';
 import { LoginUser } from '../../helpers/login';
 import { UserCreate } from '../../userCreate';
 import {
+  MODAL_STATUS,
   useCubikWallet,
-  useCubikWalletContext,
   useUserModalUIContext,
 } from '../../wallet';
 import { CubikWalletModal } from '../../wallet/WalletList/listWallet';
@@ -30,18 +30,15 @@ export const WebWalletConnectScreen = ({ onClose, setUser }: Props) => {
   const { modalState, setModalState, isWalletLoading, setIsWalletLoading } =
     useUserModalUIContext();
 
-  const { setShowModal, setSelectedAdapter, setIsWalletError } =
-    useCubikWalletContext();
   const pathname = usePathname();
-  const { connected, connecting, publicKey, select, disconnect, signMessage } =
-    useCubikWallet();
+  const { connected, connecting, publicKey, signMessage } = useCubikWallet();
 
   useEffect(() => {
     const handleWalletConnect = async () => {
       if (publicKey && connected) {
-        setModalState('wallet-verify');
+        setModalState(MODAL_STATUS.WALLET_VERIFY);
       } else if (connecting) {
-        setModalState('connecting');
+        setModalState(MODAL_STATUS.CONNECTING);
       }
     };
     handleWalletConnect();
@@ -64,7 +61,7 @@ export const WebWalletConnectScreen = ({ onClose, setUser }: Props) => {
 
       const user = await LoginUser(publicKey?.toBase58(), signature, nonce);
       if (!user) {
-        setModalState('user-create');
+        setModalState(MODAL_STATUS.USER_CREATE);
       } else {
         setUser({
           id: user.id,
@@ -72,10 +69,7 @@ export const WebWalletConnectScreen = ({ onClose, setUser }: Props) => {
           profilePicture: user.profilePicture,
           username: user.username,
         });
-        setModalState('wallet-connect');
-        setShowModal(false);
-        setSelectedAdapter(null);
-        setIsWalletError(null);
+        onClose();
         handleRevalidation(pathname || '/');
         toast.success('Successfully logged in');
       }
@@ -95,52 +89,31 @@ export const WebWalletConnectScreen = ({ onClose, setUser }: Props) => {
   };
 
   switch (modalState) {
-    case 'wallet-connect':
+    case MODAL_STATUS.WALLET_CONNECT:
+    case MODAL_STATUS.CONNECTING:
+    case MODAL_STATUS.ERROR_CONNECTING:
       return (
         <>
-          <div className="hidden md:flex justify-between items-center h-[44px] md:h-[48px] px-[16px] md:px-[24px]">
-            <Text
-              color={'primary'}
-              className="text-[var(--avatar-label-title)] h6"
-            >
-              Connect Wallet
-            </Text>
-            <button className="pointer-events-auto" onClick={onClose}>
-              <Icon
-                name="cross"
-                width={20}
-                stroke="var(--modal-header-cancel-icon)"
-                height={20}
-              />
-            </button>
-          </div>
           <CubikWalletModal onClose={onClose} setShowHeader={() => {}} />
         </>
       );
 
-    case 'wallet-verify':
+    case MODAL_STATUS.WALLET_VERIFY:
       return (
         <VerifyWallet
-          address={publicKey?.toBase58() || ''}
           handleVerify={handleVerifyWallet}
           isLoading={isWalletLoading}
-          onClose={() => {
-            disconnect();
-            select(null);
-            setSelectedAdapter(null);
-            setIsWalletError(null);
-            setModalState('wallet-connect');
-          }}
+          onClose={onClose}
         />
       );
 
-    case 'user-create':
+    case MODAL_STATUS.USER_CREATE:
       return <UserCreate />;
 
     default:
       return (
         <Text className="h3" color="primary">
-          wallet state not defined
+          wallet state not defined - {modalState}
         </Text>
       );
   }

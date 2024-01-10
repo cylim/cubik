@@ -94,7 +94,7 @@ export const InputFieldContainer = ({
         variant === 'md' ? 'h-[40px]' : 'h-[36px]',
         'flex rounded-[8px] w-full px-1',
         isError
-          ? 'border-[var(--form-input-border-error)] bg-[var(--form-input-surface-error)] text-[var(--form-input-fg-error)]'
+          ? 'border border-[var(--form-input-border-error)] bg-[var(--form-input-surface-error)] text-[var(--form-input-fg-error)]'
           : 'border-[var(--form-input-border-default)]',
         isFocused &&
           'border-[var(--form-input-border-focused)] bg-[var(--form-input-surface-focused)] text-[var(--form-input-fg-focused)]',
@@ -120,7 +120,7 @@ export const InputField = (props: Props) => {
         className={cn(
           'bg-[var(--form-input-surface-default)] text-[var(--form-input-fg-default)]',
           'disabled:text-[var(--form-input-fg-disabled)] disabled:cursor-not-allowed disabled:opacity-50 disabled:border-[var(--form-input-border-disabled)] disabled:bg-[var(--form-input-surface-disabled)',
-          'block w-full flex-1 rounded-[8px] border-0 py-1.5 placeholder:px-2 placeholder:text-[var(--form-input-border-default)] outline-none',
+          'block w-full flex-1 rounded-[8px] border-0 p-3 placeholder:text-[var(--form-input-border-default)] outline-none l3',
         )}
         {...props}
       />

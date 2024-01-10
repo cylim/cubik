@@ -1,6 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextIndex", "fullTextSearch", "driverAdapters"]
+  previewFeatures = ["driverAdapters", "fullTextIndex", "fullTextSearch"]
 }
 
 datasource db {
@@ -61,9 +61,9 @@ model CommunityMembers {
   communityId String
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
+  isActive    Boolean     @default(true)
   user        User        @relation(fields: [userId], references: [id])
   community   Communities @relation(fields: [communityId], references: [id])
-  isActive    Boolean     @default(true)
 
   @@index([userId])
   @@index([communityId])
@@ -77,8 +77,8 @@ model Activity {
   updatedAt DateTime     @updatedAt
   isActive  Boolean      @default(true)
   isArchive Boolean      @default(false)
-  user      User         @relation(fields: [userId], references: [id])
   data      Json
+  user      User         @relation(fields: [userId], references: [id])
 
   @@index([userId])
 }
@@ -88,12 +88,12 @@ model Notification {
   userId    String
   type      NotificationType
   isRead    Boolean          @default(false)
-  user      User             @relation(fields: [userId], references: [id])
   data      Json
   isActive  Boolean          @default(true)
   isArchive Boolean          @default(false)
   createdAt DateTime         @default(now())
   updatedAt DateTime         @updatedAt
+  user      User             @relation(fields: [userId], references: [id])
 
   @@index([userId])
 }
@@ -124,7 +124,7 @@ model Project {
   isDraft           Boolean             @default(false)
   tx                String              @default("")
   longDescription   String              @db.Text
-  industry          Json?
+  industry          String              @db.VarChar(2000)
   projectLink       String              @default("")
   twitterHandle     String              @default("")
   githubLink        String              @default("")
@@ -132,9 +132,8 @@ model Project {
   telegramLink      String              @default("")
   projectUserCount  Int                 @default(0)
   status            ProjectVerifyStatus @default(REVIEW)
-  isOpenSource      Boolean?             @default(false)
+  isOpenSource      Boolean?            @default(false)
   failedReason      String?             @default("")
-  mutliSigAddress   String?             @default("")
   multiSigAddressV3 String?             @default("")
   multiSigAddressV4 String?             @default("")
   email             String              @default("")
@@ -198,13 +197,13 @@ model ProjectJoinEvent {
   amount                Float              @default(0)
   communityContribution Float              @default(0)
   projectEventStatus    ProjectEventStatus @default(PENDING)
-  project               Project            @relation(fields: [projectId], references: [id])
-  event                 Event              @relation(fields: [eventId], references: [id])
-  contribution          Contribution[]
   isActive              Boolean            @default(true)
   isArchive             Boolean            @default(false)
   createdAt             DateTime           @default(now())
   updatedAt             DateTime           @updatedAt
+  project               Project            @relation(fields: [projectId], references: [id])
+  event                 Event              @relation(fields: [eventId], references: [id])
+  contribution          Contribution[]
 
   @@index([eventId])
   @@index([projectId])
@@ -269,12 +268,12 @@ model Contribution {
   isArchive          Boolean           @default(false)
   createdAt          DateTime          @default(now())
   updatedAt          DateTime          @updatedAt
+  eventId            String?
+  projectJoinEventId String?
   user               User              @relation(fields: [userId], references: [id])
   project            Project           @relation(fields: [projectId], references: [id])
   event              Event?            @relation(fields: [eventId], references: [id])
-  eventId            String?
   projectJoinEvent   ProjectJoinEvent? @relation(fields: [projectJoinEventId], references: [id])
-  projectJoinEventId String?
 
   @@index([projectId])
   @@index([userId])
@@ -318,10 +317,10 @@ model AdminAccess {
   userId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id])
   isActive  Boolean  @default(true)
-  event     Event?   @relation(fields: [eventId], references: [id])
   eventId   String?
+  user      User     @relation(fields: [userId], references: [id])
+  event     Event?   @relation(fields: [eventId], references: [id])
 
   @@index([userId])
   @@index([eventId])
@@ -336,28 +335,6 @@ enum UserType {
   Contributor
   ProjectOwner
   Sponsor
-}
-
-enum SponsorShipTier {
-  PLATINUM
-  GOLD
-  SILVER
-  BRONZE
-}
-
-enum PaymentStatus {
-  PENDING
-  PAID
-  OVERDUE
-}
-
-enum UserSybilStatus {
-  NONE
-  NEW_WALLET
-  DEAD_WALLET
-  ELUSIVE_WALLET
-  CEX_WALLET
-  CONFIRMED
 }
 
 enum ProofType {

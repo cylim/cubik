@@ -1,0 +1,481 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters", "fullTextIndex", "fullTextSearch"]
+  output          = "client/old"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("OLD_PROD_DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Activity {
+  id        String        @id @map("_id")
+  userId    String
+  type      Activity_type
+  createdAt DateTime      @default(now())
+  updatedAt DateTime
+  isActive  Boolean       @default(true)
+  isArchive Boolean       @default(false)
+  data      Json
+
+  @@index([userId])
+}
+
+model AdminAccess {
+  id          String   @id @map("_id")
+  userId      String
+  hackathonId String?
+  roundId     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  isActive    Boolean  @default(true)
+  eventId     String?
+
+  @@index([eventId])
+  @@index([hackathonId])
+  @@index([roundId])
+  @@index([userId])
+}
+
+model Comments {
+  id        String   @id @map("_id")
+  comment   String   @db.Text
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  isArchive Boolean  @default(false)
+  reactions Json
+  projectId String
+
+  @@index([projectId])
+  @@index([userId])
+}
+
+model Communities {
+  id               String             @id @map("_id")
+  name             String
+  logo             String             @db.VarChar(500)
+  background       String             @db.VarChar(500)
+  shortDescription String             @db.VarChar(2000)
+  method           Communities_method
+  collection       Json?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime
+  isArchive        Boolean            @default(true)
+}
+
+model CommunityMembers {
+  id          String   @id @map("_id")
+  userId      String
+  communityId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  isActive    Boolean  @default(true)
+
+  @@index([communityId])
+  @@index([userId])
+}
+
+model Contribution {
+  id                     String   @id @map("_id")
+  tx                     String   @db.VarChar(500)
+  token                  String
+  split                  Float
+  projectJoinRoundId     String?
+  projectJoinHackathonId String?
+  roundId                String?
+  hackathonId            String?
+  projectId              String
+  userId                 String
+  totalAmount            Float
+  totalUsdAmount         Float
+  isIncluded             Boolean  @default(false)
+  isArchive              Boolean  @default(false)
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime
+  eventId                String?
+  projectEventJoinId     String?
+
+  @@index([eventId])
+  @@index([hackathonId])
+  @@index([projectEventJoinId])
+  @@index([projectId])
+  @@index([projectJoinHackathonId])
+  @@index([projectJoinRoundId])
+  @@index([roundId])
+  @@index([userId])
+}
+
+model Event {
+  id               String     @id @map("_id")
+  name             String
+  matchedPool      Float      @default(0)
+  userId           String
+  type             Event_type
+  description      String     @db.Text
+  shortDescription String     @default("") @db.VarChar(2000)
+  isActive         Boolean    @default(true)
+  isArchive        Boolean    @default(false)
+  tx               String     @db.VarChar(500)
+  timeline         Json
+  background       String?    @default("")
+  logo             String?    @default("")
+  slug             String?    @unique
+
+  @@index([userId])
+}
+
+model Hackathon {
+  id                    String    @id @map("_id")
+  name                  String
+  logo                  String    @db.VarChar(500)
+  background            String    @db.VarChar(500)
+  shortDescription      String    @db.VarChar(2000)
+  longDescription       String    @db.Text
+  prizePool             Int       @default(0)
+  host                  Json?
+  track                 Json?
+  social                Json?
+  slug                  String    @unique
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime
+  isActive              Boolean   @default(true)
+  isArchive             Boolean   @default(false)
+  hackathonEndDate      DateTime  @default(now())
+  hackathonStartDate    DateTime  @default(now())
+  registrationEndDate   DateTime? @default(now())
+  registrationStartDate DateTime  @default(now())
+  resultDate            DateTime? @default(now())
+  votingEndDate         DateTime? @default(now())
+  votingStartDate       DateTime? @default(now())
+}
+
+model HackathonSponsors {
+  id                    String                            @id @map("_id")
+  hackathonId           String
+  name                  String
+  description           String
+  sponsorOrganizations  Json
+  link                  Json
+  prize                 Json
+  prizeBreakdown        Json?
+  otherPrize            Json?
+  ideas                 Json?
+  requirements          Json?
+  judges                Json?
+  ownerOfTrack          Json?
+  resources             Json?
+  contactPerson         String?
+  email                 String?
+  phone                 String?
+  brandColor            Json?
+  brandGuidelines       String?
+  sponsorshipAmount     Float?
+  paymentStatus         HackathonSponsors_paymentStatus?  @default(PENDING)
+  paymentMethod         String?
+  workshop              Json?
+  feedback              Json?
+  engagementMetrics     Json?
+  socialMediaHandles    Json?
+  promotionalCode       String?
+  contractSigned        Boolean?                          @default(false)
+  termsAndConditions    Boolean?                          @default(false)
+  sponsorshipTier       HackathonSponsors_sponsorshipTier @default(PLATINUM)
+  categories            Json?
+  previousParticipation Boolean?                          @default(false)
+  futureInterest        Boolean?                          @default(false)
+  notes                 String?
+  attachments           Json?
+  createdAt             DateTime                          @default(now())
+  updatedAt             DateTime
+  isActive              Boolean                           @default(true)
+
+  @@index([hackathonId])
+}
+
+model Notification {
+  id        String            @id @map("_id")
+  userId    String
+  type      Notification_type
+  isRead    Boolean           @default(false)
+  data      Json
+  isActive  Boolean           @default(true)
+  isArchive Boolean           @default(false)
+  createdAt DateTime          @default(now())
+  updatedAt DateTime
+
+  @@index([userId])
+}
+
+model Project {
+  id                 String         @id @map("_id")
+  name               String
+  shortDescription   String         @db.VarChar(2000)
+  logo               String         @db.VarChar(1000)
+  ownerPublickey     String
+  tx                 String         @default("")
+  longDescription    String         @db.Text
+  industry           String         @db.VarChar(2000)
+  projectLink        String         @default("")
+  twitterHandle      String         @default("")
+  githubLink         String         @default("")
+  discordLink        String         @default("")
+  telegramLink       String         @default("")
+  projectUserCount   Int            @default(0)
+  status             Project_status @default(REVIEW)
+  failedReason       String?        @default("")
+  mutliSigAddress    String?        @default("")
+  email              String         @default("")
+  createKey          String?        @default("")
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime
+  isActive           Boolean        @default(true)
+  isArchive          Boolean        @default(false)
+  multiSigAddress_v3 String?        @default("")
+  multiSigAddress_v4 String?        @default("")
+  slides             Json?
+  slug               String?        @default("")
+
+  @@index([ownerPublickey])
+}
+
+model ProjectEventJoin {
+  id                    String                @id @map("_id")
+  eventId               String
+  isActive              Boolean               @default(true)
+  isArchive             Boolean               @default(false)
+  tx                    String                @db.VarChar(500)
+  amount                Float                 @default(0)
+  communityContribution Float                 @default(0)
+  projectId             String
+  type                  ProjectEventJoin_type
+
+  @@index([eventId])
+  @@index([projectId])
+}
+
+model ProjectJoinHackathon {
+  id          String   @id @map("_id")
+  hackathonId String
+  projectId   String
+  tracks      Json?
+  mainTrack   String?
+  amount      Float    @default(0)
+  isArchive   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  tx          String   @db.VarChar(500)
+
+  @@index([hackathonId])
+  @@index([projectId])
+}
+
+model ProjectJoinRound {
+  id            String                  @id @map("_id")
+  projectId     String
+  tx            String                  @db.VarChar(500)
+  roundId       String
+  status        ProjectJoinRound_status @default(PENDING)
+  createdAt     DateTime                @default(now())
+  updatedAt     DateTime
+  amountRaise   Float?                  @default(0)
+  contributions Int                     @default(0)
+  isArchive     Boolean                 @default(false)
+  eventId       String?
+
+  @@index([eventId])
+  @@index([projectId])
+  @@index([roundId])
+}
+
+model Proof {
+  id        String          @id @map("_id")
+  userId    String
+  proofType Proof_proofType
+  proofInfo Json
+  createdAt DateTime        @default(now())
+  updatedAt DateTime
+  isActive  Boolean         @default(true)
+  isArchive Boolean         @default(false)
+
+  @@index([userId])
+}
+
+model Reply {
+  id          String   @id @map("_id")
+  reply       String   @db.Text
+  commentId   String
+  replyUserId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+
+  @@index([commentId])
+  @@index([replyUserId])
+}
+
+model Round {
+  id                    String   @id @map("_id")
+  name                  String
+  matchedPool           Float    @default(0)
+  notionPage            String   @db.VarChar(500)
+  projectCount          Int      @default(0)
+  userId                String
+  description           String   @db.Text
+  endTime               DateTime @default(now())
+  startTime             DateTime @default(now())
+  registrationEndDate   DateTime @default(now())
+  registrationStartDate DateTime @default(now())
+  tx                    String   @db.VarChar(500)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime
+  colorScheme           String   @default("teal")
+  shortDescription      String   @default("") @db.VarChar(2000)
+  contributions         Float    @default(0)
+  manager               String   @default("")
+  isActive              Boolean  @default(true)
+  isArchive             Boolean  @default(false)
+
+  @@index([userId])
+}
+
+model Session {
+  id        String   @id
+  ipAddress String
+  userAgent String
+  createdAt DateTime @default(now())
+  userId    String
+  country   String   @default("default")
+  latitude  String   @default("0")
+  longitude String   @default("0")
+
+  @@index([userId])
+}
+
+model Sponsor {
+  id        String   @id @map("_id")
+  name      String
+  logo      String   @db.VarChar(500)
+  roundId   String
+  tx        String   @db.VarChar(500)
+  isActive  Boolean  @default(true)
+  isArchive Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  eventId   String?
+
+  @@index([eventId])
+  @@index([roundId])
+}
+
+model Team {
+  id          String   @id @map("_id")
+  userId      String
+  projectId   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  isActive    Boolean  @default(true)
+  isArchive   Boolean  @default(false)
+  hackathonId String?
+
+  @@index([hackathonId])
+  @@index([projectId])
+  @@index([userId])
+}
+
+model User {
+  id             String   @id @map("_id")
+  username       String?  @unique
+  mainWallet     String   @unique
+  email          String?
+  profileNft     Json?
+  profilePicture String?  @db.VarChar(500)
+  tx             String?  @db.VarChar(500)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime
+  isActive       Boolean  @default(true)
+  isArchive      Boolean  @default(false)
+
+  @@fulltext([username])
+}
+
+enum Activity_type {
+  WELCOME
+  CREATE_NEW_PROJECT
+  PROJECT_STATUS_APPROVED
+  PROJECT_STATUS_REJECTED
+  PROJECT_JOIN_ROUND
+  PROJECT_JOIN_ROUND_APPROVED
+  PROJECT_JOIN_ROUND_REJECTED
+  PROOF_COLLECTED
+  PROJECT_BAN_IN_ROUND
+  CONTRIBUTION_TO_PROJECT
+  CONTRIBUTION_TO_USER
+  GENERIC
+}
+
+enum Notification_type {
+  PROJECT_STATUS_APPROVED
+  PROJECT_STATUS_REJECTED
+  CONTRIBUTION_TO_PROJECT
+  CONTRIBUTION_TO_USER
+  PROJECT_JOIN_ROUND_APPROVED
+  PROJECT_JOIN_ROUND_REJECTED
+}
+
+enum Proof_proofType {
+  SUPERTEAM
+  GITHUB
+  TWITTER
+  CIVIC
+  CUBIK_POAPS
+  CUBIK_PARTICIPANT
+  CUBIK_TEAM
+  SNS_DOMAIN
+  DISCORD
+  SOL_POSSION
+  BLUE_CHIP_HOLDER
+  DEFI_INTERACTION
+}
+
+enum Event_type {
+  ROUND
+  HACKATHON
+}
+
+enum ProjectJoinRound_status {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum Communities_method {
+  DISCORD
+  MINT_ADD
+  LIST_ADD
+}
+
+enum ProjectEventJoin_type {
+  ROUND
+  HACKATHON
+}
+
+enum Project_status {
+  REVIEW
+  VERIFIED
+  FAILED
+}
+
+enum HackathonSponsors_paymentStatus {
+  PENDING
+  PAID
+  OVERDUE
+}
+
+enum HackathonSponsors_sponsorshipTier {
+  PLATINUM
+  GOLD
+  SILVER
+  BRONZE
+}

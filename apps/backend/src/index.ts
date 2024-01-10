@@ -9,7 +9,6 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import morganBody from 'morgan-body';
 import { scheduleJob } from 'node-schedule';
-import { metadataRouter } from 'routes/metadata.router';
 import { squadsRouter } from 'routes/squads.router';
 import { TokenRouter } from 'routes/token.router';
 import { syncCommunity } from 'service/community-sync/syncCommunity';
@@ -47,7 +46,6 @@ const main = async () => {
 
   app.use(basePath + '/squads', squadsRouter);
   app.use(basePath + '/price', TokenRouter);
-  app.use(basePath + '/metadata', metadataRouter);
 
   app.listen(PORT, async () => {
     if (process.env.CRON_ENABLED === '1') {

@@ -26,7 +26,6 @@ const options = {
 const axiomTransport = new AxiomTransport({
   dataset: 'backend',
   token: process.env.AXIOM_TOKEN as string,
-  orgId: process.env.AXIOM_ORG_ID as string,
 });
 
 // Don't enable slack in testing

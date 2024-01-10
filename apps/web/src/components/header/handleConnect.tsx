@@ -2,12 +2,13 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { useCreateProject } from '@/hooks/useCreateProject';
+import { usePathname, useRouter } from 'next/navigation';
 import { useUser } from '@/hooks/useUser';
 import { handleLogout } from '@/utils/auth/logout';
 
 import { formatAddress } from '@cubik/common';
 import { UserAuth } from '@cubik/common-types';
+import { handleRevalidation } from '@cubik/common/helper';
 import {
   Avatar,
   AvatarLabelGroup,
@@ -34,7 +35,7 @@ const UserNavbarMenu = ({
   disconnect: () => any;
 }) => {
   const { toggleTheme } = useTheme();
-  const { onOpen } = useCreateProject();
+  const pathname = usePathname();
   return (
     <Menu>
       <MenuButton>
@@ -47,7 +48,7 @@ const UserNavbarMenu = ({
           />
           <Icon
             name="chevronDown"
-            stroke="var(--color-fg-primary-depth)"
+            color="var(--color-fg-primary-depth)"
             width={16}
             height={16}
           />
@@ -67,19 +68,23 @@ const UserNavbarMenu = ({
           <MenuItem text="Profile" leftIcon="user" onClick={() => {}} />
         </Link>
         <MenuItem text="Settings" leftIcon="settings" />
-        <MenuItem onClick={onOpen} text="New Project" leftIcon="plus" />
+        <Link href={'/create/project'}>
+          <MenuItem text="New Project" leftIcon="plus" />
+        </Link>
         <MenuDivider />
         <MenuItem text="Dark" leftIcon="moon">
-          <Switch onChange={toggleTheme} size="sm" />
+          <Switch onChange={toggleTheme} size="sm" checked />
         </MenuItem>
 
         <MenuItem
           text="Logout"
+          variant={'negative'}
           leftIcon="logoutRight"
-          onClick={async () => {
+          onClick={() => {
             setUser(null);
-            await disconnect();
-            await handleLogout();
+            disconnect();
+            handleLogout();
+            handleRevalidation(pathname);
           }}
         />
       </MenuList>
@@ -88,23 +93,23 @@ const UserNavbarMenu = ({
 };
 
 export const WalletConnect = () => {
-  const { connected, publicKey, disconnect, signMessage } = useCubikWallet();
+  const { connected, publicKey, disconnect } = useCubikWallet();
   const { showModal, setShowModal } = useCubikWalletContext();
   const { setUser, user } = useUser();
 
   if (!connected && !publicKey && !user) {
-    return <Button onClick={() => setShowModal(true)}>Connect Wallet</Button>;
-  }
-  if (connected && publicKey && !user) {
     return (
-      <>
-        <Spinner
-          onClick={() => {
-            disconnect();
-            setShowModal(false);
-          }}
-        />
-      </>
+      <Button size="lg" onClick={() => setShowModal(true)}>
+        Connect Wallet
+      </Button>
+    );
+  }
+
+  if (connected && publicKey && !user && showModal) {
+    return (
+      <Button isLoading LoadingText="Connecting Wallet" size="lg">
+        Connect Wallet
+      </Button>
     );
   }
 

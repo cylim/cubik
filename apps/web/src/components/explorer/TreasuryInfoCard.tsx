@@ -28,7 +28,7 @@ const TreasuryInfoCard = ({
                 name={headerIconName}
                 height={16}
                 width={16}
-                stroke="var(--color-fg-primary-subdued)"
+                color="var(--color-fg-primary-subdued)"
                 strokeWidth={1.2}
                 className=" hidden hover:stroke-[var(--color-bg-info)] md:block"
               />

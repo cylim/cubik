@@ -1,6 +1,14 @@
-import React, { ReactEventHandler } from 'react';
+import React, {
+  createContext,
+  ReactEventHandler,
+  useContext,
+  useMemo,
+  useState,
+} from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { cva, VariantProps } from 'class-variance-authority';
+import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
+import { v4 as uuid_v4 } from 'uuid';
 
 import { Icon } from '../../../icons/icon';
 import { iconLibrary } from '../../../icons/iconLibrary';
@@ -19,8 +27,35 @@ interface MenuProps {
   children: React.ReactNode;
 }
 
+const MenuContext = createContext<{
+  id: string;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+}>({
+  id: 'menu',
+  isOpen: false,
+  setIsOpen: () => {},
+});
+const SubMenuContext = createContext<{
+  id: string;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+}>({
+  id: 'menu',
+  isOpen: false,
+  setIsOpen: () => {},
+});
+
 const Menu = ({ children }: MenuProps) => {
-  return <DropdownMenu.Root>{children}</DropdownMenu.Root>;
+  const [isOpen, setIsOpen] = useState(false);
+  const id = useMemo(() => uuid_v4(), []);
+  return (
+    <MenuContext.Provider value={{ id, isOpen, setIsOpen }}>
+      <DropdownMenu.Root open={isOpen} onOpenChange={setIsOpen}>
+        {children}
+      </DropdownMenu.Root>
+    </MenuContext.Provider>
+  );
 };
 
 const DrawerMenu = ({
@@ -29,10 +64,14 @@ const DrawerMenu = ({
   onOpenChange,
   ...props
 }: DrawerProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const id = useMemo(() => uuid_v4(), []);
   return (
-    <Drawer open={open} onOpenChange={onOpenChange} {...props}>
-      {children}
-    </Drawer>
+    <MenuContext.Provider value={{ id, isOpen, setIsOpen }}>
+      <Drawer open={open} onOpenChange={onOpenChange} {...props}>
+        {children}
+      </Drawer>
+    </MenuContext.Provider>
   );
 };
 
@@ -50,16 +89,38 @@ interface MenuListProps {
 }
 
 const MenuList = ({ children, align = 'end' }: MenuListProps) => {
+  const { isOpen } = useContext(MenuContext);
+
   return (
-    <DropdownMenu.Portal>
-      <DropdownMenu.Content
-        className="py-2 min-w-[220px] shadow-lg border border-[var(--menu-list-item-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] flex flex-col gap-2"
-        sideOffset={10}
-        align={align}
-      >
-        {children}
-      </DropdownMenu.Content>
-    </DropdownMenu.Portal>
+    <AnimatePresence>
+      {isOpen && (
+        <DropdownMenu.Portal forceMount>
+          <DropdownMenu.Content
+            className="py-2 min-w-[220px] shadow-lg border border-[var(--menu-list-item-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] flex flex-col gap-2"
+            sideOffset={10}
+            align={align}
+            asChild
+          >
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: -5,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              exit={{
+                opacity: 0,
+                y: -5,
+              }}
+            >
+              {children}
+            </motion.div>
+          </DropdownMenu.Content>
+        </DropdownMenu.Portal>
+      )}
+    </AnimatePresence>
   );
 };
 const DrawerMenuList = ({ children }: MenuListProps) => {
@@ -75,7 +136,7 @@ const DrawerMenuList = ({ children }: MenuListProps) => {
   );
 };
 
-const MenuItemVariants = cva('relative p-2 mx-2   focus-visible:outline-none', {
+const MenuItemVariants = cva('relative p-2 mx-2 focus-visible:outline-none', {
   variants: {
     variant: {
       primary:
@@ -95,6 +156,7 @@ interface MenuItemProps extends VariantProps<typeof MenuItemVariants> {
   leftIcon?: keyof typeof iconLibrary;
   onClick?: () => void;
   isLoading?: boolean;
+  className?: string;
 }
 
 const MenuItem = ({
@@ -105,15 +167,21 @@ const MenuItem = ({
   isLoading,
   variant = 'primary',
 }: MenuItemProps) => {
+  const controls = useAnimationControls();
   const itemProps: {
     onClick?: () => void;
     className: string;
     onSelect?: (event: Event) => void; // Define onSelect property
   } = {
-    onClick: isLoading ? () => {} : onClick,
+    onClick: isLoading
+      ? () => {}
+      : () => {
+          onClick && onClick();
+          controls.start('loading');
+        },
     className: cn(
       isLoading ? 'cursor-not-allowed' : 'cursor-pointer',
-      children ? '' : MenuItemVariants({ variant }),
+      MenuItemVariants({ variant }),
       '',
     ),
   };
@@ -122,20 +190,27 @@ const MenuItem = ({
   }
   return (
     <DropdownMenu.Item {...itemProps}>
-      <div className="flex justify-between">
+      <div className="flex justify-between transform transition-all active:scale-95">
         <div className="flex gap-[10px] items-center ">
           {leftIcon && (
-            <Icon name={leftIcon} stroke="inherit" height={20} width={20} />
+            <Icon
+              name={leftIcon}
+              color="inherit"
+              strokeWidth={2}
+              height={20}
+              width={20}
+            />
           )}
-          <Text className="b1 md:l2-light" color={'inherit'}>
+          <Text className="b1 md:l2" color={'inherit'}>
             {text}
           </Text>
           {isLoading && (
             <Icon
               name={'spinner'}
-              stroke="inherit"
-              height={18}
-              width={18}
+              color="inherit"
+              height={20}
+              width={20}
+              strokeWidth={2}
               className={cn('animate-spin')}
             />
           )}
@@ -178,17 +253,24 @@ const DrawerMenuItem = ({
       <div className="flex justify-between">
         <div className="flex gap-[10px] items-center ">
           {leftIcon && (
-            <Icon name={leftIcon} stroke="inherit" height={20} width={20} />
+            <Icon
+              name={leftIcon}
+              strokeWidth={2}
+              color="inherit"
+              height={20}
+              width={20}
+            />
           )}
-          <Text className="b2 md:l2-light" color={'inherit'}>
+          <Text className="b2 md:l2" color={'inherit'}>
             {text}
           </Text>
           {isLoading && (
             <Icon
               name={'spinner'}
-              stroke="inherit"
-              height={18}
-              width={18}
+              color="inherit"
+              height={20}
+              width={20}
+              strokeWidth={2}
               className={cn('animate-spin')}
             />
           )}
@@ -204,26 +286,57 @@ interface SubMenuProps {
 }
 
 const SubMenu = ({ children }: SubMenuProps) => {
-  return <DropdownMenu.Sub>{children}</DropdownMenu.Sub>;
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const id = useMemo(() => uuid_v4(), []);
+
+  return (
+    <SubMenuContext.Provider value={{ id, isOpen, setIsOpen }}>
+      <DropdownMenu.Sub open={isOpen} onOpenChange={setIsOpen}>
+        {children}
+      </DropdownMenu.Sub>
+    </SubMenuContext.Provider>
+  );
 };
 
 interface SubMenuButtonProps {
   children: React.ReactNode;
   leftIcon?: keyof typeof iconLibrary;
+  className?: string;
 }
 
-const SubMenuButton = ({ children, leftIcon }: SubMenuButtonProps) => {
+const SubMenuButton = ({
+  children,
+  leftIcon,
+  className,
+}: SubMenuButtonProps) => {
   return (
-    <DropdownMenu.SubTrigger className="relative cursor-pointer hover:bg-[var(--menu-list-item-surface-hovered)] text-[var(--menu-list-item-fg-default)] hover:text-[var(--menu-list-item-fg-hovered)] hover:rounded-lg hover:stroke-[var(--menu-list-item-hovered)] stroke-[var(--menu-list-item-icon)] focus-visible:outline-none p-2 py-2 mx-2">
+    <DropdownMenu.SubTrigger
+      className={cn(
+        'relative cursor-pointer hover:bg-[var(--menu-list-item-surface-hovered)] text-[var(--menu-list-item-fg-default)] hover:text-[var(--menu-list-item-fg-hovered)] hover:rounded-lg hover:stroke-[var(--menu-list-item-hovered)] stroke-[var(--menu-list-item-icon)] focus-visible:outline-none p-2 py-2 mx-2',
+        className,
+      )}
+    >
       <div className="flex justify-between items-center ">
         <div className="flex gap-[10px] items-center ">
           {leftIcon && (
-            <Icon name={leftIcon} stroke="inherit" height={20} width={20} />
+            <Icon
+              name={leftIcon}
+              color="inherit"
+              height={20}
+              width={20}
+              strokeWidth={2}
+            />
           )}
-          <Text className="l1 md:l2-light">{children}</Text>
+          <Text className="l1 md:l2">{children}</Text>
         </div>
 
-        <Icon name="chevronRight" height={20} width={20} stroke="inherit" />
+        <Icon
+          name="chevronRight"
+          height={20}
+          width={20}
+          color="inherit"
+          strokeWidth={2}
+        />
       </div>
     </DropdownMenu.SubTrigger>
   );
@@ -234,15 +347,36 @@ interface SubMenuListProps {
 }
 
 const SubMenuList = ({ children }: SubMenuListProps) => {
+  const { isOpen } = useContext(SubMenuContext);
   return (
-    <DropdownMenu.Portal>
-      <DropdownMenu.SubContent
-        className="py-2 min-w-[220px] shadow-xl border border-[var(--menu-list-item-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] flex flex-col gap-2"
-        sideOffset={20}
-      >
-        {children}
-      </DropdownMenu.SubContent>
-    </DropdownMenu.Portal>
+    <AnimatePresence>
+      {isOpen && (
+        <DropdownMenu.Portal forceMount>
+          <DropdownMenu.SubContent
+            className="py-2 min-w-[220px] shadow-xl border border-[var(--menu-list-item-border)] bg-[var(--menu-list-surface)] rounded-xl will-change-[opacity,transform] flex flex-col gap-2"
+            sideOffset={20}
+            asChild
+          >
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: -5,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              exit={{
+                opacity: 0,
+                y: -5,
+              }}
+            >
+              {children}
+            </motion.div>
+          </DropdownMenu.SubContent>
+        </DropdownMenu.Portal>
+      )}
+    </AnimatePresence>
   );
 };
 
@@ -259,9 +393,14 @@ const SubMenuList = ({ children }: SubMenuListProps) => {
 //   );
 // };
 
-const MenuDivider = () => {
+const MenuDivider = ({ className }: { className?: string }) => {
   return (
-    <DropdownMenu.Separator className="border-t-[1px] border-[var(--color-border-primary-subdued)]" />
+    <DropdownMenu.Separator
+      className={cn(
+        'border-t-[1px] border-[var(--color-border-primary-subdued)]',
+        className,
+      )}
+    />
   );
 };
 

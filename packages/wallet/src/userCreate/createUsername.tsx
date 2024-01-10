@@ -9,6 +9,7 @@ import {
   Button,
   Checkbox,
   HelperText,
+  InputContainer,
   InputField,
   InputFieldContainer,
   InputLabel,
@@ -44,6 +45,7 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
     };
     search();
   }, [userForm.watch('username')]);
+
   return (
     <>
       <div
@@ -65,32 +67,34 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
           <div className="h-full flex justify-center items-center">
             <Avatar
               variant={'circle'}
-              size={'lg'}
+              size={'xl'}
               src={userForm.watch('avatar')}
               alt={userForm.watch('username')}
               iconName="user"
             />
           </div>
           <div className="w-full">
-            <InputLabel id="username" isRequired>
-              Choose a name
-            </InputLabel>
-            <InputFieldContainer
-              isError={userForm.formState.errors.username ? true : false}
-              variant="sm"
-            >
-              <InputField
-                placeholder="Enter your username"
-                onChange={(e) => {
-                  userForm.setValue('username', e.currentTarget.value);
-                }}
-              />
-            </InputFieldContainer>
-            {userForm.formState.errors.username && (
-              <HelperText variant={'error'} fontSize={'md'}>
-                {userForm.formState.errors.username.message}
-              </HelperText>
-            )}
+            <InputContainer>
+              <InputLabel id="username" isRequired={true}>
+                Choose a name
+              </InputLabel>
+              <InputFieldContainer
+                isError={userForm.formState.errors.username ? true : false}
+                variant="sm"
+              >
+                <InputField
+                  placeholder="@toly"
+                  onChange={(e) => {
+                    userForm.setValue('username', e.currentTarget.value);
+                  }}
+                />
+              </InputFieldContainer>
+              {userForm.formState.errors.username && (
+                <HelperText variant={'error'} fontSize={'md'}>
+                  {userForm.formState.errors.username.message}
+                </HelperText>
+              )}
+            </InputContainer>
           </div>
         </div>
         <div className="flex gap-2 flex-col">
@@ -151,7 +155,7 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
           </Button>
           <Button
             onClick={() => setUserCreateState('verify-email')}
-            variant={'link'}
+            variant={'tertiary'}
             size={'md'}
             className="w-full"
           >

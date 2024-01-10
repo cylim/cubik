@@ -13,3 +13,18 @@ session: ${hash}\n`;
     return null;
   }
 };
+
+export const createProjectEditMessage = (hash: string) => {
+  try {
+    const message = `🔶 Welcome to Cubik! 🔶\n
+-----------------------------\n
+🌱 This will edit the project details. 🌱 \n
+session: ${hash}\n`;
+
+    const data = new TextEncoder().encode(message);
+    return data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};

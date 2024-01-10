@@ -75,10 +75,8 @@ const SubItem: FC<{
               </Text>
               <Icon
                 name={'chevronDown'}
-                stroke={'var(--color-fg-secondary)'}
                 className={toggledThirdItem === subItem.id ? 'rotate-180' : ''}
                 strokeWidth={2}
-                fill="none"
                 height={16}
                 width={16}
               />
@@ -146,9 +144,7 @@ const ThirdItem: FC<{
                   toggledThirdItem === thirdItem.id ? 'rotate-180' : ''
                 }
                 name={'chevronDown'}
-                stroke={'var(--color-fg-secondary)'}
                 strokeWidth={2}
-                fill="none"
                 height={16}
                 width={16}
               />

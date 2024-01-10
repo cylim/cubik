@@ -14,7 +14,7 @@ model User {
   username         String             @unique
   mainWallet       String             @unique
   email            String?
-  profileNft       Json
+  profileNft       Json?
   isMigrated       Boolean            @default(false)
   type             UserType           @default(Contributor)
   profilePicture   String             @db.VarChar(500)
@@ -22,7 +22,7 @@ model User {
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   isEmailConfirmed Boolean            @default(false)
-  isRecivingUpdate Boolean            @default(false)
+  isReceivingUpdate      Boolean            @default(true)
   isActive         Boolean            @default(true)
   isArchive        Boolean            @default(false)
   comments         Comments[]
@@ -149,6 +149,7 @@ model Project {
   projectJoinEvent  ProjectJoinEvent[]
 
   @@index([ownerPublickey])
+  @@fulltext([name])
 }
 
 model Event {
@@ -160,7 +161,6 @@ model Event {
   matchedPool      Float              @default(0)
   userId           String
   type             EventType
-  currentStatus    EventStatusType    @default(REGISTRATION)
   description      String             @db.Text
   shortDescription String             @default("") @db.VarChar(2000)
   tx               String             @db.VarChar(500)
@@ -245,6 +245,7 @@ model Team {
   userId    String
   projectId String?
   createdAt DateTime @default(now())
+  designation  Designation @default(Other)
   updatedAt DateTime @updatedAt
   isActive  Boolean  @default(true)
   isArchive Boolean  @default(false)
@@ -397,6 +398,17 @@ enum NotificationType {
 
 enum EventStatusType {
   REGISTRATION
-  ENDED
   VOTING
 }
+enum Designation {
+  CEO
+  CTO
+  COO
+  CMO
+  Developer
+  Designer
+  Growth 
+  Manger
+  Marketing
+  Other
+} 

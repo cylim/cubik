@@ -1,21 +1,50 @@
 import React, { ReactNode } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
+import { cva } from 'class-variance-authority';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { cn } from '../../../lib/utils';
 
 export const DialogSize = {
-  sm: 'max-w-[410px]',
-  md: 'max-w-[500px]',
-  lg: 'max-w-[600px]',
-  xl: '!w-[90vw] max-w-6xl',
+  sm: `w-[410px] left-[calc(50%-205px)]`,
+  md: 'w-[500px] left-[calc(50%-250px)] ',
+  lg: 'w-[600px] left-[calc(50%-300px)] ',
+  xl: 'w-[1152px] left-[calc(50%-576px)] ',
 };
+
+const modalContentVariants = cva('', {
+  variants: {
+    dialogSize: DialogSize,
+  },
+  defaultVariants: {
+    dialogSize: 'sm',
+  },
+});
 
 interface Props {
   open: boolean;
   onClose: () => void;
-  dialogSize: keyof typeof DialogSize;
+  dialogSize: 'sm' | 'md' | 'lg' | 'xl';
   children: ReactNode | React.JSX.Element;
 }
+
+const overlayAnimation = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+};
+
+const contentAnimation = {
+  initial: { opacity: 0, y: -15 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: 15 },
+};
+
+const layoutTransition = {
+  type: 'spring',
+  stiffness: 300,
+  damping: 30,
+};
 
 export const Modal = ({
   open,
@@ -24,25 +53,44 @@ export const Modal = ({
   children,
 }: Props) => {
   return (
-    <>
-      <Dialog.Root open={open}>
-        <Dialog.Portal>
-          <Dialog.Overlay
-            onClick={onClose}
-            className="bg-black/08 backdrop-blur-[5px] data-[state=open]:animate-overlayShow fixed inset-0"
-          />
-          <Dialog.Content
-            className={cn(
-              DialogSize[dialogSize],
-              'text-white data-[state=open]:animate-contentShow fixed top-[400px] left-[50%] max-h-[85vh] w-full translate-x-[-50%] translate-y-[-50%] rounded-[12px] bg-[var(--color-bg-primary-base)] shadow-[none] focus:outline-none',
-            )}
-          >
-            <Dialog.Content className="z-50 relative">
-              {children}
-            </Dialog.Content>
-          </Dialog.Content>
-        </Dialog.Portal>
-      </Dialog.Root>
-    </>
+    <Dialog.Root open={open}>
+      <Dialog.Portal>
+        <AnimatePresence>
+          {open && (
+            <>
+              <Dialog.Overlay forceMount asChild>
+                <motion.div
+                  variants={overlayAnimation}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  className="bg-gradient-to-b from-white/10 dark:from-[#27272710] to-black/10 dark:to-[#27272705] backdrop-blur-[4px] fixed inset-0"
+                  onClick={onClose}
+                />
+              </Dialog.Overlay>
+              <Dialog.Content forceMount asChild>
+                <motion.div
+                  layout
+                  transition={{
+                    ...layoutTransition,
+                    ...{ duration: 5, ease: 'easeInOut' },
+                  }}
+                  variants={contentAnimation}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  className={cn(
+                    `fixed top-[15vh] m-auto max-h-[85vh] h-fit rounded-[12px] bg-[var(--color-bg-primary-base)] shadow-[none] focus:outline-none `,
+                    modalContentVariants({ dialogSize }),
+                  )}
+                >
+                  {children}
+                </motion.div>
+              </Dialog.Content>
+            </>
+          )}
+        </AnimatePresence>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 };

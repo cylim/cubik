@@ -41,13 +41,17 @@ export const EmailOtp = ({ userForm, setUserCreateState }: Props) => {
     try {
       const res = await checkOTP(value, userForm.watch('email'));
       if (res) {
-        setUserCreateState('profile-created');
+        setUserCreateState('signTx');
+        return true;
       }
+      return false;
     } catch (e) {
       const error = e as Error;
       toast.error(error.message);
+      return false;
     }
   };
+
   return (
     <>
       <div
@@ -61,7 +65,7 @@ export const EmailOtp = ({ userForm, setUserCreateState }: Props) => {
             onClick={() => setUserCreateState('verify-email')}
             className="stroke-[var(--modal-header-cancel-icon)] cursor-pointer"
           >
-            <Icon name="arrowLeft" />
+            <Icon className="w-6 h-6" name="arrowLeft" />
           </div>
           <Text color={'primary'} className="h4">
             Enter Code
@@ -70,7 +74,6 @@ export const EmailOtp = ({ userForm, setUserCreateState }: Props) => {
             Please enter the 6 digit code we sent to {userForm.watch('email')}
           </Text>
         </div>
-        {/* @ts-ignore */}
         <PinInput
           length={6}
           initialValue=""
@@ -97,11 +100,19 @@ export const EmailOtp = ({ userForm, setUserCreateState }: Props) => {
             pointerEvents: 'auto',
           }}
           onComplete={(value) => {
-            toast.promise(onComplete(value), {
-              loading: 'Verifying code...',
-              success: 'Code verified',
-              error: 'Code verification failed',
-            });
+            toast.promise(
+              async () => {
+                const res = await onComplete(value);
+                if (!res) {
+                  throw new Error('Code verification failed');
+                }
+              },
+              {
+                loading: 'Verifying code...',
+                success: 'Code verified',
+                error: 'Code verification failed',
+              },
+            );
           }}
           autoSelect={true}
           regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}

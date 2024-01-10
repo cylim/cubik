@@ -4,25 +4,27 @@ import React, {
   createContext,
   ReactNode,
   useContext,
-  useEffect,
-  useRef,
+  useMemo,
   useState,
 } from 'react';
 import * as RadixTabs from '@radix-ui/react-tabs';
 import { cva } from 'class-variance-authority';
+import { motion } from 'framer-motion';
+import { v4 as uuid_v4 } from 'uuid';
 
 import { cn } from '../../../lib/utils';
 import { Text } from '../text/text';
-import { useTabMeasurements } from './useTabMeasurements';
 
 export type TabContextType = {
   size: 'sm' | 'md' | 'lg';
   className?: string;
+  id?: string;
 };
 
 export const TabContext = createContext<TabContextType>({
   size: 'md',
   className: '',
+  id: 'tab',
 });
 
 const tabVariants = cva('', {
@@ -81,6 +83,7 @@ interface TabsProps {
   defaultValue?: number;
   size: 'sm' | 'md' | 'lg';
   className?: string;
+  setActiveTab?: (tab: number) => void;
 }
 
 type TabListProps = {
@@ -107,6 +110,7 @@ type TabPanelProps = {
 export type SelectedTabContextType = {
   selectedTab: number;
   setSelectedTab: React.Dispatch<React.SetStateAction<number>>;
+  previousTab: number;
 };
 
 const SelectedTabContext = createContext<SelectedTabContextType | undefined>(
@@ -118,15 +122,24 @@ const Tabs: React.FC<TabsProps> = ({
   defaultValue,
   size,
   className,
+  setActiveTab,
 }) => {
   const [selectedTab, setSelectedTab] = useState<number>(defaultValue ?? 0);
+  const [previousTab, setPreviousTab] = useState(0);
+  const id = useMemo(() => uuid_v4(), []);
 
   return (
-    <SelectedTabContext.Provider value={{ selectedTab, setSelectedTab }}>
-      <TabContext.Provider value={{ size, className }}>
+    <SelectedTabContext.Provider
+      value={{ selectedTab, setSelectedTab, previousTab }}
+    >
+      <TabContext.Provider value={{ size, className, id }}>
         <RadixTabs.Root
           defaultValue={selectedTab.toString()}
-          onValueChange={(value) => setSelectedTab(Number(value))}
+          onValueChange={(value) => {
+            if (setActiveTab) setActiveTab(Number(value));
+            setPreviousTab(selectedTab);
+            setSelectedTab(Number(value));
+          }}
           className={cn(
             tabVariants({ size }),
             className,
@@ -142,56 +155,13 @@ const Tabs: React.FC<TabsProps> = ({
 
 const TabList: React.FC<TabListProps> = ({ children, className }) => {
   const { size } = useContext(TabContext);
-  const tabListContainerRef = useRef<HTMLDivElement>(null);
   const context = useContext(SelectedTabContext);
   if (!context) {
     throw new Error(
       'TabList must be used within a SelectedTabContext.Provider',
     );
   }
-  const { selectedTab } = context;
-  console.log('selected tab', selectedTab);
   const tabListStyles = cn(tabListVariants({ size }));
-  const tabsRef = useRef<(HTMLElement | null)[]>([]);
-  const [, setForceUpdate] = useState(false);
-  const [initialized, setInitialized] = useState(false);
-
-  useEffect(() => {
-    // This will run after the component mounts and measurements are set
-    if (!initialized) {
-      setForceUpdate(true);
-      setInitialized(true);
-    }
-  }, [initialized]);
-
-  // Use the measurements from the useTabMeasurements hook
-  const measurements = useTabMeasurements(
-    tabsRef.current,
-    tabListContainerRef.current,
-  );
-
-  const indicatorStyle: React.CSSProperties = measurements[selectedTab]
-    ? {
-        left: `${measurements[selectedTab]?.left}px`,
-        width: `${measurements[selectedTab]?.width}px`,
-        opacity: initialized ? 1 : 0,
-        position: 'absolute',
-        bottom: 0,
-        borderRadius: '4px',
-        transform: 'translateY(1px) translate3d(0, 0, 0)', // Trigger hardware acceleration
-        WebkitTransform: 'translateY(1px) translate3d(0, 0, 0)', // Webkit prefix for Safari
-        transition: `left 200ms cubic-bezier(0, 0, 0.2, 1), 
-                   width 200ms cubic-bezier(0, 0, 0.2, 1),
-                   opacity 200ms ease-in-out`,
-        WebkitTransition: `left 200ms cubic-bezier(0, 0, 0.2, 1), 
-                         width 200ms cubic-bezier(0, 0, 0.2, 1),
-                         opacity 200ms ease-in-out`, // Webkit prefix for Safari
-      }
-    : {
-        opacity: 0,
-        transform: 'translate3d(0, 0, 0)',
-        WebkitTransform: 'translate3d(0, 0, 0)',
-      };
 
   return (
     <RadixTabs.List
@@ -199,26 +169,15 @@ const TabList: React.FC<TabListProps> = ({ children, className }) => {
       style={{
         position: 'relative',
       }}
-      ref={tabListContainerRef}
     >
-      <>
-        {React.Children.map(children, (child, index) => {
-          return React.cloneElement(child as any, {
-            ref: (el: HTMLElement | null) => (tabsRef.current[index] = el),
-          });
-        })}
-      </>
-      <div
-        className={`bg-[var(--tab-fg-active)] h-[2px]`}
-        style={indicatorStyle}
-      />
+      {children}
     </RadixTabs.List>
   );
 };
 
 const Tab: React.FC<TabProps> = React.forwardRef<HTMLDivElement, TabProps>(
   ({ children, value, className }, ref: any) => {
-    const { size } = useContext(TabContext);
+    const { size, id } = useContext(TabContext);
     const context = useContext(SelectedTabContext);
     const selectedTab = context?.selectedTab;
 
@@ -227,7 +186,7 @@ const Tab: React.FC<TabProps> = React.forwardRef<HTMLDivElement, TabProps>(
     return (
       <RadixTabs.Trigger
         value={value.toString()}
-        className={`${tabStyles} ${className}`}
+        className={`${tabStyles} ${className} relative`}
         ref={ref}
       >
         <Text
@@ -236,6 +195,13 @@ const Tab: React.FC<TabProps> = React.forwardRef<HTMLDivElement, TabProps>(
         >
           {children}
         </Text>
+        {selectedTab === value && (
+          <motion.div
+            layoutId={id}
+            transition={{ type: 'spring', bounce: 0.2, duration: 0.5 }}
+            className={`absolute bottom-[-4px] left-0 bg-[var(--tab-fg-active)] h-[2px] w-full`}
+          />
+        )}
       </RadixTabs.Trigger>
     );
   },
@@ -245,11 +211,35 @@ const TabPanels: React.FC<TabPanelsProps> = ({ children, className }) => (
   <div className={cn('w-full', className)}>{children}</div>
 );
 
-const TabPanel: React.FC<TabPanelProps> = ({ children, value }) => (
-  <RadixTabs.Content value={value.toString()} className="w-full">
-    {children}
-  </RadixTabs.Content>
-);
+const TabPanel: React.FC<TabPanelProps> = ({ children, value }) => {
+  // get the value of previous tab here
+  const context = useContext(SelectedTabContext);
+  const previousTab = context?.previousTab;
+
+  const isEnteringFromRight = previousTab !== undefined && previousTab < value;
+  const shouldAnimate = !(previousTab === 0 && value === 0);
+  const initialX = isEnteringFromRight ? 10 : -10;
+
+  return (
+    <RadixTabs.Content value={value.toString()} className="w-full">
+      <motion.div
+        animate={{
+          opacity: 1,
+          x: 0,
+        }}
+        initial={
+          shouldAnimate ? { opacity: 0, x: initialX } : { opacity: 1, x: 0 }
+        }
+        transition={{
+          duration: 0.45,
+          ease: [0.25, 0.1, 0.0, 1.0], // Cubic bezier values
+        }}
+      >
+        {children}
+      </motion.div>
+    </RadixTabs.Content>
+  );
+};
 
 Tab.displayName = 'Tab';
 

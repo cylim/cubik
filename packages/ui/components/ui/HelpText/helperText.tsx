@@ -11,8 +11,8 @@ const helperTextVariants = cva('transition-colors', {
       error: 'text-[var(--color-fg-error)]',
     },
     fontSize: {
-      md: 'text-[14px] font-[84] leading-5',
-      sm: 'text-[12px] font-[84] leading-4',
+      md: 'l1-light font-[84] leading-5',
+      sm: 'l2-light font-[84] leading-4',
     },
   },
   defaultVariants: {

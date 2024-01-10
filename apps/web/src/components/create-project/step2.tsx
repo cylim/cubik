@@ -1,49 +1,16 @@
-import { ProjectFormData } from '@/components/create-project';
-import { useUploadThing } from '@/utils/uploadthing';
-import React from 'React';
+import { ProjectFormData } from '@/components/create-project/createProject';
+import { LogoUploader } from '@/components/create-project/image-uploder/logoUploader';
+import { MultiImageUploader } from '@/components/create-project/image-uploder/multiImageUploader';
 import { UseFormReturn } from 'react-hook-form';
-import { toast } from 'sonner';
 
-import { Button, ImageUploader, Text } from '@cubik/ui';
+import { Button, Text } from '@cubik/ui';
 
 interface Props {
   projectForm: UseFormReturn<ProjectFormData, any, undefined>;
   setStep: React.Dispatch<React.SetStateAction<number>>;
+  forceSave: () => Promise<void>;
 }
-const Step = ({ setStep, projectForm }: Props) => {
-  const { startUpload, isUploading, permittedFileInfo } = useUploadThing(
-    'imageUploader',
-    {
-      onUploadProgress: (progressEvent) => {
-        // setProgress(progressEvent);
-        projectForm.setValue('progress', progressEvent);
-      },
-      onUploadError: (error) => {
-        projectForm.setError('logo', {
-          type: 'manual',
-          message: error.message,
-        });
-        toast.error(`Upload Error: ${error.message}`);
-      },
-      onUploadBegin: (file) => {
-        //   setLoadingState('Uploading');
-        //   toast.info(`Upload Begin: ${file}`);
-      },
-      onClientUploadComplete: (file) => {
-        if (file) {
-          console.log(file);
-          projectForm.setValue('logo', file[0].url);
-        } else {
-          projectForm.setError('logo', {
-            type: 'manual',
-            message: "Couldn't upload file",
-          });
-          toast.error(`Upload Error: ${file}`);
-        }
-      },
-    },
-  );
-
+export const Step2 = ({ setStep, projectForm, forceSave }: Props) => {
   return (
     <>
       <div className="flex flex-col gap-14">
@@ -59,20 +26,24 @@ const Step = ({ setStep, projectForm }: Props) => {
           </Text>
         </div>
         <div className="flex flex-col gap-4">
-          <Text color={'primary'} className="l2">
+          <Text color={'primary'} className="l1">
             Thumbnail
           </Text>
-          <ImageUploader
-            progress={projectForm.watch('progress') || 0}
-            logo={projectForm.watch('logo')}
-            errorMessage={projectForm.formState.errors.logo?.message}
-            isUploading={isUploading}
-            startUpload={startUpload}
-          />
+          <LogoUploader projectForm={projectForm} />
         </div>
+        <div className="flex flex-col gap-4">
+          <Text color={'primary'} className="l1">
+            Gallery
+          </Text>
+          <MultiImageUploader projectForm={projectForm} />
+        </div>
+
         <div className=" flex w-full items-center justify-between">
           <Button
-            onClick={() => setStep(1)}
+            onClick={() => {
+              setStep(1);
+              forceSave();
+            }}
             leftIconName="chevronLeft"
             variant={'outline'}
             size={'md'}
@@ -92,5 +63,3 @@ const Step = ({ setStep, projectForm }: Props) => {
     </>
   );
 };
-
-export { Step as Step2 };

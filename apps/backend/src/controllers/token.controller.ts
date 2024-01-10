@@ -23,6 +23,7 @@ export const tokenPriceController = async (req: Request, res: Response) => {
     return res.status(500).json({ error: error });
   }
 };
+
 export const tokenPriceMultiple = async (req: Request, res: Response) => {
   try {
     const prices = await Promise.all(

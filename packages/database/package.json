@@ -3,12 +3,9 @@
   "main": "./index.ts",
   "types": "./index.ts",
   "scripts": {
-    "db:gen": "prisma generate --schema ./prisma/schema.prisma",
-    "db:old:gen": "prisma generate --schema ./prisma/old.prisma",
-    "db:push": "dotenv -e ../../.env -- npx prisma db push --schema ./prisma/schema.prisma",
-    "db:old:push": "dotenv -e ../../.env -- npx prisma db pull --schema ./prisma/old.prisma",
-    "db:pull": "dotenv -e ../../.env -- npx prisma db pull --schema ./prisma/schema.prisma",
-    "db:old:pull": "dotenv -e ../../.env -- npx prisma db pull --schema ./prisma/old.prisma",
+    "db:gen": "prisma generate",
+    "db:push": "dotenv -e ../../.env -- npx prisma db push --skip-generate",
+    "db:pull": "dotenv -e ../../.env -- npx prisma db pull --skip-generate",
     "dev": "dotenv -e ../../.env -- npx prisma studio --port 5556"
   },
   "dependencies": {

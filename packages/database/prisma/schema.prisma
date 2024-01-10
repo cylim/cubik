@@ -124,7 +124,7 @@ model Project {
   isDraft           Boolean             @default(false)
   tx                String              @default("")
   longDescription   String              @db.Text
-  industry          String              @db.VarChar(2000)
+  industry          Json?              
   projectLink       String              @default("")
   twitterHandle     String              @default("")
   githubLink        String              @default("")
@@ -245,7 +245,6 @@ model Team {
   userId    String
   projectId String?
   createdAt DateTime @default(now())
-  designation  Designation @default(Other)
   updatedAt DateTime @updatedAt
   isActive  Boolean  @default(true)
   isArchive Boolean  @default(false)
@@ -400,15 +399,3 @@ enum EventStatusType {
   REGISTRATION
   VOTING
 }
-enum Designation {
-  CEO
-  CTO
-  COO
-  CMO
-  Developer
-  Designer
-  Growth 
-  Manger
-  Marketing
-  Other
-} 

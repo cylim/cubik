@@ -1,15 +1,19 @@
 import type { NextRequest } from 'next/server';
 import { Logger } from 'next-axiom';
 import { LogLevel } from 'next-axiom/dist/logger';
+import { ILogObj, Logger as TsLogger } from 'tslog';
 import { v4 as uuidV4 } from 'uuid';
 
 import { AuthPayload } from '@cubik/common-types';
 import { AuthPayload as AdminAuthPayload } from '@cubik/common-types/src/admin';
 
+const tslog: TsLogger<ILogObj> = new TsLogger();
+
 const createLogger = (source: string) => {
   return new Logger({
     logLevel: LogLevel.info,
     source,
+    autoFlush: true,
   });
 };
 
@@ -18,12 +22,10 @@ export const log = (
   data?: string | object | number | undefined | null,
 ) => {
   if (data) {
-    // eslint-disable-next-line no-console
-    return console.log(message, data);
+    return tslog.info(message, data);
   }
 
-  // eslint-disable-next-line no-console
-  return console.log(message);
+  return tslog.info(message);
 };
 export const logError = (
   message: string | number | object,
@@ -33,8 +35,9 @@ export const logError = (
   const errorMessage = error instanceof Error ? error?.message : error;
 
   // eslint-disable-next-line no-console
-  return console.error(message, logFullError ? error : errorMessage);
+  return tslog.error(message, logFullError ? error : errorMessage);
 };
+
 export const logApi = (
   {
     level = 'info',
@@ -60,6 +63,7 @@ export const logApi = (
   const logId = uuidV4();
   let reqData: object | null = null;
   const logger = createLogger(source ?? 'default');
+
   if (req?.nextUrl) {
     const { host, hostname, origin, pathname } = req.nextUrl;
 
@@ -96,11 +100,11 @@ export const logApi = (
 
   const logMessage = `${logId} - ${message}`;
 
-  if (error) {
-    logError(logMessage, error);
-  } else {
-    log(logMessage, logData);
-  }
+  // if (error) {
+  //   logError(logMessage, error);
+  // } else {
+  //   log(logMessage, logData);
+  // }
 
   return logger[logLevel](logMessage, logData);
 };

@@ -12,6 +12,7 @@ const { Multisig, VaultTransaction, Proposal } = sqds.accounts;
 export const getSquadsTxs = async (req: Request, res: Response) => {
   try {
     const { createKey } = req.query;
+
     const [multisigPda] = sqds.getMultisigPda({
       createKey: new anchor.web3.PublicKey(createKey as string),
     });

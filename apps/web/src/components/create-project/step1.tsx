@@ -48,7 +48,7 @@ export const Step1 = ({ setStep, projectForm, forceSave }: Props) => {
                 variant="md"
               >
                 <InputField
-                  maxLength={16}
+                  maxLength={32}
                   onChange={(e) => {
                     projectForm.setValue('name', e.currentTarget.value);
                   }}

@@ -39,7 +39,9 @@ interface ProjectAdminCardBodyProps {
 
 const ProjectAdminCardBody = ({ projectId }: ProjectAdminCardBodyProps) => {
   const [activeTab, setActiveTab] = useState(0);
-  const [height, setHeight] = useState(0);
+  // if you make default value 0 then first render doesn't work properly
+  // 518 is the min height of the tab 0
+  const [height, setHeight] = useState(518);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -95,8 +97,11 @@ const ProjectAdminCardBody = ({ projectId }: ProjectAdminCardBodyProps) => {
 const ProjectVerificationWrapper = ({
   children,
   projectVerificationStatus,
-}: any) => {
-  if (!projectVerificationStatus) {
+}: {
+  children: React.ReactNode;
+  projectVerificationStatus: ProjectVerifyStatus;
+}) => {
+  if (projectVerificationStatus === ProjectVerifyStatus.REVIEW) {
     return (
       <motion.div
         layout
@@ -114,21 +119,39 @@ const ProjectVerificationWrapper = ({
         />
       </motion.div>
     );
-  } else return children;
+  }
+  if (projectVerificationStatus === ProjectVerifyStatus.FAILED) {
+    return (
+      <motion.div
+        layout
+        className="flex flex-col gap-2 rounded-2xl bg-[var(--color-surface-negative-transparent)] p-2"
+      >
+        <div className="rounded-lg">{children}</div>
+        <Alert
+          type="text"
+          fill={'red'}
+          color="red"
+          content="Your Project was rejected by the team, please contact us for more information"
+          closeIcon={false}
+          // button="Contact Team"
+          className=""
+        />
+      </motion.div>
+    );
+  }
+  return children;
 };
 
 const ProjectAdminCard = ({ project }: { project: ProjectProps }) => {
-  const projectIsVerified = true; //project.status === ProjectVerifyStatus.VERIFIED;
-
   return (
-    <ProjectVerificationWrapper projectVerificationStatus={projectIsVerified}>
+    <ProjectVerificationWrapper projectVerificationStatus={project.status}>
       <Card size="md">
         <CardHeader>
           <ProjectHeader
             isDraft={false}
             project={project}
             isAdmin={true}
-            isVerified={projectIsVerified}
+            isVerified={project.status === 'VERIFIED'}
           />
         </CardHeader>
         <CardBody>

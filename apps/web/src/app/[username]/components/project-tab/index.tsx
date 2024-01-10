@@ -29,6 +29,9 @@ const getProjects = async (username: string) => {
       // if user is owner of this profile we show all projects including draft
       isDraft: user && user.username === username ? undefined : false,
     },
+    orderBy: {
+      createdAt: 'desc',
+    },
     select: {
       name: true,
       logo: true,
@@ -61,7 +64,14 @@ export const ProjectTab = async ({ username }: Props) => {
         />
       );
     }
-    return projects.map((project, index) => {
+
+    // reorder to push draft projects to the bottom
+    const reorderedProjects: typeof projects = [
+      ...projects.filter((e) => !e.isDraft),
+      ...projects.filter((e) => e.isDraft),
+    ];
+
+    return reorderedProjects.map((project, index) => {
       if (isProfileOwner) {
         if (project.isDraft) {
           return (
@@ -70,6 +80,7 @@ export const ProjectTab = async ({ username }: Props) => {
         }
         return <ProjectAdminCard project={project} key={index} />;
       }
+
       return (
         <ProjectProfileCard isDraft={false} project={project} key={index} />
       );

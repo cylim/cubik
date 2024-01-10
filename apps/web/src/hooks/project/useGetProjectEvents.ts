@@ -15,13 +15,19 @@ type GetProjectEventsByProject = Prisma.ProjectJoinEventGetPayload<{
         matchedPool: true;
         isPaused: true;
         eventStatus: true;
+        _count: {
+          select: {
+            contribution: true;
+            projectJoinEvent: true;
+          };
+        };
       };
     };
   };
 }>;
 
 type ResponseType = ApiResponseType & {
-  result: GetProjectEventsByProject;
+  result: GetProjectEventsByProject[];
 };
 
 const queryFn = async (id: string) => {
@@ -32,7 +38,7 @@ const queryFn = async (id: string) => {
   if (!responseData.success) {
     toast.error(responseData.message);
   }
-  return responseData.result as ResponseType;
+  return responseData.result as GetProjectEventsByProject[];
 };
 
 export default function useGetProjectEvents({ id }: { id: string }) {

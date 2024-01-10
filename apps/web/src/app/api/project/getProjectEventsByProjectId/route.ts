@@ -45,6 +45,12 @@ export const GET = async (req: NextRequest) => {
             matchedPool: true,
             isPaused: true,
             eventStatus: true,
+            _count: {
+              select: {
+                contribution: true,
+                projectJoinEvent: true,
+              },
+            },
           },
         },
       },

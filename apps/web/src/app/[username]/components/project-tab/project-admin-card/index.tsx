@@ -1,12 +1,14 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import ProjectHeader from '@/app/[username]/components/project-tab/project-admin-card/project-header';
+import dynamic from 'next/dynamic';
+import ProjectHeader from '@/app/[username]/components/project-tab/project-admin-card/projectHeader';
 import ProjectAdminGrantsTab from '@/app/[username]/components/project-tab/project-admin-card/tabs/grants';
 import ProjectAdminStatsTab from '@/app/[username]/components/project-tab/project-admin-card/tabs/stats';
 import ProjectAdminTreasuryTab from '@/app/[username]/components/project-tab/project-admin-card/tabs/treasury';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
+import { ProjectVerifyStatus } from '@cubik/database';
 import {
   Alert,
   Card,
@@ -19,15 +21,23 @@ import {
   Tabs,
 } from '@cubik/ui';
 
+const AnimatePresence = dynamic(
+  () => import('framer-motion').then((e) => e.AnimatePresence),
+  { ssr: false },
+);
 export type ProjectProps = {
   name: string;
   slug: string | null;
   shortDescription: string;
   logo: string;
   id: string;
+  status: ProjectVerifyStatus;
 };
+interface ProjectAdminCardBodyProps {
+  projectId: string;
+}
 
-const ProjectAdminCardBody = () => {
+const ProjectAdminCardBody = ({ projectId }: ProjectAdminCardBodyProps) => {
   const [activeTab, setActiveTab] = useState(0);
   const [height, setHeight] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
@@ -64,7 +74,7 @@ const ProjectAdminCardBody = () => {
           <div ref={ref}>
             <TabPanels>
               <TabPanel value={0}>
-                <ProjectAdminGrantsTab />
+                <ProjectAdminGrantsTab projectId={projectId} />
               </TabPanel>
               <TabPanel value={1}>
                 <ProjectAdminStatsTab />
@@ -108,30 +118,43 @@ const ProjectVerificationWrapper = ({
 };
 
 const ProjectAdminCard = ({ project }: { project: ProjectProps }) => {
-  const projectIsVerified = true;
+  const projectIsVerified = true; //project.status === ProjectVerifyStatus.VERIFIED;
+
   return (
     <ProjectVerificationWrapper projectVerificationStatus={projectIsVerified}>
       <Card size="md">
         <CardHeader>
           <ProjectHeader
+            isDraft={false}
             project={project}
             isAdmin={true}
             isVerified={projectIsVerified}
           />
         </CardHeader>
         <CardBody>
-          <ProjectAdminCardBody />
+          <ProjectAdminCardBody projectId={project.id} />
         </CardBody>
       </Card>
     </ProjectVerificationWrapper>
   );
 };
 
-const ProjectProfileCard = ({ project }: { project: ProjectProps }) => {
+const ProjectProfileCard = ({
+  project,
+  isDraft,
+}: {
+  project: ProjectProps;
+  isDraft: boolean;
+}) => {
   return (
     <Card size="md">
       <CardHeader>
-        <ProjectHeader project={project} isVerified={false} isAdmin={false} />
+        <ProjectHeader
+          isDraft={isDraft}
+          project={project}
+          isVerified={project.status === 'VERIFIED'}
+          isAdmin={false}
+        />
       </CardHeader>
     </Card>
   );

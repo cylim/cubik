@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import TabLayout from '@/components/common/tabs/TabLayout';
+import useGetProjectEvents from '@/hooks/project/useGetProjectEvents';
 
 import {
   Alert,
@@ -20,29 +21,13 @@ enum EVENT {
   ACTIVE = 'active',
   PREVIOUS = 'previous',
 }
-
-const ProjectAdminGrantsTab = ({}) => {
+interface Props {
+  projectId: string;
+}
+const ProjectAdminGrantsTab = ({ projectId }: Props) => {
   const [eventFilter, setEventFilter] = useState<EVENT>(EVENT.ALL);
-  const Events = [];
-  // {
-  //   id: '1243445',
-  //   name: 'Solana Foundation Grants Round',
-  //   matchedPool: 100,
-  //   _count: {
-  //     projectJoinEvent: 22,
-  //     contribution: 12,
-  //   },
-  // },
-  // {
-  //   id: '1243445',
-  //   name: 'Solana Foundation Grants Round',
-  //   matchedPool: 100,
-  //   _count: {
-  //     projectJoinEvent: 22,
-  //     contribution: 12,
-  //   },
-  // },
-  //];
+  // const events = useGetProjectEvents({ id: projectId });
+  // console.log(events.data);
   return (
     <TabLayout>
       <SubHead heading={'Grants'}>
@@ -69,7 +54,38 @@ const ProjectAdminGrantsTab = ({}) => {
           </SegmentContainer>
         </div>
       </SubHead>
-      {Events.length > 0 ? (
+
+      {eventFilter === EVENT.ALL && (
+        <EmptyState
+          title={'No Grants Round Found'}
+          description={
+            'You havent applied for any grants round for the project. Apply for a grant to get started.'
+          }
+          icon={'moneyDollarBagDuoSolid'}
+          border={true}
+        />
+      )}
+      {eventFilter === EVENT.ACTIVE && (
+        <EmptyState
+          title={'No Grants Round Found'}
+          description={
+            'You havent applied for any grants round for the project. Apply for a grant to get started.'
+          }
+          icon={'moneyDollarBagDuoSolid'}
+          border={true}
+        />
+      )}
+      {eventFilter === EVENT.PREVIOUS && (
+        <EmptyState
+          title={'No Grants Round Found'}
+          description={
+            'You havent applied for any grants round for the project. Apply for a grant to get started.'
+          }
+          icon={'moneyDollarBagDuoSolid'}
+          border={true}
+        />
+      )}
+      {/* 
         Events.map((event, key) => {
           return (
             <GrantsRoundCard
@@ -87,16 +103,7 @@ const ProjectAdminGrantsTab = ({}) => {
             </GrantsRoundCard>
           );
         })
-      ) : (
-        <EmptyState
-          title={'No Grants Round Found'}
-          description={
-            'You havent applied for any grants round for the project. Apply for a grant to get started.'
-          }
-          icon={'moneyDollarBagDuoSolid'}
-          border={true}
-        />
-      )}
+       */}
       <Text className="l2-light" color="tertiary">
         Grants rounds are a collaborative funding effort, designed to support
         projects like yours through community contributions amplified by

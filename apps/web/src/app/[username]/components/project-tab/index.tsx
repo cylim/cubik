@@ -16,11 +16,18 @@ interface Props {
 }
 
 const getProjects = async (username: string) => {
+  const cookieStore = cookies();
+  const token = cookieStore.get('authToken');
+  const user = token ? await IsUserLoginServer(token?.value || '') : null;
+
   return await prisma.project.findMany({
     where: {
       owner: {
         username: username,
       },
+      isArchive: false,
+      // if user is owner of this profile we show all projects including draft
+      isDraft: user && user.username === username ? undefined : false,
     },
     select: {
       name: true,
@@ -28,6 +35,8 @@ const getProjects = async (username: string) => {
       shortDescription: true,
       slug: true,
       id: true,
+      status: true,
+      isDraft: true,
     },
   });
 };
@@ -37,8 +46,8 @@ export const ProjectTab = async ({ username }: Props) => {
   const token = cookieStore.get('authToken');
   const projects = await getProjects(username);
   const user = token ? await IsUserLoginServer(token?.value || '') : null;
-  const isOwnProfile =
-    token &&
+
+  const isProfileOwner =
     user?.username.toLocaleLowerCase() === username.toLocaleLowerCase();
   const hasProjects = projects && projects.length > 0;
 
@@ -52,19 +61,24 @@ export const ProjectTab = async ({ username }: Props) => {
         />
       );
     }
-
-    return projects.map((project, index) =>
-      isOwnProfile ? (
-        <ProjectAdminCard project={project} key={index} />
-      ) : (
-        <ProjectProfileCard project={project} key={index} />
-      ),
-    );
+    return projects.map((project, index) => {
+      if (isProfileOwner) {
+        if (project.isDraft) {
+          return (
+            <ProjectProfileCard isDraft={true} project={project} key={index} />
+          );
+        }
+        return <ProjectAdminCard project={project} key={index} />;
+      }
+      return (
+        <ProjectProfileCard isDraft={false} project={project} key={index} />
+      );
+    });
   };
 
   return (
     <TabLayout>
-      {isOwnProfile ? (
+      {isProfileOwner ? (
         <>
           <SubHead heading="Projects">
             <Link href={'/create/project'}>

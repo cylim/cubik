@@ -151,6 +151,7 @@ export const SearchSelect = ({
       value={value}
       placeholder={placeholder}
       options={options}
+      className="w-full"
       //@ts-ignore
       styles={{
         control: (baseStyles: CSSObjectWithLabel, state) => ({
@@ -160,6 +161,7 @@ export const SearchSelect = ({
             : 'var(--form-input-border-default)',
           backgroundColor: 'var(--form-input-surface-default)',
           borderRadius: '8px',
+          width: '100% !important',
         }),
         placeholder: (baseStyles) => ({
           ...baseStyles,

@@ -105,7 +105,7 @@
 
 import React from 'react';
 import Select from 'react-select';
-import type { Options } from 'react-select';
+import type { Options, ThemeConfig } from 'react-select';
 import makeAnimated from 'react-select/animated';
 
 export type { Options } from 'react-select';
@@ -150,8 +150,22 @@ export const SearchSelect = ({
       }}
       value={value}
       placeholder={placeholder}
-      className="text-[var(--form-input-fg-default)] w-full bg-[var(--form-input-surface-default)] placeholder:text-[var(--form-input-border-default)]  hover:outline-[var(--form-input-border-hovered)] hover:bg-[var(--form-input-surface-hovered)"
       options={options}
+      //@ts-ignore
+      theme={(theme: ThemeConfig) => ({
+        ...theme,
+        borderRadius: '8px',
+        colors: {
+          neutral0: 'var(--form-input-surface-default)',
+          neutral50: 'var(--form-input-border-default)',
+          neutral80: 'var(--form-input-fg-default)',
+          neutral20: 'var(--form-input-border-hovered)',
+          neutral60: 'var(--form-input-border-default)',
+          neutral90: '#F43F5E',
+        },
+      })}
     />
   );
 };
+
+// className="text-[var(--form-input-fg-default)] w-full bg-[var(--form-input-surface-default)] placeholder:text-[var(--form-input-border-default)]  hover:outline-[var(--form-input-border-hovered)] hover:bg-[var(--form-input-surface-hovered)"

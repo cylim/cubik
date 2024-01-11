@@ -49,6 +49,7 @@ const main = async () => {
   app.use(basePath + '/price', TokenRouter);
   app.use(basePath + '/image', imageFilter);
 
+
   app.listen(PORT, async () => {
     if (process.env.CRON_ENABLED === '1') {
       logger.log(

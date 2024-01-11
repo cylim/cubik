@@ -36,7 +36,9 @@ export const GET = async (req: NextRequest) => {
           projectId: projectId,
           project: {
             ownerPublickey: user.mainWallet,
+            isArchive: false,
           },
+          isArchive: false,
         },
         select: {
           totalUsdAmount: true,
@@ -48,7 +50,9 @@ export const GET = async (req: NextRequest) => {
           projectId: projectId,
           project: {
             ownerPublickey: user.mainWallet,
+            isArchive: false,
           },
+          isArchive: false,
         },
         select: {
           amount: true,

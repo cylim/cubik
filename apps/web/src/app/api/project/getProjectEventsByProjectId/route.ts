@@ -33,7 +33,9 @@ export const GET = async (req: NextRequest) => {
         projectId: projectId,
         project: {
           ownerPublickey: user.mainWallet,
+          isArchive: false,
         },
+        isArchive: false,
       },
       select: {
         projectEventStatus: true,

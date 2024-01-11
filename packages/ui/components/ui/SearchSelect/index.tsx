@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 // 'use client';
 
 // import React, { useEffect, useState } from 'react';
@@ -105,7 +107,7 @@
 
 import React from 'react';
 import Select from 'react-select';
-import type { CSSObjectWithLabel, Options, ThemeConfig } from 'react-select';
+import type { CSSObjectWithLabel, Options } from 'react-select';
 import makeAnimated from 'react-select/animated';
 
 export type { Options } from 'react-select';
@@ -154,6 +156,7 @@ export const SearchSelect = ({
       className="w-full"
       //@ts-ignore
       styles={{
+        //@ts-ignore
         control: (baseStyles: CSSObjectWithLabel, state) => ({
           ...baseStyles,
           borderColor: state.isFocused
@@ -163,13 +166,15 @@ export const SearchSelect = ({
           borderRadius: '8px',
           width: '100% !important',
         }),
+        //@ts-ignore
         placeholder: (baseStyles) => ({
           ...baseStyles,
           fontSize: '12px',
           fontWeight: 400,
           color: 'var(--form-input-border-default)',
         }),
-        dropdownIndicator: (provided, state) => ({
+        //@ts-ignore
+        dropdownIndicator: (provided) => ({
           ...provided,
           background: '',
           borderColor: 'transparent !important',
@@ -182,10 +187,12 @@ export const SearchSelect = ({
             color: 'var(--form-input-fg-default)',
           },
         }),
+        //@ts-ignore
         indicatorSeparator: (provided) => ({
           ...provided,
           display: 'none',
         }),
+        //@ts-ignore
         menu: (provided) => ({
           ...provided,
           scroll: 'no-scrollbar',
@@ -195,6 +202,7 @@ export const SearchSelect = ({
 
           borderRadius: '12px',
         }),
+        //@ts-ignore
         menuList: (provided) => ({
           ...provided,
           backgroundColor: 'var(--menu-list-surface)',

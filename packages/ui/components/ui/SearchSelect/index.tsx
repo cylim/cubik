@@ -105,7 +105,7 @@
 
 import React from 'react';
 import Select from 'react-select';
-import type { Options } from 'react-select';
+import type { CSSObjectWithLabel, Options, ThemeConfig } from 'react-select';
 import makeAnimated from 'react-select/animated';
 
 export type { Options } from 'react-select';
@@ -150,8 +150,89 @@ export const SearchSelect = ({
       }}
       value={value}
       placeholder={placeholder}
-      className="text-[var(--form-input-fg-default)] w-full bg-[var(--form-input-surface-default)] placeholder:text-[var(--form-input-border-default)]  hover:outline-[var(--form-input-border-hovered)] hover:bg-[var(--form-input-surface-hovered)"
       options={options}
+      className="w-full"
+      //@ts-ignore
+      styles={{
+        control: (baseStyles: CSSObjectWithLabel, state) => ({
+          ...baseStyles,
+          borderColor: state.isFocused
+            ? 'var(--form-input-border-focused)'
+            : 'var(--form-input-border-default)',
+          backgroundColor: 'var(--form-input-surface-default)',
+          borderRadius: '8px',
+          width: '100% !important',
+        }),
+        placeholder: (baseStyles) => ({
+          ...baseStyles,
+          fontSize: '12px',
+          fontWeight: 400,
+          color: 'var(--form-input-border-default)',
+        }),
+        dropdownIndicator: (provided, state) => ({
+          ...provided,
+          background: '',
+          borderColor: 'transparent !important',
+          outline: '0px !important',
+          boxShadow: '0',
+          p: 0,
+          w: '60px',
+          color: 'var(--form-input-fg-default)',
+          _hover: {
+            color: 'var(--form-input-fg-default)',
+          },
+        }),
+        indicatorSeparator: (provided) => ({
+          ...provided,
+          display: 'none',
+        }),
+        menu: (provided) => ({
+          ...provided,
+          scroll: 'no-scrollbar',
+          boxShadow:
+            '0px 20px 25px -5px rgba(0, 0, 0, 0.10), 0px 10px 10px -5px rgba(0, 0, 0, 0.04)',
+          backgroundColor: 'var(--menu-list-surface)',
+
+          borderRadius: '12px',
+        }),
+        menuList: (provided) => ({
+          ...provided,
+          backgroundColor: 'var(--menu-list-surface)',
+          border: '1px solid var(--menu-list-item-border)',
+          borderRadius: '12px',
+          '::-webkit-scrollbar': {
+            display: 'none',
+          },
+        }),
+        //@ts-ignore
+        option: (provided) => ({
+          ...provided,
+          color: 'var(--menu-list-item-fg-default)',
+          fontSize: '14px',
+          fontWeight: '400',
+          backgroundColor: 'transparent',
+          _hover: {
+            backgroundColor: 'var(--menu-list-item-surface-hovered)',
+          },
+          ':active': {
+            backgroundColor: 'var(--menu-list-item-surface-hovered)',
+          },
+        }),
+      }}
+      // theme={(theme: ThemeConfig) => ({
+      //   ...theme,
+      //   borderRadius: '8px',
+      //   colors: {
+      //     neutral0: 'var(--form-input-surface-default)',
+      //     neutral50: 'var(--form-input-border-default)',
+      //     neutral80: 'var(--form-input-fg-default)',
+      //     neutral20: 'var(--form-input-border-hovered)',
+      //     neutral60: 'var(--form-input-border-default)',
+      //     neutral90: '#F43F5E',
+      //   },
+      // })}
     />
   );
 };
+
+// className="text-[var(--form-input-fg-default)] w-full bg-[var(--form-input-surface-default)] placeholder:text-[var(--form-input-border-default)]  hover:outline-[var(--form-input-border-hovered)] hover:bg-[var(--form-input-surface-hovered)"

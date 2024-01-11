@@ -3,6 +3,7 @@
 import React from 'react';
 import TabLayout from '@/components/common/tabs/TabLayout';
 import TreasuryInfoCard from '@/components/explorer/TreasuryInfoCard';
+import useProjectStats from '@/hooks/project/useProjectStats';
 
 import {
   Button,
@@ -16,8 +17,12 @@ import {
 
 import { StatsSwitch } from './statsSwitch';
 
-const ProjectAdminStatsTab = () => {
+interface Props {
+  id: string;
+}
+const ProjectAdminStatsTab = ({ id }: Props) => {
   const { theme } = useTheme();
+  const stats = useProjectStats({ id });
   const showEmptyState = false;
   const ChartData = [
     {
@@ -77,25 +82,41 @@ const ProjectAdminStatsTab = () => {
           headerIconName="infoCircle"
           tooltipText="Outstanding Balance is the amount of balance that is outstanding
           for this project."
-          value="$44,546.8"
+          value={
+            stats.data
+              ? `$${(
+                  stats.data?.totalContributions + stats.data?.matchGrantAmount
+                ).toLocaleString()}`
+              : '$0'
+          }
         />
         <Divider orientation="vertical" className="!h-auto" />
         <TreasuryInfoCard
           header="Contributions Received"
           headerIconName="infoCircle"
-          value="$4,621.5"
+          value={
+            stats.data
+              ? `$${(stats.data?.totalContributions).toLocaleString()}`
+              : '$0'
+          }
         />
         <Divider orientation="vertical" className="!h-auto" />
         <TreasuryInfoCard
           header="Matched Grants Funds"
           headerIconName="infoCircle"
-          value={'$30,987.8'}
+          value={
+            stats.data
+              ? `$${(stats.data?.matchGrantAmount).toLocaleString()}`
+              : '$0'
+          }
         />
         <Divider orientation="vertical" className="!h-auto" />
         <TreasuryInfoCard
           header="Contributors"
           headerIconName="infoCircle"
-          value="3,572"
+          value={
+            stats.data ? (stats.data?.totalContributors).toLocaleString() : '0'
+          }
         />
       </div>
       <div className="flex flex-col-reverse items-start justify-between gap-6 md:flex-row md:items-center ">

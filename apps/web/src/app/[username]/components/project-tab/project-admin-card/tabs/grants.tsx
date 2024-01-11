@@ -23,11 +23,11 @@ enum EVENT {
   PREVIOUS = 'previous',
 }
 interface Props {
-  projectId: string;
+  id: string;
 }
-const ProjectAdminGrantsTab = ({ projectId }: Props) => {
+const ProjectAdminGrantsTab = ({ id }: Props) => {
   const [eventFilter, setEventFilter] = useState<EVENT>(EVENT.ALL);
-  const projectEvents = useGetProjectEvents({ id: projectId });
+  const projectEvents = useGetProjectEvents({ id });
   return (
     <TabLayout>
       <SubHead heading={'Grants'}>

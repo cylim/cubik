@@ -70,7 +70,7 @@ const GrantsRoundCard = ({
             projectJoinRoundStatus === 'REJECTED' &&
               'bg-[var(--color-surface-negative-transparent)]',
             projectJoinRoundStatus === 'PENDING' &&
-              'bg-[var(--color-surface-warn-transparent)]',
+              'bg-[var(--color-surface-caution-transparent)]',
           )}
         >
           <div className="px-6 py-4 rounded-xl bg-[var(--round-card-surface)] flex flex-col gap-3">
@@ -93,6 +93,17 @@ const GrantsRoundCard = ({
                 type="text"
                 fill={'yellow'}
                 color="yellow"
+                content="Grant Application Under Review. You will receive an update before the grant round starts"
+                closeIcon={false}
+                // button="Contact Team"
+                className=""
+              />
+            )}
+            {projectJoinRoundStatus === 'REJECTED' && (
+              <Alert
+                type="text"
+                fill={'red'}
+                color="red"
                 content="Grant Application Under Review. You will receive an update before the grant round starts"
                 closeIcon={false}
                 // button="Contact Team"

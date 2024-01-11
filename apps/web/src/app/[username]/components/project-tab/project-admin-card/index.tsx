@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import ProjectHeader from '@/app/[username]/components/project-tab/project-admin-card/projectHeader';
 import ProjectAdminGrantsTab from '@/app/[username]/components/project-tab/project-admin-card/tabs/grants';
@@ -76,10 +76,16 @@ const ProjectAdminCardBody = ({ projectId }: ProjectAdminCardBodyProps) => {
           <div ref={ref}>
             <TabPanels>
               <TabPanel value={0}>
-                <ProjectAdminGrantsTab projectId={projectId} />
+                {/* replace loading with skeleton state  */}
+                <Suspense fallback={'loading....'}>
+                  <ProjectAdminGrantsTab id={projectId} />
+                </Suspense>
               </TabPanel>
               <TabPanel value={1}>
-                <ProjectAdminStatsTab />
+                {/* replace loading with skeleton state  */}
+                <Suspense fallback={'loading....'}>
+                  <ProjectAdminStatsTab id={projectId} />
+                </Suspense>
               </TabPanel>
               <TabPanel value={2}>
                 <ProjectAdminTreasuryTab />

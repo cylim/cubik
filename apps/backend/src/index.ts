@@ -1,5 +1,6 @@
 import bodyParser from 'body-parser';
 import { envConfig } from 'config';
+import { imageFilter } from 'controllers/images.controller';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import { config } from 'dotenv';
@@ -46,6 +47,8 @@ const main = async () => {
 
   app.use(basePath + '/squads', squadsRouter);
   app.use(basePath + '/price', TokenRouter);
+  app.use(basePath + '/image', imageFilter);
+
 
   app.listen(PORT, async () => {
     if (process.env.CRON_ENABLED === '1') {

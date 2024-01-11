@@ -2,7 +2,9 @@
 
 import React, { useState } from 'react';
 import TabLayout from '@/components/common/tabs/TabLayout';
+import useGetProjectEvents from '@/hooks/project/useGetProjectEvents';
 
+import { calculateEventStatus } from '@cubik/common/helper/eventStatus';
 import {
   Alert,
   EmptyState,
@@ -20,29 +22,12 @@ enum EVENT {
   ACTIVE = 'active',
   PREVIOUS = 'previous',
 }
-
-const ProjectAdminGrantsTab = ({}) => {
+interface Props {
+  id: string;
+}
+const ProjectAdminGrantsTab = ({ id }: Props) => {
   const [eventFilter, setEventFilter] = useState<EVENT>(EVENT.ALL);
-  const Events = [];
-  // {
-  //   id: '1243445',
-  //   name: 'Solana Foundation Grants Round',
-  //   matchedPool: 100,
-  //   _count: {
-  //     projectJoinEvent: 22,
-  //     contribution: 12,
-  //   },
-  // },
-  // {
-  //   id: '1243445',
-  //   name: 'Solana Foundation Grants Round',
-  //   matchedPool: 100,
-  //   _count: {
-  //     projectJoinEvent: 22,
-  //     contribution: 12,
-  //   },
-  // },
-  //];
+  const projectEvents = useGetProjectEvents({ id });
   return (
     <TabLayout>
       <SubHead heading={'Grants'}>
@@ -69,34 +54,108 @@ const ProjectAdminGrantsTab = ({}) => {
           </SegmentContainer>
         </div>
       </SubHead>
-      {Events.length > 0 ? (
-        Events.map((event, key) => {
-          return (
+      {eventFilter === EVENT.ALL &&
+        (projectEvents.data && projectEvents.data.length > 0 ? (
+          projectEvents.data.map((projectEvent) => (
             <GrantsRoundCard
-              path="/grants"
-              key={key}
-              roundStartDate={new Date('2021-10-20T00:00:00.000Z')}
-              roundEndDate={new Date('2021-10-20T00:00:00.000Z')}
+              path=""
+              projectJoinRoundStatus={projectEvent.projectEventStatus}
+              isPaused={projectEvent?.event.isPaused || false}
+              key={projectEvent.event.id}
+              eventStatusTable={projectEvent.event.eventStatus || []}
+              grantManager={false}
             >
-              <GrantRoundCardHeader grantName={event.name} />
+              <GrantRoundCardHeader
+                grantName={projectEvent.event.name || 'Default'}
+              />
               <GrantRoundCardFooter
-                matchingPool={event?.matchedPool || 0}
-                participants={event?._count.projectJoinEvent || 0}
-                contributions={event?._count.contribution || 0}
+                matchingPool={projectEvent.event?.matchedPool || 0}
+                participants={projectEvent.event._count.projectJoinEvent || 0}
+                contributions={projectEvent.event?._count.contribution || 0}
               />
             </GrantsRoundCard>
-          );
-        })
-      ) : (
-        <EmptyState
-          title={'No Grants Round Found'}
-          description={
-            'You havent applied for any grants round for the project. Apply for a grant to get started.'
-          }
-          icon={'moneyDollarBagDuoSolid'}
-          border={true}
-        />
-      )}
+          ))
+        ) : (
+          <EmptyState
+            title={'No Grants Round Found'}
+            description={
+              'You havent applied for any grants round for the project. Apply for a grant to get started.'
+            }
+            icon={'moneyDollarBagDuoSolid'}
+            border={true}
+          />
+        ))}
+      {eventFilter === EVENT.ACTIVE &&
+        (projectEvents.data && projectEvents.data.length > 0 ? (
+          projectEvents.data
+            .filter(
+              (e) => calculateEventStatus(e.event.eventStatus) !== 'ENDED',
+            )
+            .map((projectEvent) => (
+              <GrantsRoundCard
+                path=""
+                projectJoinRoundStatus={projectEvent.projectEventStatus}
+                isPaused={projectEvent?.event.isPaused || false}
+                key={projectEvent.event.id}
+                eventStatusTable={projectEvent.event.eventStatus || []}
+                grantManager={false}
+              >
+                <GrantRoundCardHeader
+                  grantName={projectEvent.event.name || 'Default'}
+                />
+                <GrantRoundCardFooter
+                  matchingPool={projectEvent.event?.matchedPool || 0}
+                  participants={projectEvent.event._count.projectJoinEvent || 0}
+                  contributions={projectEvent.event?._count.contribution || 0}
+                />
+              </GrantsRoundCard>
+            ))
+        ) : (
+          <EmptyState
+            title={'No Grants Round Found'}
+            description={
+              'You havent applied for any grants round for the project. Apply for a grant to get started.'
+            }
+            icon={'moneyDollarBagDuoSolid'}
+            border={true}
+          />
+        ))}
+      {eventFilter === EVENT.PREVIOUS &&
+        (projectEvents.data && projectEvents.data.length > 0 ? (
+          projectEvents.data
+            .filter(
+              (e) => calculateEventStatus(e.event.eventStatus) === 'ENDED',
+            )
+            .map((projectEvent) => (
+              <GrantsRoundCard
+                path=""
+                projectJoinRoundStatus={projectEvent.projectEventStatus}
+                isPaused={projectEvent?.event.isPaused || false}
+                key={projectEvent.event.id}
+                eventStatusTable={projectEvent.event.eventStatus || []}
+                grantManager={false}
+              >
+                <GrantRoundCardHeader
+                  grantName={projectEvent.event.name || 'Default'}
+                />
+                <GrantRoundCardFooter
+                  matchingPool={projectEvent.event?.matchedPool || 0}
+                  participants={projectEvent.event._count.projectJoinEvent || 0}
+                  contributions={projectEvent.event?._count.contribution || 0}
+                />
+              </GrantsRoundCard>
+            ))
+        ) : (
+          <EmptyState
+            title={'No Grants Round Found'}
+            description={
+              'You havent applied for any grants round for the project. Apply for a grant to get started.'
+            }
+            icon={'moneyDollarBagDuoSolid'}
+            border={true}
+          />
+        ))}
+
       <Text className="l2-light" color="tertiary">
         Grants rounds are a collaborative funding effort, designed to support
         projects like yours through community contributions amplified by

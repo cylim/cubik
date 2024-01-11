@@ -1,12 +1,14 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
-import ProjectHeader from '@/app/[username]/components/project-tab/project-admin-card/project-header';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
+import ProjectHeader from '@/app/[username]/components/project-tab/project-admin-card/projectHeader';
 import ProjectAdminGrantsTab from '@/app/[username]/components/project-tab/project-admin-card/tabs/grants';
 import ProjectAdminStatsTab from '@/app/[username]/components/project-tab/project-admin-card/tabs/stats';
 import ProjectAdminTreasuryTab from '@/app/[username]/components/project-tab/project-admin-card/tabs/treasury';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
+import { ProjectVerifyStatus } from '@cubik/database';
 import {
   Alert,
   Card,
@@ -19,17 +21,27 @@ import {
   Tabs,
 } from '@cubik/ui';
 
+const AnimatePresence = dynamic(
+  () => import('framer-motion').then((e) => e.AnimatePresence),
+  { ssr: false },
+);
 export type ProjectProps = {
   name: string;
   slug: string | null;
   shortDescription: string;
   logo: string;
   id: string;
+  status: ProjectVerifyStatus;
 };
+interface ProjectAdminCardBodyProps {
+  projectId: string;
+}
 
-const ProjectAdminCardBody = () => {
+const ProjectAdminCardBody = ({ projectId }: ProjectAdminCardBodyProps) => {
   const [activeTab, setActiveTab] = useState(0);
-  const [height, setHeight] = useState(0);
+  // if you make default value 0 then first render doesn't work properly
+  // 518 is the min height of the tab 0
+  const [height, setHeight] = useState(518);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -64,10 +76,16 @@ const ProjectAdminCardBody = () => {
           <div ref={ref}>
             <TabPanels>
               <TabPanel value={0}>
-                <ProjectAdminGrantsTab />
+                {/* replace loading with skeleton state  */}
+                <Suspense fallback={'loading....'}>
+                  <ProjectAdminGrantsTab id={projectId} />
+                </Suspense>
               </TabPanel>
               <TabPanel value={1}>
-                <ProjectAdminStatsTab />
+                {/* replace loading with skeleton state  */}
+                <Suspense fallback={'loading....'}>
+                  <ProjectAdminStatsTab id={projectId} />
+                </Suspense>
               </TabPanel>
               <TabPanel value={2}>
                 <ProjectAdminTreasuryTab />
@@ -85,8 +103,11 @@ const ProjectAdminCardBody = () => {
 const ProjectVerificationWrapper = ({
   children,
   projectVerificationStatus,
-}: any) => {
-  if (!projectVerificationStatus) {
+}: {
+  children: React.ReactNode;
+  projectVerificationStatus: ProjectVerifyStatus;
+}) => {
+  if (projectVerificationStatus === ProjectVerifyStatus.REVIEW) {
     return (
       <motion.div
         layout
@@ -104,34 +125,65 @@ const ProjectVerificationWrapper = ({
         />
       </motion.div>
     );
-  } else return children;
+  }
+  if (projectVerificationStatus === ProjectVerifyStatus.FAILED) {
+    return (
+      <motion.div
+        layout
+        className="flex flex-col gap-2 rounded-2xl bg-[var(--color-surface-negative-transparent)] p-2"
+      >
+        <div className="rounded-lg">{children}</div>
+        <Alert
+          type="text"
+          fill={'red'}
+          color="red"
+          content="Your Project was rejected by the team, please contact us for more information"
+          closeIcon={false}
+          // button="Contact Team"
+          className=""
+        />
+      </motion.div>
+    );
+  }
+  return children;
 };
 
 const ProjectAdminCard = ({ project }: { project: ProjectProps }) => {
-  const projectIsVerified = true;
   return (
-    <ProjectVerificationWrapper projectVerificationStatus={projectIsVerified}>
+    <ProjectVerificationWrapper projectVerificationStatus={project.status}>
       <Card size="md">
         <CardHeader>
           <ProjectHeader
+            isDraft={false}
             project={project}
             isAdmin={true}
-            isVerified={projectIsVerified}
+            isVerified={project.status === 'VERIFIED'}
           />
         </CardHeader>
         <CardBody>
-          <ProjectAdminCardBody />
+          <ProjectAdminCardBody projectId={project.id} />
         </CardBody>
       </Card>
     </ProjectVerificationWrapper>
   );
 };
 
-const ProjectProfileCard = ({ project }: { project: ProjectProps }) => {
+const ProjectProfileCard = ({
+  project,
+  isDraft,
+}: {
+  project: ProjectProps;
+  isDraft: boolean;
+}) => {
   return (
     <Card size="md">
       <CardHeader>
-        <ProjectHeader project={project} isVerified={false} isAdmin={false} />
+        <ProjectHeader
+          isDraft={isDraft}
+          project={project}
+          isVerified={project.status === 'VERIFIED'}
+          isAdmin={false}
+        />
       </CardHeader>
     </Card>
   );

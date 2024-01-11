@@ -11,6 +11,7 @@ import {
 import dayjs from '@cubik/dayjs';
 
 import { Icon } from '../../../icons/icon';
+import { cn } from '../../../lib/utils';
 import { Alert } from '../Alert';
 import { Button } from '../Button/button';
 import { Tag, TagLabel } from '../Tag/tag';
@@ -46,6 +47,7 @@ const GrantsRoundCard = ({
   eventStatusTable,
   grantManager,
   isPaused,
+  projectJoinRoundStatus,
 }: GrantsRoundCardProps) => {
   const currentStatus = calculateEventStatus(eventStatusTable);
   return (
@@ -61,21 +63,53 @@ const GrantsRoundCard = ({
         <Link
           href={path}
           prefetch
-          className="cursor-pointer	p-1 bg-[var(--color-surface-info-transparent)] rounded-2xl flex flex-col gap-3"
+          className={cn(
+            'cursor-pointer	p-1 rounded-2xl flex flex-col gap-3',
+            projectJoinRoundStatus === 'APPROVED' &&
+              'bg-[var(--color-surface-info-transparent)]',
+            projectJoinRoundStatus === 'REJECTED' &&
+              'bg-[var(--color-surface-negative-transparent)]',
+            projectJoinRoundStatus === 'PENDING' &&
+              'bg-[var(--color-surface-caution-transparent)]',
+          )}
         >
           <div className="px-6 py-4 rounded-xl bg-[var(--round-card-surface)] flex flex-col gap-3">
             {children}
           </div>
           <div>
-            <Alert
-              type="text"
-              fill={'blue'}
-              color="blue"
-              content="Grant Application Under Review. You will receive an update before the grant round starts"
-              closeIcon={false}
-              // button="Contact Team"
-              className=""
-            />
+            {projectJoinRoundStatus === 'APPROVED' && (
+              <Alert
+                type="text"
+                fill={'blue'}
+                color="blue"
+                content="Grant Application Under Review. You will receive an update before the grant round starts"
+                closeIcon={false}
+                // button="Contact Team"
+                className=""
+              />
+            )}
+            {projectJoinRoundStatus === 'PENDING' && (
+              <Alert
+                type="text"
+                fill={'yellow'}
+                color="yellow"
+                content="Grant Application Under Review. You will receive an update before the grant round starts"
+                closeIcon={false}
+                // button="Contact Team"
+                className=""
+              />
+            )}
+            {projectJoinRoundStatus === 'REJECTED' && (
+              <Alert
+                type="text"
+                fill={'red'}
+                color="red"
+                content="Grant Application Under Review. You will receive an update before the grant round starts"
+                closeIcon={false}
+                // button="Contact Team"
+                className=""
+              />
+            )}
           </div>
         </Link>
       ) : (

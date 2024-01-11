@@ -4,7 +4,7 @@ import { COMM, prisma } from '@cubik/database';
 
 import getAssetsByGroup from './getAssetsByGroup';
 
-async function syncCommunity() {
+async function syncCommunity(): Promise<void> {
   const users = await prisma.user.findMany({
     select: {
       mainWallet: true,
@@ -18,7 +18,6 @@ async function syncCommunity() {
       id: true,
     },
   });
-  // console.log(users, communities);
   communities.forEach(async (community) => {
     if (community.method === COMM.MINT_ADD) {
       const collections = community.collection as unknown as string[];

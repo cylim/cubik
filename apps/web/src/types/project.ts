@@ -23,7 +23,6 @@ export interface ProjectFormData {
   website: string;
   twitter: string;
   isOpenSource: boolean;
-  progress: number;
 }
 
 type User = {

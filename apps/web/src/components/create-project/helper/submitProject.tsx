@@ -18,7 +18,9 @@ interface SubmitProjectArgs {
   sig: string;
 }
 
-export const submitProject = async (args: SubmitProjectArgs) => {
+export const submitProject = async (
+  args: SubmitProjectArgs,
+): Promise<boolean> => {
   try {
     // todo - signature validation
     // todo - zod validation for args submitted
@@ -63,9 +65,12 @@ export const submitProject = async (args: SubmitProjectArgs) => {
         industry: industry,
         isOpenSource: project.isOpenSource,
         twitterHandle: project.twitter,
-        multiSigAddressV4: args.multiSigInfo.multisigPDA,
+        multiSigPDAV4: args.multiSigInfo.multisigPDA,
         createKey: args.multiSigInfo.createKey,
         projectUserCount: args.counter,
+        tx: args.sig,
+        isDraft: false,
+        isMigrated: true,
       },
     });
     const currentTeam = await prisma.team.findMany({

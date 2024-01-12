@@ -19,6 +19,7 @@ export const syncProject = async (project: ProjectFormData, id: string) => {
       where: {
         id: id,
         ownerPublickey: user.mainWallet,
+        isArchive: false,
       },
     });
 

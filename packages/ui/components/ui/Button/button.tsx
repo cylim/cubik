@@ -105,7 +105,7 @@ export interface ButtonProps
   LoadingText?: string;
 }
 
-const Button = ({
+export const Button = ({
   children,
   variant,
   size,
@@ -213,5 +213,3 @@ const Button = ({
     </button>
   );
 };
-
-export { Button };

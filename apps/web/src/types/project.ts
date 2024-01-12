@@ -10,20 +10,20 @@ export interface ProjectSocials {
   telegram: string;
 }
 
-export interface ProjectFormData {
-  name: string;
-  tagline: string;
-  email: string;
-  category: string[];
-  logo: string;
-  description: string;
-  slides: string[];
-  team: string[];
-  github: string;
-  website: string;
-  twitter: string;
-  isOpenSource: boolean;
-}
+// export interface ProjectFormData {
+//   name: string;
+//   tagline: string;
+//   email: string;
+//   category: string[];
+//   logo: string;
+//   description: string;
+//   slides: string[];
+//   team: string[];
+//   github: string;
+//   website: string;
+//   twitter: string;
+//   isOpenSource: boolean;
+// }
 
 type User = {
   id: string;

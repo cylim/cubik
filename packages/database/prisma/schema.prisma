@@ -135,7 +135,7 @@ model Project {
   isOpenSource      Boolean?            @default(false)
   failedReason      String?             @default("")
   multiSigAddressV3 String?             @default("")
-  multiSigAddressV4 String?             @default("")
+  multiSigPDAV4     String?             @default("")
   email             String              @default("")
   createKeyV3       String?             @default("")
   createKey         String?             @default("")

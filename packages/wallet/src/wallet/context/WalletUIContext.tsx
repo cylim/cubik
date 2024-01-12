@@ -7,6 +7,7 @@ export enum MODAL_STATUS {
   USER_CREATE = 'user-create',
   CONNECTING = 'connecting',
   ERROR_CONNECTING = 'error-connecting',
+  USER_MIGRATION = 'user-migration',
 }
 
 type ModalState = MODAL_STATUS | null;

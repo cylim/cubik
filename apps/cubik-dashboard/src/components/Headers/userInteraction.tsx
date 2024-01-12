@@ -35,7 +35,7 @@ export const UserInteraction = () => {
     },
   });
   return (
-    <div>
+    <div className="z-40">
       <Menu>
         <MenuButton>
           <div className="flex flex-row items-center justify-center gap-2 rounded-full p-1">
@@ -71,6 +71,7 @@ export const UserInteraction = () => {
             isLoading={logoutMutation.isLoading}
             onClick={logoutMutation.mutate}
             leftIcon="logoutRight"
+            variant={'negative'}
             text="Logout"
           />
         </MenuList>

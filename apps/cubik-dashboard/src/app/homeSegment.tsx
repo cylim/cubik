@@ -5,27 +5,30 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { SegmentContainer, SegmentItem } from '@cubik/ui';
 
-export const GrantsSegmentControlSwitch = () => {
+interface Props {
+  event: string | undefined;
+}
+export const GrantsSegmentControlSwitch = ({ event }: Props) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
   let path = pathname;
-  if (searchParams.get('project_page')) {
-    path = `${path}?project_page=${searchParams.get('project_page')}&`;
-  } else if (searchParams.get('contributors_page')) {
-    path = `${path}?contributors_page=${searchParams.get(
-      'contributors_page',
-    )}&`;
-  } else {
-    path = `${path}?`;
-  }
+
   return (
     <div className="flex flex-row gap-4">
       <SegmentContainer size="sm">
-        <SegmentItem isActive={true} href={`${path}time=1W`}>
+        <SegmentItem
+          isActive={!event || event === 'all'}
+          onClick={() => {
+            router.push(`${path}?event=all`);
+          }}
+        >
           All Events
         </SegmentItem>
-        <SegmentItem isActive={false} href={`${path}time=2W`}>
+        <SegmentItem
+          isActive={event === 'grants'}
+          href={`${path}?event=grants`}
+        >
           Grants
         </SegmentItem>
       </SegmentContainer>

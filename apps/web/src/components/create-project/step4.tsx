@@ -23,8 +23,11 @@ interface Props {
 export const Step4 = ({ setStep, projectForm }: Props) => {
   const { user } = useUser();
   const anchorWallet = useAnchorWallet();
+
   const csdk = cubikInstance(anchorWallet as Wallet);
+
   const [preview, setPreview] = useState<boolean>(false);
+
   const onSubmit = async () => {
     try {
       if (anchorWallet === undefined && !user?.mainWallet) {
@@ -33,7 +36,17 @@ export const Step4 = ({ setStep, projectForm }: Props) => {
       const counter = Math.floor(1000 + Math.random() * 9000);
       const createKey = web3.Keypair.generate();
       const [projectPDA] = csdk.ix.project.getPDA(createKey.publicKey, counter);
-
+      const pda = web3.PublicKey.findProgramAddressSync(
+        [
+          Buffer.from('user'),
+          new web3.PublicKey(
+            '6fa2ofZmwjiFv4a6xNt3jftHwuM3S73Vb5VE3LRKCoj',
+          ).toBuffer() as Buffer,
+        ],
+        PROGRAM_ID,
+      );
+      const [userPDA] = csdk.ix.user.getPDA();
+      console.log(userPDA.toBase58(), '---', pda[0].toBase58());
       const [multisigPDA] = web3.PublicKey.findProgramAddressSync(
         [SEED_PREFIX, SEED_MULTISIG, createKey.publicKey.toBytes()],
         PROGRAM_ID,
@@ -41,7 +54,6 @@ export const Step4 = ({ setStep, projectForm }: Props) => {
       const args = {
         counter: new BN(counter),
         membersKeys: [
-          web3.Keypair.generate().publicKey,
           createKey.publicKey,
           new web3.PublicKey(user?.mainWallet || ''),
         ],
@@ -55,7 +67,7 @@ export const Step4 = ({ setStep, projectForm }: Props) => {
         timeLock: 0,
       };
       const accounts = {
-        userAccount: new web3.PublicKey(user?.mainWallet || ''),
+        userAccount: userPDA,
         createKey: createKey.publicKey,
         projectAccount: projectPDA,
         multisig: multisigPDA,
@@ -72,7 +84,10 @@ export const Step4 = ({ setStep, projectForm }: Props) => {
       const signTx = await anchorWallet?.signTransaction(tx);
       if (!signTx) return;
       const serialized_transaction = signTx.serialize();
-      const sig = await connection.sendRawTransaction(serialized_transaction);
+      const sig = await connection.sendRawTransaction(serialized_transaction, {
+        skipPreflight: true,
+      });
+      console.log(sig);
       alert(sig);
     } catch (error) {
       console.log(error);

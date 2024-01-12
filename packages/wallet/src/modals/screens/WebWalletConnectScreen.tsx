@@ -21,6 +21,7 @@ import {
   useUserModalUIContext,
 } from '../../wallet';
 import { CubikWalletModal } from '../../wallet/WalletList/listWallet';
+import { Migration } from '../Migration';
 
 interface Props {
   onClose: () => void;
@@ -75,6 +76,11 @@ export const WebWalletConnectScreen = ({ onClose, setUser }: Props) => {
       }
     } catch (e) {
       const error = e as Error;
+
+      // if (error.message === 'Migration') {
+      //   setModalState(MODAL_STATUS.USER_MIGRATION);
+      //   return;
+      // }
       // toast.error(error.message);
       logApi({
         message: error.message,
@@ -106,6 +112,9 @@ export const WebWalletConnectScreen = ({ onClose, setUser }: Props) => {
           onClose={onClose}
         />
       );
+
+    case MODAL_STATUS.USER_MIGRATION:
+      return <Migration />;
 
     case MODAL_STATUS.USER_CREATE:
       return <UserCreate />;

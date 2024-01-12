@@ -24,6 +24,10 @@ export const LoginUser = async (pubKey: string, sig: string, nonce: string) => {
   if (!user) {
     return null;
   }
+
+  // if (!user.isMigrated) {
+  //   throw new Error('Migration');
+  // }
   const payload: AuthPayload = {
     ip: '',
     mainWallet: pubKey,

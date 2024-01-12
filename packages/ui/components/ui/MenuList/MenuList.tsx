@@ -128,7 +128,7 @@ const DrawerMenuList = ({ children }: MenuListProps) => {
     <DrawerPortal>
       <DrawerOverlay />
       <DrawerContent>
-        <DrawerBody className="py-2 pb-8 min-w-[220px] min-h-[20vh] shadow-lg rounded-xl will-change-[opacity,transform] flex flex-col gap-2">
+        <DrawerBody className="p-2 pb-8 min-w-[220px] min-h-[20vh] shadow-lg rounded-xl will-change-[opacity,transform] flex flex-col gap-4">
           {children}
         </DrawerBody>
       </DrawerContent>
@@ -136,7 +136,7 @@ const DrawerMenuList = ({ children }: MenuListProps) => {
   );
 };
 
-const MenuItemVariants = cva('relative p-2 mx-2 focus-visible:outline-none', {
+const MenuItemVariants = cva('relative mx-2 focus-visible:outline-none', {
   variants: {
     variant: {
       primary:
@@ -157,6 +157,7 @@ interface MenuItemProps extends VariantProps<typeof MenuItemVariants> {
   onClick?: () => void;
   isLoading?: boolean;
   className?: string;
+  subMenuHeader?: boolean;
 }
 
 const MenuItem = ({
@@ -181,6 +182,7 @@ const MenuItem = ({
         },
     className: cn(
       isLoading ? 'cursor-not-allowed' : 'cursor-pointer',
+      'p-2',
       MenuItemVariants({ variant }),
       '',
     ),
@@ -227,6 +229,7 @@ const DrawerMenuItem = ({
   onClick,
   isLoading,
   variant = 'primary',
+  subMenuHeader,
 }: MenuItemProps) => {
   const itemProps: {
     onClick?: () => void;
@@ -236,6 +239,7 @@ const DrawerMenuItem = ({
     onClick: isLoading ? () => {} : onClick,
     className: cn(
       isLoading ? 'cursor-not-allowed' : 'cursor-pointer',
+      subMenuHeader ? 'p-2' : 'py-2 px-3',
       children ? '' : MenuItemVariants({ variant }),
       '',
     ),
@@ -251,7 +255,7 @@ const DrawerMenuItem = ({
     >
       {' '}
       <div className="flex justify-between">
-        <div className="flex gap-[10px] items-center ">
+        <div className="flex gap-[16px] items-center">
           {leftIcon && (
             <Icon
               name={leftIcon}
@@ -261,7 +265,10 @@ const DrawerMenuItem = ({
               width={20}
             />
           )}
-          <Text className="b2 md:l2" color={'inherit'}>
+          <Text
+            className="b2 md:l2"
+            color={subMenuHeader ? 'primary' : 'secondary'}
+          >
             {text}
           </Text>
           {isLoading && (

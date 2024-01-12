@@ -13,7 +13,7 @@ const textareaVariants = cva(
       },
       state: {
         default:
-          'bg-[var(--form-input-surface-default)] border border-[var(--form-input-border-default)] placeholder:text-[var(--form-input-placeholder-default)] focus-visible:ring-1 focus-visible:ring-[var(--form-input-border-focused)] focus-visible:ring-offset-0 focus-visible:outline-none focus:border-none focus-visible:border-none hover:border hover:border-[var(--form-input-border-hovered)] disabled:bg-[var(--form-input-surface-disabled)] disabled:border disabled:border-[var(--form-input-border-disabled)] disabled:placeholder:text-[var(--form-input-placeholder-disabled)] ',
+          'bg-[var(--form-input-surface-default)] border border-[var(--form-input-border-default)] text-[var(--form-input-fg-default)] placeholder:text-[var(--form-input-placeholder-default)] focus-visible:ring-1 focus-visible:ring-[var(--form-input-border-focused)] focus-visible:ring-offset-0 focus-visible:outline-none focus:border-none focus-visible:border-none hover:border hover:border-[var(--form-input-border-hovered)] disabled:bg-[var(--form-input-surface-disabled)] disabled:border disabled:border-[var(--form-input-border-disabled)] disabled:placeholder:text-[var(--form-input-placeholder-disabled)] ',
         error:
           'bg-[var(--form-input-surface-error)] border-[var(--form-input-border-error)] placeholder:text-[var(--form-input-placeholder-error)]',
       },

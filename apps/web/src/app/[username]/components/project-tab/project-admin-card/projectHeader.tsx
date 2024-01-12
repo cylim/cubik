@@ -105,9 +105,15 @@ const ProjectHeader = ({
               <DrawerMenu open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
                 <DrawerMenuList>
                   <DrawerMenuItem text="Apply For Grant" leftIcon="cube" />
-                  <DrawerMenuItem text="Project Settings" leftIcon="settings" />
                   <DrawerMenuItem text="View Vault" leftIcon="bank" />
                   <DrawerMenuItem text="Share Project" leftIcon="share" />
+                  <DrawerMenuItem text="View On Explorer" subMenuHeader />
+                  <DrawerMenuItem
+                    text="Solana Explorer"
+                    leftIcon="solanaExplorer"
+                  />
+                  <DrawerMenuItem text="Solana FM" leftIcon="solanaFM" />
+                  <DrawerMenuItem text="Solscan" leftIcon="solscan" />
                 </DrawerMenuList>
               </DrawerMenu>
             </>

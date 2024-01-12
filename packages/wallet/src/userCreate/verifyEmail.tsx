@@ -106,7 +106,7 @@ export const VerifyEmail = ({ setUserCreateState, userForm }: Props) => {
             Confirm Email
           </Button>
           <Button
-            onClick={() => setUserCreateState('profile-created')}
+            onClick={() => setUserCreateState('signTx')}
             variant={'link'}
             size={'md'}
             className="w-full"

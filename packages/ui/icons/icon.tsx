@@ -13,6 +13,7 @@ type Props = {
   strokeWidth?: number;
   color?: string;
   className?: string;
+  onClick?: () => void;
   initial?: any;
   animate?: any;
   transition?: any;
@@ -24,6 +25,7 @@ export const Icon = ({
   strokeWidth = 1.5, // default strokeWidth if not provided
   color = 'currentColor', // default color if not provided
   className,
+  onClick,
   initial,
   animate,
   transition,
@@ -57,6 +59,7 @@ export const Icon = ({
       strokeLinecap="round"
       color={color}
       strokeLinejoin="round"
+      onClick={onClick}
       clipRule="evenodd"
       fillRule="evenodd"
     >

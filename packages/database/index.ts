@@ -22,5 +22,4 @@ if (typeof window === 'undefined') {
   }
 }
 
-// const prisma = new PrismaClient();
 export { prisma };

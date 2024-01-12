@@ -4,7 +4,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
 
 const textareaVariants = cva(
-  'flex h-[140px] md:h-40 w-full px-3 py-4 shrink-0 rounded-lg border placeholder:text-base',
+  'flex h-[140px] md:h-40 w-full p-3 shrink-0 rounded-lg border l3',
   {
     variants: {
       size: {

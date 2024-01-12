@@ -38,53 +38,33 @@ const BottomNav = (props: { name: any }) => {
         <div className={`border-t-[2px] border-white p-3`}>
           <Icon
             name={'home'}
-            stroke="var(--color-fg-primary-depth)"
+            color="var(--color-fg-primary-depth)"
             width={28}
             height={28}
-            fill={
-              activeTabs === 'home'
-                ? 'var(--color-fg-primary-depth)'
-                : 'var(--body-surface)'
-            }
           />
         </div>
         <div className={'p-3'}>
           <Icon
             name={'search'}
             width={28}
-            stroke="var(--color-fg-primary-depth)"
+            color="var(--color-fg-primary-depth)"
             height={28}
-            fill={
-              activeTabs === 'search'
-                ? 'var(--color-fg-primary-depth)'
-                : 'var(--body-surface)'
-            }
           />
         </div>
         <div className={'p-3'}>
           <Icon
             name={'bell'}
             width={28}
-            stroke="var(--color-fg-primary-depth)"
+            color="var(--color-fg-primary-depth)"
             height={28}
-            fill={
-              activeTabs === 'saved'
-                ? 'var(--color-fg-primary-depth)'
-                : 'var(--body-surface)'
-            }
           />
         </div>
         <div className={'p-3'} onClick={() => router.push('/dhruvsol')}>
           <Icon
             name={'bell'}
             width={28}
-            stroke="var(--color-fg-primary-depth)"
+            color="var(--color-fg-primary-depth)"
             height={28}
-            fill={
-              activeTabs === 'dhruvsol'
-                ? 'var(--color-fg-primary-depth)'
-                : 'var(--body-surface)'
-            }
           />
         </div>
       </div>

@@ -19,7 +19,7 @@ const getUserGrants = async () => {
     if (!token || !user) {
       return [];
     }
-
+    console.log(user.accessScope, 'scope-token');
     return await prisma.$transaction(
       user.accessScope.map((scope) =>
         prisma.event.findFirst({
@@ -33,6 +33,7 @@ const getUserGrants = async () => {
             matchedPool: true,
             isPaused: true,
             eventStatus: true,
+            type: true,
             _count: {
               select: {
                 contribution: true,
@@ -49,7 +50,12 @@ const getUserGrants = async () => {
   }
 };
 
-export default async function Home() {
+interface Props {
+  searchParams: {
+    event: string;
+  };
+}
+export default async function Home({ searchParams }: Props) {
   const cookieStore = cookies();
   const token = cookieStore.get('authToken');
   if (!token) {
@@ -72,14 +78,13 @@ export default async function Home() {
 
   const userGrants = await getUserGrants();
 
-  console.log(userGrants, 'user');
   return (
     <PageLayout>
       <div className="absolute left-[-100px] top-0 w-full">
         <Background />
       </div>
       <SubHead heading="Events" className="!h5">
-        <GrantsSegmentControlSwitch />
+        <GrantsSegmentControlSwitch event={searchParams.event} />
       </SubHead>
       {/* <Alert
         type="inline"
@@ -90,28 +95,55 @@ export default async function Home() {
         content="You can view all the grant details and manage the grant round."
         closeIcon
       /> */}
-      <div className="flex flex-col gap-4">
-        {userGrants && userGrants?.length > 0 ? (
-          userGrants.map((event) => (
-            <GrantsRoundCard
-              path="/grants"
-              isPaused={event?.isPaused || false}
-              key={event?.id}
-              eventStatusTable={event?.eventStatus || []}
-              grantManager={true}
-            >
-              <GrantRoundCardHeader grantName={event?.name || 'Default'} />
-              <GrantRoundCardFooter
-                matchingPool={event?.matchedPool || 0}
-                participants={event?._count.projectJoinEvent || 0}
-                contributions={event?._count.contribution || 0}
-              />
-            </GrantsRoundCard>
-          ))
-        ) : (
-          <></>
-        )}
-      </div>
+      {searchParams.event === 'grants' ? (
+        <div className="flex flex-col gap-4">
+          {userGrants && userGrants?.length > 0 ? (
+            userGrants.map((event) => (
+              <GrantsRoundCard
+                path="/grants"
+                isPaused={event?.isPaused || false}
+                key={event?.id}
+                eventStatusTable={event?.eventStatus || []}
+                grantManager={true}
+              >
+                <GrantRoundCardHeader grantName={event?.name || 'Default'} />
+                <GrantRoundCardFooter
+                  matchingPool={event?.matchedPool || 0}
+                  participants={event?._count.projectJoinEvent || 0}
+                  contributions={event?._count.contribution || 0}
+                />
+              </GrantsRoundCard>
+            ))
+          ) : (
+            <></>
+          )}
+        </div>
+      ) : (
+        <div className="flex flex-col gap-4">
+          {userGrants && userGrants?.length > 0 ? (
+            userGrants
+              .filter((e) => e?.type === 'ROUND')
+              .map((event) => (
+                <GrantsRoundCard
+                  path="/grants"
+                  isPaused={event?.isPaused || false}
+                  key={event?.id}
+                  eventStatusTable={event?.eventStatus || []}
+                  grantManager={true}
+                >
+                  <GrantRoundCardHeader grantName={event?.name || 'Default'} />
+                  <GrantRoundCardFooter
+                    matchingPool={event?.matchedPool || 0}
+                    participants={event?._count.projectJoinEvent || 0}
+                    contributions={event?._count.contribution || 0}
+                  />
+                </GrantsRoundCard>
+              ))
+          ) : (
+            <></>
+          )}
+        </div>
+      )}
     </PageLayout>
   );
 }

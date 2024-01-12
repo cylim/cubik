@@ -1,8 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import TabLayout from '@/components/common/tabs/TabLayout';
 import TreasuryInfoCard from '@/components/explorer/TreasuryInfoCard';
+import useProjectStats from '@/hooks/project/useProjectStats';
 
 import {
   Button,
@@ -16,53 +17,34 @@ import {
 
 import { StatsSwitch } from './statsSwitch';
 
-const ProjectAdminStatsTab = () => {
+interface Props {
+  id: string;
+}
+export type StatsIsActive = '1W' | '2W' | '1M' | '2M';
+const ProjectAdminStatsTab = ({ id }: Props) => {
   const { theme } = useTheme();
+  const stats = useProjectStats({ id });
+  const [statsIsActive, setStatsIsActive] = useState<StatsIsActive>('1W');
   const showEmptyState = false;
+
+  const formattedChartData = useMemo(() => {
+    return {
+      contributions: [],
+      contributors: [],
+    };
+  }, []);
   const ChartData = [
     {
-      name: 'Series 1',
+      name: 'Contributions',
       type: 'area',
       color: '#1199FF',
-      data: [
-        [1680307200000, 0],
-        [1680393600000, 0],
-        [1680480000000, 0],
-        [1680566400000, 0],
-        [1680652800000, 0],
-        [1680739200000, 0],
-        [1680825600000, 0],
-        [1680912000000, 56],
-        [1680998400000, 99],
-        [1681084800000, 102],
-        [1681171200000, 277],
-        [1681257600000, 242],
-        [1681344000000, 292],
-        [1681430400000, 87],
-        [1681516800000, 70],
-      ],
+      data: formattedChartData.contributions,
     },
     {
-      name: 'Series 3',
+      name: 'Contributors',
       type: 'area',
       color: '#F43F5E',
-      data: [
-        [1680307200000, 0],
-        [1680393600000, 0],
-        [1680480000000, 0],
-        [1680566400000, 0],
-        [1680652800000, 0],
-        [1680739200000, 0],
-        [1680825600000, 0],
-        [1680912000000, 0],
-        [1680998400000, 33],
-        [1681084800000, 44],
-        [1681171200000, 65],
-        [1681257600000, 147],
-        [1681344000000, 147],
-        [1681430400000, 142],
-        [1681516800000, 167],
-      ],
+      data: formattedChartData.contributions,
     },
   ];
 
@@ -77,25 +59,41 @@ const ProjectAdminStatsTab = () => {
           headerIconName="infoCircle"
           tooltipText="Outstanding Balance is the amount of balance that is outstanding
           for this project."
-          value="$44,546.8"
+          value={
+            stats.data
+              ? `$${(
+                  stats.data?.totalContributions + stats.data?.matchGrantAmount
+                ).toLocaleString()}`
+              : '$0'
+          }
         />
         <Divider orientation="vertical" className="!h-auto" />
         <TreasuryInfoCard
           header="Contributions Received"
           headerIconName="infoCircle"
-          value="$4,621.5"
+          value={
+            stats.data
+              ? `$${(stats.data?.totalContributions).toLocaleString()}`
+              : '$0'
+          }
         />
         <Divider orientation="vertical" className="!h-auto" />
         <TreasuryInfoCard
           header="Matched Grants Funds"
           headerIconName="infoCircle"
-          value={'$30,987.8'}
+          value={
+            stats.data
+              ? `$${(stats.data?.matchGrantAmount).toLocaleString()}`
+              : '$0'
+          }
         />
         <Divider orientation="vertical" className="!h-auto" />
         <TreasuryInfoCard
           header="Contributors"
           headerIconName="infoCircle"
-          value="3,572"
+          value={
+            stats.data ? (stats.data?.totalContributors).toLocaleString() : '0'
+          }
         />
       </div>
       <div className="flex flex-col-reverse items-start justify-between gap-6 md:flex-row md:items-center ">
@@ -119,7 +117,7 @@ const ProjectAdminStatsTab = () => {
             );
           })}
         </div>
-        <StatsSwitch />
+        <StatsSwitch change={setStatsIsActive} isActive={statsIsActive} />
       </div>
       <LineGraph
         theme={theme}

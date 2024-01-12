@@ -13,7 +13,13 @@ export type MetadataUser = Prisma.UserGetPayload<{
 
 export const MetadataUserValidator = z.object({
   email: z.string().min(1),
-  // profileNft: z.object(),  @todo--> Update the type here
+  profileNft: z.object({
+    name: z.string().min(1),
+    owner: z.string().min(1),
+    token: z.string().min(1),
+    collectionName: z.string().min(1),
+    collectionAddress: z.string().min(1),
+  }), // updated db type
   username: z.string().min(1),
   profilePicture: z.string().min(1),
 });

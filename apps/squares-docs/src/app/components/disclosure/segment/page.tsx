@@ -8,7 +8,7 @@ import { SegmentContainer, SegmentItem, Text } from '@cubik/ui';
 
 import PageHOC from '../../../home-page-components/components/pageHOC';
 
-const page = () => {
+const Page = () => {
   const [firstSegment, setFirstSegment] = useState(1);
   return (
     <PageHOC
@@ -64,4 +64,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

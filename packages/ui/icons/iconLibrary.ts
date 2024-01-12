@@ -203,12 +203,23 @@ export const iconLibrary: Record<string, Icon> = {
       },
     ],
   },
+
   threeDots: {
     viewBox: '0 0 24 24',
     paths: [
       { d: 'M12 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z', fill: false, stroke: true },
       { d: 'M12 13a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z', fill: false, stroke: true },
       { d: 'M12 20a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z', fill: false, stroke: true },
+    ],
+  },
+  doubleChevronRight: {
+    viewBox: '0 0 24 24',
+    paths: [
+      {
+        d: 'M13 8a20.354 20.354 0 0 1 3.894 3.702.472.472 0 0 1 0 .596A20.355 20.355 0 0 1 13 16M7 8a20.355 20.355 0 0 1 3.894 3.702.472.472 0 0 1 0 .596A20.357 20.357 0 0 1 7 16',
+        fill: false,
+        stroke: true,
+      },
     ],
   },
 

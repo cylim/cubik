@@ -17,6 +17,7 @@
 
 .ProseMirror {
   padding:0.1rem;
+  color: var(--color-fg-primary-depth);
 }
 .ProseMirror:focus {
   outline: none;
@@ -31,12 +32,11 @@
 /* Styles for Headings */
 .ProseMirror h1 {
   font-size: 2em;
-  color: var(--form-input-fg-default);
+
 }
 
 .ProseMirror h2 {
   font-size: 1.5em;
- color: var(--form-input-fg-default);
 }
 
 /* Styles for Ordered Lists */

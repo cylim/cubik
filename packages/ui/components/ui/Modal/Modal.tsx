@@ -64,7 +64,7 @@ export const Modal = ({
                   initial="initial"
                   animate="animate"
                   exit="exit"
-                  className="bg-gradient-to-b from-white/10 dark:from-[#27272710] to-black/10 dark:to-[#27272705] backdrop-blur-[4px] fixed inset-0"
+                  className="bg-gradient-to-b from-white from-0% dark:from-[#272727] dark:from-0% to-[#E5E5E510] to-10% dark:to-[#27272705] dark:to-10% backdrop-blur-[4px] fixed inset-0"
                   onClick={onClose}
                 />
               </Dialog.Overlay>

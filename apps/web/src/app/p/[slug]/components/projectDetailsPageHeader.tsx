@@ -1,10 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import { ProjectHeadersType } from '@/app/p/[slug]/layout';
 import { useProjectEventStore } from '@/app/p/[slug]/store';
 import { toast } from 'sonner';
 
-import { EventType } from '@cubik/database';
+import { Project_Backup } from '@cubik/common';
+import { calculateEventStatus } from '@cubik/common/helper/eventStatus';
 import {
   Avatar,
   Button,
@@ -16,43 +18,45 @@ import {
   Text,
 } from '@cubik/ui';
 
-type EventSegment = {
-  event: {
-    id: string;
-    type: EventType;
-    name: string;
-    projectJoinEvent: {
-      id: string;
-    }[];
-  };
-  eventId: string;
-};
-interface ProjectPropsType {
-  name: string;
-  shortDescription: string;
-  logo: string;
-  projectLink: string;
-  events: EventSegment[];
+interface Props {
+  project: ProjectHeadersType;
 }
-
-const ProjectDetailsPageHeader = ({
-  project,
-}: {
-  project: ProjectPropsType | any;
-}) => {
+export const ProjectDetailsPageHeader = ({ project }: Props) => {
   const { event, setEvent } = useProjectEventStore();
 
-  React.useEffect(() => {
-    if (!event) {
-      setEvent({
-        eventId: project.events[0].eventId,
-        name: project.events[0].event.name,
-        type: project.events[0].event.type,
-        joinId: project.events[0].event.id,
-      });
-      toast.info(`Switched to ${project.events[0].event.name}`);
-    }
-  }, [event, project.events, setEvent]);
+  useEffect(() => {
+    const handleEvent = async () => {
+      if (!event && project.projectJoinEvent.length > 0) {
+        const selectedProjectJoin = project.projectJoinEvent
+          .filter(
+            (e) =>
+              e.event.isActive &&
+              calculateEventStatus(e.event.eventStatus) !== 'ENDED',
+          )
+          .find((e) => calculateEventStatus(e.event.eventStatus) === 'VOTING');
+        console.log(
+          project.projectJoinEvent.map((e) => {
+            console.log(
+              e.event.isActive,
+              calculateEventStatus(e.event.eventStatus),
+            );
+          }),
+        );
+        if (!selectedProjectJoin) {
+          return setEvent(null);
+        }
+
+        setEvent({
+          eventId: selectedProjectJoin?.event.id,
+          name: selectedProjectJoin?.event.name,
+          type: selectedProjectJoin?.event.type,
+          joinId: selectedProjectJoin?.id,
+        });
+        toast.info(`Switched to ${selectedProjectJoin.event.name}`);
+      }
+    };
+    handleEvent();
+  }, [project.projectJoinEvent, event]);
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-4 md:gap-10 md:py-12">
@@ -70,19 +74,19 @@ const ProjectDetailsPageHeader = ({
       </div>
       <div>
         <Avatar
-          src={project?.logo || ''}
+          src={project?.logo || Project_Backup}
           size="2xl"
-          alt={project?.name || ''}
+          alt={project?.name || 'Unknown Project'}
         />
       </div>
       <div className="align-start md:align-end flex flex-col gap-3">
         <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
           <div className="flex w-full flex-col gap-1">
             <Text className="h3 md:h4" color="primary">
-              {project?.name || ''}
+              {project?.name}
             </Text>
             <Text className="b3-light md:b3-light" color="secondary">
-              {project?.shortDescription || ''}
+              {project?.shortDescription}
             </Text>
           </div>
           <div className="flex w-full flex-row gap-3 md:w-fit">
@@ -106,29 +110,38 @@ const ProjectDetailsPageHeader = ({
             <MenuButton>
               <div className="flex flex-row-reverse items-center justify-end gap-1 md:flex-row">
                 <Text color={'secondary'} className="l2">
-                  Alpha Grants Round
+                  {event?.name || 'Tip the Project'}
                 </Text>
-                <Icon name={'chevronDown'} width={18} height={18} />
+                <Icon
+                  name={'chevronDown'}
+                  color="var(--color-fg-primary-depth)"
+                  width={18}
+                  height={18}
+                />
               </div>
             </MenuButton>
             <MenuList>
-              {project?.events.map((event: EventSegment, idx: number) => {
-                return (
-                  <MenuItem
-                    key={idx}
-                    text={event.event.name!}
-                    onClick={() => {
-                      setEvent({
-                        eventId: event.eventId,
-                        name: event.event.name,
-                        type: event.event.type,
-                        joinId: event.event.projectJoinEvent[0].id,
-                      });
-                      toast.info(`Switched to ${event.event.name}`);
-                    }}
-                  />
-                );
-              })}
+              {project?.projectJoinEvent.map(
+                (projectJoinEvent, idx: number) => {
+                  return (
+                    <MenuItem
+                      key={idx}
+                      text={projectJoinEvent.event.name!}
+                      onClick={() => {
+                        setEvent({
+                          eventId: projectJoinEvent.event.id,
+                          name: projectJoinEvent.event.name,
+                          type: projectJoinEvent.event.type,
+                          joinId: projectJoinEvent.id,
+                        });
+                        toast.info(
+                          `Switched to ${projectJoinEvent.event.name}`,
+                        );
+                      }}
+                    />
+                  );
+                },
+              )}
             </MenuList>
           </Menu>
         </div>
@@ -136,5 +149,3 @@ const ProjectDetailsPageHeader = ({
     </div>
   );
 };
-
-export default ProjectDetailsPageHeader;

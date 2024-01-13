@@ -1,11 +1,10 @@
 import React from 'react';
 import type { Metadata, ResolvingMetadata } from 'next';
-import { Slides } from '@/types/project';
+import { notFound } from 'next/navigation';
+import { ProjectDetailsPageHeader } from '@/app/p/[slug]/components/projectDetailsPageHeader';
 import { utils } from '@coral-xyz/anchor';
 
-import { prisma } from '@cubik/database';
-
-import ProjectDetailsPageHeader from './components/projectDetailsPageHeader';
+import { Prisma, prisma } from '@cubik/database';
 
 interface OgProps {
   params: { slug: string };
@@ -72,11 +71,40 @@ interface Props {
   children: React.JSX.Element | React.JSX.Element[];
 }
 
+export type ProjectHeadersType = Prisma.ProjectGetPayload<{
+  select: {
+    id: true;
+    name: true;
+    shortDescription: true;
+    logo: true;
+    projectLink: true;
+    projectJoinEvent: {
+      select: {
+        id: true;
+        event: {
+          select: {
+            id: true;
+            name: true;
+            type: true;
+            isActive: true;
+            eventStatus: {
+              select: {
+                status: true;
+                endTime: true;
+                startTime: true;
+              };
+            };
+          };
+        };
+      };
+    };
+  };
+}>;
+
 const fetchProject = async (slug: string) => {
   try {
     const project = await prisma.project.findFirst({
       where: {
-        //   isActive: true,
         isArchive: false,
         slug: slug,
       },
@@ -86,77 +114,47 @@ const fetchProject = async (slug: string) => {
         shortDescription: true,
         logo: true,
         projectLink: true,
-        slides: true,
-        // mutliSigAddress: true,
-      },
-    });
-    if (!project) {
-      return [null, null];
-    }
-    const projectJoinEvent = await prisma.projectJoinEvent.findMany({
-      where: {
-        projectId: project.id,
-      },
-      select: {
-        eventId: true,
-        event: {
+        projectJoinEvent: {
           select: {
-            name: true,
             id: true,
-            type: true,
-            projectJoinEvent: {
+            event: {
               select: {
                 id: true,
-              },
-              where: {
-                projectId: project.id,
+                name: true,
+                type: true,
+                isActive: true,
+                eventStatus: {
+                  select: {
+                    status: true,
+                    endTime: true,
+                    startTime: true,
+                  },
+                },
               },
             },
           },
         },
       },
     });
-    console.log('project - ', project);
-
-    console.log('projectJoinEvent - ', projectJoinEvent);
-
-    // const rounds: ProjectPageEventType[] = project.projectJoinRound.map(
-    //   (round) => {
-    //     return {
-    //       eventId: round.roundId,
-    //       eventType: 'round',
-    //       name: round.round.name,
-    //       joinId: round.id,
-    //       startTime: round.round.startTime,
-    //       endTime: round.round.endTime,
-    //     };
-    //   },
-    // );
-    const layoutData = {
-      // id: project?.id,
-      name: project?.name,
-      shortDescription: project?.shortDescription,
-      logo: project?.logo,
-      projectLink: project?.projectLink,
-      // mutliSigAddress: project?.mutliSigAddress,
-      events: projectJoinEvent,
-      slides: project.slides as unknown as Slides,
-    };
-    return [layoutData, null];
+    if (!project) {
+      throw new Error('Project not found');
+    }
+    return project;
   } catch (error) {
     console.log(error);
-    return [null, error as Error];
+    return null;
   }
 };
 
 const ProjectLayout = async ({ children, params }: Props) => {
   const project = await fetchProject(params.slug);
-  console.log('project here - ', project);
-
+  if (!project) {
+    notFound();
+  }
   return (
     <div className="w-full">
       <div className="bg-[var(--body-surface)]">
-        {/* <ProjectDetailsPageHeader project={project[0]} /> */}
+        <ProjectDetailsPageHeader project={project} />
       </div>
       <div className="relative">{children}</div>
     </div>

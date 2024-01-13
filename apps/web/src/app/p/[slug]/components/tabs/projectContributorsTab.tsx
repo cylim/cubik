@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { getContributions, getTopEarner } from '@/app/p/[slug]/actions';
-import Loading from '@/app/p/[slug]/components/loading';
 import { useProjectEventStore } from '@/app/p/[slug]/store';
 import TabLayout from '@/components/common/tabs/TabLayout';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
@@ -168,7 +167,6 @@ export const ProjectContributorsTab = ({ slug }: Props) => {
                       </TableRow>
                     );
                   })}
-                <Loading ref={ref} hidden={page === lastPage} />
               </TableBody>
             </Table>
             <div className="flex max-w-md flex-col">

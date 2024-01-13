@@ -16,7 +16,7 @@ export const HandleConnect = () => {
   const { publicKey, connected } = useCubikWallet();
   const { user } = useUser();
 
-  if (!connected && !publicKey && !user) {
+  if ((!connected && !publicKey) || !user) {
     return (
       <Button
         variant="primary"

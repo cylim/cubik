@@ -49,19 +49,20 @@ export const Step4 = ({ setStep, projectForm }: Props) => {
         new web3.PublicKey(PROGRAM_ID),
       );
 
-      // const [projectPDA] = csdk.ix.project.getPDA(createKey.publicKey, counter);
+      // const [projectPDA] = csdk.project.getPDA(createKey.publicKey);
 
-      const pda = web3.PublicKey.findProgramAddressSync(
-        [
-          Buffer.from('user'),
-          new web3.PublicKey(
-            user?.mainWallet || anchorWallet?.publicKey?.toBase58() || '',
-          ).toBuffer() as Buffer,
-        ],
-        new web3.PublicKey(PROGRAM_ID),
+      // const pda = web3.PublicKey.findProgramAddressSync(
+      //   [
+      //     Buffer.from('user'),
+      //     new web3.PublicKey(
+      //       user?.mainWallet || anchorWallet?.publicKey?.toBase58() || '',
+      //     ).toBuffer() as Buffer,
+      //   ],
+      //   new web3.PublicKey(PROGRAM_ID),
+      // );
+      const [userPDA] = csdk.user.getPDA(
+        anchorWallet?.publicKey as web3.PublicKey,
       );
-      const [userPDA] = csdk.ix.user.getPDA();
-      console.log(pda[0].toBase58(), userPDA.toBase58());
       const [multisigPDA] = web3.PublicKey.findProgramAddressSync(
         [SEED_PREFIX, SEED_MULTISIG, createKey.publicKey.toBytes()],
         SQUADS_PROGRAM_ID,
@@ -83,7 +84,7 @@ export const Step4 = ({ setStep, projectForm }: Props) => {
         timeLock: 0,
       };
       const accounts = {
-        userAccount: pda[0],
+        userAccount: userPDA,
         createKey: createKey.publicKey,
         projectAccount: ppda8[0],
         multisig: multisigPDA,
@@ -91,7 +92,7 @@ export const Step4 = ({ setStep, projectForm }: Props) => {
         squadsProgram: SQUADS_PROGRAM_ID,
         systemProgram: web3.SystemProgram.programId,
       };
-      const ix = await csdk.ix.project.create(args, accounts);
+      const ix = await csdk.project.create(args, accounts, []);
 
       const tx = new web3.Transaction().add(ix);
       const { blockhash } = await connection.getLatestBlockhash();

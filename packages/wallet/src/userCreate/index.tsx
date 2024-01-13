@@ -14,7 +14,6 @@ import {
   generateDefaultUserName,
   generateUserBackupImage,
 } from '@cubik/common';
-import { PROGRAM_ID } from '@cubik/common/constants';
 import { UserType } from '@cubik/database';
 
 import { connection, cubikInstance } from '../authentication/contract';
@@ -63,8 +62,10 @@ export const UserCreate = () => {
   const onSubmit = async () => {
     try {
       setCreateUserLoading(true);
-      const [userPDA] = csdk.ix.user.getPDA();
-      const ix = await csdk.ix.user.create(
+      const [userPDA] = csdk.user.getPDA(
+        anchorWallet?.publicKey as web3.PublicKey,
+      );
+      const ix = await csdk.user.create(
         {
           username: userInfoForm.watch('username'),
         },

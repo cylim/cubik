@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { eventType } from '@/app/eventForm/page';
+import { eventType } from '@/app/create/event/page';
 
 import { SegmentContainer, SegmentItem } from '@cubik/ui';
 

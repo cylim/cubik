@@ -130,7 +130,7 @@ const OrganizationSponsorForm = ({
             <InputLabel id="upfrontPay" isRequired>
               Amount Paying Upfront
             </InputLabel>
-            <ul>
+            <ul className="flex flex-col gap-2">
               {fields.map((item, index) => {
                 return (
                   <li key={item.id}>

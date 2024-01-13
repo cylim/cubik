@@ -1,12 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
-import IndividualSponsorForm from '@/app/sponsorForm/IndividualSponsorForm';
-import OrganizationSponsorForm from '@/app/sponsorForm/OrganizationSponsorForm';
+import IndividualSponsorForm from '@/app/create/sponsor/IndividualSponsorForm';
+import OrganizationSponsorForm from '@/app/create/sponsor/OrganizationSponsorForm';
 import {
   SponsorFormSwitch,
   sponsorType,
-} from '@/app/sponsorForm/sponsorFormSwitch';
+} from '@/app/create/sponsor/sponsorFormSwitch';
 import {
   IndividualSponsorFormData,
   OrganizationSponsorFormData,

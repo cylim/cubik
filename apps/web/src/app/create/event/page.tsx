@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { EventFormSwitch } from '@/app/eventForm/eventFormSwitch';
-import FundingRoundForm from '@/app/eventForm/FundingRoundForm';
+import { EventFormSwitch } from '@/app/create/event/eventFormSwitch';
+import FundingRoundForm from '@/app/create/event/FundingRoundForm';
 import { EventFormData } from '@/types/events';
 import { useForm } from 'react-hook-form';
 

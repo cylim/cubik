@@ -1,5 +1,10 @@
-"use client";
+'use client';
+
 import React from 'react';
+import { useProjectEventStore } from '@/app/project/[slug]/store';
+import { toast } from 'sonner';
+
+import { EventType } from '@cubik/database';
 import {
   Avatar,
   Button,
@@ -10,9 +15,6 @@ import {
   MenuList,
   Text,
 } from '@cubik/ui';
-import { EventType } from '@cubik/database';
-import { useProjectEventStore } from '@/app/project/[slug]/store';
-import { toast } from 'sonner';
 
 type EventSegment = {
   event: {
@@ -24,7 +26,7 @@ type EventSegment = {
     }[];
   };
   eventId: string;
-}
+};
 interface ProjectPropsType {
   name: string;
   shortDescription: string;
@@ -49,7 +51,7 @@ const ProjectDetailsPageHeader = ({
         type: project.events[0].event.type,
         joinId: project.events[0].event.id,
       });
-      toast.info(`Switched to ${project.events[0].event.name}`)
+      toast.info(`Switched to ${project.events[0].event.name}`);
     }
   }, [event, project.events, setEvent]);
 
@@ -123,10 +125,10 @@ const ProjectDetailsPageHeader = ({
                         type: event.event.type,
                         joinId: event.event.projectJoinEvent[0].id,
                       });
-                      toast.info(`Switched to ${event.event.name}`)
+                      toast.info(`Switched to ${event.event.name}`);
                     }}
                   />
-                )
+                );
               })}
             </MenuList>
           </Menu>

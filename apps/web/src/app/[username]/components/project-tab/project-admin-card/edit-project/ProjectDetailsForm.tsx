@@ -1,5 +1,5 @@
-import { error } from 'console';
 import React from 'react';
+import { Industries } from '@/constants/industry';
 import { IProjectData } from '@/types/project';
 import { useUploadThing } from '@/utils/uploadthing';
 import { UseFormReturn } from 'react-hook-form';
@@ -11,6 +11,7 @@ import {
   InputField,
   InputFieldContainer,
   InputLabel,
+  SearchSelect,
   Textarea,
 } from '@cubik/ui';
 
@@ -57,6 +58,14 @@ const ProjectDetailsForm = ({
       },
     },
   );
+  const mapIndustryToOption = (industryValue: any) => {
+    return {
+      label: industryValue,
+      value: industryValue,
+    };
+  };
+
+  const defaultIndustryValues = ['Adventure Games'].map(mapIndustryToOption);
   return (
     <div className="mt-11 flex flex-col gap-8">
       <ImageUploader
@@ -143,6 +152,20 @@ const ProjectDetailsForm = ({
             {editProjectForm.formState.errors.shortDescription.message}
           </HelperText>
         )}
+      </div>
+
+      <div className="flex w-full flex-col gap-2">
+        <InputLabel id="industry">Categories</InputLabel>
+        <SearchSelect
+          placeholder="Search Category here"
+          isMulti={true}
+          onChange={(e) => {
+            if (!e) return;
+            editProjectForm.setValue('industry', e as any);
+          }}
+          value={defaultIndustryValues as any}
+          options={Industries as any}
+        />
       </div>
 
       {/* rest of the code here */}

@@ -45,7 +45,7 @@ export interface IProjectData {
   longDescription: string;
   slides: string[];
   projectLink: string;
-  industry: string;
+  industry: string[];
   status: string;
   telegramLink: string;
   isOpenSource: boolean;

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { EventFormSwitch } from '@/app/eventForm/eventFormSwitch';
 import FundingRoundForm from '@/app/eventForm/FundingRoundForm';
@@ -9,8 +9,11 @@ import { useForm } from 'react-hook-form';
 
 import { Text } from '@cubik/ui';
 
+export type eventType = 'funding' | 'RPGF' | 'hackathon';
+
 const EventFormPage = () => {
   const searchParams = useSearchParams();
+  const [eventFormType, setEventFormType] = useState<eventType>('funding');
 
   const createEventForm = useForm<EventFormData>({
     defaultValues: {
@@ -37,7 +40,7 @@ const EventFormPage = () => {
         </Text>
       </div>
       <div>
-        <EventFormSwitch event={searchParams?.event} />
+        <EventFormSwitch change={setEventFormType} isActive={eventFormType} />
       </div>
       <FundingRoundForm
         createEventForm={createEventForm}

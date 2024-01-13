@@ -1,39 +1,33 @@
 'use client';
 
 import React from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { eventType } from '@/app/eventForm/page';
 
 import { SegmentContainer, SegmentItem } from '@cubik/ui';
 
 interface Props {
-  event: string | undefined;
+  isActive: eventType;
+  change: (type: eventType) => void;
 }
-export const EventFormSwitch = ({ event }: Props) => {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const router = useRouter();
-  let path = pathname;
-
+export const EventFormSwitch = ({ isActive, change }: Props) => {
   return (
     <div className="flex flex-row gap-4">
       <SegmentContainer size="sm">
         <SegmentItem
-          isActive={!event || event === 'funding'}
-          onClick={() => {
-            router.push(`${path}?event=funding`);
-          }}
+          isActive={isActive === 'funding' ? true : false}
+          onClick={() => change('funding')}
         >
           Quadratic Funding Round
         </SegmentItem>
         <SegmentItem
-        // isActive={event === 'grants'}
-        // href={`${path}?event=grants`}
+        // isActive={isActive === 'RPGF' ? true : false}
+        // onClick={() => change('RPGF')}
         >
           RPGF
         </SegmentItem>
         <SegmentItem
-        // isActive={event === 'grants'}
-        // href={`${path}?event=grants`}
+        // isActive={isActive === 'Hackathon' ? true : false}
+        // onClick={() => change('Hackathon')}
         >
           Hackathon
         </SegmentItem>

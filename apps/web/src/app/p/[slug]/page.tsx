@@ -26,7 +26,7 @@ const ProjectPage = async ({ params }: { params: { slug: string } }) => {
               <Tab value={0}>About</Tab>
               <Tab value={1}>Contributors</Tab>
               <Tab value={2}>Team</Tab>
-              <Tab value={3}>Grants</Tab>
+              {/* <Tab value={3}>Grants</Tab> */}
             </TabList>
           </div>
           <Background />
@@ -35,16 +35,10 @@ const ProjectPage = async ({ params }: { params: { slug: string } }) => {
               <ProjectDetailsTab slug={params.slug} />
             </TabPanel>
             <TabPanel value={1}>
-              {/* <ProjectContributorsTab slug={params.slug} /> */}
-              <TabLayout>
-                <DataTableDemo />
-              </TabLayout>
+              <ProjectContributorsTab slug={params.slug} />
             </TabPanel>
             <TabPanel value={2}>
               <ProjectTeamTab slug={params.slug} />
-            </TabPanel>
-            <TabPanel value={3}>
-              <></>
             </TabPanel>
           </TabPanels>
         </Tabs>

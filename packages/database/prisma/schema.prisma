@@ -246,6 +246,7 @@ model Team {
   userId    String
   projectId String?
   createdAt DateTime @default(now())
+  desgination String? 
   updatedAt DateTime @updatedAt
   isActive  Boolean  @default(true)
   isArchive Boolean  @default(false)

@@ -1,51 +1,35 @@
-import { HtmlHTMLAttributes, useState } from 'react';
-import { cookies } from 'next/headers';
-import Image from 'next/image';
-import Link from 'next/link';
-import { updateProjectState } from '@/app/projects/actions';
-import { getProjects } from '@/app/projects/components/getProject';
-import { useQuery } from '@tanstack/react-query';
-import { toast } from 'sonner';
+import { HtmlHTMLAttributes, Suspense } from 'react';
+import { ProjectDrawerContent } from '@/app/projects/components/projectDrawerContent';
 
-import { decodeToken } from '@cubik/auth/src/admin';
-import { ProjectVerifyStatus } from '@cubik/database';
-import { logApi } from '@cubik/logger/src';
-import {
-  AvatarLabelGroup,
-  Button,
-  Sheet,
-  SheetContent,
-  SheetFooter,
-  SheetHeader,
-  SheetTrigger,
-  Tag,
-  Text,
-} from '@cubik/ui';
+import { Button, Sheet, SheetContent, SheetTrigger } from '@cubik/ui';
 
 interface DrawerProps extends HtmlHTMLAttributes<HTMLDivElement> {
   slug: string;
+  setOpenSlug: React.Dispatch<React.SetStateAction<string | null>>;
+  openSlug: string | null;
 }
 
-export async function ProjectDrawer({ slug, ...props }: DrawerProps) {
-  const [openedProject, setOpenedProject] = useState<boolean>(false);
-
-  // const project = useQuery({
-  //   queryFn: () => getProjects(slug),
-  //   queryKey: ['project', slug],
-  //   enabled: !!(openedProject && slug),
-  // });
-  console.log('project data inside drawer');
+export function ProjectDrawer({
+  slug,
+  openSlug,
+  setOpenSlug,
+  ...props
+}: DrawerProps) {
   return (
-    <Sheet>
+    <Sheet
+      onOpenChange={() => {
+        if (openSlug) {
+          setOpenSlug(slug);
+        }
+      }}
+    >
       <SheetTrigger asChild>
-        <Button
-          onClick={() => setOpenedProject(true)}
-          leftIconName="chevronRight"
-          variant={'outline'}
-          size="md"
-        />
+        <Button leftIconName="chevronRight" variant={'outline'} size="md" />
       </SheetTrigger>
-      <SheetContent className="overflow-x-scroll">
+      <SheetContent className="pointer-events-auto overflow-x-scroll">
+        <Suspense fallback="loading...">
+          <ProjectDrawerContent slug={slug} />
+        </Suspense>
         {/* {JSON.stringify(project.data)} */}
         {/* <SheetHeader>
           <div className="relative box-border flex w-full flex-col items-start justify-start px-6 pb-2 pt-0">

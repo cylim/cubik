@@ -363,3 +363,14 @@ tags.sort((a, b) => a.label.localeCompare(b.label));
 
 // return tags by sorting them in alphabetical order
 export const Industries: Option[] = tags;
+
+export const tokens: Option[] = [
+  {
+    label: 'USDC',
+    value: '0x0ewrqwertwqe784738',
+  },
+  {
+    label: 'SOL',
+    value: '0x00000000',
+  },
+];

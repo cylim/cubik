@@ -1,14 +1,10 @@
 import React from 'react';
-import { DataTableDemo } from '@/app/project/[slug]/components/tabs/projectContributorsTable';
+import { DataTableDemo } from '@/app/p/[slug]/components/tabs/projectContributorsTable';
 import TabLayout from '@/components/common/tabs/TabLayout';
 
 import { Background, Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
 
-import {
-  ProjectContributorsTab,
-  ProjectDetailsTab,
-  ProjectTeamTab,
-} from './components/tabs';
+import { ProjectDetailsTab, ProjectTeamTab } from './components/tabs';
 
 const ProjectPage = async ({ params }: { params: { slug: string } }) => {
   return (

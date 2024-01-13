@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { getContributions, getTopEarner } from '@/app/project/[slug]/actions';
-import Loading from '@/app/project/[slug]/components/loading';
-import { useProjectEventStore } from '@/app/project/[slug]/store';
+import { getContributions, getTopEarner } from '@/app/p/[slug]/actions';
+import Loading from '@/app/p/[slug]/components/loading';
+import { useProjectEventStore } from '@/app/p/[slug]/store';
 import TabLayout from '@/components/common/tabs/TabLayout';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';

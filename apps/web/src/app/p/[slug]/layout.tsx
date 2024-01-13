@@ -156,7 +156,7 @@ const ProjectLayout = async ({ children, params }: Props) => {
   return (
     <div className="w-full">
       <div className="bg-[var(--body-surface)]">
-        <ProjectDetailsPageHeader project={project[0]} />
+        {/* <ProjectDetailsPageHeader project={project[0]} /> */}
       </div>
       <div className="relative">{children}</div>
     </div>

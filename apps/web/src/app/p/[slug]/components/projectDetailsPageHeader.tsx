@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useProjectEventStore } from '@/app/project/[slug]/store';
+import { useProjectEventStore } from '@/app/p/[slug]/store';
 import { toast } from 'sonner';
 
 import { EventType } from '@cubik/database';
@@ -40,7 +40,6 @@ const ProjectDetailsPageHeader = ({
 }: {
   project: ProjectPropsType | any;
 }) => {
-  // console.log(project.events[0].event.id);
   const { event, setEvent } = useProjectEventStore();
 
   React.useEffect(() => {

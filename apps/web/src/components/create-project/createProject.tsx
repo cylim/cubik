@@ -10,6 +10,7 @@ import { Step4 } from '@/components/create-project/step4';
 import { Success } from '@/components/create-project/success';
 import { useAutosave } from '@/hooks/useAutoSave';
 import axios, { AxiosResponse } from 'axios';
+import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { v4 as uuidV4 } from 'uuid';
 
@@ -18,6 +19,8 @@ import { Prisma } from '@cubik/database';
 import { ApiResponseType } from '@cubik/database/api';
 import {
   Avatar,
+  Icon,
+  Skeleton,
   Spinner,
   Tab,
   TabList,
@@ -80,6 +83,30 @@ export interface ProjectFormData {
   twitter: string;
   isOpenSource: boolean;
 }
+
+const StepBar = ({ currentStep }: { currentStep: number }) => {
+  return (
+    <div className="flex items-center justify-between w-full">
+      <div className="flex items-center gap-2">
+        {[1, 2, 3, 4, 5].map((step) => (
+          <motion.div
+            key={step}
+            className={`h-[6px] rounded-full ${
+              currentStep === step
+                ? 'w-[32px] bg-[var(--color-fg-info-base)]'
+                : 'w-[6px] bg-[var(--color-surface-primary-transparent)]'
+            }`}
+            animate={{
+              width: currentStep === step ? 32 : 8,
+            }}
+            transition={{ duration: 0.5 }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
 export const CreateProject = ({ id }: Props) => {
   const [step, setStep] = useState<number>(1);
   const [loadedProject, setLoadedProject] = useState<ProjectData | null>(null);
@@ -190,15 +217,11 @@ export const CreateProject = ({ id }: Props) => {
   };
 
   return (
-    <div className="pointer-events-auto mx-auto flex h-screen w-full max-w-screen-xl justify-start overflow-hidden bg-[var(--modal-body-surface)]">
-      {!isLoadingProject ? (
-        <div className="w-full overflow-y-auto bg-[var(--card-bg-primary)] px-7 md:w-[55%]  md:px-14">
-          <div className="py-4 md:py-8 ">
-            <Text className="h5 text-[var(--modal-header-heading)]">
-              New Project
-            </Text>
-          </div>
-          <div className="px-4 py-5 md:px-7 md:py-11">
+    <div className="border h-[1000px] border-red-500 pointer-events-auto py-16 mx-auto flex md:gap-24 md:px-12 w-full max-w-screen-xl justify-start">
+      <div className="md:w-1/2 h-full border border-red-500">
+        {!isLoadingProject ? (
+          <div className="h-full border md:px-12 border-red-500">
+            <StepBar currentStep={step} />
             {step === 1 && (
               <Step1
                 forceSave={forceSave}
@@ -220,39 +243,65 @@ export const CreateProject = ({ id }: Props) => {
                 projectForm={createProjectForm}
               />
             )}
+            {/* {step === 3 && (
+              <Step3
+                forceSave={forceSave}
+                setStep={setStep}
+                projectForm={createProjectForm}
+              />
+            )} */}
             {step === 4 && (
               <Step4 setStep={setStep} projectForm={createProjectForm} />
             )}
             {step === 5 && <Success />}
           </div>
-        </div>
-      ) : (
-        <div className="flex w-full items-center justify-center px-7 md:w-[55%] md:px-14">
-          <Spinner color="#000000" />
-        </div>
-      )}
+        ) : (
+          <div className="flex w-full items-center justify-center px-7 md:w-[55%] md:px-14">
+            <Spinner color="#000000" />
+          </div>
+        )}
+      </div>
 
-      <div className="relative hidden w-[45%] px-14 py-8 md:block ">
-        <div className="absolute bottom-0 left-0 ml-20 w-full">
-          <div className="flex min-h-48 w-full flex-col gap-8 rounded-t-xl border-[0.66px] border-[var(--color-border-primary-base)] bg-[var(--card-bg-primary)] pl-14 pt-14">
-            <Avatar
-              size={'xl'}
-              variant={'square'}
-              src={createProjectForm.watch('logo') || Project_Backup}
-              alt="random"
-            />
+      <div className="border border-red-500 relative transform scale-90 hidden w-1/2 px-14 py-8 md:block ">
+        <div className="absolute flex items-center justify-center top-0 h-full left-0 ml-10 w-full">
+          <div className="flex w-full h-fit min-h-48 flex-col gap-8 rounded-tl-xl rounded-bl-xl overflow-hidden border-[var(--color-border-primary-base)]  bg-gradient-to-r from-[var(--body-surface)] px-14 pt-14">
+            {!(createProjectForm.watch('logo') === Project_Backup) ? (
+              <Avatar
+                size={'xl'}
+                variant={'square'}
+                src={createProjectForm.watch('logo') || Project_Backup}
+                alt="random"
+              />
+            ) : (
+              <div className="flex items-center justify-center border-[var(--card-border-primary)] rounded-md w-[72px] h-[72px] border bg-[var(--color-surface-primary-base)]">
+                <Icon
+                  name="plus"
+                  width={20}
+                  height={20}
+                  color="var(--color-fg-primary-base)"
+                />
+              </div>
+            )}
 
-            <div className="flex flex-col">
-              <Text className="b2" color={'primary'}>
-                {createProjectForm.watch('name')
-                  ? createProjectForm.watch('name')
-                  : 'Name of the Project'}
-              </Text>
-              <Text className="l3-light" color={'primary'}>
-                {createProjectForm.watch('tagline')
-                  ? createProjectForm.watch('tagline')
-                  : 'Concise and descriptive tagline of your project'}
-              </Text>
+            <div className="flex gap-3 flex-col w-full">
+              {createProjectForm.watch('name') ? (
+                <Text className="b2" color={'primary'}>
+                  {createProjectForm.watch('name')}
+                </Text>
+              ) : (
+                <div className="w-[40%] h-[28px] py-1">
+                  <div className="w-full h-full opacity-50 rounded-md bg-[var(--color-surface-primary-transparent)]" />
+                </div>
+              )}
+              {createProjectForm.watch('tagline') ? (
+                <Text className="l2-light" color={'secondary'}>
+                  {createProjectForm.watch('tagline')}
+                </Text>
+              ) : (
+                <div className="w-[80%] h-[20px] py-1">
+                  <div className="w-full h-full opacity-50 rounded-md bg-[var(--color-surface-primary-transparent)]" />
+                </div>
+              )}
             </div>
             <div>
               <Tabs size="sm" defaultValue={0}>

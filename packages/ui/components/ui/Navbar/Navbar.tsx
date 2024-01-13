@@ -38,13 +38,15 @@ export const Navbar = ({
 }) => {
   let background = true;
   if (pathname === '/') background = false;
+  if (pathname === '/create/project') background = false;
 
   return (
     <div
       className={`py-3  md:py-6 w-full top-0 ${
         background
           ? 'bg-[var(--body-surface)]'
-          : 'bg-gradient-to-b from-[var(--body-surface)] dark:from-[var(--body-surface)] dark:to-[var(--body-surface)]'
+          : //  : 'bg-gradient-to-b from-[var(--body-surface)] to-[var(--body-bg)] via-40% dark:from-[var(--body-surface)] dark:to-[var(--body-bg)] dark:via-10%'
+            'bg-[var(--body-bg)]'
       }`}
     >
       {background}

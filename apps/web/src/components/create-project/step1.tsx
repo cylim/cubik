@@ -1,4 +1,5 @@
 import { ProjectFormData } from '@/components/create-project/createProject';
+import StepTemplate from '@/components/create-project/stepTemplate';
 import { Industries } from '@/constants/industry';
 import { useState } from 'React';
 import { UseFormReturn } from 'react-hook-form';
@@ -19,14 +20,88 @@ interface Props {
   forceSave: () => Promise<void>;
 }
 export const Step1 = ({ setStep, projectForm, forceSave }: Props) => {
+  // on next function
+  const onNext = () => {
+    setStep(2);
+    forceSave();
+  };
+
+  // om previous function
   return (
     <>
-      <div>
+      <StepTemplate
+        currentStep={1}
+        onNext={onNext}
+        title={'Hey @irffan 👋🏻'}
+        description={
+          'Lets get started with creating your Project. Tell us about it, we will need its name and a unique tagline that represents your project'
+        }
+      >
+        <div className="flex flex-col gap-4">
+          <InputContainer>
+            <InputLabel
+              maxCounterValue={32}
+              counterValue={projectForm.watch('name').length || 0}
+              isRequired
+            >
+              Name of the project
+            </InputLabel>
+            <InputFieldContainer
+              isError={projectForm.formState.errors.name ? true : false}
+              variant="md"
+            >
+              <InputField
+                maxLength={32}
+                onChange={(e) => {
+                  projectForm.setValue('name', e.currentTarget.value);
+                }}
+                value={projectForm.watch('name')}
+                placeholder="Project Name"
+              />
+            </InputFieldContainer>
+          </InputContainer>
+          <InputContainer>
+            <InputLabel
+              maxCounterValue={80}
+              counterValue={projectForm.watch('tagline').length || 0}
+              isRequired
+            >
+              Tagline
+            </InputLabel>
+            <InputFieldContainer
+              isError={projectForm.formState.errors.tagline ? true : false}
+              variant="md"
+            >
+              <InputField
+                maxLength={80}
+                onChange={(e) => {
+                  projectForm.setValue('tagline', e.currentTarget.value);
+                }}
+                value={projectForm.watch('tagline')}
+                placeholder="Concise and descriptive tagline for the project"
+              />
+            </InputFieldContainer>
+          </InputContainer>
+          <InputContainer>
+            <InputLabel>Contact Email</InputLabel>
+            <InputFieldContainer
+              isError={projectForm.formState.errors.email ? true : false}
+              variant="md"
+            >
+              <InputField
+                onChange={(e) => {
+                  projectForm.setValue('email', e.currentTarget.value);
+                }}
+                value={projectForm.watch('email')}
+                placeholder="Email where all important information will be shared"
+              />
+            </InputFieldContainer>
+          </InputContainer>
+        </div>
+      </StepTemplate>
+      {/* <div>
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-1">
-            <Text className="b4-light" color={'tertiary'}>
-              1/5
-            </Text>
             <Text className="h5" color={'primary'}>
               Tell us about your project
             </Text>
@@ -145,7 +220,7 @@ export const Step1 = ({ setStep, projectForm, forceSave }: Props) => {
             Next
           </Button>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

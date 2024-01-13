@@ -1,15 +1,19 @@
 import React from 'react';
+import { tokens } from '@/constants/industry';
 import { IndividualSponsorFormData } from '@/types/sponsor';
-import { UseFormReturn } from 'react-hook-form';
+import { Controller, useFieldArray, UseFormReturn } from 'react-hook-form';
 
 import {
   Button,
   Checkbox,
   HelperText,
+  Icon,
   InputField,
   InputFieldContainer,
   InputLabel,
   InputLeftElement,
+  InputRightElement,
+  SearchSelect,
   Text,
 } from '@cubik/ui';
 
@@ -26,6 +30,11 @@ const IndividualSponsorForm = ({
   individualSponsorForm,
   submitEventData,
 }: IOrgSponsorFormProps) => {
+  const { control } = individualSponsorForm;
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'upfrontPay',
+  });
   return (
     <form
       className="flex w-full flex-col gap-[40px]"
@@ -72,6 +81,78 @@ const IndividualSponsorForm = ({
               </HelperText>
             )}
           </div>
+
+          <div className="mt-[16px] flex w-full flex-col gap-3">
+            <InputLabel id="upfrontPay" isRequired>
+              Amount Paying Upfront
+            </InputLabel>
+            <ul>
+              {fields.map((item, index) => {
+                return (
+                  <li key={item.id}>
+                    <div className="flex gap-3">
+                      <InputFieldContainer variant="sm">
+                        <InputField
+                          name="amount"
+                          placeholder="100,000"
+                          onChange={(e) => {
+                            individualSponsorForm.setValue(
+                              `upfrontPay.${index}.amount`,
+                              Number(e.currentTarget.value),
+                            );
+                          }}
+                        />
+                        <InputRightElement>
+                          <Controller
+                            render={({ field }) => (
+                              <SearchSelect
+                                placeholder="token"
+                                onChange={(e) => {
+                                  if (!e) return;
+                                  individualSponsorForm.setValue(
+                                    `upfrontPay.${index}.token`,
+                                    e as any,
+                                  );
+                                }}
+                                value={
+                                  individualSponsorForm.watch(
+                                    `upfrontPay.${index}.token`,
+                                  ) as any
+                                }
+                                options={tokens as any}
+                              />
+                            )}
+                            name={`upfrontPay.${index}.token`}
+                            control={control}
+                          />
+                        </InputRightElement>
+                      </InputFieldContainer>
+                      <button type="button" onClick={() => remove(index)}>
+                        <Icon
+                          name="delete"
+                          height={18}
+                          width={18}
+                          color="red"
+                        />
+                      </button>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+            <button
+              type="button"
+              onClick={() => {
+                append({ token: '', amount: 0 });
+              }}
+              className="rounded-lg border border-dashed border-[var(--color-border-secondary)] px-3 py-2"
+            >
+              <Text className="l4" color={'secondary'}>
+                Add Another Asset
+              </Text>
+            </button>
+          </div>
+
           <div className="flex gap-2">
             <Checkbox
               checked={individualSponsorForm.watch('selfCustody')}

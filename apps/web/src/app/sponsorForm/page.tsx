@@ -1,14 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 import IndividualSponsorForm from '@/app/sponsorForm/IndividualSponsorForm';
 import OrganizationSponsorForm from '@/app/sponsorForm/OrganizationSponsorForm';
 import {
   SponsorFormSwitch,
   sponsorType,
 } from '@/app/sponsorForm/sponsorFormSwitch';
-import { EventFormData } from '@/types/events';
 import {
   IndividualSponsorFormData,
   OrganizationSponsorFormData,
@@ -18,7 +16,6 @@ import { useForm } from 'react-hook-form';
 import { Text } from '@cubik/ui';
 
 const SposorFormPage = () => {
-  const searchParams = useSearchParams();
   const [progress, setProgress] = useState<number>(0);
   const [sponsorFormType, setSponsorFormType] =
     useState<sponsorType>('organization');
@@ -27,7 +24,7 @@ const SposorFormPage = () => {
     defaultValues: {
       name: '',
       totalCommitted: 0,
-      upfrontPay: 0,
+      upfrontPay: [{ token: '', amount: 0 }],
       paidToken: '',
       selfCustody: false,
       logo: '',
@@ -38,7 +35,7 @@ const SposorFormPage = () => {
   const individualSponsorForm = useForm<IndividualSponsorFormData>({
     defaultValues: {
       totalCommitted: 0,
-      upfrontPay: 0,
+      upfrontPay: [{ token: '', amount: 0 }],
       paidToken: '',
       selfCustody: false,
       isSponsorshipPublic: true,

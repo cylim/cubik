@@ -2,13 +2,14 @@ import React from 'react';
 import { tokens } from '@/constants/industry';
 import { OrganizationSponsorFormData } from '@/types/sponsor';
 import { useUploadThing } from '@/utils/uploadthing';
-import { UseFormReturn } from 'react-hook-form';
+import { Controller, useFieldArray, UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import {
   Button,
   Checkbox,
   HelperText,
+  Icon,
   ImageUploader,
   InputField,
   InputFieldContainer,
@@ -37,6 +38,11 @@ const OrganizationSponsorForm = ({
   progress,
   setProgress,
 }: IOrgSponsorFormProps) => {
+  const { control } = organizationSponsorForm;
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'upfrontPay',
+  });
   const { startUpload, isUploading, permittedFileInfo } = useUploadThing(
     'imageUploader',
     {
@@ -118,6 +124,77 @@ const OrganizationSponsorForm = ({
                 }
               </HelperText>
             )}
+          </div>
+
+          <div className="mt-[16px] flex w-full flex-col gap-3">
+            <InputLabel id="upfrontPay" isRequired>
+              Amount Paying Upfront
+            </InputLabel>
+            <ul>
+              {fields.map((item, index) => {
+                return (
+                  <li key={item.id}>
+                    <div className="flex gap-3">
+                      <InputFieldContainer variant="sm">
+                        <InputField
+                          name="amount"
+                          placeholder="100,000"
+                          onChange={(e) => {
+                            organizationSponsorForm.setValue(
+                              `upfrontPay.${index}.amount`,
+                              Number(e.currentTarget.value),
+                            );
+                          }}
+                        />
+                        <InputRightElement>
+                          <Controller
+                            render={({ field }) => (
+                              <SearchSelect
+                                placeholder="token"
+                                onChange={(e) => {
+                                  if (!e) return;
+                                  organizationSponsorForm.setValue(
+                                    `upfrontPay.${index}.token`,
+                                    e as any,
+                                  );
+                                }}
+                                value={
+                                  organizationSponsorForm.watch(
+                                    `upfrontPay.${index}.token`,
+                                  ) as any
+                                }
+                                options={tokens as any}
+                              />
+                            )}
+                            name={`upfrontPay.${index}.token`}
+                            control={control}
+                          />
+                        </InputRightElement>
+                      </InputFieldContainer>
+                      <button type="button" onClick={() => remove(index)}>
+                        <Icon
+                          name="delete"
+                          height={18}
+                          width={18}
+                          color="red"
+                        />
+                      </button>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+            <button
+              type="button"
+              onClick={() => {
+                append({ token: '', amount: 0 });
+              }}
+              className="rounded-lg border border-dashed border-[var(--color-border-secondary)] px-3 py-2"
+            >
+              <Text className="l4" color={'secondary'}>
+                Add Another Asset
+              </Text>
+            </button>
           </div>
         </div>
       </div>

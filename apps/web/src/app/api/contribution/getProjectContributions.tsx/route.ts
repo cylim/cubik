@@ -8,6 +8,8 @@ import { logApi } from '@cubik/logger/src';
 export const GET = async (req: NextRequest) => {
   try {
     const searchParams = req.nextUrl.searchParams;
+    const eventId = searchParams.get('eventId');
+    const projectId = searchParams.get('projectId');
   } catch (e) {
     const error = e as Error;
     const authToken = cookies().get('authToken');

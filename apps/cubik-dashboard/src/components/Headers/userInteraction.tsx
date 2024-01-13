@@ -49,7 +49,7 @@ export const UserInteraction = () => {
               name="chevronDown"
               height={20}
               width={20}
-              // stroke="var(--color-fg-primary-depth)"
+              color="var(--color-fg-primary-depth)"
             />
           </div>
         </MenuButton>

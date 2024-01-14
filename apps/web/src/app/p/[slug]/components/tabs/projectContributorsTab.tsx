@@ -8,6 +8,7 @@ import useProjectLeaderboard from '@/hooks/contributions/useProjectLeaderboard';
 
 import {
   AvatarLabelGroup,
+  Icon,
   SegmentContainer,
   SegmentItem,
   SubHead,
@@ -45,7 +46,7 @@ export const ProjectContributorsTab = ({ slug }: Props) => {
 
   return (
     <TabLayout>
-      <div className="flex w-full gap-10">
+      <div className="flex w-full flex-col gap-20 md:flex-row">
         <div className="w-full">
           <SubHead className="w-full" heading="Contributions">
             <div className="w-full max-w-sm">
@@ -74,7 +75,21 @@ export const ProjectContributorsTab = ({ slug }: Props) => {
             <div className="w-full">{JSON.stringify(contribution.data)}</div>
           )}
         </div>
-        <div className="w-full max-w-sm">Chart</div>
+        <div className="flex w-full flex-col gap-6 md:max-w-sm">
+          <SubHead className="w-full" heading="Project Treasury" />
+          <div className="rounded-lg bg-[--color-surface-primary-depth] p-4">
+            <div className="flex w-full items-start justify-start gap-2">
+              <Text className="l3-light" color={'primary'}>
+                Treasury Balance
+              </Text>
+              <Icon
+                color="var(--body-fg-tertiary)"
+                className="h-4 w-4"
+                name="infoCircle"
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </TabLayout>
   );

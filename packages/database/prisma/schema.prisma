@@ -166,6 +166,7 @@ model Event {
   tx               String             @db.VarChar(500)
   isArchive        Boolean            @default(false)
   isPaused         Boolean            @default(false)
+  isActive        Boolean            @default(true)
   eventStatus      EventStatus[]
   user             User               @relation(fields: [userId], references: [id])
   sponsor          Sponsor[]
@@ -245,6 +246,7 @@ model Team {
   userId    String
   projectId String?
   createdAt DateTime @default(now())
+  desgination String? 
   updatedAt DateTime @updatedAt
   isActive  Boolean  @default(true)
   isArchive Boolean  @default(false)

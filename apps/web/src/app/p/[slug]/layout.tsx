@@ -153,6 +153,8 @@ const ProjectLayout = async ({ children, params }: Props) => {
   }
   return (
     <div className="w-full">
+      {/* <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" /> */}
       <div className="bg-[var(--body-surface)]">
         <ProjectDetailsPageHeader project={project} />
       </div>

@@ -25,7 +25,7 @@ export const CollectionCard = (props: Props) => {
       <div
         className={cn(
           props.className,
-          'p-[4px] flex justify-between items-center',
+          'p-[4px] flex justify-between items-center cursor-pointer',
         )}
         {...props}
       >

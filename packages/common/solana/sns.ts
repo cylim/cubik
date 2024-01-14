@@ -1,7 +1,7 @@
 'use client';
 
-import { getDomainsResult } from '@bonfida/sns-react';
-import { web3 } from '@coral-xyz/anchor';
+// import { getDomainsResult } from '@bonfida/sns-react';
+// import { web3 } from '@coral-xyz/anchor';
 
 /**
  * @name getSNSFromAddress
@@ -16,11 +16,11 @@ import { web3 } from '@coral-xyz/anchor';
  * const sns = await getSNSFromAddress('address', 'https://api.mainnet-beta.solana.com');
  */
 
-export const getSNSFromAddress = async (address: string, rpc?: string) => {
-  const connection = new web3.Connection(
-    rpc || 'https://api.mainnet-beta.solana.com',
-  );
+// export const getSNSFromAddress = async (address: string, rpc?: string) => {
+//   // const connection = new web3.Connection(
+//   //   rpc || 'https://api.mainnet-beta.solana.com',
+//   // );
 
-  const domain = await getDomainsResult(connection, [address]);
-  return domain[0];
-};
+//   const domain = await getDomainsResult(connection, [address]);
+//   return domain[0];
+// };

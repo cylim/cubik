@@ -1,37 +1,23 @@
-'use client';
+import { cookies } from 'next/headers';
+import { notFound } from 'next/navigation';
+import { ProjectSearch } from '@/app/projects/components/ProjectSearch';
+import { ProjectsDashboardTable } from '@/app/projects/components/projectsTable';
+import { checkSuperAdmin } from '@/utils/helpers/checkSuperAdmin';
+import { get } from '@vercel/edge-config';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { ProjectDrawer } from '@/app/projects/components/projectDrawer';
-import { ProjectCardSkeleton } from '@/app/projects/components/Skeleton';
-import useProjects from '@/hooks/projects/useProjects';
-import { toast } from 'sonner';
-
+import { decodeToken } from '@cubik/auth/src/admin';
 import { ProjectVerifyStatus } from '@cubik/database';
-import dayjs from '@cubik/dayjs';
-import {
-  AvatarLabelGroup,
-  InputContainer,
-  InputField,
-  InputFieldContainer,
-  InputLeftElement,
-  PaginationButton,
-  SegmentContainer,
-  SegmentItem,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-  Text,
-} from '@cubik/ui';
+import { logApi } from '@cubik/logger/src';
+import { SegmentContainer, SegmentItem, Text } from '@cubik/ui';
 
-const toastMessages: Record<ProjectVerifyStatus, string> = {
-  [ProjectVerifyStatus.REVIEW]: 'Showing pending projects',
-  [ProjectVerifyStatus.VERIFIED]: 'Showing accepted projects',
-  [ProjectVerifyStatus.FAILED]: 'Showing rejected projects',
-};
+interface Props {
+  searchParams: {
+    status: ProjectVerifyStatus | undefined;
+    page: string;
+    search: string;
+    industry: string;
+  };
+}
 
 const sectionNames: Record<ProjectVerifyStatus, string> = {
   [ProjectVerifyStatus.REVIEW]: 'Pending',
@@ -39,46 +25,178 @@ const sectionNames: Record<ProjectVerifyStatus, string> = {
   [ProjectVerifyStatus.FAILED]: 'Rejected',
 };
 
-interface Props {
-  searchParams: {
-    status: ProjectVerifyStatus;
-    page: number;
-  };
+interface GetProjectArgs {
+  pageNumber: number | undefined;
+  limitNumber: number | undefined;
+  projectStatus: ProjectVerifyStatus;
+  industry: string | undefined;
+  search: string | undefined;
 }
+const getProjects = async ({
+  limitNumber,
+  pageNumber,
+  projectStatus,
+  industry,
+  search,
+}: GetProjectArgs) => {
+  try {
+    const check = await checkSuperAdmin();
+    if (!check) {
+      throw new Error('Not a admin');
+    }
+    const page = pageNumber || 1;
+    const limit = limitNumber || 10;
+    const statuses = Object.values(ProjectVerifyStatus);
+    if (
+      projectStatus &&
+      statuses.find((status) => status === projectStatus) === undefined
+    ) {
+      throw new Error('Invalid project status');
+    }
+    const skip = (page - 1) * limit;
 
-function isUrlFromDomain(url: string, domain: string): boolean {
-  // Create a regular expression pattern to match the domain
-  const domainPattern = new RegExp(
-    `^https?://${domain.replace('.', '\\.')}`,
-    'i',
-  );
+    logApi({
+      message: 'fetching projects',
+      body: {
+        limitNumber,
+        pageNumber,
+        projectStatus,
+        industry,
+        search,
+      },
+      level: 'info',
+      source: process.cwd(),
+      statusCode: 200,
+    });
+    const tx = await prisma.$transaction([
+      prisma.project.findMany({
+        skip: Number(skip),
+        take: Number(limit),
+        ...(projectStatus && {
+          where: {
+            status: projectStatus as ProjectVerifyStatus,
+            isDraft: false,
+          },
+        }),
+        ...(industry && {
+          where: {
+            industry: {
+              array_contains: industry!,
+            },
+            isDraft: false,
+          },
+        }),
+        ...(search && {
+          where: {
+            name: {
+              search: search!,
+            },
+            isDraft: false,
+            // ...(projectStatus && { status: projectStatus as ProjectVerifyStatus }),
+          },
+        }),
+        select: {
+          id: true,
+          name: true,
+          logo: true,
+          slug: true,
+          status: true,
+          industry: true,
+          createdAt: true,
+          projectLink: true,
+          email: true,
+          owner: {
+            select: {
+              id: true,
+              username: true,
+              profilePicture: true,
+              mainWallet: true,
+            },
+          },
+        },
+        orderBy: {
+          createdAt: 'desc',
+        },
+      }),
+      prisma.project.count({
+        ...(projectStatus && {
+          where: {
+            status: projectStatus as ProjectVerifyStatus,
+            isDraft: false,
+            isArchive: false,
+          },
+        }),
+        ...(industry && {
+          where: {
+            industry: {
+              array_contains: industry!,
+            },
+            isDraft: false,
+            isArchive: false,
+          },
+        }),
+        ...(search && {
+          where: {
+            name: {
+              search: search!,
+            },
+            isDraft: false,
+            isArchive: false,
+          },
+        }),
+        where: {
+          isDraft: false,
+        },
+      }),
+    ]);
+    const totalPages = Math.ceil(tx[1] / limit);
+    console.log(totalPages, '---tp');
+    return {
+      projects: tx[0],
+      numResults: tx[1],
+      totalPages,
+    };
+  } catch (e) {
+    logApi({
+      message: 'Error fetching projects',
+      error: e,
+      body: {
+        limitNumber,
+        pageNumber,
+        projectStatus,
+        industry,
+        search,
+      },
+      level: 'error',
+      source: process.cwd(),
+      statusCode: 500,
+    });
+    return {
+      projects: [],
+      numResults: 0,
+      totalPages: 0,
+    };
+  }
+};
 
-  // Test if the URL matches the domain pattern
-  return domainPattern.test(url);
-}
-
-const ProjectPage = ({ searchParams }: Props) => {
-  const [selectedStatus, setSelectedStatus] = useState<ProjectVerifyStatus>(
-    searchParams.status || ProjectVerifyStatus.REVIEW,
-  );
-  const [searchBoxState, setSearchBoxState] = useState<string>('');
-  const projects = useProjects({
-    page: searchParams.page || 1,
-    limit: 10,
-    projectStatus: selectedStatus,
-    ...(searchBoxState !== '' && { search: searchBoxState }),
-  });
-  const router = useRouter();
-  console.log(selectedStatus);
-  console.log(searchParams);
-
-  const _projects = projects.data?.pages.flatMap((page) => page.projects);
+const ProjectPage = async ({ searchParams }: Props) => {
   const states = Object.values(ProjectVerifyStatus);
+  const check = await checkSuperAdmin();
 
-  console.log(projects);
+  if (!check) {
+    notFound();
+  }
+  const projects = await getProjects({
+    search: searchParams.search,
+    industry: searchParams.industry,
+    limitNumber: 10,
+    pageNumber: Number(searchParams.page || '1'),
+    projectStatus: searchParams.status || ProjectVerifyStatus.REVIEW,
+  });
+
   return (
     <div className="mx-auto flex w-full max-w-7xl items-center justify-between p-4 md:px-8">
-      <div>
+      <div className="flex w-full flex-col gap-5">
         <Text color="primary" className="h5 pb-5">
           All Projects
         </Text>
@@ -89,16 +207,11 @@ const ProjectPage = ({ searchParams }: Props) => {
                 return (
                   <SegmentItem
                     key={state}
-                    onClick={() => {
-                      console.log(state);
-                      setSelectedStatus(state);
-                      projects.refetch();
-                      router.push(`/projects?status=${state}`, {
-                        scroll: false,
-                      });
-                      toast.success(toastMessages[state]);
-                    }}
-                    isActive={state === selectedStatus}
+                    href={`/projects?status=${state}`}
+                    isActive={
+                      state ===
+                      (searchParams.status || ProjectVerifyStatus.REVIEW)
+                    }
                   >
                     <Text className="w-full">{sectionNames[state]}</Text>
                   </SegmentItem>
@@ -106,128 +219,16 @@ const ProjectPage = ({ searchParams }: Props) => {
               })}
             </SegmentContainer>
           </div>
-          <div>
-            <InputContainer inputVariant="sm">
-              <InputFieldContainer isDisabled={false} variant="md">
-                <InputLeftElement withBorder={false}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="15"
-                    height="16"
-                    fill="none"
-                    viewBox="0 0 15 16"
-                  >
-                    <path
-                      stroke="#0D0D0D"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="m14.25 14.75-4.538-4.538m0 0a5.25 5.25 0 1 0-7.425-7.425 5.25 5.25 0 0 0 7.425 7.425Z"
-                    />
-                  </svg>
-                </InputLeftElement>
-                <InputField
-                  id="search-box"
-                  name="search-box"
-                  placeholder="Search"
-                  type="text"
-                  value={searchBoxState}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setSearchBoxState(e.target.value)
-                  }
-                />
-              </InputFieldContainer>
-            </InputContainer>
+          <div className="w-full max-w-sm">
+            <ProjectSearch />
           </div>
         </div>
-        <div className="flex flex-col gap-4 md:gap-8">
-          <Table>
-            <TableHeader>
-              <TableHead>
-                <Text>Projects</Text>
-              </TableHead>
-              <TableHead>
-                <Text>Project Link</Text>
-              </TableHead>
-              <TableHead>
-                <Text>Creator</Text>
-              </TableHead>
-              <TableHead>
-                <Text>Time</Text>
-              </TableHead>
-              <TableHead></TableHead>
-            </TableHeader>
-            <TableBody>
-              {projects.isSuccess ? (
-                _projects?.map((project) => {
-                  const isImageDelivery = isUrlFromDomain(
-                    project.logo,
-                    'imagedelivery.net',
-                  );
-                  return (
-                    <TableRow key={project.id}>
-                      <TableCell>
-                        <AvatarLabelGroup
-                          size="sm"
-                          description={project.email}
-                          title={project.name}
-                          shape="circle"
-                          avatarSrc={
-                            isImageDelivery
-                              ? project.logo
-                              : 'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/81d956af-6d69-4346-3ef3-feb755f92a00/public'
-                          }
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <a href={project.projectLink}>{project.projectLink}</a>
-                      </TableCell>
-                      <TableCell>
-                        <AvatarLabelGroup
-                          size="sm"
-                          shape="circle"
-                          title={`@${project.owner.username}`}
-                          description={
-                            project.owner.mainWallet.slice(0, 6) +
-                            '...' +
-                            project.owner.mainWallet.slice(-4)
-                          }
-                          avatarSrc={
-                            isImageDelivery
-                              ? project.owner.profilePicture
-                              : 'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/81d956af-6d69-4346-3ef3-feb755f92a00/public'
-                          }
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <Text>{dayjs(project.createdAt).fromNow()}</Text>
-                      </TableCell>
-                      <TableCell>
-                        <ProjectDrawer project={project} />
-                      </TableCell>
-                    </TableRow>
-                  );
-                })
-              ) : (
-                <>
-                  <ProjectCardSkeleton size="md" />
-                  <ProjectCardSkeleton size="md" />
-                  <ProjectCardSkeleton size="md" />
-                  <ProjectCardSkeleton size="md" />
-                  <ProjectCardSkeleton size="md" />
-                </>
-              )}
-            </TableBody>
-          </Table>
-        </div>
-        {projects.isSuccess && (
-          <div className="w-full border-t border-[var(--card-border-secondary)] px-6 py-4">
-            <PaginationButton
-              maxPage={Math.ceil(projects.data.pages[0].totalPages / 15)}
-              route={`/projects?status=${selectedStatus}&page=`}
-              page={searchParams.page || 1}
-            />
-          </div>
-        )}
+        <ProjectsDashboardTable
+          currentPage={Number(searchParams.page || '1')}
+          status={searchParams.status || ProjectVerifyStatus.REVIEW}
+          totalPage={projects.totalPages}
+          projects={projects.projects}
+        />
       </div>
     </div>
   );

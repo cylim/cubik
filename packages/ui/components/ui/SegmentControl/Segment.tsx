@@ -108,12 +108,12 @@ export const SegmentItem = ({
           transition={{ type: 'spring', bounce: 0.1 }}
           className={cn(
             segmentItemVariant({ size }),
-            'bg-[var(--segment-control-surface-active)] shadow-md absolute inset-0 w-full rounded-[6px]',
+            'bg-[var(--segment-control-surface-active)] z-0 shadow-md absolute inset-0 w-full rounded-[6px]',
             className,
           )}
         />
       )}
-      <span className="relative z-10">{content}</span>
+      <span className="relative z-1">{content}</span>
     </Link>
   ) : (
     <motion.div

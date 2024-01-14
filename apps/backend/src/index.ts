@@ -44,11 +44,9 @@ const main = async () => {
   app.get('/', (_req, res) => {
     res.send('Server is running');
   });
-
   app.use(basePath + '/squads', squadsRouter);
   app.use(basePath + '/price', TokenRouter);
   app.use(basePath + '/image', imageFilter);
-
 
   app.listen(PORT, async () => {
     if (process.env.CRON_ENABLED === '1') {

@@ -7,6 +7,7 @@ import { Step1 } from '@/components/create-project/step1';
 import { Step2 } from '@/components/create-project/step2';
 import { Step3 } from '@/components/create-project/step3';
 import { Step4 } from '@/components/create-project/step4';
+import { Success } from '@/components/create-project/success';
 import { useAutosave } from '@/hooks/useAutoSave';
 import axios, { AxiosResponse } from 'axios';
 import { useForm } from 'react-hook-form';
@@ -187,6 +188,7 @@ export const CreateProject = ({ id }: Props) => {
     if (!loadedProject) return;
     await syncProject(createProjectForm.getValues(), id);
   };
+
   return (
     <div className="pointer-events-auto mx-auto flex h-screen w-full max-w-screen-xl justify-start overflow-hidden bg-[var(--modal-body-surface)]">
       {!isLoadingProject ? (
@@ -221,6 +223,7 @@ export const CreateProject = ({ id }: Props) => {
             {step === 4 && (
               <Step4 setStep={setStep} projectForm={createProjectForm} />
             )}
+            {step === 5 && <Success />}
           </div>
         </div>
       ) : (

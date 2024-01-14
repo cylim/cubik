@@ -79,7 +79,6 @@ export default function RootLayout({
               <main className="relative z-[0]">
                 <TopNavbar />
                 {children}
-                {/* <BottomNav name={'home'} /> */}
               </main>
               <Toaster />
             </>

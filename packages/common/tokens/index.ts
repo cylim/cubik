@@ -14,6 +14,7 @@ export const TokenList: Token[] = [
     decimals: 6,
     name: 'USD Coin',
     symbol: 'USDC',
+    isTokenInUse: true,
     logoURI:
       'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9145372c-6d2f-4a66-741b-c1d3cd1c8500/public',
     tags: ['old-registry'],
@@ -25,6 +26,7 @@ export const TokenList: Token[] = [
     address: 'So11111111111111111111111111111111111111111',
     chainId: 101,
     decimals: 9,
+    isTokenInUse: false,
     name: 'SOL',
     symbol: 'SOL',
     logoURI:
@@ -39,6 +41,7 @@ export const TokenList: Token[] = [
     chainId: 101,
     decimals: 9,
     name: 'Wrapped SOL',
+    isTokenInUse: true,
     symbol: 'SOL',
     logoURI:
       'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/8f98c577-f117-4b8e-99ef-dd9283dc1c00/public',
@@ -51,6 +54,7 @@ export const TokenList: Token[] = [
     address: 'Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB',
     chainId: 101,
     decimals: 6,
+    isTokenInUse: true,
     name: 'USDT',
     symbol: 'USDT',
     logoURI:
@@ -64,6 +68,7 @@ export const TokenList: Token[] = [
     address: 'DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263',
     chainId: 101,
     decimals: 5,
+    isTokenInUse: true,
     name: 'BonkCoin',
     symbol: 'Bonk',
     logoURI:

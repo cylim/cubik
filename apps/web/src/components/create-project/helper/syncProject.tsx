@@ -8,7 +8,6 @@ import { prisma } from '@cubik/database';
 
 export const syncProject = async (project: ProjectFormData, id: string) => {
   try {
-    console.log(project, '--project--');
     const authToken = cookies().get('authToken');
     if (!authToken) throw new Error('No auth token found');
 
@@ -20,6 +19,7 @@ export const syncProject = async (project: ProjectFormData, id: string) => {
       where: {
         id: id,
         ownerPublickey: user.mainWallet,
+        isArchive: false,
       },
     });
 

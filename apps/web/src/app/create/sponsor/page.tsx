@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import FormContainer from '@/app/components/FormContainer';
 import IndividualSponsorForm from '@/app/create/sponsor/IndividualSponsorForm';
 import OrganizationSponsorForm from '@/app/create/sponsor/OrganizationSponsorForm';
 import {
@@ -12,8 +13,6 @@ import {
   OrganizationSponsorFormData,
 } from '@/types/sponsor';
 import { useForm } from 'react-hook-form';
-
-import { Text } from '@cubik/ui';
 
 const SposorFormPage = () => {
   const [progress, setProgress] = useState<number>(0);
@@ -51,21 +50,15 @@ const SposorFormPage = () => {
   };
 
   return (
-    <div className="mx-auto my-20 flex max-w-xl flex-col items-center  justify-center gap-[56px]">
-      <div className="flex flex-col items-center gap-[14px]">
-        <Text className="h3" color={'primary'}>
-          Become a Sponsor
-        </Text>
-        <Text className="b3" color={'secondary'}>
-          Become a sponsor of the ongoing grant round
-        </Text>
-      </div>
-      <div>
-        <SponsorFormSwitch
-          change={setSponsorFormType}
-          isActive={sponsorFormType}
-        />
-      </div>
+    <FormContainer
+      title="Become a Sponsor"
+      subtitle="Become a sponsor of the ongoing grant round"
+    >
+      <SponsorFormSwitch
+        change={setSponsorFormType}
+        isActive={sponsorFormType}
+      />
+
       {sponsorFormType === 'organization' && (
         <OrganizationSponsorForm
           organizationSponsorForm={organizationSponsorForm}
@@ -80,7 +73,7 @@ const SposorFormPage = () => {
           submitEventData={submitIndividualData}
         />
       )}
-    </div>
+    </FormContainer>
   );
 };
 

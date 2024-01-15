@@ -8,6 +8,7 @@ export interface ProjectSocials {
   github: string;
   discord: string;
   telegram: string;
+  twitter: string;
 }
 
 // export interface ProjectFormData {

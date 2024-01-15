@@ -14,7 +14,7 @@ import {
 } from '@/types/sponsor';
 import { useForm } from 'react-hook-form';
 
-const SposorFormPage = () => {
+const SponsorFormPage = () => {
   const [progress, setProgress] = useState<number>(0);
   const [sponsorFormType, setSponsorFormType] =
     useState<sponsorType>('organization');
@@ -77,4 +77,4 @@ const SposorFormPage = () => {
   );
 };
 
-export default SposorFormPage;
+export default SponsorFormPage;

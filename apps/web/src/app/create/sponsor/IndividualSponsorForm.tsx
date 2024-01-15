@@ -1,8 +1,8 @@
 import React from 'react';
-import { tokens } from '@/constants/industry';
 import { IndividualSponsorFormData } from '@/types/sponsor';
 import { Controller, useFieldArray, UseFormReturn } from 'react-hook-form';
 
+import { getValidToken } from '@cubik/common/tokens/getValidTokenList';
 import {
   Button,
   Checkbox,
@@ -35,6 +35,7 @@ const IndividualSponsorForm = ({
     control,
     name: 'upfrontPay',
   });
+  const tokenList = getValidToken();
   return (
     <form
       className="flex w-full flex-col gap-[40px]"
@@ -91,7 +92,7 @@ const IndividualSponsorForm = ({
                 return (
                   <li key={item.id}>
                     <div className="flex gap-3">
-                      <InputFieldContainer variant="sm">
+                      <InputFieldContainer variant="md">
                         <InputField
                           name="amount"
                           placeholder="100,000"
@@ -106,6 +107,7 @@ const IndividualSponsorForm = ({
                           <Controller
                             render={({ field }) => (
                               <SearchSelect
+                                withoutBorder={true}
                                 placeholder="token"
                                 onChange={(e) => {
                                   if (!e) return;
@@ -119,7 +121,12 @@ const IndividualSponsorForm = ({
                                     `upfrontPay.${index}.token`,
                                   ) as any
                                 }
-                                options={tokens as any}
+                                options={
+                                  tokenList.map((token) => ({
+                                    label: token.name,
+                                    value: token.address,
+                                  })) as any
+                                }
                               />
                             )}
                             name={`upfrontPay.${index}.token`}

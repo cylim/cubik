@@ -10,33 +10,33 @@ datasource db {
 }
 
 model User {
-  id               String             @id @default(uuid()) @map("_id")
-  username         String             @unique
-  mainWallet       String             @unique
-  email            String?
-  profileNft       Json?
-  isMigrated       Boolean            @default(false)
-  type             UserType           @default(Contributor)
-  profilePicture   String             @db.VarChar(500)
-  tx               String             @db.VarChar(500)
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
-  isEmailConfirmed Boolean            @default(false)
-  isReceivingUpdate      Boolean            @default(true)
-  isActive         Boolean            @default(true)
-  isArchive        Boolean            @default(false)
-  comments         Comments[]
-  reply            Reply[]
-  contribution     Contribution[]
-  team             Team[]
-  proof            Proof[]
-  project          Project[]
-  adminAccess      AdminAccess[]
-  activity         Activity[]
-  communityMembers CommunityMembers[]
-  notification     Notification[]
-  event            Event[]
-  sponsorTeam      SponsorTeam[]
+  id                String             @id @default(uuid()) @map("_id")
+  username          String             @unique
+  mainWallet        String             @unique
+  email             String?
+  profileNft        Json?
+  isMigrated        Boolean            @default(false)
+  type              UserType           @default(Contributor)
+  profilePicture    String             @db.VarChar(500)
+  tx                String             @db.VarChar(500)
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  isEmailConfirmed  Boolean            @default(false)
+  isReceivingUpdate Boolean            @default(true)
+  isActive          Boolean            @default(true)
+  isArchive         Boolean            @default(false)
+  comments          Comments[]
+  reply             Reply[]
+  contribution      Contribution[]
+  team              Team[]
+  proof             Proof[]
+  project           Project[]
+  adminAccess       AdminAccess[]
+  activity          Activity[]
+  communityMembers  CommunityMembers[]
+  notification      Notification[]
+  event             Event[]
+  sponsorTeam       SponsorTeam[]
 
   @@fulltext([username])
 }
@@ -124,7 +124,7 @@ model Project {
   isDraft           Boolean             @default(false)
   tx                String              @default("")
   longDescription   String              @db.Text
-  industry          Json?              
+  industry          Json?
   projectLink       String              @default("")
   twitterHandle     String              @default("")
   githubLink        String              @default("")
@@ -166,7 +166,7 @@ model Event {
   tx               String             @db.VarChar(500)
   isArchive        Boolean            @default(false)
   isPaused         Boolean            @default(false)
-  isActive        Boolean            @default(true)
+  isActive         Boolean            @default(true)
   eventStatus      EventStatus[]
   user             User               @relation(fields: [userId], references: [id])
   sponsor          Sponsor[]
@@ -213,17 +213,19 @@ model ProjectJoinEvent {
 model Sponsor {
   id             String        @id @default(uuid()) @map("_id")
   name           String
-  logo           String        @db.VarChar(500)
-  tx             String        @db.VarChar(500)
-  eventId        String?
-  vault          String
+  type           SponsorType   @default(INDIVIDUAL)
+  multisigPDA    String
+  eventId        String
   paidToken      Json
+  isPublic       Boolean       @default(true)
   totalCommitted Float         @default(0)
-  isActive       Boolean       @default(true)
+  selfCustody    Boolean       @default(false)
+  tx             String        @db.VarChar(500)
+  logo           String?       @db.VarChar(500)
   isArchive      Boolean       @default(false)
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
-  event          Event?        @relation(fields: [eventId], references: [id])
+  event          Event         @relation(fields: [eventId], references: [id])
   team           SponsorTeam[]
 
   @@index([eventId])
@@ -242,16 +244,16 @@ model SponsorTeam {
 }
 
 model Team {
-  id        String   @id @default(uuid()) @map("_id")
-  userId    String
-  projectId String?
-  createdAt DateTime @default(now())
-  desgination String? 
-  updatedAt DateTime @updatedAt
-  isActive  Boolean  @default(true)
-  isArchive Boolean  @default(false)
-  user      User     @relation(fields: [userId], references: [id])
-  project   Project? @relation(fields: [projectId], references: [id])
+  id          String   @id @default(uuid()) @map("_id")
+  userId      String
+  projectId   String?
+  createdAt   DateTime @default(now())
+  desgination String?
+  updatedAt   DateTime @updatedAt
+  isActive    Boolean  @default(true)
+  isArchive   Boolean  @default(false)
+  user        User     @relation(fields: [userId], references: [id])
+  project     Project? @relation(fields: [projectId], references: [id])
 
   @@index([projectId])
   @@index([userId])
@@ -337,6 +339,11 @@ enum UserType {
   Contributor
   ProjectOwner
   Sponsor
+}
+
+enum SponsorType {
+  ORGANIZATION
+  INDIVIDUAL
 }
 
 enum ProofType {

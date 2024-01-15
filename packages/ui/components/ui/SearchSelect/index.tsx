@@ -123,6 +123,7 @@ interface Props {
   isMulti?: boolean;
   placeholder?: string;
   onInputChange?: (newValue: string) => void;
+  withoutBorder?: boolean;
 }
 const animatedComponents = makeAnimated();
 export const SearchSelect = ({
@@ -131,6 +132,7 @@ export const SearchSelect = ({
   onChange,
   isMulti,
   placeholder,
+  withoutBorder,
   onInputChange,
 }: Props) => {
   return (
@@ -165,6 +167,10 @@ export const SearchSelect = ({
           backgroundColor: 'var(--form-input-surface-default)',
           borderRadius: '8px',
           width: '100% !important',
+          border: withoutBorder ? '0px' : baseStyles.border,
+          ':focus': {
+            border: '0px !important',
+          },
         }),
         //@ts-ignore
         placeholder: (baseStyles) => ({

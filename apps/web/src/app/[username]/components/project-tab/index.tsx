@@ -5,6 +5,7 @@ import {
   ProjectAdminCard,
   ProjectProfileCard,
 } from '@/app/[username]/components/project-tab/project-admin-card';
+import RenderUserProjects from '@/app/[username]/components/project-tab/renderProject';
 import TabLayout from '@/components/common/tabs/TabLayout';
 import { IsUserLoginServer } from '@/utils/auth/isUserLoginServer';
 
@@ -67,23 +68,16 @@ export const ProjectTab = async ({ username }: Props) => {
 
     // reorder to push draft projects to the bottom
     const reorderedProjects: typeof projects = [
-      ...projects.filter((e) => !e.isDraft),
       ...projects.filter((e) => e.isDraft),
+      ...projects.filter((e) => !e.isDraft),
     ];
 
     return reorderedProjects.map((project, index) => {
       if (isProfileOwner) {
-        if (project.isDraft) {
-          return (
-            <ProjectProfileCard isDraft={true} project={project} key={index} />
-          );
-        }
         return <ProjectAdminCard project={project} key={index} />;
       }
 
-      return (
-        <ProjectProfileCard isDraft={false} project={project} key={index} />
-      );
+      return <ProjectProfileCard project={project} key={index} />;
     });
   };
 
@@ -99,13 +93,13 @@ export const ProjectTab = async ({ username }: Props) => {
             </Link>
           </SubHead>
           <div className="flex min-h-[100vh] w-full flex-col justify-start gap-[16px] md:gap-[24px]">
-            {renderProjects()}
+            <RenderUserProjects projects={projects} />
           </div>
         </>
       ) : (
         <>
           <SubHead heading="Projects" />
-          {renderProjects()}
+          {/* <>{renderProjects()}</> */}
         </>
       )}
     </TabLayout>

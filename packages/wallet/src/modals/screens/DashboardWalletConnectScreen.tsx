@@ -74,7 +74,8 @@ export const DashboardWalletConnectScreen = ({
       setShowModal(false);
       setSelectedAdapter(null);
       setIsWalletError(null);
-      handleRevalidation(pathname || '/');
+      console.log(pathname);
+      handleRevalidation(pathname);
       toast.success('Successfully logged in');
     } catch (e) {
       const error = e as Error;

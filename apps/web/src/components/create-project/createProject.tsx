@@ -7,6 +7,9 @@ import { Step1 } from '@/components/create-project/step1';
 import { Step2 } from '@/components/create-project/step2';
 import { Step3 } from '@/components/create-project/step3';
 import { Step4 } from '@/components/create-project/step4';
+import { Step5 } from '@/components/create-project/step5';
+import { Step6 } from '@/components/create-project/step6';
+import { Step7 } from '@/components/create-project/step7';
 import { Success } from '@/components/create-project/success';
 import { useAutosave } from '@/hooks/useAutoSave';
 import axios, { AxiosResponse } from 'axios';
@@ -85,28 +88,67 @@ export interface ProjectFormData {
 }
 
 const StepBar = ({ currentStep }: { currentStep: number }) => {
+  const totalSteps = 8;
+  const stepsToShow = 5; // Number of steps to show at a time
+  const halfSteps = Math.floor(stepsToShow / 2);
+  const stepVariants = (step: number) => {
+    const distance = Math.abs(currentStep - step);
+    let width = 6; // Default width for inactive steps
+    let opacity = 0.3; // Default opacity for inactive steps
+
+    if (distance === 0) {
+      width = 22; // Active step
+      opacity = 1;
+    } else if (distance === 1) {
+      width = 14; // Steps adjacent to the active step
+      opacity = 0.8;
+    } else if (distance === 2) {
+      width = 8; // Steps adjacent to the active step
+      opacity = 0.5;
+    }
+
+    return {
+      active: {
+        width: width,
+        opacity: opacity,
+        backgroundColor: 'var(--color-fg-info-base)',
+        transition: { type: 'spring', stiffness: 300, damping: 20 },
+      },
+      inactive: {
+        width: width,
+        opacity: opacity,
+        backgroundColor: 'var(--color-surface-primary-transparent)',
+        transition: { duration: 0.5 },
+      },
+    };
+  };
+
+  const shouldRenderStep = (step: number) => {
+    const startStep = Math.max(1, currentStep - halfSteps);
+    const endStep = Math.min(totalSteps, currentStep + halfSteps);
+
+    return step >= startStep && step <= endStep;
+  };
   return (
     <div className="flex items-center justify-between w-full">
       <div className="flex items-center gap-2">
-        {[1, 2, 3, 4, 5].map((step) => (
-          <motion.div
-            key={step}
-            className={`h-[6px] rounded-full ${
-              currentStep === step
-                ? 'w-[32px] bg-[var(--color-fg-info-base)]'
-                : 'w-[6px] bg-[var(--color-surface-primary-transparent)]'
-            }`}
-            animate={{
-              width: currentStep === step ? 32 : 8,
-            }}
-            transition={{ duration: 0.5 }}
-          />
-        ))}
+        {Array.from({ length: totalSteps }, (_, i) => i + 1).map(
+          (step) =>
+            shouldRenderStep(step) && (
+              <motion.div
+                key={step}
+                className="h-[6px] rounded-full"
+                variants={stepVariants(step)}
+                initial="inactive"
+                animate={currentStep === step ? 'active' : 'inactive'}
+                layout
+              />
+            ),
+        )}
       </div>
     </div>
   );
 };
-
 export const CreateProject = ({ id }: Props) => {
   const [step, setStep] = useState<number>(1);
   const [loadedProject, setLoadedProject] = useState<ProjectData | null>(null);
@@ -217,10 +259,10 @@ export const CreateProject = ({ id }: Props) => {
   };
 
   return (
-    <div className="border h-[1000px] border-red-500 pointer-events-auto py-16 mx-auto flex md:gap-24 md:px-12 w-full max-w-screen-xl justify-start">
-      <div className="md:w-1/2 h-full border border-red-500">
+    <div className=" h-[840px] pointer-events-auto py-16 mx-auto flex md:gap-24 md:px-12 w-full max-w-screen-xl justify-start">
+      <div className="md:w-1/2 h-full ">
         {!isLoadingProject ? (
-          <div className="h-full border md:px-12 border-red-500">
+          <div className="h-full md:px-12 ">
             <StepBar currentStep={step} />
             {step === 1 && (
               <Step1
@@ -243,17 +285,35 @@ export const CreateProject = ({ id }: Props) => {
                 projectForm={createProjectForm}
               />
             )}
-            {/* {step === 3 && (
-              <Step3
-                forceSave={forceSave}
+            {step === 4 && (
+              <Step4
                 setStep={setStep}
                 projectForm={createProjectForm}
+                forceSave={forceSave}
               />
-            )} */}
-            {step === 4 && (
-              <Step4 setStep={setStep} projectForm={createProjectForm} />
             )}
-            {step === 5 && <Success />}
+            {step === 5 && (
+              <Step5
+                setStep={setStep}
+                projectForm={createProjectForm}
+                forceSave={forceSave}
+              />
+            )}
+            {step === 6 && (
+              <Step6
+                setStep={setStep}
+                projectForm={createProjectForm}
+                forceSave={forceSave}
+              />
+            )}
+            {step === 7 && (
+              <Step7
+                setStep={setStep}
+                projectForm={createProjectForm}
+                forceSave={forceSave}
+              />
+            )}
+            {step === 10 && <Success />}
           </div>
         ) : (
           <div className="flex w-full items-center justify-center px-7 md:w-[55%] md:px-14">
@@ -262,7 +322,7 @@ export const CreateProject = ({ id }: Props) => {
         )}
       </div>
 
-      <div className="border border-red-500 relative transform scale-90 hidden w-1/2 px-14 py-8 md:block ">
+      <div className="relative transform scale-90 hidden w-1/2 px-14 py-8 md:block ">
         <div className="absolute flex items-center justify-center top-0 h-full left-0 ml-10 w-full">
           <div className="flex w-full h-fit min-h-48 flex-col gap-8 rounded-tl-xl rounded-bl-xl overflow-hidden border-[var(--color-border-primary-base)]  bg-gradient-to-r from-[var(--body-surface)] px-14 pt-14">
             {!(createProjectForm.watch('logo') === Project_Backup) ? (

@@ -1,8 +1,10 @@
 import React from 'react';
 import type { Metadata, ResolvingMetadata } from 'next';
-import { utils } from '@coral-xyz/anchor';
 import { Slides } from '@/types/project';
+import { utils } from '@coral-xyz/anchor';
+
 import { prisma } from '@cubik/database';
+
 import ProjectDetailsPageHeader from './components/projectDetailsPageHeader';
 
 interface OgProps {
@@ -38,8 +40,9 @@ export async function generateMetadata(
     Buffer.from(project?.shortDescription ?? 'default'),
   )}&logo=${utils.bytes.base64.encode(
     Buffer.from(project?.logo ?? 'default'),
-  )}&contributors=${contributors}&comments=${project?._count.comments
-    }&eventName=${eventName}`;
+  )}&contributors=${contributors}&comments=${
+    project?._count.comments
+  }&eventName=${eventName}`;
 
   const previousImages = (await parent)?.openGraph?.images ?? [];
 
@@ -83,7 +86,7 @@ const fetchProject = async (slug: string) => {
         shortDescription: true,
         logo: true,
         projectLink: true,
-        slides: true
+        slides: true,
         // mutliSigAddress: true,
       },
     });
@@ -104,13 +107,14 @@ const fetchProject = async (slug: string) => {
             projectJoinEvent: {
               select: {
                 id: true,
-              }, where: {
-                projectId: project.id
-              }
-            }
-          }
-        }
-      }
+              },
+              where: {
+                projectId: project.id,
+              },
+            },
+          },
+        },
+      },
     });
     console.log('project - ', project);
 
@@ -136,7 +140,7 @@ const fetchProject = async (slug: string) => {
       projectLink: project?.projectLink,
       // mutliSigAddress: project?.mutliSigAddress,
       events: projectJoinEvent,
-      slides: project.slides as unknown as Slides
+      slides: project.slides as unknown as Slides,
     };
     return [layoutData, null];
   } catch (error) {
@@ -151,6 +155,8 @@ const ProjectLayout = async ({ children, params }: Props) => {
 
   return (
     <div className="w-full">
+      {/* <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" /> */}
       <div className="bg-[var(--body-surface)]">
         <ProjectDetailsPageHeader project={project[0]} />
       </div>

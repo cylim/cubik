@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ProjectProps } from '@/app/[username]/components/project-tab/project-admin-card';
 import EditProjectModal from '@/app/[username]/components/project-tab/project-admin-card/editProjectModal';
+import { deleteDraftProject } from '@/app/[username]/components/project-tab/project-admin-card/helper/deleteDraftProject';
 
 import {
   AvatarLabelGroup,
@@ -21,8 +22,6 @@ import {
   SubMenu,
   SubMenuButton,
   SubMenuList,
-  Tag,
-  TagLabel,
   Text,
 } from '@cubik/ui';
 import { useMediaQuery } from '@cubik/ui/hooks';
@@ -31,12 +30,10 @@ const ProjectHeader = ({
   project,
   isAdmin,
   isVerified,
-  isDraft,
 }: {
   project: ProjectProps;
   isAdmin: boolean;
   isVerified: boolean;
-  isDraft: boolean;
 }) => {
   const isLiveInRound = false;
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -82,110 +79,130 @@ const ProjectHeader = ({
                 {'superteam.earn'}
               </Text>
             )}
-            {isDraft && (
-              <Tag variant="subtle" color="yellow">
-                <TagLabel>{'Draft'}</TagLabel>
-              </Tag>
-            )}
           </div>
         </AvatarLabelGroup>
-        <div className="flex flex-row gap-2">
-          {isMobile ? (
-            <>
-              {' '}
-              <Button
-                leftIconName="threeDots"
-                onClick={() => {
-                  setIsDrawerOpen(true);
-                }}
-                variant={'secondary'}
-                size="xl"
-                className="h-[48px] w-[48px]"
-              />
-              <DrawerMenu open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
-                <DrawerMenuList>
-                  <DrawerMenuItem text="Apply For Grant" leftIcon="cube" />
-                  <DrawerMenuItem text="Project Settings" leftIcon="settings" />
-                  <DrawerMenuItem text="View Vault" leftIcon="bank" />
-                  <DrawerMenuItem text="Share Project" leftIcon="share" />
-                </DrawerMenuList>
-              </DrawerMenu>
-            </>
-          ) : (
-            <Menu>
-              <MenuButton>
+        {project.isDraft ? (
+          <>
+            {' '}
+            <Link href={'/create/project?id=' + project.id}>
+              <Button variant={'secondary'} size="md">
+                Continue Editing
+              </Button>
+            </Link>
+            <Button
+              onClick={() => {
+                deleteDraftProject(project.id);
+              }}
+              variant={'danger'}
+              size="md"
+            >
+              Delete Draft
+            </Button>
+          </>
+        ) : (
+          <div className="flex flex-row gap-2">
+            {isMobile ? (
+              <>
+                {' '}
                 <Button
                   leftIconName="threeDots"
+                  onClick={() => {
+                    setIsDrawerOpen(true);
+                  }}
                   variant={'secondary'}
                   size="xl"
                   className="h-[48px] w-[48px]"
                 />
-              </MenuButton>
-              <MenuList>
-                <div className={`px-2 ${isVerified ? 'block' : 'hidden'}`}>
-                  <div className="flex w-full flex-row justify-between gap-2 rounded-lg bg-[var(--menu-header-surface-highlighted)] px-3 py-2 align-bottom">
-                    <Text
-                      className="l2 line-clamp-1 max-w-[9rem] overflow-hidden"
-                      color="secondary"
-                    >
-                      {`https://cubik.so/projects/${project.slug}`}
-                    </Text>
-                    <Icon
-                      name="copy"
-                      color="var(--menu-header-fg)"
-                      height={18}
-                      width={18}
+                <DrawerMenu open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
+                  <DrawerMenuList>
+                    <DrawerMenuItem text="Apply For Grant" leftIcon="cube" />
+                    <DrawerMenuItem
+                      text="Project Settings"
+                      leftIcon="settings"
                     />
+                    <DrawerMenuItem text="View Vault" leftIcon="squads" />
+                    <DrawerMenuItem text="Share Project" leftIcon="share" />
+                  </DrawerMenuList>
+                </DrawerMenu>
+              </>
+            ) : (
+              <Menu>
+                <MenuButton>
+                  <Button
+                    leftIconName="threeDots"
+                    variant={'secondary'}
+                    size="xl"
+                    className="h-[48px] w-[48px]"
+                  />
+                </MenuButton>
+                <MenuList>
+                  <div className={`px-2 ${isVerified ? 'block' : 'hidden'}`}>
+                    <div className="flex w-full flex-row justify-between gap-2 rounded-lg bg-[var(--menu-header-surface-highlighted)] px-3 py-2 align-bottom">
+                      <Text
+                        className="l2 line-clamp-1 max-w-[9rem] overflow-hidden"
+                        color="secondary"
+                      >
+                        {`https://cubik.so/projects/${project.slug}`}
+                      </Text>
+                      <Icon
+                        name="copy"
+                        color="var(--menu-header-fg)"
+                        height={18}
+                        width={18}
+                      />
+                    </div>
                   </div>
-                </div>
-                <MenuDivider className={`${isVerified ? 'block' : 'hidden'}`} />
-                <MenuItem text="Apply For Grant" leftIcon="cube" />
-                <MenuItem
-                  text="Project Settings"
-                  leftIcon="settings"
-                  onClick={() => {
-                    setOpen(true);
-                  }}
-                />
-                <MenuDivider />
-                <MenuItem text="View Vault" leftIcon="bank" />
-                <SubMenu>
-                  <SubMenuButton
+                  <MenuDivider
                     className={`${isVerified ? 'block' : 'hidden'}`}
-                    leftIcon="share"
-                  >
-                    Share Project
-                  </SubMenuButton>
-                  <SubMenuList>
-                    <MenuItem text="Download"></MenuItem>
-                    <MenuItem text="Create a Copy"></MenuItem>
-                    <MenuItem text="Mark as Draft"></MenuItem>
-                    <MenuItem text="Delete"></MenuItem>
-                  </SubMenuList>
-                </SubMenu>
-                <SubMenu>
-                  <SubMenuButton leftIcon="compass">
-                    View On Explorer
-                  </SubMenuButton>
-                  <SubMenuList>
-                    <MenuItem
-                      text="Solana Explorer"
-                      leftIcon="solanaExplorer"
-                    />
-                    <MenuItem text="Solana FM" leftIcon="solanaFM" />
-                    <MenuItem text="Solscan" leftIcon="solscan" />
-                    {/* <MenuItem text="xRay" leftIcon="xRay" /> */}
-                  </SubMenuList>
-                </SubMenu>
-                <MenuItem
-                  text="Download Data"
-                  className={`${isVerified ? 'block' : 'hidden'}`}
-                  leftIcon="download"
-                />
-              </MenuList>
-            </Menu>
-          )}
-        </div>
+                  />
+                  <MenuItem text="Apply For Grant" leftIcon="cube" />
+                  <MenuItem
+                    text="Project Settings"
+                    leftIcon="settings"
+                    onClick={() => {
+                      setOpen(true);
+                    }}
+                  />
+                  <MenuDivider />
+                  <MenuItem text="View Vault" leftIcon="squads" />
+                  <SubMenu>
+                    <SubMenuButton
+                      className={`${isVerified ? 'block' : 'hidden'}`}
+                      leftIcon="share"
+                    >
+                      Share Project
+                    </SubMenuButton>
+                    <SubMenuList>
+                      <MenuItem text="Download"></MenuItem>
+                      <MenuItem text="Create a Copy"></MenuItem>
+                      <MenuItem text="Mark as Draft"></MenuItem>
+                      <MenuItem text="Delete"></MenuItem>
+                    </SubMenuList>
+                  </SubMenu>
+                  <SubMenu>
+                    <SubMenuButton leftIcon="compass">
+                      View On Explorer
+                    </SubMenuButton>
+                    <SubMenuList>
+                      <MenuItem
+                        text="Solana Explorer"
+                        leftIcon="solanaExplorer"
+                      />
+                      <MenuItem text="Solana FM" leftIcon="solanaFM" />
+                      <MenuItem text="Solscan" leftIcon="solscan" />
+                      <MenuItem text="xRay" leftIcon="xRay" />
+                    </SubMenuList>
+                  </SubMenu>
+                  <MenuItem
+                    text="Download Data"
+                    className={`${isVerified ? 'block' : 'hidden'}`}
+                    leftIcon="download"
+                  />
+                </MenuList>
+              </Menu>
+            )}
+          </div>
+        )}
         <EditProjectModal open={open} setOpen={setOpen} project={project} />
       </div>
     );
@@ -198,11 +215,6 @@ const ProjectHeader = ({
         description={project?.shortDescription}
         size={'xl'}
       />
-      {isDraft && (
-        <Tag variant="subtle" color="yellow">
-          <TagLabel>{'Draft'}</TagLabel>
-        </Tag>
-      )}
       {/* <Button leftIconName="threeDots" variant={'secondary'} size="xl" /> */}
     </div>
   );

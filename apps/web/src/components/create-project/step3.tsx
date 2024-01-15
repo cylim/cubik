@@ -1,25 +1,15 @@
 import { ProjectFormData } from '@/components/create-project/createProject';
+import { LogoUploader } from '@/components/create-project/image-uploder/logoUploader';
 import StepTemplate from '@/components/create-project/stepTemplate';
-import { TeamSelector } from '@/components/create-project/team-selector/teamSelector';
 import { UseFormReturn } from 'react-hook-form';
 
-import {
-  Button,
-  Checkbox,
-  Icon,
-  InputContainer,
-  InputField,
-  InputFieldContainer,
-  InputLabel,
-  Text,
-} from '@cubik/ui';
+import { Button, Text } from '@cubik/ui';
 
 interface Props {
   projectForm: UseFormReturn<ProjectFormData, any, undefined>;
   setStep: React.Dispatch<React.SetStateAction<number>>;
   forceSave: () => Promise<void>;
 }
-
 export const Step3 = ({ setStep, projectForm, forceSave }: Props) => {
   const onNext = () => {
     setStep(4);
@@ -28,32 +18,24 @@ export const Step3 = ({ setStep, projectForm, forceSave }: Props) => {
   const onPrev = () => {
     setStep(2);
   };
+
   return (
     <>
       <StepTemplate
-        currentStep={2}
+        currentStep={3}
         onNext={onNext}
         onPrevious={onPrev}
-        title={'Choose Categories'}
+        title={'Show us how it looks 🫣'}
         description={
-          'These categories will be used to filter when someone wants to see projects in specific categories. Choose them carefully they can impact discoverability of your project.'
+          'Time to add the logo, Make sure it is visible enough to be seen from space or at least on both light and dark backgrounds.'
         }
       >
-        <InputContainer>
-          <InputLabel>Categories</InputLabel>
-          <InputFieldContainer
-            isError={projectForm.formState.errors.github ? true : false}
-            variant="md"
-          >
-            <InputField
-              onChange={(e) => {
-                projectForm.setValue('github', e.currentTarget.value);
-              }}
-              value={projectForm.watch('github')}
-              placeholder="https://github.com"
-            />
-          </InputFieldContainer>
-        </InputContainer>
+        <div className="flex flex-col gap-4">
+          <Text color={'primary'} className="l1">
+            Upload Thumbnail
+          </Text>
+          <LogoUploader projectForm={projectForm} />
+        </div>
       </StepTemplate>
     </>
   );

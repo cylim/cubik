@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import move from 'array-move';
+import { motion, useDragControls, useMotionValue } from 'framer-motion';
 import { toast } from 'sonner';
 
 import { Icon } from '../../../icons/icon';
 import { cn } from '../../../lib/utils';
 import { Avatar } from '../../ui/Avatar/Avatar';
 import { Text } from '../text/text';
+import { findIndex, Position } from './findIndex';
+
+interface Offset {
+  top: number;
+  left: number;
+}
 
 interface Props {
   startUpload: (files: File[], input?: undefined) => any;
@@ -14,15 +22,98 @@ interface Props {
   progress: number;
   onRemove: (url: string) => void;
 }
+
+const onTop = { zIndex: 1 };
+const flat = {
+  zIndex: 0,
+  transition: { delay: 0.3 },
+};
+
+interface DraggableItemProps {
+  onRemove: (url: string) => void;
+  moveItem: (i: number, dragOffset: number) => void;
+  i: number;
+  img: string;
+  setPosition: (index: number, offset: Position) => void;
+}
+
+const DraggableItem = ({
+  onRemove,
+  moveItem,
+  i,
+  img,
+  setPosition,
+}: DraggableItemProps) => {
+  const [isDragging, setDragging] = useState(false);
+  const ref = useRef<HTMLLIElement>(null);
+  const dragOriginX = useMotionValue(0);
+
+  useEffect(() => {
+    if (ref.current) {
+      setPosition(i, {
+        width: ref.current.offsetWidth,
+        left: ref.current.offsetLeft,
+      });
+    }
+  }, [i, setPosition]);
+
+  return (
+    <motion.li
+      ref={ref}
+      initial={false}
+      animate={
+        isDragging ? { zIndex: 1 } : { zIndex: 0, transition: { delay: 0.3 } }
+      }
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 1.12 }}
+      drag="x"
+      className="border border-[var(--form-uploader-border-default)] border-dashed rounded-lg p-2"
+      dragOriginX={dragOriginX}
+      dragConstraints={{ left: 0, right: 0 }}
+      dragElastic={1}
+      onDragStart={() => setDragging(true)}
+      onDragEnd={() => setDragging(false)}
+      onDrag={(e, { point }) => moveItem(i, point.x)}
+    >
+      <div
+        className="hover:opacity-50 cursor-pointer"
+        onClick={() => onRemove(img)}
+      >
+        <Avatar size={'md'} variant={'square'} src={img} alt="uploaded" />
+      </div>
+    </motion.li>
+  );
+};
+
 export const MultiImageUploader = ({
   isUploading,
   progress,
   onRemove,
-  images,
+  images: initialImages, // Rename the prop to avoid conflict
   startUpload,
 }: Props) => {
+  const controls = useDragControls();
   const [drag, setDragging] = useState(false);
   const [_file, setFile] = useState<File[]>([]);
+  const positionsRef = useRef<{ [key: number]: Offset }>({}).current;
+  const [imageList, setImageList] = useState<string[]>(initialImages);
+
+  const moveItem = (currentIndex: number, dragOffset: number) => {
+    const targetIndex = findIndex(
+      currentIndex,
+      dragOffset,
+      Object.values(positionsRef),
+    );
+
+    if (targetIndex !== -1 && targetIndex !== currentIndex) {
+      // Rearrange the imageList array
+      const newImageList = move(imageList, currentIndex, targetIndex);
+      setImageList(newImageList);
+    }
+  };
+  const setPosition = (index: number, offset: Offset) => {
+    positionsRef[index] = offset;
+  };
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -53,7 +144,7 @@ export const MultiImageUploader = ({
   };
 
   const processFile = (file: File) => {
-    const newFileArray = [...images, file];
+    const newFileArray = [...initialImages, file];
 
     if (newFileArray.length > 5) {
       return toast.error('You can only upload 5 images');
@@ -62,7 +153,7 @@ export const MultiImageUploader = ({
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex w-fill border border-red-500 flex-col gap-4">
       {!isUploading ? (
         <div
           className={cn(
@@ -139,27 +230,19 @@ export const MultiImageUploader = ({
         </div>
       )}
       <div className="flex justify-between items-center overflow-x-scroll no-scrollbar">
-        {images &&
-          new Array(5).fill(0).map((_, index) => {
-            if (images[index]) {
-              const img = images[index];
+        {initialImages &&
+          new Array(4).fill(0).map((_, index) => {
+            if (initialImages[index]) {
+              const img = initialImages[index];
               return (
-                <div
-                  className="border border-[var(--form-uploader-border-default)] border-dashed rounded-lg p-4"
-                  key={index + '-image'}
-                >
-                  <div
-                    className="hover:opacity-50 cursor-pointer"
-                    onClick={() => onRemove(img)}
-                  >
-                    <Avatar
-                      size={'lg'}
-                      variant={'square'}
-                      src={images[index]}
-                      alt="random"
-                    />
-                  </div>
-                </div>
+                <DraggableItem
+                  key={index}
+                  moveItem={moveItem}
+                  i={index}
+                  img={img}
+                  onRemove={onRemove}
+                  setPosition={setPosition}
+                />
               );
             }
             return (

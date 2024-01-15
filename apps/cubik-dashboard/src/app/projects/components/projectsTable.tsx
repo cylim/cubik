@@ -1,12 +1,19 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { ProjectDrawer } from '@/app/projects/components/projectDrawer';
 import { ProjectAdminList } from '@/hooks/projects/useProjects';
 import { ColumnDef } from '@tanstack/react-table';
 
+import { ProjectVerifyStatus } from '@cubik/database';
 import dayjs from '@cubik/dayjs';
-import { AvatarLabelGroup, Checkbox, CubikTable, Text } from '@cubik/ui';
+import {
+  AvatarLabelGroup,
+  Checkbox,
+  CubikTable,
+  PaginationButton,
+  Text,
+} from '@cubik/ui';
 
 type tData = {
   id: string;
@@ -25,11 +32,19 @@ type tData = {
   url: string;
 };
 
-const ProjectsDashboardTable = ({
+export const ProjectsDashboardTable = ({
   projects,
+  totalPage,
+  currentPage,
+  status,
 }: {
   projects: ProjectAdminList[];
+  totalPage: number;
+  currentPage: number;
+  status: ProjectVerifyStatus;
 }) => {
+  const [openSlug, setOpenSlug] = useState<string | null>(null);
+
   const data: tData[] = projects?.map((project: ProjectAdminList) => {
     return {
       id: project.id,
@@ -50,7 +65,6 @@ const ProjectsDashboardTable = ({
       slug: project.slug,
     };
   });
-
   const columns: ColumnDef<tData>[] = [
     {
       id: 'select',
@@ -151,14 +165,27 @@ const ProjectsDashboardTable = ({
       cell: ({ row }) => {
         return (
           <div className="flex justify-center">
-            <ProjectDrawer slug={row.getValue('slug')} />
+            <ProjectDrawer
+              openSlug={openSlug}
+              setOpenSlug={setOpenSlug}
+              slug={row.getValue('slug')}
+            />
           </div>
         );
       },
     },
   ];
 
-  return <CubikTable data={data} columns={columns} />;
+  return (
+    <div>
+      <CubikTable data={data} columns={columns} />
+      <div className="w-full border-t border-[var(--card-border-secondary)] px-6 py-4">
+        <PaginationButton
+          maxPage={totalPage}
+          route={`/projects?status=${status}&page=`}
+          page={currentPage || 1}
+        />
+      </div>
+    </div>
+  );
 };
-
-export default ProjectsDashboardTable;

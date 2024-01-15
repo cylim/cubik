@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 import { Icon } from '../../../icons/icon';
 import { cn } from '../../../lib/utils';
@@ -9,9 +10,20 @@ interface Props {
   startUpload: (files: File[], input?: undefined) => any;
   isUploading: boolean;
   errorMessage: string | undefined;
-  logo: string;
+  logo?: string;
   progress: number;
 }
+
+const fileSizeInMB = (sizeInBytes: number) =>
+  (sizeInBytes / 1000000).toFixed(3);
+
+const TextWrapper = ({
+  children,
+}: {
+  children: React.ReactNode[] | React.ReactNode;
+}) => (
+  <div className="flex w-full justify-center flex-col gap-2">{children}</div>
+);
 export const ImageUploader = ({
   startUpload,
   isUploading,
@@ -22,7 +34,6 @@ export const ImageUploader = ({
   console.log('logo', logo);
   const [drag, setDragging] = useState(false);
   const [file, setFile] = useState<File[]>([]);
-
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
     setDragging(true);
@@ -56,8 +67,9 @@ export const ImageUploader = ({
   return (
     <div
       className={cn(
-        `border border-[var(--form-uploader-border-default)] flex justify-start gap-3 p-3 rounded-xl w-full`,
-        drag && 'border-[var(--form-uploader-border-hover)]',
+        `border transition-all border-dashed border-[var(--form-uploader-border-default)] flex justify-start gap-3 p-3 rounded-lg w-full`,
+        drag &&
+          'bg-[--color-surface-positive-transparent] border-[--color-border-positive-emphasis]',
       )}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
@@ -66,7 +78,7 @@ export const ImageUploader = ({
       {/* Success */}
       {logo && !isUploading && !errorMessage && (
         <div className={cn('w-max rounded flex')}>
-          <Avatar size={'lg'} src={logo} alt="name" />
+          <Avatar size={'md'} src={logo} alt="name" />
         </div>
       )}
       {/* Uploading state */}
@@ -78,10 +90,12 @@ export const ImageUploader = ({
           )}
         >
           <Icon
-            name={'spinner'}
-            className="stroke-[var(--form-uploader-icon-uploading)] animate-spin"
-            height={18}
-            width={18}
+            name={progress === 100 ? 'checkTickCircleFilled' : 'spinner'}
+            color="var(--form-uploader-icon-uploading)"
+            className={progress === 100 ? '' : 'animate-spin'}
+            strokeWidth={2}
+            width={22}
+            height={22}
           />
         </div>
       )}
@@ -89,13 +103,20 @@ export const ImageUploader = ({
       {!logo && !errorMessage && !isUploading && (
         <div
           className={cn(
-            'p-4 w-max rounded flex',
+            'p-4 w-[54x] rounded flex items-center justify-center',
             'bg-[var(--form-uploader-img-default)]',
           )}
         >
           <Icon
-            name={'upload'}
-            className="stroke-[var(--form-uploader-icon-default)]"
+            name={drag ? 'spinner' : 'upload'}
+            color={
+              drag
+                ? 'var(--form-uploader-icon-dropping)'
+                : 'var(--form-uploader-icon-default)'
+            }
+            strokeWidth={2}
+            width={22}
+            height={22}
           />
         </div>
       )}
@@ -113,31 +134,35 @@ export const ImageUploader = ({
           />
         </div>
       )}
-
       {/* Default  */}
       {!logo && !errorMessage && !isUploading && (
-        <div className="flex justify-center flex-col gap-3">
-          <Text className="l2" color={'primary'}>
-            Drop, Paste here or{' '}
-            <label className="text-[--form-uploader-link-default] cursor-pointer">
-              Browse
-              <input
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={handleChange}
-              />
-            </label>
-          </Text>
+        <TextWrapper>
+          {!drag ? (
+            <Text className="l2" color={'primary'}>
+              Drop, Paste here or{' '}
+              <label className="text-[--form-uploader-link-default] cursor-pointer">
+                Browse
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleChange}
+                />
+              </label>
+            </Text>
+          ) : (
+            <Text className="l2" color={'primary'}>
+              Drop your images here
+            </Text>
+          )}
           <Text className="l3-light text-[var(--form-helper-default)]">
             Recommended size: 240*250 | JPG, PNG, GIF. Max size: 2MB
           </Text>
-        </div>
+        </TextWrapper>
       )}
-
-      {/* Sucess state */}
+      {/* Success state */}
       {logo && !errorMessage && !isUploading && (
-        <div className="flex justify-center flex-col gap-3">
+        <TextWrapper>
           <Text className="l2 flex gap-1" color={'primary'}>
             <label className="text-[--form-uploader-text-success]">
               Uploaded Successfully
@@ -155,7 +180,7 @@ export const ImageUploader = ({
           <Text className="l3-light text-[var(--form-helper-default)]">
             {file[0]?.name || `${logo.slice(0, 45)}......`}
           </Text>
-        </div>
+        </TextWrapper>
       )}
       {/* Error state */}
       {errorMessage && (
@@ -181,21 +206,37 @@ export const ImageUploader = ({
       )}
       {/* Uploading state */}
       {isUploading && (
-        <div className="flex justify-center flex-col gap-3 w-full">
-          <Text className="l2 flex gap-1" color={'primary'}>
-            <label className="text-[var(--form-uploader-text-uploading)] line-clamp-1">
-              Uploading {file[0].name}
-            </label>
-          </Text>
-          <div className="bg-[var(--form-uploader-img-uploading)] h-3 w-full rounded-lg overflow-hidden">
-            <div
-              style={{
-                width: `${progress}%`,
-              }}
-              className="bg-[var(--form-uploader-icon-uploading)] h-3"
-            />
+        <TextWrapper>
+          <div className="flex justify-between w-full flex-row gap-2 items-center ">
+            <Text
+              className="l2 flex gap-1 max-w-[70%] overflow-clip"
+              color={'primary'}
+            >
+              <label className="text-[var(--form-uploader-text-uploading)] line-clamp-1">
+                Uploading {file[0]?.name}
+              </label>
+            </Text>
+            <Text className="l3" color="secondary">
+              {file[0] &&
+                `${fileSizeInMB(
+                  file[0].size * (progress / 100),
+                )} MB / ${fileSizeInMB(file[0].size)} MB`}
+            </Text>
           </div>
-        </div>
+          <div className="flex w-full flex-row gap-2 items-center ">
+            <div className="bg-[var(--form-uploader-img-uploading)] h-3 w-full rounded-lg overflow-hidden">
+              <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+                className="bg-[var(--form-uploader-icon-uploading)] h-3"
+              />
+            </div>
+            <Text className="l2" color="secondary">
+              {progress}%
+            </Text>
+          </div>
+        </TextWrapper>
       )}
     </div>
   );

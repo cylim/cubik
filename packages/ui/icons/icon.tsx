@@ -23,7 +23,7 @@ export const Icon = ({
   height,
   width,
   strokeWidth = 1.5, // default strokeWidth if not provided
-  color = 'currentColor', // default color if not provided
+  color, // default color if not provided
   className,
   onClick,
   initial,

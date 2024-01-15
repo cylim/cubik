@@ -1,10 +1,10 @@
 import React from 'react';
-import { tokens } from '@/constants/industry';
 import { OrganizationSponsorFormData } from '@/types/sponsor';
 import { useUploadThing } from '@/utils/uploadthing';
 import { Controller, useFieldArray, UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
 
+import { getValidToken } from '@cubik/common/tokens/getValidTokenList';
 import {
   Button,
   Checkbox,
@@ -39,6 +39,7 @@ const OrganizationSponsorForm = ({
   setProgress,
 }: IOrgSponsorFormProps) => {
   const { control } = organizationSponsorForm;
+  const tokenList = getValidToken();
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'upfrontPay',
@@ -135,7 +136,7 @@ const OrganizationSponsorForm = ({
                 return (
                   <li key={item.id}>
                     <div className="flex gap-3">
-                      <InputFieldContainer variant="sm">
+                      <InputFieldContainer variant="md">
                         <InputField
                           name="amount"
                           placeholder="100,000"
@@ -158,12 +159,18 @@ const OrganizationSponsorForm = ({
                                     e as any,
                                   );
                                 }}
+                                withoutBorder={true}
                                 value={
                                   organizationSponsorForm.watch(
                                     `upfrontPay.${index}.token`,
                                   ) as any
                                 }
-                                options={tokens as any}
+                                options={
+                                  tokenList.map((token) => ({
+                                    label: token.name,
+                                    value: token.address,
+                                  })) as any
+                                }
                               />
                             )}
                             name={`upfrontPay.${index}.token`}

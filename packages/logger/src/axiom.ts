@@ -1,6 +1,4 @@
 import type { NextRequest } from 'next/server';
-import { Logger } from 'next-axiom';
-import { LogLevel } from 'next-axiom/dist/logger';
 import { ILogObj, Logger as TsLogger } from 'tslog';
 import { v4 as uuidV4 } from 'uuid';
 
@@ -9,13 +7,13 @@ import { AuthPayload as AdminAuthPayload } from '@cubik/common-types/src/admin';
 
 const tslog: TsLogger<ILogObj> = new TsLogger();
 
-const createLogger = (source: string) => {
-  return new Logger({
-    logLevel: LogLevel.info,
-    source,
-    autoFlush: true,
-  });
-};
+// const createLogger = (source: string) => {
+//   return new Logger({
+//     logLevel: LogLevel.info,
+//     source,
+//     autoFlush: true,
+//   });
+// };
 
 export const log = (
   message: string,
@@ -30,24 +28,19 @@ export const log = (
 export const logError = (
   message: string | number | object,
   error?: unknown,
-  logFullError = false,
 ) => {
-  const errorMessage = error instanceof Error ? error?.message : error;
-
   // eslint-disable-next-line no-console
-  return tslog.error(message, logFullError ? error : errorMessage);
+  return tslog.error(message, error);
 };
 
 export const logApi = (
   {
-    level = 'info',
     error = null,
     body,
     message,
     user,
     req,
     statusCode = null,
-    source,
   }: {
     level?: 'info' | 'error' | 'debug';
     error?: string | null | unknown;
@@ -62,7 +55,6 @@ export const logApi = (
 ) => {
   const logId = uuidV4();
   let reqData: object | null = null;
-  const logger = createLogger(source ?? 'default');
 
   if (req?.nextUrl) {
     const { host, hostname, origin, pathname } = req.nextUrl;
@@ -96,15 +88,11 @@ export const logApi = (
     data: [data ?? null],
   };
 
-  const logLevel = error ? 'error' : level;
-
   const logMessage = `${logId} - ${message}`;
 
-  // if (error) {
-  //   logError(logMessage, error);
-  // } else {
-  //   log(logMessage, logData);
-  // }
-
-  return logger[logLevel](logMessage, logData);
+  if (error) {
+    logError(logMessage, error);
+  } else {
+    log(logMessage, logData);
+  }
 };

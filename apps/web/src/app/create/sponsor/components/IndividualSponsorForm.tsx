@@ -123,7 +123,7 @@ const IndividualSponsorForm = ({
                                 }
                                 options={
                                   tokenList.map((token) => ({
-                                    label: token.name,
+                                    label: token.symbol,
                                     value: token.address,
                                   })) as any
                                 }

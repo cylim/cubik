@@ -1,12 +1,8 @@
 import React from 'react';
-import { cookies } from 'next/headers';
-import Image from 'next/image';
 import Link from 'next/link';
-import CommentSection from '@/app/project/[slug]/components/comments/comment-section';
-import ProjectDescriptionAndImages from '@/app/project/[slug]/components/tabs/components/projectDescriptionAndImages';
+import ProjectDescriptionAndImages from '@/app/p/[slug]/components/tabs/components/projectDescriptionAndImages';
 import TabLayout from '@/components/common/tabs/TabLayout';
 import { ProjectSocials } from '@/types/project';
-import { IsUserLoginServer } from '@/utils/auth/isUserLoginServer';
 
 import dayjs from '@cubik/dayjs';
 import { Divider, Icon, Text } from '@cubik/ui';
@@ -76,7 +72,7 @@ const InteractionSidebar = ({
 }) => {
   console.log(industry);
   return (
-    <div className="flex w-full flex-col gap-6 md:gap-8">
+    <div className="flex w-full max-w-sm flex-col gap-6 md:gap-8">
       {/* <div className="flex flex-col gap-4 md:gap-6">
         <Text className="h5" color={'primary'}>
           Live Round Stats
@@ -158,11 +154,6 @@ export const ProjectDetailsTab = async ({ slug }: { slug: string }) => {
   if (!project) {
     return 'Loading...';
   }
-  const cookieStore = cookies();
-  const token = cookieStore.get('authToken');
-  const user = token && (await IsUserLoginServer(token.value));
-  console.log('user - ', user);
-  console.log('fetchedProjectDetails - ', project);
 
   return (
     <TabLayout>
@@ -170,7 +161,7 @@ export const ProjectDetailsTab = async ({ slug }: { slug: string }) => {
         <div className="flex flex-col gap-6 md:flex-row md:gap-20">
           <div className="flex flex-col gap-4">
             <ProjectDescriptionAndImages project={project} />
-            <CommentSection user={user!} projectId={project.id} />
+            {/* <CommentSection user={user!} projectId={project.id} /> */}
           </div>
           <InteractionSidebar
             socials={{

@@ -7,8 +7,6 @@ const envVarsSchema = Joi.object().keys({
   NODE_ENV: Joi.string().valid('production', 'development', 'test').required(),
   PORT: Joi.number().default(8000),
   SECRET: Joi.string().required(),
-  INFURA_API_KEY: Joi.string().required(),
-  INFURA_API_KEY_SECRET: Joi.string().required(),
 });
 
 const { value: validatedEnv, error } = envVarsSchema

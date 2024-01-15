@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { getComments, makeComment } from '@/app/project/[slug]/actions';
-import Loading from '@/app/project/[slug]/components/loading';
+import { getComments, makeComment } from '@/app/p/[slug]/actions';
+import Loading from '@/app/p/[slug]/components/loading';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import { toast } from 'sonner';

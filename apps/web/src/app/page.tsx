@@ -52,6 +52,7 @@ const getProjects = async () => {
         name: true,
         logo: true,
         shortDescription: true,
+        slug: true,
       },
       take: 30,
     });
@@ -139,10 +140,7 @@ export default async function Home() {
               {projects.map((project) => {
                 return (
                   <ProjectCard
-                    href={
-                      '/project/' +
-                      project.name.split(' ')[0].toLocaleLowerCase()
-                    }
+                    href={`/p/${project.slug}`}
                     //Button={<SaveButton />}
                     description={project.shortDescription}
                     name={project.name}
@@ -202,8 +200,7 @@ export default async function Home() {
               {projects.slice(0, 3).map((project) => {
                 return (
                   <CollectionCard
-                    href={'/project'}
-                    //Button={<SaveButton />}
+                    href={`/p/${project.slug}`}
                     description={project.shortDescription}
                     name={project.name}
                     logo={project.logo}

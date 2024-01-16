@@ -3,11 +3,12 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { decodeToken } from '@cubik/auth';
 import { handleApiClientError, successHandler } from '@cubik/database/api';
-import { logApi } from '@cubik/logger/src';
+import { logApi, logE, logInfo } from '@cubik/logger/src';
 
 export const GET = async (req: NextRequest) => {
   try {
     const searchParams = req.nextUrl.searchParams;
+    logInfo(req);
     const eventId = searchParams.get('eventId');
     const project = searchParams.get('project');
     const page = Number(searchParams.get('page')) || 1;
@@ -16,7 +17,6 @@ export const GET = async (req: NextRequest) => {
       throw new Error('Missing eventId or projectId');
     }
     const skip = (page - 1) * limit;
-
     const [data, count] = await prisma.$transaction([
       prisma.contribution.findMany({
         where: {
@@ -72,14 +72,14 @@ export const GET = async (req: NextRequest) => {
   } catch (e) {
     const error = e as Error;
     const authToken = cookies().get('authToken');
-    logApi({
-      req: req as any,
-      error,
-      message: 'Error while loading project contributions',
-      source: process.cwd(),
-      level: 'error',
-      user: authToken ? await decodeToken(authToken.value) : undefined,
-    });
+    // logE({
+    //   req: req as any,
+    //   error,
+    //   message: 'Error while loading project contributions',
+    //   source: process.cwd(),
+    //   level: 'error',
+    //   user: authToken ? await decodeToken(authToken.value) : undefined,
+    // });
     return handleApiClientError(error.message);
   }
 };

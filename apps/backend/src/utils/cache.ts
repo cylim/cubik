@@ -1,5 +1,5 @@
 import { TokenPrice } from "../service/price/syncPrice";
-
+import logger from "../middleware/logger";
 /**
  * Represents an item stored in the cache.
  * @template T The type of the value stored in the cache item.
@@ -31,7 +31,7 @@ class InMemoryCache<K, V> {
         if (timeoutMs) {
             // Set a timeout to automatically remove the item after the specified time
             item.timeoutId = setTimeout(() => {
-                console.debug(`Cache item with key ${key} timed out and was removed from the cache.`);
+                logger.debug(`Cache item with key ${key} timed out and was removed from the cache.`);
                 this.delete(key);
             }, timeoutMs);
         }

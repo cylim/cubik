@@ -1,6 +1,7 @@
 import axios from 'axios';
 import type { TokenPriceResponse } from 'types';
 import pThrottle from 'p-throttle';
+import logger from '../middleware/logger';
 
 const throttle = pThrottle({
   limit: 2,
@@ -8,7 +9,9 @@ const throttle = pThrottle({
 });
 
 const throttledRequest = throttle(async token => {
-  console.debug('throttledRequest', token)
+  logger.debug('throttledRequest', [
+    token
+  ])
   const response = await axios.get<TokenPriceResponse>(
     `https://price.jup.ag/v4/price?ids=${token}`,
   );

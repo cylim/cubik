@@ -15,6 +15,7 @@ model User {
   mainWallet        String             @unique
   email             String?
   profileNft        Json?
+  rank              Int                @default(0)
   isMigrated        Boolean            @default(false)
   type              UserType           @default(Contributor)
   profilePicture    String             @db.VarChar(500)

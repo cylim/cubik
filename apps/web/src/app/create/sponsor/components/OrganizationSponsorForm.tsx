@@ -208,13 +208,13 @@ const OrganizationSponsorForm = ({
       <div>
         <div>
           <Text className="h5" color={'primary'}>
-            Organisation Details
+            Organization Details
           </Text>
         </div>
         <div className="flex w-full flex-col gap-[24px]">
           <div className="mt-[16px] flex w-full  justify-between gap-3">
             <InputLabel id="public">
-              Make my Organisation Sponsorship Public
+              Make my Organization Sponsorship Public
             </InputLabel>
             <Switch
               onChange={(e) => {

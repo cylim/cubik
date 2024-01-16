@@ -898,6 +898,9 @@ importers:
 
   packages/logger:
     dependencies:
+      '@axiomhq/winston':
+        specifier: 1.0.0-rc.1
+        version: 1.0.0-rc.1
       '@cubik/common-types':
         specifier: workspace:*
         version: link:../common-types
@@ -922,6 +925,9 @@ importers:
       uuid:
         specifier: ^9.0.1
         version: 9.0.1
+      winston:
+        specifier: ^3.11.0
+        version: 3.11.0
 
   packages/notifications:
     dependencies:

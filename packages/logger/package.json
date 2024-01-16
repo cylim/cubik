@@ -2,7 +2,7 @@
   "name": "@cubik/logger",
   "version": "1.0.0",
   "description": "",
-  "main": "/src/index.ts",
+  "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@axiomhq/winston": "1.0.0-rc.1",
     "@cubik/common-types": "workspace:*",
     "@types/uuid": "^9.0.7",
     "next": "^14.0.4",
@@ -17,6 +18,7 @@
     "posthog-js": "^1.96.1",
     "posthog-node": "^3.2.1",
     "tslog": "^4.9.2",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "winston": "^3.11.0"
   }
 }

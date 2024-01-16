@@ -2,12 +2,12 @@
 
 import React, { useState } from 'react';
 import FormContainer from '@/app/components/FormContainer';
-import IndividualSponsorForm from '@/app/create/sponsor/IndividualSponsorForm';
-import OrganizationSponsorForm from '@/app/create/sponsor/OrganizationSponsorForm';
+import IndividualSponsorForm from '@/app/create/sponsor/components/IndividualSponsorForm';
+import OrganizationSponsorForm from '@/app/create/sponsor/components/OrganizationSponsorForm';
 import {
   SponsorFormSwitch,
   sponsorType,
-} from '@/app/create/sponsor/sponsorFormSwitch';
+} from '@/app/create/sponsor/components/sponsorFormSwitch';
 import {
   IndividualSponsorFormData,
   OrganizationSponsorFormData,

@@ -647,7 +647,7 @@ importers:
         specifier: workspace:*
         version: link:../dayjs
       '@portal-payments/solana-wallet-names':
-        specifier: ^2.1.0
+        specifier: ^2.0.4
         version: 2.1.0(@types/node@20.10.5)(bn.js@5.2.1)(borsh@0.7.0)(buffer@6.0.1)(rollup@3.29.4)(vite@5.0.10)
       axios:
         specifier: ^1.6.2
@@ -11441,7 +11441,7 @@ packages:
   /canvas-renderer@2.2.1:
     resolution: {integrity: sha512-RrBgVL5qCEDIXpJ6NrzyRNoTnXxYarqm/cS/W6ERhUJts5UQtt/XPEosGN3rqUkZ4fjBArlnCbsISJ+KCFnIAg==}
     dependencies:
-      '@types/node': 20.10.4
+      '@types/node': 20.10.5
     dev: false
 
   /capability@0.2.5:

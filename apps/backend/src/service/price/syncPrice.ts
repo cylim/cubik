@@ -1,8 +1,9 @@
 import { tokenPrice } from 'utils/price';
 
 import { getValidToken } from '@cubik/common/tokens/getValidTokenList';
+import { tokenCache } from 'utils/cache';
 
-interface TokenPrice {
+export interface TokenPrice {
   id: string;
   mintSymbol: string;
   vsToken: string;
@@ -11,15 +12,25 @@ interface TokenPrice {
 }
 export const syncPrice = async (): Promise<(TokenPrice | null)[]> => {
   try {
-    const tokenList = getValidToken();
-    const priceList: Promise<TokenPrice | null>[] = [];
+    const cached = tokenCache.get('pricelist')
+    if (cached) {
+      console.debug('cache hit')
+      return cached
+    }
+    if (!cached) {
+      console.debug('cache miss')
+      const tokenList = getValidToken();
+      const priceList: Promise<TokenPrice | null>[] = [];
 
-    tokenList.forEach(async (token) => {
-      const price = tokenPrice(token.address);
-      priceList.push(price);
-    });
-    const res = await Promise.all(priceList);
-    return res;
+      tokenList.forEach(async (token) => {
+        const price = tokenPrice(token.address);
+        priceList.push(price);
+      });
+      const tokenPriceList = await Promise.all(priceList);
+      tokenCache.set('pricelist', tokenPriceList, 300_000)
+      return tokenPriceList
+    }
+    return []
   } catch (error) {
     console.log(error);
     return [];

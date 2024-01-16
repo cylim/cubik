@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Resend } from 'resend';
-import { CreateEmailResponse } from 'resend/build/src/emails/interfaces';
 
 import { ActivityType } from '@cubik/database';
 import { logApi } from '@cubik/logger/src';
@@ -44,7 +43,7 @@ export async function sendEmail(
   to: string | string[],
   notificationType: ActivityType,
   props: EmailProps,
-): Promise<CreateEmailResponse | null> {
+) {
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
 

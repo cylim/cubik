@@ -93,12 +93,15 @@ const useProjects = ({
     queryFn: () =>
       queryFn({ page, limit, projectStatus, searchIndustry, search }),
     enabled: !!page,
+
     getNextPageParam: (lastPage, pages) => {
       if (lastPage.totalPages === pages.length) {
         return undefined;
       }
       return pages.length + 1;
     },
+    initialPageParam:1
+   
   });
 };
 

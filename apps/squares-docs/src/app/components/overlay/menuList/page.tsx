@@ -72,7 +72,7 @@ const MenuListPage = () => {
                 leftIconName="threeDots"
                 variant={'secondary'}
                 size="xl"
-                className="h-[48px] w-[48px]"
+                className="size-[48px]"
               />
             </MenuButton>
             <MenuList>

@@ -8,12 +8,6 @@ interface Props {
   };
 }
 const ProjectPageDrawer = ({ params }: Props) => {
-  console.log('--------------');
-  console.log('--------------');
-  console.log('--------------');
-  console.log(params.slug);
-  console.log('--------------');
-  console.log('--------------');
   return (
     <CustomModal>
       <>sadfdsa</>

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { leaderboardSwitchOptions } from '@/app/grant/Leaderboard';
+import { leaderboardSwitchOptions } from '@/app/event/[slug]/components/Leaderboard';
 
 import { SegmentContainer, SegmentItem } from '@cubik/ui';
 

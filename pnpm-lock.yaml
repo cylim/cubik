@@ -650,7 +650,7 @@ importers:
         specifier: workspace:*
         version: link:../dayjs
       '@portal-payments/solana-wallet-names':
-        specifier: ^2.1.0
+        specifier: ^2.0.4
         version: 2.1.0(@types/node@20.10.5)(bn.js@5.2.1)(borsh@0.7.0)(buffer@6.0.1)(rollup@3.29.4)(vite@5.0.10)
       axios:
         specifier: ^1.6.2
@@ -904,6 +904,9 @@ importers:
 
   packages/logger:
     dependencies:
+      '@axiomhq/winston':
+        specifier: 1.0.0-rc.1
+        version: 1.0.0-rc.1
       '@cubik/common-types':
         specifier: workspace:*
         version: link:../common-types
@@ -928,6 +931,9 @@ importers:
       uuid:
         specifier: ^9.0.1
         version: 9.0.1
+      winston:
+        specifier: ^3.11.0
+        version: 3.11.0
 
   packages/notifications:
     dependencies:
@@ -11518,7 +11524,7 @@ packages:
   /canvas-renderer@2.2.1:
     resolution: {integrity: sha512-RrBgVL5qCEDIXpJ6NrzyRNoTnXxYarqm/cS/W6ERhUJts5UQtt/XPEosGN3rqUkZ4fjBArlnCbsISJ+KCFnIAg==}
     dependencies:
-      '@types/node': 20.10.4
+      '@types/node': 20.10.5
     dev: false
 
   /capability@0.2.5:

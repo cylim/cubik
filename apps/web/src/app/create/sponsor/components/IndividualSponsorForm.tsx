@@ -1,8 +1,6 @@
 import React from 'react';
-import { OrganizationSponsorFormData } from '@/types/sponsor';
-import { useUploadThing } from '@/utils/uploadthing';
+import { IndividualSponsorFormData } from '@/types/sponsor';
 import { Controller, useFieldArray, UseFormReturn } from 'react-hook-form';
-import { toast } from 'sonner';
 
 import { getValidToken } from '@cubik/common/tokens/getValidTokenList';
 import {
@@ -10,76 +8,38 @@ import {
   Checkbox,
   HelperText,
   Icon,
-  ImageUploader,
   InputField,
   InputFieldContainer,
   InputLabel,
   InputLeftElement,
   InputRightElement,
   SearchSelect,
-  Switch,
   Text,
 } from '@cubik/ui';
 
 interface IOrgSponsorFormProps {
-  organizationSponsorForm: UseFormReturn<
-    OrganizationSponsorFormData,
+  individualSponsorForm: UseFormReturn<
+    IndividualSponsorFormData,
     any,
     undefined
   >;
-  submitEventData: (data: OrganizationSponsorFormData) => void;
-  progress: number;
-  setProgress: (value: number) => void;
+  submitEventData: (data: IndividualSponsorFormData) => void;
 }
 
-const OrganizationSponsorForm = ({
-  organizationSponsorForm,
+const IndividualSponsorForm = ({
+  individualSponsorForm,
   submitEventData,
-  progress,
-  setProgress,
 }: IOrgSponsorFormProps) => {
-  const { control } = organizationSponsorForm;
-  const tokenList = getValidToken();
+  const { control } = individualSponsorForm;
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'upfrontPay',
   });
-  const { startUpload, isUploading, permittedFileInfo } = useUploadThing(
-    'imageUploader',
-    {
-      onUploadProgress: (progressEvent) => {
-        // setProgress(progressEvent);
-        setProgress(progressEvent);
-      },
-      onUploadError: (error) => {
-        organizationSponsorForm.setError('logo', {
-          type: 'manual',
-          message: error.message,
-        });
-        toast.error(`Upload Error: ${error.message}`);
-      },
-      onUploadBegin: (file) => {
-        //   setLoadingState('Uploading');
-        //   toast.info(`Upload Begin: ${file}`);
-      },
-      onClientUploadComplete: (file) => {
-        if (file) {
-          console.log(file);
-          organizationSponsorForm.setValue('logo', file[0].url);
-        } else {
-          organizationSponsorForm.setError('logo', {
-            type: 'manual',
-            message: "Couldn't upload file",
-          });
-          toast.error(`Upload Error: ${file}`);
-        }
-      },
-    },
-  );
+  const tokenList = getValidToken();
   return (
     <form
       className="flex w-full flex-col gap-[40px]"
-      onSubmit={organizationSponsorForm.handleSubmit(submitEventData)}
+      onSubmit={individualSponsorForm.handleSubmit(submitEventData)}
     >
       <div>
         <div>
@@ -96,33 +56,29 @@ const OrganizationSponsorForm = ({
             <InputFieldContainer
               variant="sm"
               isError={
-                organizationSponsorForm.formState.errors.totalCommitted
+                individualSponsorForm.formState.errors.totalCommitted
                   ? true
                   : false
               }
             >
               <InputLeftElement withBorder={false}>$</InputLeftElement>
               <InputField
-                name="name"
+                name="totalCommitted"
                 placeholder="100,000"
                 onChange={(e) => {
-                  organizationSponsorForm.setValue(
+                  individualSponsorForm.setValue(
                     'totalCommitted',
                     Number(e.currentTarget.value),
                   );
                 }}
                 defaultValue={
-                  organizationSponsorForm.formState.defaultValues
-                    ?.totalCommitted
+                  individualSponsorForm.formState.defaultValues?.totalCommitted
                 }
               />
             </InputFieldContainer>
-            {organizationSponsorForm.formState.errors.totalCommitted && (
+            {individualSponsorForm.formState.errors.totalCommitted && (
               <HelperText variant={'error'} fontSize={'sm'}>
-                {
-                  organizationSponsorForm.formState.errors.totalCommitted
-                    .message
-                }
+                {individualSponsorForm.formState.errors.totalCommitted.message}
               </HelperText>
             )}
           </div>
@@ -141,7 +97,7 @@ const OrganizationSponsorForm = ({
                           name="amount"
                           placeholder="100,000"
                           onChange={(e) => {
-                            organizationSponsorForm.setValue(
+                            individualSponsorForm.setValue(
                               `upfrontPay.${index}.amount`,
                               Number(e.currentTarget.value),
                             );
@@ -151,23 +107,23 @@ const OrganizationSponsorForm = ({
                           <Controller
                             render={({ field }) => (
                               <SearchSelect
+                                withoutBorder={true}
                                 placeholder="token"
                                 onChange={(e) => {
                                   if (!e) return;
-                                  organizationSponsorForm.setValue(
+                                  individualSponsorForm.setValue(
                                     `upfrontPay.${index}.token`,
                                     e as any,
                                   );
                                 }}
-                                withoutBorder={true}
                                 value={
-                                  organizationSponsorForm.watch(
+                                  individualSponsorForm.watch(
                                     `upfrontPay.${index}.token`,
                                   ) as any
                                 }
                                 options={
                                   tokenList.map((token) => ({
-                                    label: token.name,
+                                    label: token.symbol,
                                     value: token.address,
                                   })) as any
                                 }
@@ -203,81 +159,15 @@ const OrganizationSponsorForm = ({
               </Text>
             </button>
           </div>
-        </div>
-      </div>
-      <div>
-        <div>
-          <Text className="h5" color={'primary'}>
-            Organisation Details
-          </Text>
-        </div>
-        <div className="flex w-full flex-col gap-[24px]">
-          <div className="mt-[16px] flex w-full  justify-between gap-3">
-            <InputLabel id="public">
-              Make my Organisation Sponsorship Public
-            </InputLabel>
-            <Switch
-              onChange={(e) => {
-                console.log(e);
-                organizationSponsorForm.setValue('isSponsorshipPublic', e);
-              }}
-              size="sm"
-              checked
-            />
-          </div>
-          <div className="flex w-full flex-col gap-3">
-            <InputLabel id="name" isRequired>
-              Name
-            </InputLabel>
 
-            <InputFieldContainer
-              variant="sm"
-              isError={
-                organizationSponsorForm.formState.errors.name ? true : false
-              }
-            >
-              <InputField
-                name="name"
-                placeholder="Name of the Sponsoring Organization"
-                onChange={(e) => {
-                  organizationSponsorForm.setValue(
-                    'name',
-                    e.currentTarget.value,
-                  );
-                }}
-                defaultValue={
-                  organizationSponsorForm.formState.defaultValues?.name
-                }
-              />
-            </InputFieldContainer>
-            {organizationSponsorForm.formState.errors.name && (
-              <HelperText variant={'error'} fontSize={'sm'}>
-                {organizationSponsorForm.formState.errors.name.message}
-              </HelperText>
-            )}
-          </div>
-          <div className="flex w-full flex-col gap-3">
-            <InputLabel id="name" isRequired>
-              Upload Logo
-            </InputLabel>
-            <ImageUploader
-              progress={progress || 0}
-              logo={organizationSponsorForm.watch('logo')}
-              errorMessage={
-                organizationSponsorForm.formState.errors.logo?.message
-              }
-              isUploading={isUploading}
-              startUpload={startUpload}
-            />
-          </div>
           <div className="flex gap-2">
             <Checkbox
-              checked={organizationSponsorForm.watch('selfCustody')}
+              checked={individualSponsorForm.watch('selfCustody')}
               onCheckedChange={(e) => {
                 if (e) {
-                  organizationSponsorForm.setValue('selfCustody', true);
+                  individualSponsorForm.setValue('selfCustody', true);
                 } else {
-                  organizationSponsorForm.setValue('selfCustody', false);
+                  individualSponsorForm.setValue('selfCustody', false);
                 }
               }}
             />
@@ -287,7 +177,30 @@ const OrganizationSponsorForm = ({
               </Text>
               <Text color={'secondary'} className="l2">
                 You can self custody the grants match pool funds you sponsor in
-                a multisig which you can access through the admin dashboard.
+                a multisig and get admin access.
+              </Text>
+            </div>
+          </div>
+
+          <div className="flex gap-2">
+            <Checkbox
+              checked={individualSponsorForm.watch('isSponsorshipPublic')}
+              onCheckedChange={(e) => {
+                if (e) {
+                  individualSponsorForm.setValue('isSponsorshipPublic', true);
+                } else {
+                  individualSponsorForm.setValue('isSponsorshipPublic', false);
+                }
+              }}
+            />
+            <div className="gap-[6px]">
+              <Text color={'primary'} className="l1">
+                Make my individual Sponsorship Public
+              </Text>
+              <Text color={'secondary'} className="l2">
+                Your name will be visible on the grants detail page, if you
+                don&apos;t want to make this information public unselect this
+                option.
               </Text>
             </div>
           </div>
@@ -302,4 +215,4 @@ const OrganizationSponsorForm = ({
   );
 };
 
-export default OrganizationSponsorForm;
+export default IndividualSponsorForm;

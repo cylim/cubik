@@ -20,7 +20,7 @@
     "@cubik/common-types": "workspace:*",
     "@cubik/database": "workspace:*",
     "@cubik/dayjs": "workspace:*",
-    "@portal-payments/solana-wallet-names": "^2.1.0",
+    "@portal-payments/solana-wallet-names": "^2.0.4",
     "axios": "^1.6.2",
     "bs58": "^5.0.0",
     "crypto-js": "^4.2.0",

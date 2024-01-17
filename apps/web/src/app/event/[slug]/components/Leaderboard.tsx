@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { LeaderboardSwitch } from '@/app/grant/LeaderboardSwitch';
+import { LeaderboardSwitch } from '@/app/event/[slug]/components/LeaderboardSwitch';
 
 import { EmptyState, Text } from '@cubik/ui';
 

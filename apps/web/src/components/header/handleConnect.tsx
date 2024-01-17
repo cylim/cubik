@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useUser } from '@/hooks/useUser';
@@ -10,6 +10,7 @@ import { v4 as uuidV4 } from 'uuid';
 import { formatAddress } from '@cubik/common';
 import { UserAuth } from '@cubik/common-types';
 import { handleRevalidation } from '@cubik/common/helper';
+import { getSNSFromAddress } from '@cubik/common/solana/sns';
 import {
   Avatar,
   AvatarLabelGroup,
@@ -37,6 +38,16 @@ const UserNavbarMenu = ({
 }) => {
   const { toggleTheme } = useTheme();
   const pathname = usePathname();
+  const [userDomain, setUserDomain] = useState<string | null>(null);
+  useEffect(() => {
+    const domain = async () => {
+      if (user?.mainWallet) {
+        const domain = await getSNSFromAddress(user.mainWallet);
+        setUserDomain(domain);
+      }
+    };
+    domain();
+  }, [user?.mainWallet]);
   return (
     <Menu>
       <MenuButton>
@@ -62,7 +73,9 @@ const UserNavbarMenu = ({
             title={user?.username || ''}
             shape="circle"
             size="md"
-            description={formatAddress(user?.mainWallet || '')}
+            description={
+              userDomain ? userDomain : formatAddress(user?.mainWallet || '')
+            }
           />
         </div>
         <Link href={'/' + user?.username}>

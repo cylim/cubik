@@ -6,7 +6,6 @@ import useGetProjectEvents from '@/hooks/project/useGetProjectEvents';
 
 import { calculateEventStatus } from '@cubik/common/helper/eventStatus';
 import {
-  Alert,
   EmptyState,
   GrantRoundCardFooter,
   GrantRoundCardHeader,

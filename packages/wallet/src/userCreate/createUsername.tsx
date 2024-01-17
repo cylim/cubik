@@ -7,7 +7,6 @@ import { toast } from 'sonner';
 import {
   Avatar,
   Button,
-  Checkbox,
   HelperText,
   InputContainer,
   InputField,
@@ -97,7 +96,7 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
             </InputContainer>
           </div>
         </div>
-        <div className="flex gap-2 flex-col">
+        {/* <div className="flex gap-2 flex-col">
           <Text color={'primary'} className="l1-light">
             You are a
           </Text>
@@ -137,7 +136,7 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
               </Text>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="flex gap-3 flex-col">
           <Button
             variant={'primary'}

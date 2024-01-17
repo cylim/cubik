@@ -7,6 +7,7 @@ import {
   Button,
   Checkbox,
   HelperText,
+  InputContainer,
   InputField,
   InputFieldContainer,
   InputLabel,
@@ -67,25 +68,27 @@ export const VerifyEmail = ({ setUserCreateState, userForm }: Props) => {
         </div>
         <div>
           <div className="w-full">
-            <InputLabel id="email" isRequired={true}>
-              Email Address
-            </InputLabel>
-            <InputFieldContainer
-              isError={userForm.formState.errors.email ? true : false}
-              variant="sm"
-            >
-              <InputField
-                placeholder="someone@gmail.com"
-                onChange={(e) => {
-                  userForm.setValue('email', e.currentTarget.value);
-                }}
-              />
-            </InputFieldContainer>
-            {userForm.formState.errors.email && (
-              <HelperText variant={'error'} fontSize={'md'}>
-                {userForm.formState.errors.email.message}
-              </HelperText>
-            )}
+            <InputContainer>
+              <InputLabel id="email" isRequired={true}>
+                Email Address
+              </InputLabel>
+              <InputFieldContainer
+                isError={userForm.formState.errors.email ? true : false}
+                variant="sm"
+              >
+                <InputField
+                  placeholder="someone@gmail.com"
+                  onChange={(e) => {
+                    userForm.setValue('email', e.currentTarget.value);
+                  }}
+                />
+              </InputFieldContainer>
+              {userForm.formState.errors.email && (
+                <HelperText variant={'error'} fontSize={'md'}>
+                  {userForm.formState.errors.email.message}
+                </HelperText>
+              )}
+            </InputContainer>
           </div>
         </div>
         <div className="flex justify-start items-center gap-2">
@@ -107,7 +110,7 @@ export const VerifyEmail = ({ setUserCreateState, userForm }: Props) => {
           </Button>
           <Button
             onClick={() => setUserCreateState('signTx')}
-            variant={'link'}
+            variant={'tertiary'}
             size={'md'}
             className="w-full"
           >

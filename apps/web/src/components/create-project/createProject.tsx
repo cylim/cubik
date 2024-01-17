@@ -1,90 +1,34 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { syncProject } from '@/components/create-project/helper/syncProject';
-import { Step1 } from '@/components/create-project/step1';
-import { Step2 } from '@/components/create-project/step2';
-import { Step3 } from '@/components/create-project/step3';
-import { Step4 } from '@/components/create-project/step4';
-import { Step5 } from '@/components/create-project/step5';
-import { Step6 } from '@/components/create-project/step6';
-import { Step7 } from '@/components/create-project/step7';
-import { Success } from '@/components/create-project/success';
-import { useAutosave } from '@/hooks/useAutoSave';
-import axios, { AxiosResponse } from 'axios';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { IProjectData } from '@/types/project';
+import { DevTool } from '@hookform/devtools';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
-import { v4 as uuidV4 } from 'uuid';
+import { z } from 'zod';
 
-import { Project_Backup } from '@cubik/common';
-import { Prisma } from '@cubik/database';
-import { ApiResponseType } from '@cubik/database/api';
-import {
-  Avatar,
-  Icon,
-  Skeleton,
-  Spinner,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  Text,
-} from '@cubik/ui';
+import { Button } from '@cubik/ui';
+
+import ProjectCreationDisplay from './projectCreationDisplay';
+import { Step1 } from './step1';
+import { Step2 } from './step2';
+import { Step3 } from './step3';
+import { Step4 } from './step4';
+import { Step5 } from './step5';
+import { Step6 } from './step6';
+import { Step7 } from './step7';
+import { Step8 } from './step8';
+import { Success } from './success';
 
 interface Props {
   id: string;
 }
-type ProjectData = Prisma.ProjectGetPayload<{
-  select: {
-    id: true;
-    name: true;
-    discordLink: true;
-    githubLink: true;
-    email: true;
-    shortDescription: true;
-    logo: true;
-    longDescription: true;
-    slides: true;
-    projectLink: true;
-    industry: true;
-    status: true;
-    telegramLink: true;
-    isOpenSource: true;
-    twitterHandle: true;
-    team: {
-      select: {
-        id: true;
-        user: {
-          select: {
-            id: true;
-            username: true;
-            profilePicture: true;
-          };
-        };
-      };
-    };
-  };
-}>;
+
 export interface Option {
   label?: string;
   value?: string;
   inputId: string;
-}
-export interface ProjectFormData {
-  name: string;
-  tagline: string;
-  email: string;
-  category: Option[];
-  logo: string;
-  description: string;
-  slides: string[];
-  team: Option[];
-  github: string;
-  website: string;
-  twitter: string;
-  isOpenSource: boolean;
 }
 
 const StepBar = ({ currentStep }: { currentStep: number }) => {
@@ -130,7 +74,7 @@ const StepBar = ({ currentStep }: { currentStep: number }) => {
     return step >= startStep && step <= endStep;
   };
   return (
-    <div className="flex items-center justify-between w-full">
+    <div className="flex w-full items-center justify-between">
       <div className="flex items-center gap-2">
         {Array.from({ length: totalSteps }, (_, i) => i + 1).map(
           (step) =>
@@ -149,239 +93,166 @@ const StepBar = ({ currentStep }: { currentStep: number }) => {
     </div>
   );
 };
+
 export const CreateProject = ({ id }: Props) => {
+  console.log('🔄 Project create page rerendered');
   const [step, setStep] = useState<number>(1);
-  const [loadedProject, setLoadedProject] = useState<ProjectData | null>(null);
-  const [isLoadingProject, setIsLoadingProject] = useState<boolean>(false);
-  const lastUpdateRef = useRef<number>(Date.now());
-  const [formState, setFormState] = useState<any>(null);
-  const router = useRouter();
-  const createProjectForm = useForm<ProjectFormData>({
-    defaultValues: {
-      category: [],
-      isOpenSource: false,
-      logo: '',
-      description: '',
-      email: '',
-      github: '',
-      name: '',
-      slides: [],
-      tagline: '',
-      team: [],
-      twitter: '',
-      website: '',
-    },
+  const {
+    watch,
+    getValues,
+    setValue,
+    trigger,
+    clearErrors,
+    register,
+    control,
+    handleSubmit,
+    setFocus,
+    setError,
+    formState: { errors },
+  } = useForm<IProjectData>({
+    resolver: zodResolver(
+      z.object({
+        id: z.string(),
+        name: z
+          .string()
+          .min(3, { message: "Project name can't be empty" })
+          .max(36, {
+            message: "Project name can't be more than 36 characters",
+          }),
+        discordLink: z.string(),
+        githubLink: z.string(),
+        email: z.string().email({ message: 'Invalid email address' }),
+        shortDescription: z
+          .string()
+          .min(1, { message: "Project tagline can't be empty" }),
+        logo: z.string().url({ message: 'Invalid logo url' }),
+        longDescription: z.string(),
+        slides: z.array(z.string()).max(4),
+        projectLink: z.string().url({ message: 'Invalid website url' }),
+        industry: z.string(),
+        status: z.string(),
+        telegramLink: z.string().url({ message: 'Invalid telegram url' }),
+        isOpenSource: z.boolean(),
+        twitterHandle: z.string().url({ message: 'Invalid twitter url' }),
+        team: z.array(
+          z.object({
+            name: z.string(),
+            role: z.string(),
+          }),
+        ),
+      }),
+    ),
   });
 
-  // this loads the project data from the database for first time
-  useEffect(() => {
-    const loadProjectData = async () => {
-      try {
-        // if the modal is not open or the project is already loaded, return to avoid loop of fetch calls
-        if (!open || loadedProject) return;
-        setIsLoadingProject(true);
-
-        const data = (await axios.get(
-          `/api/project/loadProject?project=${id}&draft=true&create=true`,
-        )) as AxiosResponse<ApiResponseType, any>;
-
-        const projectData = data.data.result as ProjectData;
-        if (!projectData) {
-          throw new Error('No project found');
-        }
-        // manually set the values because react-hook-form is default values are not updating
-        createProjectForm.setValue('name', projectData.name);
-        createProjectForm.setValue('tagline', projectData.shortDescription);
-        createProjectForm.setValue('email', projectData.email);
-        createProjectForm.setValue('logo', projectData.logo);
-        createProjectForm.setValue('description', projectData.longDescription);
-        createProjectForm.setValue(
-          'slides',
-          (projectData.slides as string[]) || [],
-        );
-        createProjectForm.setValue('github', projectData.githubLink);
-        createProjectForm.setValue('website', projectData.projectLink);
-        createProjectForm.setValue('twitter', projectData.twitterHandle);
-        const category = (projectData.industry as string[]).map((e) => {
-          return {
-            inputId: uuidV4(),
-            label: e,
-            value: e,
-          };
-        });
-        createProjectForm.setValue('category', category || []);
-        createProjectForm.setValue(
-          'isOpenSource',
-          projectData.isOpenSource || false,
-        );
-        const team: Option[] =
-          projectData?.team.map((e) => {
-            return {
-              inputId: e.user.id,
-              label: e.user.username,
-              value: e.user.id,
-            };
-          }) || [];
-        createProjectForm.setValue('team', team);
-
-        setLoadedProject(projectData);
-      } catch (error) {
-        console.log(error);
-        localStorage.removeItem('latest-draft-project');
-        router.push('/create/project');
-        return;
-      } finally {
-        setIsLoadingProject(false);
-      }
-    };
-    loadProjectData();
-  }, [open, loadedProject]);
-  useEffect(() => {
-    const subscription = createProjectForm.watch((value) => {
-      setFormState(value as any); // Update the state with the latest form value
-      lastUpdateRef.current = Date.now(); // Update the last update time
-    });
-    return () => subscription.unsubscribe(); // Cleanup
-  }, [createProjectForm.watch()]);
-
-  useAutosave(
-    async () => {
-      if (!loadedProject) return;
-      await syncProject(createProjectForm.getValues(), id);
-    },
-    15000,
-    [formState],
-    lastUpdateRef.current + 30000 > Date.now() ? true : false,
-  );
-  const forceSave = async () => {
-    if (!loadedProject) return;
-    await syncProject(createProjectForm.getValues(), id);
-  };
+  const forceSave = async () => {};
 
   return (
-    <div className=" h-[840px] pointer-events-auto py-16 mx-auto flex md:gap-24 md:px-12 w-full max-w-screen-xl justify-start">
-      <div className="md:w-1/2 h-full ">
-        {!isLoadingProject ? (
-          <div className="h-full md:px-12 ">
-            <StepBar currentStep={step} />
-            {step === 1 && (
-              <Step1
-                forceSave={forceSave}
-                setStep={setStep}
-                projectForm={createProjectForm}
-              />
-            )}
-            {step === 2 && (
-              <Step2
-                forceSave={forceSave}
-                setStep={setStep}
-                projectForm={createProjectForm}
-              />
-            )}
-            {step === 3 && (
-              <Step3
-                forceSave={forceSave}
-                setStep={setStep}
-                projectForm={createProjectForm}
-              />
-            )}
-            {step === 4 && (
-              <Step4
-                setStep={setStep}
-                projectForm={createProjectForm}
-                forceSave={forceSave}
-              />
-            )}
-            {step === 5 && (
-              <Step5
-                setStep={setStep}
-                projectForm={createProjectForm}
-                forceSave={forceSave}
-              />
-            )}
-            {step === 6 && (
-              <Step6
-                setStep={setStep}
-                projectForm={createProjectForm}
-                forceSave={forceSave}
-              />
-            )}
-            {step === 7 && (
-              <Step7
-                setStep={setStep}
-                projectForm={createProjectForm}
-                forceSave={forceSave}
-              />
-            )}
-            {step === 10 && <Success />}
-          </div>
-        ) : (
-          <div className="flex w-full items-center justify-center px-7 md:w-[55%] md:px-14">
-            <Spinner color="#000000" />
-          </div>
-        )}
-      </div>
-
-      <div className="relative transform scale-90 hidden w-1/2 px-14 py-8 md:block ">
-        <div className="absolute flex items-center justify-center top-0 h-full left-0 ml-10 w-full">
-          <div className="flex w-full h-fit min-h-48 flex-col gap-8 rounded-tl-xl rounded-bl-xl overflow-hidden border-[var(--color-border-primary-base)]  bg-gradient-to-r from-[var(--body-surface)] px-14 pt-14">
-            {!(createProjectForm.watch('logo') === Project_Backup) ? (
-              <Avatar
-                size={'xl'}
-                variant={'square'}
-                src={createProjectForm.watch('logo') || Project_Backup}
-                alt="random"
-              />
-            ) : (
-              <div className="flex items-center justify-center border-[var(--card-border-primary)] rounded-md w-[72px] h-[72px] border bg-[var(--color-surface-primary-base)]">
-                <Icon
-                  name="plus"
-                  width={20}
-                  height={20}
-                  color="var(--color-fg-primary-base)"
+    <>
+      <div className=" pointer-events-auto mx-auto flex h-[840px] w-full max-w-screen-xl justify-start py-16 md:gap-24 md:px-12">
+        <div className="h-full md:w-1/2 ">
+          <Button onClick={() => clearErrors()}>reset errors</Button>
+          <AnimatePresence>
+            <motion.form
+              onSubmit={handleSubmit(() => {})}
+              className="h-full md:px-12 "
+            >
+              <StepBar currentStep={step} />
+              {step === 1 && (
+                <Step1
+                  forceSave={forceSave}
+                  setStep={setStep}
+                  watch={watch}
+                  setValue={setValue}
+                  errors={errors}
+                  clearErrors={clearErrors}
+                  trigger={trigger}
+                  register={register}
                 />
-              </div>
-            )}
-
-            <div className="flex gap-3 flex-col w-full">
-              {createProjectForm.watch('name') ? (
-                <Text className="b2" color={'primary'}>
-                  {createProjectForm.watch('name')}
-                </Text>
-              ) : (
-                <div className="w-[40%] h-[28px] py-1">
-                  <div className="w-full h-full opacity-50 rounded-md bg-[var(--color-surface-primary-transparent)]" />
-                </div>
               )}
-              {createProjectForm.watch('tagline') ? (
-                <Text className="l2-light" color={'secondary'}>
-                  {createProjectForm.watch('tagline')}
-                </Text>
-              ) : (
-                <div className="w-[80%] h-[20px] py-1">
-                  <div className="w-full h-full opacity-50 rounded-md bg-[var(--color-surface-primary-transparent)]" />
-                </div>
+              {step === 2 && (
+                <Step2
+                  forceSave={forceSave}
+                  setStep={setStep}
+                  watch={watch}
+                  setValue={setValue}
+                  errors={errors}
+                  clearErrors={clearErrors}
+                  trigger={trigger}
+                  register={register}
+                  control={control}
+                />
               )}
-            </div>
-            <div>
-              <Tabs size="sm" defaultValue={0}>
-                <TabList className="mx-auto">
-                  <Tab value={0}>About</Tab>
-                  <Tab value={1}>Contributions</Tab>
-                </TabList>
-                <TabPanels className="mx-auto w-full max-w-7xl px-4 md:px-8">
-                  <TabPanel value={0}>
-                    <div className="h-96" />
-                  </TabPanel>
-                  <TabPanel value={1}>
-                    <div className="h-96" />
-                  </TabPanel>
-                </TabPanels>
-              </Tabs>
-            </div>
-          </div>
+              {step === 3 && (
+                <Step3
+                  forceSave={forceSave}
+                  setStep={setStep}
+                  watch={watch}
+                  setValue={setValue}
+                  errors={errors}
+                  clearErrors={clearErrors}
+                  trigger={trigger}
+                  register={register}
+                  setError={setError}
+                  control={control}
+                />
+              )}
+              {step === 4 && (
+                <Step4
+                  setStep={setStep}
+                  forceSave={forceSave}
+                  watch={watch}
+                  setError={setError}
+                  errors={errors}
+                  setValue={setValue}
+                  control={control}
+                />
+              )}
+              {step === 5 && (
+                <Step5
+                  setStep={setStep}
+                  forceSave={forceSave}
+                  errors={errors}
+                  watch={watch}
+                  register={register}
+                />
+              )}
+              {step === 6 && (
+                <Step6
+                  setStep={setStep}
+                  forceSave={forceSave}
+                  errors={errors}
+                  watch={watch}
+                  register={register}
+                />
+              )}
+              {step === 7 && (
+                <Step7
+                  setStep={setStep}
+                  forceSave={forceSave}
+                  errors={errors}
+                  watch={watch}
+                  register={register}
+                />
+              )}
+              {step === 8 && (
+                <Step8
+                  control={control}
+                  setStep={setStep}
+                  forceSave={forceSave}
+                  errors={errors}
+                  setValue={setValue}
+                  watch={watch}
+                  register={register}
+                />
+              )}
+              {step === 10 && <Success />}
+            </motion.form>
+          </AnimatePresence>
         </div>
+
+        <ProjectCreationDisplay watch={watch} />
       </div>
-    </div>
+      <DevTool control={control} /> {/* set up the dev tool */}
+    </>
   );
 };

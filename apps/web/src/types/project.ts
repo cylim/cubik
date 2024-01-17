@@ -30,7 +30,7 @@ type User = {
   profilePicture: string;
   username: string;
 };
-type Team = {
+export type Team = {
   id: string;
   user: User;
 };

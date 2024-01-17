@@ -1,16 +1,14 @@
 import React from 'react';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
-import {
-  ProjectAdminCard,
-  ProjectProfileCard,
-} from '@/app/[username]/components/project-tab/project-admin-card';
-import RenderUserProjects from '@/app/[username]/components/project-tab/renderProject';
-import TabLayout from '@/components/common/tabs/TabLayout';
-import { IsUserLoginServer } from '@/utils/auth/isUserLoginServer';
 
 import { prisma } from '@cubik/database';
 import { Button, EmptyState, SubHead } from '@cubik/ui';
+
+import TabLayout from '../../../../components/common/tabs/TabLayout';
+import { IsUserLoginServer } from '../../../../utils/auth/isUserLoginServer';
+import { ProjectAdminCard, ProjectProfileCard } from './project-admin-card';
+import RenderUserProjects from './renderProject';
 
 interface Props {
   username: string;
@@ -99,7 +97,7 @@ export const ProjectTab = async ({ username }: Props) => {
       ) : (
         <>
           <SubHead heading="Projects" />
-          {/* <>{renderProjects()}</> */}
+          <RenderUserProjects projects={projects} />
         </>
       )}
     </TabLayout>

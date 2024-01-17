@@ -1,16 +1,33 @@
-import { ProjectFormData } from '@/components/create-project/createProject';
+import { ProjectFormData } from '@/components/create-project/createProject[ARCHIEVE]';
 import { LogoUploader } from '@/components/create-project/image-uploder/logoUploader';
+import { CreateProjectStepProps } from '@/components/create-project/step1';
 import StepTemplate from '@/components/create-project/stepTemplate';
-import { UseFormReturn } from 'react-hook-form';
+import { IProjectData } from '@/types/project';
+import {
+  Control,
+  Controller,
+  UseFormReturn,
+  UseFormSetError,
+} from 'react-hook-form';
 
 import { Button, Text } from '@cubik/ui';
 
-interface Props {
-  projectForm: UseFormReturn<ProjectFormData, any, undefined>;
-  setStep: React.Dispatch<React.SetStateAction<number>>;
-  forceSave: () => Promise<void>;
+interface Step2Props extends CreateProjectStepProps {
+  setError: UseFormSetError<IProjectData>;
+  control: Control<IProjectData, any>;
 }
-export const Step3 = ({ setStep, projectForm, forceSave }: Props) => {
+export const Step3 = ({
+  setStep,
+  forceSave,
+  watch,
+  errors,
+  setError,
+  clearErrors,
+  trigger,
+  setValue,
+  register,
+  control,
+}: Step2Props) => {
   const onNext = () => {
     setStep(4);
     forceSave();
@@ -34,7 +51,18 @@ export const Step3 = ({ setStep, projectForm, forceSave }: Props) => {
           <Text color={'primary'} className="l1">
             Upload Thumbnail
           </Text>
-          <LogoUploader projectForm={projectForm} />
+          <Controller
+            name="logo"
+            control={control}
+            render={() => (
+              <LogoUploader
+                setError={setError}
+                setValue={setValue}
+                errors={errors}
+                watch={watch}
+              />
+            )}
+          />
         </div>
       </StepTemplate>
     </>

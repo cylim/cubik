@@ -37,7 +37,7 @@ const StepTemplate = ({
   description,
 }: Props) => {
   return (
-    <div className="h-full pt-5 justify-between flex flex-col">
+    <div className="flex h-full flex-col justify-between pt-5">
       <div className="flex flex-col gap-11">
         <div className="flex flex-col gap-4">
           {title && (
@@ -92,6 +92,7 @@ const StepTemplate = ({
         )}
         {onNext && (
           <Button
+            type="button"
             onClick={onNext}
             rightIconName="chevronRight"
             variant={'primary'}

@@ -4,14 +4,17 @@ import '@cubik/presets/styles/lightColor.style.css';
 import '@cubik/presets/styles/darkColors.styles.css';
 import '@cubik/presets/styles/component.style.css';
 
+import React from 'react';
 import type { Metadata, Viewport } from 'next';
 import dynamic from 'next/dynamic';
 import { Inter } from 'next/font/google';
-import TopNavbar from '@/components/header/navigation';
-import { Provider } from '@/providers/provider';
 
 import { CubikToaster } from '@cubik/ui';
 import { cn } from '@cubik/ui/lib/utils';
+
+import TopNavbar from '../components/header/navigation';
+import BottomNav from '../components/mobile-bottom-nav';
+import { Provider } from '../providers/provider';
 
 const CookiesProvider = dynamic(() =>
   import('next-client-cookies/server').then((e) => e.CookiesProvider),
@@ -29,6 +32,7 @@ export const metadata: Metadata = {
   },
   description: APP_DESCRIPTION,
   manifest: '/manifest.json',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
@@ -81,6 +85,7 @@ export default function RootLayout({
                 {children}
               </main>
               <CubikToaster />
+              <BottomNav />
             </>
           </Provider>
         </CookiesProvider>

@@ -1,25 +1,32 @@
 import React from 'react';
+import { useMediaQuery } from '@uidotdev/usehooks';
 import { toast, Toaster } from 'sonner';
 
 const CubikToaster = () => {
+  const isMobile = useMediaQuery('(max-width: 768px)');
   return (
     <Toaster
-      position="bottom-center"
+      position={isMobile ? 'top-center' : 'bottom-center'}
       toastOptions={{
         unstyled: true,
         classNames: {
-          error: 'bg-[var(--toast-error-surface)]',
-          success: 'bg-[var(--toast-success-surface)] text-green-400',
-          warning: 'bg-[var(--toast-warning-surface)] text-yellow-400',
-          info: 'bg-[var(--toast-info-surface)]',
           toast:
-            'bg-red-500 p-2 rounded-md min-w-[300px] flex flex-row gap-2 items center',
-          title: '',
-          loader: '',
-          description: 'text-red-400',
-          actionButton: 'bg-zinc-400',
+            'bg-[var(--toast-primary-surface)] border border-[var(--color-border-primary-transparent)] text-[var(--toast-primary-text)] py-3 px-4 rounded-xl min-w-[340px] flex flex-row gap-2 items-center ',
+          title: 'text-sm !font-normal',
+          description: 'text-sm !font-light',
+          actionButton:
+            'underline underline-offset-4 !bg-transparent !border-none !text-[var(--color-fg-primary-base)]',
           cancelButton: 'bg-orange-400',
           closeButton: 'bg-lime-400',
+          loader:
+            '!bg-[var(--toast-loading-surface)] !dark:border-[var(--toast-primary-transparent)] !text-[var(--toast-loading-text)]',
+          error:
+            'border-[var(--toast-error-border)] !dark:border-[var(--toast-primary-transparent)] !bg-[var(--toast-error-surface)] !text-[var(--toast-error-text)]',
+          success:
+            'border-[var(--toast-success-border)] dark:border-[var(--toast-primary-transparent)] bg-[var(--toast-success-surface)] text-[var(--toast-success-text)]',
+          warning:
+            'border-[var(--toast-warning-border)] dark:border-[var(--toast-primary-transparent)] bg-[var(--toast-warning-surface)] text-[var(--toast-warning-text)] border border-[var(--color-border-primary-transparent)]',
+          info: 'border-[var(--toast-info-border)] dark:border-[var(--toast-primary-transparent)] !bg-[var(--toast-info-surface)] text-[var(--toast-info-text)]',
         },
       }}
     />

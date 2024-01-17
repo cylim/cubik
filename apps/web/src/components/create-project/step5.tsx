@@ -1,18 +1,34 @@
-import { ProjectFormData } from '@/components/create-project/createProject';
 import StepTemplate from '@/components/create-project/stepTemplate';
-import { UseFormReturn } from 'react-hook-form';
+import { IProjectData } from '@/types/project';
+import { FieldErrors, UseFormRegister, UseFormWatch } from 'react-hook-form';
 
-import { Button, Text } from '@cubik/ui';
+import {
+  Button,
+  HelperText,
+  InputContainer,
+  InputField,
+  InputFieldContainer,
+  InputLabel,
+  Text,
+} from '@cubik/ui';
 
 interface Props {
-  projectForm: UseFormReturn<ProjectFormData, any, undefined>;
   setStep: React.Dispatch<React.SetStateAction<number>>;
   forceSave: () => Promise<void>;
+  watch: UseFormWatch<IProjectData>;
+  register: UseFormRegister<IProjectData>;
+  errors: FieldErrors<IProjectData>;
 }
-export const Step5 = ({ setStep, projectForm, forceSave }: Props) => {
+export const Step5 = ({
+  setStep,
+  errors,
+  watch,
+  register,
+  forceSave,
+}: Props) => {
   const onNext = () => {
     setStep(6);
-    forceSave();
+    // forceSave();
   };
   const onPrev = () => {
     setStep(4);
@@ -29,10 +45,23 @@ export const Step5 = ({ setStep, projectForm, forceSave }: Props) => {
           'It takes a village to raise a project. Spotlight every villager, big or small.'
         }
       >
-        <div className="flex flex-col gap-4">
-          <Text color={'primary'} className="l1">
-            Gallery
-          </Text>
+        <div className="flex flex-col">
+          <InputContainer className="pb-8">
+            <InputLabel>Add Team Members</InputLabel>
+            <InputFieldContainer
+              isError={errors.team ? true : false}
+              variant="md"
+            >
+              <InputField
+                maxLength={32}
+                placeholder="Search username"
+                {...register('team')}
+              />
+            </InputFieldContainer>
+            <HelperText variant={'error'} show={errors.team ? true : false}>
+              {errors.team?.message}
+            </HelperText>
+          </InputContainer>
         </div>
       </StepTemplate>
     </>

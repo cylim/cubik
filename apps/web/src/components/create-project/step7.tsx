@@ -1,15 +1,23 @@
-import { ProjectFormData } from '@/components/create-project/createProject';
 import StepTemplate from '@/components/create-project/stepTemplate';
-import { UseFormReturn } from 'react-hook-form';
+import { IProjectData } from '@/types/project';
+import { FieldErrors, UseFormRegister, UseFormWatch } from 'react-hook-form';
 
-import { Button, Text } from '@cubik/ui';
+import { Text } from '@cubik/ui';
 
 interface Props {
-  projectForm: UseFormReturn<ProjectFormData, any, undefined>;
   setStep: React.Dispatch<React.SetStateAction<number>>;
   forceSave: () => Promise<void>;
+  watch: UseFormWatch<IProjectData>;
+  register: UseFormRegister<IProjectData>;
+  errors: FieldErrors<IProjectData>;
 }
-export const Step7 = ({ setStep, projectForm, forceSave }: Props) => {
+export const Step7 = ({
+  setStep,
+  errors,
+  watch,
+  register,
+  forceSave,
+}: Props) => {
   const onNext = () => {
     setStep(8);
     forceSave();
@@ -17,7 +25,6 @@ export const Step7 = ({ setStep, projectForm, forceSave }: Props) => {
   const onPrev = () => {
     setStep(6);
   };
-
   return (
     <>
       <StepTemplate

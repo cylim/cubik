@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useUser } from '@/hooks/useUser';
 import { handleLogout } from '@/utils/auth/logout';
+import { v4 as uuidV4 } from 'uuid';
 
 import { formatAddress } from '@cubik/common';
 import { UserAuth } from '@cubik/common-types';
@@ -68,7 +69,7 @@ const UserNavbarMenu = ({
           <MenuItem text="Profile" leftIcon="user" onClick={() => {}} />
         </Link>
         <MenuItem text="Settings" leftIcon="settings" />
-        <Link href={'/create/project'}>
+        <Link href={`/create/project?id=${uuidV4()}`}>
           <MenuItem text="New Project" leftIcon="plus" />
         </Link>
         <MenuDivider />

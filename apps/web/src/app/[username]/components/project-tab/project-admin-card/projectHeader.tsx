@@ -19,10 +19,12 @@ import {
   MenuItem,
   MenuList,
   PingIcon,
+  Spinner,
   SubMenu,
   SubMenuButton,
   SubMenuList,
   Text,
+  toast,
 } from '@cubik/ui';
 import { useMediaQuery } from '@cubik/ui/hooks';
 
@@ -91,7 +93,12 @@ const ProjectHeader = ({
             </Link>
             <Button
               onClick={() => {
-                deleteDraftProject(project.id);
+                toast.promise(deleteDraftProject(project.id), {
+                  loading: 'Deleting Draft...',
+                  success: 'Draft deleted successfully!',
+                  error: 'Error deleting draft',
+                  icon: <Spinner />,
+                });
               }}
               variant={'danger'}
               size="md"

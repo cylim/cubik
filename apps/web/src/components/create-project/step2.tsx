@@ -1,17 +1,26 @@
-import { ProjectFormData } from '@/components/create-project/createProject';
+import { ProjectFormData } from '@/components/create-project/createProject[ARCHIEVE]';
+import { CreateProjectStepProps } from '@/components/create-project/step1';
 import StepTemplate from '@/components/create-project/stepTemplate';
 import { Industries } from '@/constants/industry';
-import { UseFormReturn } from 'react-hook-form';
+import { Controller, UseFormReturn } from 'react-hook-form';
 
 import { InputLabel, SearchSelect } from '@cubik/ui';
 
-interface Props {
-  projectForm: UseFormReturn<ProjectFormData, any, undefined>;
-  setStep: React.Dispatch<React.SetStateAction<number>>;
-  forceSave: () => Promise<void>;
+interface Step2Props extends CreateProjectStepProps {
+  control: any;
 }
 
-export const Step2 = ({ setStep, projectForm, forceSave }: Props) => {
+export const Step2 = ({
+  setStep,
+  forceSave,
+  watch,
+  errors,
+  clearErrors,
+  trigger,
+  setValue,
+  register,
+  control,
+}: Step2Props) => {
   const onNext = () => {
     setStep(3);
     forceSave();
@@ -32,15 +41,21 @@ export const Step2 = ({ setStep, projectForm, forceSave }: Props) => {
       >
         <div className="flex flex-col gap-3">
           <InputLabel>Categories</InputLabel>
-          <SearchSelect
-            placeholder="Search Category here"
-            isMulti={true}
-            onChange={(e) => {
-              if (!e) return;
-              projectForm.setValue('category', e as any);
-            }}
-            value={projectForm.watch('category') as any}
-            options={Industries as any}
+          <Controller
+            name="industry"
+            control={control}
+            render={() => (
+              <SearchSelect
+                placeholder="Search Category here"
+                isMulti={true}
+                onChange={(e) => {
+                  if (!e) return;
+                  setValue('industry', e as any);
+                }}
+                value={watch('industry') as any}
+                options={Industries as any}
+              />
+            )}
           />
         </div>
       </StepTemplate>

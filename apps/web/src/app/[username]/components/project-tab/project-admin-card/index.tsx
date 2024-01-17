@@ -1,11 +1,6 @@
 'use client';
 
 import React, { Suspense, useEffect, useRef, useState } from 'react';
-import dynamic from 'next/dynamic';
-import ProjectHeader from '@/app/[username]/components/project-tab/project-admin-card/projectHeader';
-import ProjectAdminGrantsTab from '@/app/[username]/components/project-tab/project-admin-card/tabs/grants';
-import ProjectAdminStatsTab from '@/app/[username]/components/project-tab/project-admin-card/tabs/stats';
-import ProjectAdminTreasuryTab from '@/app/[username]/components/project-tab/project-admin-card/tabs/treasury';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { ProjectVerifyStatus } from '@cubik/database';
@@ -20,6 +15,11 @@ import {
   TabPanels,
   Tabs,
 } from '@cubik/ui';
+
+import ProjectAdminStatsTab from '../../../components/project-tab/project-admin-card/tabs/stats';
+import ProjectAdminTreasuryTab from '../../../components/project-tab/project-admin-card/tabs/treasury';
+import ProjectHeader from './projectHeader';
+import ProjectAdminGrantsTab from './tabs/grants';
 
 export type ProjectProps = {
   name: string;

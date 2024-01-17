@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import TabLayout from '@/components/common/tabs/TabLayout';
 import useGetProjectEvents from '@/hooks/project/useGetProjectEvents';
+import { set } from '@coral-xyz/anchor/dist/cjs/utils/features';
 
 import { calculateEventStatus } from '@cubik/common/helper/eventStatus';
 import {
@@ -24,8 +25,9 @@ enum EVENT {
 }
 interface Props {
   id: string;
+  setActiveSegment: React.Dispatch<React.SetStateAction<number>>;
 }
-const ProjectAdminGrantsTab = ({ id }: Props) => {
+const ProjectAdminGrantsTab = ({ id, setActiveSegment }: Props) => {
   const [eventFilter, setEventFilter] = useState<EVENT>(EVENT.ALL);
   const projectEvents = useGetProjectEvents({ id });
   return (
@@ -35,19 +37,28 @@ const ProjectAdminGrantsTab = ({ id }: Props) => {
           <SegmentContainer size="sm">
             <SegmentItem
               isActive={eventFilter === EVENT.ALL}
-              onClick={() => setEventFilter(EVENT.ALL)}
+              onClick={() => {
+                setActiveSegment(0);
+                setEventFilter(EVENT.ALL);
+              }}
             >
               All Grants
             </SegmentItem>
             <SegmentItem
               isActive={eventFilter === EVENT.ACTIVE}
-              onClick={() => setEventFilter(EVENT.ACTIVE)}
+              onClick={() => {
+                setActiveSegment(1);
+                setEventFilter(EVENT.ACTIVE);
+              }}
             >
               Active Grants
             </SegmentItem>
             <SegmentItem
               isActive={eventFilter === EVENT.PREVIOUS}
-              onClick={() => setEventFilter(EVENT.PREVIOUS)}
+              onClick={() => {
+                setActiveSegment(2);
+                setEventFilter(EVENT.PREVIOUS);
+              }}
             >
               Previous Grants
             </SegmentItem>

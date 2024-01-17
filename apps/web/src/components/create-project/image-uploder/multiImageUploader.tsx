@@ -1,58 +1,68 @@
 import React from 'react';
-import { ProjectFormData } from '@/components/create-project/createProject';
+import { IProjectData } from '@/types/project';
 import { useUploadThing } from '@/utils/uploadthing';
-import { UseFormReturn } from 'react-hook-form';
+import {
+  FieldErrors,
+  UseFormReturn,
+  UseFormSetError,
+  UseFormSetValue,
+  UseFormWatch,
+} from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { MultiImageUploader as MIU } from '@cubik/ui';
 
 interface Props {
-  projectForm: UseFormReturn<ProjectFormData, any, undefined>;
+  setValue: UseFormSetValue<IProjectData>;
+  watch: UseFormWatch<IProjectData>;
+  setError: UseFormSetError<IProjectData>;
+  errors: FieldErrors<IProjectData>;
 }
-export const MultiImageUploader = ({ projectForm }: Props) => {
+export const MultiImageUploader = ({
+  setValue,
+  watch,
+  errors,
+  setError,
+}: Props) => {
   const [progress, setProgress] = React.useState<number>(0);
-  const [error, setError] = React.useState<Error | null>(null);
+
   const { startUpload, isUploading } = useUploadThing('imageUploader', {
     onUploadProgress: (progressEvent) => {
       setProgress(progressEvent);
     },
     onUploadError: (error) => {
-      setError(error);
+      setError('slides', { message: error.message });
       toast.error(`Upload Error: ${error.message}`);
     },
     onUploadBegin: (file) => {
       //   setLoadingState('Uploading');
-      toast.info(`Upload Begin: ${file}`);
+      // toast.info(`Upload Begin: ${file}`);
     },
     onClientUploadComplete: (file) => {
       if (file) {
-        projectForm.setValue('slides', [
-          ...projectForm.watch('slides'),
-          file[0].url,
-        ]);
+        setValue('slides', [...(watch('slides') || []), file[0].url]);
       } else {
-        setError({
-          message: 'Upload Error',
-          name: 'Upload Error',
-        });
+        setError('slides', { message: 'Upload Error' });
         toast.error(`Upload Error: ${file}`);
       }
     },
   });
   const onRemove = (url: string) => {
-    projectForm.setValue(
+    setValue(
       'slides',
-      projectForm.watch('slides').filter((slide) => slide !== url),
+      watch('slides').filter((slide) => slide !== url),
     );
   };
   return (
     <>
       <MIU
+        name={'slides'}
         onRemove={onRemove}
-        errorMessage={error?.message}
+        errorMessage={errors.slides ? errors.slides.message : undefined}
         isUploading={isUploading}
         progress={progress}
-        images={projectForm.watch('slides')}
+        setError={setError}
+        images={watch('slides')?.length > 0 ? watch('slides') : []}
         startUpload={startUpload}
       />
     </>

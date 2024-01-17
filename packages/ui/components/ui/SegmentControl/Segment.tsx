@@ -105,7 +105,7 @@ export const SegmentItem = ({
       {isActive && (
         <motion.div
           layoutId={id}
-          transition={{ type: 'spring', bounce: 0.1 }}
+          transition={{ type: 'spring', bounce: 0.1, duration: 0.05 }}
           className={cn(
             segmentItemVariant({ size }),
             'bg-[var(--segment-control-surface-active)] z-0 shadow-md absolute inset-0 w-full rounded-[6px]',

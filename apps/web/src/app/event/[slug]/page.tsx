@@ -1,30 +1,83 @@
 import React from 'react';
-import Leaderboard from '@/app/grant/Leaderboard';
+import Image from 'next/image';
+import { notFound } from 'next/navigation';
+import Leaderboard from '@/app/event/[slug]/components/Leaderboard';
 
 import { AvatarLabelGroup, Button, Icon, Text } from '@cubik/ui';
 
-const GrantPage = () => {
+interface Props {
+  params: {
+    slug: string;
+  };
+}
+
+const getEvent = async (slug: string) => {
+  try {
+    const data = await prisma.event.findFirst({
+      where: {
+        slug: slug,
+        isArchive: false,
+      },
+      select: {
+        name: true,
+        background: true,
+        shortDescription: true,
+        description: true,
+        projectJoinEvent: {
+          where: {
+            isActive: true,
+            isArchive: false,
+          },
+          select: {
+            amount: true,
+            communityContribution: true,
+            projectId: true,
+          },
+        },
+        eventStatus: true,
+        sponsor: true,
+        isPaused: true,
+      },
+    });
+    return data;
+  } catch (error) {
+    return null;
+  }
+};
+const EventPage = async ({ params }: Props) => {
+  if (!params.slug) {
+    notFound();
+  }
+  const grant = await getEvent(params.slug);
+  if (!grant) {
+    notFound();
+  }
   return (
     <div className="flex flex-col gap-16">
       <div className="bg-[var(--body-surface)]">
         <div className="mx-auto flex max-w-7xl items-center">
           <div className="my-16 flex w-full flex-col items-center justify-center gap-9 px-6">
-            <div className="h-[200px] w-full bg-blue-400"></div>
-            <div className=" flex w-full justify-between gap-4">
+            <Image
+              alt="bg"
+              src={grant.background || ''}
+              width={3000}
+              height={300}
+            />
+            {/* <div className="h-[200px] w-full bg-blue-400"></div> */}
+            <div className="flex w-full flex-col justify-between gap-4 md:flex-row">
               <div className="flex flex-col gap-2">
                 <Text className="h2" color={'primary'}>
-                  Cubik Grants Round 1
+                  {grant.name}
                 </Text>
                 <Text className="l1" color={'secondary'}>
-                  Morem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                  vulputate libero et velit interdum, ac aliquet odio mattis.
+                  {grant.shortDescription}
                 </Text>
               </div>
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-row gap-3  md:flex-col">
                 <Button size={'md'} variant={'primary'} className="w-full">
                   Submit Project
                 </Button>
-                <Button size={'md'} variant={'outline'}>
+                <Button size={'md'} variant={'outline'} className="w-full">
                   <div className="flex gap-2">
                     Become a sponsor
                     <Icon
@@ -43,7 +96,7 @@ const GrantPage = () => {
                   Matching Pool
                 </Text>
                 <Text className="h4-heavy" color={'primary'}>
-                  $300,000
+                  $00
                 </Text>
               </div>
               <div>
@@ -51,7 +104,7 @@ const GrantPage = () => {
                   Projects
                 </Text>
                 <Text className="h4-heavy" color={'primary'}>
-                  30
+                  {grant.projectJoinEvent.length}
                 </Text>
               </div>
             </div>
@@ -64,7 +117,7 @@ const GrantPage = () => {
             <div className="flex flex-[0.6] flex-col gap-11">
               <div className="flex flex-col gap-6">
                 <Text className="h5" color={'primary'}>
-                  About Grants Round
+                  About {grant.name}
                 </Text>
                 <Text className="l1" color={'secondary'}>
                   Yorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
@@ -187,4 +240,4 @@ const GrantPage = () => {
   );
 };
 
-export default GrantPage;
+export default EventPage;

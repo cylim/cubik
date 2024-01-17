@@ -9,7 +9,7 @@ import React, {
 } from 'react';
 import * as RadixTabs from '@radix-ui/react-tabs';
 import { cva } from 'class-variance-authority';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { v4 as uuid_v4 } from 'uuid';
 
 import { cn } from '../../../lib/utils';
@@ -230,6 +230,7 @@ const TabPanel: React.FC<TabPanelProps> = ({ children, value }) => {
         initial={
           shouldAnimate ? { opacity: 0, x: initialX } : { opacity: 1, x: 0 }
         }
+        //  exit={shouldAnimate ? { opacity: 0, x: endingX } : { opacity: 1, x: 0 }}
         transition={{
           duration: 0.45,
           ease: [0.25, 0.1, 0.0, 1.0], // Cubic bezier values

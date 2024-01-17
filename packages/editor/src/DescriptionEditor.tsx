@@ -10,15 +10,23 @@ import { TextStyle } from '@tiptap/extension-text-style';
 import Underline from '@tiptap/extension-underline';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import { Control, Controller } from 'react-hook-form';
 
 import { Icon } from '@cubik/ui';
 import { cn } from '@cubik/ui/lib/utils';
 
 interface Props {
   content: string;
+  name: string;
+  control: Control<any, any>;
   onUpdate: (data: string) => void;
 }
-export const DescriptionEditor = ({ content, onUpdate }: Props) => {
+export const DescriptionEditor = ({
+  content,
+  control,
+  name,
+  onUpdate,
+}: Props) => {
   const editor = useEditor({
     content: content,
     extensions: [
@@ -165,14 +173,22 @@ export const DescriptionEditor = ({ content, onUpdate }: Props) => {
         </div>
       </div>
       <div className="overflow-y-scroll max-h-[20rem] selection:text-">
-        <EditorContent
-          style={{
-            height: '20rem',
-            overflowY: 'scroll',
-            color: 'var(--form-input-fg-default)',
+        <Controller
+          name={name}
+          control={control}
+          render={() => {
+            return (
+              <EditorContent
+                style={{
+                  height: '20rem',
+                  overflowY: 'scroll',
+                  color: 'var(--form-input-fg-default)',
+                }}
+                className="grid min-h-[160px] w-full rounded-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white"
+                editor={editor}
+              />
+            );
           }}
-          className="grid min-h-[160px] w-full rounded-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white"
-          editor={editor}
         />
       </div>
     </div>

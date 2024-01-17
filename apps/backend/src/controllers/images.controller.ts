@@ -44,7 +44,7 @@ export const revalidateCache = async () => {
 };
 
 export const imageFilter = async (req: Request, res: Response) => {
-  // /:size/:url --> 500x500/<url>
+  // /?size=500x500&url=<https://...>
   const { size, url } = req.query as {
     size: string;
     url: string;

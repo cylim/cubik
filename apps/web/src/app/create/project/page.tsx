@@ -2,9 +2,12 @@ import React from 'react';
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
-import { SelectionSection } from '@/app/create/project/components/selectionSection';
-import { CreateProject } from '@/components/create-project/createProject';
 import { validate } from 'uuid';
+
+import { Background } from '@cubik/ui';
+
+import { CreateProject } from '../../../components/create-project';
+import { SelectionSection } from './components/selectionSection';
 
 interface Props {
   searchParams: {
@@ -13,27 +16,25 @@ interface Props {
 }
 
 const ProjectPage = ({ searchParams }: Props) => {
+  console.log('🔄 Parent rerender');
   const selectedId = searchParams.id;
   const authToken = cookies().get('authToken');
 
   const isValidId = validate(selectedId);
 
   // checks if the user is logged in
-  if (!authToken) {
+  if (!authToken || !isValidId) {
     notFound();
   }
 
-  // checks if the user has selected a category
-  if (!selectedId) {
-    return <SelectionSection />;
-  }
-
-  // checks if the selected id is valid uuid
-  if (!isValidId) {
-    return <SelectionSection />;
-  }
-
   // create project page
-  return <CreateProject id={selectedId} />;
+  return (
+    <>
+      <div className="absolute top-0">
+        <Background />
+      </div>
+      <CreateProject id={selectedId} />
+    </>
+  );
 };
 export default ProjectPage;

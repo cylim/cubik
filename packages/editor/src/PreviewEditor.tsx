@@ -24,6 +24,7 @@ export const PreviewEditor = ({ content, className }: Props) => {
       }
     >
       <div dangerouslySetInnerHTML={{ __html: safeContent }} />
+      {/* todo: dangerouslySetInnerHTML can have security issues please check this */}
     </div>
   );
 };

@@ -17,18 +17,20 @@ type Props = {
   initial?: any;
   animate?: any;
   transition?: any;
+  variants?: any;
 };
 export const Icon = ({
   name,
   height,
   width,
   strokeWidth = 1.5, // default strokeWidth if not provided
-  color = 'currentColor', // default color if not provided
+  color, // default color if not provided
   className,
   onClick,
   initial,
   animate,
   transition,
+  variants,
 }: Props) => {
   const icon = iconLibrary[name];
   const viewBox = icon?.viewBox;
@@ -50,6 +52,7 @@ export const Icon = ({
     <motion.svg
       width={width}
       height={height}
+      variants={variants}
       // this is a temporary solution we have to find a permanent fix for the viewBox property of svg
       viewBox={viewBox}
       xmlns="http://www.w3.org/2000/svg"

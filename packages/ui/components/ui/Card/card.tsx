@@ -78,14 +78,14 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ children, size }) => {
   return (
-    <motion.div
-      initial={{
-        opacity: 0,
-      }}
-      animate={{
-        opacity: 1,
-      }}
-      //  transition={{ duration: 10 }}
+    <div
+    // initial={{
+    //   opacity: 0,
+    // }}
+    // animate={{
+    //   opacity: 1,
+    // }}
+    //  transition={{ duration: 10 }}
     >
       <CardContext.Provider value={{ size }}>
         <motion.div
@@ -95,7 +95,7 @@ const Card: React.FC<CardProps> = ({ children, size }) => {
           {children}
         </motion.div>
       </CardContext.Provider>
-    </motion.div>
+    </div>
   );
 };
 

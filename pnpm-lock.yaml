@@ -147,6 +147,9 @@ importers:
       node-schedule:
         specifier: ^2.1.1
         version: 2.1.1
+      p-throttle:
+        specifier: ^6.1.0
+        version: 6.1.0
       request-ip:
         specifier: ^3.3.0
         version: 3.3.0
@@ -18241,6 +18244,11 @@ packages:
     dependencies:
       aggregate-error: 3.1.0
     dev: true
+
+  /p-throttle@6.1.0:
+    resolution: {integrity: sha512-eQMdGTxk2+047La67wefUtt0tEHh7D+C8Jl7QXoFCuIiNYeQ9zWs2AZiJdIAs72rSXZ06t11me2bgalRNdy3SQ==}
+    engines: {node: '>=18'}
+    dev: false
 
   /p-try@2.2.0:
     resolution: {integrity: sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==}

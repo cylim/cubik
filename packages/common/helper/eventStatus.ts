@@ -3,7 +3,7 @@ import { EventStatus as EventStatusTable } from '@cubik/database';
 import dayjs from '@cubik/dayjs';
 
 export const calculateEventStatus = (
-  event: EventStatusTable[],
+  event: Partial<EventStatusTable>[],
 ): EventStatus => {
   const registrationTimings = event.find((e) => e.status === 'REGISTRATION');
   const votingTimings = event.find((e) => e.status === 'VOTING');

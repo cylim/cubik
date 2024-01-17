@@ -14,13 +14,13 @@ const ImagesCarousel = ({ slides }: { slides: string[] }) => {
         opts={{
           align: 'start',
         }}
-        className="w-full h-fit max-h-72"
+        className="h-fit max-h-72 w-full"
       >
         <CarouselContent>
           {slides.map((slide, index) => (
             <CarouselItem
               key={index}
-              className="border h-fit pl-4 sm:basis-[70%]"
+              className="h-fit border pl-4 sm:basis-[70%]"
             >
               <div className="h-fit w-full">
                 <Image
@@ -54,13 +54,13 @@ const ProjectDescriptionAndImages = ({ project }: { project: Project }) => {
       <div className="h-fit">
         <ImagesCarousel slides={project.slides} />
       </div>
-      <div className="border flex flex-col gap-4">
+      <div className="flex flex-col gap-4 border">
         <Text color="primary" className="h5">
           About {project.name}
         </Text>
         <PreviewEditor
           content={project.longDescription}
-          className="overflow-hidden max-h-[10rem]"
+          className="max-h-[10rem] overflow-hidden"
         />
       </div>
     </>

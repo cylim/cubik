@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import type { Request, Response } from 'express';
+import { syncPrice } from 'service/price/syncPrice';
 import { tokenPrice } from 'utils/price';
 
 const tokens = ['SOL', 'USDC', 'ETH'];
@@ -37,5 +38,15 @@ export const tokenPriceMultiple = async (req: Request, res: Response) => {
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: error });
+  }
+};
+
+export const cachedTokenPrice = async (_req: Request, res: Response) => {
+  try {
+    const price = await syncPrice();
+    res.status(200).json({ result: price, error: null });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: error, result: [] });
   }
 };

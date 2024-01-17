@@ -75,6 +75,9 @@ importers:
       '@cubik/presets':
         specifier: workspace:*
         version: link:../../packages/presets
+      '@cubik/redis':
+        specifier: workspace:^
+        version: link:../../packages/redis
       '@sqds/multisig':
         specifier: ^1.11.0
         version: 1.12.0

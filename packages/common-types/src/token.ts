@@ -10,6 +10,7 @@ export type Token = {
   symbol: string;
   logoURI: string;
   tags: string[];
+  isTokenInUse?: boolean;
   extensions?: {
     coingeckoId: string;
   };

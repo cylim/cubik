@@ -118,7 +118,7 @@ const OrganizationSponsorForm = ({
               />
             </InputFieldContainer>
             {organizationSponsorForm.formState.errors.totalCommitted && (
-              <HelperText variant={'error'} fontSize={'sm'}>
+              <HelperText variant={'error'}>
                 {
                   organizationSponsorForm.formState.errors.totalCommitted
                     .message
@@ -251,7 +251,7 @@ const OrganizationSponsorForm = ({
               />
             </InputFieldContainer>
             {organizationSponsorForm.formState.errors.name && (
-              <HelperText variant={'error'} fontSize={'sm'}>
+              <HelperText variant={'error'}>
                 {organizationSponsorForm.formState.errors.name.message}
               </HelperText>
             )}

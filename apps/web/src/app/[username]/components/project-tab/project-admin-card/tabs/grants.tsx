@@ -7,7 +7,6 @@ import { set } from '@coral-xyz/anchor/dist/cjs/utils/features';
 
 import { calculateEventStatus } from '@cubik/common/helper/eventStatus';
 import {
-  Alert,
   EmptyState,
   GrantRoundCardFooter,
   GrantRoundCardHeader,

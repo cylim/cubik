@@ -49,7 +49,7 @@ const WalletConnectStatus = ({ adapter }: { adapter: WalletAdapter }) => {
       : 'var(--color-fg-info-base)';
   const iconName =
     modalState === MODAL_STATUS.ERROR_CONNECTING
-      ? 'dangerSkullDuoSolid'
+      ? 'walletReloadDuoSolid'
       : 'walletPlusDuoSolid';
 
   const onRetry = async () => {

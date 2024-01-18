@@ -90,7 +90,7 @@ const EditProjectModal = ({ open, setOpen, project }: IEditProjectModal) => {
                       <div className="flex items-center justify-between">
                         <div>
                           <InputLabel id="archive">Archive Project</InputLabel>
-                          <HelperText variant={'default'} fontSize={'md'}>
+                          <HelperText variant={'default'}>
                             Archive the project and make it private
                           </HelperText>
                         </div>
@@ -104,7 +104,7 @@ const EditProjectModal = ({ open, setOpen, project }: IEditProjectModal) => {
                           <InputLabel id="archive">
                             Transfer Ownership
                           </InputLabel>
-                          <HelperText variant={'default'} fontSize={'md'}>
+                          <HelperText variant={'default'}>
                             Transferring this project to other account can loose
                             access to the existing Vault and all the related
                             data

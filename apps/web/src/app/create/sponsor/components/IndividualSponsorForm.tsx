@@ -77,7 +77,7 @@ const IndividualSponsorForm = ({
               />
             </InputFieldContainer>
             {individualSponsorForm.formState.errors.totalCommitted && (
-              <HelperText variant={'error'} fontSize={'sm'}>
+              <HelperText variant={'error'}>
                 {individualSponsorForm.formState.errors.totalCommitted.message}
               </HelperText>
             )}

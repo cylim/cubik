@@ -4,6 +4,7 @@ import * as sqds from '@sqds/multisig';
 import type { Request, Response } from 'express';
 import express from 'express';
 import Controller from 'interfaces/controller.interface';
+import logger from 'services/logger';
 
 const RPC_URL = process.env.RPC_URL || 'https://rpc.cubik.so';
 
@@ -21,6 +22,7 @@ class SquadsController implements Controller {
 
   private initializeRoutes() {
     this.router.get(`${this.path}/`, this.getSquadsTxs);
+    logger.debug("SquadsController initialized");
   }
 
   private getSquadsTxs = async (req: Request, res: Response) => {

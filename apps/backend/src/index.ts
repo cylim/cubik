@@ -4,6 +4,7 @@ import logger from './services/logger';
 import App from 'app';
 import SquadsController from 'controllers/squads.controller';
 import TokenController from 'controllers/token.controller';
+import UserNftController from 'controllers/usernft.controller';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const main = async () => {
@@ -12,6 +13,7 @@ const main = async () => {
     new ImageController(),
     new SquadsController(),
     new TokenController(),
+    new UserNftController(),
   ]);
   app.listen();
 

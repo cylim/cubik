@@ -3,6 +3,7 @@ import { getValidToken } from '@cubik/common/tokens/getValidTokenList';
 import type { Request, Response } from 'express';
 import express from 'express';
 import Controller from 'interfaces/controller.interface';
+import logger from 'services/logger';
 import { syncPrice } from 'services/price/syncPrice';
 import { tokenPrice } from 'utils/price';
 
@@ -17,6 +18,7 @@ class TokenController implements Controller {
   private initializeRoutes() {
     this.router.get(`${this.path}/all`, this.allTokens);
     this.router.get(`${this.path}/cached`, this.cachedTokenPrice);
+    logger.debug('TokenController initialized');
   }
 
   private allTokens = async (req: Request, res: Response) => {

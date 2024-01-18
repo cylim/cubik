@@ -19,6 +19,7 @@
     "@cubik/auth": "workspace:^",
     "@cubik/common": "workspace:^0.1.0",
     "@cubik/common-types": "workspace:*",
+    "@cubik/logger": "workspace:*",
     "@cubik/database": "workspace:*",
     "@cubik/helper-scripts": "workspace:^1.0.0",
     "@cubik/presets": "workspace:*",

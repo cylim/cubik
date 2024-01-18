@@ -72,6 +72,9 @@ importers:
       '@cubik/helper-scripts':
         specifier: workspace:^1.0.0
         version: link:../../packages/helper-scripts
+      '@cubik/logger':
+        specifier: workspace:*
+        version: link:../../packages/logger
       '@cubik/presets':
         specifier: workspace:*
         version: link:../../packages/presets

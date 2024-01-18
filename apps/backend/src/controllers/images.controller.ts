@@ -8,6 +8,7 @@ import NodeCache from 'node-cache';
 import sharp from 'sharp';
 import validator from 'validator';
 import Controller from 'interfaces/controller.interface';
+import logger from 'services/logger';
 
 const cache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 
@@ -21,6 +22,7 @@ class ImageController implements Controller {
 
   private initializeRoutes() {
     this.router.get(`${this.path}/filter`, this.imageFilter);
+    logger.debug('ImageController initialized');
   }
 
   private imageFilter = async (req: Request, res: Response) => {

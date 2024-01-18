@@ -3,6 +3,8 @@ import Link from 'next/link';
 //import Link from 'next/link';
 import { cva, VariantProps } from 'class-variance-authority';
 
+import { useTheme } from '../../../hooks/useTheme';
+import { cn } from '../../../lib/utils';
 import { Logo } from '../Logo';
 
 const navbarVariants = cva('', {
@@ -32,22 +34,16 @@ interface NavbarProps extends VariantProps<typeof navbarVariants> {}
 export const Navbar = ({
   pathname,
   children,
+  className,
 }: {
   pathname?: string;
   children: ReactNode;
+  className?: string;
 }) => {
-  let background = true;
-  if (pathname === '/') background = false;
+  const { theme } = useTheme();
 
   return (
-    <div
-      className={`py-3  md:py-6 w-full top-0 ${
-        background
-          ? 'bg-[var(--body-surface)]'
-          : 'bg-gradient-to-b from-[var(--body-surface)] dark:from-[var(--body-surface)] dark:to-[var(--body-surface)]'
-      }`}
-    >
-      {background}
+    <div className={cn('py-3 md:py-6 w-full top-0', className)}>
       <div className="container mx-auto max-w-7xl px-6 h-full">
         <div className="flex justify-between items-center h-full">
           <Link href={'/'}>

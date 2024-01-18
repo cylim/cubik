@@ -47,11 +47,17 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
 
   return (
     <>
-      <div
+      <form
         className="flex flex-col gap-8"
         style={{
           padding: '32px',
         }}
+        onSubmit={userForm.handleSubmit(() => {
+          if (userForm.formState.errors.username) {
+            return toast.error(userForm.formState.errors.username.message);
+          }
+          setUserCreateState('verify-email');
+        })}
       >
         <div className="flex gap-3 flex-col">
           <Text className="h4" color={'primary'}>
@@ -143,12 +149,7 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
             size={'md'}
             className="w-full"
             rightIconName="arrowRight"
-            onClick={() => {
-              if (userForm.formState.errors.username) {
-                return toast.error(userForm.formState.errors.username.message);
-              }
-              setUserCreateState('verify-email');
-            }}
+            type="submit"
           >
             Lets go
           </Button>
@@ -161,7 +162,7 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
             Skip for now
           </Button>
         </div>
-      </div>
+      </form>
     </>
   );
 };

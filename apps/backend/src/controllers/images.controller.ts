@@ -50,7 +50,12 @@ class ImageController implements Controller {
     if (
       !validator.isURL(url, {
         protocols: ['http', 'https'],
-        host_whitelist: ['imagedelivery.net', 'uploadthing.com', 'utfs.io'],
+        host_whitelist: [
+          'imagedelivery.net',
+          'uploadthing.com',
+          'utfs.io',
+          'cdn.helius-rpc.com',
+        ],
         require_protocol: true,
       }) ||
       !validator.isURL(url)

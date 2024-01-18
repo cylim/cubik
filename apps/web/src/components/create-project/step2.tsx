@@ -41,6 +41,7 @@ export const Step2 = ({
       >
         <div className="flex flex-col gap-3">
           <InputLabel>Categories</InputLabel>
+
           <Controller
             name="industry"
             control={control}
@@ -50,6 +51,7 @@ export const Step2 = ({
                 isMulti={true}
                 onChange={(e) => {
                   if (!e) return;
+                  console.log('input value - ', e);
                   setValue('industry', e as any);
                 }}
                 value={watch('industry') as any}

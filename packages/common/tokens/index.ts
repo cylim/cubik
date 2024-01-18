@@ -16,7 +16,7 @@ export const TokenList: Token[] = [
     symbol: 'USDC',
     isTokenInUse: true,
     logoURI:
-      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/9145372c-6d2f-4a66-741b-c1d3cd1c8500/public',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/7d689ab9-ade3-4045-d183-e7acdb5d8500/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'usd-coin',
@@ -30,7 +30,7 @@ export const TokenList: Token[] = [
     name: 'SOL',
     symbol: 'SOL',
     logoURI:
-      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/8f98c577-f117-4b8e-99ef-dd9283dc1c00/public',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/88505318-17b3-4f00-7f49-d87c8a5ecd00/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'wrapped-solana',
@@ -44,7 +44,7 @@ export const TokenList: Token[] = [
     isTokenInUse: true,
     symbol: 'SOL',
     logoURI:
-      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/8f98c577-f117-4b8e-99ef-dd9283dc1c00/public',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/88505318-17b3-4f00-7f49-d87c8a5ecd00/public',
     tags: ['old-registry'],
     extensions: {
       coingeckoId: 'wrapped-solana',
@@ -58,7 +58,7 @@ export const TokenList: Token[] = [
     name: 'USDT',
     symbol: 'USDT',
     logoURI:
-      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/c3f7ef5a-c996-416e-590f-8bb2a70dfc00/public',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/2e59416b-1c2c-4ef9-d553-0ef18a3d4900/public',
     tags: ['old-registry', 'solana-fm'],
     extensions: {
       coingeckoId: 'tether',
@@ -72,7 +72,7 @@ export const TokenList: Token[] = [
     name: 'BonkCoin',
     symbol: 'Bonk',
     logoURI:
-      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/42f70ef3-5d36-4ca6-42fc-219783c89d00/public',
+      'https://imagedelivery.net/rWTckr21FEHs39XCNFz7Yw/f3176176-52c2-4acc-bb4f-3b2dde4b2700/public',
     tags: ['community'],
     extensions: {
       coingeckoId: 'bonk',

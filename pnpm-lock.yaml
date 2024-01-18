@@ -365,6 +365,9 @@ importers:
 
   apps/squares-docs:
     dependencies:
+      '@cubik/common':
+        specifier: workspace:*
+        version: link:../../packages/common
       '@cubik/config':
         specifier: workspace:*
         version: link:../../packages/config

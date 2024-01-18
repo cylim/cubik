@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { getValidToken } from '@cubik/common/tokens/getValidTokenList';
 import type { Request, Response } from 'express';
 import express from 'express';
 import Controller from 'interfaces/controller.interface';
 import { syncPrice } from 'services/price/syncPrice';
 import { tokenPrice } from 'utils/price';
 
-const tokens = ['SOL', 'USDC', 'ETH'];
+const tokens = getValidToken();
 
 class TokenController implements Controller {
   public router = express.Router();
@@ -21,8 +22,8 @@ class TokenController implements Controller {
   private allTokens = async (req: Request, res: Response) => {
     try {
       const prices = await Promise.all(
-        tokens.map(async (token: string) => {
-          const data = await tokenPrice(token);
+        tokens.map(async (token) => {
+          const data = await tokenPrice(token.address);
           return { token: token, price: data?.price, name: '', icon: '' };
         }),
       );

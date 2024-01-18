@@ -1,17 +1,19 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import HttpException from '../exceptions/httpException';
 
 function errorMiddleware(
-  error: HttpException,
+  err: HttpException,
   _request: Request,
-  response: Response,
+  res: Response,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _next: NextFunction,
 ) {
-  const status = error.status ?? 500;
-  const message = error.message ?? 'Something went wrong';
-  return response.status(status).send({
-    message,
-    status,
-  });
+  const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
+  res.status(statusCode)
+  res.json({
+    message: err.message,
+    stack: process.env.NODE_ENV === 'production' ? null : err.stack,
+  })
 }
 
 export default errorMiddleware;

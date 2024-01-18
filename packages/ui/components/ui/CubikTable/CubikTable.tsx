@@ -63,7 +63,7 @@ export const CubikTable = ({ columns, data }: { columns: any; data: any }) => {
                 row.getIsSelected()
                   ? 'bg-[var(--color-bg-cool-base)]'
                   : 'transparent'
-              }
+              } 
               `}
               key={row.id}
             >

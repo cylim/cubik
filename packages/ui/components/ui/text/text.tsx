@@ -14,6 +14,7 @@ const headingVariant = cva('antialiased', {
       negative: 'text-[var(--color-fg-negative-emphasis)]',
       info: 'text-[var(--color-fg-info-base)]',
       inherit: '',
+      inverse: 'text-[var(--color-fg-primary-inverse)]',
     },
   },
   defaultVariants: {

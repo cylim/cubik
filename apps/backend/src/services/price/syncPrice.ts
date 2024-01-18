@@ -2,7 +2,7 @@ import { tokenPrice } from 'utils/price';
 
 import { getValidToken } from '@cubik/common/tokens/getValidTokenList';
 import { tokenCache } from 'utils/cache';
-import logger from '../../middleware/logger';
+import logger from '../logger';
 
 export interface TokenPrice {
   id: string;

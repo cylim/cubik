@@ -1,7 +1,7 @@
 import axios from 'axios';
 import type { TokenPriceResponse } from 'types';
 import pThrottle from 'p-throttle';
-import logger from '../middleware/logger';
+import logger from '../services/logger';
 
 const throttle = pThrottle({
   limit: 2,

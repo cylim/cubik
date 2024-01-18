@@ -1,5 +1,5 @@
-import { TokenPrice } from "../service/price/syncPrice";
-import logger from "../middleware/logger";
+import { TokenPrice } from "../services/price/syncPrice";
+import logger from "../services/logger";
 /**
  * Represents an item stored in the cache.
  * @template T The type of the value stored in the cache item.

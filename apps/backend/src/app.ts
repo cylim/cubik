@@ -1,18 +1,17 @@
 import bodyParser from 'body-parser';
+import { envConfig } from 'config';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
+import helmet from 'helmet';
 import morgan from 'morgan';
 import morganBody from 'morgan-body';
-import helmet from 'helmet';
+import { scheduleJob } from 'node-schedule';
+import { syncCommunity } from 'services/community-sync/syncCommunity';
 
 import Controller from './interfaces/controller.interface';
 import errorMiddleware from './middleware/error.middleware';
-
 import logger from './services/logger';
-import { scheduleJob } from 'node-schedule';
-import { syncCommunity } from 'services/community-sync/syncCommunity';
-import { envConfig } from 'config';
 
 class App {
   public app: express.Application;
@@ -21,7 +20,11 @@ class App {
     this.app = express();
 
     // Make this first to avoid logging
-    this.app.use('/checks', (_, response) => response.send());
+    this.app.use('/checks', (_, response) =>
+      response.send({
+        success: true,
+      }),
+    );
 
     this.initializeStandardMiddlewares();
     this.initializeControllers(controllers);
@@ -68,7 +71,7 @@ class App {
           return callback(null, true);
         },
         credentials: true,
-      })
+      }),
     );
 
     this.app.use(express.json());
@@ -79,7 +82,7 @@ class App {
     this.app.use(
       helmet({
         contentSecurityPolicy: false,
-      })
+      }),
     );
     morganBody(this.app, {
       noColors: true,

@@ -7,10 +7,14 @@ import Controller from "interfaces/controller.interface";
 import { apiResponse, errorHandler } from "@cubik/database/api";
 import { logApi } from "@cubik/logger";
 import logger from "services/logger";
+import z from 'zod';
 
 class UserNftController implements Controller {
     public path = "/user";
     public router = express.Router();
+    private querySchema = z.object({
+        address: z.string().min(42).max(100),
+    })
 
     constructor() {
         this.initializeRoutes();
@@ -23,6 +27,10 @@ class UserNftController implements Controller {
 
     private getUserNfts = async (req: Request, res: Response) => {
         try {
+            const parsed = await this.querySchema.safeParseAsync(req.query);
+            if (!parsed.success) {
+                return res.status(400).json(errorHandler(parsed.error));
+            }
             const { address } = req.query;
             const nftres = await axios(
                 `https://mainnet.helius-rpc.com/?api-key=${process.env.HELIUS_API_KEY}`,

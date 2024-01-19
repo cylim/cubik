@@ -9,7 +9,7 @@ import sharp from 'sharp';
 import validator from 'validator';
 import z from 'zod';
 import { errorHandler } from '@cubik/database/api';
-import { imageCache } from 'utils/cache';
+import { imageCache, toMilliseconds } from 'utils/cache';
 
 class ImageController implements Controller {
   public path = '/image';
@@ -115,7 +115,7 @@ class ImageController implements Controller {
       //   flag: 'w',
       // });
 
-      imageCache.set(cacheKey, resizedImage, 60 * 60 * 24);
+      imageCache.set(cacheKey, resizedImage, toMilliseconds(24, 0, 0));
 
       // cache.set(cacheKey, resizedImagePath);
 

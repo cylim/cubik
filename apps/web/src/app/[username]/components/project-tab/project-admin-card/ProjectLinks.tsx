@@ -72,7 +72,7 @@ const ProjectLinks = ({ editProjectForm }: IEditProjectLinkProps) => {
             />
           </InputFieldContainer>
           {editProjectForm.formState.errors.twitterHandle && (
-            <HelperText variant={'error'} fontSize={'sm'}>
+            <HelperText variant={'error'}>
               {editProjectForm.formState.errors.twitterHandle.message}
             </HelperText>
           )}
@@ -99,7 +99,7 @@ const ProjectLinks = ({ editProjectForm }: IEditProjectLinkProps) => {
             />
           </InputFieldContainer>
           {editProjectForm.formState.errors.githubLink && (
-            <HelperText variant={'error'} fontSize={'sm'}>
+            <HelperText variant={'error'}>
               {editProjectForm.formState.errors.githubLink.message}
             </HelperText>
           )}
@@ -130,7 +130,7 @@ const ProjectLinks = ({ editProjectForm }: IEditProjectLinkProps) => {
             />
           </InputFieldContainer>
           {editProjectForm.formState.errors.discordLink && (
-            <HelperText variant={'error'} fontSize={'sm'}>
+            <HelperText variant={'error'}>
               {editProjectForm.formState.errors.discordLink.message}
             </HelperText>
           )}
@@ -160,7 +160,7 @@ const ProjectLinks = ({ editProjectForm }: IEditProjectLinkProps) => {
             />
           </InputFieldContainer>
           {editProjectForm.formState.errors.telegramLink && (
-            <HelperText variant={'error'} fontSize={'sm'}>
+            <HelperText variant={'error'}>
               {editProjectForm.formState.errors.telegramLink.message}
             </HelperText>
           )}

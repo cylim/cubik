@@ -1,10 +1,10 @@
 import React from 'react';
-import { tokens } from '@/constants/industry';
 import { OrganizationSponsorFormData } from '@/types/sponsor';
 import { useUploadThing } from '@/utils/uploadthing';
 import { Controller, useFieldArray, UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
 
+import { getValidToken } from '@cubik/common/tokens/getValidTokenList';
 import {
   Button,
   Checkbox,
@@ -39,6 +39,7 @@ const OrganizationSponsorForm = ({
   setProgress,
 }: IOrgSponsorFormProps) => {
   const { control } = organizationSponsorForm;
+  const tokenList = getValidToken();
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'upfrontPay',
@@ -117,7 +118,7 @@ const OrganizationSponsorForm = ({
               />
             </InputFieldContainer>
             {organizationSponsorForm.formState.errors.totalCommitted && (
-              <HelperText variant={'error'} fontSize={'sm'}>
+              <HelperText variant={'error'}>
                 {
                   organizationSponsorForm.formState.errors.totalCommitted
                     .message
@@ -135,7 +136,7 @@ const OrganizationSponsorForm = ({
                 return (
                   <li key={item.id}>
                     <div className="flex gap-3">
-                      <InputFieldContainer variant="sm">
+                      <InputFieldContainer variant="md">
                         <InputField
                           name="amount"
                           placeholder="100,000"
@@ -158,12 +159,18 @@ const OrganizationSponsorForm = ({
                                     e as any,
                                   );
                                 }}
+                                withoutBorder={true}
                                 value={
                                   organizationSponsorForm.watch(
                                     `upfrontPay.${index}.token`,
                                   ) as any
                                 }
-                                options={tokens as any}
+                                options={
+                                  tokenList.map((token) => ({
+                                    label: token.symbol,
+                                    value: token.address,
+                                  })) as any
+                                }
                               />
                             )}
                             name={`upfrontPay.${index}.token`}
@@ -201,13 +208,13 @@ const OrganizationSponsorForm = ({
       <div>
         <div>
           <Text className="h5" color={'primary'}>
-            Organisation Details
+            Organization Details
           </Text>
         </div>
         <div className="flex w-full flex-col gap-[24px]">
           <div className="mt-[16px] flex w-full  justify-between gap-3">
             <InputLabel id="public">
-              Make my Organisation Sponsorship Public
+              Make my Organization Sponsorship Public
             </InputLabel>
             <Switch
               onChange={(e) => {
@@ -244,7 +251,7 @@ const OrganizationSponsorForm = ({
               />
             </InputFieldContainer>
             {organizationSponsorForm.formState.errors.name && (
-              <HelperText variant={'error'} fontSize={'sm'}>
+              <HelperText variant={'error'}>
                 {organizationSponsorForm.formState.errors.name.message}
               </HelperText>
             )}

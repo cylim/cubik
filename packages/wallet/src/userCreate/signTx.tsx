@@ -41,7 +41,7 @@ export const SignTx = ({ error, onRetry, isLoading }: Props) => {
   const iconColor = error
     ? 'var(--color-fg-negative-base)'
     : 'var(--color-fg-info-base)';
-  const iconName = error ? 'dangerSkullDuoSolid' : 'walletPlusDuoSolid';
+  const iconName = error ? 'walletReloadDuoSolid' : 'walletPlusDuoSolid';
 
   const textFlipAnimation = {
     initial: { y: 10, opacity: 0 },
@@ -73,7 +73,7 @@ export const SignTx = ({ error, onRetry, isLoading }: Props) => {
             gap: '8px',
           }}
         >
-          {error && (
+          {error && !isLoading && (
             <Icon
               name="retry"
               strokeWidth={3}
@@ -126,7 +126,7 @@ export const SignTx = ({ error, onRetry, isLoading }: Props) => {
       <div className="w-full flex items-center gap-2 flex-col">
         {error
           ? renderButton('Retry', 'error')
-          : renderButton('Confirm', 'confirming')}
+          : renderButton('Sign & Confirm', 'confirming')}
       </div>
     </div>
   );

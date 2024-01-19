@@ -32,23 +32,17 @@ const SwitchPage = () => {
 
             <ToggleSwitch size={'md'}>
               <InputLabel isRequired={true}>Label Text</InputLabel>
-              <HelperText variant={'default'} fontSize={'md'}>
-                Helper text
-              </HelperText>
+              <HelperText variant={'default'}>Helper text</HelperText>
             </ToggleSwitch>
 
             <ToggleSwitch size={'sm'} variant={'extended'}>
               <InputLabel isRequired={true}>Label Text</InputLabel>
-              <HelperText variant={'default'} fontSize={'sm'}>
-                Helper text
-              </HelperText>
+              <HelperText variant={'default'}>Helper text</HelperText>
             </ToggleSwitch>
 
             <ToggleSwitch size={'md'} variant={'extended'}>
               <InputLabel isRequired={true}>Label Text</InputLabel>
-              <HelperText variant={'default'} fontSize={'md'}>
-                Helper text
-              </HelperText>
+              <HelperText variant={'default'}>Helper text</HelperText>
             </ToggleSwitch>
           </div>
         </div>

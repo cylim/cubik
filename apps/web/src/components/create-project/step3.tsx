@@ -1,148 +1,70 @@
-import { ProjectFormData } from '@/components/create-project/createProject';
-import { TeamSelector } from '@/components/create-project/team-selector/teamSelector';
-import { UseFormReturn } from 'react-hook-form';
-
+import { ProjectFormData } from '@/components/create-project/createProject[ARCHIEVE]';
+import { LogoUploader } from '@/components/create-project/image-uploder/logoUploader';
+import { CreateProjectStepProps } from '@/components/create-project/step1';
+import StepTemplate from '@/components/create-project/stepTemplate';
+import { IProjectData } from '@/types/project';
 import {
-  Button,
-  Checkbox,
-  Icon,
-  InputContainer,
-  InputField,
-  InputFieldContainer,
-  InputLabel,
-  Text,
-} from '@cubik/ui';
+  Control,
+  Controller,
+  UseFormReturn,
+  UseFormSetError,
+} from 'react-hook-form';
 
-interface Props {
-  projectForm: UseFormReturn<ProjectFormData, any, undefined>;
-  setStep: React.Dispatch<React.SetStateAction<number>>;
-  forceSave: () => Promise<void>;
+import { Button, Text } from '@cubik/ui';
+
+interface Step2Props extends CreateProjectStepProps {
+  setError: UseFormSetError<IProjectData>;
+  control: Control<IProjectData, any>;
 }
+export const Step3 = ({
+  setStep,
+  forceSave,
+  watch,
+  errors,
+  setError,
+  clearErrors,
+  trigger,
+  setValue,
+  register,
+  control,
+}: Step2Props) => {
+  const onNext = () => {
+    setStep(4);
+    forceSave();
+  };
+  const onPrev = () => {
+    setStep(2);
+  };
 
-export const Step3 = ({ setStep, projectForm, forceSave }: Props) => {
   return (
     <>
-      <div className="flex flex-col gap-14">
-        <div className="flex flex-col gap-8">
-          <div className="flex flex-col gap-1">
-            <Text className="b4-light" color={'tertiary'}>
-              3/5
-            </Text>
-            <Text className="h5" color={'primary'}>
-              Project Creators
-            </Text>
-            <Text className="b4-light" color={'secondary'}>
-              you can add your team or anyone you worked with on this project
-            </Text>
-          </div>
-        </div>
+      <StepTemplate
+        currentStep={3}
+        onNext={onNext}
+        onPrevious={onPrev}
+        title={'Show us how it looks 🫣'}
+        description={
+          'Time to add the logo, Make sure it is visible enough to be seen from space or at least on both light and dark backgrounds.'
+        }
+      >
         <div className="flex flex-col gap-4">
           <Text color={'primary'} className="l1">
-            Add Creators
+            Upload Thumbnail
           </Text>
-
-          <TeamSelector projectForm={projectForm} />
-        </div>
-
-        <div className="flex w-full flex-col gap-8">
-          <div>
-            <Text className="h5" color={'primary'}>
-              Links and Verification
-            </Text>
-            <Text className="b4-light" color={'secondary'}>
-              Help use easily verify the ownership of the project by connecting
-              twitter and github repository of the project
-            </Text>
-          </div>
-          {/* <div className="flex w-full flex-col gap-3">
-            <div className="flex items-center justify-between">
-              <Text className="l1" color={'primary'}>
-                Github
-              </Text>
-              <Button leftIconName="github" className="w-[228px]">
-                Connect Github
-              </Button>
-            </div>
-            <div className="flex items-center justify-between">
-              <Text className="l1" color={'primary'}>
-                X.com
-              </Text>
-              <Button leftIconName="twitter" className="w-[228px]">
-                Connect X.com
-              </Button>
-            </div>
-          </div> */}
-          <div className="flex w-full flex-col gap-3">
-            <InputContainer>
-              <InputLabel>Github</InputLabel>
-              <InputFieldContainer
-                isError={projectForm.formState.errors.github ? true : false}
-                variant="md"
-              >
-                <InputField
-                  onChange={(e) => {
-                    projectForm.setValue('github', e.currentTarget.value);
-                  }}
-                  value={projectForm.watch('github')}
-                  placeholder="https://github.com"
-                />
-              </InputFieldContainer>
-            </InputContainer>
-            <InputContainer>
-              <InputLabel>X.come</InputLabel>
-              <InputFieldContainer
-                isError={projectForm.formState.errors.twitter ? true : false}
-                variant="md"
-              >
-                <InputField
-                  onChange={(e) => {
-                    projectForm.setValue('twitter', e.currentTarget.value);
-                  }}
-                  value={projectForm.watch('twitter')}
-                  placeholder="https://x.com"
-                />
-              </InputFieldContainer>
-            </InputContainer>
-          </div>
-        </div>
-
-        <div className="flex items-center justify-start gap-3">
-          <Checkbox
-            checked={projectForm.watch('isOpenSource')}
-            onCheckedChange={(e) => {
-              if (e) {
-                projectForm.setValue('isOpenSource', true);
-              } else {
-                projectForm.setValue('isOpenSource', false);
-              }
-            }}
+          <Controller
+            name="logo"
+            control={control}
+            render={() => (
+              <LogoUploader
+                setError={setError}
+                setValue={setValue}
+                errors={errors}
+                watch={watch}
+              />
+            )}
           />
-          <Text className="l1" color={'primary'}>
-            The Project is Open Source
-          </Text>
         </div>
-        <div className="flex w-full items-center justify-between">
-          <Button
-            onClick={() => {
-              setStep(2);
-              forceSave();
-            }}
-            leftIconName="chevronLeft"
-            variant={'outline'}
-            size={'md'}
-          >
-            Previous
-          </Button>
-          <Button
-            onClick={() => setStep(4)}
-            rightIconName="chevronRight"
-            variant={'primary'}
-            size={'md'}
-          >
-            Next
-          </Button>
-        </div>
-      </div>
+      </StepTemplate>
     </>
   );
 };

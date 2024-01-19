@@ -10,10 +10,6 @@ import { motion } from 'framer-motion';
 import { Text } from '../text/text';
 
 // @params data: TData, columns: ColumnDef<TData>[]
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
-}
 
 export const CubikTable = ({ columns, data }: { columns: any; data: any }) => {
   const table = useReactTable({
@@ -63,7 +59,7 @@ export const CubikTable = ({ columns, data }: { columns: any; data: any }) => {
                 row.getIsSelected()
                   ? 'bg-[var(--color-bg-cool-base)]'
                   : 'transparent'
-              }
+              } 
               `}
               key={row.id}
             >

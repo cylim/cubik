@@ -107,7 +107,7 @@
 
 import React from 'react';
 import Select from 'react-select';
-import type { CSSObjectWithLabel, Options } from 'react-select';
+import type { Options } from 'react-select';
 import makeAnimated from 'react-select/animated';
 
 export type { Options } from 'react-select';
@@ -123,6 +123,7 @@ interface Props {
   isMulti?: boolean;
   placeholder?: string;
   onInputChange?: (newValue: string) => void;
+  withoutBorder?: boolean;
 }
 const animatedComponents = makeAnimated();
 export const SearchSelect = ({
@@ -131,6 +132,7 @@ export const SearchSelect = ({
   onChange,
   isMulti,
   placeholder,
+  // withoutBorder,
   onInputChange,
 }: Props) => {
   return (
@@ -138,6 +140,30 @@ export const SearchSelect = ({
       defaultValue={value}
       isMulti={isMulti}
       components={animatedComponents}
+      // formatOptionLabel={({ label, icon }) => (
+      //   <div
+      //     style={{
+      //       display: 'flex',
+      //       alignItems: 'center',
+      //       gap: '0px',
+      //     }}
+      //   >
+      //     {/* eslint-disable-next-line @next/next/no-img-element */}
+      //     <img
+      //       src={
+      //         'https://utfs.io/f/8f76eb20-adf4-4043-82e1-a5973b974011-5iq82l.png'
+      //       }
+      //       alt={label}
+      //       style={{
+      //         marginRight: '10px',
+      //         borderRadius: '100%',
+      //         width: '16px',
+      //         height: '16px',
+      //       }}
+      //     />
+      //     {label}
+      //   </div>
+      // )}
       onChange={(e) => {
         if (isMulti) {
           onChange(e as Options<Option>[]);
@@ -153,80 +179,85 @@ export const SearchSelect = ({
       value={value}
       placeholder={placeholder}
       options={options}
+      unstyled={true}
       className="w-full"
       //@ts-ignore
-      styles={{
-        //@ts-ignore
-        control: (baseStyles: CSSObjectWithLabel, state) => ({
-          ...baseStyles,
-          borderColor: state.isFocused
-            ? 'var(--form-input-border-focused)'
-            : 'var(--form-input-border-default)',
-          backgroundColor: 'var(--form-input-surface-default)',
-          borderRadius: '8px',
-          width: '100% !important',
-        }),
-        //@ts-ignore
-        placeholder: (baseStyles) => ({
-          ...baseStyles,
-          fontSize: '12px',
-          fontWeight: 400,
-          color: 'var(--form-input-border-default)',
-        }),
-        //@ts-ignore
-        dropdownIndicator: (provided) => ({
-          ...provided,
-          background: '',
-          borderColor: 'transparent !important',
-          outline: '0px !important',
-          boxShadow: '0',
-          p: 0,
-          w: '60px',
-          color: 'var(--form-input-fg-default)',
-          _hover: {
-            color: 'var(--form-input-fg-default)',
-          },
-        }),
-        //@ts-ignore
-        indicatorSeparator: (provided) => ({
-          ...provided,
-          display: 'none',
-        }),
-        //@ts-ignore
-        menu: (provided) => ({
-          ...provided,
-          scroll: 'no-scrollbar',
-          boxShadow:
-            '0px 20px 25px -5px rgba(0, 0, 0, 0.10), 0px 10px 10px -5px rgba(0, 0, 0, 0.04)',
-          backgroundColor: 'var(--menu-list-surface)',
+      // styles={{
+      //   //@ts-ignore
+      //   control: (baseStyles: CSSObjectWithLabel, state) => ({
+      //     ...baseStyles,
+      //     borderColor: state.isFocused
+      //       ? 'var(--form-input-border-focused)'
+      //       : 'var(--form-input-border-default)',
+      //     backgroundColor: 'var(--form-input-surface-default)',
+      //     borderRadius: '8px',
+      //     width: '100% !important',
+      //     border: withoutBorder ? '0px' : baseStyles.border,
+      //     ':focus': {
+      //       border: '0px !important',
+      //     },
+      //   }),
+      //   //@ts-ignore
+      //   placeholder: (baseStyles) => ({
+      //     ...baseStyles,
+      //     fontSize: '12px',
+      //     fontWeight: 400,
+      //     color: 'var(--form-input-border-default)',
+      //   }),
+      //   //@ts-ignore
+      //   dropdownIndicator: (provided) => ({
+      //     ...provided,
+      //     background: '',
+      //     borderColor: 'transparent !important',
+      //     outline: '0px !important',
+      //     boxShadow: '0',
+      //     p: 0,
+      //     w: '60px',
+      //     color: 'var(--form-input-fg-default)',
+      //     _hover: {
+      //       color: 'var(--form-input-fg-default)',
+      //     },
+      //   }),
+      //   //@ts-ignore
+      //   indicatorSeparator: (provided) => ({
+      //     ...provided,
+      //     display: 'none',
+      //   }),
+      //   //@ts-ignore
+      //   menu: (provided) => ({
+      //     ...provided,
+      //     scroll: 'no-scrollbar',
+      //     boxShadow:
+      //       '0px 20px 25px -5px rgba(0, 0, 0, 0.10), 0px 10px 10px -5px rgba(0, 0, 0, 0.04)',
+      //     backgroundColor: 'var(--menu-list-surface)',
 
-          borderRadius: '12px',
-        }),
-        //@ts-ignore
-        menuList: (provided) => ({
-          ...provided,
-          backgroundColor: 'var(--menu-list-surface)',
-          border: '1px solid var(--menu-list-item-border)',
-          borderRadius: '12px',
-          '::-webkit-scrollbar': {
-            display: 'none',
-          },
-        }),
-        //@ts-ignore
-        option: (provided) => ({
-          ...provided,
-          color: 'var(--menu-list-item-fg-default)',
-          fontSize: '14px',
-          fontWeight: '400',
-          backgroundColor: 'transparent',
-          _hover: {
-            backgroundColor: 'var(--menu-list-item-surface-hovered)',
-          },
-          ':active': {
-            backgroundColor: 'var(--menu-list-item-surface-hovered)',
-          },
-        }),
-      }}
+      //     borderRadius: '12px',
+      //   }),
+      //   //@ts-ignore
+      //   menuList: (provided) => ({
+      //     ...provided,
+      //     backgroundColor: 'var(--menu-list-surface)',
+      //     border: '1px solid var(--menu-list-item-border)',
+      //     borderRadius: '12px',
+      //     '::-webkit-scrollbar': {
+      //       display: 'none',
+      //     },
+      //   }),
+      //   //@ts-ignore
+      //   option: (provided) => ({
+      //     ...provided,
+      //     color: 'var(--menu-list-item-fg-default)',
+      //     fontSize: '14px',
+      //     fontWeight: '400',
+      //     backgroundColor: 'transparent',
+      //     _hover: {
+      //       backgroundColor: 'var(--menu-list-item-surface-hovered)',
+      //     },
+      //     ':active': {
+      //       backgroundColor: 'var(--menu-list-item-surface-hovered)',
+      //     },
+      //   }),
+      // }}
       // theme={(theme: ThemeConfig) => ({
       //   ...theme,
       //   borderRadius: '8px',

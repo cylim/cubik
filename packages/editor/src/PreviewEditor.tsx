@@ -20,6 +20,7 @@ export const PreviewEditor = ({ content, className }: Props) => {
       className={cn('ProseMirror rounded-lg  overflow-scroll', className)}
     >
       <div dangerouslySetInnerHTML={{ __html: safeContent }} />
+      {/* todo: dangerouslySetInnerHTML can have security issues please check this */}
     </div>
   );
 };

@@ -7,7 +7,6 @@ import { toast } from 'sonner';
 import {
   Avatar,
   Button,
-  Checkbox,
   HelperText,
   InputContainer,
   InputField,
@@ -48,11 +47,17 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
 
   return (
     <>
-      <div
+      <form
         className="flex flex-col gap-8"
         style={{
           padding: '32px',
         }}
+        onSubmit={userForm.handleSubmit(() => {
+          if (userForm.formState.errors.username) {
+            return toast.error(userForm.formState.errors.username.message);
+          }
+          setUserCreateState('verify-email');
+        })}
       >
         <div className="flex gap-3 flex-col">
           <Text className="h4" color={'primary'}>
@@ -90,14 +95,14 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
                 />
               </InputFieldContainer>
               {userForm.formState.errors.username && (
-                <HelperText variant={'error'} fontSize={'md'}>
+                <HelperText variant={'error'}>
                   {userForm.formState.errors.username.message}
                 </HelperText>
               )}
             </InputContainer>
           </div>
         </div>
-        <div className="flex gap-2 flex-col">
+        {/* <div className="flex gap-2 flex-col">
           <Text color={'primary'} className="l1-light">
             You are a
           </Text>
@@ -137,19 +142,14 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
               </Text>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="flex gap-3 flex-col">
           <Button
             variant={'primary'}
             size={'md'}
             className="w-full"
             rightIconName="arrowRight"
-            onClick={() => {
-              if (userForm.formState.errors.username) {
-                return toast.error(userForm.formState.errors.username.message);
-              }
-              setUserCreateState('verify-email');
-            }}
+            type="submit"
           >
             Lets go
           </Button>
@@ -162,7 +162,7 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
             Skip for now
           </Button>
         </div>
-      </div>
+      </form>
     </>
   );
 };

@@ -2,6 +2,7 @@
 
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { UseFormReturn } from 'react-hook-form';
 import PinInput from 'react-pin-input';
 import { toast } from 'sonner';
@@ -71,7 +72,18 @@ export const EmailOtp = ({ userForm, setUserCreateState }: Props) => {
             Enter Code
           </Text>
           <Text color={'secondary'} className="b3-light">
-            Please enter the 6 digit code we sent to {userForm.watch('email')}
+            Please enter the 6 digit code we sent to{' '}
+            {userForm.watch('email').endsWith('gmail.com') ? (
+              <Link
+                href={'https://mail.google.com/'}
+                target="_blank"
+                className="underline"
+              >
+                {userForm.watch('email')}
+              </Link>
+            ) : (
+              `${userForm.watch('email')}`
+            )}
           </Text>
         </div>
         <PinInput

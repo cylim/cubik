@@ -1,5 +1,6 @@
 import { TokenPrice } from "../services/price/syncPrice";
 import logger from "../services/logger";
+
 /**
  * Represents an item stored in the cache.
  * @template T The type of the value stored in the cache item.
@@ -82,6 +83,16 @@ class InMemoryCache<K, V> {
 
         this.cache.clear();
     }
+
+    /**
+     * Checks if a key exists in the cache.
+     * @param key - The key to check.
+     * @returns True if the key exists in the cache, false otherwise.
+     */
+    has(key: K): boolean {
+        return this.cache.has(key);
+    }
 }
 
 export const tokenCache = new InMemoryCache<string, (TokenPrice | null)[]>();
+export const imageCache = new InMemoryCache<string, Buffer>();

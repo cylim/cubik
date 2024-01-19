@@ -7,8 +7,7 @@ import { config } from 'dotenv';
 
 import logger from './services/logger';
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const main = async () => {
+const main = async (): Promise<void> => {
   config();
   const app = new App([
     new ImageController(),

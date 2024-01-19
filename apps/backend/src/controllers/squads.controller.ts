@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import * as anchor from '@coral-xyz/anchor';
+import { errorHandler } from '@cubik/database/api';
 import * as sqds from '@sqds/multisig';
 import type { Request, Response } from 'express';
 import express from 'express';
 import Controller from 'interfaces/controller.interface';
 import logger from 'services/logger';
+import z from 'zod';
 
 const RPC_URL = process.env.RPC_URL || 'https://rpc.cubik.so';
 
@@ -15,6 +17,9 @@ const { Multisig, VaultTransaction, Proposal } = sqds.accounts;
 class SquadsController implements Controller {
   public path = "/squads";
   public router = express.Router();
+  public querySchema = z.object({
+    createKey: z.string().min(42).max(100),
+  })
 
   constructor() {
     this.initializeRoutes();
@@ -27,6 +32,10 @@ class SquadsController implements Controller {
 
   private getSquadsTxs = async (req: Request, res: Response) => {
     try {
+      const parsed = await this.querySchema.safeParseAsync(req.query);
+      if (!parsed.success) {
+        return res.status(400).json(errorHandler(parsed.error));
+      }
       const { createKey } = req.query;
 
       const [multisigPda] = sqds.getMultisigPda({

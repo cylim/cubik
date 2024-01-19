@@ -1,21 +1,23 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import fs from 'fs';
-import path from 'path';
 import { Readable } from 'stream';
 import axios from 'axios';
 import type { Request, Response } from 'express';
 import express from 'express';
 import Controller from 'interfaces/controller.interface';
-import NodeCache from 'node-cache';
 import logger from 'services/logger';
 import sharp from 'sharp';
 import validator from 'validator';
-
-const cache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
+import z from 'zod';
+import { errorHandler } from '@cubik/database/api';
+import { imageCache, toMilliseconds } from 'utils/cache';
 
 class ImageController implements Controller {
   public path = '/image';
   public router = express.Router();
+  public querySchema = z.object({
+    size: z.string().min(1).max(9),
+    url: z.string().min(1).max(1000),
+  })
 
   constructor() {
     this.initializeRoutes();
@@ -28,6 +30,11 @@ class ImageController implements Controller {
 
   private imageFilter = async (req: Request, res: Response) => {
     // @todo -- revalidate cache every 24 hrs
+
+    const parsed = await this.querySchema.safeParseAsync(req.query);
+    if (!parsed.success) {
+      return res.status(400).json(errorHandler(parsed.error));
+    }
 
     // /:size/:url --> 500x500/<url>
     const { size, url } = req.query as {
@@ -67,10 +74,20 @@ class ImageController implements Controller {
     const sanitizedUrl = url;
     const cacheKey = `${size}-${sanitizedUrl}`;
 
-    // Check cache
-    if (cache.has(cacheKey)) {
-      return res.sendFile(cache.get(cacheKey) as string);
+    if (imageCache.has(cacheKey)) {
+      const cachedImage = imageCache.get(cacheKey);
+      if (cachedImage) {
+        const readStream = Readable.from(cachedImage);
+        res.setHeader('Content-Type', 'image/png');
+        readStream.pipe(res);
+        return;
+      }
     }
+
+    // // Check cache
+    // if (cache.has(cacheKey)) {
+    //   return res.sendFile(cache.get(cacheKey) as string);
+    // }
 
     try {
       const response = await axios.get(sanitizedUrl, {
@@ -78,27 +95,29 @@ class ImageController implements Controller {
       });
       const buffer = Buffer.from(response.data, 'binary');
 
-      const cacheDir = path.join(__dirname, '../../../../cache');
-      if (!fs.existsSync(cacheDir)) {
-        fs.mkdirSync(cacheDir, { recursive: true });
-      }
+      // const cacheDir = path.join(__dirname, '../../../../cache');
+      // if (!fs.existsSync(cacheDir)) {
+      //   fs.mkdirSync(cacheDir, { recursive: true });
+      // }
 
-      const resizedImagePath = path.join(
-        cacheDir,
-        encodeURIComponent(cacheKey),
-      );
+      // const resizedImagePath = path.join(
+      //   cacheDir,
+      //   encodeURIComponent(cacheKey),
+      // );
 
       const resizedImage = await sharp(buffer)
         .resize(width, height)
         .toFormat('png')
         .toBuffer();
 
-      // Write the resized image to cache directory
-      fs.writeFileSync(resizedImagePath, resizedImage, {
-        flag: 'w',
-      });
+      // // Write the resized image to cache directory
+      // fs.writeFileSync(resizedImagePath, resizedImage, {
+      //   flag: 'w',
+      // });
 
-      cache.set(cacheKey, resizedImagePath);
+      imageCache.set(cacheKey, resizedImage, toMilliseconds(24, 0, 0));
+
+      // cache.set(cacheKey, resizedImagePath);
 
       // Stream the resized image
       const readStream = Readable.from(resizedImage);

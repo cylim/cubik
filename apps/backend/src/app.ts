@@ -49,7 +49,7 @@ class App {
     return this.app;
   }
 
-  private initializeStandardMiddlewares() {
+  private initializeStandardMiddlewares(): void {
     this.app.set('trust proxy', true);
 
     this.app.use(
@@ -90,7 +90,7 @@ class App {
     });
   }
 
-  private initializeControllers(controllers: readonly Controller[]) {
+  private initializeControllers(controllers: readonly Controller[]): void {
     // All the generic containers as supplied by app
     controllers.forEach((controller) => {
       this.app.use('/api/v1', controller.router);

@@ -12,7 +12,7 @@ import z from 'zod';
 class UserNftController implements Controller {
     public path = "/user";
     public router = express.Router();
-    private querySchema = z.object({
+    public querySchema = z.object({
         address: z.string().min(42).max(100),
     })
 

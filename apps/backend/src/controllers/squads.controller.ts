@@ -17,7 +17,7 @@ const { Multisig, VaultTransaction, Proposal } = sqds.accounts;
 class SquadsController implements Controller {
   public path = "/squads";
   public router = express.Router();
-  private querySchema = z.object({
+  public querySchema = z.object({
     createKey: z.string().min(42).max(100),
   })
 

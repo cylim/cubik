@@ -10,12 +10,18 @@ import NodeCache from 'node-cache';
 import logger from 'services/logger';
 import sharp from 'sharp';
 import validator from 'validator';
+import z from 'zod';
+import { errorHandler } from '@cubik/database/api';
 
 const cache = new NodeCache({ stdTTL: 100, checkperiod: 120 });
 
 class ImageController implements Controller {
   public path = '/image';
   public router = express.Router();
+  private querySchema = z.object({
+    size: z.string().min(1).max(9),
+    url: z.string().min(1).max(1000),
+  })
 
   constructor() {
     this.initializeRoutes();
@@ -28,6 +34,11 @@ class ImageController implements Controller {
 
   private imageFilter = async (req: Request, res: Response) => {
     // @todo -- revalidate cache every 24 hrs
+
+    const parsed = await this.querySchema.safeParseAsync(req.query);
+    if (!parsed.success) {
+      return res.status(400).json(errorHandler(parsed.error));
+    }
 
     // /:size/:url --> 500x500/<url>
     const { size, url } = req.query as {

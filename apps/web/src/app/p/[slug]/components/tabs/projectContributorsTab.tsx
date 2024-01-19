@@ -48,7 +48,7 @@ export const ProjectContributorsTab = ({ slug }: Props) => {
   return (
     <TabLayout>
       <div className="flex w-full flex-col gap-20 md:flex-row">
-        <div className="w-full">
+        <div className="flex w-full flex-col gap-4">
           <SubHead className="w-full" heading="Contributions">
             <div className="w-full max-w-sm">
               <SegmentContainer size="sm">

@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
@@ -11,42 +10,52 @@ import { Text } from '../text/text';
 
 // @params data: TData, columns: ColumnDef<TData>[]
 
-export const CubikTable = ({ columns, data }: { columns: any; data: any }) => {
+export const CubikTable = ({
+  columns,
+  data,
+  showHeader,
+}: {
+  columns: any;
+  data: any;
+  showHeader?: boolean;
+}) => {
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
-
   return (
     <div className="rounded-md w-full bg-[var(--card-bg-primary)]">
       <table className="w-full">
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr
-              className=" px-6 border-b border-b-[var(--table-row-border)]"
-              key={headerGroup.id}
-            >
-              {headerGroup.headers.map((header) => (
-                <th className="px-3 py-5" key={header.id}>
-                  <Text
-                    className={
-                      'b3 text-start whitespace-nowrap overflow-hidden overflow-ellipsis'
-                    }
-                    color="tertiary"
-                  >
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
-                  </Text>
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
+        {showHeader && (
+          <thead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr
+                className=" px-6 border-b border-b-[var(--table-row-border)]"
+                key={headerGroup.id}
+              >
+                {headerGroup.headers.map((header) => (
+                  <th className="px-3 py-5" key={header.id}>
+                    <Text
+                      className={
+                        'b3 text-start whitespace-nowrap overflow-hidden overflow-ellipsis'
+                      }
+                      color="tertiary"
+                    >
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext(),
+                          )}
+                    </Text>
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+        )}
+
         <tbody>
           {table.getRowModel().rows.map((row) => (
             <motion.tr

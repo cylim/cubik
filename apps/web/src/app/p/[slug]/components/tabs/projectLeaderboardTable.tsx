@@ -3,6 +3,7 @@ import { ColumnDef } from '@tanstack/react-table';
 
 import { nFormatter } from '@cubik/common';
 import { AvatarLabelGroup, CubikTable, Text } from '@cubik/ui';
+import TitleWithIcon from '@cubik/ui/components/ui/Avatar/TitleWithIcon';
 
 type tData = {
   id: string;
@@ -20,7 +21,6 @@ const ProjectLeaderboardTable = ({
 }: {
   leaderboardData: any;
 }) => {
-  console.log('leaderboardData', leaderboardData);
   if (!leaderboardData) {
     return <></>;
   }
@@ -31,60 +31,59 @@ const ProjectLeaderboardTable = ({
         avatar: leader?.user?.profilePicture,
         name: leader?.user?.username,
       },
-
-      totalUsdAmount: leader?.totalUsdAmount,
+      donation: {
+        totalUsdAmount: leader?.totalUsdAmount,
+      },
     };
   });
-
-  // data.push({
-  //   id:
-  // })
-
   const columns: ColumnDef<tData>[] = [
     {
       accessorKey: 'leader',
-      header: '',
-      cell: ({ row }) => {
-        return row.index + 1;
-      },
-    },
-    {
-      accessorKey: 'leader',
-      header: '',
 
       cell: ({ row }) => {
-        console.log('row', row);
         return (
-          // <></>
-          <AvatarLabelGroup
-            size="sm"
-            avatarSrc={(row.getValue('leader') as { avatar: string }).avatar}
-            shape="circle"
-            title={(row.getValue('leader') as { name: string }).name}
-          />
+          <div className="flex gap-2">
+            <TitleWithIcon
+              size="sm"
+              text={`${row.index + 1}`}
+              iconColor={
+                row.index + 1 === 1
+                  ? 'var(--tag-solid-surface-orange)'
+                  : row.index + 1 === 2
+                  ? 'var(--tag-solid-surface-green)'
+                  : 'transparent'
+              }
+              icon={'awardMedal'}
+            />
+            <AvatarLabelGroup
+              size="sm"
+              avatarSrc={(row.getValue('leader') as { avatar: string }).avatar}
+              shape="circle"
+              title={(row.getValue('leader') as { name: string }).name}
+            />
+          </div>
         );
       },
     },
     {
-      accessorKey: 'leader',
+      accessorKey: 'donation',
       header: '',
       cell: ({ row }) => {
-        console.log('row', row);
         return (
           <div>
-            {/* <Text className="l2" color="primary">
-              {nFormatter(
+            <Text className="l3" color="secondary">
+              {`$ ${nFormatter(
                 (row.getValue('donation') as { totalUsdAmount: number })
                   .totalUsdAmount,
-              ).toString()}
-            </Text> */}
+              )}`}
+            </Text>
           </div>
         );
       },
     },
   ];
-  return <CubikTable data={data} columns={columns} />;
-  // return <div>asdfs</div>;
+
+  return <CubikTable data={data} columns={columns} showHeader={false} />;
 };
 
 export default ProjectLeaderboardTable;

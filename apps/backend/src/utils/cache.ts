@@ -94,5 +94,13 @@ class InMemoryCache<K, V> {
     }
 }
 
+/**
+ * Converts hours, minutes, and seconds to milliseconds.
+ * @param hrs - The number of hours.
+ * @param min - The number of minutes.
+ * @param sec - The number of seconds.
+ * @returns The total number of milliseconds.
+ */
+export const toMilliseconds = (hrs: number, min: number, sec: number): number => (hrs * 60 * 60 + min * 60 + sec) * 1000;
 export const tokenCache = new InMemoryCache<string, (TokenPrice | null)[]>();
 export const imageCache = new InMemoryCache<string, Buffer>();

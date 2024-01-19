@@ -411,6 +411,7 @@ export const iconLibrary: Record<string, Icon> = {
       },
     ],
   },
+  //do not change this
   cross: {
     viewBox: '0 0 24 24',
     paths: [

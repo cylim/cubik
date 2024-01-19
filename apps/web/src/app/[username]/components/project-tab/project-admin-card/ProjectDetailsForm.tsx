@@ -85,7 +85,7 @@ const ProjectDetailsForm = ({
           />
         </InputFieldContainer>
         {editProjectForm.formState.errors.name && (
-          <HelperText variant={'error'} fontSize={'sm'}>
+          <HelperText variant={'error'}>
             {editProjectForm.formState.errors.name.message}
           </HelperText>
         )}
@@ -109,7 +109,7 @@ const ProjectDetailsForm = ({
           />
         </InputFieldContainer>
         {editProjectForm.formState.errors.email && (
-          <HelperText variant={'error'} fontSize={'sm'}>
+          <HelperText variant={'error'}>
             {editProjectForm.formState.errors.email.message}
           </HelperText>
         )}
@@ -134,7 +134,7 @@ const ProjectDetailsForm = ({
             : { state: 'default' })}
         />
         {editProjectForm.formState.errors.shortDescription && (
-          <HelperText variant={'error'} fontSize={'sm'}>
+          <HelperText variant={'error'}>
             {editProjectForm.formState.errors.shortDescription.message}
           </HelperText>
         )}

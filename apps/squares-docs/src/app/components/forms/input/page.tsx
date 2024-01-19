@@ -58,9 +58,7 @@ const FormSuccess = () => {
             onChange={(e) => setValue('email', e.currentTarget.value)}
           />
         </InputFieldContainer>
-        <HelperText variant={'error'} fontSize={'md'}>
-          {errors.email?.message}
-        </HelperText>
+        <HelperText variant={'error'}>{errors.email?.message}</HelperText>
       </InputContainer>
       <InputContainer>
         <InputLabel isRequired={true}>Password</InputLabel>
@@ -72,9 +70,7 @@ const FormSuccess = () => {
             onChange={(e) => setValue('password', e.currentTarget.value)}
           />
         </InputFieldContainer>
-        <HelperText variant={'error'} fontSize={'md'}>
-          {errors.password?.message}
-        </HelperText>
+        <HelperText variant={'error'}>{errors.password?.message}</HelperText>
       </InputContainer>
       <Button variant="success" type="submit">
         Submit
@@ -124,9 +120,7 @@ const FormError = () => {
               onChange={(e) => setValue('email', e.currentTarget.value)}
             />
           </InputFieldContainer>
-          <HelperText variant={'error'} fontSize={'md'}>
-            {errors.email?.message}
-          </HelperText>
+          <HelperText variant={'error'}>{errors.email?.message}</HelperText>
         </InputContainer>
         <InputContainer>
           <InputLabel isRequired={true}>Password</InputLabel>
@@ -142,9 +136,7 @@ const FormError = () => {
               onChange={(e) => setValue('password', e.currentTarget.value)}
             />
           </InputFieldContainer>
-          <HelperText variant={'error'} fontSize={'md'}>
-            {errors.password?.message}
-          </HelperText>
+          <HelperText variant={'error'}>{errors.password?.message}</HelperText>
         </InputContainer>
         <Button variant="success" type="submit">
           Submit
@@ -188,9 +180,7 @@ const InputPage = () => {
                 />
                 <InputRightElement>https</InputRightElement>
               </InputFieldContainer>
-              <HelperText variant={'success'} fontSize={'md'}>
-                hello
-              </HelperText>
+              <HelperText variant={'success'}>hello</HelperText>
             </InputContainer>
             {/* <div className="border-[var(--color-border-primary) overflow-hidden rounded-[8px] border bg-[var(--white)] px-6 py-4">
             <CodeComponent

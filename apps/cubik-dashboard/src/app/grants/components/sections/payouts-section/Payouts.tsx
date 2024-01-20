@@ -1,10 +1,10 @@
 import React from 'react';
-import PartnerTresuries from '@/app/grants/components/sections/payouts-section/PartnerTresuries';
+import { PartnerTreasuries } from '@/app/grants/components/sections/payouts-section/PartnerTreasuries';
 
 const PayoutsSection = () => {
   return (
     <div>
-      <PartnerTresuries />
+      <PartnerTreasuries />
     </div>
   );
 };

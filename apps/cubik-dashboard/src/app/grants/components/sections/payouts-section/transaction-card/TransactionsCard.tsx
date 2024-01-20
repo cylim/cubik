@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+import { Project_Backup } from '@cubik/common';
+import { getValidToken } from '@cubik/common/tokens/getValidTokenList';
 import {
   AvatarLabelGroup,
   Button,
@@ -28,22 +30,28 @@ const TransactionsCard = ({ children }: ITransactionsCard) => {
   );
 };
 
-const TransactionsCardHeader = () => {
+interface TransactionsCardHeaderProps {
+  name: string;
+  logo: string;
+  username: string;
+}
+
+const TransactionsCardHeader = ({
+  logo,
+  name,
+  username,
+}: TransactionsCardHeaderProps) => {
   return (
     <div className="flex items-center justify-between">
       <AvatarLabelGroup
         size="md"
-        title="Cubik"
-        description="by @dhruv"
+        title={name}
+        description={`by @${username}`}
         avatarShape="square"
-        avatarSrc="https://res.cloudinary.com/demonicirfan/image/upload/v1692786112/OG-Grant_23_tbhrsg.png"
+        avatarSrc={logo || Project_Backup}
       />
       <div className="flex gap-3">
-        <Button
-          rightIconName="add"
-          rightIconColor="var(--color-fg-primary-inverse)"
-          variant={'primary'}
-        >
+        <Button rightIconName="plus" variant={'primary'}>
           Add Funds
         </Button>
         <Button leftIconName="threeDots" variant={'secondary'} size="md" />
@@ -52,7 +60,26 @@ const TransactionsCardHeader = () => {
   );
 };
 
-const TransactionsCardBalance = () => {
+interface TreasuriesAssets {
+  token: string;
+  amount: number;
+}
+interface TransactionsCardBalanceProps {
+  totalCommitted: number;
+  assets: TreasuriesAssets[];
+}
+const TransactionsCardBalance = ({
+  totalCommitted,
+  assets,
+}: TransactionsCardBalanceProps) => {
+  const validTokens = getValidToken();
+  const assetList = assets.map((asset) => {
+    const token = validTokens.find((token) => token.address === asset.token);
+    return {
+      alt: token?.symbol || '',
+      src: token?.logoURI || Project_Backup,
+    };
+  });
   return (
     <div className="flex flex-col gap-11">
       <div className="flex flex-col gap-2">
@@ -86,13 +113,13 @@ const TransactionsCardBalance = () => {
             </Tooltip>
           </div>
           <Text className="b1" color={'positive'}>
-            $20,000
+            ${totalCommitted}
           </Text>
         </div>
         <div className="flex flex-col gap-2">
           <div className="flex gap-1">
             <Text className="l2-light" color={'secondary'}>
-              Multisig Threashold
+              Multisig Threshold
             </Text>
             <Tooltip>
               <TooltipTrigger>
@@ -120,9 +147,16 @@ const TransactionsCardBalance = () => {
               Treasury Assets
             </Text>
           </div>
-          <Text className="b1" color={'positive'}>
-            $SOL + 2 Other
-          </Text>
+          <div>
+            {/* // todo -- Need to fix this  */}
+            <AvatarLabelGroup
+              avatarSrc={assetList || []}
+              shape="circle"
+              avatarShape="square"
+              size="sm"
+              title={assetList[0].alt + ' ' + `${assetList.length - 1} Other`}
+            />
+          </div>
         </div>
       </div>
     </div>

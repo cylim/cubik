@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
+import { number } from 'zod';
 
 import { decodeToken } from '@cubik/auth';
 import { handleApiClientError, successHandler } from '@cubik/database/api';
@@ -10,6 +11,8 @@ export const GET = async (req: NextRequest) => {
     const searchParams = req.nextUrl.searchParams;
     const eventId = searchParams.get('eventId');
     const project = searchParams.get('project');
+    const auth = cookies().get('authToken');
+    const user = auth ? await decodeToken(auth?.value) : null;
 
     if (!eventId || !project) {
       throw new Error('Missing eventId or projectId');
@@ -53,10 +56,13 @@ export const GET = async (req: NextRequest) => {
 
     const topEarnerArray = Array.from(topEarnerMap.entries())
       .map(([userId, amount]) => ({ userId, amount }))
-      .sort((a, b) => b.amount - a.amount)
-      .slice(0, 10);
+      .sort((a, b) => b.amount - a.amount);
 
-    const earners = topEarnerArray.map((item) => {
+    const currentUserRank = user
+      ? topEarnerArray.findIndex((earner) => earner.userId === user?.mainWallet)
+      : null;
+
+    const earners = topEarnerArray.slice(0, 10).map((item) => {
       const earner = res.find((i) => i.userId === item.userId);
       return {
         ...earner,
@@ -64,7 +70,19 @@ export const GET = async (req: NextRequest) => {
       };
     });
 
-    return NextResponse.json(successHandler(earners, 'Success'));
+    return NextResponse.json(
+      successHandler(
+        {
+          earners: earners,
+          currentUserRank: currentUserRank,
+          currentUser:
+            typeof currentUserRank === 'number'
+              ? topEarnerArray[currentUserRank]
+              : null,
+        },
+        'Success',
+      ),
+    );
   } catch (e) {
     const error = e as Error;
     const authToken = cookies().get('authToken');

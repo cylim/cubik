@@ -29,7 +29,6 @@ export const ImageUploader = ({
   startUpload,
   isUploading,
   errorMessage,
-  setError,
   logo,
   progress,
 }: Props) => {

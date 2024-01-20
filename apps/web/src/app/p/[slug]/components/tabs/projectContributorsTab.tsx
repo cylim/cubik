@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import ProjectLeaderboardTable from '@/app/p/[slug]/components/tabs/projectLeaderboardTable';
 import { useProjectEventStore } from '@/app/p/[slug]/store';
 import TabLayout from '@/components/common/tabs/TabLayout';
 import useProjectContribution from '@/hooks/contributions/useProjectContribution';
@@ -47,7 +48,7 @@ export const ProjectContributorsTab = ({ slug }: Props) => {
   return (
     <TabLayout>
       <div className="flex w-full flex-col gap-20 md:flex-row">
-        <div className="w-full">
+        <div className="flex w-full flex-col gap-4">
           <SubHead className="w-full" heading="Contributions">
             <div className="w-full max-w-sm">
               <SegmentContainer size="sm">
@@ -68,7 +69,10 @@ export const ProjectContributorsTab = ({ slug }: Props) => {
           </SubHead>
           {contributionSwitcher === 'leaderboard' && (
             <div className="w-full">
-              {JSON.stringify(leaderboardContribution.data)}
+              {/* {JSON.stringify(leaderboardContribution.data)} */}
+              <ProjectLeaderboardTable
+                leaderboardData={leaderboardContribution.data}
+              />
             </div>
           )}
           {contributionSwitcher === 'recent' && (

@@ -19,14 +19,17 @@ const ImagesCarousel = ({ slides }: { slides: string[] }) => {
         <CarouselContent>
           {slides.map((slide, index) => (
             <CarouselItem key={index} className="h-fit pl-4 sm:basis-[70%]">
-              <div className="h-fit w-full">
+              <div className="h-72 w-full">
                 <Image
                   src={slide}
                   alt={'carousel image'}
                   objectFit="contain"
                   className="h-auto w-full rounded-lg"
                   width={1400}
-                  height={1400}
+                  height={'1400'}
+                  style={{
+                    height: '100%',
+                  }}
                 />
               </div>
             </CarouselItem>

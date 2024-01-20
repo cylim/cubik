@@ -86,7 +86,7 @@ const TransactionsCardBalance = () => {
             </Tooltip>
           </div>
           <Text className="b1" color={'positive'}>
-            2/3
+            $20,000
           </Text>
         </div>
         <div className="flex flex-col gap-2">
@@ -111,7 +111,7 @@ const TransactionsCardBalance = () => {
             </Tooltip>
           </div>
           <Text className="b1" color={'positive'}>
-            $20,000
+            2/3
           </Text>
         </div>
         <div className="flex flex-col gap-2">

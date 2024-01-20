@@ -1,8 +1,8 @@
 import { tokenPrice } from 'utils/price';
 
 import { getValidToken } from '@cubik/common/tokens/getValidTokenList';
-import { tokenCache } from 'utils/cache';
-import logger from '../../middleware/logger';
+import { toMilliseconds, tokenCache } from 'utils/cache';
+import logger from '../logger';
 
 export interface TokenPrice {
   id: string;
@@ -28,7 +28,7 @@ export const syncPrice = async (): Promise<(TokenPrice | null)[]> => {
         priceList.push(price);
       });
       const tokenPriceList = await Promise.all(priceList);
-      tokenCache.set('pricelist', tokenPriceList, 300_000)
+      tokenCache.set('pricelist', tokenPriceList, toMilliseconds(0, 5, 0))
       return tokenPriceList
     }
     return []

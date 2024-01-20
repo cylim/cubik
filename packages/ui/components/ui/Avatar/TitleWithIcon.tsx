@@ -29,7 +29,7 @@ interface TitleWithIconProps extends VariantProps<typeof titleVariants> {
   text: string;
   icon?: keyof typeof iconLibrary;
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
-  iconColor: string;
+  iconColor?: string;
 }
 
 const TitleWithIcon: React.FC<TitleWithIconProps> = ({

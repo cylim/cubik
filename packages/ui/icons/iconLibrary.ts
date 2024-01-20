@@ -144,6 +144,17 @@ export const iconLibrary: Record<string, Icon> = {
       },
     ],
   },
+  arrowUp: {
+    viewBox: '0 0 24 24',
+    paths: [
+      {
+        d: 'M6 8.83a30.23 30.23 0 0 1 5.406-5.62A.949.949 0 0 1 12 3m6 5.83a30.233 30.233 0 0 0-5.406-5.62A.949.949 0 0 0 12 3m0 0v18',
+        fill: false,
+        stroke: true,
+      },
+    ],
+  },
+
   inbox: {
     viewBox: '0 0 24 24',
     paths: [
@@ -461,6 +472,17 @@ export const iconLibrary: Record<string, Icon> = {
       },
     ],
   },
+  infoCircleFilled: {
+    viewBox: '0 0 24 24',
+    paths: [
+      {
+        d: 'M12 12v4m0-7.375v-.001M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z',
+        fill: true,
+        stroke: false,
+      },
+    ],
+  },
+
   //do not change this
   moon: {
     viewBox: '0 0 24 24',

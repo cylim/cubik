@@ -103,6 +103,7 @@ export interface ButtonProps
   rightIconName?: keyof typeof iconLibrary;
   isLoading?: boolean;
   LoadingText?: string;
+  rightIconColor?: string;
 }
 
 export const Button = ({
@@ -114,6 +115,7 @@ export const Button = ({
   className,
   isLoading,
   LoadingText,
+  rightIconColor,
   ...props
 }: ButtonProps) => {
   return (
@@ -149,10 +151,10 @@ export const Button = ({
           {rightIconName && (
             <Icon
               name={rightIconName}
-              color="inherit"
               height={16}
               width={16}
               className={buttonVariants({ variant })}
+              color={rightIconColor ?? 'inherit'}
             />
           )}
         </>

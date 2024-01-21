@@ -5,10 +5,12 @@ import React from 'react';
 import { Project_Backup } from '@cubik/common';
 import { getValidToken } from '@cubik/common/tokens/getValidTokenList';
 import {
+  AvatarGroup,
   AvatarLabelGroup,
   Button,
   Checkbox,
   Icon,
+  InputLabel,
   SubHead,
   Tag,
   TagLabel,
@@ -68,6 +70,7 @@ interface TransactionsCardBalanceProps {
   totalCommitted: number;
   assets: TreasuriesAssets[];
 }
+
 const TransactionsCardBalance = ({
   totalCommitted,
   assets,
@@ -91,6 +94,7 @@ const TransactionsCardBalance = ({
         </Text>
       </div>
       <div className="flex  gap-16">
+        {/* Promised Amount  */}
         <div className="flex flex-col gap-2">
           <div className="flex gap-1">
             <Text className="l2-light" color={'secondary'}>
@@ -99,7 +103,7 @@ const TransactionsCardBalance = ({
             <Tooltip>
               <TooltipTrigger>
                 <Icon
-                  name={'infoCircleFilled'}
+                  name={'infoCircleDuoSolid'}
                   height={16}
                   width={16}
                   color="var(--color-surface-cool-emphasis)"
@@ -116,6 +120,7 @@ const TransactionsCardBalance = ({
             ${totalCommitted}
           </Text>
         </div>
+        {/* Multisig Threshold  */}
         <div className="flex flex-col gap-2">
           <div className="flex gap-1">
             <Text className="l2-light" color={'secondary'}>
@@ -124,7 +129,7 @@ const TransactionsCardBalance = ({
             <Tooltip>
               <TooltipTrigger>
                 <Icon
-                  name={'infoCircleFilled'}
+                  name={'infoCircleDuoSolid'}
                   height={16}
                   width={16}
                   color="var(--color-surface-cool-emphasis)"
@@ -141,21 +146,24 @@ const TransactionsCardBalance = ({
             2/3
           </Text>
         </div>
+
+        {/* Treasury assets  */}
         <div className="flex flex-col gap-2">
           <div className="flex gap-1">
             <Text className="l2-light" color={'secondary'}>
               Treasury Assets
             </Text>
           </div>
-          <div>
-            {/* // todo -- Need to fix this  */}
-            <AvatarLabelGroup
-              avatarSrc={assetList || []}
+          <div className="flex items-center gap-2">
+            <AvatarGroup
+              avatars={assetList || []}
               shape="circle"
-              avatarShape="square"
+              variant="circular"
               size="sm"
-              title={assetList[0].alt + ' ' + `${assetList.length - 1} Other`}
             />
+            <Text className="l1" color={'primary'}>
+              {assetList[0].alt + ' ' + `${assetList.length - 1} Other`}
+            </Text>
           </div>
         </div>
       </div>
@@ -171,7 +179,24 @@ const TransactionSection = () => {
           Batch Transaction
         </Button>
       </SubHead>
-      <div>select all</div>
+      <div className="flex items-center gap-2">
+        <Checkbox
+          // checked={false}
+          onCheckedChange={(e) => {
+            console.log(e);
+            // if (e) {
+            //   setSelectedProjects([...selectedProjects, project.id]);
+            // } else {
+            //   setSelectedProjects(
+            //     selectedProjects.filter(
+            //       (id: number) => id !== project.id,
+            //     ),
+            //   );
+            // }
+          }}
+        />
+        <InputLabel>Select All</InputLabel>
+      </div>
       <div className="flex flex-col gap-3">
         <TransactionInfoCard />
         <TransactionInfoCard />

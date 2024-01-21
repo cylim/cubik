@@ -1,5 +1,7 @@
 import type { Metadata, ResolvingMetadata } from 'next';
 
+import { prisma } from '@cubik/database';
+
 import { ProfileTabs } from './components/tabs';
 
 interface Props {

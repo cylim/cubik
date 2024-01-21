@@ -1,5 +1,6 @@
 import TabLayout from '@/components/common/tabs/TabLayout';
 
+import { prisma } from '@cubik/database';
 import {
   AvatarLabelGroup,
   Button,

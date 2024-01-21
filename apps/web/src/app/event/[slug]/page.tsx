@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Leaderboard from '@/app/event/[slug]/components/Leaderboard';
 
+import { prisma } from '@cubik/database';
 import { AvatarLabelGroup, Button, Icon, Text } from '@cubik/ui';
 
 interface Props {

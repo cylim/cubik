@@ -10,7 +10,6 @@ export const moveImagesToCloudflare = async () => {
       where: {
         profilePicture: {
           not: {
-            equals: null,
             contains: 'imagedelivery.net',
           },
         },

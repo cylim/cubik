@@ -80,4 +80,6 @@ const InputLabel = forwardRef<HTMLElement | null, TextProps>(
   },
 );
 
+InputLabel.displayName = 'InputLabel';
+
 export { InputLabel };

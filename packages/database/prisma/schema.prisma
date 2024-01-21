@@ -14,8 +14,8 @@ model User {
   username          String             @unique
   mainWallet        String             @unique
   email             String?
+  cscore            Float                @default(0)
   profileNft        Json?
-  rank              Int                @default(0)
   isMigrated        Boolean            @default(false)
   type              UserType           @default(Contributor)
   profilePicture    String             @db.VarChar(500)
@@ -125,6 +125,7 @@ model Project {
   isMigrated        Boolean             @default(false)
   isDraft           Boolean             @default(false)
   tx                String              @default("")
+  rank              Int                @default(0)
   longDescription   String              @db.Text
   industry          Json?
   projectLink       String              @default("")

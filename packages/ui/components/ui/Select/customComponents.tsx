@@ -3,15 +3,16 @@
 import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { components } from 'react-select';
-import type { GroupBase, Options } from 'react-select';
+import type { GroupBase } from 'react-select';
 import { SelectComponents } from 'react-select/dist/declarations/src/components';
+
+import { Options, SelectOptionsType } from '@cubik/common-types';
 
 import { Icon } from '../../../icons/icon';
 import { cn } from '../../../lib/utils';
 import { AvatarLabelGroup } from '../Avatar/AvatarLabelGroup';
+import { Spinner } from '../Spinner/Spinner';
 import { Text } from '../text/text';
-
-export type { Options } from 'react-select';
 
 const menuVariants = {
   hidden: { opacity: 0, y: -20, transition: { duration: 0.2 } },
@@ -19,16 +20,30 @@ const menuVariants = {
   exit: { opacity: 0, y: 20, transition: { duration: 0.2 } },
 };
 
-type OptionType = {
-  label: string;
-  value: string;
-  icon?: string;
-  disabled?: boolean;
-  errorMessage?: string;
+export const InputFieldVariants = {
+  variants: {
+    size: {
+      md: 'min-h-[36.4px] md:min-h-[38.4px]',
+      sm: 'min-h-[32.4px] md:min-h-[34.4px]',
+    },
+  },
+};
+
+export const OptionVariants = {
+  variants: {
+    size: {
+      md: 'sm',
+      sm: 'xs',
+    },
+  },
 };
 
 export const CustomComponents: Partial<
-  SelectComponents<Options<OptionType>, boolean, GroupBase<Options<OptionType>>>
+  SelectComponents<
+    Options<SelectOptionsType>,
+    boolean,
+    GroupBase<Options<SelectOptionsType>>
+  >
 > = {
   // The wrapper around the entire select component.
   SelectContainer: (props) => {
@@ -36,6 +51,7 @@ export const CustomComponents: Partial<
   },
   // The second highest level wrapper around the components. It is responsible for the positioning of the ValueContainer and IndicatorsContainer. It is followed by the Menu.
   Control: (props) => {
+    const size = props.getStyles('control', props).size as 'sm' | 'md'; // this is a workaround for passing size from styles to components
     return (
       <div
         className={cn(
@@ -48,7 +64,12 @@ export const CustomComponents: Partial<
         )}
       >
         <components.Control {...props}>
-          <div className="flex w-full flex-row items-center">
+          <div
+            className={cn(
+              'flex w-full flex-row items-center',
+              InputFieldVariants.variants.size[size],
+            )}
+          >
             {props.children}
           </div>
         </components.Control>
@@ -56,13 +77,12 @@ export const CustomComponents: Partial<
     );
   },
   Menu: (props) => {
-    // console.log('is open', props.selectProps.menuIsOpen); todo: fix closing animation
     return (
-      <components.Menu {...props}>
-        <AnimatePresence>
-          {props.selectProps.menuIsOpen && (
+      <AnimatePresence>
+        {props.selectProps.menuIsOpen && (
+          <components.Menu {...props}>
             <motion.div
-              key={'select menu'}
+              key={props.selectProps.id}
               initial="hidden"
               animate="visible"
               exit="exit"
@@ -71,9 +91,9 @@ export const CustomComponents: Partial<
             >
               {props.children}
             </motion.div>
-          )}
-        </AnimatePresence>
-      </components.Menu>
+          </components.Menu>
+        )}
+      </AnimatePresence>
     );
   },
   MenuList: (props) => (
@@ -88,39 +108,104 @@ export const CustomComponents: Partial<
       <components.MenuList {...props} />
     </div>
   ),
-  IndicatorsContainer: (props) => {
-    return (
-      <div className="">
-        <components.IndicatorsContainer {...props} />
-      </div>
-    );
-  },
   Option: (props) => {
+    const size = props.getStyles('option', props).size as 'sm' | 'md';
     return (
       <div
-        className="cursor-pointer hover:bg-[var(--menu-list-item-surface-hovered)] text-[var(--menu-list-item-fg-default)] hover:text-[var(--menu-list-item-fg-hovered)] hover:rounded-lg hover:stroke-[var(--menu-list-item-hovered)] stroke-[var(--menu-list-item-icon)] focus-visible:outline-none p-2 py-2"
+        className="cursor-pointer hover:bg-[var(--menu-list-item-surface-hovered)] text-[var(--menu-list-item-fg-default)] hover:text-[var(--menu-list-item-fg-hovered)] hover:rounded-lg hover:stroke-[var(--menu-list-item-hovered)] stroke-[var(--menu-list-item-icon)] focus-visible:outline-none p-2 py-2 flex flex-row items-center transform scale-95"
         {...props.innerProps}
         {...props.innerRef}
       >
         {props.data.icon ? (
           <AvatarLabelGroup
-            size="xs"
+            size={cn('', OptionVariants.variants.size[size]) as 'xs' | 'sm'}
             shape="circle"
             avatarSrc={props.data.icon ? props.data.icon : undefined}
             title={props.data.label ? props.data.label : undefined}
           />
         ) : (
-          <Text className="l1" color={'inherit'}>
+          <Text className="b2 md:l1" color={'inherit'}>
             {props.label}
+          </Text>
+        )}
+        {props.data?.secondaryValue && (
+          <Text className="l2" color={'tertiary'}>
+            {props.data.secondaryValue}
           </Text>
         )}
       </div>
     );
   },
+  LoadingMessage: (props) => {
+    return (
+      <components.LoadingMessage {...props}>
+        <Text className="l2 border border-red-500" color={'secondary'}>
+          Hello world
+        </Text>
+      </components.LoadingMessage>
+    );
+  },
+  LoadingIndicator: (props) => {
+    return (
+      <AnimatePresence>
+        {props.selectProps.isLoading && (
+          <motion.div
+            layoutId={props.selectProps.id}
+            // animate opacity
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="transform translate-x-[-4px] transition-all p-1 rounded-md "
+          >
+            <Spinner />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    );
+  },
+  DropdownIndicator: (props) => {
+    return (
+      <AnimatePresence>
+        {!props.selectProps.isLoading && (
+          <motion.div
+            layoutId={props.selectProps.id}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <components.DropdownIndicator {...props}>
+              <div className="transform translate-x-[-4px] transition-all p-1 rounded-md hover:bg-[var(--color-surface-primary-transparent)] active:scale-95">
+                <Icon
+                  name="chevronDown"
+                  width={
+                    Number(props.getStyles('dropdownIndicator', props).size) ||
+                    20
+                  }
+                  height={
+                    Number(props.getStyles('dropdownIndicator', props).size) ||
+                    20
+                  }
+                  strokeWidth={2}
+                  color="var(--form-input-fg-default)"
+                />
+              </div>
+            </components.DropdownIndicator>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    );
+  },
   Placeholder: (props) => {
+    const size = props.getStyles('placeholder', props).size as 'sm' | 'md';
     return (
       <components.Placeholder {...props}>
-        <Text className="l1 top-0 absolute ps-2" color="placeholder">
+        <Text
+          className={cn(
+            'l1 top-0 absolute ps-2 flex items-center',
+            InputFieldVariants.variants.size[size],
+          )}
+          color="placeholder"
+        >
           {props.children}
         </Text>
       </components.Placeholder>
@@ -131,43 +216,57 @@ export const CustomComponents: Partial<
       return <components.Input {...props} />;
     } else if (props.isMulti) {
       return (
-        <div className="px-2">
+        <div className="px-2 flex items-center">
           <components.Input {...props} />
         </div>
       );
     } else {
-      return <components.Input {...props}>{props.children}</components.Input>;
+      return (
+        <div className="ps-2 ">
+          <components.Input {...props} />
+        </div>
+      );
     }
   },
   ValueContainer: (props) => {
+    const size = props.getStyles('valueContainer', props).size as 'sm' | 'md';
     return (
-      <div className="w-full items-center ps-1 flex flex-row flex-nowrap overflow-visible">
+      <div
+        className={cn(
+          'w-full ps-1 flex flex-row items-center flex-nowrap overflow-scroll',
+          InputFieldVariants.variants.size[size],
+        )}
+      >
         <components.ValueContainer {...props} />
       </div>
     );
   },
   SingleValue: (props) => {
+    const size = props.getStyles('singleValue', props).size as 'sm' | 'md';
     return (
       <components.SingleValue {...props}>
         <AnimatePresence>
           <motion.div
-            key={props.data?.label}
-            initial={{ opacity: 0, y: -5 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 5 }}
+            key={props.data?.value}
+            initial={{ opacity: 0, y: -5, scale: 0.85 }}
+            animate={{ opacity: 1, y: 0, scale: 0.9 }}
+            exit={{ opacity: 0, y: 5, scale: 0.85 }}
             transition={{ duration: 0.2 }}
-            className="text-[var(--color-fg-primary-depth)] absolute overflow-visible top-0 px-1"
+            className={cn(
+              'text-[var(--color-fg-primary-depth)] flex items-center absolute overflow-visible top-0 bottom-0 px-1',
+              InputFieldVariants.variants.size[size],
+            )}
           >
-            {props.data.icon ? (
+            {props.data?.icon ? (
               <AvatarLabelGroup
-                size="xs"
+                size={cn('', OptionVariants.variants.size[size]) as 'xs' | 'sm'}
                 shape="circle"
                 avatarSrc={props.data.icon}
                 title={props.data.label}
               />
             ) : (
-              <Text className="l1 px-1" color={'inherit'}>
-                {props.data.label}
+              <Text className="b2 md:l1 px-1" color={'inherit'}>
+                {props.data?.label ? props.data.label : ''}
               </Text>
             )}
           </motion.div>
@@ -207,17 +306,6 @@ export const CustomComponents: Partial<
           height={18}
         />
       </components.MultiValueRemove>
-    </div>
-  ),
-  DropdownIndicator: () => (
-    <div className="scale-75 md:scale-1 transform translate-x-[-4px] transition-all p-1 rounded-md hover:bg-[var(--color-surface-primary-transparent)] active:scale-95">
-      <Icon
-        name="chevronDown"
-        width={20}
-        height={20}
-        strokeWidth={2}
-        color="var(--form-input-fg-default)"
-      />
     </div>
   ),
 };

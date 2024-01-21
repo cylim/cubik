@@ -48,10 +48,7 @@ export const Step5 = ({
         <div className="flex flex-col">
           <InputContainer className="pb-8">
             <InputLabel>Add Team Members</InputLabel>
-            <InputFieldContainer
-              isError={errors.team ? true : false}
-              variant="md"
-            >
+            <InputFieldContainer isError={errors.team ? true : false} size="sm">
               <InputField
                 maxLength={32}
                 placeholder="Search username"

@@ -71,8 +71,8 @@ export const VerifyEmail = ({ setUserCreateState, userForm }: Props) => {
               Email Address
             </InputLabel>
             <InputFieldContainer
+              size="md"
               isError={userForm.formState.errors.email ? true : false}
-              variant="sm"
             >
               <InputField
                 placeholder="someone@gmail.com"
@@ -82,7 +82,7 @@ export const VerifyEmail = ({ setUserCreateState, userForm }: Props) => {
               />
             </InputFieldContainer>
             {userForm.formState.errors.email && (
-              <HelperText variant={'error'} fontSize={'md'}>
+              <HelperText variant={'error'}>
                 {userForm.formState.errors.email.message}
               </HelperText>
             )}

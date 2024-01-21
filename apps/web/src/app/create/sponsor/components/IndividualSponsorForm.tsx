@@ -13,7 +13,7 @@ import {
   InputLabel,
   InputLeftElement,
   InputRightElement,
-  SearchSelect,
+  Select,
   Text,
 } from '@cubik/ui';
 
@@ -54,14 +54,14 @@ const IndividualSponsorForm = ({
             </InputLabel>
 
             <InputFieldContainer
-              variant="sm"
+              size="sm"
               isError={
                 individualSponsorForm.formState.errors.totalCommitted
                   ? true
                   : false
               }
             >
-              <InputLeftElement withBorder={false}>$</InputLeftElement>
+              <InputLeftElement>$</InputLeftElement>
               <InputField
                 name="totalCommitted"
                 placeholder="100,000"
@@ -77,7 +77,7 @@ const IndividualSponsorForm = ({
               />
             </InputFieldContainer>
             {individualSponsorForm.formState.errors.totalCommitted && (
-              <HelperText variant={'error'} fontSize={'sm'}>
+              <HelperText variant={'error'}>
                 {individualSponsorForm.formState.errors.totalCommitted.message}
               </HelperText>
             )}
@@ -92,7 +92,7 @@ const IndividualSponsorForm = ({
                 return (
                   <li key={item.id}>
                     <div className="flex gap-3">
-                      <InputFieldContainer variant="md">
+                      <InputFieldContainer size="md">
                         <InputField
                           name="amount"
                           placeholder="100,000"
@@ -106,7 +106,7 @@ const IndividualSponsorForm = ({
                         <InputRightElement>
                           <Controller
                             render={({ field }) => (
-                              <SearchSelect
+                              <Select
                                 withoutBorder={true}
                                 placeholder="token"
                                 onChange={(e) => {

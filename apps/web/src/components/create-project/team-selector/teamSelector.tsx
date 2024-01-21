@@ -9,7 +9,7 @@ import { toast } from 'sonner';
 import { v4 as uuidV4 } from 'uuid';
 
 import { ApiResponseType } from '@cubik/database/api';
-import { Icon, SearchSelect, Text } from '@cubik/ui';
+import { Icon, Select, Text } from '@cubik/ui';
 
 interface Props {
   projectForm: UseFormReturn<ProjectFormData, any, undefined>;
@@ -56,7 +56,7 @@ const TeamSelectorInput = ({
 
   return (
     <div className="flex w-full items-center gap-1">
-      <SearchSelect
+      <Select
         placeholder="username"
         isMulti={false}
         onChange={(e) => {

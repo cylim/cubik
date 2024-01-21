@@ -80,7 +80,7 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
               </InputLabel>
               <InputFieldContainer
                 isError={userForm.formState.errors.username ? true : false}
-                variant="sm"
+                size="sm"
               >
                 <InputField
                   placeholder="@toly"
@@ -90,7 +90,7 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
                 />
               </InputFieldContainer>
               {userForm.formState.errors.username && (
-                <HelperText variant={'error'} fontSize={'md'}>
+                <HelperText variant={'error'}>
                   {userForm.formState.errors.username.message}
                 </HelperText>
               )}

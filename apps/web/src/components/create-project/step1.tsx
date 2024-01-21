@@ -83,10 +83,7 @@ export const Step1 = ({
             >
               Name of the project
             </InputLabel>
-            <InputFieldContainer
-              isError={errors.name ? true : false}
-              variant="md"
-            >
+            <InputFieldContainer isError={errors.name ? true : false} size="md">
               <InputField
                 maxLength={32}
                 placeholder="Project Name"
@@ -107,7 +104,7 @@ export const Step1 = ({
             </InputLabel>
             <InputFieldContainer
               isError={errors.shortDescription ? true : false}
-              variant="md"
+              size="md"
             >
               <InputField
                 maxLength={80}

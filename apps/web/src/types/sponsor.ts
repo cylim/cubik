@@ -3,20 +3,25 @@ type UpfrontPayType = {
   amount: GLfloat;
 };
 
+type TreasuryManagers = {
+  username: string;
+  id: string;
+  mainWallet: string;
+};
+
 export interface OrganizationSponsorFormData {
-  name: string;
   totalCommitted: GLfloat;
   upfrontPay: UpfrontPayType[];
-  paidToken: string;
+  name: string;
   logo: string;
-  selfCustody: boolean;
   isSponsorshipPublic: boolean;
+  wantsSelfCustody: boolean;
+  treasuryMangers: TreasuryManagers[];
 }
 
 export interface IndividualSponsorFormData {
   totalCommitted: GLfloat;
   upfrontPay: UpfrontPayType[];
-  paidToken: string;
   selfCustody: boolean;
   isSponsorshipPublic: boolean;
 }

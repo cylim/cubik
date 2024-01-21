@@ -46,7 +46,7 @@ export const Step2 = ({
             name="industry"
             control={control}
             render={() => (
-              <SearchSelect
+              <CubikSelect
                 placeholder="Search Category here"
                 isMulti={true}
                 onChange={(e) => {

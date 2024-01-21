@@ -96,7 +96,7 @@ const CommentSection = ({ user, projectId }: Props) => {
         Comments
       </Text>
       <InputContainer inputVariant="md">
-        <InputFieldContainer isDisabled={false} variant="md">
+        <InputFieldContainer isDisabled={false} size="md">
           <InputField
             id="comment-inputbox"
             name="comment"

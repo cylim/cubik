@@ -189,8 +189,8 @@ export default async function Home() {
             </div>
           </div>
           <div className="flex h-full w-full flex-1 flex-col gap-8 px-4 py-8 lg:w-2/3">
-            <InputFieldContainer variant={'md'}>
-              <InputLeftElement withBorder={false}>
+            <InputFieldContainer size={'md'}>
+              <InputLeftElement>
                 <Icon name="search" />
               </InputLeftElement>
               <InputField placeholder="Search" />

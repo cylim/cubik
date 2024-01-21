@@ -95,8 +95,8 @@ export const ContributorsTable = async ({ eventId, searchParams }: Props) => {
       <div className="flex flex-col items-center justify-between gap-3 p-5 md:flex-row">
         <SubHead heading="All Contributors" />
         <div className="flex items-center justify-between gap-5">
-          <InputFieldContainer variant={'md'}>
-            <InputLeftElement withBorder={false}>
+          <InputFieldContainer size={'md'}>
+            <InputLeftElement>
               <Icon name="search" />
             </InputLeftElement>
             <InputField placeholder="Search" />

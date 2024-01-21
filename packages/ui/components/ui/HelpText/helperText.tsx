@@ -8,10 +8,13 @@ import { Text } from '../text/text';
 const helperTextVariants = cva('transition-colors', {
   variants: {
     variant: {
-      success: 'text-[var(--color-fg-success)]',
-      default: 'text-[var(--color-fg-tertiary)]',
-      error: 'text-[var(--color-fg-error)]',
+      default: 'text-[var(--color-fg-primary-base)]',
+      success: 'text-[var(--color-fg-positive-base)]',
+      error: 'text-[var(--color-fg-negative-base)]',
     },
+  },
+  defaultVariants: {
+    variant: 'default',
   },
 });
 
@@ -19,12 +22,13 @@ type TextProps = React.HTMLAttributes<HTMLElement> &
   VariantProps<typeof helperTextVariants> & { show?: boolean };
 
 const HelperText = forwardRef<HTMLElement | null, TextProps>(
-  ({ className, children, variant, show, ...props }) => {
+  ({ className, children, variant, show }) => {
     return (
       <AnimatePresence>
         {show && (
           <motion.div
             layout
+            layoutId={children?.toString()}
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}

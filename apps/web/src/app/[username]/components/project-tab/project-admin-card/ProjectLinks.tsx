@@ -27,7 +27,7 @@ const ProjectLinks = ({ editProjectForm }: IEditProjectLinkProps) => {
           Project URL
         </InputLabel>
 
-        <InputFieldContainer variant="sm">
+        <InputFieldContainer size="sm">
           <InputField
             name="projectURL"
             placeholder="https://unified.jup.ag"
@@ -44,12 +44,12 @@ const ProjectLinks = ({ editProjectForm }: IEditProjectLinkProps) => {
 
         <div className="flex flex-col gap-2">
           <InputFieldContainer
-            variant="sm"
+            size="sm"
             isError={
               editProjectForm.formState.errors.twitterHandle ? true : false
             }
           >
-            <InputLeftElement withBorder={true}>
+            <InputLeftElement>
               <Icon
                 name="X"
                 height={16}
@@ -72,16 +72,16 @@ const ProjectLinks = ({ editProjectForm }: IEditProjectLinkProps) => {
             />
           </InputFieldContainer>
           {editProjectForm.formState.errors.twitterHandle && (
-            <HelperText variant={'error'} fontSize={'sm'}>
+            <HelperText variant={'error'}>
               {editProjectForm.formState.errors.twitterHandle.message}
             </HelperText>
           )}
 
           <InputFieldContainer
-            variant="sm"
+            size="sm"
             isError={editProjectForm.formState.errors.githubLink ? true : false}
           >
-            <InputLeftElement withBorder={true}>
+            <InputLeftElement>
               <Icon
                 name="github"
                 height={16}
@@ -99,18 +99,18 @@ const ProjectLinks = ({ editProjectForm }: IEditProjectLinkProps) => {
             />
           </InputFieldContainer>
           {editProjectForm.formState.errors.githubLink && (
-            <HelperText variant={'error'} fontSize={'sm'}>
+            <HelperText variant={'error'}>
               {editProjectForm.formState.errors.githubLink.message}
             </HelperText>
           )}
 
           <InputFieldContainer
-            variant="sm"
+            size="sm"
             isError={
               editProjectForm.formState.errors.discordLink ? true : false
             }
           >
-            <InputLeftElement withBorder={true}>
+            <InputLeftElement>
               <Icon
                 name="discord"
                 height={16}
@@ -130,17 +130,17 @@ const ProjectLinks = ({ editProjectForm }: IEditProjectLinkProps) => {
             />
           </InputFieldContainer>
           {editProjectForm.formState.errors.discordLink && (
-            <HelperText variant={'error'} fontSize={'sm'}>
+            <HelperText variant={'error'}>
               {editProjectForm.formState.errors.discordLink.message}
             </HelperText>
           )}
           <InputFieldContainer
-            variant="sm"
+            size="sm"
             isError={
               editProjectForm.formState.errors.telegramLink ? true : false
             }
           >
-            <InputLeftElement withBorder={true}>
+            <InputLeftElement>
               <Icon
                 name="telegram"
                 height={16}
@@ -160,7 +160,7 @@ const ProjectLinks = ({ editProjectForm }: IEditProjectLinkProps) => {
             />
           </InputFieldContainer>
           {editProjectForm.formState.errors.telegramLink && (
-            <HelperText variant={'error'} fontSize={'sm'}>
+            <HelperText variant={'error'}>
               {editProjectForm.formState.errors.telegramLink.message}
             </HelperText>
           )}

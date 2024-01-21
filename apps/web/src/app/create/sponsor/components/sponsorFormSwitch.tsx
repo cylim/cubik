@@ -13,13 +13,13 @@ interface Props {
 }
 export const SponsorFormSwitch = ({ isActive, change }: Props) => {
   return (
-    <div className="flex flex-row gap-4">
-      <SegmentContainer size="sm">
+    <div className="flex w-full flex-row gap-4">
+      <SegmentContainer size="md">
         <SegmentItem
           isActive={isActive === 'organization' ? true : false}
           onClick={() => change('organization')}
         >
-          Sponsor as Organizaiton
+          Sponsor as Organization
         </SegmentItem>
         <SegmentItem
           isActive={isActive === 'individual' ? true : false}

@@ -34,7 +34,6 @@ export const Icon = ({
 }: Props) => {
   const icon = iconLibrary[name];
   const viewBox = icon?.viewBox;
-
   const renderedPaths = icon?.paths.map((value, index) => (
     <motion.path
       key={index}

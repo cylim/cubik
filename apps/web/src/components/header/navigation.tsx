@@ -52,20 +52,26 @@ const TopNavbar = () => {
   });
   const { theme } = useTheme();
 
+  // when on other pages except explorer page or create page
   let background = 'bg-[var(--body-surface)]';
+
+  // when on explorer page / home page
   if (pathname === '/' && theme === 'light')
     background =
       'bg-gradient-to-b from-[var(--body-surface)] to-transparent via-40% dark:from-[var(--body-surface)] dark:to-[var(--body-surface)] dark:via-10%';
-  else if (pathname.includes('/create'))
-    background =
-      'light:bg-gradient-to-b light:from-[#fff] light:to-transparent light:via-10% dark:bg-transparent';
+  // when on any page with /create or /apply but only in light mode
+  else if (
+    pathname.includes('/create') ||
+    (pathname.includes('/apply') && theme === 'light')
+  )
+    background = 'bg-gradient-to-b from-[#FAFAFA] to-transparent via-10%';
 
   useEffect(() => {
     if (typeof document !== 'undefined') {
       const themeMetaTag = document.querySelector('meta[name="theme-color"]');
       if (themeMetaTag) {
-        if (pathname.includes('/create'))
-          if (banner) {
+        if (pathname.includes('/create') || pathname.includes('/apply'))
+          if (banner.show) {
             themeMetaTag.setAttribute('content', '#F4D03F');
           } else
             themeMetaTag.setAttribute(

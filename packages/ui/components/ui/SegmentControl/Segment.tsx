@@ -27,9 +27,9 @@ const SizeContext = createContext<{ size: 'sm' | 'md' | 'lg'; id: string }>({
 const segmentTextVariant = cva('whitespace-nowrap', {
   variants: {
     size: {
-      sm: 'l3',
-      md: 'l2',
-      lg: 'l1',
+      sm: 'l2 md:l3',
+      md: 'l2 md:l2',
+      lg: 'l1 md:l1',
     },
   },
   defaultVariants: {
@@ -39,9 +39,9 @@ const segmentTextVariant = cva('whitespace-nowrap', {
 const segmentContainerVariant = cva('', {
   variants: {
     size: {
-      sm: 'h-[36px]',
-      md: 'h-[40px]',
-      lg: 'h-[44px]',
+      sm: 'h-[36px] rounded-lg',
+      md: 'h-[40px] rounded-lg',
+      lg: 'h-[44px] rounded-[10px]',
     },
   },
   defaultVariants: {
@@ -51,9 +51,9 @@ const segmentContainerVariant = cva('', {
 const segmentItemVariant = cva('', {
   variants: {
     size: {
-      sm: 'h-[28px]',
-      md: 'h-[32px]',
-      lg: 'h-[36px]',
+      sm: 'h-[28px] rounded-[6px]',
+      md: 'h-[32px] rounded-[6px]',
+      lg: 'h-[36px] rounded-[8px]',
     },
   },
   defaultVariants: {
@@ -68,7 +68,7 @@ export const SegmentContainer = ({ children, size }: SegmentContainerProps) => {
       <div
         className={cn(
           segmentContainerVariant({ size }),
-          'bg-[var(--segment-control-surface-inactive)] w-full p-1 gap-1 flex justify-center items-center rounded-[8px]',
+          'bg-[var(--segment-control-surface-inactive)] w-full p-1 gap-1 flex justify-center items-center',
         )}
       >
         {children}
@@ -99,7 +99,7 @@ export const SegmentItem = ({
       scroll={false}
       href={href}
       className={cn(
-        'relative transition-all px-6 w-full h-full flex items-center justify-center gap-2 cursor-pointer text-center rounded-[6px]',
+        'relative transition-all px-6 w-full h-full flex items-center justify-center gap-2 cursor-pointer text-center',
       )}
     >
       {isActive && (
@@ -108,7 +108,7 @@ export const SegmentItem = ({
           transition={{ type: 'spring', bounce: 0.1, duration: 0.05 }}
           className={cn(
             segmentItemVariant({ size }),
-            'bg-[var(--segment-control-surface-active)] z-0 shadow-md absolute inset-0 w-full rounded-[6px]',
+            'bg-[var(--segment-control-surface-active)] z-0 shadow-md absolute inset-0 w-full',
             className,
           )}
         />

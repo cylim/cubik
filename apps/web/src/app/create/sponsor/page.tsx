@@ -12,24 +12,14 @@ import {
   IndividualSponsorFormData,
   OrganizationSponsorFormData,
 } from '@/types/sponsor';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 const SponsorFormPage = () => {
   const [progress, setProgress] = useState<number>(0);
   const [sponsorFormType, setSponsorFormType] =
     useState<sponsorType>('organization');
-
-  const organizationSponsorForm = useForm<OrganizationSponsorFormData>({
-    defaultValues: {
-      name: '',
-      totalCommitted: 0,
-      upfrontPay: [{ token: '', amount: 0 }],
-      paidToken: '',
-      selfCustody: false,
-      logo: '',
-      isSponsorshipPublic: true,
-    },
-  });
 
   const individualSponsorForm = useForm<IndividualSponsorFormData>({
     defaultValues: {
@@ -51,28 +41,47 @@ const SponsorFormPage = () => {
 
   return (
     <FormContainer
-      title="Become a Sponsor"
-      subtitle="Become a sponsor of the ongoing grant round"
+      title="Join as Grant Round Partner"
+      subtitle="Collaborate in our mission to fund public goods by joining this grant round as a partner"
     >
       <SponsorFormSwitch
         change={setSponsorFormType}
         isActive={sponsorFormType}
       />
 
-      {sponsorFormType === 'organization' && (
+      {/* <AnimatePresence initial={false}> */}
+      {sponsorFormType === 'organization' ? (
+        // <motion.div
+        //   key={'organization'}
+        //   className=" w-full"
+        //   initial={{ opacity: 0 }}
+        //   animate={{ opacity: 1 }}
+        //   exit={{ opacity: 0 }}
+        //   transition={{
+        //     duration: 0.1,
+        //   }}
+        // >
         <OrganizationSponsorForm
-          organizationSponsorForm={organizationSponsorForm}
-          submitEventData={submitOrgSponsorData}
           progress={progress}
           setProgress={setProgress}
         />
-      )}
-      {sponsorFormType === 'individual' && (
+      ) : (
+        // </motion.div>
+        // <motion.div
+        //   key="individual"
+        //   className=" w-full"
+        //   initial={{ opacity: 0 }}
+        //   animate={{ opacity: 1 }}
+        //   exit={{ opacity: 0 }}
+        //   transition={{ duration: 0.1 }}
+        // >
         <IndividualSponsorForm
           individualSponsorForm={individualSponsorForm}
           submitEventData={submitIndividualData}
         />
+        // </motion.div>
       )}
+      {/* </AnimatePresence> */}
     </FormContainer>
   );
 };

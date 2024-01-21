@@ -5,44 +5,35 @@ import CodeComponent from '@/app/home-page-components/code-component';
 import PageHOC from '@/app/home-page-components/components/pageHOC';
 import DocsTabsHOC from '@/app/home-page-components/components/Tabs';
 
+import { SelectOptionsType } from '@cubik/common-types';
 import { getValidToken } from '@cubik/common/tokens/getValidTokenList';
-import {
-  Options, // move this to common types
-  SearchSelect,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Text,
-} from '@cubik/ui';
-
-type OptionsType = {
-  // move this to common types
-  value: string;
-  label: string;
-  icon?: string;
-  disabled?: boolean;
-  errorMessage?: string;
-};
+import { Select, Text } from '@cubik/ui';
 
 const SelectPage = () => {
-  const [selectedValue1, setSelectedValue1] = useState<[] | undefined>();
-  const [selectedValue2, setSelectedValue2] = useState<[] | undefined>();
-  const [selectedValue3, setSelectedValue3] = useState<[] | undefined>();
-  const [selectedValue4, setSelectedValue4] = useState<[] | undefined>();
+  const [selectedValue1, setSelectedValue1] = useState<
+    SelectOptionsType[] | undefined
+  >();
+  const [selectedValue2, setSelectedValue2] = useState<
+    SelectOptionsType[] | undefined
+  >();
+  const [selectedValue3, setSelectedValue3] = useState<
+    SelectOptionsType[] | undefined
+  >();
+  const [selectedValue4, setSelectedValue4] = useState<
+    SelectOptionsType[] | undefined
+  >();
   const tokens = getValidToken();
 
-  const TokenOptions: Options<OptionsType> = tokens.map((token) => ({
+  const TokenOptions: SelectOptionsType[] = tokens.map((token) => ({
     value: token.address,
     label: token.symbol,
     icon: token.logoURI,
   }));
 
-  const data: Options<OptionsType> = [
+  const data: SelectOptionsType[] = [
     { value: 'apple', label: 'Apple' },
     { value: 'banana', label: 'Banana' },
-    { value: 'orange', label: 'Orange', errorMessage: 'there was some error' },
+    { value: 'orange', label: 'Orange' },
     { value: 'mango', label: 'Mango' },
     { value: 'grape', label: 'Grape' },
     { value: 'pineapple', label: 'Pineapple' },
@@ -71,7 +62,7 @@ const SelectPage = () => {
             <div className="rounded-md border border-[var(--color-border-primary-base)] bg-[var(--color-bg-primary-base)] p-10">
               <div className="align-center flex flex-row flex-wrap justify-start gap-12">
                 <div className="mx-auto w-64">
-                  <SearchSelect
+                  <Select
                     placeholder="Search Category here"
                     isMulti={true}
                     onChange={(e) => {
@@ -92,8 +83,8 @@ const SelectPage = () => {
             </Text>
             <div className="rounded-md border border-[var(--color-border-primary-base)] bg-[var(--color-bg-primary-base)] p-10">
               <div className="align-center flex flex-row flex-wrap justify-start gap-12">
-                <div className="mx-auto w-32">
-                  <SearchSelect
+                <div className="mx-auto w-44">
+                  <Select
                     placeholder="Search Category here"
                     isMulti={false}
                     isSearchable={false}
@@ -102,12 +93,13 @@ const SelectPage = () => {
                       if (!e) return;
                       setSelectedValue2(e as any);
                     }}
-                    value={selectedValue2 as any}
-                    options={TokenOptions as any}
+                    size="md"
+                    value={selectedValue2}
+                    options={TokenOptions}
                   />
                 </div>
                 <div className="mx-auto w-64">
-                  <SearchSelect
+                  <Select
                     placeholder="Search Category here"
                     isMulti={true}
                     onChange={(e) => {
@@ -120,9 +112,10 @@ const SelectPage = () => {
                   />
                 </div>
                 <div className="mx-auto w-64">
-                  <SearchSelect
+                  <Select
                     placeholder="Search Category here"
                     isMulti={false}
+                    size="md"
                     isSearchable={false}
                     onChange={(e) => {
                       if (!e) return;

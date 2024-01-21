@@ -17,8 +17,8 @@ export const ProjectSearch = () => {
   const [search, setSearch] = useState<string>('');
   return (
     <InputContainer inputVariant="sm">
-      <InputFieldContainer isDisabled={false} variant="md">
-        <InputLeftElement withBorder={false}>
+      <InputFieldContainer isDisabled={false} size="md">
+        <InputLeftElement>
           <Icon
             name="search"
             color="var(--form-input-fg-default)"

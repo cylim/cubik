@@ -11,8 +11,8 @@ const titleVariants = cva(
   {
     variants: {
       size: {
-        xs: 'l2',
-        sm: 'l1',
+        xs: 'l1 md:l2',
+        sm: 'b2 md:l1',
         md: 'h5',
         lg: 'h4',
         xl: 'h4',

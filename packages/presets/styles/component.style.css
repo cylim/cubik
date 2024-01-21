@@ -213,7 +213,7 @@
     --form-checkbox-surface-default-checked: var(--color-interaction-primary);
     --form-checkbox-surface-default: var(--form-input-surface-default);
     --form-input-border-disabled: var(--color-border-primary-depth);
-    --form-input-border-error: var(--color-border-error);
+    --form-input-border-error: var(--color-border-negative-base);
     --form-input-border-focused: var(--color-border-info-base);
     --form-input-border-hovered: var(--color-border-cool-emphasis);
     --form-input-border-default: var(--color-border-primary-base);

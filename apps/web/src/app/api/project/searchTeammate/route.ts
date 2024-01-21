@@ -36,6 +36,8 @@ export const GET = async (req: NextRequest) => {
       select: {
         id: true,
         username: true,
+        profilePicture: true,
+        mainWallet: true,
       },
     });
 

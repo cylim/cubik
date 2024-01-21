@@ -56,6 +56,7 @@ export const ImageUploader = ({
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
     if (e.target.files && e.target.files[0]) {
       processFile(e.target.files[0]);
       setFile([e.target.files[0]]);
@@ -77,7 +78,7 @@ export const ImageUploader = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
           >
-            <Text className="l2" color={'primary'}>
+            <Text className="l1 md:l2" color={'primary'}>
               Drop, Paste here or{' '}
               <label className="text-[--form-uploader-link-default] cursor-pointer">
                 Browse
@@ -200,7 +201,7 @@ export const ImageUploader = ({
   const Description = React.memo(() => {
     console.log('description rerendering');
     return (
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {!logo && !errorMessage && !isUploading && (
           <motion.div
             key="recommended size description"

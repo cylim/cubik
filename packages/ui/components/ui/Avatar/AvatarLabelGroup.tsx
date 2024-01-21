@@ -22,8 +22,8 @@ interface AvatarLabelProps {
 const subTitleVariants = cva('flex relative', {
   variants: {
     size: {
-      xs: 'l2',
-      sm: 'l1',
+      xs: 'l1 md:l2',
+      sm: 'b2 md:l1',
       md: 'h5',
       lg: 'h4',
       xl: 'h4',
@@ -40,8 +40,8 @@ const descriptionVariants = cva(
   {
     variants: {
       size: {
-        xs: 'l3-light',
-        sm: 'l3-light',
+        xs: 'l2 md:l3-light',
+        sm: 'l2 md:l3-light',
         md: 'b4-light',
         lg: 'b4-light',
         xl: 'b3-light',
@@ -99,7 +99,7 @@ const AvatarLabelGroup: React.FC<AvatarLabelProps> = ({
   return (
     <div className={cn(avatarLabelContainerVariants({ size }), className)}>
       {/* Image Container */}
-      <div className="flex-shrink-0 flex">
+      <div className="flex items-center justify-center">
         {typeof avatarSrc === 'string' ? (
           <Avatar src={avatarSrc} alt="sample" size={size} variant={shape} />
         ) : (

@@ -77,7 +77,7 @@ export const Step3 = ({ setStep, projectForm, forceSave }: Props) => {
               <InputLabel>Github</InputLabel>
               <InputFieldContainer
                 isError={projectForm.formState.errors.github ? true : false}
-                variant="md"
+                size="md"
               >
                 <InputField
                   onChange={(e) => {
@@ -92,7 +92,7 @@ export const Step3 = ({ setStep, projectForm, forceSave }: Props) => {
               <InputLabel>X.come</InputLabel>
               <InputFieldContainer
                 isError={projectForm.formState.errors.twitter ? true : false}
-                variant="md"
+                size="md"
               >
                 <InputField
                   onChange={(e) => {

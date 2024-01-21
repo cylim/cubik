@@ -4,10 +4,22 @@ import React, { createContext, useContext, useState } from 'react';
 
 import { cn } from '../../../lib/utils';
 
+export const InputFieldContainerVariants = {
+  variants: {
+    size: {
+      md: 'h-[38px] md:h-[40px]',
+      sm: 'h-[34px] md:h-[36px]',
+    },
+  },
+};
+
 type InputContextType = {
   isFocused: boolean;
   setIsFocused: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 export const InputContext = createContext<InputContextType>({
   isFocused: false,
@@ -16,21 +28,19 @@ export const InputContext = createContext<InputContextType>({
 
 export const InputLeftElement = ({
   children,
-  withBorder,
   isDisabled,
 }: {
-  children: React.ReactNode;
-  withBorder: boolean;
+  children: React.ReactNode | React.ReactNode[];
   isDisabled?: boolean;
 }) => {
   return (
     <div
       className={cn(
+        // 'border border-red-500',
         isDisabled
           ? 'text-[var(--form-input-fg-disabled)]'
           : 'text-[var(--form-input-fg-default)]',
-        'inline-flex items-center rounded-l-[8px] px-3',
-        withBorder && 'border-r  border-[var(--form-input-border-default)]',
+        'inline-flex gap-2 items-center rounded-l-[8px] ps-3',
       )}
     >
       {children}
@@ -39,21 +49,22 @@ export const InputLeftElement = ({
 };
 export const InputRightElement = ({
   children,
-  withBorder,
   isDisabled,
+  className,
 }: {
   children: React.ReactNode;
-  withBorder?: boolean;
   isDisabled?: boolean;
+  className?: string;
 }) => {
   return (
     <div
       className={cn(
+        // 'border border-red-500',
         isDisabled
           ? 'text-[var(--form-input-fg-disabled)]'
           : 'text-[var(--form-input-fg-default)]',
-        'relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-[8px] px-3 py-2 text-sm font-semibold border-0 border-l-0',
-        withBorder && 'border-r  border-[var(--form-input-border-default)]',
+        'inline-flex items-center rounded-l-[8px] pe-3',
+        className,
       )}
     >
       {children}
@@ -65,12 +76,12 @@ export const InputFieldContainer = ({
   children,
   isError,
   isDisabled,
-  variant,
+  size,
 }: {
   children: React.ReactNode;
   isDisabled?: boolean;
   isError?: boolean;
-  variant: 'md' | 'sm';
+  size: 'md' | 'sm';
 }) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
@@ -81,13 +92,35 @@ export const InputFieldContainer = ({
         isError,
         isDisabled,
         isFocused,
-        variant,
+        size,
         setIsFocused,
         disabled: isDisabled,
       } as Partial<typeof child.props>);
     }
     return child;
   });
+
+  const disabledClasses = isDisabled
+    ? 'cursor-not-allowed border-[var(--form-input-border-disabled)] bg-[var(--form-input-surface-disabled)]'
+    : '';
+  const sizeClasses = InputFieldContainerVariants.variants.size[size];
+  const focusClasses = isFocused
+    ? 'border border-[var(--form-input-border-focused)] ring-4 ring-[var(--color-surface-primary-transparent)] bg-[var(--form-input-surface-focused)] text-[var(--form-input-fg-focused)]'
+    : '';
+  const errorClasses = isError
+    ? 'border border-[var(--form-input-border-error)] hover:border-[var(--form-input-border-error)] ring-4 ring-[var(--color-surface-negative-transparent)] bg-[var(--form-input-surface-error)] text-[var(--form-input-fg-error)]'
+    : 'border-[var(--form-input-border-default)]';
+  const baseClasses =
+    'flex rounded-[8px] w-full transition-all bg-[var(--form-input-surface-default)] hover:text-[var(--form-input-fg-hovered)] border hover:ring-4 ring-[var(--color-surface-primary-transparent)] hover:bg-[var(--form-input-surface-hovered)]';
+
+  const combinedClasses = cn(
+    baseClasses,
+    sizeClasses,
+    disabledClasses,
+    focusClasses,
+    errorClasses,
+  );
+
   return (
     <InputContext.Provider
       value={{
@@ -95,39 +128,22 @@ export const InputFieldContainer = ({
         setIsFocused,
       }}
     >
-      <div
-        className={cn(
-          isDisabled && 'cursor-not-allowed',
-          variant === 'md' ? 'h-[40px]' : 'h-[36px]',
-          'flex rounded-[8px] w-full px-1 transition-all bg-[var(--form-input-surface-default)] hover:text-[var(--form-input-fg-hovered)] border hover:ring-4  ring-[var(--color-surface-primary-transparent)] hover:bg-[var(--form-input-surface-hovered)',
-          isFocused &&
-            'border border-[var(--form-input-border-focused)] ring-4 ring-[var(--color-surface-primary-transparent)] bg-[var(--form-input-surface-focused)] text-[var(--form-input-fg-focused)]',
-          isError
-            ? 'border border-[var(--form-input-border-error)] hover:border-[var(--form-input-border-error)] ring-4 ring-[var(--color-surface-negative-transparent)] bg-[var(--form-input-surface-error)] text-[var(--form-input-fg-error)]'
-            : 'border-[var(--form-input-border-default)]',
-          isDisabled &&
-            'border-[var(--form-input-border-disabled)] bg-[var(--form-input-surface-disabled)',
-        )}
-      >
-        {childrenWithProps}
-      </div>
+      <div className={combinedClasses}>{childrenWithProps}</div>
     </InputContext.Provider>
   );
 };
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
-
 export const InputField = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, onFocus, onBlur, ...props }, ref) => {
-    const { isFocused, setIsFocused } = useContext(InputContext);
+  function InputField({ type, onFocus, onBlur, className, ...props }, ref) {
+    const { setIsFocused } = useContext(InputContext);
     return (
       <input
         className={cn(
           'bg-[var(--form-input-surface-default)] text-[var(--form-input-fg-default)]',
           'disabled:text-[var(--form-input-fg-disabled)] disabled:cursor-not-allowed disabled:opacity-50 disabled:border-[var(--form-input-border-disabled)] disabled:bg-[var(--form-input-surface-disabled)]',
-          'block w-full flex-1 rounded-[8px] border-0 p-3 outline-none font-regular text-md ',
-          'placeholder:text-[var(--form-input-border-default)] placeholder:text-sm ',
+          'block w-full flex-1 rounded-[8px] border-0 p-3 outline-none font-medium text-sm md:text-md',
+          'placeholder:text-[var(--form-input-border-default)] placeholder:text-sm placeholder:font-normal',
+          className,
         )}
         type={type}
         ref={ref}
@@ -137,11 +153,13 @@ export const InputField = React.forwardRef<HTMLInputElement, InputProps>(
         }}
         onBlur={(e) => {
           setIsFocused(false);
-          onFocus && onFocus(e);
+          onBlur && onBlur(e);
         }}
-        {...props}
         autoComplete="off"
+        {...props}
       />
     );
   },
 );
+
+InputField.displayName = 'InputField';

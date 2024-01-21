@@ -47,7 +47,7 @@ export const Navbar = ({
       <div className="container mx-auto max-w-7xl px-6 h-full">
         <div className="flex justify-between items-center h-full">
           <Link href={'/'}>
-            <Logo variant="text" />
+            <Logo variant="icon" />
           </Link>
           {/* <ul className="hidden md:flex gap-x-6 text-white">
             <li>

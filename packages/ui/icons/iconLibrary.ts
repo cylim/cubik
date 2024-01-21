@@ -144,6 +144,17 @@ export const iconLibrary: Record<string, Icon> = {
       },
     ],
   },
+  arrowUp: {
+    viewBox: '0 0 24 24',
+    paths: [
+      {
+        d: 'M6 8.83a30.23 30.23 0 0 1 5.406-5.62A.949.949 0 0 1 12 3m6 5.83a30.233 30.233 0 0 0-5.406-5.62A.949.949 0 0 0 12 3m0 0v18',
+        fill: false,
+        stroke: true,
+      },
+    ],
+  },
+
   inbox: {
     viewBox: '0 0 24 24',
     paths: [
@@ -461,6 +472,17 @@ export const iconLibrary: Record<string, Icon> = {
       },
     ],
   },
+  infoCircleFilled: {
+    viewBox: '0 0 24 24',
+    paths: [
+      {
+        d: 'M12 12v4m0-7.375v-.001M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z',
+        fill: true,
+        stroke: false,
+      },
+    ],
+  },
+
   //do not change this
   moon: {
     viewBox: '0 0 24 24',
@@ -1116,6 +1138,22 @@ export const iconLibrary: Record<string, Icon> = {
       },
       {
         d: 'M22.2955 15.5698C22.1694 16.3826 21.9437 17.1762 21.6237 17.9329C21.5493 18.1086 21.3786 18.2188 21.1937 18.2197M18.7655 17.4511C19.5105 17.7997 20.2952 18.0548 21.1018 18.211C21.1326 18.217 21.1633 18.2198 21.1937 18.2197M21.1937 18.2197C21.0041 16.1863 19.293 14.5947 17.2101 14.5947C15.0003 14.5947 13.209 16.3861 13.209 18.5958C13.209 20.8056 15.0003 22.5969 17.2101 22.5969C17.8537 22.5969 18.4618 22.445 19.0005 22.175',
+        fill: false,
+        stroke: true,
+      },
+    ],
+  },
+  infoCircleDuoSolid: {
+    viewBox: '0 0 24 24',
+    paths: [
+      {
+        d: 'M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2Z',
+        opacity: 0.28,
+        fill: true,
+        stroke: false,
+      },
+      {
+        d: 'M12 12V16M12 8.62503V8.6239',
         fill: false,
         stroke: true,
       },

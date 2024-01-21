@@ -44,6 +44,9 @@ export const getProject = async (slug: string) => {
           },
         },
         team: {
+          where: {
+            isArchive: false,
+          },
           select: {
             user: {
               select: {

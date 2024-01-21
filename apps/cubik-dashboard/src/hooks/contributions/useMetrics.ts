@@ -20,7 +20,6 @@ const queryFn = async ({ scope }: Data) => {
     `/api/contributions/metrics?scope=${scope}`,
   );
   const responseData = response.data as ResponseType;
-  console.log('first', responseData.result);
   if (!responseData.success) {
     throw new Error(responseData.message);
   }

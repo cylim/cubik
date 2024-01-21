@@ -1,11 +1,9 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
-import { number } from 'zod';
-
 import { decodeToken } from '@cubik/auth';
+import { prisma } from '@cubik/database';
 import { handleApiClientError, successHandler } from '@cubik/database/api';
 import { logApi } from '@cubik/logger/src';
-import { prisma } from '@cubik/database';
 
 export const GET = async (req: NextRequest) => {
   try {

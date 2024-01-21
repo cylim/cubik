@@ -163,7 +163,7 @@ export const TeamSelector = ({ projectForm }: Props) => {
         </Text>
         <Icon
           name="plus"
-          className="h-4 w-4 stroke-[var(--color-border-secondary)]"
+          className="size-4 stroke-[var(--color-border-secondary)]"
         />
       </div>
     </div>

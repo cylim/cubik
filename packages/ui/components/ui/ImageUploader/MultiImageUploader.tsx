@@ -75,7 +75,7 @@ export const MultiImageUploader = ({
   startUpload,
 }: Props) => {
   const [drag, setDragging] = useState(false);
-  const [_file, setFile] = useState<File[]>([]);
+  const [, setFile] = useState<File[]>([]);
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();

@@ -68,7 +68,7 @@ export const UserInteraction = () => {
             <Switch onChange={toggleTheme} size="sm" checked />
           </MenuItem>
           <MenuItem
-            isLoading={logoutMutation.isLoading}
+            isLoading={logoutMutation.isPending}
             onClick={logoutMutation.mutate}
             leftIcon="logoutRight"
             variant={'negative'}

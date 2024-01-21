@@ -112,8 +112,8 @@ const ProjectStatusWrapper = ({
 }) => {
   if (isDraft) {
     return (
-      <div className="flex overflow-hidden flex-col mb-6 rounded-2xl  bg-[var(--color-surface-caution-transparent)]">
-        <div className="rounded-lg m-[6px]">{children}</div>
+      <div className="mb-6 flex flex-col overflow-hidden rounded-2xl  bg-[var(--color-surface-caution-transparent)]">
+        <div className="m-[6px] rounded-lg">{children}</div>
         <Alert
           type="text"
           fill={'yellow'}
@@ -128,8 +128,8 @@ const ProjectStatusWrapper = ({
   }
   if (projectVerificationStatus === ProjectVerifyStatus.REVIEW) {
     return (
-      <div className="flex overflow-hidden flex-col mb-6 rounded-2xl bg-[var(--color-surface-info-transparent)]">
-        <div className="rounded-lg m-[6px]">{children}</div>
+      <div className="mb-6 flex flex-col overflow-hidden rounded-2xl bg-[var(--color-surface-info-transparent)]">
+        <div className="m-[6px] rounded-lg">{children}</div>
         <Alert
           type="text"
           fill={'blue'}

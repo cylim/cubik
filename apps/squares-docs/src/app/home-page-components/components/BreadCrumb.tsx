@@ -20,7 +20,7 @@ export default function BreadCrumb({
           <li key={page.name}>
             <div className="flex items-center">
               <svg
-                className="h-5 w-5 shrink-0 text-[var(--color-fg-tertiary)]"
+                className="size-[5px] shrink-0 text-[var(--color-fg-tertiary)]"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 aria-hidden="true"

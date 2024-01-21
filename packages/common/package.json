@@ -16,15 +16,15 @@
   "scripts": {},
   "dependencies": {
     "@bonfida/sns-react": "^2.1.0",
-    "@coral-xyz/anchor": "^0.27.0",
+    "@coral-xyz/anchor": "^0.29.0",
     "@cubik/common-types": "workspace:*",
     "@cubik/database": "workspace:*",
     "@cubik/dayjs": "workspace:*",
+    "axios": "^1.6.5",
     "@portal-payments/solana-wallet-names": "^2.0.4",
-    "axios": "^1.6.2",
     "bs58": "^5.0.0",
     "crypto-js": "^4.2.0",
-    "next": "^14.0.4",
+    "next": "14.1.0",
     "typescript": "^5.3.3",
     "zod": "^3.22.4"
   },

@@ -88,7 +88,7 @@ export const ProjectContributorsTab = ({ slug }: Props) => {
               </Text>
               <Icon
                 color="var(--body-fg-tertiary)"
-                className="h-4 w-4"
+                className="size-4"
                 name="infoCircle"
               />
             </div>

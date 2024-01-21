@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -21,6 +22,7 @@ import {
 } from '@cubik/ui';
 
 import { searchUsername } from '../helpers/searchUsername';
+import { useCubikWallet } from '../wallet';
 import { UserCreateForm, UserCreateSteps } from './index';
 
 interface Props {
@@ -32,6 +34,7 @@ interface Props {
 export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
   const [nfts, setNfts] = useState([]);
   const [loadingNfts, setLoadingNfts] = useState(false);
+  const { publicKey } = useCubikWallet();
   useEffect(() => {
     const search = async () => {
       if (userForm.watch('username').length < 3) {
@@ -44,6 +47,7 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
           message: 'Username must be less than 32 characters',
         });
       }
+
       if (res.usernameAvailable === false) {
         userForm.setError('username', {
           message: 'Username is not available',
@@ -51,10 +55,13 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
       }
     };
     const getUserNfts = async () => {
+      if (nfts.length > 0) return;
       setLoadingNfts(true);
       try {
         const response = await fetch(
-          `http://localhost:3000/api/user/nfts?address=3KfUcTXzkaeyssSWCt2RB9q1gGmMdrKQdDBrM8hMJdq8`,
+          `${
+            process.env.NEXT_PUBLIC_BACKEND
+          }/user/nft?address=${publicKey?.toBase58()}`,
         );
 
         if (!response.ok) {
@@ -147,6 +154,7 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
                   {nfts.map((nft: any, index) => (
                     <CarouselItem key={index} className="h-fit pl-4 basis-0">
                       <div className="h-fit w-full">
+                        {/* // using this because we don't want to get helius cdn in nextjs links */}
                         <img
                           src={nft?.image?.cdn_uri}
                           alt=""
@@ -157,6 +165,7 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
                           }
                           style={{
                             borderRadius: '4px',
+                            cursor: 'pointer',
                           }}
                         />
                       </div>

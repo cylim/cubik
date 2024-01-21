@@ -15,6 +15,7 @@ import {
   SubMenu,
   SubMenuButton,
   SubMenuList,
+  ViewOnExplorer,
 } from '@cubik/ui';
 
 const MenuListPage = () => {
@@ -93,12 +94,7 @@ const MenuListPage = () => {
                 <SubMenuButton leftIcon="compass">
                   View On Explorer
                 </SubMenuButton>
-                <SubMenuList>
-                  <MenuItem text="Solana Explorer" leftIcon="solanaExplorer" />
-                  <MenuItem text="Solana FM" leftIcon="solanaFM" />
-                  <MenuItem text="Solscan" leftIcon="solscan" />
-                  <MenuItem text="xRay" leftIcon="xRay" variant={'negative'} />
-                </SubMenuList>
+                <ViewOnExplorer address="random" type="account" />
               </SubMenu>
               <MenuItem
                 text="logout"

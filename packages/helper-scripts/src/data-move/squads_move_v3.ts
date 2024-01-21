@@ -9,7 +9,7 @@ export const moveV3Vaults = async () => {
         id: e.id,
       },
       data: {
-        multiSigAddress_v3: e.mutliSigAddress,
+        // multiSigAddress_v3: e.mutliSigAddress,
       },
     });
     console.log(updateData);

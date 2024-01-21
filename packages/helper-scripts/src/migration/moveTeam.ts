@@ -1,12 +1,11 @@
 import { prisma } from '@cubik/database';
-import { JsonObject } from '@cubik/database/prisma/client/old/runtime/library';
 
 export const moveTeamData = async () => {
   const users = await prisma.user.findMany();
 
   for (const user of users) {
     if (user.profileNft !== null) {
-      const profileNft = user.profileNft as JsonObject;
+      const profileNft = user.profileNft as unknown as any;
       const { collectionName, collectionAddress } = await getAsset(
         profileNft.token as string,
       );

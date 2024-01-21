@@ -3,12 +3,11 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { decodeToken } from '@cubik/auth';
 import { handleApiClientError, successHandler } from '@cubik/database/api';
-import { logApi, logE, logInfo } from '@cubik/logger/src';
+import { prisma } from '@cubik/database';
 
 export const GET = async (req: NextRequest) => {
   try {
     const searchParams = req.nextUrl.searchParams;
-    logInfo(req);
     const eventId = searchParams.get('eventId');
     const project = searchParams.get('project');
     const page = Number(searchParams.get('page')) || 1;

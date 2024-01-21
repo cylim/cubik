@@ -7,6 +7,7 @@ import { utils, web3 } from '@coral-xyz/anchor';
 import { toast } from 'sonner';
 
 import { decodeToken, verifyProjectEditMessage } from '@cubik/auth';
+import { prisma } from '@cubik/database';
 import { handleApiClientError } from '@cubik/database/api';
 import { logApi } from '@cubik/logger/src';
 

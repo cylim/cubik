@@ -22,6 +22,7 @@ import {
 } from '@cubik/ui';
 
 import { searchUsername } from '../helpers/searchUsername';
+import { useCubikWallet } from '../wallet';
 import { UserCreateForm, UserCreateSteps } from './index';
 
 interface Props {
@@ -33,6 +34,7 @@ interface Props {
 export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
   const [nfts, setNfts] = useState([]);
   const [loadingNfts, setLoadingNfts] = useState(false);
+  const { publicKey } = useCubikWallet();
   useEffect(() => {
     const search = async () => {
       if (userForm.watch('username').length < 3) {
@@ -45,6 +47,7 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
           message: 'Username must be less than 32 characters',
         });
       }
+
       if (res.usernameAvailable === false) {
         userForm.setError('username', {
           message: 'Username is not available',
@@ -56,7 +59,9 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
       setLoadingNfts(true);
       try {
         const response = await fetch(
-          `http://localhost:3000/api/user/nfts?address=3KfUcTXzkaeyssSWCt2RB9q1gGmMdrKQdDBrM8hMJdq8`,
+          `${
+            process.env.NEXT_PUBLIC_BACKEND
+          }/user/nft?address=${publicKey?.toBase58()}`,
         );
 
         if (!response.ok) {

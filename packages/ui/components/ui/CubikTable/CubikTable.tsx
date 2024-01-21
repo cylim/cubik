@@ -1,7 +1,9 @@
 import React from 'react';
 import {
+  ExpandedState,
   flexRender,
   getCoreRowModel,
+  getExpandedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
 import { motion } from 'framer-motion';
@@ -13,16 +15,23 @@ import { Text } from '../text/text';
 export const CubikTable = ({
   columns,
   data,
-  showHeader,
+  showHeader = true,
 }: {
   columns: any;
   data: any;
   showHeader?: boolean;
 }) => {
+  const [expanded, setExpanded] = React.useState<ExpandedState>({});
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    state: {
+      expanded,
+    },
+    onExpandedChange: setExpanded,
+    getSubRows: (row: any) => row.subRows,
+    getExpandedRowModel: getExpandedRowModel(),
   });
   return (
     <div className="rounded-md w-full bg-[var(--card-bg-primary)]">

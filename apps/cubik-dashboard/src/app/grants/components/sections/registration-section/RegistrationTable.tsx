@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { cookies } from 'next/headers';
 import { handlePageSkip } from '@/utils/handlePage';
 
-import { ProjectEventStatus } from '@cubik/database';
+import { prisma, ProjectEventStatus } from '@cubik/database';
 import dayjs from '@cubik/dayjs';
 import {
   AvatarLabelGroup,

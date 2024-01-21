@@ -7,6 +7,7 @@ import { verifyMessage } from '@cubik/auth';
 import { createToken } from '@cubik/auth/src/admin';
 import { AccessScope, AuthPayload } from '@cubik/common-types/src/admin';
 import { DEFAULT_COOKIE_OPTIONS } from '@cubik/common/constants';
+import { prisma } from '@cubik/database';
 
 export const loginAdmin = async (
   pubKey: string,

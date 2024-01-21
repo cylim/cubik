@@ -246,7 +246,7 @@ const OrganizationSponsorForm = ({
       className=" flex w-full flex-col justify-start"
       onSubmit={handleSubmit(OnSubmit)}
     >
-      <div className="flex w-full flex-col gap-4 md:gap-8 mb-[24px] md:mb-[40px]">
+      <div className="mb-[24px] flex w-full flex-col gap-4 md:mb-[40px] md:gap-8">
         <Text className="h4 md:h5 w-full" color={'primary'}>
           Sponsorship Details
         </Text>
@@ -296,7 +296,7 @@ const OrganizationSponsorForm = ({
                         duration: 0.3,
                       }}
                     >
-                      <div className="flex py-1 gap-2">
+                      <div className="flex gap-2 py-1">
                         <InputFieldContainer
                           size="md"
                           isError={
@@ -319,7 +319,7 @@ const OrganizationSponsorForm = ({
                           <InputRightElement>
                             <motion.div layout transition={{ duration: 0.3 }}>
                               <Text
-                                className="b2-heavy md:l2-heavy flex flex-row items-centergap-0"
+                                className="b2-heavy md:l2-heavy items-centergap-0 flex flex-row"
                                 color="tertiary"
                               >
                                 <span className="pb-[1px]">$</span>
@@ -403,7 +403,7 @@ const OrganizationSponsorForm = ({
                 e.preventDefault();
                 append({ token: '', amount: 0 });
               }}
-              className="w-full rounded-lg border border-dashed border-[var(--color-border-secondary)] px-3 py-3"
+              className="w-full rounded-lg border border-dashed border-[var(--color-border-secondary)] p-3"
             >
               <Text className="l1 md:l2" color={'tertiary'}>
                 Add Another Asset
@@ -524,7 +524,7 @@ const OrganizationSponsorForm = ({
               duration: 0.15,
             }}
           >
-            <div className="flex w-full flex-col pt-[24px] md:pt-[40px] gap-8">
+            <div className="flex w-full flex-col gap-8 pt-[24px] md:pt-[40px]">
               <InputContainer>
                 <InputLabel
                   id="name"
@@ -575,7 +575,7 @@ const OrganizationSponsorForm = ({
           </motion.div>
         )}
       </AnimatePresence>
-      <div className="pt-6 md:pt-12 w-full mt-6 md:mt-12">
+      <div className="mt-6 w-full pt-6 md:mt-12 md:pt-12">
         <Button size={'xl'} className="w-full" type="submit">
           Proceed to Payment
         </Button>

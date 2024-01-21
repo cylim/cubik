@@ -88,6 +88,7 @@ interface AvatarProps extends VariantProps<typeof avatarVariants> {
   alt: string;
   className?: string;
   iconName?: keyof typeof iconLibrary;
+  iconClick?: () => void;
 }
 
 const Avatar = ({
@@ -97,6 +98,7 @@ const Avatar = ({
   size,
   className,
   iconName,
+  iconClick,
 }: AvatarProps) => {
   return (
     <span
@@ -135,7 +137,12 @@ const Avatar = ({
         priority
       />
       {iconName && (
-        <Icon name={iconName} className={cn(iconVariants({ variant, size }))} />
+        <Icon
+          name={iconName}
+          className={cn(iconVariants({ variant, size }))}
+          color="var(--avatar-status-icon)"
+          onClick={iconClick}
+        />
       )}
     </span>
   );

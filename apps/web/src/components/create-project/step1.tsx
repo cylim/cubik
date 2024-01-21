@@ -19,7 +19,6 @@ import {
   InputField,
   InputFieldContainer,
   InputLabel,
-  SearchSelect,
   Text,
   Textarea,
 } from '@cubik/ui';

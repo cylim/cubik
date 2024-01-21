@@ -50,11 +50,12 @@ export const VerifyEmail = ({ setUserCreateState, userForm }: Props) => {
   };
   return (
     <>
-      <div
+      <form
         className="flex flex-col gap-8 pointer-events-auto"
         style={{
           padding: '32px',
         }}
+        onSubmit={userForm.handleSubmit(onSendEmail)}
       >
         <div className="flex gap-3 flex-col">
           <Text className="h4" color={'primary'}>
@@ -100,21 +101,21 @@ export const VerifyEmail = ({ setUserCreateState, userForm }: Props) => {
             size={'md'}
             className="w-full"
             // rightIconName=""
-            onClick={onSendEmail}
+            type="submit"
             isLoading={isLoading}
           >
             Confirm Email
           </Button>
           <Button
             onClick={() => setUserCreateState('signTx')}
-            variant={'link'}
+            variant={'tertiary'}
             size={'md'}
             className="w-full"
           >
             Skip for now
           </Button>
         </div>
-      </div>
+      </form>
     </>
   );
 };

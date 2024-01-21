@@ -34,7 +34,7 @@ const AlertPage = () => {
           <CodeComponent codeString='import { Progress } from "@cubik/ui"' />
         </div>
         <div className="mt-10 flex flex-col gap-5">
-          <div className="flex gap-2 flex-col-gap-4">
+          <div className="flex-col-gap-4 flex gap-2">
             <Button
               onClick={() => {
                 toast.promise(
@@ -48,7 +48,9 @@ const AlertPage = () => {
                   {
                     loading: 'Signing Transaction',
                     success: (data) => {
-                      return `${data.name} toast has been added`;
+                      return `${
+                        (data as { name: string }).name
+                      } toast has been added`;
                     },
                     error: 'Error',
                     icon: <Spinner />,

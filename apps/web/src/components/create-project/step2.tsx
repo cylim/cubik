@@ -4,7 +4,7 @@ import StepTemplate from '@/components/create-project/stepTemplate';
 import { Industries } from '@/constants/industry';
 import { Controller, UseFormReturn } from 'react-hook-form';
 
-import { InputLabel, SearchSelect } from '@cubik/ui';
+import { InputLabel, Select } from '@cubik/ui';
 
 interface Step2Props extends CreateProjectStepProps {
   control: any;
@@ -41,17 +41,15 @@ export const Step2 = ({
       >
         <div className="flex flex-col gap-3">
           <InputLabel>Categories</InputLabel>
-
           <Controller
             name="industry"
             control={control}
             render={() => (
-              <CubikSelect
+              <Select
                 placeholder="Search Category here"
                 isMulti={true}
                 onChange={(e) => {
                   if (!e) return;
-                  console.log('input value - ', e);
                   setValue('industry', e as any);
                 }}
                 value={watch('industry') as any}

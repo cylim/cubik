@@ -6,8 +6,8 @@ const TabLayout = ({
   currentTabValue,
 }: {
   children: React.ReactNode;
-  previousTabValue?: Number;
-  currentTabValue?: Number;
+  previousTabValue?: number;
+  currentTabValue?: number;
 }) => {
   return (
     <div

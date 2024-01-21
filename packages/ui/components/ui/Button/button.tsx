@@ -45,7 +45,7 @@ const transition = {
 const buttonVariants = cva('', {
   variants: {
     variant: {
-      primary: 'stroke-inherit l2-heavy',
+      primary: 'l2-heavy',
       secondary: 'stroke-[var(--button-secondary-text-default)]',
       outline:
         'stroke-[var(--button-outline-text-default)] !text-[var(--button-outline-text-default)] ',
@@ -64,6 +64,24 @@ const buttonVariants = cva('', {
   },
 });
 
+// added t
+const iconColorVariants = cva('', {
+  variants: {
+    variant: {
+      primary: 'var(--button-primary-text-default)',
+      secondary: 'var(--button-secondary-text-default)',
+      outline: 'var(--button-outline-text-default)',
+      link: 'var(--button-link-text-default)',
+      tertiary: 'var(--button-link-text-default)',
+      danger: 'var(--button-danger-text-default)',
+      success: 'var(--button-success-text-default)',
+      unStyled: '',
+    },
+  },
+  defaultVariants: {
+    variant: 'primary',
+  },
+});
 const iconVariants = cva('', {
   variants: {
     size: {
@@ -131,8 +149,8 @@ export const Button = ({
         <>
           {leftIconName && (
             <Icon
+              color={iconColorVariants({ variant })}
               name={leftIconName}
-              color="inherit"
               height={16}
               width={16}
               className={cn(
@@ -149,10 +167,10 @@ export const Button = ({
           {rightIconName && (
             <Icon
               name={rightIconName}
-              color="inherit"
               height={16}
               width={16}
               className={buttonVariants({ variant })}
+              color={iconColorVariants({ variant })}
             />
           )}
         </>

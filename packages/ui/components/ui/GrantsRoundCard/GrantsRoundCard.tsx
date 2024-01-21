@@ -127,9 +127,13 @@ const GrantsRoundCard = ({
 
 interface GrantsRoundCardHeaderProps {
   grantName: string;
+  onClick?: () => void;
 }
 
-const GrantRoundCardHeader = ({ grantName }: GrantsRoundCardHeaderProps) => {
+const GrantRoundCardHeader = ({
+  grantName,
+  onClick,
+}: GrantsRoundCardHeaderProps) => {
   const { currentEventStatus, isPaused } = useContext(RoundCardContext);
   return (
     <div className="flex items-center justify-between w-full">
@@ -163,7 +167,12 @@ const GrantRoundCardHeader = ({ grantName }: GrantsRoundCardHeaderProps) => {
           </div>
         )}
       </div>
-      <Button leftIconName="chevronRight" variant={'outline'} className="" />
+      <Button
+        leftIconName="chevronRight"
+        variant={'outline'}
+        className=""
+        onClick={onClick}
+      />
     </div>
   );
 };

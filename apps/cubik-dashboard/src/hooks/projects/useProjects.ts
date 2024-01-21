@@ -100,8 +100,7 @@ const useProjects = ({
       }
       return pages.length + 1;
     },
-    initialPageParam:1
-   
+    initialPageParam: 1,
   });
 };
 

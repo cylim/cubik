@@ -13,7 +13,7 @@
     "@axiomhq/winston": "1.0.0-rc.1",
     "@cubik/common-types": "workspace:*",
     "@types/uuid": "^9.0.7",
-    "next": "^14.0.4",
+    "next": "^14.1.0",
     "next-axiom": "^1.1.1",
     "posthog-js": "^1.98.2",
     "posthog-node": "^3.5.0",

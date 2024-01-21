@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import * as anchor from '@coral-xyz/anchor';
-import { errorHandler } from '@cubik/database/api';
 import * as sqds from '@sqds/multisig';
 import type { Request, Response } from 'express';
 import express from 'express';
 import Controller from 'interfaces/controller.interface';
 import logger from 'services/logger';
 import z from 'zod';
+
+import { errorHandler } from '@cubik/database/api';
 
 const RPC_URL = process.env.RPC_URL || 'https://rpc.cubik.so';
 
@@ -15,11 +16,11 @@ const connection = new anchor.web3.Connection(RPC_URL);
 const { Multisig, VaultTransaction, Proposal } = sqds.accounts;
 
 class SquadsController implements Controller {
-  public path = "/squads";
+  public path = '/squads';
   public router = express.Router();
   public querySchema = z.object({
     createKey: z.string().min(42).max(100),
-  })
+  });
 
   constructor() {
     this.initializeRoutes();
@@ -27,7 +28,7 @@ class SquadsController implements Controller {
 
   private initializeRoutes() {
     this.router.get(`${this.path}/`, this.getSquadsTxs);
-    logger.debug("SquadsController initialized");
+    logger.debug('SquadsController initialized');
   }
 
   private getSquadsTxs = async (req: Request, res: Response) => {

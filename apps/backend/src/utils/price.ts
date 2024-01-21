@@ -1,17 +1,16 @@
 import axios from 'axios';
-import type { TokenPriceResponse } from 'types';
 import pThrottle from 'p-throttle';
+import type { TokenPriceResponse } from 'types';
+
 import logger from '../services/logger';
 
 const throttle = pThrottle({
   limit: 2,
-  interval: 1000
+  interval: 1000,
 });
 
-const throttledRequest = throttle(async token => {
-  logger.debug('throttledRequest', [
-    token
-  ])
+const throttledRequest = throttle(async (token) => {
+  logger.debug('throttledRequest', [token]);
   const response = await axios.get<TokenPriceResponse>(
     `https://price.jup.ag/v4/price?ids=${token}`,
   );

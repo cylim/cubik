@@ -14,7 +14,7 @@
     "axios": "^1.6.5",
     "dotenv": "^16.3.1",
     "dotenv-cli": "latest",
-    "next": "^14.0.4"
+    "next": "14.1.0"
   },
   "devDependencies": {
     "prisma": "^5.8.0",

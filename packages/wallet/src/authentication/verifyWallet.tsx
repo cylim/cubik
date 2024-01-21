@@ -175,8 +175,8 @@ export const VerifyWallet = ({ handleVerify, isLoading }: Props) => {
             verifyModalState === 'default'
               ? 0
               : verifyModalState === 'loading'
-              ? 1
-              : 2
+                ? 1
+                : 2
           ]
         }
       </motion.div>
@@ -185,8 +185,8 @@ export const VerifyWallet = ({ handleVerify, isLoading }: Props) => {
           verifyModalState === 'default'
             ? 'Sign & Confirm'
             : verifyModalState === 'loading'
-            ? 'Loading'
-            : 'Retry',
+              ? 'Loading'
+              : 'Retry',
         )}
         <Button
           onClick={() => {

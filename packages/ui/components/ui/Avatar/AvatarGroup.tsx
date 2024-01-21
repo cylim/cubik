@@ -54,15 +54,17 @@ export const AvatarGroup = ({
           ),
         )}
       >
-        {avatars?.slice(0, maxCount).map((avatar, index) => (
-          <Avatar
-            key={index}
-            src={avatar.src}
-            alt={avatar.alt}
-            variant={shape}
-            size={size}
-          />
-        ))}
+        {avatars
+          ?.slice(0, maxCount)
+          .map((avatar, index) => (
+            <Avatar
+              key={index}
+              src={avatar.src}
+              alt={avatar.alt}
+              variant={shape}
+              size={size}
+            />
+          ))}
         {variant === 'squared-horizontal' && overflowCount && (
           <div className="w-[100%] h-full flex items-center justify-center">
             <Text className="l1 m-auto" color="primary">

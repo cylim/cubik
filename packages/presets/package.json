@@ -15,7 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@cubik/config": "workspace:*",
-    "@next/eslint-plugin-next": "^14.0.4",
+    "@next/eslint-plugin-next": "14.1.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/eslint": "^8.56.2",
     "@typescript-eslint/eslint-plugin": "^6.18.1",

@@ -1,7 +1,8 @@
+import { tokenCache, toMilliseconds } from 'utils/cache';
 import { tokenPrice } from 'utils/price';
 
 import { getValidToken } from '@cubik/common/tokens/getValidTokenList';
-import { toMilliseconds, tokenCache } from 'utils/cache';
+
 import logger from '../logger';
 
 export interface TokenPrice {
@@ -13,13 +14,13 @@ export interface TokenPrice {
 }
 export const syncPrice = async (): Promise<(TokenPrice | null)[]> => {
   try {
-    const cached = tokenCache.get('pricelist')
+    const cached = tokenCache.get('pricelist');
     if (cached) {
-      logger.debug('cache hit')
-      return cached
+      logger.debug('cache hit');
+      return cached;
     }
     if (!cached) {
-      logger.debug('cache miss')
+      logger.debug('cache miss');
       const tokenList = getValidToken();
       const priceList: Promise<TokenPrice | null>[] = [];
 
@@ -28,10 +29,10 @@ export const syncPrice = async (): Promise<(TokenPrice | null)[]> => {
         priceList.push(price);
       });
       const tokenPriceList = await Promise.all(priceList);
-      tokenCache.set('pricelist', tokenPriceList, toMilliseconds(0, 5, 0))
-      return tokenPriceList
+      tokenCache.set('pricelist', tokenPriceList, toMilliseconds(0, 5, 0));
+      return tokenPriceList;
     }
-    return []
+    return [];
   } catch (error) {
     console.log(error);
     return [];

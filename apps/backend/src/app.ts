@@ -12,6 +12,7 @@ import { syncCommunity } from 'services/community-sync/syncCommunity';
 import Controller from './interfaces/controller.interface';
 import errorMiddleware from './middleware/error.middleware';
 import logger from './services/logger';
+import { rankedProjectsJob } from 'services/rank-projects';
 
 class App {
   public app: express.Application;
@@ -31,17 +32,20 @@ class App {
   }
 
   public listen(): void {
-    this.app.listen(envConfig.port || 8080, () => {
+    this.app.listen(envConfig.port || 8080, async () => {
       if (process.env.CRON_ENABLED === '1') {
         logger.log(
           'info',
           `Adding Sync Community Cron Job, cron interval ${process.env.CRON_INTERVAL}`,
         );
         scheduleJob(process.env.CRON_INTERVAL!, syncCommunity);
+        logger.log('info', `Adding Rank Projects Cron Job`);
+        scheduleJob(process.env.CRON_INTERVAL!, rankedProjectsJob);
       }
 
       // await syncCommunity();
       logger.info(`App listening on the port ${process.env.PORT}`);
+
     });
   }
 

@@ -1,21 +1,28 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
 
+import { generateUserBackupImage } from '@cubik/common';
 import {
   Avatar,
   Button,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
   HelperText,
   InputContainer,
   InputField,
   InputFieldContainer,
   InputLabel,
+  Spinner,
   Text,
 } from '@cubik/ui';
 
 import { searchUsername } from '../helpers/searchUsername';
+import { useCubikWallet } from '../wallet';
 import { UserCreateForm, UserCreateSteps } from './index';
 
 interface Props {
@@ -23,7 +30,11 @@ interface Props {
   setUserCreateState: React.Dispatch<React.SetStateAction<UserCreateSteps>>;
   userForm: UseFormReturn<UserCreateForm, any, undefined>;
 }
+
 export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
+  const [nfts, setNfts] = useState([]);
+  const [loadingNfts, setLoadingNfts] = useState(false);
+  const { publicKey } = useCubikWallet();
   useEffect(() => {
     const search = async () => {
       if (userForm.watch('username').length < 3) {
@@ -36,13 +47,37 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
           message: 'Username must be less than 32 characters',
         });
       }
+
       if (res.usernameAvailable === false) {
         userForm.setError('username', {
           message: 'Username is not available',
         });
       }
     };
+    const getUserNfts = async () => {
+      if (nfts.length > 0) return;
+      setLoadingNfts(true);
+      try {
+        const response = await fetch(
+          `${
+            process.env.NEXT_PUBLIC_BACKEND
+          }/user/nft?address=${publicKey?.toBase58()}`,
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const nfts = await response.json();
+        setNfts(nfts.result);
+        setLoadingNfts(false);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
     search();
+    getUserNfts();
   }, [userForm.watch('username')]);
 
   return (
@@ -75,14 +110,15 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
               size={'xl'}
               src={userForm.watch('avatar')}
               alt={userForm.watch('username')}
-              iconName="user"
+              iconName="cross"
+              iconClick={() =>
+                userForm.setValue('avatar', generateUserBackupImage())
+              }
             />
           </div>
           <div className="w-full">
             <InputContainer>
-              <InputLabel id="username" isRequired={true}>
-                Choose a name
-              </InputLabel>
+              <InputLabel id="username">Choose a name</InputLabel>
               <InputFieldContainer
                 isError={userForm.formState.errors.username ? true : false}
                 variant="sm"
@@ -101,6 +137,44 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
               )}
             </InputContainer>
           </div>
+        </div>
+        <div>
+          <InputContainer>
+            <InputLabel id="username">Choose a NFT</InputLabel>
+            {loadingNfts ? (
+              <Spinner />
+            ) : (
+              <Carousel
+                opts={{
+                  align: 'start',
+                }}
+                className="h-fit max-h-72 w-full basis-0"
+              >
+                <CarouselContent>
+                  {nfts.map((nft: any, index) => (
+                    <CarouselItem key={index} className="h-fit pl-4 basis-0">
+                      <div className="h-fit w-full">
+                        {/* // using this because we don't want to get helius cdn in nextjs links */}
+                        <img
+                          src={nft?.image?.cdn_uri}
+                          alt=""
+                          height={50}
+                          width={50}
+                          onClick={() =>
+                            userForm.setValue('avatar', nft?.image?.cdn_uri)
+                          }
+                          style={{
+                            borderRadius: '4px',
+                            cursor: 'pointer',
+                          }}
+                        />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+              </Carousel>
+            )}
+          </InputContainer>
         </div>
         {/* <div className="flex gap-2 flex-col">
           <Text color={'primary'} className="l1-light">

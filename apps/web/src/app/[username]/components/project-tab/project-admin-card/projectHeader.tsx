@@ -25,6 +25,7 @@ import {
   SubMenuList,
   Text,
   toast,
+  ViewOnExplorer,
 } from '@cubik/ui';
 import { useMediaQuery } from '@cubik/ui/hooks';
 
@@ -190,15 +191,7 @@ const ProjectHeader = ({
                     <SubMenuButton leftIcon="compass">
                       View On Explorer
                     </SubMenuButton>
-                    <SubMenuList>
-                      <MenuItem
-                        text="Solana Explorer"
-                        leftIcon="solanaExplorer"
-                      />
-                      <MenuItem text="Solana FM" leftIcon="solanaFM" />
-                      <MenuItem text="Solscan" leftIcon="solscan" />
-                      <MenuItem text="xRay" leftIcon="xRay" />
-                    </SubMenuList>
+                    <ViewOnExplorer address="random" type="account" />
                   </SubMenu>
                   <MenuItem
                     text="Download Data"

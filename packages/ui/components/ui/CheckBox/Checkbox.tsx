@@ -15,7 +15,7 @@ const Checkbox = React.forwardRef<
   <CheckboxPrimitive.Root
     ref={ref}
     className={cn(
-      'peer h-4 w-4 shrink-0 rounded-sm border border-[var(--form-checkbox-border-default)] shadow focus-visible:outline-none focus-visible:ring-1 hover:border-[var(--form-checkbox-border-hovered)] focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 hover:bg-[var(--form-checkbox-surface-hovered)] disabled:border-[var(--form-checkbox-border-disabled)] disabled:bg-[var(--form-checkbox-surface-disabled)] data-[state=checked]:bg-[var(--form-checkbox-surface-default-checked)] data-[state=checked]:border-[var(--form-checkbox-surface-default-checked)]',
+      'peer h-5 w-5 shrink-0 rounded-[4px] border border-[var(--form-checkbox-border-default)]  focus-visible:outline-none focus-visible:ring-1 hover:border-[var(--form-checkbox-border-hovered)] focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 hover:bg-[var(--form-checkbox-surface-hovered)] disabled:border-[var(--form-checkbox-border-disabled)] disabled:bg-[var(--form-checkbox-surface-disabled)] data-[state=checked]:bg-[var(--form-checkbox-surface-default-checked)] data-[state=checked]:border-[var(--form-checkbox-surface-default-checked)]',
       className,
     )}
     {...props}
@@ -23,7 +23,11 @@ const Checkbox = React.forwardRef<
     <CheckboxPrimitive.Indicator
       className={cn('flex items-center justify-center text-current')}
     >
-      <Icon name="check" className="w-4 h-4" />
+      <Icon
+        name="check"
+        className="w-4 h-4"
+        color="var(--form-checkbox-icon-default)"
+      />
     </CheckboxPrimitive.Indicator>
   </CheckboxPrimitive.Root>
 ));

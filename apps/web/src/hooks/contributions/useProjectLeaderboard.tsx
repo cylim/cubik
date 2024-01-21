@@ -3,7 +3,8 @@ import { toast } from 'sonner';
 
 import { apiInstance, ApiResponseType } from '@cubik/database/api';
 
-type Result = {
+//@change type
+type Earner = {
   totalUsdAmount: number;
   userId?: string | undefined;
   id?: string | undefined;
@@ -17,6 +18,15 @@ type Result = {
       }
     | undefined;
 }[];
+type Result = {
+  earners: Earner;
+  currentUserRank: number | null;
+  currentUser: {
+    userId: string;
+    amount: number;
+  } | null;
+};
+
 type ResponseType = ApiResponseType & {
   result: Result;
 };

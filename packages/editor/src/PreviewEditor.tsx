@@ -15,15 +15,12 @@ export const PreviewEditor = ({ content, className }: Props) => {
     <div
       style={{
         minHeight: '20rem',
+        height: '30rem',
       }}
-      className={
-        (cn(
-          'bg-[var(--form-input-surface-default)] ProseMirror rounded-lg border border-[var(--form-input-border-default)]',
-        ),
-        className)
-      }
+      className={cn('ProseMirror rounded-lg  overflow-scroll', className)}
     >
       <div dangerouslySetInnerHTML={{ __html: safeContent }} />
+      {/* todo: dangerouslySetInnerHTML can have security issues please check this */}
     </div>
   );
 };

@@ -14,6 +14,7 @@ model User {
   username          String             @unique
   mainWallet        String             @unique
   email             String?
+  cscore            Float                @default(0)
   profileNft        Json?
   isMigrated        Boolean            @default(false)
   type              UserType           @default(Contributor)
@@ -37,6 +38,7 @@ model User {
   notification      Notification[]
   event             Event[]
   sponsorTeam       SponsorTeam[]
+  sponsor           Sponsor[]
 
   @@fulltext([username])
 }
@@ -123,6 +125,7 @@ model Project {
   isMigrated        Boolean             @default(false)
   isDraft           Boolean             @default(false)
   tx                String              @default("")
+  rank              Int                @default(0)
   longDescription   String              @db.Text
   industry          Json?
   projectLink       String              @default("")
@@ -211,24 +214,41 @@ model ProjectJoinEvent {
 }
 
 model Sponsor {
-  id             String        @id @default(uuid()) @map("_id")
-  name           String
-  type           SponsorType   @default(INDIVIDUAL)
+  id             String           @id @default(uuid()) @map("_id")
+  name           String // namne of sponsor
+  type           SponsorType      @default(INDIVIDUAL)
   multisigPDA    String
   eventId        String
-  paidToken      Json
-  isPublic       Boolean       @default(true)
-  totalCommitted Float         @default(0)
-  selfCustody    Boolean       @default(false)
-  tx             String        @db.VarChar(500)
-  logo           String?       @db.VarChar(500)
-  isArchive      Boolean       @default(false)
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
-  event          Event         @relation(fields: [eventId], references: [id])
+  isPublic       Boolean          @default(true)
+  totalCommitted Float            @default(0) 
+  selfCustody    Boolean          @default(false)
+  tx             String           @db.VarChar(500)
+  logo           String?          @db.VarChar(500)
+  isArchive      Boolean          @default(false)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  event          Event            @relation(fields: [eventId], references: [id])
   team           SponsorTeam[]
+  userId         String
+  user           User             @relation(fields: [userId], references: [id]) 
+  treasuryAssets TreasuryAssets[]
 
   @@index([eventId])
+  @@index([userId])
+}
+
+model TreasuryAssets {
+  id           String   @id @default(uuid()) @map("_id")
+  sponsorId    String
+  tokenAddress String
+  amount       Float   @default(0)
+  tx           String?  @db.VarChar(500)
+  isArchive    Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  sponsor      Sponsor @relation(fields: [sponsorId], references: [id])
+
+  @@index([sponsorId])
 }
 
 model SponsorTeam {

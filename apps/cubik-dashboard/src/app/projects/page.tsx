@@ -6,7 +6,7 @@ import { checkSuperAdmin } from '@/utils/helpers/checkSuperAdmin';
 import { get } from '@vercel/edge-config';
 
 import { decodeToken } from '@cubik/auth/src/admin';
-import { ProjectVerifyStatus } from '@cubik/database';
+import { prisma, ProjectVerifyStatus } from '@cubik/database';
 import { logApi } from '@cubik/logger/src';
 import { SegmentContainer, SegmentItem, Text } from '@cubik/ui';
 

@@ -14,6 +14,7 @@ import {
   generateDefaultUserName,
   generateUserBackupImage,
 } from '@cubik/common';
+import { ProfileNftType } from '@cubik/common-types';
 import { UserType } from '@cubik/database';
 
 import { connection, cubikInstance } from '../authentication/contract';
@@ -36,7 +37,7 @@ export type UserCreateForm = {
   username: string;
   email: string;
   avatar: string;
-  nft?: string;
+  nft: ProfileNftType | undefined;
   userType: UserType;
   isReceiveEmails: boolean;
 };
@@ -56,6 +57,7 @@ export const UserCreate = () => {
       username: generateDefaultUserName(publicKey),
       userType: UserType.Contributor,
       isReceiveEmails: true,
+      nft: undefined,
     },
   });
 

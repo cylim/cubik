@@ -1,65 +1,64 @@
-import { ProjectFormData } from '@/components/create-project/createProject';
-import { LogoUploader } from '@/components/create-project/image-uploder/logoUploader';
-import { MultiImageUploader } from '@/components/create-project/image-uploder/multiImageUploader';
-import { UseFormReturn } from 'react-hook-form';
+import { ProjectFormData } from '@/components/create-project/createProject[ARCHIEVE]';
+import { CreateProjectStepProps } from '@/components/create-project/step1';
+import StepTemplate from '@/components/create-project/stepTemplate';
+import { Industries } from '@/constants/industry';
+import { Controller, UseFormReturn } from 'react-hook-form';
 
-import { Button, Text } from '@cubik/ui';
+import { InputLabel, SearchSelect } from '@cubik/ui';
 
-interface Props {
-  projectForm: UseFormReturn<ProjectFormData, any, undefined>;
-  setStep: React.Dispatch<React.SetStateAction<number>>;
-  forceSave: () => Promise<void>;
+interface Step2Props extends CreateProjectStepProps {
+  control: any;
 }
-export const Step2 = ({ setStep, projectForm, forceSave }: Props) => {
+
+export const Step2 = ({
+  setStep,
+  forceSave,
+  watch,
+  errors,
+  clearErrors,
+  trigger,
+  setValue,
+  register,
+  control,
+}: Step2Props) => {
+  const onNext = () => {
+    setStep(3);
+    forceSave();
+  };
+  const onPrev = () => {
+    setStep(1);
+  };
   return (
     <>
-      <div className="flex flex-col gap-14">
-        <div className="flex flex-col">
-          <Text className="b4-light" color={'tertiary'}>
-            2/5
-          </Text>
-          <Text className="h5 py-1" color={'primary'}>
-            How Does it look
-          </Text>
-          <Text className="b4-light" color={'secondary'}>
-            lets make your project look nice
-          </Text>
+      <StepTemplate
+        currentStep={2}
+        onNext={onNext}
+        onPrevious={onPrev}
+        title={'Choose Categories'}
+        description={
+          'These categories will be used to filter when someone wants to see projects in specific categories. Choose them carefully they can impact discoverability of your project.'
+        }
+      >
+        <div className="flex flex-col gap-3">
+          <InputLabel>Categories</InputLabel>
+          <Controller
+            name="industry"
+            control={control}
+            render={() => (
+              <SearchSelect
+                placeholder="Search Category here"
+                isMulti={true}
+                onChange={(e) => {
+                  if (!e) return;
+                  setValue('industry', e as any);
+                }}
+                value={watch('industry') as any}
+                options={Industries as any}
+              />
+            )}
+          />
         </div>
-        <div className="flex flex-col gap-4">
-          <Text color={'primary'} className="l1">
-            Thumbnail
-          </Text>
-          <LogoUploader projectForm={projectForm} />
-        </div>
-        <div className="flex flex-col gap-4">
-          <Text color={'primary'} className="l1">
-            Gallery
-          </Text>
-          <MultiImageUploader projectForm={projectForm} />
-        </div>
-
-        <div className=" flex w-full items-center justify-between">
-          <Button
-            onClick={() => {
-              setStep(1);
-              forceSave();
-            }}
-            leftIconName="chevronLeft"
-            variant={'outline'}
-            size={'md'}
-          >
-            Previous
-          </Button>
-          <Button
-            onClick={() => setStep(3)}
-            rightIconName="chevronRight"
-            variant={'primary'}
-            size={'md'}
-          >
-            Next
-          </Button>
-        </div>
-      </div>
+      </StepTemplate>
     </>
   );
 };

@@ -16,7 +16,6 @@ export const Metrics = () => {
   const { scope } = AccessStore();
   const { user } = useUser();
   const { theme } = useTheme();
-  console.log('scope', scope);
   const metrics = useMetrics({
     scope: scope?.event_id || '',
     enabled: scope?.event_id ? true : false,
@@ -28,7 +27,7 @@ export const Metrics = () => {
       <MetricsItem
         label="Contributions"
         changePercent="10%"
-        subText={'$' + metrics.data?.contributions.toLocaleString() || '0'}
+        subText={'$' + metrics.data?.contributions.toLocaleString() || ''}
       >
         <MinimalLineGraph
           theme={theme}

@@ -1,17 +1,20 @@
+/* eslint-disable react/display-name */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
-import React, { useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 import { cn } from '../../../lib/utils';
 
-interface Props extends React.HTMLProps<HTMLInputElement> {
-  name?: string;
-  id?: string;
-  placeholder?: string;
-  isError?: boolean;
-  variant?: 'md' | 'sm';
-  setIsFocused?: React.Dispatch<React.SetStateAction<boolean>>;
-}
+type InputContextType = {
+  isFocused: boolean;
+  setIsFocused: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const InputContext = createContext<InputContextType>({
+  isFocused: false,
+  setIsFocused: () => {},
+});
 
 export const InputLeftElement = ({
   children,
@@ -88,42 +91,59 @@ export const InputFieldContainer = ({
     return child;
   });
   return (
-    <div
-      className={cn(
-        isDisabled && 'cursor-not-allowed',
-        variant === 'md' ? 'h-[40px]' : 'h-[36px]',
-        'flex rounded-[8px] w-full px-1',
-        isError
-          ? 'border border-[var(--form-input-border-error)] bg-[var(--form-input-surface-error)] text-[var(--form-input-fg-error)]'
-          : 'border-[var(--form-input-border-default)]',
-        isFocused &&
-          'border-[var(--form-input-border-focused)] bg-[var(--form-input-surface-focused)] text-[var(--form-input-fg-focused)]',
-        isDisabled &&
-          'border-[var(--form-input-border-disabled)] bg-[var(--form-input-surface-disabled)',
-        'bg-[var(--form-input-surface-default)] hover:text-[var(--form-input-fg-hovered)] border  hover:border-[var(--form-input-border-hovered)] hover:bg-[var(--form-input-surface-hovered)',
-      )}
+    <InputContext.Provider
+      value={{
+        isFocused,
+        setIsFocused,
+      }}
     >
-      {childrenWithProps}
-    </div>
+      <div
+        className={cn(
+          isDisabled && 'cursor-not-allowed',
+          variant === 'md' ? 'h-[40px]' : 'h-[36px]',
+          'flex rounded-[8px] w-full px-1 transition-all bg-[var(--form-input-surface-default)] hover:text-[var(--form-input-fg-hovered)] border hover:ring-4  ring-[var(--color-surface-primary-transparent)] hover:bg-[var(--form-input-surface-hovered)',
+          isFocused &&
+            'border border-[var(--form-input-border-focused)] ring-4 ring-[var(--color-surface-primary-transparent)] bg-[var(--form-input-surface-focused)] text-[var(--form-input-fg-focused)]',
+          isError
+            ? 'border border-[var(--form-input-border-error)] hover:border-[var(--form-input-border-error)] ring-4 ring-[var(--color-surface-negative-transparent)] bg-[var(--form-input-surface-error)] text-[var(--form-input-fg-error)]'
+            : 'border-[var(--form-input-border-default)]',
+          isDisabled &&
+            'border-[var(--form-input-border-disabled)] bg-[var(--form-input-surface-disabled)',
+        )}
+      >
+        {childrenWithProps}
+      </div>
+    </InputContext.Provider>
   );
 };
 
-export const InputField = (props: Props) => {
-  const { id, name, isError = false, setIsFocused } = props;
-  return (
-    <>
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {}
+
+export const InputField = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type, onFocus, onBlur, ...props }, ref) => {
+    const { setIsFocused } = useContext(InputContext);
+    return (
       <input
-        name={name}
-        id={id}
-        onFocus={() => !isError && setIsFocused && setIsFocused(true)}
-        onBlur={() => !isError && setIsFocused && setIsFocused(false)}
         className={cn(
           'bg-[var(--form-input-surface-default)] text-[var(--form-input-fg-default)]',
-          'disabled:text-[var(--form-input-fg-disabled)] disabled:cursor-not-allowed disabled:opacity-50 disabled:border-[var(--form-input-border-disabled)] disabled:bg-[var(--form-input-surface-disabled)',
-          'block w-full flex-1 rounded-[8px] border-0 p-3 placeholder:text-[var(--form-input-border-default)] outline-none l3',
+          'disabled:text-[var(--form-input-fg-disabled)] disabled:cursor-not-allowed disabled:opacity-50 disabled:border-[var(--form-input-border-disabled)] disabled:bg-[var(--form-input-surface-disabled)]',
+          'block w-full flex-1 rounded-[8px] border-0 p-3 outline-none font-regular text-md ',
+          'placeholder:text-[var(--form-input-border-default)] placeholder:text-sm ',
         )}
+        type={type}
+        ref={ref}
+        onFocus={(e) => {
+          setIsFocused(true);
+          onFocus && onFocus(e);
+        }}
+        onBlur={(e) => {
+          setIsFocused(false);
+          onFocus && onFocus(e);
+        }}
         {...props}
+        autoComplete="off"
       />
-    </>
-  );
-};
+    );
+  },
+);

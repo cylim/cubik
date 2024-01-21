@@ -1,5 +1,6 @@
 import React from 'react';
 import { DetailsSection } from '@/app/grants/components/sections/details-section';
+import PayoutsSection from '@/app/grants/components/sections/payouts-section/Payouts';
 
 import { Background, Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';
 
@@ -16,7 +17,7 @@ export const TabsSection = ({ searchParams }: Props) => {
           <TabList className="mx-auto max-w-7xl px-4 md:px-8">
             <Tab value={0}>Details</Tab>
             <Tab value={1}>Registrations</Tab>
-            <Tab value={2}>Multi</Tab>
+            <Tab value={2}>Payouts</Tab>
             <Tab value={3}>Analytics</Tab>
             <Tab value={4}>Settings</Tab>
           </TabList>
@@ -29,7 +30,9 @@ export const TabsSection = ({ searchParams }: Props) => {
           <TabPanel value={1}>
             <RegistrationsSection searchParams={searchParams} />
           </TabPanel>
-          <TabPanel value={2}>Multi</TabPanel>
+          <TabPanel value={2}>
+            <PayoutsSection />
+          </TabPanel>
           <TabPanel value={3}>Change your password here.</TabPanel>
           <TabPanel value={4}>Change your password here.</TabPanel>
         </TabPanels>

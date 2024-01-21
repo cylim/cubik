@@ -1,7 +1,9 @@
 import React, { forwardRef } from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { cn } from '../../../lib/utils';
+import { Text } from '../text/text';
 
 const helperTextVariants = cva('transition-colors', {
   variants: {
@@ -10,34 +12,43 @@ const helperTextVariants = cva('transition-colors', {
       default: 'text-[var(--color-fg-tertiary)]',
       error: 'text-[var(--color-fg-error)]',
     },
-    fontSize: {
-      md: 'l1-light font-[84] leading-5',
-      sm: 'l2-light font-[84] leading-4',
-    },
-  },
-  defaultVariants: {
-    fontSize: 'md',
   },
 });
 
 type TextProps = React.HTMLAttributes<HTMLElement> &
-  VariantProps<typeof helperTextVariants>;
+  VariantProps<typeof helperTextVariants> & { show?: boolean };
 
 const HelperText = forwardRef<HTMLElement | null, TextProps>(
-  ({ className, children, fontSize, variant, ...props }) => {
+  ({ className, children, variant, show }) => {
     return (
-      <p
-        className={cn(
-          helperTextVariants({
-            fontSize,
-            variant,
-          }),
-          className,
+      <AnimatePresence>
+        {show && (
+          <motion.div
+            layout
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{
+              duration: 0.4,
+              type: 'spring',
+              stiffness: 300,
+              damping: 30,
+            }}
+          >
+            <Text
+              className={cn(
+                helperTextVariants({
+                  variant,
+                }),
+                className,
+                'l2',
+              )}
+            >
+              {children}
+            </Text>
+          </motion.div>
         )}
-        {...props}
-      >
-        {children}
-      </p>
+      </AnimatePresence>
     );
   },
 );

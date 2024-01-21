@@ -35,13 +35,16 @@ const InputLabel = forwardRef<HTMLElement | null, TextProps>(
             {props.icon}
           </div>
           {props.maxCounterValue && (
-            <p
-              className={cn(
-                'text-[var(--color-fg-tertiary)] transition-colors',
-              )}
+            <Text
+              className={'transition-colors l2'}
+              color={
+                Number(props?.counterValue) > Number(props.maxCounterValue)
+                  ? 'negative'
+                  : 'tertiary'
+              }
             >
               {props.counterValue}/{props.maxCounterValue}
-            </p>
+            </Text>
           )}
         </div>
       </>

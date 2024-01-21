@@ -1,12 +1,7 @@
 'use client';
 
 import React, { Suspense, useEffect, useRef, useState } from 'react';
-import dynamic from 'next/dynamic';
-import ProjectHeader from '@/app/[username]/components/project-tab/project-admin-card/projectHeader';
-import ProjectAdminGrantsTab from '@/app/[username]/components/project-tab/project-admin-card/tabs/grants';
-import ProjectAdminStatsTab from '@/app/[username]/components/project-tab/project-admin-card/tabs/stats';
-import ProjectAdminTreasuryTab from '@/app/[username]/components/project-tab/project-admin-card/tabs/treasury';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { ProjectVerifyStatus } from '@cubik/database';
 import {
@@ -21,16 +16,18 @@ import {
   Tabs,
 } from '@cubik/ui';
 
-const AnimatePresence = dynamic(
-  () => import('framer-motion').then((e) => e.AnimatePresence),
-  { ssr: false },
-);
+import ProjectAdminStatsTab from '../../../components/project-tab/project-admin-card/tabs/stats';
+import ProjectAdminTreasuryTab from '../../../components/project-tab/project-admin-card/tabs/treasury';
+import ProjectHeader from './projectHeader';
+import ProjectAdminGrantsTab from './tabs/grants';
+
 export type ProjectProps = {
   name: string;
   slug: string | null;
   shortDescription: string;
   logo: string;
   id: string;
+  isDraft: boolean;
   status: ProjectVerifyStatus;
 };
 interface ProjectAdminCardBodyProps {
@@ -39,6 +36,7 @@ interface ProjectAdminCardBodyProps {
 
 const ProjectAdminCardBody = ({ projectId }: ProjectAdminCardBodyProps) => {
   const [activeTab, setActiveTab] = useState(0);
+  const [activeSegment, setActiveSegment] = useState(0);
   // if you make default value 0 then first render doesn't work properly
   // 518 is the min height of the tab 0
   const [height, setHeight] = useState(518);
@@ -48,7 +46,7 @@ const ProjectAdminCardBody = ({ projectId }: ProjectAdminCardBodyProps) => {
     if (ref.current) {
       setHeight(ref.current.offsetHeight);
     }
-  }, [activeTab]);
+  }, [activeTab, activeSegment]);
 
   return (
     <Tabs defaultValue={0} size="sm" setActiveTab={setActiveTab}>
@@ -78,7 +76,10 @@ const ProjectAdminCardBody = ({ projectId }: ProjectAdminCardBodyProps) => {
               <TabPanel value={0}>
                 {/* replace loading with skeleton state  */}
                 <Suspense fallback={'loading....'}>
-                  <ProjectAdminGrantsTab id={projectId} />
+                  <ProjectAdminGrantsTab
+                    id={projectId}
+                    setActiveSegment={setActiveSegment}
+                  />
                 </Suspense>
               </TabPanel>
               <TabPanel value={1}>
@@ -100,38 +101,50 @@ const ProjectAdminCardBody = ({ projectId }: ProjectAdminCardBodyProps) => {
   );
 };
 
-const ProjectVerificationWrapper = ({
+const ProjectStatusWrapper = ({
   children,
+  isDraft,
   projectVerificationStatus,
 }: {
   children: React.ReactNode;
+  isDraft: boolean;
   projectVerificationStatus: ProjectVerifyStatus;
 }) => {
-  if (projectVerificationStatus === ProjectVerifyStatus.REVIEW) {
+  if (isDraft) {
     return (
-      <motion.div
-        layout
-        className="flex flex-col gap-2 rounded-2xl bg-[var(--color-surface-caution-transparent)] p-2"
-      >
-        <div className="rounded-lg">{children}</div>
+      <div className="mb-6 flex flex-col overflow-hidden rounded-2xl  bg-[var(--color-surface-caution-transparent)]">
+        <div className="m-[6px] rounded-lg">{children}</div>
         <Alert
           type="text"
           fill={'yellow'}
           color="yellow"
+          content="Saved as Draft, please submit for review"
+          closeIcon={false}
+          // button="Contact Team"
+          className="m-2"
+        />
+      </div>
+    );
+  }
+  if (projectVerificationStatus === ProjectVerifyStatus.REVIEW) {
+    return (
+      <div className="mb-6 flex flex-col overflow-hidden rounded-2xl bg-[var(--color-surface-info-transparent)]">
+        <div className="m-[6px] rounded-lg">{children}</div>
+        <Alert
+          type="text"
+          fill={'blue'}
+          color="blue"
           content="Your Project Is Under review, you will be notified once it is verified"
           closeIcon={false}
           // button="Contact Team"
-          className=""
+          className="m-2"
         />
-      </motion.div>
+      </div>
     );
   }
   if (projectVerificationStatus === ProjectVerifyStatus.FAILED) {
     return (
-      <motion.div
-        layout
-        className="flex flex-col gap-2 rounded-2xl bg-[var(--color-surface-negative-transparent)] p-2"
-      >
+      <div className="flex flex-col gap-2 rounded-2xl bg-[var(--color-surface-negative-transparent)] p-2">
         <div className="rounded-lg">{children}</div>
         <Alert
           type="text"
@@ -142,7 +155,7 @@ const ProjectVerificationWrapper = ({
           // button="Contact Team"
           className=""
         />
-      </motion.div>
+      </div>
     );
   }
   return children;
@@ -150,36 +163,33 @@ const ProjectVerificationWrapper = ({
 
 const ProjectAdminCard = ({ project }: { project: ProjectProps }) => {
   return (
-    <ProjectVerificationWrapper projectVerificationStatus={project.status}>
+    <ProjectStatusWrapper
+      isDraft={project.isDraft}
+      projectVerificationStatus={project.status}
+    >
       <Card size="md">
         <CardHeader>
           <ProjectHeader
-            isDraft={false}
             project={project}
             isAdmin={true}
             isVerified={project.status === 'VERIFIED'}
           />
         </CardHeader>
-        <CardBody>
-          <ProjectAdminCardBody projectId={project.id} />
-        </CardBody>
+        {!project.isDraft && (
+          <CardBody>
+            <ProjectAdminCardBody projectId={project.id} />
+          </CardBody>
+        )}
       </Card>
-    </ProjectVerificationWrapper>
+    </ProjectStatusWrapper>
   );
 };
 
-const ProjectProfileCard = ({
-  project,
-  isDraft,
-}: {
-  project: ProjectProps;
-  isDraft: boolean;
-}) => {
+const ProjectProfileCard = ({ project }: { project: ProjectProps }) => {
   return (
     <Card size="md">
       <CardHeader>
         <ProjectHeader
-          isDraft={isDraft}
           project={project}
           isVerified={project.status === 'VERIFIED'}
           isAdmin={false}

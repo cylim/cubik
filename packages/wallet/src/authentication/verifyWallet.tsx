@@ -106,7 +106,7 @@ export const VerifyWallet = ({ handleVerify, isLoading }: Props) => {
     error: {
       bg: 'bg-[var(--color-surface-negative-transparent)]',
       color: 'var(--color-fg-negative-base)',
-      name: 'dangerSkullDuoSolid',
+      name: 'walletReloadDuoSolid',
     },
   }[verifyModalState];
 

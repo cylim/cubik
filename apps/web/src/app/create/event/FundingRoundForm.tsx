@@ -54,7 +54,7 @@ const FundingRoundForm = ({
               />
             </InputFieldContainer>
             {createEventForm.formState.errors.name && (
-              <HelperText variant={'error'} fontSize={'sm'}>
+              <HelperText variant={'error'}>
                 {createEventForm.formState.errors.name.message}
               </HelperText>
             )}
@@ -91,7 +91,7 @@ const FundingRoundForm = ({
               </InputRightElement>
             </InputFieldContainer>
             {createEventForm.formState.errors.name && (
-              <HelperText variant={'error'} fontSize={'sm'}>
+              <HelperText variant={'error'}>
                 {createEventForm.formState.errors.name.message}
               </HelperText>
             )}
@@ -116,7 +116,7 @@ const FundingRoundForm = ({
                 : { state: 'default' })}
             />
             {createEventForm.formState.errors.description && (
-              <HelperText variant={'error'} fontSize={'sm'}>
+              <HelperText variant={'error'}>
                 {createEventForm.formState.errors.description.message}
               </HelperText>
             )}

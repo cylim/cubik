@@ -6,13 +6,13 @@ const TabLayout = ({
   currentTabValue,
 }: {
   children: React.ReactNode;
-  previousTabValue?: Number;
-  currentTabValue?: Number;
+  previousTabValue?: number;
+  currentTabValue?: number;
 }) => {
   return (
     <div
       //  transition={{ duration: 5 }}
-      className="h-full  w-full overflow-y-scroll py-[24px] md:py-[32px]"
+      className="size-full  overflow-y-scroll py-[24px] md:py-[32px]"
     >
       <div className="mx-auto flex max-w-7xl flex-col gap-[24px] px-[16px] md:gap-[32px] md:px-[32px]">
         {children}

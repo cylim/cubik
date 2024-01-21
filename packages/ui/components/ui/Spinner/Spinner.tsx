@@ -14,7 +14,7 @@ interface Props {
   onClick?: () => void;
   color?: ClassValue;
 }
-export const Spinner = ({ className, color, onClick }: Props) => {
+export const Spinner = ({ className }: Props) => {
   return (
     <div className={cn('flex items-center justify-center', className)}>
       <motion.div

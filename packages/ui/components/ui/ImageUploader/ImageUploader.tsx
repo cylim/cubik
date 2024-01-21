@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -197,7 +198,6 @@ export const ImageUploader = ({
   };
 
   const Description = React.memo(() => {
-    console.log('description rerendering');
     return (
       <AnimatePresence>
         {!logo && !errorMessage && !isUploading && (

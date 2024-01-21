@@ -9,7 +9,7 @@ import React, {
 } from 'react';
 import * as RadixTabs from '@radix-ui/react-tabs';
 import { cva } from 'class-variance-authority';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { v4 as uuid_v4 } from 'uuid';
 
 import { cn } from '../../../lib/utils';

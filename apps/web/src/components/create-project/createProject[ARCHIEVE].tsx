@@ -134,7 +134,7 @@ const StepBar = ({ currentStep }: { currentStep: number }) => {
     return step >= startStep && step <= endStep;
   };
   return (
-    <div className="flex items-center justify-between w-full">
+    <div className="flex w-full items-center justify-between">
       <div className="flex items-center gap-2">
         {Array.from({ length: totalSteps }, (_, i) => i + 1).map(
           (step) =>
@@ -281,8 +281,8 @@ export const CreateProject = ({ id }: Props) => {
   };
 
   return (
-    <div className=" h-[840px] pointer-events-auto py-16 mx-auto flex md:gap-24 md:px-12 w-full max-w-screen-xl justify-start">
-      <div className="md:w-1/2 h-full ">
+    <div className=" pointer-events-auto mx-auto flex h-[840px] w-full max-w-screen-xl justify-start py-16 md:gap-24 md:px-12">
+      <div className="h-full md:w-1/2 ">
         <AnimatePresence>
           {!isLoadingProject ? (
             <motion.div className="h-full md:px-12 ">
@@ -351,19 +351,19 @@ export const CreateProject = ({ id }: Props) => {
               >
                 <div className="flex flex-col gap-10">
                   <div className="flex flex-col gap-4">
-                    <div className="w-[30%] h-[28px] py-1">
-                      <div className="w-full h-full opacity-50 rounded-md bg-[var(--color-surface-primary-transparent)]" />
+                    <div className="h-[28px] w-[30%] py-1">
+                      <div className="size-full rounded-md bg-[var(--color-surface-primary-transparent)] opacity-50" />
                     </div>
-                    <div className="w-[80%] h-[28px] py-1">
-                      <div className="w-full h-full opacity-50 rounded-md bg-[var(--color-surface-primary-transparent)]" />
+                    <div className="h-[28px] w-[80%] py-1">
+                      <div className="size-full rounded-md bg-[var(--color-surface-primary-transparent)] opacity-50" />
                     </div>
                   </div>{' '}
                   <div className="flex flex-col gap-4">
-                    <div className="w-[60%] h-[28px] py-1">
-                      <div className="w-full h-full opacity-50 rounded-md bg-[var(--color-surface-primary-transparent)]" />
+                    <div className="h-[28px] w-[60%] py-1">
+                      <div className="size-full rounded-md bg-[var(--color-surface-primary-transparent)] opacity-50" />
                     </div>
-                    <div className="w-[80%] h-[28px] py-1">
-                      <div className="w-full h-full opacity-50 rounded-md bg-[var(--color-surface-primary-transparent)]" />
+                    <div className="h-[28px] w-[80%] py-1">
+                      <div className="size-full rounded-md bg-[var(--color-surface-primary-transparent)] opacity-50" />
                     </div>
                   </div>
                 </div>
@@ -373,9 +373,9 @@ export const CreateProject = ({ id }: Props) => {
         </AnimatePresence>
       </div>
 
-      <div className="relative transform scale-90 hidden w-1/2 px-14 py-8 md:block ">
-        <div className="absolute flex items-center justify-center top-0 h-full left-0 ml-10 w-full">
-          <div className="flex w-full h-fit min-h-48 flex-col gap-8 rounded-tl-xl rounded-bl-xl overflow-hidden border-[var(--color-border-primary-base)]  bg-gradient-to-r from-[var(--body-surface)] px-14 pt-14">
+      <div className="relative hidden w-1/2 scale-90 px-14 py-8 md:block">
+        <div className="absolute left-0 top-0 ml-10 flex size-full items-center justify-center">
+          <div className="flex h-fit min-h-48 w-full flex-col gap-8 overflow-hidden rounded-l-xl border-[var(--color-border-primary-base)] bg-gradient-to-r  from-[var(--body-surface)] px-14 pt-14">
             {!(createProjectForm.watch('logo') === Project_Backup) ? (
               <Avatar
                 size={'xl'}
@@ -384,7 +384,7 @@ export const CreateProject = ({ id }: Props) => {
                 alt="random"
               />
             ) : (
-              <div className="flex items-center justify-center border-[var(--card-border-primary)] rounded-md w-[72px] h-[72px] border bg-[var(--color-surface-primary-base)]">
+              <div className="flex size-[72px] items-center justify-center rounded-md border border-[var(--card-border-primary)] bg-[var(--color-surface-primary-base)]">
                 <Icon
                   name="plus"
                   width={20}
@@ -394,14 +394,14 @@ export const CreateProject = ({ id }: Props) => {
               </div>
             )}
 
-            <div className="flex gap-3 flex-col w-full">
+            <div className="flex w-full flex-col gap-3">
               {createProjectForm.watch('name') ? (
                 <Text className="b2" color={'primary'}>
                   {createProjectForm.watch('name')}
                 </Text>
               ) : (
-                <div className="w-[40%] h-[28px] py-1">
-                  <div className="w-full h-full opacity-50 rounded-md bg-[var(--color-surface-primary-transparent)]" />
+                <div className="h-[28px] w-[40%] py-1">
+                  <div className="size-full rounded-md bg-[var(--color-surface-primary-transparent)] opacity-50" />
                 </div>
               )}
               {createProjectForm.watch('tagline') ? (
@@ -409,8 +409,8 @@ export const CreateProject = ({ id }: Props) => {
                   {createProjectForm.watch('tagline')}
                 </Text>
               ) : (
-                <div className="w-[80%] h-[20px] py-1">
-                  <div className="w-full h-full opacity-50 rounded-md bg-[var(--color-surface-primary-transparent)]" />
+                <div className="h-[20px] w-[80%] py-1">
+                  <div className="size-full rounded-md bg-[var(--color-surface-primary-transparent)] opacity-50" />
                 </div>
               )}
             </div>

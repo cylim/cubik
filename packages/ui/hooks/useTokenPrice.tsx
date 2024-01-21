@@ -70,16 +70,17 @@ const fetchTokenPrice = async () => {
 };
 
 const useTokenPrice = () => {
-  const { state, dispatch } = useTokenContext();
+  const { state } = useTokenContext();
 
   const { error } = useQuery<TokenPriceResponse[]>({
     queryKey: ['tokenPrice'],
     queryFn: fetchTokenPrice,
     refetchInterval: 5000,
-    onSuccess: (data) => {
-      // Update the global context with the fetched token price
-      dispatch({ type: 'UPDATE_TOKEN_PRICE', payload: data });
-    },
+
+    // onSuccess: (data) => {
+    //   // Update the global context with the fetched token price
+    //   dispatch({ type: 'UPDATE_TOKEN_PRICE', payload: data });
+    // },
   });
 
   return { data: state, error };

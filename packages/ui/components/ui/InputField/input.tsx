@@ -1,3 +1,5 @@
+/* eslint-disable react/display-name */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import React, { createContext, useContext, useState } from 'react';
@@ -120,7 +122,7 @@ export interface InputProps
 
 export const InputField = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, onFocus, onBlur, ...props }, ref) => {
-    const { isFocused, setIsFocused } = useContext(InputContext);
+    const { setIsFocused } = useContext(InputContext);
     return (
       <input
         className={cn(

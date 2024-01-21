@@ -43,12 +43,12 @@ const BottomNav = () => {
         }
       >
         <Link href={`/`}>
-          <div className="w-fit relative">
+          <div className="relative w-fit">
             {pathname === '/' && (
               <motion.div
                 layoutId={'bottom navbar'}
                 transition={{ type: 'spring', bounce: 0.2, duration: 0.5 }}
-                className={`absolute top-[-16px] left-[-6px] bg-[var(--tab-fg-active)] h-[2px] w-[40px]`}
+                className={`absolute left-[-6px] top-[-16px] h-[2px] w-[40px] bg-[var(--tab-fg-active)]`}
               />
             )}
             <Icon
@@ -59,12 +59,12 @@ const BottomNav = () => {
             />
           </div>
         </Link>
-        <div className="w-fit relative">
+        <div className="relative w-fit">
           {pathname === '/search' && (
             <motion.div
               layoutId={'bottom navbar'}
               transition={{ type: 'spring', bounce: 0.2, duration: 0.5 }}
-              className={`absolute top-[-16px] left-[-6px] bg-[var(--tab-fg-active)] h-[2px] w-[40px]`}
+              className={`absolute left-[-6px] top-[-16px] h-[2px] w-[40px] bg-[var(--tab-fg-active)]`}
             />
           )}
           <Icon
@@ -88,13 +88,13 @@ const BottomNav = () => {
               pathname.split('/')[1] === user.user?.username
                 ? 'border-2 border-[var(--color-fg-primary-depth)]'
                 : 'border-2 border-transparent'
-            } flex rounded-full relative items-center justify-center`}
+            } relative flex items-center justify-center rounded-full`}
           >
             {pathname === `/${user.user?.username}` && (
               <motion.div
                 layoutId={'bottom navbar'}
                 transition={{ type: 'spring', bounce: 0.2, duration: 0.5 }}
-                className={`absolute top-[-16px] left-[-6px] bg-[var(--tab-fg-active)] h-[2px] w-[40px]`}
+                className={`absolute left-[-6px] top-[-16px] h-[2px] w-[40px] bg-[var(--tab-fg-active)]`}
               />
             )}
             <Avatar

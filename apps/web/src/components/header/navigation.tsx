@@ -27,9 +27,9 @@ const Banner = () => {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 48 }}
           exit={{ opacity: 0, height: 0 }}
-          className={`h-12 bg-[var(--color-bg-caution-base)] w-full flex items-center justify-between`}
+          className={`flex h-12 w-full items-center justify-between bg-[var(--color-bg-caution-base)]`}
         >
-          <div className="flex flex-row justify-between items-center max-w-7xl px-6 w-full">
+          <div className="flex w-full max-w-7xl flex-row items-center justify-between px-6">
             <Text className="l2" color="inverse">
               You are on devnet mode
             </Text>

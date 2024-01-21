@@ -6,10 +6,11 @@ import express from 'express';
 import Controller from 'interfaces/controller.interface';
 import logger from 'services/logger';
 import sharp from 'sharp';
+import { imageCache, toMilliseconds } from 'utils/cache';
 import validator from 'validator';
 import z from 'zod';
+
 import { errorHandler } from '@cubik/database/api';
-import { imageCache, toMilliseconds } from 'utils/cache';
 
 class ImageController implements Controller {
   public path = '/image';
@@ -17,7 +18,7 @@ class ImageController implements Controller {
   public querySchema = z.object({
     size: z.string().min(1).max(9),
     url: z.string().min(1).max(1000),
-  })
+  });
 
   constructor() {
     this.initializeRoutes();

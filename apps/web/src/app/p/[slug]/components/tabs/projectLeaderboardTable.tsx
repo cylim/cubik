@@ -50,8 +50,8 @@ const ProjectLeaderboardTable = ({
                 row.index + 1 === 1
                   ? 'var(--tag-solid-surface-orange)'
                   : row.index + 1 === 2
-                  ? 'var(--tag-solid-surface-green)'
-                  : 'transparent'
+                    ? 'var(--tag-solid-surface-green)'
+                    : 'transparent'
               }
               icon={'awardMedal'}
             />

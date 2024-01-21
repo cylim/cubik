@@ -10,6 +10,6 @@ export interface CloudflareResponseType {
     variants: string[];
   };
   success: boolean;
-  errors: any[];
-  messages: any[];
+  errors: unknown[];
+  messages: unknown[];
 }

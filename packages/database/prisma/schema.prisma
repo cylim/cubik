@@ -218,7 +218,6 @@ model Sponsor {
   type           SponsorType      @default(INDIVIDUAL)
   multisigPDA    String
   eventId        String
-  paidToken      Json
   isPublic       Boolean          @default(true)
   totalCommitted Float            @default(0) 
   selfCustody    Boolean          @default(false)

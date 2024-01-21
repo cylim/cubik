@@ -48,6 +48,12 @@ const config = {
         port: '',
         pathname: '*/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.helius-rpc.com', // remove this later
+        port: '',
+        pathname: '*/**',
+      },
     ],
   },
   typescript: {

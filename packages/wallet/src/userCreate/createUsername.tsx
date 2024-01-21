@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -51,6 +52,7 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
       }
     };
     const getUserNfts = async () => {
+      if (nfts.length > 0) return;
       setLoadingNfts(true);
       try {
         const response = await fetch(
@@ -147,6 +149,7 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
                   {nfts.map((nft: any, index) => (
                     <CarouselItem key={index} className="h-fit pl-4 basis-0">
                       <div className="h-fit w-full">
+                        {/* // using this because we don't want to get helius cdn in nextjs links */}
                         <img
                           src={nft?.image?.cdn_uri}
                           alt=""
@@ -157,6 +160,7 @@ export const CreateUsername = ({ userForm, setUserCreateState }: Props) => {
                           }
                           style={{
                             borderRadius: '4px',
+                            cursor: 'pointer',
                           }}
                         />
                       </div>

@@ -19,7 +19,7 @@ type TextProps = React.HTMLAttributes<HTMLElement> &
   VariantProps<typeof helperTextVariants> & { show?: boolean };
 
 const HelperText = forwardRef<HTMLElement | null, TextProps>(
-  ({ className, children, variant, show, ...props }) => {
+  ({ className, children, variant, show }) => {
     return (
       <AnimatePresence>
         {show && (

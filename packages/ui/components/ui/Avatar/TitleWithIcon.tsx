@@ -29,13 +29,19 @@ interface TitleWithIconProps extends VariantProps<typeof titleVariants> {
   text: string;
   icon?: keyof typeof iconLibrary;
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  iconColor?: string;
 }
 
-const TitleWithIcon: React.FC<TitleWithIconProps> = ({ text, icon, size }) => {
+const TitleWithIcon: React.FC<TitleWithIconProps> = ({
+  text,
+  icon,
+  size,
+  iconColor,
+}) => {
   return (
     <div className={cn('flex items-center gap-2')}>
       <Text className={cn(titleVariants({ size }))}>{text}</Text>
-      {icon && <Icon name={icon} />}
+      {icon && <Icon name={icon} color={iconColor} height={18} width={18} />}
     </div>
   );
 };

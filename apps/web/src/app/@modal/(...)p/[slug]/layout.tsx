@@ -20,14 +20,6 @@ interface Props {
   };
 }
 const ProjectLayoutDrawer = ({ children, params }: Props) => {
-  console.log('---------------');
-  console.log('---------------');
-  console.log('---------------');
-  console.log(params.slug);
-  console.log('---------------');
-  console.log('---------------');
-  console.log('---------------');
-  console.log('---------------');
   // return (
   //   <Drawer modal open={true}>
   //     <DrawerPortal>

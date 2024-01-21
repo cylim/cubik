@@ -3,6 +3,8 @@ import ProjectDescriptionAndImages from '@/app/p/[slug]/components/tabs/componen
 import { ProjectDetailsSidebar } from '@/app/p/[slug]/components/tabs/components/projectDetailsTab/projectDetailsSidebar';
 import TabLayout from '@/components/common/tabs/TabLayout';
 
+import { prisma } from '@cubik/database';
+
 const fetchProjectDetails = async (slug: string) => {
   try {
     const project = await prisma.project.findFirst({

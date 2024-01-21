@@ -3,6 +3,8 @@
 import { cookies } from 'next/headers';
 import { IsUserLoginServer } from '@/utils/auth/isUserLoginServer';
 
+import { prisma } from '@cubik/database';
+
 /**
  * Creates a comment for a project.
  *

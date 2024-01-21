@@ -4,6 +4,7 @@ import PageLayout from '@/components/Layouts/PageLayout';
 import { ConnectWalletSection } from '@/components/wallet/ConnectWalletSection';
 import { IsUserLoginServer } from '@/utils/helpers/isUserLogin';
 
+import { prisma } from '@cubik/database';
 import {
   Background,
   GrantRoundCardFooter,

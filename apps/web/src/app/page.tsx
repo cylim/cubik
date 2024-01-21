@@ -6,6 +6,7 @@ import {
   ProjectSectionHeader,
 } from '@/components/explorer/ExplorerHeader';
 import { get } from '@vercel/edge-config';
+import { v4 as uuidV4 } from 'uuid';
 
 import { prisma } from '@cubik/database';
 import {
@@ -112,7 +113,7 @@ export default async function Home() {
                 <Button size="lg" className="!px-4" variant={'primary'}>
                   Get Started
                 </Button>
-                <Link href={'/create/project'}>
+                <Link href={`/create/project?id=${uuidV4()}`}>
                   <Button size="lg" variant={'secondary'}>
                     Submit a Project
                   </Button>
@@ -133,7 +134,7 @@ export default async function Home() {
           </div>
         </div>
         <div className="flex min-h-screen w-full max-w-7xl flex-col items-center gap-10 md:mx-auto lg:flex-row lg:items-start">
-          <div className="flex h-full w-full flex-col gap-8 px-4 py-8 md:px-6 lg:w-2/3">
+          <div className="flex size-full flex-col gap-8 px-4 py-8 md:px-6 lg:w-2/3">
             <ProjectSectionHeader />
             {/* Projects */}
             <div className="flex flex-col gap-4 md:gap-8">
@@ -176,7 +177,7 @@ export default async function Home() {
                               333 Contributors
                             </Text>{' '}
                           </div>
-                          <div className="h-1 w-1 rounded-full bg-[var(--color-fg-primary-subdued)]" />
+                          <div className="size-1 rounded-full bg-[var(--color-fg-primary-subdued)]" />
                           <Text className="b3-light md:b4-light">
                             132 Matched
                           </Text>
@@ -188,7 +189,7 @@ export default async function Home() {
               })}
             </div>
           </div>
-          <div className="flex h-full w-full flex-1 flex-col gap-8 px-4 py-8 lg:w-2/3">
+          <div className="flex size-full flex-1 flex-col gap-8 px-4 py-8 lg:w-2/3">
             <InputFieldContainer variant={'md'}>
               <InputLeftElement withBorder={false}>
                 <Icon name="search" />

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import BottomNav from '@/components/mobile-bottom-nav';
 import { env } from '@/env.mjs';
 import { usePrice } from '@/hooks/usePrice';
 import { WalletProvider } from '@/providers/wallet';
@@ -9,10 +10,9 @@ import {
   QueryClientProvider,
   useQuery,
 } from '@tanstack/react-query';
+import { useMediaQuery } from 'usehooks-ts';
 
 import { getValidTokenPrice } from '@cubik/common/solana';
-//import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-
 import { ThemeProvider } from '@cubik/ui';
 
 interface Props {
@@ -21,12 +21,15 @@ interface Props {
 
 export const Provider = ({ children }: Props) => {
   const [client] = useState(() => new QueryClient());
-
+  const isMobile = useMediaQuery('(min-width: 768px)');
   return (
     <ThemeProvider>
       <QueryClientProvider client={client}>
         <PriceProvider>
-          <WalletProvider>{children}</WalletProvider>
+          <WalletProvider>
+            {children}
+            {!isMobile && <BottomNav />}
+          </WalletProvider>
         </PriceProvider>
       </QueryClientProvider>
     </ThemeProvider>

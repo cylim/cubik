@@ -13,7 +13,6 @@ import { CubikToaster } from '@cubik/ui';
 import { cn } from '@cubik/ui/lib/utils';
 
 import TopNavbar from '../components/header/navigation';
-import BottomNav from '../components/mobile-bottom-nav';
 import { Provider } from '../providers/provider';
 
 const CookiesProvider = dynamic(() =>
@@ -85,7 +84,6 @@ export default function RootLayout({
                 {children}
               </main>
               <CubikToaster />
-              <BottomNav />
             </>
           </Provider>
         </CookiesProvider>

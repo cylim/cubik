@@ -1,35 +1,20 @@
 import { useState } from 'react';
-import StepTemplate from '@/components/create-project/stepTemplate';
+import { CreateProjectStepProps } from '@/components/create/project/step1';
+import StepTemplate from '@/components/create/project/stepTemplate';
 import { IProjectData } from '@/types/project';
-import {
-  Control,
-  FieldErrors,
-  UseFormRegister,
-  UseFormSetValue,
-  UseFormWatch,
-} from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 
 import { DescriptionEditor, PreviewEditor } from '@cubik/editor';
 import { SegmentContainer, SegmentItem, Text } from '@cubik/ui';
 
-interface Props {
-  setStep: React.Dispatch<React.SetStateAction<number>>;
-  forceSave: () => Promise<void>;
-  setValue: UseFormSetValue<IProjectData>;
-  watch: UseFormWatch<IProjectData>;
-  register: UseFormRegister<IProjectData>;
-  errors: FieldErrors<IProjectData>;
-  control: Control<IProjectData, any>;
-}
-export const Step8 = ({
-  setStep,
-  errors,
-  watch,
-  setValue,
-  register,
-  forceSave,
-  control,
-}: Props) => {
+export const Step8 = ({ setStep, forceSave }: CreateProjectStepProps) => {
+  const {
+    setValue,
+    watch,
+    control,
+    setError,
+    formState: { errors },
+  } = useFormContext<IProjectData>();
   const [preview, setPreview] = useState<boolean>(false);
 
   const onNext = () => {

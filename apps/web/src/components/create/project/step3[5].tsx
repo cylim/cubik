@@ -1,5 +1,5 @@
-import { ProjectFormData } from '@/components/create-project/createProject[ARCHIEVE]';
-import { TeamSelector } from '@/components/create-project/team-selector/teamSelector';
+import { ProjectFormData } from '@/components/create/project/createProject[ARCHIEVE]';
+import { TeamSelector } from '@/components/create/project/team-selector/teamSelector';
 import { UseFormReturn } from 'react-hook-form';
 
 import {

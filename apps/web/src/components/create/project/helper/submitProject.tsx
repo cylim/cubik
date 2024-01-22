@@ -1,13 +1,30 @@
 'use server';
 
 import { cookies } from 'next/headers';
-import { ProjectFormData } from '@/components/create-project/createProject[ARCHIEVE]';
+import { ProjectFormData } from '@/components/create/project/createProject[ARCHIEVE]';
 
 import { decodeToken } from '@cubik/auth';
 import { prisma } from '@cubik/database';
 
-export const syncProject = async (project: ProjectFormData, id: string) => {
+interface SubmitProjectArgs {
+  id: string;
+  project: ProjectFormData;
+  multiSigInfo: {
+    multisigPDA: string;
+    createKey: string;
+  };
+  createKey: string;
+  counter: number;
+  sig: string;
+}
+
+export const submitProject = async (
+  args: SubmitProjectArgs,
+): Promise<boolean> => {
   try {
+    // todo - signature validation
+    // todo - zod validation for args submitted
+
     const authToken = cookies().get('authToken');
     if (!authToken) throw new Error('No auth token found');
 
@@ -17,15 +34,16 @@ export const syncProject = async (project: ProjectFormData, id: string) => {
 
     const checkProject = await prisma.project.findMany({
       where: {
-        id: id,
+        id: args.id,
         ownerPublickey: user.mainWallet,
-        isArchive: false,
       },
     });
 
     if (!checkProject) throw new Error('No project found');
 
     let industry: string[] = [];
+    const { project } = args;
+
     if (project.category) {
       project.category.forEach((c) => {
         if (c.value) industry.push(c.value);
@@ -33,7 +51,7 @@ export const syncProject = async (project: ProjectFormData, id: string) => {
     }
     await prisma.project.update({
       where: {
-        id: id,
+        id: args.id,
       },
       data: {
         name: project.name,
@@ -47,11 +65,17 @@ export const syncProject = async (project: ProjectFormData, id: string) => {
         industry: industry,
         isOpenSource: project.isOpenSource,
         twitterHandle: project.twitter,
+        multiSigPDAV4: args.multiSigInfo.multisigPDA,
+        createKey: args.multiSigInfo.createKey,
+        projectUserCount: args.counter,
+        tx: args.sig,
+        isDraft: false,
+        isMigrated: true,
       },
     });
     const currentTeam = await prisma.team.findMany({
       where: {
-        projectId: id,
+        projectId: args.id,
         isArchive: false,
       },
       select: {
@@ -77,7 +101,7 @@ export const syncProject = async (project: ProjectFormData, id: string) => {
     // remove member
     currentTeam.forEach((c) => {
       // current team has this member and new team has this member
-      if (project.team.find((e) => e.value === c.userId)) {
+      if (args.project.team.find((e) => e.value === c.userId)) {
         console.log(' not removing--', c.userId);
       } else {
         // current team has this member but not in the new team
@@ -90,7 +114,7 @@ export const syncProject = async (project: ProjectFormData, id: string) => {
       ...newMembers.map((m) =>
         prisma.team.create({
           data: {
-            projectId: id,
+            projectId: args.id,
             userId: m,
           },
         }),
@@ -100,7 +124,7 @@ export const syncProject = async (project: ProjectFormData, id: string) => {
           where: {
             id: currentTeam.find((c) => c.userId === m)?.id,
             userId: m,
-            projectId: id,
+            projectId: args.id,
           },
           data: {
             isArchive: true,

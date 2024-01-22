@@ -47,7 +47,11 @@ export const CustomComponents: Partial<
 > = {
   // The wrapper around the entire select component.
   SelectContainer: (props) => {
-    return <components.SelectContainer {...props} />;
+    return (
+      <components.SelectContainer {...props}>
+        <AnimatePresence>{props.children}</AnimatePresence>
+      </components.SelectContainer>
+    );
   },
   // The second highest level wrapper around the components. It is responsible for the positioning of the ValueContainer and IndicatorsContainer. It is followed by the Menu.
   Control: (props) => {
@@ -77,23 +81,22 @@ export const CustomComponents: Partial<
     );
   },
   Menu: (props) => {
+    console.log('menu props', props.selectProps.menuIsOpen);
     return (
-      <AnimatePresence>
-        {props.selectProps.menuIsOpen && (
-          <components.Menu {...props}>
-            <motion.div
-              key={props.selectProps.id}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              variants={menuVariants}
-              className="shadow-lg rounded-xl z-10 bg-[var(--menu-surface)]"
-            >
-              {props.children}
-            </motion.div>
-          </components.Menu>
-        )}
-      </AnimatePresence>
+      props.selectProps.menuIsOpen && (
+        <components.Menu {...props}>
+          <motion.div
+            key={props.selectProps.id}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={menuVariants}
+            className="shadow-lg rounded-xl z-10 bg-[var(--menu-surface)]"
+          >
+            {props.children}
+          </motion.div>
+        </components.Menu>
+      )
     );
   },
   MenuList: (props) => (
@@ -103,7 +106,7 @@ export const CustomComponents: Partial<
       // exit="hidden"
       // variants={menuVariants}
       // transition={{ duration: 0.1 }}
-      className="shadow-lg overflow-hidden rounded-xl bg-[var(--menu-list-surface)] h-full p-2"
+      className="shadow-lg overflow-hidden rounded-xl bg-[var(--menu-list-surface)] h-full w-full p-1"
     >
       <components.MenuList {...props} />
     </div>

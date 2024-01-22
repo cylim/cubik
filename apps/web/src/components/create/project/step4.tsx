@@ -1,36 +1,20 @@
-import { ProjectFormData } from '@/components/create-project/createProject[ARCHIEVE]';
-import { MultiImageUploader } from '@/components/create-project/image-uploder/multiImageUploader';
-import StepTemplate from '@/components/create-project/stepTemplate';
+import { MultiImageUploader } from '@/components/create/project/image-uploder/multiImageUploader';
+import { CreateProjectStepProps } from '@/components/create/project/step1';
+import StepTemplate from '@/components/create/project/stepTemplate';
 import { IProjectData } from '@/types/project';
-import {
-  Control,
-  Controller,
-  FieldErrors,
-  UseFormSetError,
-  UseFormSetValue,
-  UseFormWatch,
-} from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 
 import { Button, Text } from '@cubik/ui';
 
-interface Props {
-  setValue: UseFormSetValue<IProjectData>;
-  watch: UseFormWatch<IProjectData>;
-  setStep: React.Dispatch<React.SetStateAction<number>>;
-  setError: UseFormSetError<IProjectData>;
-  errors: FieldErrors<IProjectData>;
-  forceSave: () => Promise<void>;
-  control: Control<IProjectData, any>;
-}
-export const Step4 = ({
-  setStep,
-  setValue,
-  watch,
-  setError,
-  errors,
-  forceSave,
-  control,
-}: Props) => {
+export const Step4 = ({ setStep, forceSave }: CreateProjectStepProps) => {
+  const {
+    setValue,
+    watch,
+    control,
+    setError,
+    formState: { errors },
+  } = useFormContext<IProjectData>();
+
   const onNext = () => {
     setStep(5);
     console.log('on next click');

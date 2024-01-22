@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import StepTemplate from '@/components/create-project/stepTemplate';
+import StepTemplate from '@/components/create/project/stepTemplate';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosResponse } from 'axios';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -26,7 +26,7 @@ import {
   Text,
 } from '@cubik/ui';
 
-import { useAutosave } from '../../hooks/useAutoSave';
+import { useAutosave } from '../../../hooks/useAutoSave';
 import { syncProject } from './helper/syncProject';
 import { Step1 } from './step1';
 import { Step2 } from './step2';

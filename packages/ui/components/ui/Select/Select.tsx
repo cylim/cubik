@@ -13,7 +13,7 @@ import { CustomComponents } from './customComponents';
 
 interface Props {
   options: SelectOptionsType[];
-  onChange: (value: Options<SelectOptionsType>[]) => void;
+  onChange: (e: string) => void;
   value?: SelectOptionsType[];
   size?: 'sm' | 'md' | 'lg';
   isMulti?: boolean;
@@ -57,11 +57,13 @@ export const Select = ({
         return loadingMessage || 'Loading...';
       }}
       onChange={(e) => {
-        console.log('on change');
         if (isMulti) {
           onChange(e as any);
         } else {
-          onChange(e as any);
+          if (e) {
+            console.log('on change - ', e.value);
+            onChange(e.value);
+          }
         }
       }}
       onInputChange={(e, a) => {
@@ -75,22 +77,22 @@ export const Select = ({
       options={options}
       unstyled={true}
       styles={{
-        control: (provided, state) => ({
+        control: () => ({
           size: size,
         }),
-        option: (provided, state) => ({
+        option: () => ({
           size: size,
         }),
-        singleValue: (provided, state) => ({
+        singleValue: () => ({
           size: size,
         }),
-        valueContainer: (provided, state) => ({
+        valueContainer: () => ({
           size: size,
         }),
-        placeholder: (provided, state) => ({
+        placeholder: () => ({
           size: size,
         }),
-        dropdownIndicator: (provided, state) => ({
+        dropdownIndicator: () => ({
           size: isSmallerDevice ? 16 : 20,
         }),
       }}
@@ -169,7 +171,7 @@ export const AsyncSelect = ({
         placeholder: () => ({
           size: size,
         }),
-        dropdownIndicator: (provided, state) => ({
+        dropdownIndicator: () => ({
           size: isSmallerDevice ? 16 : 20,
         }),
       }}

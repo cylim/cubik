@@ -3,11 +3,12 @@
 import React, { useState } from 'react';
 import FormContainer from '@/app/components/FormContainer';
 import IndividualSponsorForm from '@/app/create/sponsor/components/IndividualSponsorForm';
-import OrganizationSponsorForm from '@/app/create/sponsor/components/OrganizationSponsorForm';
+import OrganizationSponsorForm from '@/app/create/sponsor/components/organizationSponsorForm/dfdf';
 import {
   SponsorFormSwitch,
   sponsorType,
 } from '@/app/create/sponsor/components/sponsorFormSwitch';
+//import { OrganizationSponsorForm } from '@/components/create/sponsor/organization';
 import {
   IndividualSponsorFormData,
   OrganizationSponsorFormData,
@@ -66,6 +67,9 @@ const SponsorFormPage = () => {
           setProgress={setProgress}
         />
       ) : (
+        //<OrganizationSponsorForm />
+        // <OrganizationSponsorForm />
+        // <OrganizationSponsorForm />
         // </motion.div>
         // <motion.div
         //   key="individual"

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ProjectFormData } from '@/components/create-project/createProject[ARCHIEVE]';
+import { ProjectFormData } from '@/components/create/project/createProject[ARCHIEVE]';
 import { IProjectData } from '@/types/project';
 import { useUploadThing } from '@/utils/uploadthing';
 import {

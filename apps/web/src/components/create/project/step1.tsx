@@ -1,56 +1,28 @@
-import StepTemplate from '@/components/create-project/stepTemplate';
-import { Industries } from '@/constants/industry';
+import StepTemplate from '@/components/create/project/stepTemplate';
 import { IProjectData } from '@/types/project';
-import { useEffect, useState } from 'React';
-import {
-  FieldErrors,
-  UseFormClearErrors,
-  UseFormRegister,
-  UseFormReturn,
-  UseFormSetValue,
-  UseFormTrigger,
-  UseFormWatch,
-} from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 
 import {
-  Button,
   HelperText,
   InputContainer,
   InputField,
   InputFieldContainer,
   InputLabel,
-  Text,
-  Textarea,
 } from '@cubik/ui';
 
 export interface CreateProjectStepProps {
   setStep: React.Dispatch<React.SetStateAction<number>>;
   forceSave: () => Promise<void>;
-  watch: UseFormWatch<IProjectData>;
-  errors: FieldErrors<IProjectData>;
-  trigger: UseFormTrigger<IProjectData>;
-  setValue: UseFormSetValue<IProjectData>;
-  register: UseFormRegister<IProjectData>;
-  clearErrors: UseFormClearErrors<IProjectData>;
 }
 
-export const Step1 = ({
-  setStep,
-  forceSave,
-  watch,
-  errors,
-  clearErrors,
-  trigger,
-  setValue,
-  register,
-}: CreateProjectStepProps) => {
-  console.log(
-    '🔄 Step 1 component Rerendered',
-    'name:',
-    watch('name'),
-    'description:',
-    watch('shortDescription'),
-  );
+export const Step1 = ({ setStep, forceSave }: CreateProjectStepProps) => {
+  const {
+    trigger,
+    register,
+    watch,
+    formState: { errors },
+  } = useFormContext<IProjectData>();
+
   // on next function
   const onNext = async () => {
     const isNameValid = await trigger('name');

@@ -1,33 +1,20 @@
-import { ProjectFormData } from '@/components/create-project/createProject[ARCHIEVE]';
-import { LogoUploader } from '@/components/create-project/image-uploder/logoUploader';
-import { CreateProjectStepProps } from '@/components/create-project/step1';
-import StepTemplate from '@/components/create-project/stepTemplate';
+import { LogoUploader } from '@/components/create/project/image-uploder/logoUploader';
+import { CreateProjectStepProps } from '@/components/create/project/step1';
+import StepTemplate from '@/components/create/project/stepTemplate';
 import { IProjectData } from '@/types/project';
-import {
-  Control,
-  Controller,
-  UseFormReturn,
-  UseFormSetError,
-} from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 
 import { Button, Text } from '@cubik/ui';
 
-interface Step2Props extends CreateProjectStepProps {
-  setError: UseFormSetError<IProjectData>;
-  control: Control<IProjectData, any>;
-}
-export const Step3 = ({
-  setStep,
-  forceSave,
-  watch,
-  errors,
-  setError,
-  clearErrors,
-  trigger,
-  setValue,
-  register,
-  control,
-}: Step2Props) => {
+export const Step3 = ({ setStep, forceSave }: CreateProjectStepProps) => {
+  const {
+    setValue,
+    watch,
+    control,
+    setError,
+    formState: { errors },
+  } = useFormContext<IProjectData>();
+
   const onNext = () => {
     setStep(4);
     forceSave();

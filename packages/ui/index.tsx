@@ -62,3 +62,4 @@ export * from './components/ui/Select';
 export * from './components/ui/StatsCard';
 export * from './components/ui/Toast';
 export * from './components/ui/ViewOnExplorer';
+export * from './components/ui/FormStepper';

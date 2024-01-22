@@ -60,11 +60,11 @@ const TopNavbar = () => {
     background =
       'bg-gradient-to-b from-[var(--body-surface)] to-transparent via-40% dark:from-[var(--body-surface)] dark:to-[var(--body-surface)] dark:via-10%';
   // when on any page with /create or /apply but only in light mode
-  else if (
-    pathname.includes('/create') ||
-    (pathname.includes('/apply') && theme === 'light')
-  )
-    background = 'bg-gradient-to-b from-[#FAFAFA] to-transparent via-10%';
+  else if (pathname.includes('/create') || pathname.includes('/apply')) {
+    if (theme === 'light') {
+      background = 'bg-gradient-to-b from-[#FAFAFA] to-transparent via-10%';
+    } else background = 'transparent';
+  }
 
   useEffect(() => {
     if (typeof document !== 'undefined') {

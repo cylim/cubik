@@ -6,7 +6,7 @@ import { validate } from 'uuid';
 
 import { Background } from '@cubik/ui';
 
-import { CreateProject } from '../../../components/create-project';
+import { CreateProject } from '../../../components/create/project';
 import { SelectionSection } from './components/selectionSection';
 
 interface Props {

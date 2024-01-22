@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { OrganizationSponsorFormData } from '@/types/sponsor';
 import { useUploadThing } from '@/utils/uploadthing';
+import { DevTool } from '@hookform/devtools';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosResponse } from 'axios';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -54,9 +55,9 @@ const OrganizationSponsorForm = ({
   setProgress,
 }: IOrgSponsorFormProps) => {
   const isSmallerDevice = useMediaQuery('(max-width: 768px)');
+  const [randomNumber, setRandomNumber] = useState(10);
   const [searchResult, setSearchResult] = useState<SearchResults[]>([]);
   const [search, setSearch] = useState<string>('');
-  const [randomNumber, setRandomNumber] = useState(10);
   const tokenList = getValidToken();
   const TokenOptions: SelectOptionsType[] = tokenList.map((token) => ({
     label: token.symbol,
@@ -167,11 +168,13 @@ const OrganizationSponsorForm = ({
     setValue,
     setError,
     watch,
+    register,
     formState: { errors },
   } = useForm<OrganizationSponsorFormData>({
     resolver: customResolver,
     defaultValues: {
       upfrontPay: [{ token: TokenOptions[0].value, amount: 0 }],
+      isSponsorshipPublic: false,
       wantsSelfCustody: false,
     },
   });
@@ -210,7 +213,7 @@ const OrganizationSponsorForm = ({
         setProgress(progressEvent);
       },
       onUploadError: (error) => {
-        organizationSponsorForm.setError('logo', {
+        setError('logo', {
           type: 'manual',
           message: error.message,
         });
@@ -223,9 +226,9 @@ const OrganizationSponsorForm = ({
       onClientUploadComplete: (file) => {
         if (file) {
           console.log(file);
-          organizationSponsorForm.setValue('logo', file[0].url);
+          setValue('logo', file[0].url);
         } else {
-          organizationSponsorForm.setError('logo', {
+          setError('logo', {
             type: 'manual',
             message: "Couldn't upload file",
           });
@@ -236,10 +239,10 @@ const OrganizationSponsorForm = ({
   );
 
   const OnSubmit = (data: OrganizationSponsorFormData) => {
+    console.log('data - ', data);
     console.log(data);
   };
 
-  console.log('errors - ', errors);
   return (
     <motion.form
       layoutId="sponsorship form"
@@ -284,7 +287,7 @@ const OrganizationSponsorForm = ({
                 {fields.map((item, index) => {
                   return (
                     <motion.li
-                      key={item.id}
+                      key={index}
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
@@ -307,19 +310,19 @@ const OrganizationSponsorForm = ({
                           }
                         >
                           <InputField
-                            name="amount"
                             placeholder="10,000"
-                            onChange={(e) => {
-                              setValue(
-                                `upfrontPay.${index}.amount`,
-                                Number(e.currentTarget.value),
-                              );
-                            }}
+                            {...register(`upfrontPay.${index}.amount`)}
+                            // onChange={(e) => {
+                            //   setValue(
+                            //     `upfrontPay.${index}.amount`,
+                            //     Number(e.currentTarget.value),
+                            //   );
+                            // }}
                           />
                           <InputRightElement>
                             <motion.div layout transition={{ duration: 0.3 }}>
                               <Text
-                                className="b2-heavy md:l2-heavy items-centergap-0 flex flex-row"
+                                className="b2-heavy md:l2-heavy flex flex-row items-center gap-0"
                                 color="tertiary"
                               >
                                 <span className="pb-[1px]">$</span>
@@ -334,7 +337,7 @@ const OrganizationSponsorForm = ({
                         </InputFieldContainer>
                         <div className="w-full max-w-32">
                           <Controller
-                            render={({ field }) => (
+                            render={() => (
                               <Select
                                 placeholder="Token"
                                 size="md"
@@ -580,6 +583,8 @@ const OrganizationSponsorForm = ({
           Proceed to Payment
         </Button>
       </div>
+      {/* use form hook devtool */}
+      <DevTool control={control} />
     </motion.form>
   );
 };

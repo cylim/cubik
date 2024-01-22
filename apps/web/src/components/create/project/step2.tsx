@@ -1,26 +1,19 @@
-import { ProjectFormData } from '@/components/create-project/createProject[ARCHIEVE]';
-import { CreateProjectStepProps } from '@/components/create-project/step1';
-import StepTemplate from '@/components/create-project/stepTemplate';
+import { CreateProjectStepProps } from '@/components/create/project/step1';
+import StepTemplate from '@/components/create/project/stepTemplate';
 import { Industries } from '@/constants/industry';
-import { Controller, UseFormReturn } from 'react-hook-form';
+import { IProjectData } from '@/types/project';
+import { Controller, useFormContext, UseFormReturn } from 'react-hook-form';
 
 import { InputLabel, Select } from '@cubik/ui';
 
-interface Step2Props extends CreateProjectStepProps {
-  control: any;
-}
+export const Step2 = ({ setStep, forceSave }: CreateProjectStepProps) => {
+  const {
+    setValue,
+    watch,
+    control,
+    formState: { errors },
+  } = useFormContext<IProjectData>();
 
-export const Step2 = ({
-  setStep,
-  forceSave,
-  watch,
-  errors,
-  clearErrors,
-  trigger,
-  setValue,
-  register,
-  control,
-}: Step2Props) => {
   const onNext = () => {
     setStep(3);
     forceSave();
@@ -39,7 +32,7 @@ export const Step2 = ({
           'These categories will be used to filter when someone wants to see projects in specific categories. Choose them carefully they can impact discoverability of your project.'
         }
       >
-        <div className="flex flex-col gap-3">
+        <div className="flex max-w-[442px] flex-col gap-3">
           <InputLabel>Categories</InputLabel>
           <Controller
             name="industry"
@@ -48,6 +41,8 @@ export const Step2 = ({
               <Select
                 placeholder="Search Category here"
                 isMulti={true}
+                isClearable={false}
+                isSearchable={true}
                 onChange={(e) => {
                   if (!e) return;
                   setValue('industry', e as any);

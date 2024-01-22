@@ -30,12 +30,12 @@ const avatarVariants = cva('', {
     {
       variant: 'square',
       size: 'sm',
-      class: 'rounded-md w-[24px] h-[24px] md:w-[32px] md:h-[32px]',
+      class: 'rounded-md w-[22px] h-[22px] md:w-[30px] md:h-[30px]',
     },
     {
       variant: 'square',
       size: 'md',
-      class: 'rounded-md w-[32px] h-[32px] md:w-[44px] md:h-[44px]',
+      class: 'rounded-md w-[30px] h-[30px] md:w-[44px] md:h-[44px]',
     },
     {
       variant: 'square',
@@ -68,12 +68,12 @@ const iconVariants = cva(
         circle: 'bottom-0 right-0',
       },
       size: {
-        xs: 'w-[0.375rem] h-[0.375rem]',
-        sm: 'w-2 h-2',
-        md: 'w-[0.625rem] h-[0.625rem]',
-        lg: 'w-[1rem] h-[1rem]',
-        xl: 'w-4 h-4',
-        '2xl': 'w-5 h-5',
+        xs: 'w-[6px] h-[6px]',
+        sm: 'w-[8px] h-[8px]',
+        md: 'w-[10rem] h-[10rem]',
+        lg: 'w-[16rem] h-[16rem]',
+        xl: 'w-[64px] h-[64px]',
+        '2xl': 'w-[80px] h-[80px]',
       },
     },
     defaultVariants: {

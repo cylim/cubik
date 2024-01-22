@@ -1,5 +1,5 @@
-import { useMediaQuery } from '@uidotdev/usehooks';
 import { toast } from 'sonner';
+import { useMediaQuery } from 'usehooks-ts';
 
 import { UserAuth } from '@cubik/common-types';
 import {

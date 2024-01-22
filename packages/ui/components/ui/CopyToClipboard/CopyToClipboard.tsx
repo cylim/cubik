@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCopyToClipboard, useMediaQuery } from '@uidotdev/usehooks';
+import { useCopyToClipboard, useMediaQuery } from 'usehooks-ts';
 
 import { Icon } from '../../../icons/icon';
 

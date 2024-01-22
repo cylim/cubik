@@ -1,4 +1,4 @@
-import { useMediaQuery } from '@uidotdev/usehooks';
+import { useMediaQuery } from 'usehooks-ts';
 
 import { AccessScope } from '@cubik/common-types/src/admin';
 import {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMediaQuery } from '@uidotdev/usehooks';
+import { useMediaQuery } from 'usehooks-ts';
 
 import { Icon, IconName } from '../../../icons/icon';
 import { cn } from '../../../lib/utils';

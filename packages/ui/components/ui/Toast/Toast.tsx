@@ -1,6 +1,6 @@
 import React from 'react';
-import { useMediaQuery } from '@uidotdev/usehooks';
 import { toast, Toaster } from 'sonner';
+import { useMediaQuery } from 'usehooks-ts';
 
 const CubikToaster = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');

@@ -1,2 +1,2 @@
 'use client';
-export * from '@uidotdev/usehooks';
+export * from 'usehooks-ts';

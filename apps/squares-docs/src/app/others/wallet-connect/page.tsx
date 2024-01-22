@@ -1,6 +1,5 @@
 'use client';
 
-// @todo: make this work or uninstll it - import SwipeableViews from 'react-swipeable-views';
 import React from 'react';
 
 import { Button, Tab, TabList, TabPanel, TabPanels, Tabs } from '@cubik/ui';

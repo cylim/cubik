@@ -27,7 +27,7 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       prettier-plugin-tailwindcss:
-        specifier: ^0.5.11
+        specifier: ^0.5.7
         version: 0.5.11(@ianvs/prettier-plugin-sort-imports@4.1.1)(prettier@2.8.8)
       typescript:
         specifier: ^5.3.3
@@ -317,7 +317,7 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0(next@14.1.0)(react@18.2.0)
       prettier-plugin-tailwindcss:
-        specifier: ^0.5.11
+        specifier: ^0.5.7
         version: 0.5.11(@ianvs/prettier-plugin-sort-imports@4.1.1)(@trivago/prettier-plugin-sort-imports@4.3.0)(prettier@3.2.2)
       react:
         specifier: ^18.2.0
@@ -398,9 +398,6 @@ importers:
       '@solana/wallet-adapter-wallets':
         specifier: ^0.19.25
         version: 0.19.25(@babel/runtime@7.23.5)(@particle-network/auth@0.5.6)(@solana/web3.js@1.89.0)(bs58@4.0.1)(react-dom@18.2.0)(react-native@0.73.0)(react@18.2.0)(tslib@2.6.2)
-      '@types/react-swipeable-views':
-        specifier: ^0.13.5
-        version: 0.13.5
       '@types/react-syntax-highlighter':
         specifier: ^15.5.11
         version: 15.5.11
@@ -422,9 +419,6 @@ importers:
       react-hook-form:
         specifier: ^7.49.3
         version: 7.49.3(react@18.2.0)
-      react-swipeable-views:
-        specifier: ^0.14.0
-        version: 0.14.0(react@18.2.0)
       react-syntax-highlighter:
         specifier: ^15.5.0
         version: 15.5.0(react@18.2.0)
@@ -562,7 +556,7 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0(next@14.1.0)(react@18.2.0)
       prettier-plugin-tailwindcss:
-        specifier: ^0.5.11
+        specifier: ^0.5.7
         version: 0.5.11(@ianvs/prettier-plugin-sort-imports@4.1.1)(@trivago/prettier-plugin-sort-imports@4.3.0)(prettier@3.2.2)
       react:
         specifier: ^18.2.0
@@ -754,7 +748,7 @@ importers:
         specifier: ^3.2.2
         version: 3.2.2
       prettier-plugin-tailwindcss:
-        specifier: ^0.5.11
+        specifier: ^0.5.7
         version: 0.5.11(@ianvs/prettier-plugin-sort-imports@4.1.1)(@trivago/prettier-plugin-sort-imports@4.3.0)(prettier@3.2.2)
       tailwindcss:
         specifier: ^3.4.1
@@ -1053,7 +1047,7 @@ importers:
         specifier: ^3.2.2
         version: 3.2.2
       prettier-plugin-tailwindcss:
-        specifier: ^0.5.11
+        specifier: ^0.5.7
         version: 0.5.11(@ianvs/prettier-plugin-sort-imports@4.1.1)(@trivago/prettier-plugin-sort-imports@4.3.0)(prettier@3.2.2)
       tailwindcss:
         specifier: ^3.4.1
@@ -1171,9 +1165,6 @@ importers:
       '@types/bn.js':
         specifier: ^5.1.5
         version: 5.1.5
-      '@uidotdev/usehooks':
-        specifier: ^2.4.1
-        version: 2.4.1(react-dom@18.2.0)(react@18.2.0)
       '@uploadthing/react':
         specifier: ^6.1.0
         version: 6.1.0(next@14.1.0)(react@18.2.0)(uploadthing@6.1.1)
@@ -1237,6 +1228,9 @@ importers:
       uploadthing:
         specifier: ^6.1.1
         version: 6.1.1
+      usehooks-ts:
+        specifier: ^2.9.5
+        version: 2.9.5(react-dom@18.2.0)(react@18.2.0)
       uuid:
         specifier: ^9.0.1
         version: 9.0.1
@@ -2801,12 +2795,6 @@ packages:
       core-js-pure: 3.34.0
       regenerator-runtime: 0.14.0
     dev: true
-
-  /@babel/runtime@7.0.0:
-    resolution: {integrity: sha512-7hGhzlcmg01CvH1EHdSPVXYX1aJ8KCEyz6I9xYIi/asDtzBPMyMhVibhM/K6g/5qnKBwjZtp10bNZIEFTRW1MA==}
-    dependencies:
-      regenerator-runtime: 0.12.1
-    dev: false
 
   /@babel/runtime@7.1.2:
     resolution: {integrity: sha512-Y3SCjmhSupzFB6wcv1KmmFucH6gDVnI30WjOcicV10ju0cZjak3Jcs67YLIXBrmZYw1xCrVeJPbycFwrqNyxpg==}
@@ -9665,12 +9653,6 @@ packages:
     resolution: {integrity: sha512-TJxDm6OfAX2KJWJdMEVTwWke5Sc/E/RlnPGvGfS0W7+6ocy2xhDVQVh/KvC2Uf7kACs+gDytdusDSdWfWkaNzw==}
     dependencies:
       '@types/react': 18.2.46
-
-  /@types/react-swipeable-views@0.13.5:
-    resolution: {integrity: sha512-ni6WjO7gBq2xB2Y/ZiRdQOgjGOxIik5ow2s7xKieDq8DxsXTdV46jJslSBVK2yoIJHf6mG3uqNTwxwgzbXRRzg==}
-    dependencies:
-      '@types/react': 18.2.46
-    dev: false
 
   /@types/react-syntax-highlighter@15.5.11:
     resolution: {integrity: sha512-ZqIJl+Pg8kD+47kxUjvrlElrraSUrYa4h0dauY/U/FTUuprSCqvUj+9PNQNQzVc6AJgIWUUxn87/gqsMHNbRjw==}
@@ -16764,10 +16746,6 @@ packages:
       readable-stream: 3.6.2
     dev: false
 
-  /keycode@2.2.1:
-    resolution: {integrity: sha512-Rdgz9Hl9Iv4QKi8b0OlCRQEzp4AgVxyCtz5S/+VIHezDmrDhkp2N2TqBWOLz0/gbeREXOOiI9/4b8BY9uw2vFg==}
-    dev: false
-
   /keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
     dependencies:
@@ -19533,17 +19511,6 @@ packages:
       react-is: 18.1.0
     dev: false
 
-  /react-event-listener@0.6.6(react@18.2.0):
-    resolution: {integrity: sha512-+hCNqfy7o9wvO6UgjqFmBzARJS7qrNoda0VqzvOuioEpoEXKutiKuv92dSz6kP7rYLmyHPyYNLesi5t/aH1gfw==}
-    peerDependencies:
-      react: ^16.3.0
-    dependencies:
-      '@babel/runtime': 7.23.5
-      prop-types: 15.8.1
-      react: 18.2.0
-      warning: 4.0.3
-    dev: false
-
   /react-hook-form@7.49.3(react@18.2.0):
     resolution: {integrity: sha512-foD6r3juidAT1cOZzpmD/gOKt7fRsDhXXZ0y28+Al1CHgX+AY1qIN9VSIIItXRq1dN68QrRwl1ORFlwjBaAqeQ==}
     engines: {node: '>=18', pnpm: '8'}
@@ -19767,42 +19734,6 @@ packages:
       invariant: 2.2.4
       react: 18.2.0
       tslib: 2.6.2
-    dev: false
-
-  /react-swipeable-views-core@0.14.0:
-    resolution: {integrity: sha512-0W/e9uPweNEOSPjmYtuKSC/SvKKg1sfo+WtPdnxeLF3t2L82h7jjszuOHz9C23fzkvLfdgkaOmcbAxE9w2GEjA==}
-    engines: {node: '>=6.0.0'}
-    dependencies:
-      '@babel/runtime': 7.0.0
-      warning: 4.0.3
-    dev: false
-
-  /react-swipeable-views-utils@0.14.0(react@18.2.0):
-    resolution: {integrity: sha512-W+fXBOsDqgFK1/g7MzRMVcDurp3LqO3ksC8UgInh2P/tKgb5DusuuB1geKHFc6o1wKl+4oyER4Zh3Lxmr8xbXA==}
-    engines: {node: '>=6.0.0'}
-    dependencies:
-      '@babel/runtime': 7.0.0
-      keycode: 2.2.1
-      prop-types: 15.8.1
-      react-event-listener: 0.6.6(react@18.2.0)
-      react-swipeable-views-core: 0.14.0
-      shallow-equal: 1.2.1
-    transitivePeerDependencies:
-      - react
-    dev: false
-
-  /react-swipeable-views@0.14.0(react@18.2.0):
-    resolution: {integrity: sha512-wrTT6bi2nC3JbmyNAsPXffUXLn0DVT9SbbcFr36gKpbaCgEp7rX/OFxsu5hPc/NBsUhHyoSRGvwqJNNrWTwCww==}
-    engines: {node: '>=6.0.0'}
-    peerDependencies:
-      react: ^15.3.0 || ^16.0.0 || ^17.0.0
-    dependencies:
-      '@babel/runtime': 7.0.0
-      prop-types: 15.8.1
-      react: 18.2.0
-      react-swipeable-views-core: 0.14.0
-      react-swipeable-views-utils: 0.14.0(react@18.2.0)
-      warning: 4.0.3
     dev: false
 
   /react-syntax-highlighter@15.5.0(react@18.2.0):
@@ -20686,10 +20617,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       kind-of: 6.0.3
-    dev: false
-
-  /shallow-equal@1.2.1:
-    resolution: {integrity: sha512-S4vJDjHHMBaiZuT9NPb616CSmLf618jawtv3sufLl6ivK8WocjAo58cXwbRV1cgqxH0Qbv+iUt6m05eqEa2IRA==}
     dev: false
 
   /sharp@0.33.2:
